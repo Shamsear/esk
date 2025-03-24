@@ -3,18 +3,31 @@ function warmPageCache() {
     // Common pages that might be navigated to
     const commonPages = ['index.html', 'career-mode.html'];
     
-    // Preload these pages in the background
-    setTimeout(() => {
-        commonPages.forEach(page => {
-            if (!window.location.href.includes(page)) {
-                const link = document.createElement('link');
-                link.rel = 'prefetch';
-                link.href = page;
-                document.head.appendChild(link);
-                console.log('Prefetched:', page);
-            }
-        });
-    }, 2000); // Wait for the current page to finish loading first
+    // Use requestIdleCallback for better performance
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            commonPages.forEach(page => {
+                if (!window.location.href.includes(page)) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = page;
+                    document.head.appendChild(link);
+                }
+            });
+        }, { timeout: 2000 });
+    } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        setTimeout(() => {
+            commonPages.forEach(page => {
+                if (!window.location.href.includes(page)) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = page;
+                    document.head.appendChild(link);
+                }
+            });
+        }, 2000);
+    }
 }
 
 // Initialize page - optimized for speed
@@ -27,49 +40,76 @@ function initPage() {
     // Enable interactions immediately
     document.body.style.pointerEvents = 'auto';
     
-    // Reset any transition effects
-    document.body.style.opacity = '1';
-    document.body.style.filter = 'blur(0)';
-    
     // Add smooth entrance animations to elements - using requestAnimationFrame for better performance
     requestAnimationFrame(() => animateElementsOnLoad());
 }
 
 // Animate elements on page load - optimized for speed
 function animateElementsOnLoad() {
-    // Animate header elements with a water-like effect
+    // Animate header elements with simple animation
     const header = document.querySelector('header');
     if (header) {
-        header.style.opacity = '0';
-        header.style.transform = 'translateY(-15px)';
+        header.style.opacity = '1';
+        header.style.transform = 'translateY(0)';
+    }
+    
+    // Create staggered animation for nav items - with reduced complexity
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    // Use batch processing for better performance
+    const batchSize = 5;
+    for (let i = 0; i < navItems.length; i += batchSize) {
+        const endIndex = Math.min(i + batchSize, navItems.length);
         
-        requestAnimationFrame(() => {
-            header.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
-            header.style.opacity = '1';
-            header.style.transform = 'translateY(0)';
+        setTimeout(() => {
+            for (let j = i; j < endIndex; j++) {
+                const item = navItems[j];
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }
+        }, i * 10); // Reduced delay between batches
+    }
+
+    // Add animation only to visible sections - using Intersection Observer for better performance
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated-section');
+                    // Stop observing after animation is added
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)').forEach(section => {
+            sectionObserver.observe(section);
+        });
+    } else {
+        // Fallback for older browsers
+        document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)').forEach(section => {
+            if (isElementInViewport(section)) {
+                section.classList.add('animated-section');
+            }
         });
     }
     
-    // Create staggered wave-like animation for nav items - with performance optimizations
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px) scale(0.95)';
+    // Use Intersection Observer for reveal animations
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Stop observing after animation is added
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
         
-        setTimeout(() => {
-            item.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
-            item.style.opacity = '1';
-            item.style.transform = 'translateY(0) scale(1)';
-        }, 100 + (index * 50)); // Shorter delay between items
-    });
-
-    // Add liquid animation to sections - limit to visible sections only
-    const sections = document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)');
-    sections.forEach((section) => {
-        if (isElementInViewport(section)) {
-            section.classList.add('animated-section');
-        }
-    });
+        document.querySelectorAll('.reveal:not(.active)').forEach(el => {
+            revealObserver.observe(el);
+        });
+    }
 }
 
 // Handle browser back/forward navigation
@@ -82,7 +122,7 @@ window.addEventListener('pageshow', function(event) {
     }
 });
 
-// Preloader
+// Preloader with optimized timing
 window.addEventListener('load', function() {
     // Initialize page
     initPage();
@@ -91,44 +131,42 @@ window.addEventListener('load', function() {
     warmPageCache();
     
     const preloader = document.querySelector('.preloader');
-    setTimeout(function() {
-        preloader.classList.add('fade-out');
-        
-        // Initialize navigation items with skeleton loading effect
-        const navCards = document.querySelectorAll('.nav-card');
-        navCards.forEach(card => {
-            const img = card.querySelector('img');
-            if (img) {
-                card.classList.add('skeleton');
-                img.onload = function() {
-                    card.classList.remove('skeleton');
-                };
-                // Fix for image loading issues
-                if (img.complete) {
-                    card.classList.remove('skeleton');
-                }
-            }
-        });
-        
-        // Show welcome toast
+    if (preloader) {
+        // Reduce preloader time
         setTimeout(function() {
-            const toast = document.getElementById('toast');
-            if (toast) {
-                toast.classList.add('show');
-                
-                setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-        }, 1500);
-        
-    }, 1000);
+            preloader.classList.add('fade-out');
+            
+            // Lazy load images for better performance
+            lazyLoadImages();
+            
+            // Show welcome toast - reduced delay
+            setTimeout(function() {
+                const toast = document.getElementById('toast');
+                if (toast) {
+                    toast.classList.add('show');
+                    
+                    setTimeout(function() {
+                        toast.classList.remove('show');
+                    }, 2000); // Reduced toast display time
+                }
+            }, 500); // Reduced delay before showing toast
+            
+        }, 500); // Reduced preloader time
+    }
     
-    // Initialize audio
+    // Initialize audio with reduced startup impact
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => initAudio());
+    } else {
+        setTimeout(initAudio, 2000);
+    }
+});
+
+// Initialize audio separately to reduce initial load impact
+function initAudio() {
     const backgroundMusic = document.getElementById('backgroundMusic');
     if (backgroundMusic) {
-        backgroundMusic.volume = 0.3; // Set initial volume
-        // Mute by default
+        backgroundMusic.volume = 0.3;
         backgroundMusic.muted = true;
     }
     
@@ -152,55 +190,72 @@ window.addEventListener('load', function() {
                 }
             }
         });
-        
-        // Style the audio toggle button
-        audioBtn.style.position = 'fixed';
-        audioBtn.style.bottom = '30px';
-        audioBtn.style.left = '30px';
-        audioBtn.style.width = '50px';
-        audioBtn.style.height = '50px';
-        audioBtn.style.borderRadius = '50%';
-        audioBtn.style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
-        audioBtn.style.color = 'white';
-        audioBtn.style.display = 'flex';
-        audioBtn.style.justifyContent = 'center';
-        audioBtn.style.alignItems = 'center';
-        audioBtn.style.zIndex = '99';
-        audioBtn.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-        audioBtn.style.cursor = 'pointer';
-        audioBtn.style.transition = 'all 0.3s ease';
     }
-    
-    // Activate all reveal elements initially visible
-    const reveals = document.querySelectorAll('.reveal');
-    reveals.forEach(el => {
-        if (isElementInViewport(el)) {
-            el.classList.add('active');
-        }
-    });
-    
-    // Initialize typing effect
-    initTypingEffect();
+}
 
-    // Initialize back to top button
-    const backToTop = document.getElementById('backToTop');
-    if (backToTop) {
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-        });
-        
-        backToTop.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+// Lazy load images for better performance
+function lazyLoadImages() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+                    
+                    if (src) {
+                        img.setAttribute('src', src);
+                        img.removeAttribute('data-src');
+                    }
+                    
+                    imageObserver.unobserve(img);
+                }
             });
         });
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for older browsers - load all images with a delay
+        setTimeout(() => {
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                const src = img.getAttribute('data-src');
+                if (src) {
+                    img.setAttribute('src', src);
+                    img.removeAttribute('data-src');
+                }
+            });
+        }, 1000);
     }
-});
+}
+
+// Optimize scroll handlers with throttling
+function throttle(callback, limit) {
+    let waiting = false;
+    return function() {
+        if (!waiting) {
+            callback.apply(this, arguments);
+            waiting = true;
+            setTimeout(() => {
+                waiting = false;
+            }, limit);
+        }
+    };
+}
+
+// Use throttled scroll handler for performance
+const throttledScrollHandler = throttle(function() {
+    // Handle scroll effects
+    handleScrollEffects();
+    
+    // Update progress bar
+    updateProgressBar();
+    
+    // Update active section in navigation
+    updateActiveSections();
+}, 100); // Run max 10 times per second
+
+window.addEventListener('scroll', throttledScrollHandler);
 
 // Typing effect
 function initTypingEffect() {
