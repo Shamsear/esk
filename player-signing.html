@@ -263,105 +263,264 @@
                 </div>
                 
                 <div class="position-tabs">
-                    <button class="position-tab active" data-position="goalkeeper">Goalkeepers</button>
-                    <button class="position-tab" data-position="defender">Defenders</button>
-                    <button class="position-tab" data-position="midfielder">Midfielders</button>
-                    <button class="position-tab" data-position="forward">Forwards</button>
-                    <button class="position-tab" data-position="all">All Players</button>
+                    <button class="position-tab active" data-position="all">All</button>
+                    <button class="position-tab" data-position="GK">GK</button>
+                    <button class="position-tab" data-position="CB">CB</button>
+                    <button class="position-tab" data-position="LB">LB</button>
+                    <button class="position-tab" data-position="RB">RB</button>
+                    <button class="position-tab" data-position="CM">CM</button>
+                    <button class="position-tab" data-position="DM">DM</button>
+                    <button class="position-tab" data-position="AM">AM</button>
+                    <button class="position-tab" data-position="ST">ST</button>
+                    <button class="position-tab" data-position="CF">CF</button>
+                    <button class="position-tab" data-position="RW">RW</button>
+                    <button class="position-tab" data-position="LW">LW</button>
                 </div>
                 
-                <!-- Goalkeeper Section -->
-                <div id="goalkeeper" class="position-content active">
+                <!-- GK Section -->
+                <div id="GK" class="position-content active">
                     <div class="auction-table-container">
-                        <table class="auction-table">
+                        <table class="auction-table" data-position="GK">
                             <thead>
                                 <tr>
                                     <th>Player Name</th>
-                                    <th>Rating</th>
-                                    <th>Winning Team</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
                                     <th>Bid Amount</th>
-                                    <th>Reserve Price</th>
+                                    <th>Contract</th>
                                 </tr>
                             </thead>
-                            <tbody id="goalkeeper-table">
+                            <tbody id="GK-table">
                                 <!-- Will be populated via JavaScript -->
                             </tbody>
                         </table>
                     </div>
                 </div>
                 
-                <!-- Defender Section -->
-                <div id="defender" class="position-content">
+                <!-- CB Section -->
+                <div id="CB" class="position-content">
                     <div class="auction-table-container">
-                        <table class="auction-table">
+                        <table class="auction-table" data-position="CB">
                             <thead>
                                 <tr>
                                     <th>Player Name</th>
-                                    <th>Rating</th>
-                                    <th>Winning Team</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
                                     <th>Bid Amount</th>
-                                    <th>Reserve Price</th>
+                                    <th>Contract</th>
                                 </tr>
                             </thead>
-                            <tbody id="defender-table">
+                            <tbody id="CB-table">
                                 <!-- Will be populated via JavaScript -->
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
-                <!-- Midfielder Section -->
-                <div id="midfielder" class="position-content">
+
+                <!-- LB Section -->
+                <div id="LB" class="position-content">
                     <div class="auction-table-container">
-                        <table class="auction-table">
+                        <table class="auction-table" data-position="LB">
                             <thead>
                                 <tr>
                                     <th>Player Name</th>
-                                    <th>Rating</th>
-                                    <th>Winning Team</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
                                     <th>Bid Amount</th>
-                                    <th>Reserve Price</th>
+                                    <th>Contract</th>
                                 </tr>
                             </thead>
-                            <tbody id="midfielder-table">
+                            <tbody id="LB-table">
                                 <!-- Will be populated via JavaScript -->
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
-                <!-- Forward Section -->
-                <div id="forward" class="position-content">
+
+                <!-- RB Section -->
+                <div id="RB" class="position-content">
                     <div class="auction-table-container">
-                        <table class="auction-table">
+                        <table class="auction-table" data-position="RB">
                             <thead>
                                 <tr>
                                     <th>Player Name</th>
-                                    <th>Rating</th>
-                                    <th>Winning Team</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
                                     <th>Bid Amount</th>
-                                    <th>Reserve Price</th>
+                                    <th>Contract</th>
                                 </tr>
                             </thead>
-                            <tbody id="forward-table">
+                            <tbody id="RB-table">
                                 <!-- Will be populated via JavaScript -->
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
+
+                <!-- CM Section -->
+                <div id="CM" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="CM">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CM-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- DM Section -->
+                <div id="DM" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="DM">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="DM-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AM Section -->
+                <div id="AM" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="AM">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="AM-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ST Section -->
+                <div id="ST" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="ST">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ST-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CF Section -->
+                <div id="CF" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="CF">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CF-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RW Section -->
+                <div id="RW" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="RW">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="RW-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- LW Section -->
+                <div id="LW" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="LW">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="LW-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <!-- All Players Section -->
                 <div id="all" class="position-content">
                     <div class="auction-table-container">
-                        <table class="auction-table">
+                        <table class="auction-table" data-position="all">
                             <thead>
                                 <tr>
                                     <th>Player Name</th>
                                     <th>Position</th>
-                                    <th>Rating</th>
-                                    <th>Winning Team</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
                                     <th>Bid Amount</th>
-                                    <th>Reserve Price</th>
+                                    <th>Contract</th>
                                 </tr>
                             </thead>
                             <tbody id="all-table">
@@ -389,20 +548,12 @@
             </div>
         </footer>
     </div>
-    
-    <div class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
 
     <div class="toast" id="toast">View player auction results!</div>
     
-    <audio id="backgroundMusic" preload="none">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
-    </audio>
-
     <!-- Load particles.js only when needed with defer -->
     <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Defer main script to improve initial page load -->
+    <!-- Defer main script to improve initial load -->
     <script defer src="js/script.js"></script>
     <!-- Auction data script -->
     <script defer src="js/player-auction.js"></script>

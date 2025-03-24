@@ -17,15 +17,15 @@ function warmPageCache() {
         }, { timeout: 2000 });
     } else {
         // Fallback for browsers that don't support requestIdleCallback
-        setTimeout(() => {
-            commonPages.forEach(page => {
-                if (!window.location.href.includes(page)) {
-                    const link = document.createElement('link');
-                    link.rel = 'prefetch';
-                    link.href = page;
-                    document.head.appendChild(link);
-                }
-            });
+    setTimeout(() => {
+        commonPages.forEach(page => {
+            if (!window.location.href.includes(page)) {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = page;
+                document.head.appendChild(link);
+            }
+        });
         }, 2000);
     }
 }
@@ -53,8 +53,8 @@ function animateElementsOnLoad() {
     // Animate header elements with simple animation
     const header = document.querySelector('header');
     if (header) {
-        header.style.opacity = '1';
-        header.style.transform = 'translateY(0)';
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
     }
     
     // Create staggered animation for nav items - with reduced complexity
@@ -68,7 +68,7 @@ function animateElementsOnLoad() {
         setTimeout(() => {
             for (let j = i; j < endIndex; j++) {
                 const item = navItems[j];
-                item.style.opacity = '1';
+            item.style.opacity = '1';
                 item.style.transform = 'translateY(0)';
             }
         }, i * 10); // Reduced delay between batches
@@ -92,10 +92,10 @@ function animateElementsOnLoad() {
     } else {
         // Fallback for older browsers
         document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)').forEach(section => {
-            if (isElementInViewport(section)) {
-                section.classList.add('animated-section');
-            }
-        });
+        if (isElementInViewport(section)) {
+            section.classList.add('animated-section');
+        }
+    });
     }
     
     // Use Intersection Observer for reveal animations
@@ -137,20 +137,20 @@ window.addEventListener('load', function() {
     const preloader = document.querySelector('.preloader');
     if (preloader) {
         // Reduce preloader time
-        setTimeout(function() {
-            preloader.classList.add('fade-out');
-            
+    setTimeout(function() {
+        preloader.classList.add('fade-out');
+        
             // Lazy load images for better performance
             lazyLoadImages();
             
             // Show welcome toast - reduced delay
-            setTimeout(function() {
-                const toast = document.getElementById('toast');
-                if (toast) {
-                    toast.classList.add('show');
-                    
-                    setTimeout(function() {
-                        toast.classList.remove('show');
+        setTimeout(function() {
+            const toast = document.getElementById('toast');
+            if (toast) {
+                toast.classList.add('show');
+                
+                setTimeout(function() {
+                    toast.classList.remove('show');
                     }, 2000); // Reduced toast display time
                 }
             }, 500); // Reduced delay before showing toast
@@ -231,6 +231,52 @@ function lazyLoadImages() {
             });
         }, 1000);
     }
+}
+
+// Add scroll effects function
+function handleScrollEffects() {
+    const scrollPosition = window.scrollY;
+    const header = document.querySelector('header');
+    
+    // Add header scroll effect
+    if (header) {
+        if (scrollPosition > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+}
+
+function updateProgressBar() {
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        const totalHeight = document.body.scrollHeight - window.innerHeight;
+        const progress = (window.pageYOffset / totalHeight) * 100;
+        progressBar.style.width = progress + '%';
+    }
+}
+
+function updateActiveSections() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 60) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + currentSection) {
+            link.classList.add('active');
+        }
+    });
 }
 
 // Optimize scroll handlers with throttling
@@ -596,14 +642,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Shrink navbar on scroll
     window.addEventListener('scroll', function() {
         const topBar = document.querySelector('.top-bar');
-        const backToTop = document.getElementById('backToTop');
         
         if (window.scrollY > 50) {
             topBar.classList.add('scrolled');
-            backToTop.classList.add('show');
         } else {
             topBar.classList.remove('scrolled');
-            backToTop.classList.remove('show');
         }
     });
     
@@ -648,7 +691,7 @@ function isElementInViewport(el) {
     return (
         rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
     );
-}
+} 
 
 // Add event listener to clear any lingering blur effects when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
@@ -662,4 +705,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (pageTransition) {
         pageTransition.classList.remove('active');
     }
+});
+
+// Add scroll event listener
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial call
+    handleScrollEffects();
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScrollEffects);
 }); 
