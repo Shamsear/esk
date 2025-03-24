@@ -46,6 +46,7 @@ body {
     position: relative;
     max-height: 100vh;
     overflow-y: auto;
+    background: transparent;
 }
 
 #particles-js {
@@ -54,29 +55,91 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.9),
+        rgba(20, 20, 40, 0.85),
+        rgba(0, 0, 0, 0.8)
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure content is above overlay */
+main, header, footer {
+    position: relative;
+    z-index: 3;
+}
+
+/* Adjust particles to be behind overlay */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
+}
+
+/* Ensure video background stays behind overlay */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.2;
     bottom: 0;
     right: 0;
     margin: 0;
     padding: 0;
 }
 
-.overlay {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 0.85), rgba(0, 0, 0, 0.8));
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+/* Adjust body styles to work with overlay */
+body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    background: transparent;
 }
 
+/* Ensure top bar stays above overlay */
 .top-bar {
-    position: relative  ;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -90,6 +153,54 @@ body {
     z-index: 100;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+}
+
+/* Adjust container to work with overlay */
+.container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Ensure footer stays above overlay */
+footer {
+    position: relative;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    padding: 40px 20px 0;
+    margin-top: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .overlay {
+        padding-top: 60px; /* Account for fixed top bar */
+    }
+    
+    .top-bar {
+        padding: 10px 15px;
+    }
+}
+
+/* Light mode adjustments */
+body.light-mode .overlay {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.8),
+        rgba(200, 200, 220, 0.85),
+        rgba(255, 255, 255, 0.8)
+    );
+}
+
+body.light-mode .top-bar,
+body.light-mode footer {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 .top-bar.scrolled {
@@ -126,16 +237,6 @@ body {
 
 body.light-mode {
     color: #333;
-}
-
-body.light-mode .overlay {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(200, 200, 220, 0.85), rgba(255, 255, 255, 0.8));
-}
-
-body.light-mode .top-bar, 
-body.light-mode footer {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .social-icons a,
@@ -1058,22 +1159,6 @@ body:hover .cursor-outline {
     opacity: 1;
 }
 
-/* Video background */
-.video-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    opacity: 0.2;
-    bottom: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-}
-
 /* Floating elements animation */
 .float {
     animation: float 6s ease-in-out infinite;
@@ -1231,15 +1316,17 @@ body:hover .cursor-outline {
 .feature-item {
     flex: 1 1 300px;
     padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .feature-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .feature-item i {
@@ -1452,4 +1539,171 @@ main {
 /* Remove audio toggle styles */
 .audio-toggle {
     display: none;
+}
+
+/* Enhanced Animation Classes */
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.page-exit {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+}
+
+/* Enhanced Card Effects */
+.nav-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced Feature Items */
+.feature-item {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feature-item:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Enhanced Section Transitions */
+section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced Particle Effects */
+#particles-js {
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
+}
+
+.overlay:hover #particles-js {
+    opacity: 0.9;
+}
+
+/* Enhanced Container Layout */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Enhanced Background Effects */
+.overlay {
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.9),
+        rgba(20, 20, 40, 0.85),
+        rgba(0, 0, 0, 0.8)
+    );
+    backdrop-filter: blur(10px);
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5 {
+    background: linear-gradient(90deg, #fff, var(--primary), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .feature-item {
+        margin: 10px 0;
+    }
+
+    .nav-card {
+        transform: none !important;
+    }
+}
+
+/* Enhanced Loading States */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Enhanced Hover Effects */
+.hover-glow:hover {
+    box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.3);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Enhanced Focus States */
+:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.5);
+}
+
+/* Enhanced Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary), var(--secondary));
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(var(--secondary), var(--primary));
+    border: 2px solid transparent;
 } 
