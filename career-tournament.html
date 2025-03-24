@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Career Tournament - Eskimos Road to Glory</title>
+    <meta name="description" content="Explore the career tournaments in Eskimos Road to Glory, featuring division leagues, champions league, and more special tournaments.">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/script.js" as="script">
+    <!-- Load fonts with display=swap for better rendering -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Fix for horizontal scrolling on mobile */
+        html, body {
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .overlay {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        /* Tournament page specific styles */
+        .tournament-section {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Tournament cards */
+        .tournament-card {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .tournament-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .tournament-header {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-bottom: 2px solid var(--accent-color, #2196F3);
+        }
+        
+        .tournament-content {
+            padding: 20px;
+        }
+        
+        .tournament-images {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .white-box, .black-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 0;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .black-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-left: 3px solid var(--accent-color, #2196F3);
+        }
+        
+        .tournament-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .moze-center {
+            text-align: center;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color, #2196F3);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Loading animation for images */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+        
+        /* Back to top button styling */
+        .back-to-top {
+            background: var(--accent-color, #2196F3);
+            color: #000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: #fff;
+            transform: translateY(-5px);
+        }
+        
+        @media (min-width: 768px) {
+            .tournament-images {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tournament-section {
+                padding: 10px;
+            }
+            
+            .tournament-card {
+                margin-bottom: 20px;
+            }
+            
+            .tournament-header {
+                padding: 10px;
+            }
+            
+            .tournament-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="skip-link">Skip to content</div>
+    
+    <div class="page-transition"></div>
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    
+    <video class="video-bg" autoplay muted loop playsinline preload="auto">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
+    </video>
+    
+    <div id="particles-js"></div>
+    
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40">
+                <span>ESKIMOS</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                <a href="career-tournament.html">Career Tournament</a>
+            </div>
+        </div>
+        
+        <main>
+            <header id="career-header" class="animated-section">
+                <a href="index.html" class="back-link reveal"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <h1 class="fade-in-up">Career Tournament</h1>
+                <p class="subtitle fade-in-up delay-1">Compete in prestigious tournaments</p>
+            </header>
+
+            <div class="tournament-section">
+                <div class="black-box fade-in-up delay-2">
+                    <h1 class="moze-center" style="font-size: 28px;">DIVISION LEAGUE</h1>
+                </div>
+                
+                <!-- Division One -->
+                <div class="tournament-card fade-in-up delay-3">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION ONE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car1.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division One" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division One Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Division Two -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION TWO</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car3.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Two" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Two Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Division Three -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION THREE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car5.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Three" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car6.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Three Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Division Four -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION FOUR</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car7.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Four" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car8.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Four Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Division Five -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION FIVE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car9.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Five" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car10.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Five Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Division Cup -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION CUP</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car23.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Cup" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car24.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Division Cup Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="black-box fade-in-up delay-2">
+                    <h1 class="moze-center" style="font-size: 28px;">R2G EUROPEAN LEAGUE</h1>
+                </div>
+                
+                
+                <!-- Champions League -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G CHAMPIONS LEAGUE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car11.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Champions League" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car12.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Champions League Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Europa League -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G EUROPA LEAGUE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car13.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Europa League" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car14.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Europa League Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Conference League -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G CONFERENCE LEAGUE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car15.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Conference League" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car16.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Conference League Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Super League -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G SUPER LEAGUE</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car17.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Super League" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car18.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Super League Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="black-box fade-in-up delay-2">
+                    <h1 class="moze-center" style="font-size: 28px;">R2G SPECIAL TOUR</h1>
+                </div>
+                
+                
+                <!-- Authentic Tour -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G AUTHENTIC TOUR</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car19.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Authentic Tour" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car20.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Authentic Tour Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inter Clash -->
+                <div class="tournament-card fade-in-up">
+                    <div class="tournament-header">
+                        <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G INTER CLASH</h2>
+                    </div>
+                    <div class="tournament-content">
+                        <div class="tournament-images">
+                            <img data-src="assets/images/tournaments/car21.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Inter Clash" class="lazy-load">
+                            <img data-src="assets/images/tournaments/car22.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Inter Clash Standings" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="tournament-guide.html">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="manager-ranking.html">Manager Ranking</a>
+                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                    <a href="career-tournament.html">Career Tournament</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="toast" id="toast">Welcome to Career Tournaments!</div>
+    
+    <audio id="backgroundMusic" preload="none">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Load particles.js only when needed with defer -->
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Defer main script to improve initial page load -->
+    <script defer src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy load images with fade effect
+            const lazyImages = document.querySelectorAll('img.lazy-load');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.add('loaded');
+                            setTimeout(() => {
+                                img.classList.remove('lazy-load');
+                            }, 500);
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.1
+                });
+                
+                lazyImages.forEach(img => {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                lazyImages.forEach(img => {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    img.classList.remove('lazy-load');
+                });
+            }
+            
+            // Make images non-clickable
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.pointerEvents = 'none';
+                img.style.cursor = 'default';
+            });
+            
+            // Back to top button functionality
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Show welcome toast with delay
+            const toast = document.getElementById('toast');
+            setTimeout(() => {
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

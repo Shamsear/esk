@@ -21,6 +21,9 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -31,11 +34,18 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
     color: var(--text);
     transition: all 0.3s ease;
     animation: pageEnter 0.4s ease-out;
     will-change: opacity, transform;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 100vh;
+    overflow-y: auto;
 }
 
 #particles-js {
@@ -46,6 +56,10 @@ body {
     left: 0;
     z-index: -1;
     pointer-events: none;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .overlay {
@@ -57,6 +71,8 @@ body {
     align-items: center;
     position: relative;
     z-index: 2;
+    margin: 0;
+    padding: 0;
 }
 
 .top-bar {
@@ -423,12 +439,13 @@ h5 {
 }
 
 footer {
-    padding: 40px 20px;
+    padding: 40px 20px 0;
     text-align: center;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 0;
 }
 
 .footer-content {
@@ -696,7 +713,9 @@ footer {
 /* Back to top button */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: auto;
+    margin: 0;
+    padding: 0;
     right: 30px;
     width: 50px;
     height: 50px;
@@ -851,7 +870,9 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 /* Toast Notification */
 .toast {
     position: fixed;
-    bottom: 30px;
+    bottom: auto;
+    margin: 0;
+    padding: 0;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
     background-color: rgba(0, 0, 0, 0.8);
@@ -986,7 +1007,6 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
-    backdrop-filter: blur(3px);
     will-change: transform;
 }
 
@@ -1004,22 +1024,6 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
         opacity: 1; 
         transform: translateY(0);
     }
-}
-
-/* Reset body styles when returning from another page */
-body.no-transition {
-    animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    transform: none !important;
-}
-
-/* Reset all animations and transitions when in no-transition mode */
-body.no-transition * {
-    animation: none !important;
-    transition: none !important;
-    filter: none !important;
 }
 
 /* Custom cursor */
@@ -1064,6 +1068,10 @@ body:hover .cursor-outline {
     object-fit: cover;
     z-index: 0;
     opacity: 0.2;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* Floating elements animation */
@@ -1092,7 +1100,9 @@ body:hover .cursor-outline {
 .audio-toggle {
     display: flex;
     position: fixed;
-    bottom: 30px;
+    bottom: auto;
+    margin: 0;
+    padding: 0;
     left: 30px;
     width: 50px;
     height: 50px;
@@ -1306,7 +1316,7 @@ body:hover .cursor-outline {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-    will-change: transform, opacity, filter;
+    will-change: transform, opacity;
 }
 
 .delay-1 { animation-delay: 0.1s; }
@@ -1320,12 +1330,10 @@ body:hover .cursor-outline {
     from {
         opacity: 0;
         transform: translateY(20px);
-        filter: blur(3px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
-        filter: blur(0);
     }
 }
 
@@ -1348,14 +1356,13 @@ body:hover .cursor-outline {
     animation: slideIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     z-index: -1;
     pointer-events: none;
-    filter: blur(15px);
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    will-change: transform, filter;
+    will-change: transform;
 }
 
 @keyframes slideIn {
-    from { transform: translateX(-100%); filter: blur(20px); }
-    to { transform: translateX(100%); filter: blur(15px); }
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
 }
 
 /* Enhanced fade-in animations with performance optimizations */
@@ -1363,19 +1370,17 @@ body:hover .cursor-outline {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-    will-change: transform, opacity, filter;
+    will-change: transform, opacity;
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
-        filter: blur(3px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
-        filter: blur(0);
     }
 }
 
@@ -1461,4 +1466,11 @@ footer .footer-nav a:hover {
         width: 100%;
         text-align: center;
     }
+}
+
+main {
+    flex: 1 0 auto;
+    width: 100%;
+    padding-bottom: 0;
+    margin-bottom: 0;
 } 

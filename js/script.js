@@ -32,42 +32,13 @@ function warmPageCache() {
 
 // Initialize page - optimized for speed
 function initPage() {
+    // Reset any transition effects that might be lingering
+    document.body.style.filter = 'none';
+    document.body.style.opacity = '1';
+    
     // Handle the fade-in of the page
     if (document.querySelector('.page-transition')) {
         document.querySelector('.page-transition').style.transform = 'translateX(-100%)';
-        document.querySelector('.page-transition').classList.remove('active');
-    }
-    
-    // Reset any page-specific styles that might be causing issues
-    const careerHeader = document.querySelector('#career-header');
-    if (careerHeader) {
-        careerHeader.style.opacity = '1';
-        careerHeader.style.filter = 'none';
-        careerHeader.style.transform = 'none';
-    }
-    
-    // Check if we're coming from a navigation (not direct page load)
-    if (sessionStorage.getItem('navigatingFrom')) {
-        // Reset styles that might have been applied during transition
-        document.body.classList.add('no-transition');
-        document.body.style.opacity = '1';
-        document.body.style.filter = 'none';
-        document.body.style.transition = 'none';
-        
-        // Reset any fade-in-up elements that might still be animating
-        document.querySelectorAll('.fade-in-up').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-            el.style.filter = 'none';
-        });
-        
-        // Clear the navigation flag
-        sessionStorage.removeItem('navigatingFrom');
-        
-        // Remove the class after a short delay
-        setTimeout(() => {
-            document.body.classList.remove('no-transition');
-        }, 100);
     }
     
     // Enable interactions immediately
@@ -149,46 +120,14 @@ function animateElementsOnLoad() {
 window.addEventListener('pageshow', function(event) {
     // Check if the page is being shown from the browser cache (back/forward navigation)
     if (event.persisted) {
-        // This is a back/forward navigation - reset all transition styles immediately
-        document.body.classList.add('no-transition');
-        document.body.style.animation = 'none';
-        document.body.style.opacity = '1';
-        document.body.style.filter = 'none';
-        document.body.style.transform = 'none';
-        document.body.style.transition = 'none';
-        
-        // Remove blur from any elements that might have it
-        document.querySelectorAll('.fade-in-up, .reveal, header, .animated-section').forEach(el => {
-            el.style.opacity = '1';
-            el.style.filter = 'none';
-            el.style.transform = 'none';
-        });
-        
-        // Force a repaint to immediately apply these styles
-        void document.body.offsetHeight;
-        
-        // Then initialize the page
+        // This is a back/forward navigation - instant initialization
+        document.body.style.animation = 'none'; // Skip the entry animation
         initPage();
-        
-        // Remove the class after a short delay
-        setTimeout(() => {
-            document.body.classList.remove('no-transition');
-        }, 100);
     }
 });
 
 // Preloader with optimized timing
 window.addEventListener('load', function() {
-    // Reset any transition styles that might have persisted
-    document.body.style.opacity = '1';
-    document.body.style.filter = 'none';
-    document.body.style.transition = 'none';
-    
-    // Also reset specific elements that might be causing the blur in career mode
-    document.querySelectorAll('.fade-in-up, .reveal').forEach(el => {
-        el.style.filter = 'none';
-    });
-    
     // Initialize page
     initPage();
     
@@ -411,13 +350,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Disable pointer events during transition
                 document.body.style.pointerEvents = 'none';
                 
-                // Store the current page URL in sessionStorage to know we're navigating
-                sessionStorage.setItem('navigatingFrom', window.location.href);
-                
-                // Faster, more subtle fade for smoother transition
+                // Smoother fade without blur for better performance
                 document.body.style.opacity = '0.95';
-                document.body.style.filter = 'blur(2px)';
-                document.body.style.transition = 'opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), filter 0.2s cubic-bezier(0.19, 1, 0.22, 1)';
+                document.body.style.transition = 'opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1)';
                 
                 // Show transition with minimal delay
                 setTimeout(() => {
@@ -713,4 +648,18 @@ function isElementInViewport(el) {
     return (
         rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
     );
-} 
+}
+
+// Add event listener to clear any lingering blur effects when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Clear any lingering blur or opacity effects
+    document.body.style.filter = 'none';
+    document.body.style.opacity = '1';
+    document.body.style.transition = '';
+    
+    // Ensure page transition element is reset
+    const pageTransition = document.querySelector('.page-transition');
+    if (pageTransition) {
+        pageTransition.classList.remove('active');
+    }
+}); 

@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eskimos Road to Glory</title>
     <meta name="description" content="Explore the journey of Eskimos in their road to glory, featuring team history, players, championships, and more.">
-    <!-- Fix blurry navigation issues with a small inline script -->
-    <script>
-        // Clear any transition effects that might be stored in the browser's cache
-        if (performance.navigation.type === 2) {
-            // This is a back/forward navigation
-            document.documentElement.classList.add('no-transition');
-            setTimeout(() => document.documentElement.classList.remove('no-transition'), 100);
-        }
-    </script>
     <!-- Preload critical resources -->
     <link rel="preload" href="css/styles.css" as="style">
     <link rel="preload" href="js/script.js" as="script">
@@ -78,7 +69,7 @@
                 <a href="career-mode.html">Career Mode</a>
                 <a href="manager-ranking.html">Manager Ranking</a>
                 <a href="trophy-cabinet.html">Trophy Cabinet</a>
-                <a href="#">Career Tournament</a>
+                <a href="career-tournament.html">Career Tournament</a>
             </div>
         </div>
         
@@ -90,32 +81,60 @@
                 <a href="#" class="cta-button pulse-effect reveal">JOIN THE JOURNEY</a>
             </header>
 
-            <div class="navigation">
+            <div class="navigation career-navigation">
                 <a href="tournament-guide.html" class="nav-item tilt-effect reveal" data-tooltip="Tournament guide and rules">
                     <div class="nav-card">
-                        <img data-src="assets/images/h1.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Tournament Guide" width="100%" height="auto">
+                        <img data-src="assets/images/home/h1.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Tournament Guide" width="100%" height="auto">
+                        <div class="overlay-text">Tournament Guide</div>
                     </div>
                 </a>
                 <a href="career-mode.html" class="nav-item tilt-effect reveal" data-tooltip="Career mode information">
                     <div class="nav-card">
-                        <img data-src="assets/images/h2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Career Mode" width="100%" height="auto">
+                        <img data-src="assets/images/home/h2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Career Mode" width="100%" height="auto">
+                        <div class="overlay-text">Career Mode</div>
                     </div>
                 </a>
                 <a href="manager-ranking.html" class="nav-item tilt-effect reveal" data-tooltip="Manager ranking system">
                     <div class="nav-card">
-                        <img data-src="assets/images/h3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Manager Ranking" width="100%" height="auto">
+                        <img data-src="assets/images/home/h3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Manager Ranking" width="100%" height="auto">
+                        <div class="overlay-text">Manager Ranking</div>
                     </div>
                 </a>
                 <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal" data-tooltip="Club trophy cabinet">
                     <div class="nav-card">
-                        <img data-src="assets/images/H4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Trophy Cabinet" width="100%" height="auto">
+                        <img data-src="assets/images/home/H4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Trophy Cabinet" width="100%" height="auto">
+                        <div class="overlay-text">Trophy Cabinet</div>
                     </div>
                 </a>
-                <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Career tournament history">
+                <a href="career-tournament.html" class="nav-item tilt-effect reveal" data-tooltip="Career tournament history">
                     <div class="nav-card">
-                        <img data-src="assets/images/H5.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Career Tournament" width="100%" height="auto">
+                        <img data-src="assets/images/home/H5.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Career Tournament" width="100%" height="auto">
+                        <div class="overlay-text">Career Tournament</div>
                     </div>
                 </a>
+            </div>
+
+            <div class="career-description">
+                <h2 class="fade-in-up delay-2">Welcome to Eskimos Road to Glory</h2>
+                <p class="fade-in-up delay-3">Embark on an immersive football management experience. Navigate through our comprehensive resources, manage your career, track your progress, and compete with friends in tournaments. Your road to glory starts here.</p>
+                
+                <div class="features">
+                    <div class="feature-item fade-in-up delay-4">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Tournaments</h3>
+                        <p>Participate in various tournaments and competitions, each with unique rules, challenges, and rewards.</p>
+                    </div>
+                    <div class="feature-item fade-in-up delay-5">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Management</h3>
+                        <p>Manage your club, players, and resources to build a successful team capable of winning championships.</p>
+                    </div>
+                    <div class="feature-item fade-in-up delay-6">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progress</h3>
+                        <p>Track your development with detailed statistics, achievements, and milestones throughout your journey.</p>
+                    </div>
+                </div>
             </div>
         </main>
         
@@ -127,7 +146,7 @@
                     <a href="career-mode.html">Career Mode</a>
                     <a href="manager-ranking.html">Manager Ranking</a>
                     <a href="trophy-cabinet.html">Trophy Cabinet</a>
-                    <a href="#">Career Tournament</a>
+                    <a href="career-tournament.html">Career Tournament</a>
                 </div>
                 <div class="copyright">
                     &copy; 2024 Eskimos Road to Glory. All rights reserved.
@@ -142,11 +161,8 @@
     
     <div class="scroll-indicator-container">
         <div class="scroll-indicator active" data-section="home"></div>
-        <div class="scroll-indicator" data-section="tournament"></div>
-        <div class="scroll-indicator" data-section="career"></div>
-        <div class="scroll-indicator" data-section="ranking"></div>
-        <div class="scroll-indicator" data-section="trophy"></div>
-        <div class="scroll-indicator" data-section="tournament-history"></div>
+        <div class="scroll-indicator" data-section="navigation"></div>
+        <div class="scroll-indicator" data-section="description"></div>
     </div>
 
     <div class="toast" id="toast">Welcome to Eskimos Road to Glory!</div>

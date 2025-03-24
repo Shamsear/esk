@@ -2,16 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Manager Ranking - Eskimos Road to Glory</title>
     <meta name="description" content="View the current manager rankings in the Eskimos Road to Glory tournament, featuring performance statistics and achievements.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <style>
+        /* Fix for horizontal scrolling on mobile */
+        html, body {
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .overlay {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
         /* Manager Ranking Specific Styles */
         .club-gallery {
             padding: 20px 0;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         
         .search-box {
@@ -358,7 +374,7 @@
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/ranking/logo11.png" alt="Mini Logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -588,6 +604,20 @@
                 'pointer-events': 'none',
                 'cursor': 'default'
             });
+            
+            // Add CSS rules to ensure image clicks are disabled
+            $('<style>')
+                .prop('type', 'text/css')
+                .html(`
+                    .moze-gallery li, .moze-gallery img, .moze-gallery a {
+                        pointer-events: none !important;
+                        cursor: default !important;
+                    }
+                    .moze-gallery li:hover {
+                        transform: none !important;
+                    }
+                `)
+                .appendTo('head');
             
             // View Detailed Statistics button
             $('#viewStandings').on('click', function() {
