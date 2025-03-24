@@ -173,28 +173,6 @@ function initAudio() {
         backgroundMusic.volume = 0.3;
         backgroundMusic.muted = true;
     }
-    
-    // Add audio toggle if not present
-    const audioToggle = document.querySelector('.audio-toggle');
-    if (!audioToggle) {
-        const audioBtn = document.createElement('div');
-        audioBtn.className = 'audio-toggle';
-        audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        audioBtn.setAttribute('aria-label', 'Toggle audio');
-        document.body.appendChild(audioBtn);
-        
-        audioBtn.addEventListener('click', function() {
-            if (backgroundMusic) {
-                backgroundMusic.muted = !backgroundMusic.muted;
-                
-                if (backgroundMusic.muted) {
-                    this.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                } else {
-                    this.innerHTML = '<i class="fas fa-volume-up"></i>';
-                }
-            }
-        });
-    }
 }
 
 // Lazy load images for better performance
