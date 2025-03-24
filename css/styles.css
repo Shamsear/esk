@@ -72,12 +72,12 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.4),
-        rgba(20, 20, 40, 0.35),
-        rgba(0, 0, 0, 0.3)
+        rgba(0, 0, 0, 0.05),
+        rgba(20, 20, 40, 0.02),
+        rgba(0, 0, 0, 0.01)
     );
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -1694,4 +1694,26 @@ h1, h2, h3, h4, h5 {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(var(--secondary), var(--primary));
     border: 2px solid transparent;
+}
+
+/* Bid amount text colors */
+.auction-table .bid-amount {
+    font-weight: 600;
+}
+
+.auction-table .bid-amount:contains("NOT BID") {
+    color: #4caf50; /* Green color for "NOT BID" */
+}
+
+.auction-table .bid-amount:not(:contains("NOT BID")) {
+    color: #f44336; /* Red color for bid amounts */
+}
+
+/* Alternative approach using data attributes */
+.auction-table .bid-amount[data-status="not-bid"] {
+    color: #4caf50; /* Green color for "NOT BID" */
+}
+
+.auction-table .bid-amount[data-status="bid"] {
+    color: #f44336; /* Red color for bid amounts */
 } 

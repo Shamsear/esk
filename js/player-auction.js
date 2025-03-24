@@ -730,4 +730,41 @@ function enhanceSearchInput() {
 // Initialize enhancements
 document.addEventListener('DOMContentLoaded', () => {
     enhanceSearchInput();
+});
+
+// Function to update bid amount text colors
+function updateBidAmountColors() {
+    const bidAmounts = document.querySelectorAll('.auction-table .bid-amount');
+    
+    bidAmounts.forEach(bidAmount => {
+        const text = bidAmount.textContent.trim();
+        if (text === 'NOT BID') {
+            bidAmount.style.color = '#4caf50'; // Green color
+            bidAmount.setAttribute('data-status', 'not-bid');
+        } else {
+            bidAmount.style.color = '#f44336'; // Red color
+            bidAmount.setAttribute('data-status', 'bid');
+        }
+    });
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    updateBidAmountColors();
+    
+    // Update colors when switching between position tabs
+    const positionTabs = document.querySelectorAll('.position-tab');
+    positionTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            setTimeout(updateBidAmountColors, 100); // Small delay to ensure content is updated
+        });
+    });
+    
+    // Update colors when searching
+    const searchInput = document.getElementById('playerSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            setTimeout(updateBidAmountColors, 100);
+        });
+    }
 }); 
