@@ -46,7 +46,7 @@ body {
     position: relative;
     max-height: 100vh;
     overflow-y: auto;
-    background: transparent;
+    background-color: transparent;
 }
 
 #particles-js {
@@ -71,13 +71,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.05),
-        rgba(20, 20, 40, 0.02),
-        rgba(0, 0, 0, 0.01)
-    );
-    backdrop-filter: blur(0.5px);
-    -webkit-backdrop-filter: blur(0.5px);
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -178,11 +174,7 @@ footer {
 
 /* Light mode adjustments */
 body.light-mode .overlay {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.3),
-        rgba(200, 200, 220, 0.25),
-        rgba(255, 255, 255, 0.3)
-    );
+    background: none;
 }
 
 body.light-mode .top-bar,
@@ -1718,127 +1710,117 @@ h1, h2, h3, h4, h5 {
     color: #f44336; /* Red color for bid amounts */
 }
 
-/* Mobile Enhancements */
+/* Mobile Enhancements - Completely Redesigned */
 @media (max-width: 768px) {
-    /* Improved Background & Overlay */
+    /* Better Background Visibility */
     body {
         background-attachment: scroll;
         background-position: center center;
+        background-size: cover !important;
     }
     
     .overlay {
-        padding-top: 70px;
-        background: linear-gradient(135deg, 
-            rgba(0, 0, 0, 0.1),
-            rgba(20, 20, 40, 0.08),
-            rgba(0, 0, 0, 0.05)
-        );
+        padding-top: 60px;
     }
     
-    /* Better Particles on Mobile */
+    /* Show More Background */
     #particles-js {
         display: block !important;
-        opacity: 0.35;
+        opacity: 0.2;
     }
     
-    /* Enhanced Header for Mobile */
+    .video-bg {
+        opacity: 0.3;
+    }
+    
+    /* Improved Content Containers */
+    .container, .auction-container, .career-description {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border-radius: 15px;
+        margin: 0 auto 20px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Better Header */
     header {
-        padding: 80px 15px 30px;
-    }
-    
-    .logo {
-        max-width: 200px;
-        margin-bottom: 20px;
+        padding: 70px 15px 30px;
+        background: none;
     }
     
     h1 {
-        font-size: 2.7em;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
+        font-size: 2.5em;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
     
     .subtitle {
         font-size: 1em;
-        margin-bottom: 25px;
-        letter-spacing: 2px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     }
     
-    /* Enhanced Navigation Cards */
-    .navigation {
-        gap: 12px;
-        padding: 0 10px;
-    }
-    
-    .nav-item {
-        width: 90%;
-        max-width: 320px;
-        margin-bottom: 15px;
-    }
-    
+    /* Enhanced Cards */
     .nav-card {
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-        transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
     
     .nav-item:active .nav-card {
-        transform: scale(0.98);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transform: scale(0.95);
     }
     
-    .nav-title {
-        font-size: 1.5em;
-        padding: 20px 15px;
+    /* Better Feature Items */
+    .feature-item {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        padding: 1.5rem;
+        margin: 10px 0;
     }
     
-    /* Enhanced Mobile Menu */
+    /* Fixed Top Bar */
+    .top-bar {
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        height: 60px;
+        padding: 0 15px;
+    }
+    
+    /* Better Mobile Menu */
     .mobile-menu {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
     
     .mobile-menu-links a {
+        width: 85%;
         padding: 15px;
-        margin: 5px 0;
-        width: 80%;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.07);
-        transition: all 0.3s ease-out;
+        margin: 8px 0;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
-    .mobile-menu-links a:active {
-        background: rgba(255, 255, 255, 0.15);
-        transform: scale(0.98);
-    }
-    
-    /* Enhanced Career Mode Mobile UI */
-    .career-description {
-        margin: 2rem auto;
-        padding: 1.5rem;
-        border-radius: 15px;
-    }
-    
-    .feature-item {
-        margin: 10px 0;
-        padding: 1.2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    }
-    
-    .feature-item:active {
-        transform: scale(0.98);
-    }
-    
-    /* Enhanced Top Bar */
-    .top-bar {
-        height: 60px;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Enhanced Footer */
+    /* Better Footer */
     footer {
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 20px;
         padding-bottom: 20px;
     }
     
@@ -1846,50 +1828,31 @@ h1, h2, h3, h4, h5 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
-        width: 100%;
+        width: 90%;
+        margin: 0 auto 15px;
     }
     
     .footer-nav a {
         padding: 12px 8px;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.07);
-        transition: all 0.3s ease-out;
+        background: rgba(255, 255, 255, 0.1);
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
     }
     
-    .footer-nav a:active {
-        background: rgba(255, 255, 255, 0.15);
-    }
-    
-    /* Better video background */
-    .video-bg {
-        opacity: 0.15;
-    }
-    
-    /* Show more background */
-    .container {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 15px;
-        margin-bottom: 15px;
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-    }
-    
-    /* Touch optimized buttons */
+    /* Better button styles */
     .cta-button {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
         padding: 15px 35px;
-        font-size: 1em;
         border-radius: 30px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        font-size: 1em;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        border: none;
     }
     
     .cta-button:active {
         transform: translateY(3px);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Mobile-optimized animations */
-    .fade-in-up {
-        animation-duration: 0.4s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 }
 
