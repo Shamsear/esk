@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Guide - Eskimos Road to Glory</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/tournament-guide.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo11.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Page transition -->
+    <div class="page-transition"></div>
+
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Video background -->
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
+    </video>
+    
+    <div id="particles-js"></div>
+    
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.png" alt="Eskimos Logo">
+                <span>Eskimos R2G</span>
+            </div>
+            
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i class="fas fa-times"></i></button>
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="#">Manager Ranking</a>
+                <a href="#">Trophy Cabinet</a>
+            </div>
+        </div>
+
+        <main id="main-content">
+            <header id="career-header" class="animated-section">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <h1 class="fade-in-up">Tournament Guide</h1>
+                <p class="subtitle">Your roadmap to glory</p>
+            </header>
+
+            <div class="guide-content">
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-question-circle"></i> Career Mode FAQs</h2>
+                    <div class="info-card">
+                        <p>Frequently asked questions about how to play career mode in Eskimos Road to Glory.</p>
+                    </div>
+                    <ul class="qa-list">
+                        <li id="faq-1" class="qa-item">
+                            <button class="question">How to play career mode?<div class="question-progress"></div></button>
+                            <div class="answer">Buy players through auction and use these players only to make the squad to compete in R2G.</div>
+                        </li>
+                        
+                        <li id="faq-2" class="qa-item">
+                            <button class="question">How to buy players through auction?<div class="question-progress"></div></button>
+                            <div class="answer">Each franchise have clubs coins as their bank balance. They can use this amount to bid and buy <span class="highlight">5☆</span>, <span class="highlight">4☆</span> and <span class="highlight">3☆</span> players during player auction.</div>
+                        </li>
+                        
+                        <li id="faq-3" class="qa-item">
+                            <button class="question">How do each franchise gets their R2G Coins?<div class="question-progress"></div></button>
+                            <div class="answer">Whenever a new franchise is registered they are rewarded with a total of <span class="highlight">2000</span> R2G Coins and <span class="highlight">100</span> R2G Tokens. Each club will also get R2G Coins by their performance in each match but this coins will only add during the season end.</div>
+                        </li>
+                        
+                        <li id="faq-4" class="qa-item">
+                            <button class="question">What are the other use or purpose of R2G Coins?<div class="question-progress"></div></button>
+                            <div class="answer">R2G Coins can be used during the transfer market and also R2G Coins are used to pay the player salary.</div>
+                        </li>
+                        
+                        <li id="faq-5" class="qa-item">
+                            <button class="question">Do we lose players if their salary is not paid?<div class="question-progress"></div></button>
+                            <div class="answer">No, we won't lose player. The franchise will only lose player when his contract comes to an end. At that time only he will be free agent. If salary is not paid, the player <span class="highlight">can't</span> be used for upcoming matches.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Road Map</h2>
+                    <div class="info-card">
+                        <p>Follow our season roadmap to understand how the tournament progresses from start to finish.</p>
+                    </div>
+                    <img src="assets/images/guide/auction1.jpg" alt="Road Map" class="guide-img">
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-id-card"></i> Player Card</h2>
+                    <div class="info-card">
+                        <p>Player cards show the important stats and attributes of players available in the auction.</p>
+                    </div>
+                    <div class="image-gallery">
+                        <img src="assets/images/guide/auction2.jpg" alt="Player Card Example 1" class="guide-img">
+                        <img src="assets/images/guide/auction3.jpg" alt="Player Card Example 2" class="guide-img">
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Transfer Market</h2>
+                    <div class="info-card">
+                        <p>The transfer market allows teams to buy, sell, loan, and trade players during specific periods.</p>
+                    </div>
+                    <ul class="qa-list">
+                        <li id="transfer-1" class="qa-item">
+                            <button class="question">When will be the transfer window for R2G?<div class="question-progress"></div></button>
+                            <div class="answer">There will be two Transfer window for a season. The transfer window time will be given accordingly and during that time sale, swap and loan for a player can be done.</div>
+                        </li>
+                        
+                        <li id="transfer-2" class="qa-item">
+                            <button class="question">How does loan transfer work?<div class="question-progress"></div></button>
+                            <div class="answer">The loan amount is determined between the base price and auctioned price.</div>
+                        </li>
+                        
+                        <li id="transfer-3" class="qa-item">
+                            <button class="question">Is free transfer allowed?<div class="question-progress"></div></button>
+                            <div class="answer">No, free transfer is not allowed, but one can sale the player for interested club coins.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> Card Types</h2>
+                    <div class="info-card">
+                        <p>Different card types represent various levels of player rarity and special abilities.</p>
+                    </div>
+                    <div class="image-gallery">
+                        <img src="assets/images/guide/auction4.jpg" alt="Card Type 1" class="guide-img">
+                        <img src="assets/images/guide/auction5.jpg" alt="Card Type 2" class="guide-img">
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-trophy"></i> Season Awards</h2>
+                    <div class="info-card">
+                        <p>End-of-season awards recognize top performers and achievements throughout the tournament.</p>
+                    </div>
+                    <img src="assets/images/guide/awards.jpg" alt="Season Awards" class="guide-img">
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-gift"></i> Match Bonus</h2>
+                    <div class="info-card">
+                        <p>Earn special bonuses and rewards for performances during matches.</p>
+                    </div>
+                    <img src="assets/images/guide/bonus.jpg" alt="Match Bonus" class="guide-img">
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-gavel"></i> Match Guide</h2>
+                    <div class="info-card">
+                        <p>Follow these rules when playing matches in the Eskimos Road to Glory tournament.</p>
+                    </div>
+                    <ul class="bullet-list qa-list">
+                        <li>
+                            CAN ONLY USE PLAYERS BOUGHT FROM PLAYER AUCTION, IF NOT AVAILABLE CAN USE <span class="highlight">1☆</span> OR <span class="highlight">2☆</span> PLAYERS
+                        </li>
+                        <li>
+                            MATCH TIME:- 6 MINUTES
+                        </li>
+                        <li>
+                            PENALTY AND EXTRA TIME SHOULD BE OFF
+                        </li>
+                        <li>
+                            RANDOM CONDITION
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h2 class="section-title"><i class="fas fa-exclamation-circle"></i> Important</h2>
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-exclamation-circle"></i> Administrative Notes</h3>
+                        <ul class="bullet-list qa-list">
+                            <li>
+                                If there is any doubts or issue contact admins directly and clear it as soon as possible.
+                            </li>
+                            <li>
+                                All decisions taken by admins will be final.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <!-- Back to top button -->
+        <div class="back-to-top" id="backToTop">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+
+        <!-- Audio toggle -->
+        <div class="audio-toggle">
+            <i class="fas fa-volume-mute"></i>
+        </div>
+
+        <!-- Toast message -->
+        <div class="toast" id="toast">Welcome to Eskimos Tournament Guide!</div>
+
+        <!-- Background music -->
+        <audio id="backgroundMusic" loop>
+            <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
+        </audio>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="tournament-guide.html">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="#">Manager Ranking</a>
+                    <a href="#">Trophy Cabinet</a>
+                </div>
+                <div class="copyright">&copy; 2025 Eskimos Road to Glory. All Rights Reserved.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/tournament-guide.js"></script>
+</body>
+</html> 

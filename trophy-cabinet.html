@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trophy Cabinet - Eskimos Road to Glory</title>
+    <meta name="description" content="View the trophy cabinet of Eskimos Road to Glory tournament, featuring all trophies and achievements.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Trophy Cabinet Specific Styles */
+        .trophy-gallery {
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        /* Season heading styling */
+        .season-heading {
+            padding: 0px;
+            margin-top: 0px;
+        }
+        
+        .season-heading h1.moze-center {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        
+        /* Season heading h2 styling */
+        .season-heading h2 {
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Centered box for season headings */
+        .centered-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .centered-box::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            bottom: -15px;
+            left: 10%;
+        }
+
+        /* Black box for season heading */
+        .season-box {
+            background-color: #000;
+            padding: 15px 20px;
+            margin: 9px;
+            border: 2px solid var(--accent-color);
+            width: 220px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transform: perspective(500px) rotateX(5deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .season-box:hover {
+            transform: perspective(500px) rotateX(0);
+            box-shadow: 0 8px 25px rgba(var(--accent-color-rgb), 0.3);
+        }
+
+        /* Season heading text */
+        .season-box h1 {
+            color: white;
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(var(--accent-color-rgb), 0.5);
+        }
+
+        /* Responsive season heading */
+        @media screen and (min-width: 768px) {
+            .season-box h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .moze-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 15px;
+        }
+        
+        .moze-gallery li {
+            position: relative;
+            width: 250px;
+            height: auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: default;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .moze-gallery li:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(var(--accent-color-rgb), 0.3);
+        }
+        
+        .moze-gallery img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: transparent;
+            padding: 10px;
+            pointer-events: none;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+        }
+        
+        .moze-gallery li:hover img {
+            transform: scale(1.1);
+        }
+        
+        .club-info {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 40px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .club-info:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--accent-color-rgb), 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .club-info h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+        }
+        
+        .club-info p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 90%;
+            margin: 0 auto 15px;
+        }
+        
+        .black-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-color);
+            border-right: 4px solid var(--accent-color);
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transform: perspective(800px) rotateX(2deg);
+            transition: all 0.5s ease;
+        }
+        
+        .black-box:hover {
+            transform: perspective(800px) rotateX(0);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(var(--accent-color-rgb), 0.3);
+        }
+        
+        .black-box h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.7);
+        }
+        
+        .stats-preview {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Animations for page elements */
+        .fade-in-up {
+            animation-duration: 0.8s;
+            animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        .delay-5 {
+            animation-delay: 1s;
+        }
+        
+        /* Scroll down button with animation */
+        .scroll-guide {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        
+        .scroll-guide:hover {
+            opacity: 1;
+        }
+        
+        .scroll-arrow {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(45deg);
+            margin: 0 auto;
+            animation: scroll-guide-anim 2s infinite;
+        }
+        
+        @keyframes scroll-guide-anim {
+            0% { transform: rotate(45deg) translate(-5px, -5px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: rotate(45deg) translate(5px, 5px); opacity: 0; }
+        }
+
+        @media screen and (max-width: 768px) {
+            .moze-gallery {
+                gap: 15px;
+                padding: 0 5px;
+            }
+            
+            .moze-gallery li {
+                width: 100%;
+                max-width: 95%;
+                margin-bottom: 15px;
+                aspect-ratio: auto;
+                height: auto;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            }
+            
+            .moze-gallery img {
+                object-fit: contain;
+                padding: 5px;
+                width: 90%;
+                height: auto;
+                max-height: none;
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+            
+            .club-info {
+                padding: 20px 15px;
+                margin-bottom: 25px;
+            }
+            
+            .black-box h1 {
+                font-size: 1.8rem;
+            }
+            
+            .trophy-gallery {
+                padding: 10px 0;
+            }
+            
+            .stats-preview {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        /* Enhanced Season Headings */
+        .centered-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 15vh;
+            margin: 60px 0 40px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .centered-box::before, 
+        .centered-box::after {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            bottom: -5px;
+        }
+
+        .centered-box::before {
+            left: 5%;
+            transform-origin: left center;
+            animation: slideInLeft 1.5s ease-out forwards;
+        }
+
+        .centered-box::after {
+            right: 5%;
+            transform-origin: right center;
+            animation: slideInRight 1.5s ease-out forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+
+        .season-box {
+            background: linear-gradient(145deg, #000000, #222222);
+            padding: 20px 30px;
+            margin: 0;
+            border: none;
+            width: 300px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(var(--accent-color-rgb), 0.5);
+            transform: perspective(800px) rotateX(5deg);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .season-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--accent-color), transparent, var(--accent-color));
+            z-index: -1;
+            animation: borderRotate 6s linear infinite;
+        }
+
+        .season-box::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: linear-gradient(145deg, #000000, #222222);
+            z-index: -1;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .season-box:hover {
+            transform: perspective(800px) rotateX(0) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 0 2px var(--accent-color);
+        }
+
+        .season-box h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.7);
+            position: relative;
+            display: inline-block;
+        }
+
+        .season-box h1::before,
+        .season-box h1::after {
+            content: '';
+            position: absolute;
+            height: 4px;
+            width: 30px;
+            background-color: var(--accent-color);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .season-box h1::before {
+            left: -40px;
+        }
+
+        .season-box h1::after {
+            right: -40px;
+        }
+
+        .season-number {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .season-decoration {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(var(--accent-color-rgb), 0.2);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+
+        .season-decoration-left {
+            left: -30px;
+            animation: rotateCounterClockwise 20s linear infinite;
+        }
+
+        .season-decoration-right {
+            right: -30px;
+            animation: rotateClockwise 20s linear infinite;
+        }
+
+        @keyframes rotateClockwise {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @keyframes rotateCounterClockwise {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(-360deg); }
+        }
+
+        .centered-box:hover .season-decoration {
+            border-color: rgba(var(--accent-color-rgb), 0.5);
+        }
+
+        @media screen and (max-width: 768px) {
+            .season-box {
+                width: 90%;
+                max-width: 280px;
+                padding: 15px 20px;
+            }
+            
+            .season-box h1 {
+                font-size: 2rem;
+            }
+            
+            .season-box h1::before,
+            .season-box h1::after {
+                width: 20px;
+            }
+            
+            .season-box h1::before {
+                left: -25px;
+            }
+            
+            .season-box h1::after {
+                right: -25px;
+            }
+            
+            .season-decoration {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Season heading h2 styling enhancement */
+        .season-heading h2 {
+            text-decoration: none;
+            position: relative;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin: 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            padding: 0 15px;
+        }
+
+        .season-heading h2::before,
+        .season-heading h2::after {
+            content: "";
+            position: absolute;
+            height: 12px;
+            border: 2px solid var(--accent-color);
+            transition: all 0.5s ease;
+        }
+
+        .season-heading h2::before {
+            width: 12px;
+            left: -5px;
+            top: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .season-heading h2::after {
+            width: 12px;
+            right: -5px;
+            bottom: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .season-heading h2:hover::before,
+        .season-heading h2:hover::after {
+            width: 25px;
+            height: 25px;
+        }
+        
+        /* Animated header corners */
+        .animated-header {
+            position: relative;
+            padding: 10px 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .animated-header:hover {
+            color: var(--accent-color);
+            letter-spacing: 3px;
+        }
+        
+        .animated-header .corner-tl,
+        .animated-header .corner-tr,
+        .animated-header .corner-bl,
+        .animated-header .corner-br {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--accent-color);
+            border-style: solid;
+            border-width: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .animated-header .corner-tl {
+            top: 0;
+            left: 0;
+            border-top-width: 2px;
+            border-left-width: 2px;
+        }
+        
+        .animated-header .corner-tr {
+            top: 0;
+            right: 0;
+            border-top-width: 2px;
+            border-right-width: 2px;
+        }
+        
+        .animated-header .corner-bl {
+            bottom: 0;
+            left: 0;
+            border-bottom-width: 2px;
+            border-left-width: 2px;
+        }
+        
+        .animated-header .corner-br {
+            bottom: 0;
+            right: 0;
+            border-bottom-width: 2px;
+            border-right-width: 2px;
+        }
+        
+        .animated-header .corner-tl.expanded,
+        .animated-header .corner-tr.expanded,
+        .animated-header .corner-bl.expanded,
+        .animated-header .corner-br.expanded {
+            width: 25px;
+            height: 25px;
+        }
+        
+        .animated-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: translateX(-50%);
+            transition: width 0.5s ease;
+        }
+        
+        .animated-header:hover::after {
+            width: 70%;
+        }
+
+        /* Trophy icon decorations */
+        .trophy-icon {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="%23e6399555"><path d="M552 64H448V24c0-13.3-10.7-24-24-24H152c-13.3 0-24 10.7-24 24v40H24C10.7 64 0 74.7 0 88v56c0 35.7 22.5 72.4 61.9 100.7 31.5 22.7 69.8 37.1 110 41.7C203.3 338.5 240 360 240 360v72h-48c-35.3 0-64 20.7-64 56v12c0 6.6 5.4 12 12 12h296c6.6 0 12-5.4 12-12v-12c0-35.3-28.7-56-64-56h-48v-72s36.7-21.5 68.1-73.6c40.3-4.6 78.6-19 110-41.7 39.3-28.3 61.9-65 61.9-100.7V88c0-13.3-10.7-24-24-24zM99.3 192.8C74.9 175.2 64 155.6 64 144v-16h64.2c1 32.6 5.8 61.2 12.8 86.2-15.1-5.2-29.2-12.4-41.7-21.4zM512 144c0 16.1-17.7 36.1-35.3 48.8-12.5 9-26.7 16.2-41.8 21.4 7-25 11.8-53.6 12.8-86.2H512v16z"/></svg>');
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.2;
+            filter: blur(1px);
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Trophy particles */
+        .trophy-particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(230, 57, 149, 0.8), transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            animation: trophy-particle-anim 1.5s ease-out forwards;
+        }
+        
+        @keyframes trophy-particle-anim {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+        
+        /* Trophy pulse animation */
+        @keyframes trophy-pulse {
+            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); }
+            50% { transform: scale(1.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(var(--accent-color-rgb), 0.7); }
+            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); }
+        }
+        
+        .trophy-pulse {
+            animation: trophy-pulse 0.7s ease-in-out;
+            z-index: 5;
+        }
+        
+        /* Add pointer cursor to trophy items */
+        .moze-gallery li {
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+        
+        .moze-gallery img {
+            pointer-events: auto !important;
+        }
+    </style>
+
+    <script>
+        // Add this to the head to define a CSS variable for accent color
+        document.documentElement.style.setProperty('--accent-color-rgb', '230, 57, 149');
+    </script>
+</head>
+<body>
+    <div class="skip-link">Skip to content</div>
+    
+    <div class="page-transition"></div>
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
+    </video>
+    
+    <div id="particles-js"></div>
+    
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo">
+                <span>ESKIMOS</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+            </div>
+        </div>
+        
+        <main>
+            <header id="career-header" class="animated-section">
+                <a href="career-mode.html" class="back-link reveal" style="display: none;"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
+                <h1 class="fade-in-up">Trophy Cabinet</h1>
+                <p class="subtitle fade-in-up delay-1">All trophies and achievements in Eskimos Road to Glory</p>
+            </header>
+
+            <div class="black-box fade-in-up delay-2">
+                <h1>TROPHY CABINET</h1>
+            </div>
+            
+            <div class="club-info fade-in-up delay-3">
+                <h2>Eskimos Road to Glory Achievements</h2>
+                <p>Below are all the trophies and achievements from all seasons of the Eskimos Road to Glory tournament.</p>
+                
+                <div class="stats-preview">
+                    <div class="stat-item">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">Major Trophies</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">International Cups</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">25</div>
+                        <div class="stat-label">Achievement Badges</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="centered-box fade-in-up">
+                <div class="season-decoration season-decoration-left"></div>
+                <div class="season-box">
+                    <div class="season-number">Season</div>
+                    <h1>SEASON 4</h1>
+                </div>
+                <div class="season-decoration season-decoration-right"></div>
+            </div>
+
+            <div class="club-info fade-in-up">
+                <div class="textbox season-heading">
+                    <h2 class="moze-center">TROPHY</h2>
+                </div>
+                <p>Major trophies won during Season 4 of the Eskimos Road to Glory tournament.</p>
+            </div>
+
+            <div class="trophy-gallery">
+                <ul class="moze-gallery pictures fade-in-up delay-5">
+                    <li>
+                        <img src="assets/images/trophy/t1.jpg" alt="Premier League Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t2.jpg" alt="FA Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t3.jpg" alt="Carabao Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t4.jpg" alt="Champions League Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t5.jpg" alt="Europa League Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t6.jpg" alt="UEFA Super Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t7.jpg" alt="Club World Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/t8.jpg" alt="Community Shield Trophy">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="club-info fade-in-up">
+                <div class="textbox season-heading">
+                    <h2 class="moze-center">AWARDS</h2>
+                </div>
+                <p>Prestigious individual awards won by players in Season 4.</p>
+            </div>
+
+            <div class="trophy-gallery">
+                <ul class="moze-gallery pictures fade-in-up">
+                    <li>
+                        <img src="assets/images/trophy/ta1.jpg" alt="Ballon d'Or Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ta2.jpg" alt="Golden Boot Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ta3.jpg" alt="Golden Glove Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ta4.jpg" alt="Player of the Year Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ta5.jpg" alt="Player of the Year Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ta6.jpg" alt="Player of the Year Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ta7.jpg" alt="Player of the Year Trophy">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="centered-box fade-in-up">
+                <div class="season-decoration season-decoration-left"></div>
+                <div class="season-box">
+                    <div class="season-number">Season</div>
+                    <h1>SEASON 2</h1>
+                </div>
+                <div class="season-decoration season-decoration-right"></div>
+            </div>
+
+            <div class="club-info fade-in-up">
+                <div class="textbox season-heading">
+                    <h2 class="moze-center">TROPHY</h2>
+                </div>
+                <p>Major trophies won during Season 2 of the Eskimos Road to Glory tournament.</p>
+            </div>
+
+            <div class="trophy-gallery">
+                <ul class="moze-gallery pictures fade-in-up">
+                    <li>
+                        <img src="assets/images/trophy/elitet2.jpg" alt="Premier League Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/div1t2.jpg" alt="FA Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/div2t2.jpg" alt="Champions League Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/uclt.jpg" alt="UEFA Super Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/uelt.jpg" alt="Community Shield Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ueclt.jpg" alt="Community Shield Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/trio.jpg" alt="Community Shield Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/special.jpg" alt="Community Shield Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/divcup.jpg" alt="Community Shield Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/tos.jpg" alt="Community Shield Trophy">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="club-info fade-in-up">
+                <div class="textbox season-heading">
+                    <h2 class="moze-center">AWARDS</h2>
+                </div>
+                <p>Prestigious individual awards won by players in Season 2.</p>
+            </div>
+
+            <div class="trophy-gallery">
+                <ul class="moze-gallery pictures fade-in-up">
+                    <li>
+                        <img src="assets/images/trophy/best.jpg" alt="Ballon d'Or Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/ballen.jpg" alt="Golden Boot Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/muller.jpg" alt="Golden Glove Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/yashin.jpg" alt="Golden Glove Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/golden.jpg" alt="Golden Glove Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/maldini.jpg" alt="Golden Glove Trophy">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="centered-box fade-in-up">
+                <div class="season-decoration season-decoration-left"></div>
+                <div class="season-box">
+                    <div class="season-number">Season</div>
+                    <h1>SEASON 1</h1>
+                </div>
+                <div class="season-decoration season-decoration-right"></div>
+            </div>
+
+            <div class="club-info fade-in-up">
+                <div class="textbox season-heading">
+                    <h2 class="moze-center">TROPHY</h2>
+                </div>
+                <p>Major trophies won during Season 1 of the Eskimos Road to Glory tournament.</p>
+            </div>
+
+            <div class="trophy-gallery">
+                <ul class="moze-gallery pictures fade-in-up">
+                    <li>
+                        <img src="assets/images/trophy/elitet.jpg" alt="Carabao Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/div1t.jpg" alt="Europa League Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/div2t.jpg" alt="Club World Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/kingt.jpg" alt="Club World Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/supert.jpg" alt="Club World Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/divg.jpg" alt="Club World Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/eurot.jpg" alt="Club World Cup Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/team.jpg" alt="Club World Cup Trophy">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="club-info fade-in-up">
+                <div class="textbox season-heading">
+                    <h2 class="moze-center">AWARDS</h2>
+                </div>
+                <p>Prestigious individual awards won by players in Season 1.</p>
+            </div>
+
+            <div class="trophy-gallery">
+                <ul class="moze-gallery pictures fade-in-up">
+                    <li>
+                        <img src="assets/images/trophy/a1.jpg" alt="Player of the Year Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/a2.jpg" alt="Best Goalkeeper Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/gerd.jpg" alt="Best Goalkeeper Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/a4.jpg" alt="Best Goalkeeper Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/a5.jpg" alt="Best Goalkeeper Trophy">
+                    </li>
+                    <li>
+                        <img src="assets/images/trophy/a6.jpg" alt="Best Goalkeeper Trophy">
+                    </li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="tournament-guide.html">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="manager-ranking.html">Manager Ranking</a>
+                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="toast" id="toast">Welcome to Trophy Cabinet!</div>
+    
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Initialize page functionality
+        $(document).ready(function() {
+            // Add hover effects
+            $('.moze-gallery li').hover(
+                function() {
+                    $(this).find('img').css('transform', 'scale(1.05)');
+                },
+                function() {
+                    $(this).find('img').css('transform', 'scale(1)');
+                }
+            );
+            
+            // Show toast message
+            $('#toast').addClass('show');
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 3000);
+        });
+    </script>
+    
+    <script>
+        // Initialize page functionality
+        $(document).ready(function() {
+            // Add hover effects
+            $('.moze-gallery li').hover(
+                function() {
+                    $(this).find('img').css('transform', 'scale(1.05)');
+                },
+                function() {
+                    $(this).find('img').css('transform', 'scale(1)');
+                }
+            );
+            
+            // Add animation to section headers
+            $('.season-heading h2').each(function(index) {
+                $(this).addClass('animated-header');
+                
+                // Add border corners for decoration
+                $(this).append('<span class="corner-tl"></span>')
+                       .append('<span class="corner-tr"></span>')
+                       .append('<span class="corner-bl"></span>')
+                       .append('<span class="corner-br"></span>');
+                
+                // Add hover effect
+                $(this).hover(
+                    function() {
+                        $(this).find('.corner-tl, .corner-tr, .corner-bl, .corner-br').addClass('expanded');
+                    },
+                    function() {
+                        $(this).find('.corner-tl, .corner-tr, .corner-bl, .corner-br').removeClass('expanded');
+                    }
+                );
+            });
+            
+            // Show toast message
+            $('#toast').addClass('show');
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 3000);
+        });
+    </script>
+    
+    <script>
+        // Initialize page functionality with trophy animations
+        $(document).ready(function() {
+            // Add hover effects
+            $('.moze-gallery li').hover(
+                function() {
+                    // Create trophy particles on hover
+                    const rect = this.getBoundingClientRect();
+                    createTrophyParticles(rect.left + rect.width/2, rect.top + rect.height/2);
+                }
+            );
+            
+            // Add click handler for trophy pulse animation
+            $('.moze-gallery li').on('click', function() {
+                // Remove existing animation class from all items
+                $('.moze-gallery li').removeClass('trophy-pulse');
+                
+                // Add animation class to clicked item
+                $(this).addClass('trophy-pulse');
+                
+                // Create more particles for click effect
+                const rect = this.getBoundingClientRect();
+                for (let i = 0; i < 6; i++) {
+                    createTrophyParticles(
+                        rect.left + rect.width * Math.random(), 
+                        rect.top + rect.height * Math.random()
+                    );
+                }
+                
+                // Show toast with trophy info
+                const trophyName = $(this).find('img').attr('alt') || "Trophy";
+                showToast(`${trophyName} selected!`, 2000);
+            });
+            
+            // Create trophy icons for decoration
+            createTrophyIcons();
+            
+            // Create animated headers
+            $('.trophy-heading h2, .awards-heading h2').each(function() {
+                const text = $(this).text();
+                $(this).empty();
+                $(this).addClass('animated-header');
+                $(this).html(`
+                    <span class="corner-tl"></span>
+                    <span class="corner-tr"></span>
+                    ${text}
+                    <span class="corner-bl"></span>
+                    <span class="corner-br"></span>
+                `);
+            });
+            
+            // Function to show custom toast messages
+            window.showToast = function(message, duration = 3000) {
+                const toast = $('#toast');
+                toast.text(message);
+                toast.addClass('show');
+                setTimeout(function() {
+                    toast.removeClass('show');
+                }, duration);
+            };
+        });
+        
+        // Function to create floating trophy icons
+        function createTrophyIcons() {
+            // Create 8 trophy icons with random positions and animations
+            for (let i = 0; i < 8; i++) {
+                const icon = $('<div class="trophy-icon"></div>');
+                
+                // Set random positions and animation duration
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 15 + Math.random() * 30;
+                const size = 20 + Math.random() * 20;
+                
+                icon.css({
+                    'left': left + 'vw',
+                    'bottom': '-50px',
+                    'width': size + 'px',
+                    'height': size + 'px',
+                    'animation-duration': duration + 's',
+                    'animation-delay': delay + 's'
+                });
+                
+                $('body').append(icon);
+            }
+        }
+        
+        // Function to create trophy particles effect
+        function createTrophyParticles(x, y) {
+            // Create 8 particles in a circle pattern
+            for (let i = 0; i < 8; i++) {
+                const particle = $('<div class="trophy-particle"></div>');
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 20 + Math.random() * 10;
+                
+                particle.css({
+                    'left': x + Math.cos(angle) * distance + 'px',
+                    'top': y + Math.sin(angle) * distance + 'px'
+                });
+                
+                $('body').append(particle);
+                
+                // Remove after animation completes
+                setTimeout(function() {
+                    particle.remove();
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+</html> 

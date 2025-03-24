@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eskimos Road to Glory</title>
+    <meta name="description" content="Explore the journey of Eskimos in their road to glory, featuring team history, players, championships, and more.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="skip-link">Skip to content</div>
+    
+    <div class="page-transition"></div>
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
+    </video>
+    
+    <div id="particles-js"></div>
+    
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo">
+                <span>ESKIMOS</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-menu-links">
+                <a href="#home">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="#">Manager Ranking</a>
+                <a href="#">Trophy Cabinet</a>
+                <a href="#">Career Tournament</a>
+            </div>
+        </div>
+        
+        <main>
+            <header id="home">
+                <img src="assets/images/logo11.png" alt="Eskimos Road to Glory Logo" class="logo float">
+                <h1 class="reveal typing-effect">ESKIMOS ROAD TO GLORY</h1>
+                <div class="subtitle reveal">JOURNEY TO EXCELLENCE</div>
+                <a href="#" class="cta-button pulse-effect reveal">JOIN THE JOURNEY</a>
+            </header>
+
+            <div class="navigation">
+                <a href="tournament-guide.html" class="nav-item tilt-effect reveal" data-tooltip="Tournament guide and rules">
+                    <div class="nav-card">
+                        <img src="assets/images/home/h1.png" alt="Tournament Guide">
+                    </div>
+                </a>
+                <a href="career-mode.html" class="nav-item tilt-effect reveal" data-tooltip="Career mode information">
+                    <div class="nav-card">
+                        <img src="assets/images/home/h2.png" alt="Career Mode">
+                    </div>
+                </a>
+                <a href="manager-ranking.html" class="nav-item tilt-effect reveal" data-tooltip="Manager ranking system">
+                    <div class="nav-card">
+                        <img src="assets/images/home/h3.png" alt="Manager Ranking">
+                    </div>
+                </a>
+                <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal" data-tooltip="Club trophy cabinet">
+                    <div class="nav-card">
+                        <img src="assets/images/home/h4.png" alt="Trophy Cabinet">
+                    </div>
+                </a>
+                <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Career tournament history">
+                    <div class="nav-card">
+                        <img src="assets/images/home/h5.png" alt="Career Tournament">
+                    </div>
+                </a>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="#home">Home</a>
+                    <a href="tournament-guide.html">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="#">Manager Ranking</a>
+                    <a href="#">Trophy Cabinet</a>
+                    <a href="#">Career Tournament</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <div class="scroll-indicator-container">
+        <div class="scroll-indicator active" data-section="home"></div>
+        <div class="scroll-indicator" data-section="tournament"></div>
+        <div class="scroll-indicator" data-section="career"></div>
+        <div class="scroll-indicator" data-section="ranking"></div>
+        <div class="scroll-indicator" data-section="trophy"></div>
+        <div class="scroll-indicator" data-section="tournament-history"></div>
+    </div>
+
+    <div class="toast" id="toast">Welcome to Eskimos Road to Glory!</div>
+    
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html> 
