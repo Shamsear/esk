@@ -1006,6 +1006,22 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
     }
 }
 
+/* Reset body styles when returning from another page */
+body.no-transition {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+}
+
+/* Reset all animations and transitions when in no-transition mode */
+body.no-transition * {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+}
+
 /* Custom cursor */
 .cursor-dot,
 .cursor-outline {

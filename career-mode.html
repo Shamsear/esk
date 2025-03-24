@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Career Mode - Eskimos Road to Glory</title>
     <meta name="description" content="Explore career mode options for Eskimos Road to Glory, featuring different career paths, achievements, and strategies.">
+    <!-- Fix blurry navigation issues with a small inline script -->
+    <script>
+        // Clear any transition effects that might be stored in the browser's cache
+        if (performance.navigation.type === 2) {
+            // This is a back/forward navigation
+            document.documentElement.classList.add('no-transition');
+            setTimeout(() => document.documentElement.classList.remove('no-transition'), 100);
+        }
+    </script>
     <!-- Preload critical resources -->
     <link rel="preload" href="css/styles.css" as="style">
     <link rel="preload" href="js/script.js" as="script">
@@ -83,31 +92,31 @@
             <div class="navigation career-navigation">
                 <a href="registered-clubs.html" class="nav-item tilt-effect reveal" data-tooltip="Registered clubs management">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C1.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Registered Clubs" width="100%" height="auto">
+                        <img data-src="assets/images/C1.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Registered Clubs" width="100%" height="auto">
                         <div class="overlay-text">Registered Clubs</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player signing and transfers">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Signing" width="100%" height="auto">
+                        <img data-src="assets/images/C2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Signing" width="100%" height="auto">
                         <div class="overlay-text">Player Signing</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Manager status and statistics">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Manager Status" width="100%" height="auto">
+                        <img data-src="assets/images/C3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Manager Status" width="100%" height="auto">
                         <div class="overlay-text">Manager Status</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player status and statistics">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Status" width="100%" height="auto">
+                        <img data-src="assets/images/C4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Status" width="100%" height="auto">
                         <div class="overlay-text">Player Status</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player salary management">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C5.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Salary" width="100%" height="auto">
+                        <img data-src="assets/images/C5.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Salary" width="100%" height="auto">
                         <div class="overlay-text">Player Salary</div>
                     </div>
                 </a>
