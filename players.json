@@ -4057,19 +4057,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-6",
-        "team": "REAL MADRID CF",
-        "value": "320 RC"
-      },
-      {
         "season": "6-7",
         "team": "AL HILAL SFC",
         "value": "150 RC"
       },
       {
-        "season": "",
-        "team": "",
-        "value": ""
+        "season": "4-6",
+        "team": "REAL MADRID CF",
+        "value": "320 RC"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/RUMMENIGGE_CARD.webp",
