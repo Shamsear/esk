@@ -148,31 +148,31 @@
                 <a href="tournament-guide.html" class="nav-item tilt-effect reveal" data-tooltip="Tournament guide and rules">
                     <div class="nav-card">
                         <!-- Lazy loaded images with width and height -->
-                        <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" loading="lazy">
+                        <img data-data-src="assets/images/home/h1.png" alt="Tournament Guide" width="300" height="168" loading="lazy">
                         <div class="overlay-text">Tournament Guide</div>
                     </div>
                 </a>
                 <a href="career-mode.html" class="nav-item tilt-effect reveal" data-tooltip="Career mode information">
                     <div class="nav-card">
-                        <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" loading="lazy">
+                        <img data-data-src="assets/images/home/h2.png" alt="Career Mode" width="300" height="168" loading="lazy">
                         <div class="overlay-text">Career Mode</div>
                     </div>
                 </a>
                 <a href="manager-ranking.html" class="nav-item tilt-effect reveal" data-tooltip="Manager ranking system">
                     <div class="nav-card">
-                        <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" loading="lazy">
+                        <img data-data-src="assets/images/home/h3.png" alt="Manager Ranking" width="300" height="168" loading="lazy">
                         <div class="overlay-text">Manager Ranking</div>
                     </div>
                 </a>
                 <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal" data-tooltip="Club trophy cabinet">
                     <div class="nav-card">
-                        <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
+                        <img data-data-src="assets/images/home/h4.png" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
                         <div class="overlay-text">Trophy Cabinet</div>
                     </div>
                 </a>
                 <a href="career-tournament.html" class="nav-item tilt-effect reveal" data-tooltip="Career tournament history">
                     <div class="nav-card">
-                        <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168" loading="lazy">
+                        <img data-data-src="assets/images/home/h5.png" alt="Career Tournament" width="300" height="168" loading="lazy">
                         <div class="overlay-text">Career Tournament</div>
                     </div>
                 </a>
@@ -270,7 +270,7 @@
     <!-- Service worker registration -->
     <script defer src="js/sw-register.js"></script>
     
-    <!-- Performance optimizations - Load in correct order -->
+    <!-- Performance optimizations -->
     <script defer src="js/performance.js"></script>
     <script defer src="js/image-optimization.js"></script>
     
@@ -284,22 +284,6 @@
     <script>
         // Immediately executed critical JS
         document.addEventListener('DOMContentLoaded', function() {
-            // Make sure all images are loaded correctly
-            const allImages = document.querySelectorAll('img');
-            allImages.forEach(img => {
-                // If image has a data-src but no src, set src from data-src
-                if (img.dataset.src && !img.src) {
-                    img.src = img.dataset.src;
-                }
-                
-                // If image failed to load or has an empty src, try using a fallback
-                img.onerror = function() {
-                    if (this.src.includes('/assets/images/')) {
-                        this.src = 'https://via.placeholder.com/' + (this.width || '300') + 'x' + (this.height || '200') + '?text=Image+Not+Found';
-                    }
-                };
-            });
-            
             // Load the video after page content
             setTimeout(function() {
                 const video = document.querySelector('.video-bg');

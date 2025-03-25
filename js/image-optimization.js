@@ -217,68 +217,10 @@ function optimizeBackgroundImages() {
     });
 }
 
-// Function to handle data-src lazy loading 
-function loadLazyImages() {
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '100px 0px' // Start loading a bit before they come into view
-        });
-        
-        lazyImages.forEach(img => {
-            imageObserver.observe(img);
-        });
-    } else {
-        // Fallback for browsers without IntersectionObserver
-        lazyImages.forEach(img => {
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-            }
-        });
-    }
-}
-
-// Handle image loading errors
-function setupImageErrorHandling() {
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
-        img.onerror = function() {
-            console.error(`Failed to load image: ${this.src}`);
-            
-            // Replace with placeholder if image is from assets folder
-            if (this.src.includes('/assets/images/')) {
-                this.src = `https://via.placeholder.com/${this.width || 300}x${this.height || 200}?text=Image+Not+Found`;
-                
-                // Add class for styling
-                this.classList.add('image-error');
-                
-                // Add title with original path for debugging
-                this.title = `Failed to load: ${this.src}`;
-            }
-        };
-    });
-}
-
 // Initialize all optimizations
 document.addEventListener('DOMContentLoaded', function() {
     setupLQIP();
     optimizeBackgroundImages();
-    loadLazyImages(); // Add lazy loading for data-src images
-    setupImageErrorHandling(); // Handle image errors
     
     // Re-check when window is resized
     let resizeTimeout;
