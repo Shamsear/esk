@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Status - Eskimos Road to Glory</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/logo11.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Main page style */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 0;
+            user-select: none; /* Standard property */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+        }
+        /* Welcome screen styles */
+        #loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #121212; /* Dark theme background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: #fff;
+            text-align: center;
+            font-size: 32px;
+            flex-direction: column;
+            animation: fadeIn 1s ease-in-out; /* Fade in effect */
+        }
+        /* Welcome message styling */
+        .welcome-message {
+            font-size: 48px;
+            font-weight: bold;
+            color: #b0b0b0; /* Dark gray color for the welcome message */
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards, bounce 2s ease-in-out infinite;
+        }
+        @media screen and (max-width: 768px) {
+            .welcome-message {
+            font-size: 38px;
+            font-weight: bold;
+            color: #b0b0b0; /* Dark gray color for the welcome message */
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards, bounce 2s ease-in-out infinite;
+        }
+    }
+
+        /* Dynamic subtext that rotates */
+        .subtext {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #888; /* Light gray for the loading message */
+            opacity: 0;
+            animation: fadeIn 2.5s ease-in-out forwards;
+        }
+
+        /* Background animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1c1c1c, #2a2a2a, #0f0f0f); /* Dark gradient */
+            background-size: 300% 300%;
+            animation: gradientShift 5s ease infinite;
+            z-index: -1; /* Make sure it's behind the welcome screen */
+        }
+
+        /* Keyframes for fading in and background animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        #content {
+            display: none; /* Make sure it's hidden by default */
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            color: #fff;
+        }
+        h2 {
+            display: block;
+            font-size: 1.5em;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: normal;
+            unicode-bidi: isolate;
+        }
+
+        /* Search bar and filters container */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #282828;
+        }
+
+        .search-container input {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        /* Player cards section */
+        .content {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+        .player-cards {
+             /* Ensures padding does not cause overflow */
+        }
+
+        /* Player card container with fixed dimensions */
+.player-card {
+    width: 250px; /* Fixed width for player cards */
+    height: auto; /* Fixed height for player cards */
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    text-align: center;
+    box-shadow: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex; /* Use flexbox to center content */
+    flex-direction: column; /* Arrange content vertically */
+    justify-content: center; /* Center vertically */
+}
+.player-card {
+    width: 100%;
+    box-sizing: border-box; /* Ensures that padding/margins don't cause overflow */
+}
+
+@media screen and (min-width: 768px) {
+    .player-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 70%;
+        margin: 0 auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+}
+
+/* Adjust grid layout for larger screens */
+@media screen and (max-width: 768px) {
+    .player-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+}
+
+        .player-card:hover {
+            transform: scale(1.05);
+        }
+
+        .player-card.selected {
+            border: 2px solid #4caf50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+            border-radius: 10px;
+        }
+
+        .player-card img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+
+        /* Filter section */
+        .filters {
+            flex: 1;
+            background-color: #282828;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+        }
+        
+        .dropdown-option img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .filters h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .filters label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .filters select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+        }
+
+        /* Apply and Reset buttons */
+        .filters .filter-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .filters button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-positions a.selected {
+            background-color: #4caf50;
+            color: white;
+        }
+                
+        .apply-button {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .reset-button {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        /* Filter Button for Mobile/Tablets */
+        /* Filter Button for Mobile/Tablets */
+.filter-btn {
+    display: none;
+    background-color: #282828;
+    color: #e3e3e3;
+    border: 1px solid #e3e3e3;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: auto;
+    position: fixed; /* Keep the button fixed */
+    right: 20px; /* Position it on the right side */
+    top: 50%; /* Position it in the middle vertically */
+    transform: translateY(-50%); /* Center it vertically */
+    z-index: 100; /* Ensure it stays on top */
+}
+
+
+        .filter-btn i {
+            margin-right: 10px;
+        }
+
+        /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    overflow: auto; /* Allow scrolling if needed */
+}
+
+/* Modal Content (The Box) */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90vw; /* 90% of the viewport width */
+    max-width: 600px; /* Limit the maximum width for larger screens */
+    max-height: 90vh; /* 90% of the viewport height */
+    overflow-y: auto; /* Scrollable content if it exceeds height */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Modal Close Button */
+.modal-content .close {
+    color:white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Player Info and Stats Table */
+.modal-content table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Remove space between table borders */
+    margin-top: 20px;
+}
+
+.modal-content table th, .modal-content table td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: left;
+}
+
+.modal-content table th {
+    background-color: white;
+    font-weight: bold;
+}
+
+/* Responsive Adjustments with Media Queries */
+@media (max-width: 700px) {
+    .modal-content {
+        width: 95vw; /* Use more of the viewport width on small screens */
+        max-width: 95vw; /* Override max-width for small devices */
+    }
+    
+    .modal-content img {
+        height: auto !important; /* Reduce the image size on smaller devices */
+        margin: auto;
+        width: 50% !important;
+        display: block;
+    }
+}
+@media (min-width: 700px) {
+    .modal-content img {
+        height: auto !important; /* Reduce the image size on smaller devices */
+        margin: auto;
+        width: 50% !important;
+        display: block;
+    }
+}
+
+
+        .modal-content h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: white;
+            text-decoration: none;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .apply-button {
+            background-color: #2196F3;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 48%;
+        }
+
+        .reset-button {
+            background-color: #444;
+            color: #e3e3e3;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 48%;
+        }
+
+        .apply-button:hover {
+            background-color: #0b7dda;
+        }
+
+        .reset-button:hover {
+            background-color: #555;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: white;
+            text-decoration: none;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            /* Hide filters and show the filter button on smaller screens */
+            .filters {
+                display: none;
+            }
+
+            .filter-btn {
+                display: block;
+            }
+        }
+        
+        /* Navigation bar styles */
+        .navbar {
+            background-color: #282828;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .navbar .logo-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-links a {
+            color: #e3e3e3;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .navbar .nav-links a:hover {
+            color: #2196F3;
+        }
+        
+        /* Back button */
+        .back-button {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 15px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading/Welcome Screen -->
+    <div id="loading">
+        <div class="background-animation"></div>
+        <div class="welcome-message">Player Status</div>
+        <div class="subtext">Loading player data...</div>
+    </div>
+    
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="assets/images/logo11.png" alt="Eskimos Logo">
+            <span class="logo-text">Eskimos Road to Glory</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="career-mode.html">Career Mode</a>
+        </div>
+    </div>
+    
+    <a href="career-mode.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
+
+    <!-- Main Content -->
+    <div id="content">
+        <h1>Player Status Database</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search by player name...">
+        </div>
+        
+        <div class="content">
+            <div class="player-cards" id="playerCards">
+                <!-- Player cards will be loaded here dynamically -->
+            </div>
+        </div>
+        
+        <!-- Filter button for mobile/tablets -->
+        <button class="filter-btn" id="filterBtn"><i class="fas fa-filter"></i> Filters</button>
+        
+        <!-- Player Data Modal -->
+        <div id="playerModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="playerInfo">
+                    <!-- Player information will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate loading time
+        setTimeout(function() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 3000);
+        
+        // Sample player data (would be fetched from an API in a real implementation)
+        const players = [
+            {
+                id: 1,
+                name: "Lionel Messi",
+                position: "RW",
+                club: "Inter Miami",
+                overall: 90,
+                image: "https://static.wikia.nocookie.net/fifa/images/a/a9/FB_24_Messi.png/revision/latest/scale-to-width-down/256?cb=20231013180337"
+            },
+            {
+                id: 2,
+                name: "Cristiano Ronaldo",
+                position: "ST",
+                club: "Al Nassr",
+                overall: 86,
+                image: "https://static.wikia.nocookie.net/fifa/images/9/93/FB_24_Ronaldo.png/revision/latest/scale-to-width-down/256?cb=20231013180540"
+            },
+            {
+                id: 3,
+                name: "Kylian Mbappé",
+                position: "ST",
+                club: "Paris Saint-Germain",
+                overall: 91,
+                image: "https://static.wikia.nocookie.net/fifa/images/f/fd/FB_24_Mbapp%C3%A9.png/revision/latest/scale-to-width-down/256?cb=20231013180344"
+            },
+            {
+                id: 4,
+                name: "Kevin De Bruyne",
+                position: "CAM",
+                club: "Manchester City",
+                overall: 91,
+                image: "https://static.wikia.nocookie.net/fifa/images/a/a7/FB_24_De_Bruyne.png/revision/latest/scale-to-width-down/256?cb=20231013175945"
+            },
+            {
+                id: 5,
+                name: "Erling Haaland",
+                position: "ST",
+                club: "Manchester City",
+                overall: 91,
+                image: "https://static.wikia.nocookie.net/fifa/images/a/ac/FB_24_Haaland.png/revision/latest/scale-to-width-down/256?cb=20231013180055"
+            },
+            {
+                id: 6,
+                name: "Virgil van Dijk",
+                position: "CB",
+                club: "Liverpool",
+                overall: 89,
+                image: "https://static.wikia.nocookie.net/fifa/images/f/f3/FB_24_Van_Dijk.png/revision/latest/scale-to-width-down/256?cb=20231013180729"
+            }
+        ];
+
+        // Function to create player cards
+        function createPlayerCards() {
+            const playerCardsContainer = document.getElementById('playerCards');
+            playerCardsContainer.innerHTML = '';
+            
+            players.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                card.dataset.id = player.id;
+                
+                card.innerHTML = `
+                    <img src="${player.image}" alt="${player.name}">
+                    <h3>${player.name}</h3>
+                    <p>${player.position} | ${player.club} | ${player.overall} OVR</p>
+                `;
+                
+                card.addEventListener('click', function() {
+                    showPlayerModal(player);
+                });
+                
+                playerCardsContainer.appendChild(card);
+            });
+        }
+        
+        // Function to show player modal with details
+        function showPlayerModal(player) {
+            const modal = document.getElementById('playerModal');
+            const playerInfo = document.getElementById('playerInfo');
+            
+            playerInfo.innerHTML = `
+                <img src="${player.image}" alt="${player.name}" style="width: 200px; height: auto; margin: 0 auto; display: block;">
+                <h2>${player.name}</h2>
+                <table>
+                    <tr>
+                        <th>Position</th>
+                        <td>${player.position}</td>
+                    </tr>
+                    <tr>
+                        <th>Club</th>
+                        <td>${player.club}</td>
+                    </tr>
+                    <tr>
+                        <th>Overall Rating</th>
+                        <td>${player.overall}</td>
+                    </tr>
+                </table>
+            `;
+            
+            modal.style.display = 'block';
+        }
+        
+        // Close modal when clicking the X button
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('playerModal').style.display = 'none';
+        });
+        
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('playerModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchValue = this.value.toLowerCase();
+            const playerCards = document.querySelectorAll('.player-card');
+            
+            playerCards.forEach(card => {
+                const playerName = card.querySelector('h3').textContent.toLowerCase();
+                if (playerName.includes(searchValue)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Initialize the page
+        window.onload = function() {
+            createPlayerCards();
+        };
+    </script>
+</body>
+</html> 
