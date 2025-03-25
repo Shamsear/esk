@@ -32,24 +32,20 @@ function warmPageCache() {
 
 // Initialize page - optimized for speed
 function initPage() {
+    // Reset any transition effects that might be lingering
     document.body.style.filter = 'none';
     document.body.style.opacity = '1';
     
-    // Smooth page transition
-    const pageTransition = document.querySelector('.page-transition');
-    if (pageTransition) {
-        pageTransition.style.transform = 'translateX(-100%)';
+    // Handle the fade-in of the page
+    if (document.querySelector('.page-transition')) {
+        document.querySelector('.page-transition').style.transform = 'translateX(-100%)';
     }
     
-    // Enable interactions
+    // Enable interactions immediately
     document.body.style.pointerEvents = 'auto';
     
-    // Enhanced animations
-    requestAnimationFrame(() => {
-        animateElementsOnLoad();
-        initSectionAnimations();
-        enhanceNavigationCards();
-    });
+    // Add smooth entrance animations to elements - using requestAnimationFrame for better performance
+    requestAnimationFrame(() => animateElementsOnLoad());
 }
 
 // Animate elements on page load - optimized for speed
@@ -696,149 +692,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add scroll listener
     window.addEventListener('scroll', handleScrollEffects);
-});
-
-// Enhanced section animations
-function initSectionAnimations() {
-    const sections = document.querySelectorAll('section');
-    
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                sectionObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
-    });
-    
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
-}
-
-// Enhanced navigation cards
-function enhanceNavigationCards() {
-    const cards = document.querySelectorAll('.nav-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-            
-            card.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                scale3d(1.05, 1.05, 1.05)
-            `;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-}
-
-// Enhanced particle effects
-function initParticles() {
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle' },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    animation: { enable: true, speed: 1, minimumValue: 0.1 }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    animation: { enable: true, speed: 2, minimumValue: 0.1 }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ffffff',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    outMode: 'out',
-                    bounce: false,
-                    attract: { enable: false, rotateX: 600, rotateY: 1200 }
-                }
-            },
-            interactivity: {
-                detectOn: 'canvas',
-                events: {
-                    onHover: { enable: true, mode: 'grab' },
-                    onClick: { enable: true, mode: 'push' },
-                    resize: true
-                },
-                modes: {
-                    grab: { distance: 140, lineLinked: { opacity: 1 } },
-                    push: { particles_nb: 4 }
-                }
-            },
-            retina_detect: true
-        });
-    }
-}
-
-// Initialize enhancements when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    initPage();
-    initParticles();
-    
-    // Enhance scroll animations
-    const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('reveal-visible');
-                scrollObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    document.querySelectorAll('.reveal').forEach(el => {
-        scrollObserver.observe(el);
-    });
-    
-    // Enhanced hover effects for feature items
-    document.querySelectorAll('.feature-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'translateY(-15px) scale(1.02)';
-            item.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5)';
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = '';
-            item.style.boxShadow = '';
-        });
-    });
-});
-
-// Enhanced page transitions
-window.addEventListener('beforeunload', () => {
-    document.body.classList.add('page-exit');
 }); 

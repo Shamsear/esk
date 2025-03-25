@@ -1,6 +1,6 @@
 // Google Sheets API URLs
 const SHEET_ID = '1DO93v-xB2cPZn31-drgOggeVFgaH-0V0XLPjhfkB5Ek';
-const POSITIONS = ['GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'RW', 'LW', 'ST'];
+const POSITIONS = ['GK', 'CB', 'RB', 'LB', 'CM', 'DM', 'AM', 'ST', 'CF', 'RW', 'LW'];
 
 // DOM Elements
 let searchInput, positionTabs, tables, loadingOverlay, loadingMessage;
@@ -311,12 +311,13 @@ function mapPosition(sheetPosition) {
         'CB': 'defender',
         'RB': 'defender',
         'LB': 'defender',
-        'DM': 'midfielder',
         'CM': 'midfielder',
+        'DM': 'midfielder',
         'AM': 'midfielder',
+        'ST': 'forward',
+        'CF': 'forward',
         'RW': 'forward',
-        'LW': 'forward',
-        'ST': 'forward'
+        'LW': 'forward'
     };
     return positionMap[sheetPosition] || 'unknown';
 }
