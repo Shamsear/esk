@@ -179,6 +179,20 @@ footer {
         height: 60px;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     }
+    
+    /* Ensure background image is visible on mobile */
+    body {
+        background-image: url('../assets/images/logo.jpg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+    }
+    
+    /* Fix the video background opacity */
+    .video-bg {
+        opacity: 0.2;
+    }
 }
 
 /* Light mode adjustments */
@@ -1736,6 +1750,15 @@ h1, h2, h3, h4, h5 {
         opacity: 0.25;
     }
     
+    /* Preserve background image on mobile */
+    body {
+        background-image: url('../assets/images/logo.jpg') !important; 
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+    }
+    
     /* Better glass-morphism containers on mobile */
     .container, .career-description, .guide-section, .features, .auction-container {
         background: rgba(0, 0, 0, 0.5);
@@ -2032,5 +2055,21 @@ h1, h2, h3, h4, h5 {
     
     .guide-section {
         padding: 15px;
+    }
+}
+
+/* Fixes for iOS devices which don't handle background-attachment:fixed well */
+@supports (-webkit-overflow-scrolling: touch) {
+    body {
+        background-image: url('../assets/images/logo.jpg') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important; /* Use scroll instead of fixed for iOS */
+        min-height: 100vh;
+    }
+    
+    .overlay {
+        background: rgba(0, 0, 0, 0.3); /* Add slight overlay for contrast */
     }
 } 
