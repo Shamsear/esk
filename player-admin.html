@@ -18,6 +18,9 @@
     <title>R2G Player Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/club-dropdown.css">
+    <!-- Load club manager script -->
+    <script src="js/club-loader.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -171,6 +174,7 @@
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
+            position: relative;
         }
         .add-stat-btn {
             background-color: #3f51b5;
@@ -242,11 +246,14 @@
             display: flex;
             margin-bottom: 15px;
             border-bottom: 1px solid #444;
+            overflow-x: auto; /* Allow tabs to scroll on mobile */
+            -webkit-overflow-scrolling: touch;
         }
         .tab {
             padding: 10px 15px;
             cursor: pointer;
             border-bottom: 2px solid transparent;
+            white-space: nowrap; /* Prevent tab text from wrapping */
         }
         .tab:hover {
             background-color: #333;
@@ -295,6 +302,112 @@
             height: 20px;
             margin-right: 10px;
             object-fit: contain;
+        }
+        
+        /* Stats reordering controls */
+        .stat-controls {
+            display: flex;
+            gap: 5px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .stat-move-btn {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #555;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .stat-move-btn:hover {
+            background-color: #777;
+        }
+        
+        .stats-controls-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            
+            .player-list {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+                max-height: 300px;
+            }
+            
+            .header {
+                flex-direction: column;
+                padding: 10px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                margin-bottom: 10px;
+                font-size: 20px;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-delete {
+                align-self: center;
+            }
+            
+            /* Make tabs more usable on mobile */
+            .tabs {
+                padding-bottom: 5px;
+            }
+            
+            .tab {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            
+            /* Adjust stat items for mobile */
+            .stat-item {
+                flex-wrap: wrap;
+                padding: 15px 10px;
+            }
+            
+            .stat-item > div {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            /* Adjust form elements for touch */
+            button, input, select {
+                padding: 12px 15px;
+                font-size: 16px; /* Prevents iOS zoom on focus */
+            }
+            
+            label {
+                font-size: 14px;
+            }
         }
     </style>
 
@@ -357,11 +470,10 @@
                 <div class="form-group">
                     <label for="player-club">Club</label>
                     <div class="club-dropdown">
-                        <input type="text" id="player-club" class="club-search" placeholder="Search club...">
-                        <div class="club-options" id="club-options">
-                            <!-- Club options will be added here dynamically -->
-                        </div>
+                        <input type="text" id="player-club" placeholder="Search club..." class="club-search">
+                        <div id="club-options" class="club-options"></div>
                     </div>
+                    <div id="club-preview" class="club-preview"></div>
                 </div>
                 
                 <div class="form-group">
@@ -388,10 +500,23 @@
             
             <div class="tab-content" data-tab="stats">
                 <h3>Player Stats & History</h3>
+                <div class="stats-controls-container">
+                    <div>
+                        <button id="add-stat-btn" class="add-stat-btn">+ Add Stat</button>
+                    </div>
+                    <div>
+                        <button id="sort-by-season" title="Sort by Season">Sort by Season</button>
+                        <button id="sort-by-value" title="Sort by Value">Sort by Value</button>
+                    </div>
+                </div>
                 <div id="stats-container" class="stats-container">
                     <!-- Stat items will be added here dynamically -->
                 </div>
-                <button id="add-stat-btn" class="add-stat-btn">+ Add Stat</button>
+                <div class="stats-controls-container">
+                    <div>
+                        <button id="add-stat-btn-bottom" class="add-stat-btn">+ Add Stat</button>
+                    </div>
+                </div>
             </div>
             
             <div class="tab-content" data-tab="image">
@@ -634,49 +759,15 @@
 
         // Extract unique clubs from player data
         function extractClubs() {
-            const clubsSet = new Set();
-            clubsList = []; // Reset clubsList before populating
-            
-            playersData.forEach(player => {
-                if (player.club && !clubsSet.has(player.club)) {
-                    clubsSet.add(player.club);
-                    clubsList.push({
-                        name: player.club,
-                        logo: player.clubLogo || ''
-                    });
-                }
-            });
-            
-            // Also collect team names from player stats
-            collectTeamNames();
-            
-            // Sort clubs alphabetically
-            clubsList.sort((a, b) => a.name.localeCompare(b.name));
+            // This function is now deprecated - using ClubManager instead
+            console.log('Using ClubManager for club data');
+            return window.ClubManager.initialize();
         }
         
         // Collect all unique team names from player stats
         function collectTeamNames() {
-            const teamsSet = new Set();
-            
-            // First get all existing teams in clubsList
-            clubsList.forEach(club => {
-                teamsSet.add(club.name);
-            });
-            
-            // Then add all unique team names from player stats
-            playersData.forEach(player => {
-                if (player.stats && Array.isArray(player.stats)) {
-                    player.stats.forEach(stat => {
-                        if (stat.team && !teamsSet.has(stat.team)) {
-                            teamsSet.add(stat.team);
-                            clubsList.push({
-                                name: stat.team,
-                                logo: '' // No logo for stats teams by default
-                            });
-                        }
-                    });
-                }
-            });
+            // This function is now deprecated - using ClubManager instead
+            console.log('Using ClubManager for team data');
         }
 
         // Populate players list
@@ -849,14 +940,20 @@
             const clubOptions = document.getElementById('club-options');
             
             clubInput.addEventListener('focus', () => {
-                populateClubOptions();
+                populateClubOptions('');
                 clubOptions.style.display = 'block';
             });
             
             clubInput.addEventListener('input', debounce(function() {
-                populateClubOptions(clubInput.value);
+                populateClubOptions(this.value);
                 clubOptions.style.display = 'block';
             }, 200));
+            
+            clubInput.addEventListener('blur', function() {
+                setTimeout(() => {
+                    clubOptions.style.display = 'none';
+                }, 150);
+            });
             
             // Global click handler for dropdowns (both club and team dropdowns)
             document.addEventListener('click', (e) => {
@@ -895,8 +992,13 @@
             // Delete button
             document.getElementById('delete-btn').addEventListener('click', deletePlayer);
             
-            // Add stat button
-            document.getElementById('add-stat-btn').addEventListener('click', addStatItem);
+            // Add stat buttons (both top and bottom)
+            document.getElementById('add-stat-btn').addEventListener('click', () => addStatItem());
+            document.getElementById('add-stat-btn-bottom').addEventListener('click', () => addStatItem());
+            
+            // Sorting buttons
+            document.getElementById('sort-by-season').addEventListener('click', sortStatsBySeason);
+            document.getElementById('sort-by-value').addEventListener('click', sortStatsByValue);
             
             // Image path input change
             const imagePathInput = document.getElementById('player-image-path');
@@ -1085,13 +1187,11 @@
                     const season = statElement.querySelector('[data-stat-season]').value;
                     const team = statElement.querySelector('[data-stat-team]').value;
                     const value = statElement.querySelector('[data-stat-value]').value;
-                    const apps = statElement.querySelector('[data-stat-apps]').value;
                     
                     return { 
                         season,
                         team,
-                        value,
-                        apps
+                        value
                     };
                 });
                 
@@ -1294,14 +1394,13 @@
                 addStatItem(
                     stat.season || '', 
                     stat.team || '', 
-                    stat.value || '',
-                    stat.apps || '00'
+                    stat.value || ''
                 );
             });
         }
 
         // Add stat item with the correct fields matching the JSON structure
-        function addStatItem(season = '', team = '', statValue = '', apps = '00') {
+        function addStatItem(season = '', team = '', statValue = '') {
             const container = document.getElementById('stats-container');
             const statElement = document.createElement('div');
             statElement.className = 'stat-item';
@@ -1335,30 +1434,30 @@
             teamDropdown.appendChild(teamOptions);
             
             // Setup team dropdown functionality
-            teamInput.addEventListener('focus', () => {
-                // Close all other open dropdowns first
-                document.querySelectorAll('.team-options').forEach(el => {
-                    if (el !== teamOptions) {
-                        el.style.display = 'none';
-                    }
-                });
+            teamInput.addEventListener('focus', async () => {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
                 
-                populateTeamOptions(teamOptions, teamInput);
+                populateTeamOptions(teamOptions, teamInput, '');
                 teamOptions.style.display = 'block';
             });
             
-            teamInput.addEventListener('input', () => {
-                populateTeamOptions(teamOptions, teamInput, teamInput.value);
+            teamInput.addEventListener('input', async function() {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(teamOptions, teamInput, this.value);
                 teamOptions.style.display = 'block';
             });
             
-            teamInput.addEventListener('blur', (e) => {
-                // Use a small timeout to allow for clicking on options
+            teamInput.addEventListener('blur', () => {
                 setTimeout(() => {
-                    if (!teamOptions.contains(document.activeElement)) {
-                        teamOptions.style.display = 'none';
-                    }
-                }, 200);
+                    teamOptions.style.display = 'none';
+                }, 150);
             });
             
             // Create value input
@@ -1370,23 +1469,44 @@
             valueInput.style.flex = '1';
             valueInput.style.marginRight = '10px';
             
-            // Create apps input
-            const appsInput = document.createElement('input');
-            appsInput.type = 'text';
-            appsInput.value = apps;
-            appsInput.placeholder = 'Apps (e.g. 00)';
-            appsInput.dataset.statApps = 'true';
-            appsInput.style.flex = '0.5';
-            appsInput.style.marginRight = '10px';
+            // Create controls for reordering and deletion
+            const controlsContainer = document.createElement('div');
+            controlsContainer.className = 'stat-controls';
+            
+            // Create move up button
+            const moveUpBtn = document.createElement('button');
+            moveUpBtn.className = 'stat-move-btn';
+            moveUpBtn.innerHTML = '&uarr;';
+            moveUpBtn.title = 'Move Up';
+            moveUpBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                moveStatUp(statElement);
+            });
+            
+            // Create move down button
+            const moveDownBtn = document.createElement('button');
+            moveDownBtn.className = 'stat-move-btn';
+            moveDownBtn.innerHTML = '&darr;';
+            moveDownBtn.title = 'Move Down';
+            moveDownBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                moveStatDown(statElement);
+            });
             
             // Create delete button
             const deleteButton = document.createElement('button');
-            deleteButton.className = 'btn-delete';
-            deleteButton.textContent = 'X';
-            deleteButton.style.padding = '5px 10px';
-            deleteButton.addEventListener('click', () => {
+            deleteButton.className = 'stat-move-btn btn-delete';
+            deleteButton.innerHTML = '&times;';
+            deleteButton.title = 'Delete Stat';
+            deleteButton.addEventListener('click', (e) => {
+                e.preventDefault();
                 container.removeChild(statElement);
             });
+            
+            // Add buttons to controls container
+            controlsContainer.appendChild(moveUpBtn);
+            controlsContainer.appendChild(moveDownBtn);
+            controlsContainer.appendChild(deleteButton);
             
             // Add labels above inputs for clarity
             const wrapper = document.createElement('div');
@@ -1417,16 +1537,9 @@
             valueLabel.style.marginRight = '10px';
             valueLabel.style.fontSize = '12px';
             
-            const appsLabel = document.createElement('div');
-            appsLabel.textContent = 'Apps';
-            appsLabel.style.flex = '0.5';
-            appsLabel.style.marginRight = '10px';
-            appsLabel.style.fontSize = '12px';
-            
             headerRow.appendChild(seasonLabel);
             headerRow.appendChild(teamLabel);
             headerRow.appendChild(valueLabel);
-            headerRow.appendChild(appsLabel);
             
             // Create inputs row
             const inputsRow = document.createElement('div');
@@ -1435,130 +1548,95 @@
             inputsRow.appendChild(seasonInput);
             inputsRow.appendChild(teamDropdown);
             inputsRow.appendChild(valueInput);
-            inputsRow.appendChild(appsInput);
-            inputsRow.appendChild(deleteButton);
             
             wrapper.appendChild(headerRow);
             wrapper.appendChild(inputsRow);
             
             statElement.appendChild(wrapper);
+            statElement.appendChild(controlsContainer);
             container.appendChild(statElement);
+        }
+
+        // Move stat item up
+        function moveStatUp(statElement) {
+            const container = document.getElementById('stats-container');
+            const prevStat = statElement.previousElementSibling;
+            
+            if (prevStat) {
+                container.insertBefore(statElement, prevStat);
+            }
+        }
+        
+        // Move stat item down
+        function moveStatDown(statElement) {
+            const container = document.getElementById('stats-container');
+            const nextStat = statElement.nextElementSibling;
+            
+            if (nextStat) {
+                container.insertBefore(nextStat, statElement);
+            }
+        }
+        
+        // Sort stats by season
+        function sortStatsBySeason() {
+            const container = document.getElementById('stats-container');
+            const stats = Array.from(container.children);
+            
+            stats.sort((a, b) => {
+                const seasonA = a.querySelector('[data-stat-season]').value;
+                const seasonB = b.querySelector('[data-stat-season]').value;
+                return seasonA.localeCompare(seasonB);
+            });
+            
+            // Re-append in sorted order
+            stats.forEach(stat => container.appendChild(stat));
+        }
+        
+        // Sort stats by value
+        function sortStatsByValue() {
+            const container = document.getElementById('stats-container');
+            const stats = Array.from(container.children);
+            
+            stats.sort((a, b) => {
+                const valueA = parseInt(a.querySelector('[data-stat-value]').value) || 0;
+                const valueB = parseInt(b.querySelector('[data-stat-value]').value) || 0;
+                return valueB - valueA; // Sort by highest value first
+            });
+            
+            // Re-append in sorted order
+            stats.forEach(stat => container.appendChild(stat));
         }
 
         // Populate team options for stat dropdowns
         function populateTeamOptions(container, inputElement, searchTerm = '') {
-            // Clear the container
-            container.innerHTML = '';
-            
-            // Use fragment for better performance
-            const fragment = document.createDocumentFragment();
-            const lowerSearchTerm = searchTerm.toLowerCase();
-            
-            // Filter clubs based on search term
-            const filteredClubs = lowerSearchTerm
-                ? clubsList.filter(club => club.name.toLowerCase().includes(lowerSearchTerm))
-                : clubsList;
-            
-            // Limit to maximum of 20 results to prevent UI lag
-            const maxResults = Math.min(filteredClubs.length, 20);
-            
-            for (let i = 0; i < maxResults; i++) {
-                const club = filteredClubs[i];
-                const option = document.createElement('div');
-                option.className = 'team-option';
-                
-                const logo = document.createElement('img');
-                logo.className = 'team-logo';
-                logo.src = club.logo || 'https://via.placeholder.com/20';
-                logo.alt = club.name;
-                logo.onerror = function() {
-                    this.src = 'https://via.placeholder.com/20';
-                };
-                
-                const name = document.createElement('span');
-                name.textContent = club.name;
-                
-                option.appendChild(logo);
-                option.appendChild(name);
-                
-                option.addEventListener('click', () => {
-                    inputElement.value = club.name;
-                    container.style.display = 'none';
-                });
-                
-                fragment.appendChild(option);
-            }
-            
-            // Add "more results" indicator if needed
-            if (filteredClubs.length > maxResults) {
-                const moreMessage = document.createElement('div');
-                moreMessage.className = 'team-option';
-                moreMessage.style.textAlign = 'center';
-                moreMessage.style.color = '#aaa';
-                moreMessage.textContent = `And ${filteredClubs.length - maxResults} more results...`;
-                fragment.appendChild(moreMessage);
-            }
-            
-            // Append all elements at once
-            container.appendChild(fragment);
+            // Use the ClubManager to populate team options
+            window.ClubManager.populateClubOptions(container, inputElement, searchTerm, club => {
+                // Update any related UI or data after selection
+                inputElement.value = club.name;
+                container.style.display = 'none';
+            });
         }
 
         // Populate club options
         function populateClubOptions(searchTerm = '') {
             const container = document.getElementById('club-options');
-            container.innerHTML = '';
+            const inputElement = document.getElementById('player-club');
             
-            // Use fragment for better performance
-            const fragment = document.createDocumentFragment();
-            const lowerSearchTerm = searchTerm.toLowerCase();
-            
-            // Filter clubs based on search term
-            const filteredClubs = lowerSearchTerm 
-                ? clubsList.filter(club => club.name.toLowerCase().includes(lowerSearchTerm))
-                : clubsList;
-            
-            // Limit to maximum of 20 results to prevent UI lag
-            const maxResults = Math.min(filteredClubs.length, 20);
-            
-            for (let i = 0; i < maxResults; i++) {
-                const club = filteredClubs[i];
-                const option = document.createElement('div');
-                option.className = 'club-option';
+            // Use the ClubManager to populate club options
+            window.ClubManager.populateClubOptions(container, inputElement, searchTerm, club => {
+                // Update player club and related UI
+                document.getElementById('player-club').value = club.name;
                 
-                const logo = document.createElement('img');
-                logo.className = 'club-logo';
-                logo.src = club.logo || 'https://via.placeholder.com/20';
-                logo.alt = club.name;
-                logo.onerror = function() {
-                    this.src = 'https://via.placeholder.com/20';
-                };
-                
-                const name = document.createElement('span');
-                name.textContent = club.name;
-                
-                option.appendChild(logo);
-                option.appendChild(name);
-                
-                option.addEventListener('click', () => {
-                    document.getElementById('player-club').value = club.name;
-                    container.style.display = 'none';
-                });
-                
-                fragment.appendChild(option);
-            }
-            
-            // Add "more results" indicator if needed
-            if (filteredClubs.length > maxResults) {
-                const moreMessage = document.createElement('div');
-                moreMessage.className = 'club-option';
-                moreMessage.style.textAlign = 'center';
-                moreMessage.style.color = '#aaa';
-                moreMessage.textContent = `And ${filteredClubs.length - maxResults} more results...`;
-                fragment.appendChild(moreMessage);
-            }
-            
-            // Append all elements at once
-            container.appendChild(fragment);
+                // If we have club logo, update it
+                if (club.logo) {
+                    // Update club logo preview if it exists
+                    const clubLogoPreview = document.getElementById('club-logo-preview');
+                    if (clubLogoPreview) {
+                        clubLogoPreview.src = club.logo;
+                        clubLogoPreview.style.display = 'block';
+                    }
+                }
+            });
         }
 
         // Update image preview
@@ -1679,6 +1757,57 @@
                 showStatusMessage(`GitHub Error: ${error.message}`, false);
                 console.error('GitHub save error:', error);
                 throw error; // Re-throw to be handled by the caller
+            }
+        }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Initialize club data first to ensure it's available
+            await window.ClubManager.initialize();
+            
+            // Load players data
+            loadPlayersData();
+            
+            // Add event listeners
+            setupEventListeners();
+            
+            // Setup club search functionality
+            setupClubSearchFunctionality();
+        });
+
+        // Set up club search functionality
+        function setupClubSearchFunctionality() {
+            const clubInput = document.getElementById('player-club');
+            const clubOptions = document.getElementById('club-options');
+            
+            // Add event listeners for club search
+            clubInput.addEventListener('focus', function() {
+                populateClubOptions('');
+                clubOptions.style.display = 'block';
+            });
+            
+            clubInput.addEventListener('input', function() {
+                populateClubOptions(this.value);
+                clubOptions.style.display = 'block';
+            });
+            
+            clubInput.addEventListener('blur', function() {
+                setTimeout(() => {
+                    clubOptions.style.display = 'none';
+                }, 150);
+            });
+            
+            // Add club logo preview if not exists
+            const clubPreviewContainer = document.getElementById('club-preview');
+            if (clubPreviewContainer && !document.getElementById('club-logo-preview')) {
+                const clubLogoPreview = document.createElement('img');
+                clubLogoPreview.id = 'club-logo-preview';
+                clubLogoPreview.className = 'club-logo-preview';
+                clubLogoPreview.style.maxWidth = '50px';
+                clubLogoPreview.style.maxHeight = '50px';
+                clubLogoPreview.style.marginTop = '5px';
+                clubLogoPreview.style.display = 'none';
+                clubPreviewContainer.appendChild(clubLogoPreview);
             }
         }
     </script>
