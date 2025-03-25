@@ -1,0 +1,200 @@
+// Service Worker for caching and offline functionality
+const CACHE_NAME = 'r2g-cache-v1';
+const STATIC_ASSETS = [
+  '/',
+  '/index.html',
+  '/career-mode.html',
+  '/career-tournament.html',
+  '/manager-ranking.html',
+  '/registered-clubs.html',
+  '/trophy-cabinet.html',
+  '/tournament-guide.html',
+  '/css/styles.css',
+  '/css/critical.css',
+  '/js/script.js',
+  '/js/performance.js',
+  '/js/image-optimization.js',
+  '/assets/images/logo11.png'
+];
+
+// Cache critical resources during installation
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Caching static assets');
+        return cache.addAll(STATIC_ASSETS);
+      })
+      .then(() => self.skipWaiting())
+  );
+});
+
+// Activate and clean up old caches
+self.addEventListener('activate', event => {
+  const cacheWhitelist = [CACHE_NAME];
+  
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            console.log('Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Stale-while-revalidate strategy for all requests
+self.addEventListener('fetch', event => {
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+  
+  // Skip requests for players.json as it might be large
+  if (event.request.url.includes('players.json')) {
+    return;
+  }
+  
+  event.respondWith(
+    caches.match(event.request)
+      .then(cachedResponse => {
+        // Return cached response if available
+        const fetchPromise = fetch(event.request)
+          .then(networkResponse => {
+            // Cache new version if it's a successful response
+            if (networkResponse && networkResponse.ok && networkResponse.type === 'basic') {
+              const responseToCache = networkResponse.clone();
+              caches.open(CACHE_NAME)
+                .then(cache => {
+                  cache.put(event.request, responseToCache);
+                });
+            }
+            return networkResponse;
+          })
+          .catch(err => {
+            console.log('Fetch failed:', err);
+            // If the network fails and we don't have a cached response, handle offline
+            return caches.match('/offline.html');
+          });
+          
+        // Return the cached response or wait for network
+        return cachedResponse || fetchPromise;
+      })
+  );
+});
+
+// Cache images using a separate cache with longer expiration
+self.addEventListener('fetch', event => {
+  // Only handle image requests
+  if (event.request.destination === 'image') {
+    event.respondWith(
+      caches.open('image-cache-v1')
+        .then(cache => {
+          return cache.match(event.request)
+            .then(cachedResponse => {
+              // Return cached response if available
+              const fetchPromise = fetch(event.request)
+                .then(networkResponse => {
+                  // Cache new version if it's a successful response
+                  if (networkResponse && networkResponse.ok) {
+                    cache.put(event.request, networkResponse.clone());
+                  }
+                  return networkResponse;
+                })
+                .catch(err => {
+                  console.log('Image fetch failed:', err);
+                  // Try to serve a placeholder image if available
+                  return caches.match('/assets/images/placeholder.png');
+                });
+                
+              // Return the cached response or wait for network
+              return cachedResponse || fetchPromise;
+            });
+        })
+    );
+  }
+});
+
+// Background sync for saving data when offline
+self.addEventListener('sync', event => {
+  if (event.tag === 'sync-data') {
+    event.waitUntil(syncData());
+  }
+});
+
+// Handle messages from the main thread
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Function to sync data when back online
+async function syncData() {
+  const db = await openDB();
+  const offlineData = await db.getAll('offlineData');
+  
+  // Process each saved offline data item
+  for (const item of offlineData) {
+    try {
+      const response = await fetch(item.url, {
+        method: item.method,
+        headers: item.headers,
+        body: item.body
+      });
+      
+      if (response.ok) {
+        // Delete from the offline store once successfully synced
+        await db.delete('offlineData', item.id);
+      }
+    } catch (error) {
+      console.error('Failed to sync data:', error);
+    }
+  }
+}
+
+// Simple IndexedDB utility for storing offline data
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open('OfflineDataDB', 1);
+    
+    request.onupgradeneeded = event => {
+      const db = event.target.result;
+      db.createObjectStore('offlineData', { keyPath: 'id', autoIncrement: true });
+    };
+    
+    request.onsuccess = event => {
+      const db = event.target.result;
+      resolve({
+        getAll: storeName => {
+          return new Promise((resolve, reject) => {
+            const transaction = db.transaction([storeName], 'readonly');
+            const store = transaction.objectStore(storeName);
+            const request = store.getAll();
+            
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+        },
+        delete: (storeName, id) => {
+          return new Promise((resolve, reject) => {
+            const transaction = db.transaction([storeName], 'readwrite');
+            const store = transaction.objectStore(storeName);
+            const request = store.delete(id);
+            
+            request.onsuccess = () => resolve();
+            request.onerror = () => reject(request.error);
+          });
+        }
+      });
+    };
+    
+    request.onerror = event => {
+      reject(new Error('Failed to open IndexedDB'));
+    };
+  });
+} 

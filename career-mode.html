@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Career Mode - Eskimos Road to Glory</title>
     <meta name="description" content="Explore career mode options for Eskimos Road to Glory, featuring different career paths, achievements, and strategies.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
 </head>
 <body>
     <div class="skip-link">Skip to content</div>
@@ -25,16 +43,14 @@
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
-    </video>
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
     
     <div id="particles-js"></div>
     
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Mini Logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="300" height="200">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -58,11 +74,11 @@
             </button>
             <div class="mobile-menu-links">
                 <a href="index.html">Home</a>
-                <a href="#">Tournament Guide</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
                 <a href="career-mode.html">Career Mode</a>
-                <a href="#">Manager Ranking</a>
-                <a href="#">Trophy Cabinet</a>
-                <a href="#">Career Tournament</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                <a href="career-tournament.html">Career Tournament</a>
             </div>
         </div>
         
@@ -76,31 +92,31 @@
             <div class="navigation career-navigation">
                 <a href="registered-clubs.html" class="nav-item tilt-effect reveal" data-tooltip="Registered clubs management">
                     <div class="nav-card">
-                        <img src="assets/images/C1.png" alt="Registered Clubs">
+                        <img data-src="assets/images/careerhome/c1.png" alt="Registered Clubs" width="300" height="200" loading="lazy">
                         <div class="overlay-text">Registered Clubs</div>
                     </div>
                 </a>
-                <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player signing and transfers">
+                <a href="player-signing.html" class="nav-item tilt-effect reveal" data-tooltip="Player signing and transfers">
                     <div class="nav-card">
-                        <img src="assets/images/C2.png" alt="Player Signing">
+                        <img data-src="assets/images/careerhome/c2.png" alt="Player Signing" width="300" height="200" loading="lazy">
                         <div class="overlay-text">Player Signing</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Manager status and statistics">
                     <div class="nav-card">
-                        <img src="assets/images/C3.png" alt="Manager Status">
+                        <img data-src="assets/images/careerhome/c3.png" alt="Manager Status" width="300" height="200" loading="lazy">
                         <div class="overlay-text">Manager Status</div>
                     </div>
                 </a>
-                <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player status and statistics">
+                <a href="player-status.html" class="nav-item tilt-effect reveal" data-tooltip="Player status and statistics">
                     <div class="nav-card">
-                        <img src="assets/images/C4.png" alt="Player Status">
+                        <img data-src="assets/images/careerhome/c4.png" alt="Player Status" width="300" height="200" loading="lazy">
                         <div class="overlay-text">Player Status</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player salary management">
                     <div class="nav-card">
-                        <img src="assets/images/C5.png" alt="Player Salary">
+                        <img data-src="assets/images/careerhome/c5.png" alt="Player Salary" width="300" height="200" loading="lazy">
                         <div class="overlay-text">Player Salary</div>
                     </div>
                 </a>
@@ -121,10 +137,39 @@
                         <h3>Progress</h3>
                         <p>Track your career development with detailed statistics, performance metrics, and milestone achievements.</p>
                     </div>
-                    <div class="feature-item fade-in-up delay-6">
-                        <i class="fas fa-users"></i>
-                        <h3>Community</h3>
-                        <p>Compete with friends and join the global community of managers striving for greatness in the football world.</p>
+                </div>
+            </div>
+            
+            <div class="career-timeline fade-in-up delay-7">
+                <h2 class="section-heading">Career Path</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Rookie</h3>
+                            <p>Begin your journey as a new player or manager. Learn the basics and establish your reputation in the community.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Contender</h3>
+                            <p>Start competing in tournaments and leagues. Build your team and develop your strategic approach.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Professional</h3>
+                            <p>Master advanced techniques and tactics. Qualify for elite tournaments and establish yourself among the top performers.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Champion</h3>
+                            <p>Compete at the highest level. Win major tournaments and earn your place in the Eskimos Road to Glory hall of fame.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,7 +202,54 @@
         <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="js/script.js"></script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+
 </body>
 </html> 

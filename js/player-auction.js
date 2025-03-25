@@ -251,85 +251,166 @@ function getRatingClass(baseValue) {
     }
 }
 
-// Populate tables with data
+// Create player row for the "all" table
+function createAllPlayersRow(player) {
+    const row = document.createElement('tr');
+    const ratingClass = getRatingClass(player.rating);
+    row.classList.add(ratingClass);
+    row.innerHTML = `
+        <td class="player-name">${player.name}</td>
+        <td>${player.position}</td>
+        <td class="base-value">${player.rating}</td>
+        <td class="value">${getPlayerValue(player.rating)}</td>
+        <td class="team-name">${player.team || 'Unsold'}</td>
+        <td class="bid-amount">${formatCurrency(player.bidAmount) || 'Not Bid'}</td>
+        <td>${player.contract || 'N/A'}</td>
+    `;
+    return row;
+}
+
+// Populate tables with player data
 function populateTables(players) {
-    // Clear existing tables
-    tables.forEach(table => {
-        const tbody = table.querySelector('tbody');
+    if (!players || players.length === 0) {
+        console.warn('No player data provided');
+        return;
+    }
+
+    console.log(`Populating tables with ${players.length} players`);
+    
+    // Reset all tables
+    document.querySelectorAll('.auction-table tbody').forEach(tbody => {
         tbody.innerHTML = '';
     });
 
-    // Group players by position
+    // Group by position
     const playersByPosition = {};
+    const allPlayers = [];
+    
     POSITIONS.forEach(pos => {
         playersByPosition[pos] = [];
     });
 
     players.forEach(player => {
-        if (playersByPosition[player.position]) {
-            playersByPosition[player.position].push(player);
+        const normalized = mapPosition(player.position);
+        
+        if (playersByPosition[normalized]) {
+            playersByPosition[normalized].push(player);
+            allPlayers.push(player);
+        } else {
+            console.warn(`Unknown position: ${player.position}`);
         }
     });
 
-    // Populate each position table
+    // Populate position tables
     POSITIONS.forEach(position => {
-        const table = document.querySelector(`.auction-table[data-position="${position}"]`);
-        if (!table) return;
-
-        const tbody = table.querySelector('tbody');
+        const tableId = `${position}-table`;
+        const tableBody = document.getElementById(tableId);
+        
+        if (!tableBody) {
+            console.warn(`Table body ${tableId} not found`);
+            return;
+        }
+        
         const positionPlayers = playersByPosition[position] || [];
-        positionPlayers.forEach(player => {
-            const row = createPlayerRow(player);
-            tbody.appendChild(row);
-        });
+        
+        if (positionPlayers.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="6" class="no-results">No ${position} players available</td></tr>`;
+        } else {
+            positionPlayers.forEach(player => {
+                const row = createPlayerRow(player);
+                tableBody.appendChild(row);
+            });
+        }
     });
 
-    // Populate all players table
-    const allTable = document.querySelector('.auction-table[data-position="all"]');
-    if (allTable) {
-        const tbody = allTable.querySelector('tbody');
-        players.forEach(player => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="player-name">${player.name}</td>
-                <td>${player.position}</td>
-                <td class="base-value">${player.rating}</td>
-                <td class="value">${getPlayerValue(player.rating)}</td>
-                <td class="team-name">${player.team || 'Unsold'}</td>
-                <td class="bid-amount">${formatCurrency(player.bidAmount) || 'Not Bid'}</td>
-                <td>${player.contract || 'N/A'}</td>
-            `;
-            tbody.appendChild(row);
-        });
+    // Populate "all players" table
+    const allTableBody = document.getElementById('all-table');
+    if (allTableBody) {
+        if (allPlayers.length === 0) {
+            allTableBody.innerHTML = '<tr><td colspan="7" class="no-results">No players available</td></tr>';
+        } else {
+            allPlayers.forEach(player => {
+                const row = createAllPlayersRow(player);
+                allTableBody.appendChild(row);
+            });
+        }
+    } else {
+        console.warn('All players table body not found');
     }
+    
+    // Update UI states
+    updateBidAmountColors();
 }
 
-// Map sheet positions to table positions
+// Map position names (for handling possible variations)
 function mapPosition(sheetPosition) {
-    const positionMap = {
-        'GK': 'goalkeeper',
-        'CB': 'defender',
-        'RB': 'defender',
-        'LB': 'defender',
-        'CM': 'midfielder',
-        'DM': 'midfielder',
-        'AM': 'midfielder',
-        'ST': 'forward',
-        'CF': 'forward',
-        'RW': 'forward',
-        'LW': 'forward'
-    };
-    return positionMap[sheetPosition] || 'unknown';
+    // Normalize position name to upper case
+    const pos = String(sheetPosition).toUpperCase().trim();
+    
+    // Direct matches
+    if (POSITIONS.includes(pos)) {
+        return pos;
+    }
+    
+    // Handle variations
+    if (pos.includes('GOALKEEPER') || pos === 'G' || pos === 'GOALIE') return 'GK';
+    if (pos.includes('CENTER BACK') || pos === 'CD' || pos === 'DC') return 'CB';
+    if (pos.includes('LEFT BACK') || pos === 'LWB' || pos === 'LD') return 'LB';
+    if (pos.includes('RIGHT BACK') || pos === 'RWB' || pos === 'RD') return 'RB';
+    if (pos.includes('CENTER MID') || pos === 'CMF' || pos === 'MC') return 'CM';
+    if (pos.includes('DEFENSIVE MID') || pos === 'CDM' || pos === 'DMF') return 'DM';
+    if (pos.includes('ATTACKING MID') || pos === 'CAM' || pos === 'AMF') return 'AM';
+    if (pos.includes('STRIKER') || pos === 'FW') return 'ST';
+    if (pos.includes('CENTER FORWARD') || pos === 'CF') return 'CF';
+    if (pos.includes('RIGHT WING') || pos === 'RM' || pos === 'RMF') return 'RW';
+    if (pos.includes('LEFT WING') || pos === 'LM' || pos === 'LMF') return 'LW';
+    
+    // Default to first position if no match (should handle properly)
+    console.warn(`Unknown position "${sheetPosition}" - defaulting to ${POSITIONS[0]}`);
+    return POSITIONS[0];
 }
 
 // Filter players based on search term
 function filterPlayers(searchTerm) {
+    const tables = document.querySelectorAll('.auction-table');
+    
     tables.forEach(table => {
         const rows = table.querySelectorAll('tbody tr');
+        
+        if (rows.length === 0) return;
+        
+        let visibleCount = 0;
+        
         rows.forEach(row => {
-            const playerName = row.cells[0].textContent.toLowerCase();
-            row.style.display = playerName.includes(searchTerm) ? '' : 'none';
+            // Skip "no results" rows
+            if (row.querySelector('.no-results')) return;
+            
+            const text = row.textContent.toLowerCase();
+            const match = text.includes(searchTerm);
+            
+            row.style.display = match ? '' : 'none';
+            
+            if (match) visibleCount++;
         });
+        
+        // Show no results message if needed
+        const tbody = table.querySelector('tbody');
+        const position = table.dataset.position;
+        
+        // Remove existing no-results row if it exists
+        const existingNoResults = tbody.querySelector('.no-results-row');
+        if (existingNoResults) {
+            tbody.removeChild(existingNoResults);
+        }
+        
+        // Add no-results row if needed
+        if (visibleCount === 0 && searchTerm) {
+            const noResultsRow = document.createElement('tr');
+            noResultsRow.classList.add('no-results-row');
+            const colspan = position === 'all' ? 7 : 6;
+            noResultsRow.innerHTML = `<td colspan="${colspan}" class="no-results">No players matching "${searchTerm}"</td>`;
+            tbody.appendChild(noResultsRow);
+        }
     });
 }
 
@@ -733,18 +814,38 @@ document.addEventListener('DOMContentLoaded', () => {
     enhanceSearchInput();
 });
 
-// Function to update bid amount text colors
+// Update bid amount colors based on value
 function updateBidAmountColors() {
-    const bidAmounts = document.querySelectorAll('.auction-table .bid-amount');
-    
-    bidAmounts.forEach(bidAmount => {
-        const text = bidAmount.textContent.trim();
-        if (text === 'NOT BID') {
-            bidAmount.style.color = '#4caf50'; // Green color
-            bidAmount.setAttribute('data-status', 'not-bid');
-        } else {
-            bidAmount.style.color = '#f44336'; // Red color
-            bidAmount.setAttribute('data-status', 'bid');
+    document.querySelectorAll('.auction-table tbody tr').forEach(row => {
+        const bidCell = row.querySelector('.bid-amount');
+        const baseValueCell = row.querySelector('.base-value');
+        
+        if (!bidCell || !baseValueCell) return;
+        
+        const bidText = bidCell.textContent.trim();
+        
+        // Skip non-numeric values
+        if (bidText === 'Not Bid' || bidText === 'N/A') return;
+        
+        // Parse values (handle both formatted and unformatted values)
+        const bidAmount = parseInt(bidText.replace(/,/g, ''));
+        const baseValue = parseInt(baseValueCell.textContent.trim());
+        
+        if (isNaN(bidAmount) || isNaN(baseValue)) return;
+        
+        // Remove existing color classes
+        bidCell.classList.remove('high-bid', 'medium-bid', 'low-bid');
+        
+        // Add color class based on bid amount relative to base value
+        if (bidAmount >= baseValue * 1.5) {
+            bidCell.classList.add('high-bid');
+            bidCell.style.color = '#e74c3c'; // Red for high bids
+        } else if (bidAmount >= baseValue * 1.2) {
+            bidCell.classList.add('medium-bid');
+            bidCell.style.color = '#f39c12'; // Orange for medium bids
+        } else if (bidAmount >= baseValue) {
+            bidCell.classList.add('low-bid');
+            bidCell.style.color = '#4caf50'; // Green for low bids
         }
     });
 }

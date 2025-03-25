@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Tournament Guide - Eskimos Road to Glory</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/tournament-guide.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="img/logo11.png" type="image/x-icon">
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
 </head>
 <body>
     <!-- Skip link for accessibility -->
@@ -28,16 +46,14 @@
     </div>
 
     <!-- Video background -->
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
-    </video>
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
     
     <div id="particles-js"></div>
     
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Eskimos Logo">
+                <img src="assets/images/logo11.png" alt="Eskimos Logo" width="300" height="200">
                 <span>Eskimos R2G</span>
             </div>
             
@@ -114,7 +130,7 @@
                     <div class="info-card">
                         <p>Follow our season roadmap to understand how the tournament progresses from start to finish.</p>
                     </div>
-                    <img src="assets/images/guide/auction1.jpg" alt="Road Map" class="guide-img">
+                    <img data-src="assets/images/guide/auction1.jpg" alt="Road Map" class="guide-img" width="300" height="200" loading="lazy">
                 </div>
 
                 <div class="guide-section">
@@ -123,8 +139,8 @@
                         <p>Player cards show the important stats and attributes of players available in the auction.</p>
                     </div>
                     <div class="image-gallery">
-                        <img src="assets/images/guide/auction2.jpg" alt="Player Card Example 1" class="guide-img">
-                        <img src="assets/images/guide/auction3.jpg" alt="Player Card Example 2" class="guide-img">
+                        <img data-src="assets/images/guide/auction2.jpg" alt="Player Card Example 1" class="guide-img" width="300" height="200" loading="lazy">
+                        <img data-src="assets/images/guide/auction3.jpg" alt="Player Card Example 2" class="guide-img" width="300" height="200" loading="lazy">
                     </div>
                 </div>
 
@@ -157,8 +173,8 @@
                         <p>Different card types represent various levels of player rarity and special abilities.</p>
                     </div>
                     <div class="image-gallery">
-                        <img src="assets/images/guide/auction4.jpg" alt="Card Type 1" class="guide-img">
-                        <img src="assets/images/guide/auction5.jpg" alt="Card Type 2" class="guide-img">
+                        <img data-src="assets/images/guide/auction4.jpg" alt="Card Type 1" class="guide-img" width="300" height="200" loading="lazy">
+                        <img data-src="assets/images/guide/auction5.jpg" alt="Card Type 2" class="guide-img" width="300" height="200" loading="lazy">
                     </div>
                 </div>
 
@@ -167,7 +183,7 @@
                     <div class="info-card">
                         <p>End-of-season awards recognize top performers and achievements throughout the tournament.</p>
                     </div>
-                    <img src="assets/images/guide/awards.jpg" alt="Season Awards" class="guide-img">
+                    <img data-src="assets/images/guide/awards.jpg" alt="Season Awards" class="guide-img" width="300" height="200" loading="lazy">
                 </div>
 
                 <div class="guide-section">
@@ -175,7 +191,7 @@
                     <div class="info-card">
                         <p>Earn special bonuses and rewards for performances during matches.</p>
                     </div>
-                    <img src="assets/images/guide/bonus.jpg" alt="Match Bonus" class="guide-img">
+                    <img data-src="assets/images/guide/bonus.jpg" alt="Match Bonus" class="guide-img" width="300" height="200" loading="lazy">
                 </div>
 
                 <div class="guide-section">
@@ -254,8 +270,55 @@
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/tournament-guide.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="js/script.js"></script>
+    <script defer src="js/tournament-guide.js"></script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+
 </body>
 </html> 

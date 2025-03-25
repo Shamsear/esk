@@ -2,12 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eskimos Road to Glory</title>
-    <meta name="description" content="Explore the journey of Eskimos in their road to glory, featuring team history, players, championships, and more.">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Eskimos Road to Glory - FIFA Pro Clubs</title>
+    <meta name="description" content="Official website for Eskimos Road to Glory FIFA Pro Clubs community. Join tournaments, view rankings, and explore career mode features.">
+    
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+    
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/critical.css" as="style">
+    <link rel="preload" href="assets/images/logo11.png" as="image" type="image/png">
+
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical path CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            background-color: #1a1a1a;
+            overflow-x: hidden;
+        }
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="css/critical.css">
+    
+    <!-- Load fonts with display swap -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
 </head>
 <body>
     <div class="skip-link">Skip to content</div>
@@ -25,8 +94,8 @@
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
+    <!-- Video background with lazy loading -->
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4">
     </video>
     
     <div id="particles-js"></div>
@@ -34,7 +103,7 @@
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Mini Logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -60,15 +129,16 @@
                 <a href="#home">Home</a>
                 <a href="tournament-guide.html">Tournament Guide</a>
                 <a href="career-mode.html">Career Mode</a>
-                <a href="#">Manager Ranking</a>
-                <a href="#">Trophy Cabinet</a>
-                <a href="#">Career Tournament</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                <a href="career-tournament.html">Career Tournament</a>
             </div>
         </div>
         
         <main>
             <header id="home">
-                <img src="assets/images/logo11.png" alt="Eskimos Road to Glory Logo" class="logo float">
+                <!-- Logo with width and height for better CLS -->
+                <img src="assets/images/logo11.png" alt="Eskimos Road to Glory Logo" class="logo float" width="250" height="250">
                 <h1 class="reveal typing-effect">ESKIMOS ROAD TO GLORY</h1>
                 <div class="subtitle reveal">JOURNEY TO EXCELLENCE</div>
                 <a href="#" class="cta-button pulse-effect reveal">JOIN THE JOURNEY</a>
@@ -77,69 +147,188 @@
             <div class="navigation">
                 <a href="tournament-guide.html" class="nav-item tilt-effect reveal" data-tooltip="Tournament guide and rules">
                     <div class="nav-card">
-                        <img src="assets/images/home/h1.png" alt="Tournament Guide">
+                        <!-- Lazy loaded images with width and height -->
+                        <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" loading="lazy">
+                        <div class="overlay-text">Tournament Guide</div>
                     </div>
                 </a>
                 <a href="career-mode.html" class="nav-item tilt-effect reveal" data-tooltip="Career mode information">
                     <div class="nav-card">
-                        <img src="assets/images/home/h2.png" alt="Career Mode">
+                        <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" loading="lazy">
+                        <div class="overlay-text">Career Mode</div>
                     </div>
                 </a>
                 <a href="manager-ranking.html" class="nav-item tilt-effect reveal" data-tooltip="Manager ranking system">
                     <div class="nav-card">
-                        <img src="assets/images/home/h3.png" alt="Manager Ranking">
+                        <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" loading="lazy">
+                        <div class="overlay-text">Manager Ranking</div>
                     </div>
                 </a>
                 <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal" data-tooltip="Club trophy cabinet">
                     <div class="nav-card">
-                        <img src="assets/images/home/h4.png" alt="Trophy Cabinet">
+                        <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
+                        <div class="overlay-text">Trophy Cabinet</div>
                     </div>
                 </a>
-                <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Career tournament history">
+                <a href="career-tournament.html" class="nav-item tilt-effect reveal" data-tooltip="Career tournament history">
                     <div class="nav-card">
-                        <img src="assets/images/home/h5.png" alt="Career Tournament">
+                        <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168" loading="lazy">
+                        <div class="overlay-text">Career Tournament</div>
                     </div>
                 </a>
             </div>
+            
+            <div class="home-description fade-in-up delay-2">
+                <h2 class="section-heading">Your Road to Glory Journey</h2>
+                <p class="section-text">Welcome to Eskimos Road to Glory, the ultimate FIFA Pro Clubs experience. Join our community of passionate players, build your team, develop your skills, and compete in thrilling tournaments to become legends in the world of virtual football.</p>
+                
+                <div class="features">
+                    <div class="feature-item fade-in-up delay-3">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Tournaments</h3>
+                        <p>Compete in regular tournaments with different formats and prize pools. Test your skills against other clubs and climb the ranks.</p>
+                    </div>
+                    <div class="feature-item fade-in-up delay-4">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progression</h3>
+                        <p>Track your growth with detailed statistics and earn recognition for your achievements. Rise through the ranks from rookie to legend.</p>
+                    </div>
+                </div>
+                
+                <div class="cta-section fade-in-up delay-5">
+                    <h3 class="cta-heading">Ready to Begin Your Journey?</h3>
+                    <p class="cta-text">Join hundreds of players already competing in our tournaments and enjoying the Eskimos experience.</p>
+                    <a href="#" class="cta-button pulse-effect">JOIN NOW</a>
+                </div>
+            </div>
+            
+            <div class="testimonials fade-in-up delay-6">
+                <h2 class="section-heading">What Our Community Says</h2>
+                <div class="testimonial-container">
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"The tournaments are incredibly well organized, and the community is one of the most supportive I've found in gaming."</p>
+                        </div>
+                        <div class="testimonial-author">- Alex M., Tournament Champion</div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"From my first match to becoming a team captain, the Road to Glory journey has been an amazing experience!"</p>
+                        </div>
+                        <div class="testimonial-author">- Sophia K., Team Captain</div>
+                    </div>
+                </div>
+            </div>
         </main>
-        
+            
         <footer>
             <div class="footer-content">
                 <div class="footer-nav">
                     <a href="#home">Home</a>
                     <a href="tournament-guide.html">Tournament Guide</a>
                     <a href="career-mode.html">Career Mode</a>
-                    <a href="#">Manager Ranking</a>
-                    <a href="#">Trophy Cabinet</a>
-                    <a href="#">Career Tournament</a>
+                    <a href="manager-ranking.html">Manager Ranking</a>
+                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" data-tooltip="Discord"><i class="fab fa-discord"></i></a>
                 </div>
                 <div class="copyright">
-                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                    &copy; <span id="year"></span> Eskimos Road to Glory. All rights reserved.
                 </div>
             </div>
         </footer>
     </div>
     
-    <div class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
     </div>
     
-    <div class="scroll-indicator-container">
-        <div class="scroll-indicator active" data-section="home"></div>
-        <div class="scroll-indicator" data-section="tournament"></div>
-        <div class="scroll-indicator" data-section="career"></div>
-        <div class="scroll-indicator" data-section="ranking"></div>
-        <div class="scroll-indicator" data-section="trophy"></div>
-        <div class="scroll-indicator" data-section="tournament-history"></div>
+    <div id="toast" class="toast">
+        Welcome to Eskimos Road to Glory!
     </div>
-
-    <div class="toast" id="toast">Welcome to Eskimos Road to Glory!</div>
     
-    <audio id="backgroundMusic" autoplay loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Load scripts optimized -->
+    <script>
+        // Inline critical JS functions
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Add minimal toast functionality
+        setTimeout(function() {
+            const toast = document.getElementById('toast');
+            if (toast) toast.classList.add('show');
+            
+            setTimeout(function() {
+                if (toast) toast.classList.remove('show');
+            }, 3000);
+        }, 2000);
+    </script>
+    
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations - Load in correct order -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+    
+    <!-- Defer main script loading -->
+    <script defer src="js/script.js"></script>
+    
+    <!-- Defer third-party scripts -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/script.js"></script>
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure all images are loaded correctly
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach(img => {
+                // If image has a data-src but no src, set src from data-src
+                if (img.dataset.src && !img.src) {
+                    img.src = img.dataset.src;
+                }
+                
+                // If image failed to load or has an empty src, try using a fallback
+                img.onerror = function() {
+                    if (this.src.includes('/assets/images/')) {
+                        this.src = 'https://via.placeholder.com/' + (this.width || '300') + 'x' + (this.height || '200') + '?text=Image+Not+Found';
+                    }
+                };
+            });
+            
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
 </body>
 </html> 
