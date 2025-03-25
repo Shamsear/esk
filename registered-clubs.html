@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Registered Clubs - Eskimos Road to Glory</title>
     <meta name="description" content="View all registered clubs in the Eskimos Road to Glory tournament, featuring club statistics, achievements, and rosters.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Registered Clubs Specific Styles */
@@ -307,6 +320,11 @@
             display: none; /* Hide manager names */
         }
     </style>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
 </head>
 <body>
     <div class="skip-link">Skip to content</div>
@@ -324,16 +342,14 @@
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
-    </video>
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
     
     <div id="particles-js"></div>
     
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Mini Logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="300" height="200">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -384,7 +400,7 @@
                 <ul class="moze-gallery pictures fade-in-up delay-4">
                     <li data-name="Arsenal FC" data-manager="Mikel Arteta">
                         <div class="club-number">1</div>
-                        <img src="assets/images/managers/p1.jpg" alt="Arsenal FC">
+                        <img data-src="assets/images/managers/p1.jpg" alt="Arsenal FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay">
                             <div class="title"><span>Arsenal FC</span></div>
                         </a>
@@ -392,7 +408,7 @@
                     </li>
                     <li data-name="Liverpool FC" data-manager="Jürgen Klopp">
                         <div class="club-number">3</div>
-                        <img src="assets/images/managers/p3.jpg" alt="Liverpool FC">
+                        <img data-src="assets/images/managers/p3.jpg" alt="Liverpool FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay">
                             <div class="title"><span>Liverpool FC</span></div>
                         </a>
@@ -400,7 +416,7 @@
                     </li>
                     <li data-name="Chelsea FC" data-manager="Mauricio Pochettino">
                         <div class="club-number">4</div>
-                        <img src="assets/images/managers/p4.jpg" alt="Chelsea FC">
+                        <img data-src="assets/images/managers/p4.jpg" alt="Chelsea FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay">
                             <div class="title"><span>Chelsea FC</span></div>
                         </a>
@@ -408,210 +424,210 @@
                     </li>
                     <li data-name="Manchester City">
                         <div class="club-number">5</div>
-                        <img src="assets/images/managers/p5.jpg" alt="Manchester City">
+                        <img data-src="assets/images/managers/p5.jpg" alt="Manchester City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/managers/p5.jpg" data-fancybox="gallery_clubs" data-caption="Manchester City" title="Manchester City">
                             <div class="title"><span>Manchester City</span></div>
                         </a>
                     </li>
                     <li data-name="Tottenham Hotspur">
                         <div class="club-number">6</div>
-                        <img src="assets/images/managers/p6.jpg" alt="Tottenham Hotspur">
+                        <img data-src="assets/images/managers/p6.jpg" alt="Tottenham Hotspur" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/managers/p6.jpg" data-fancybox="gallery_clubs" data-caption="Tottenham Hotspur" title="Tottenham Hotspur">
                             <div class="title"><span>Tottenham Hotspur</span></div>
                         </a>
                     </li>
                     <li data-name="Everton FC">
                         <div class="club-number">7</div>
-                        <img src="assets/images/managers/p7.jpg" alt="Everton FC">
+                        <img data-src="assets/images/managers/p7.jpg" alt="Everton FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/managers/p7.jpg" data-fancybox="gallery_clubs" data-caption="Everton FC" title="Everton FC">
                             <div class="title"><span>Everton FC</span></div>
                         </a>
                     </li>
                     <li data-name="Newcastle United">
                         <div class="club-number">8</div>
-                        <img src="assets/images/managers/p8.jpg" alt="Newcastle United">
+                        <img data-src="assets/images/managers/p8.jpg" alt="Newcastle United" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/managers/p8.jpg" data-fancybox="gallery_clubs" data-caption="Newcastle United" title="Newcastle United">
                             <div class="title"><span>Newcastle United</span></div>
                         </a>
                     </li>
                     <li data-name="Aston Villa">
                         <div class="club-number">9</div>
-                        <img src="assets/images/managers/p9.jpg" alt="Aston Villa">
+                        <img data-src="assets/images/managers/p9.jpg" alt="Aston Villa" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/managers/p9.jpg" data-fancybox="gallery_clubs" data-caption="Aston Villa" title="Aston Villa">
                             <div class="title"><span>Aston Villa</span></div>
                         </a>
                     </li>
                     <li data-name="West Ham United">
                         <div class="club-number">10</div>
-                        <img src="assets/images/managers/p10.jpg" alt="West Ham United">
+                        <img data-src="assets/images/managers/p10.jpg" alt="West Ham United" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/managers/p10.jpg" data-fancybox="gallery_clubs" data-caption="West Ham United" title="West Ham United">
                             <div class="title"><span>West Ham United</span></div>
                         </a>
                     </li>
                     <li data-name="Leicester City">
                         <div class="club-number">11</div>
-                        <img src="assets/images/managers/p11.jpg" alt="Leicester City">
+                        <img data-src="assets/images/managers/p11.jpg" alt="Leicester City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p11.jpg" data-fancybox="gallery_clubs" data-caption="Leicester City" title="Leicester City">
                             <div class="title"><span>Leicester City</span></div>
                         </a>
                     </li>
                     <li data-name="Crystal Palace">
                         <div class="club-number">14</div>
-                        <img src="assets/images/managers/p14.jpg" alt="Crystal Palace">
+                        <img data-src="assets/images/managers/p14.jpg" alt="Crystal Palace" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p14.jpg" data-fancybox="gallery_clubs" data-caption="Crystal Palace" title="Crystal Palace">
                             <div class="title"><span>Crystal Palace</span></div>
                         </a>
                     </li>
                     <li data-name="Leeds United">
                         <div class="club-number">15</div>
-                        <img src="assets/images/managers/p15.jpg" alt="Leeds United">
+                        <img data-src="assets/images/managers/p15.jpg" alt="Leeds United" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p15.jpg" data-fancybox="gallery_clubs" data-caption="Leeds United" title="Leeds United">
                             <div class="title"><span>Leeds United</span></div>
                         </a>
                     </li>
                     <li data-name="Brighton & Hove Albion">
                         <div class="club-number">16</div>
-                        <img src="assets/images/managers/p16.jpg" alt="Brighton & Hove Albion">
+                        <img data-src="assets/images/managers/p16.jpg" alt="Brighton & Hove Albion" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p16.jpg" data-fancybox="gallery_clubs" data-caption="Brighton & Hove Albion" title="Brighton & Hove Albion">
                             <div class="title"><span>Brighton & Hove Albion</span></div>
                         </a>
                     </li>
                     <li data-name="Burnley FC">
                         <div class="club-number">17</div>
-                        <img src="assets/images/managers/p17.jpg" alt="Burnley FC">
+                        <img data-src="assets/images/managers/p17.jpg" alt="Burnley FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p17.jpg" data-fancybox="gallery_clubs" data-caption="Burnley FC" title="Burnley FC">
                             <div class="title"><span>Burnley FC</span></div>
                         </a>
                     </li>
                     <li data-name="West Bromwich Albion">
                         <div class="club-number">19</div>
-                        <img src="assets/images/managers/p19.jpg" alt="West Bromwich Albion">
+                        <img data-src="assets/images/managers/p19.jpg" alt="West Bromwich Albion" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p19.jpg" data-fancybox="gallery_clubs" data-caption="West Bromwich Albion" title="West Bromwich Albion">
                             <div class="title"><span>West Bromwich Albion</span></div>
                         </a>
                     </li>
                     <li data-name="Watford FC">
                         <div class="club-number">21</div>
-                        <img src="assets/images/managers/p21.jpg" alt="Watford FC">
+                        <img data-src="assets/images/managers/p21.jpg" alt="Watford FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p21.jpg" data-fancybox="gallery_clubs" data-caption="Watford FC" title="Watford FC">
                             <div class="title"><span>Watford FC</span></div>
                         </a>
                     </li>
                     <li data-name="AFC Bournemouth">
                         <div class="club-number">22</div>
-                        <img src="assets/images/managers/p22.jpg" alt="AFC Bournemouth">
+                        <img data-src="assets/images/managers/p22.jpg" alt="AFC Bournemouth" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p22.jpg" data-fancybox="gallery_clubs" data-caption="AFC Bournemouth" title="AFC Bournemouth">
                             <div class="title"><span>AFC Bournemouth</span></div>
                         </a>
                     </li>
                     <li data-name="Norwich City">
                         <div class="club-number">23</div>
-                        <img src="assets/images/managers/p23.jpg" alt="Norwich City">
+                        <img data-src="assets/images/managers/p23.jpg" alt="Norwich City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p23.jpg" data-fancybox="gallery_clubs" data-caption="Norwich City" title="Norwich City">
                             <div class="title"><span>Norwich City</span></div>
                         </a>
                     </li>
                     <li data-name="Brentford FC">
                         <div class="club-number">24</div>
-                        <img src="assets/images/managers/p24.jpg" alt="Brentford FC">
+                        <img data-src="assets/images/managers/p24.jpg" alt="Brentford FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p24.jpg" data-fancybox="gallery_clubs" data-caption="Brentford FC" title="Brentford FC">
                             <div class="title"><span>Brentford FC</span></div>
                         </a>
                     </li>
                     <li data-name="Nottingham Forest">
                         <div class="club-number">25</div>
-                        <img src="assets/images/managers/p25.jpg" alt="Nottingham Forest">
+                        <img data-src="assets/images/managers/p25.jpg" alt="Nottingham Forest" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p25.jpg" data-fancybox="gallery_clubs" data-caption="Nottingham Forest" title="Nottingham Forest">
                             <div class="title"><span>Nottingham Forest</span></div>
                         </a>
                     </li>
                     <li data-name="Stoke City">
                         <div class="club-number">26</div>
-                        <img src="assets/images/managers/p26.jpg" alt="Stoke City">
+                        <img data-src="assets/images/managers/p26.jpg" alt="Stoke City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p26.jpg" data-fancybox="gallery_clubs" data-caption="Stoke City" title="Stoke City">
                             <div class="title"><span>Stoke City</span></div>
                         </a>
                     </li>
                     <li data-name="Swansea City">
                         <div class="club-number">27</div>
-                        <img src="assets/images/managers/p27.jpg" alt="Swansea City">
+                        <img data-src="assets/images/managers/p27.jpg" alt="Swansea City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p27.jpg" data-fancybox="gallery_clubs" data-caption="Swansea City" title="Swansea City">
                             <div class="title"><span>Swansea City</span></div>
                         </a>
                     </li>
                     <li data-name="Middlesbrough FC">
                         <div class="club-number">28</div>
-                        <img src="assets/images/managers/p28.jpg" alt="Middlesbrough FC">
+                        <img data-src="assets/images/managers/p28.jpg" alt="Middlesbrough FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p28.jpg" data-fancybox="gallery_clubs" data-caption="Middlesbrough FC" title="Middlesbrough FC">
                             <div class="title"><span>Middlesbrough FC</span></div>
                         </a>
                     </li>
                     <li data-name="Derby County">
                         <div class="club-number">29</div>
-                        <img src="assets/images/managers/p29.jpg" alt="Derby County">
+                        <img data-src="assets/images/managers/p29.jpg" alt="Derby County" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p29.jpg" data-fancybox="gallery_clubs" data-caption="Derby County" title="Derby County">
                             <div class="title"><span>Derby County</span></div>
                         </a>
                     </li>
                     <li data-name="Cardiff City">
                         <div class="club-number">30</div>
-                        <img src="assets/images/managers/p30.jpg" alt="Cardiff City">
+                        <img data-src="assets/images/managers/p30.jpg" alt="Cardiff City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p30.jpg" data-fancybox="gallery_clubs" data-caption="Cardiff City" title="Cardiff City">
                             <div class="title"><span>Cardiff City</span></div>
                         </a>
                     </li>
                     <li data-name="Queens Park Rangers">
                         <div class="club-number">31</div>
-                        <img src="assets/images/managers/p31.jpg" alt="Queens Park Rangers">
+                        <img data-src="assets/images/managers/p31.jpg" alt="Queens Park Rangers" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p31.jpg" data-fancybox="gallery_clubs" data-caption="Queens Park Rangers" title="Queens Park Rangers">
                             <div class="title"><span>Queens Park Rangers</span></div>
                         </a>
                     </li>
                     <li data-name="Blackburn Rovers">
                         <div class="club-number">32</div>
-                        <img src="assets/images/managers/p32.jpg" alt="Blackburn Rovers">
+                        <img data-src="assets/images/managers/p32.jpg" alt="Blackburn Rovers" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p32.jpg" data-fancybox="gallery_clubs" data-caption="Blackburn Rovers" title="Blackburn Rovers">
                             <div class="title"><span>Blackburn Rovers</span></div>
                         </a>
                     </li>
                     <li data-name="Birmingham City">
                         <div class="club-number">33</div>
-                        <img src="assets/images/managers/p33.jpg" alt="Birmingham City">
+                        <img data-src="assets/images/managers/p33.jpg" alt="Birmingham City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p33.jpg" data-fancybox="gallery_clubs" data-caption="Birmingham City" title="Birmingham City">
                             <div class="title"><span>Birmingham City</span></div>
                         </a>
                     </li>
                     <li data-name="Preston North End">
                         <div class="club-number">34</div>
-                        <img src="assets/images/managers/p34.jpg" alt="Preston North End">
+                        <img data-src="assets/images/managers/p34.jpg" alt="Preston North End" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p34.jpg" data-fancybox="gallery_clubs" data-caption="Preston North End" title="Preston North End">
                             <div class="title"><span>Preston North End</span></div>
                         </a>
                     </li>
                     <li data-name="Reading FC">
                         <div class="club-number">36</div>
-                        <img src="assets/images/managers/p36.jpg" alt="Reading FC">
+                        <img data-src="assets/images/managers/p36.jpg" alt="Reading FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p36.jpg" data-fancybox="gallery_clubs" data-caption="Reading FC" title="Reading FC">
                             <div class="title"><span>Reading FC</span></div>
                         </a>
                     </li>
                     <li data-name="Millwall FC">
                         <div class="club-number">37</div>
-                        <img src="assets/images/managers/p37.jpg" alt="Millwall FC">
+                        <img data-src="assets/images/managers/p37.jpg" alt="Millwall FC" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p37.jpg" data-fancybox="gallery_clubs" data-caption="Millwall FC" title="Millwall FC">
                             <div class="title"><span>Millwall FC</span></div>
                         </a>
                     </li>
                     <li data-name="Bristol City">
                         <div class="club-number">38</div>
-                        <img src="assets/images/managers/p38.jpg" alt="Bristol City">
+                        <img data-src="assets/images/managers/p38.jpg" alt="Bristol City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p38.jpg" data-fancybox="gallery_clubs" data-caption="Bristol City" title="Bristol City">
                             <div class="title"><span>Bristol City</span></div>
                         </a>
                     </li>
                     <li data-name="Bristol City">
                         <div class="club-number">39</div>
-                        <img src="assets/images/managers/p39.jpg" alt="Bristol City">
+                        <img data-src="assets/images/managers/p39.jpg" alt="Bristol City" width="300" height="200" loading="lazy">
                         <a class="moze-gallery-overlay" href="assets/images/p39.jpg" data-fancybox="gallery_clubs" data-caption="Bristol City" title="Bristol City">
                             <div class="title"><span>Bristol City</span></div>
                         </a>
@@ -650,9 +666,9 @@
         <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
+    <script defer src="js/script.js"></script>
     <script>
         // Initialize page functionality
         $(document).ready(function() {
@@ -673,5 +689,52 @@
             });
         });
     </script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+
 </body>
 </html> 

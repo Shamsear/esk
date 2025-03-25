@@ -1,0 +1,198 @@
+/* Critical path CSS for immediate rendering */
+:root {
+    --primary: #3498db;
+    --primary-rgb: 52, 152, 219;
+    --secondary: #16a085;
+    --secondary-rgb: 22, 160, 133;
+    --accent: #e74c3c;
+    --accent-rgb: 231, 76, 60;
+    --text: #ecf0f1;
+    --dark: #2c3e50;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text);
+}
+
+.overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 0.85), rgba(0, 0, 0, 0.8));
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mini-logo {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.mini-logo img {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.mini-logo span {
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    background: linear-gradient(90deg, var(--text), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header {
+    padding: 140px 20px 50px;
+    text-align: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    max-width: 250px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, var(--primary), #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.3);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Reduced motion for performance */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    .logo, .reveal, .float {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Mobile-first responsive styles */
+@media (max-width: 768px) {
+    header {
+        padding: 100px 20px 40px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo {
+        max-width: 180px;
+    }
+    
+    .cta-button {
+        padding: 12px 25px;
+    }
+}
+
+/* Apply optimizations for devices with battery saver mode */
+@media (prefers-reduced-data: reduce) {
+    .video-bg, #particles-js {
+        display: none;
+    }
+    
+    body {
+        background: #121212;
+    }
+} 

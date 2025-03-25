@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /assets/raw/
+Disallow: /admin-login.html
+Disallow: /token-setup.html
+Disallow: /test-json-loading.html
+
+# Sitemap
+Sitemap: https://example.com/sitemap.xml 

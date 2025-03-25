@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Trophy Cabinet - Eskimos Road to Glory</title>
     <meta name="description" content="View the trophy cabinet of Eskimos Road to Glory tournament, featuring all trophies and achievements.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Trophy Cabinet Specific Styles */
@@ -749,6 +762,11 @@
         // Add this to the head to define a CSS variable for accent color
         document.documentElement.style.setProperty('--accent-color-rgb', '230, 57, 149');
     </script>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
 </head>
 <body>
     <div class="skip-link">Skip to content</div>
@@ -766,16 +784,14 @@
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
-    </video>
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
     
     <div id="particles-js"></div>
     
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Mini Logo">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="300" height="200">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -856,28 +872,28 @@
             <div class="trophy-gallery">
                 <ul class="moze-gallery pictures fade-in-up delay-5">
                     <li>
-                        <img src="assets/images/trophy/t1.jpg" alt="Premier League Trophy">
+                        <img data-src="assets/images/trophy/t1.jpg" alt="Premier League Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t2.jpg" alt="FA Cup Trophy">
+                        <img data-src="assets/images/trophy/t2.jpg" alt="FA Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t3.jpg" alt="Carabao Cup Trophy">
+                        <img data-src="assets/images/trophy/t3.jpg" alt="Carabao Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t4.jpg" alt="Champions League Trophy">
+                        <img data-src="assets/images/trophy/t4.jpg" alt="Champions League Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t5.jpg" alt="Europa League Trophy">
+                        <img data-src="assets/images/trophy/t5.jpg" alt="Europa League Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t6.jpg" alt="UEFA Super Cup Trophy">
+                        <img data-src="assets/images/trophy/t6.jpg" alt="UEFA Super Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t7.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/t7.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/t8.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/t8.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                 </ul>
             </div>
@@ -892,25 +908,25 @@
             <div class="trophy-gallery">
                 <ul class="moze-gallery pictures fade-in-up">
                     <li>
-                        <img src="assets/images/trophy/ta1.jpg" alt="Ballon d'Or Trophy">
+                        <img data-src="assets/images/trophy/ta1.jpg" alt="Ballon d'Or Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ta2.jpg" alt="Golden Boot Trophy">
+                        <img data-src="assets/images/trophy/ta2.jpg" alt="Golden Boot Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ta3.jpg" alt="Golden Glove Trophy">
+                        <img data-src="assets/images/trophy/ta3.jpg" alt="Golden Glove Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ta4.jpg" alt="Player of the Year Trophy">
+                        <img data-src="assets/images/trophy/ta4.jpg" alt="Player of the Year Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ta5.jpg" alt="Player of the Year Trophy">
+                        <img data-src="assets/images/trophy/ta5.jpg" alt="Player of the Year Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ta6.jpg" alt="Player of the Year Trophy">
+                        <img data-src="assets/images/trophy/ta6.jpg" alt="Player of the Year Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ta7.jpg" alt="Player of the Year Trophy">
+                        <img data-src="assets/images/trophy/ta7.jpg" alt="Player of the Year Trophy" width="300" height="200" loading="lazy">
                     </li>
                 </ul>
             </div>
@@ -934,34 +950,34 @@
             <div class="trophy-gallery">
                 <ul class="moze-gallery pictures fade-in-up">
                     <li>
-                        <img src="assets/images/trophy/elitet2.jpg" alt="Premier League Trophy">
+                        <img data-src="assets/images/trophy/elitet2.jpg" alt="Premier League Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/div1t2.jpg" alt="FA Cup Trophy">
+                        <img data-src="assets/images/trophy/div1t2.jpg" alt="FA Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/div2t2.jpg" alt="Champions League Trophy">
+                        <img data-src="assets/images/trophy/div2t2.jpg" alt="Champions League Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/uclt.jpg" alt="UEFA Super Cup Trophy">
+                        <img data-src="assets/images/trophy/uclt.jpg" alt="UEFA Super Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/uelt.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/uelt.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ueclt.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/ueclt.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/trio.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/trio.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/special.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/special.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/divcup.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/divcup.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/tos.jpg" alt="Community Shield Trophy">
+                        <img data-src="assets/images/trophy/tos.jpg" alt="Community Shield Trophy" width="300" height="200" loading="lazy">
                     </li>
                 </ul>
             </div>
@@ -976,22 +992,22 @@
             <div class="trophy-gallery">
                 <ul class="moze-gallery pictures fade-in-up">
                     <li>
-                        <img src="assets/images/trophy/best.jpg" alt="Ballon d'Or Trophy">
+                        <img data-src="assets/images/trophy/best.jpg" alt="Ballon d'Or Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/ballen.jpg" alt="Golden Boot Trophy">
+                        <img data-src="assets/images/trophy/ballen.jpg" alt="Golden Boot Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/muller.jpg" alt="Golden Glove Trophy">
+                        <img data-src="assets/images/trophy/muller.jpg" alt="Golden Glove Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/yashin.jpg" alt="Golden Glove Trophy">
+                        <img data-src="assets/images/trophy/yashin.jpg" alt="Golden Glove Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/golden.jpg" alt="Golden Glove Trophy">
+                        <img data-src="assets/images/trophy/golden.jpg" alt="Golden Glove Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/maldini.jpg" alt="Golden Glove Trophy">
+                        <img data-src="assets/images/trophy/maldini.jpg" alt="Golden Glove Trophy" width="300" height="200" loading="lazy">
                     </li>
                 </ul>
             </div>
@@ -1015,28 +1031,28 @@
             <div class="trophy-gallery">
                 <ul class="moze-gallery pictures fade-in-up">
                     <li>
-                        <img src="assets/images/trophy/elitet.jpg" alt="Carabao Cup Trophy">
+                        <img data-src="assets/images/trophy/elitet.jpg" alt="Carabao Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/div1t.jpg" alt="Europa League Trophy">
+                        <img data-src="assets/images/trophy/div1t.jpg" alt="Europa League Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/div2t.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/div2t.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/kingt.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/kingt.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/supert.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/supert.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/divg.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/divg.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/eurot.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/eurot.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/team.jpg" alt="Club World Cup Trophy">
+                        <img data-src="assets/images/trophy/team.jpg" alt="Club World Cup Trophy" width="300" height="200" loading="lazy">
                     </li>
                 </ul>
             </div>
@@ -1051,22 +1067,22 @@
             <div class="trophy-gallery">
                 <ul class="moze-gallery pictures fade-in-up">
                     <li>
-                        <img src="assets/images/trophy/a1.jpg" alt="Player of the Year Trophy">
+                        <img data-src="assets/images/trophy/a1.jpg" alt="Player of the Year Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/a2.jpg" alt="Best Goalkeeper Trophy">
+                        <img data-src="assets/images/trophy/a2.jpg" alt="Best Goalkeeper Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/gerd.jpg" alt="Best Goalkeeper Trophy">
+                        <img data-src="assets/images/trophy/gerd.jpg" alt="Best Goalkeeper Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/a4.jpg" alt="Best Goalkeeper Trophy">
+                        <img data-src="assets/images/trophy/a4.jpg" alt="Best Goalkeeper Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/a5.jpg" alt="Best Goalkeeper Trophy">
+                        <img data-src="assets/images/trophy/a5.jpg" alt="Best Goalkeeper Trophy" width="300" height="200" loading="lazy">
                     </li>
                     <li>
-                        <img src="assets/images/trophy/a6.jpg" alt="Best Goalkeeper Trophy">
+                        <img data-src="assets/images/trophy/a6.jpg" alt="Best Goalkeeper Trophy" width="300" height="200" loading="lazy">
                     </li>
                 </ul>
             </div>
@@ -1098,9 +1114,9 @@
         <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
+    <script defer src="js/script.js"></script>
     <script>
         // Initialize page functionality
         $(document).ready(function() {
@@ -1273,5 +1289,52 @@
             }
         }
     </script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+
 </body>
 </html> 

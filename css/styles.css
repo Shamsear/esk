@@ -25,16 +25,20 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-image: url('/img/logo.jpg');
-    background-size: cover;
-    background-position: center;
+    background-image: url('../assets/images/logo.jpg');
+    background-size: contain;
+    background-position: center top;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: #000;
     min-height: 100vh;
     overflow-x: hidden;
     color: var(--text);
     transition: all 0.3s ease;
     animation: pageEnter 0.8s ease-out;
+    /* Prevent default body margins which can cause issues */
+    margin: 0;
+    padding: 0;
 }
 
 #particles-js {
@@ -56,6 +60,8 @@ body {
     align-items: center;
     position: relative;
     z-index: 2;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .top-bar {
@@ -489,6 +495,16 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* Mobile background fix */
+    body {
+        background-image: url('../assets/images/logo.jpg');
+        background-size: contain;
+        background-position: center top;
+        background-color: #000;
+        font-size: 14px;
+    }
+    
+    /* Rest of mobile styles */
     header {
         padding: 110px 15px 40px;
     }
@@ -1158,6 +1174,7 @@ body:hover .cursor-outline {
     margin: 0.8rem;
 }
 
+/* Enhanced overlay text for nav cards */
 .overlay-text {
     position: absolute;
     bottom: 0;
@@ -1165,12 +1182,13 @@ body:hover .cursor-outline {
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
-    padding: 0.8rem;
+    padding: 1rem;
     text-align: center;
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
+    z-index: 3;
 }
 
 .nav-card:hover .overlay-text {
@@ -1424,5 +1442,553 @@ footer .footer-nav a:hover {
     footer .footer-nav a {
         width: 100%;
         text-align: center;
+    }
+}
+
+/* Performance optimizations */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Lazy load classes */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* Better responsive containers */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+/* Improved mobile sizing */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 2.5em;
+    }
+    
+    h2 {
+        font-size: 2em;
+    }
+    
+    h3 {
+        font-size: 1.8em;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.8em;
+    }
+    
+    h3 {
+        font-size: 1.6em;
+    }
+}
+
+/* Home page specific styles */
+.home-description {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.section-heading {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--primary);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.section-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.cta-heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Testimonials section */
+.testimonials {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.testimonial-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.testimonial-item {
+    flex: 1 1 300px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.testimonial-item::before {
+    content: '\201C';
+    font-family: Georgia, serif;
+    font-size: 5rem;
+    color: var(--primary);
+    opacity: 0.3;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    line-height: 1;
+}
+
+.testimonial-content {
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.testimonial-author {
+    margin-top: 1.5rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Improved Career Mode Page Layout */
+.career-description {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.career-description h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--primary);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.career-description p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+.feature-item {
+    flex: 1 1 300px;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 350px;
+}
+
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.feature-item i {
+    font-size: 2.8rem;
+    color: var(--primary);
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.2rem;
+    display: inline-block;
+}
+
+.feature-item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+}
+
+.feature-item p {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    line-height: 1.6;
+    text-align: center;
+}
+
+#career-header {
+    padding: 2.5rem 1.5rem 2rem;
+    margin-bottom: 1rem;
+}
+
+#career-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+#career-header .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.career-navigation {
+    margin-top: 2.5rem;
+    max-width: 1300px;
+}
+
+@media (max-width: 768px) {
+    .career-description {
+        padding: 1.5rem;
+        margin: 1.5rem 1rem;
+    }
+    
+    .career-description h2 {
+        font-size: 2rem;
+    }
+    
+    .career-description p {
+        font-size: 1.1rem;
+    }
+    
+    #career-header {
+        padding: 2rem 1rem 1.5rem;
+    }
+    
+    #career-header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Responsive styles for home sections */
+@media (max-width: 992px) {
+    .home-description,
+    .testimonials {
+        padding: 2rem 1.5rem;
+    }
+    
+    .section-heading {
+        font-size: 2.2rem;
+    }
+    
+    .section-text {
+        font-size: 1.1rem;
+    }
+    
+    .testimonial-container {
+        flex-direction: column;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Career Stats Section */
+.career-stats {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 2.5rem;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    flex: 1 1 200px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 250px;
+}
+
+.stat-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Career Timeline Section */
+.career-timeline {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.timeline {
+    position: relative;
+    margin-top: 3rem;
+    padding: 0 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.timeline-marker {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-marker {
+    background: var(--secondary);
+    box-shadow: 0 0 0 8px rgba(var(--secondary-rgb), 0.3);
+    transform: translateX(-50%) scale(1.2);
+}
+
+.timeline-content {
+    width: 45%;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-left: auto;
+    margin-right: 30px;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-right: auto;
+    margin-left: 30px;
+    text-align: left;
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary);
+}
+
+.timeline-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive adjustments for career sections */
+@media (max-width: 992px) {
+    .stats-container {
+        justify-content: center;
+    }
+    
+    .stat-item {
+        flex: 1 1 180px;
+        max-width: 200px;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-marker {
+        left: 30px;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 60px);
+        margin-left: 60px !important;
+        text-align: left !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .career-stats,
+    .career-timeline {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+    }
+    
+    .stat-item {
+        flex: 1 1 150px;
+        padding: 1.5rem 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+    }
+    
+    .timeline {
+        margin-top: 2rem;
+    }
+    
+    .timeline-item {
+        margin-bottom: 2.5rem;
+    }
+    
+    .timeline-content {
+        padding: 1.2rem;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 50px);
+        margin-left: 50px !important;
+        padding: 1rem;
     }
 } 

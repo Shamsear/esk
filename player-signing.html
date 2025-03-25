@@ -1,30 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Player Signing Auction Results - Eskimos Road to Glory</title>
     <meta name="description" content="View player signing auction results for Eskimos Road to Glory, featuring bidding details for each position and player.">
-    <!-- Preload critical resources -->
+    
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Preload critical assets -->
     <link rel="preload" href="css/styles.css" as="style">
     <link rel="preload" href="js/script.js" as="script">
-    <!-- Load fonts with display=swap for better rendering -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" href="assets/images/logo11.png" as="image" type="image/png">
+    
+    <!-- Critical CSS inline for faster rendering -->
+    <style>
+        /* Critical path CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            background-color: #1a1a1a;
+            overflow-x: hidden;
+        }
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <!-- Load fonts with display swap for better rendering -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    
     <!-- Defer non-critical CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Page specific styles -->
     <style>
         /* Specific styles for the auction table */
         .auction-container {
-            max-width: 1200px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
+            overflow: hidden;
         }
         
         .position-tabs {
@@ -64,6 +121,21 @@
         .auction-table-container {
             overflow-x: auto;
             margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        
+        /* Modified table columns for better sizing */
+        .auction-table th:first-child,
+        .auction-table td:first-child {
+            min-width: 120px;
+        }
+        
+        .auction-table th,
+        .auction-table td {
+            min-width: 80px;
         }
         
         .auction-table {
@@ -80,6 +152,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            white-space: nowrap;
         }
         
         .auction-table tr {
@@ -99,6 +172,9 @@
         .auction-table td {
             padding: 12px 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .auction-table .player-name {
@@ -171,27 +247,71 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .auction-table th, .auction-table td {
-                padding: 10px 8px;
-                font-size: 13px;
+                padding: 8px 6px;
+                font-size: 12px;
             }
             
             .position-tab {
-                padding: 10px 20px;
-                font-size: 13px;
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+            
+            .auction-container {
+                padding: 10px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
             }
         }
         
         @media (max-width: 480px) {
             .auction-container {
-                padding: 15px 10px;
+                padding: 10px 5px;
+                width: 100%;
+                max-width: 100%;
             }
             
             .auction-table th, .auction-table td {
-                padding: 8px 6px;
-                font-size: 12px;
+                padding: 6px 4px;
+                font-size: 11px;
+            }
+            
+            .position-tabs {
+                margin-bottom: 10px;
+            }
+            
+            .position-tab {
+                padding: 8px 12px;
+                font-size: 11px;
+                margin: 0 3px;
+            }
+        }
+        
+        main {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        
+        @media (min-width: 1200px) {
+            .auction-container {
+                max-width: 1200px;
             }
         }
     </style>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
 </head>
 <body>
     <div class="skip-link">Skip to content</div>
@@ -209,8 +329,8 @@
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline preload="auto">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
+    <!-- Defer loading of background video -->
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4">
     </video>
     
     <div id="particles-js"></div>
@@ -218,7 +338,7 @@
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40" loading="eager">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -551,11 +671,60 @@
 
     <div class="toast" id="toast">View player auction results!</div>
     
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
     <!-- Load particles.js only when needed with defer -->
     <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <!-- Defer main script to improve initial load -->
     <script defer src="js/script.js"></script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    
     <!-- Auction data script -->
     <script defer src="js/player-auction.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+
 </body>
 </html> 

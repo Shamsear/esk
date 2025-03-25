@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>R2G Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #282828;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 120px;
+        }
+    </style>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h2>R2G Admin</h2>
+        </div>
+        <h1>Login</h1>
+        
+        <div id="error-message" class="error-message"></div>
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+        
+        <button id="login-btn">Login</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if already logged in
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (isLoggedIn) {
+                window.location.href = 'player-admin.html';
+                return;
+            }
+            
+            const loginBtn = document.getElementById('login-btn');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const errorMessage = document.getElementById('error-message');
+            
+            // Set focus on username input
+            usernameInput.focus();
+            
+            // Handle login button click
+            loginBtn.addEventListener('click', attemptLogin);
+            
+            // Handle Enter key press
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    attemptLogin();
+                }
+            });
+            
+            function attemptLogin() {
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+                
+                // Clear previous error
+                errorMessage.style.display = 'none';
+                
+                // Validate input
+                if (!username || !password) {
+                    showError('Please enter both username and password');
+                    return;
+                }
+                
+                // In a real application, you would validate credentials against a server
+                // For demonstration purposes, we're using hardcoded credentials
+                // IMPORTANT: In a production environment, use proper authentication with secure backend validation
+                if (username === 'admin' && password === 'r2gadmin123') {
+                    // Set session storage
+                    sessionStorage.setItem('adminLoggedIn', 'true');
+                    sessionStorage.setItem('adminUsername', username);
+                    
+                    // Redirect to admin panel
+                    window.location.href = 'player-admin.html';
+                } else {
+                    showError('Invalid username or password');
+                    passwordInput.value = '';
+                }
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <script defer src="js/image-optimization.js"></script>
+
+</body>
+</html> 
