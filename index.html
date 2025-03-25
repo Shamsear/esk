@@ -29,6 +29,25 @@
             overflow-x: hidden;
         }
         
+        /* Mobile background fix */
+        @media (max-width: 768px) {
+            body {
+                background-image: url('assets/images/logo.jpg') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+                background-attachment: scroll !important;
+            }
+            
+            .video-bg {
+                opacity: 0.05 !important;
+            }
+            
+            #particles-js {
+                opacity: 0.1 !important;
+            }
+        }
+        
         /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 8px;
@@ -92,7 +111,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-image: url('assets/images/logo.jpg') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: scroll !important;">
     <div class="skip-link">Skip to content</div>
     
     <div class="page-transition"></div>
@@ -109,13 +128,13 @@
     </div>
     
     <!-- Reducing video opacity to ensure background image is visible -->
-    <video class="video-bg" autoplay muted loop playsinline preload="auto" style="opacity: 0.15;">
+    <video class="video-bg" autoplay muted loop playsinline preload="auto" style="opacity: 0.08;">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
     </video>
     
     <div id="particles-js"></div>
     
-    <div class="overlay">
+    <div class="overlay" style="background: none !important; backdrop-filter: none !important;">
         <div class="top-bar">
             <div class="mini-logo">
                 <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40">
