@@ -27,12 +27,15 @@ html, body {
 body {
     font-family: 'Montserrat', sans-serif;
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-image: url('../assets/images/logo.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
 =======
+=======
+>>>>>>> parent of 4cc0256 (perf)
     background-image: url('/img/logo.jpg');
     background-size: cover;
     background-position: center;
@@ -45,6 +48,7 @@ body {
     overflow-x: hidden;
     color: var(--text);
     transition: all 0.3s ease;
+<<<<<<< HEAD
     animation: pageEnter 0.4s ease-out;
     will-change: opacity, transform;
     display: flex;
@@ -57,6 +61,9 @@ body {
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 =======
 >>>>>>> parent of 4c7d845 (X)
+=======
+    animation: pageEnter 0.8s ease-out;
+>>>>>>> parent of 4cc0256 (perf)
 }
 
 #particles-js {
@@ -466,7 +473,7 @@ h5 {
     max-width: 300px;
     margin-bottom: 25px;
     transform: scale(1);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: all 0.4s ease;
     position: relative;
     overflow: visible;
     text-align: center;
@@ -491,22 +498,22 @@ h5 {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.5s ease;
     transform-origin: center;
     transform-style: preserve-3d;
     will-change: transform, box-shadow;
 }
 
 .nav-item:hover .nav-card {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: rotateY(-5deg) translateY(-20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .nav-card img {
     width: 125%;
     height: auto;
     display: block;
-    transition: all 0.4s ease;
+    transition: all 0.5s ease;
     filter: brightness(0.9);
     position: relative;
     left: 50%;
@@ -515,12 +522,17 @@ h5 {
 
 .nav-item:hover .nav-card img {
 <<<<<<< HEAD
+<<<<<<< HEAD
     transform: translate(-50%, -50%) scale(1.05);
     filter: brightness(1.1);
 =======
     filter: brightness(1.1);
     transform: translateX(-50%) scale(1.05);
 >>>>>>> parent of 2e09445 (Add files via upload)
+=======
+    filter: brightness(1.1);
+    transform: translateX(-50%) scale(1.05);
+>>>>>>> parent of 4cc0256 (perf)
 }
 
 .nav-card::before {
@@ -774,31 +786,6 @@ footer {
     .career-navigation .nav-item {
         margin: 0.5rem 0;
     }
-    
-    #particles-js {
-        display: none;
-    }
-    
-    .video-bg {
-        opacity: 0.1;
-    }
-    
-    .reveal {
-        transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    
-    .nav-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .nav-card img {
-        transition: all 0.3s ease;
-    }
-    
-    .nav-item:hover .nav-card {
-        transform: none;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
 }
 
 @media (max-width: 576px) {
@@ -835,17 +822,17 @@ footer {
 
 /* Preloader */
 .preloader {
-    background-color: #000;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
 }
 
 .preloader.fade-out {
@@ -1003,19 +990,21 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    will-change: transform, opacity;
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    filter: blur(5px);
+    will-change: transform, opacity, filter;
 }
 
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
 }
 
-.reveal:nth-child(2) { transition-delay: 0.05s; }
-.reveal:nth-child(3) { transition-delay: 0.1s; }
-.reveal:nth-child(4) { transition-delay: 0.15s; }
-.reveal:nth-child(5) { transition-delay: 0.2s; }
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal:nth-child(4) { transition-delay: 0.3s; }
+.reveal:nth-child(5) { transition-delay: 0.4s; }
 
 /* 3D Effect for Cards */
 .tilt-effect {
@@ -1171,14 +1160,21 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 }
 
 /* Page entry animation - optimized for speed */
+body {
+    animation: pageEnter 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: opacity, transform, filter;
+}
+
 @keyframes pageEnter {
     from { 
         opacity: 0; 
-        transform: translateY(10px);
+        transform: translateY(10px) scale(0.99);
+        filter: blur(5px);
     }
     to { 
         opacity: 1; 
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+        filter: blur(0);
     }
 }
 
@@ -1458,12 +1454,12 @@ body:hover .cursor-outline {
     will-change: transform, opacity;
 }
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-.delay-6 { animation-delay: 0.6s; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
+.delay-6 { animation-delay: 1.2s; }
 
 @keyframes fadeInUp {
     from {
@@ -1525,19 +1521,21 @@ body:hover .cursor-outline {
 
 /* Enhanced Transition Effects */
 .nav-item {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                opacity 0.4s ease;
 }
 
 .nav-item:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
 }
 
 /* Enhance nav card transitions */
 .nav-card img {
-    transition: all 0.4s ease;
+    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .nav-item:hover .nav-card img {
+<<<<<<< HEAD
 <<<<<<< HEAD
     transform: translate(-50%, -50%) scale(1.05);
     filter: brightness(1.1);
@@ -1545,6 +1543,10 @@ body:hover .cursor-outline {
     transform: translateX(-50%) scale(1.08);
     filter: brightness(1.2) saturate(1.2);
 >>>>>>> parent of 2e09445 (Add files via upload)
+=======
+    transform: translateX(-50%) scale(1.08);
+    filter: brightness(1.2) saturate(1.2);
+>>>>>>> parent of 4cc0256 (perf)
 }
 
 /* Optimized ripple effect */

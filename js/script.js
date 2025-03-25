@@ -3,6 +3,7 @@ function warmPageCache() {
     // Common pages that might be navigated to
     const commonPages = ['index.html', 'career-mode.html'];
     
+<<<<<<< HEAD
     // Use requestIdleCallback for better performance
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
@@ -17,6 +18,9 @@ function warmPageCache() {
         }, { timeout: 2000 });
     } else {
         // Fallback for browsers that don't support requestIdleCallback
+=======
+    // Preload these pages in the background
+>>>>>>> parent of 4cc0256 (perf)
     setTimeout(() => {
         commonPages.forEach(page => {
             if (!window.location.href.includes(page)) {
@@ -24,10 +28,17 @@ function warmPageCache() {
                 link.rel = 'prefetch';
                 link.href = page;
                 document.head.appendChild(link);
+<<<<<<< HEAD
             }
         });
         }, 2000);
     }
+=======
+                console.log('Prefetched:', page);
+            }
+        });
+    }, 2000); // Wait for the current page to finish loading first
+>>>>>>> parent of 4cc0256 (perf)
 }
 
 // Initialize page - optimized for speed
@@ -44,28 +55,42 @@ function initPage() {
     // Enable interactions immediately
     document.body.style.pointerEvents = 'auto';
     
+    // Reset any transition effects
+    document.body.style.opacity = '1';
+    document.body.style.filter = 'blur(0)';
+    
     // Add smooth entrance animations to elements - using requestAnimationFrame for better performance
     requestAnimationFrame(() => animateElementsOnLoad());
 }
 
 // Animate elements on page load - optimized for speed
 function animateElementsOnLoad() {
-    // Animate header elements with simple animation
+    // Animate header elements with a water-like effect
     const header = document.querySelector('header');
     if (header) {
+<<<<<<< HEAD
             header.style.opacity = '1';
             header.style.transform = 'translateY(0)';
+=======
+        header.style.opacity = '0';
+        header.style.transform = 'translateY(-15px)';
+        
+        requestAnimationFrame(() => {
+            header.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
+        });
+>>>>>>> parent of 4cc0256 (perf)
     }
     
-    // Create staggered animation for nav items - with reduced complexity
+    // Create staggered wave-like animation for nav items - with performance optimizations
     const navItems = document.querySelectorAll('.nav-item');
-    
-    // Use batch processing for better performance
-    const batchSize = 5;
-    for (let i = 0; i < navItems.length; i += batchSize) {
-        const endIndex = Math.min(i + batchSize, navItems.length);
+    navItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px) scale(0.95)';
         
         setTimeout(() => {
+<<<<<<< HEAD
             for (let j = i; j < endIndex; j++) {
                 const item = navItems[j];
             item.style.opacity = '1';
@@ -92,10 +117,22 @@ function animateElementsOnLoad() {
     } else {
         // Fallback for older browsers
         document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)').forEach(section => {
+=======
+            item.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0) scale(1)';
+        }, 100 + (index * 50)); // Shorter delay between items
+    });
+
+    // Add liquid animation to sections - limit to visible sections only
+    const sections = document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)');
+    sections.forEach((section) => {
+>>>>>>> parent of 4cc0256 (perf)
         if (isElementInViewport(section)) {
             section.classList.add('animated-section');
         }
     });
+<<<<<<< HEAD
     }
     
     // Use Intersection Observer for reveal animations
@@ -114,6 +151,8 @@ function animateElementsOnLoad() {
             revealObserver.observe(el);
         });
     }
+=======
+>>>>>>> parent of 4cc0256 (perf)
 }
 
 // Handle browser back/forward navigation
@@ -126,7 +165,7 @@ window.addEventListener('pageshow', function(event) {
     }
 });
 
-// Preloader with optimized timing
+// Preloader
 window.addEventListener('load', function() {
     // Initialize page
     initPage();
@@ -135,6 +174,7 @@ window.addEventListener('load', function() {
     warmPageCache();
     
     const preloader = document.querySelector('.preloader');
+<<<<<<< HEAD
     if (preloader) {
         // Reduce preloader time
     setTimeout(function() {
@@ -152,63 +192,122 @@ window.addEventListener('load', function() {
                 setTimeout(function() {
                     toast.classList.remove('show');
                     }, 2000); // Reduced toast display time
+=======
+    setTimeout(function() {
+        preloader.classList.add('fade-out');
+        
+        // Initialize navigation items with skeleton loading effect
+        const navCards = document.querySelectorAll('.nav-card');
+        navCards.forEach(card => {
+            const img = card.querySelector('img');
+            if (img) {
+                card.classList.add('skeleton');
+                img.onload = function() {
+                    card.classList.remove('skeleton');
+                };
+                // Fix for image loading issues
+                if (img.complete) {
+                    card.classList.remove('skeleton');
+>>>>>>> parent of 4cc0256 (perf)
                 }
-            }, 500); // Reduced delay before showing toast
-            
-        }, 500); // Reduced preloader time
-    }
-    
-    // Initialize audio with reduced startup impact
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => initAudio());
-    } else {
-        setTimeout(initAudio, 2000);
-    }
-});
-
-// Initialize audio separately to reduce initial load impact
-function initAudio() {
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    if (backgroundMusic) {
-        backgroundMusic.volume = 0.3;
-        backgroundMusic.muted = true;
-    }
-}
-
-// Lazy load images for better performance
-function lazyLoadImages() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const src = img.getAttribute('data-src');
-                    
-                    if (src) {
-                        img.setAttribute('src', src);
-                        img.removeAttribute('data-src');
-                    }
-                    
-                    imageObserver.unobserve(img);
-                }
-            });
+            }
         });
         
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    } else {
-        // Fallback for older browsers - load all images with a delay
-        setTimeout(() => {
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                const src = img.getAttribute('data-src');
-                if (src) {
-                    img.setAttribute('src', src);
-                    img.removeAttribute('data-src');
-                }
-            });
-        }, 1000);
+        // Show welcome toast
+        setTimeout(function() {
+            const toast = document.getElementById('toast');
+            if (toast) {
+                toast.classList.add('show');
+                
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }, 1500);
+        
+    }, 1000);
+    
+    // Initialize audio
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    if (backgroundMusic) {
+        backgroundMusic.volume = 0.3; // Set initial volume
+        // Mute by default
+        backgroundMusic.muted = true;
     }
+<<<<<<< HEAD
+}
+=======
+    
+    // Add audio toggle if not present
+    const audioToggle = document.querySelector('.audio-toggle');
+    if (!audioToggle) {
+        const audioBtn = document.createElement('div');
+        audioBtn.className = 'audio-toggle';
+        audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        audioBtn.setAttribute('aria-label', 'Toggle audio');
+        document.body.appendChild(audioBtn);
+        
+        audioBtn.addEventListener('click', function() {
+            if (backgroundMusic) {
+                backgroundMusic.muted = !backgroundMusic.muted;
+                
+                if (backgroundMusic.muted) {
+                    this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else {
+                    this.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }
+            }
+        });
+        
+        // Style the audio toggle button
+        audioBtn.style.position = 'fixed';
+        audioBtn.style.bottom = '30px';
+        audioBtn.style.left = '30px';
+        audioBtn.style.width = '50px';
+        audioBtn.style.height = '50px';
+        audioBtn.style.borderRadius = '50%';
+        audioBtn.style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
+        audioBtn.style.color = 'white';
+        audioBtn.style.display = 'flex';
+        audioBtn.style.justifyContent = 'center';
+        audioBtn.style.alignItems = 'center';
+        audioBtn.style.zIndex = '99';
+        audioBtn.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+        audioBtn.style.cursor = 'pointer';
+        audioBtn.style.transition = 'all 0.3s ease';
+    }
+    
+    // Activate all reveal elements initially visible
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => {
+        if (isElementInViewport(el)) {
+            el.classList.add('active');
+        }
+    });
+    
+    // Initialize typing effect
+    initTypingEffect();
+>>>>>>> parent of 4cc0256 (perf)
+
+    // Initialize back to top button
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+<<<<<<< HEAD
 }
 
 // Add scroll effects function
@@ -284,6 +383,9 @@ const throttledScrollHandler = throttle(function() {
 }, 100); // Run max 10 times per second
 
 window.addEventListener('scroll', throttledScrollHandler);
+=======
+});
+>>>>>>> parent of 4cc0256 (perf)
 
 // Typing effect
 function initTypingEffect() {
