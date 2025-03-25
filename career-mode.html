@@ -2,45 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Career Mode - Eskimos Road to Glory</title>
     <meta name="description" content="Explore career mode options in Eskimos Road to Glory, featuring club management, player transfers, and more.">
-    <meta name="theme-color" content="#2196F3">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="preconnect" href="https://assets.mixkit.co">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div class="skip-link">Skip to content</div>
     
     <div class="page-transition"></div>
     
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-outline" aria-hidden="true"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
     
-    <div class="progress-container" aria-hidden="true">
+    <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
     
-    <div class="preloader" aria-label="Page loading">
+    <div class="preloader">
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <video class="video-bg" autoplay muted loop playsinline preload="auto">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" type="video/mp4">
     </video>
     
-    <div id="particles-js" aria-hidden="true"></div>
+    <div id="particles-js"></div>
     
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <a href="index.html">
-                    <img src="assets/images/logo11.png" alt="Eskimos Logo" width="40" height="40">
-                    <span>ESKIMOS</span>
-                </a>
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40">
+                <span>ESKIMOS</span>
             </div>
             <div class="controls">
                 <div class="social-icons">
@@ -61,113 +56,108 @@
             <button class="close-menu" id="closeMenu">
                 <i class="fas fa-times"></i>
             </button>
-            <nav class="mobile-menu-links">
+            <div class="mobile-menu-links">
                 <a href="index.html">Home</a>
                 <a href="tournament-guide.html">Tournament Guide</a>
                 <a href="career-mode.html">Career Mode</a>
                 <a href="manager-ranking.html">Manager Ranking</a>
                 <a href="trophy-cabinet.html">Trophy Cabinet</a>
                 <a href="career-tournament.html">Career Tournament</a>
-            </nav>
+            </div>
         </div>
         
-        <main id="main-content">
+        <main>
             <header id="career-header" class="animated-section">
-                <a href="index.html" class="back-link reveal"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home</a>
+                <a href="index.html" class="back-link reveal"><i class="fas fa-arrow-left"></i> Back to Home</a>
                 <h1 class="fade-in-up">Career Mode</h1>
                 <p class="subtitle fade-in-up delay-1">Select your path to glory</p>
             </header>
 
-            <section class="navigation career-navigation" id="navigation-section">
-                <h2 class="visually-hidden">Career Management Options</h2>
+            <div class="navigation career-navigation">
                 <a href="registered-clubs.html" class="nav-item tilt-effect reveal" data-tooltip="Registered clubs management">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C1.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Registered Clubs" width="100%" height="auto" loading="lazy">
+                        <img data-src="assets/images/careerhome/C1.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Registered Clubs" width="100%" height="auto">
                         <div class="overlay-text">Registered Clubs</div>
                     </div>
                 </a>
                 <a href="player-signing.html" class="nav-item tilt-effect reveal" data-tooltip="Player signing and transfers">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Signing" width="100%" height="auto" loading="lazy">
+                        <img data-src="assets/images/careerhome/C2.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Signing" width="100%" height="auto">
                         <div class="overlay-text">Player Signing</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Manager status and statistics">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Manager Status" width="100%" height="auto" loading="lazy">
+                        <img data-src="assets/images/careerhome/C3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Manager Status" width="100%" height="auto">
                         <div class="overlay-text">Manager Status</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player status and statistics">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Status" width="100%" height="auto" loading="lazy">
+                        <img data-src="assets/images/careerhome/C4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Status" width="100%" height="auto">
                         <div class="overlay-text">Player Status</div>
                     </div>
                 </a>
                 <a href="#" class="nav-item tilt-effect reveal" data-tooltip="Player salary management">
                     <div class="nav-card">
-                        <img data-src="assets/images/careerhome/C5.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Salary" width="100%" height="auto" loading="lazy">
+                        <img data-src="assets/images/careerhome/C5.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Player Salary" width="100%" height="auto">
                         <div class="overlay-text">Player Salary</div>
                     </div>
                 </a>
-            </section>
+            </div>
 
-            <section class="career-description">
+            <div class="career-description">
                 <h2 class="fade-in-up delay-2">Your Career Journey</h2>
                 <p class="fade-in-up delay-3">Embark on an immersive career experience in our football management simulation. Choose your path, develop your skills, and lead your team to glory through strategic decisions, player management, and tactical brilliance.</p>
                 
                 <div class="features">
-                    <article class="feature-item fade-in-up delay-4">
-                        <i class="fas fa-trophy" aria-hidden="true"></i>
+                    <div class="feature-item fade-in-up delay-4">
+                        <i class="fas fa-trophy"></i>
                         <h3>Achievements</h3>
                         <p>Unlock trophies and awards as you progress through your career, showcasing your managerial excellence.</p>
-                    </article>
-                    <article class="feature-item fade-in-up delay-5">
-                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    </div>
+                    <div class="feature-item fade-in-up delay-5">
+                        <i class="fas fa-chart-line"></i>
                         <h3>Progress</h3>
                         <p>Track your career development with detailed statistics, performance metrics, and milestone achievements.</p>
-                    </article>
-                    <article class="feature-item fade-in-up delay-6">
-                        <i class="fas fa-users" aria-hidden="true"></i>
+                    </div>
+                    <div class="feature-item fade-in-up delay-6">
+                        <i class="fas fa-users"></i>
                         <h3>Community</h3>
                         <p>Compete with friends and join the global community of managers striving for greatness in the football world.</p>
-                    </article>
+                    </div>
                 </div>
-            </section>
+            </div>
         </main>
         
         <footer>
             <div class="footer-content">
-                <nav class="footer-nav">
+                <div class="footer-nav">
                     <a href="index.html">Home</a>
                     <a href="tournament-guide.html">Tournament Guide</a>
                     <a href="career-mode.html">Career Mode</a>
                     <a href="manager-ranking.html">Manager Ranking</a>
                     <a href="trophy-cabinet.html">Trophy Cabinet</a>
                     <a href="career-tournament.html">Career Tournament</a>
-                </nav>
+                </div>
                 <div class="copyright">
-                    &copy; <span id="currentYear">2024</span> Eskimos Road to Glory. All rights reserved.
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
                 </div>
             </div>
         </footer>
     </div>
     
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </button>
+    <div class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
-    <div class="toast" id="toast" role="alert" aria-live="polite">Welcome to Career Mode!</div>
+    <div class="toast" id="toast">Welcome to Career Mode!</div>
     
     <audio id="backgroundMusic" preload="none">
         <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
-    <script src="js/script.js" defer></script>
-    <script>
-        // Update copyright year automatically
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
