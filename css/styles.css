@@ -45,6 +45,7 @@ body {
     max-height: 100vh;
     overflow-y: auto;
     background-color: transparent;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 #particles-js {
@@ -80,6 +81,7 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* Ensure content is above overlay */
@@ -167,31 +169,41 @@ footer {
 @media (max-width: 768px) {
     #particles-js {
         display: block;
-        opacity: 0.25;
+        opacity: 0.15;
     }
     
     .overlay {
         padding-top: 60px;
+        background: rgba(0, 0, 0, 0.7);
     }
     
     .top-bar {
         padding: 10px 15px;
         height: 60px;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.8);
     }
     
-    /* Ensure background image is visible on mobile */
-    body {
-        background-image: url('../assets/images/logo.jpg') !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: fixed !important;
-    }
-    
-    /* Fix the video background opacity */
     .video-bg {
-        opacity: 0.2;
+        opacity: 0.15;
+    }
+    
+    .container {
+        margin: 10px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+    
+    .nav-card {
+        margin: 5px;
+        transform: none !important;
+    }
+    
+    .nav-card img {
+        max-height: 150px;
+        object-fit: cover;
     }
 }
 
