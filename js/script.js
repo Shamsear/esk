@@ -3,24 +3,7 @@ function warmPageCache() {
     // Common pages that might be navigated to
     const commonPages = ['index.html', 'career-mode.html'];
     
-<<<<<<< HEAD
-    // Use requestIdleCallback for better performance
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-            commonPages.forEach(page => {
-                if (!window.location.href.includes(page)) {
-                    const link = document.createElement('link');
-                    link.rel = 'prefetch';
-                    link.href = page;
-                    document.head.appendChild(link);
-                }
-            });
-        }, { timeout: 2000 });
-    } else {
-        // Fallback for browsers that don't support requestIdleCallback
-=======
     // Preload these pages in the background
->>>>>>> parent of 4cc0256 (perf)
     setTimeout(() => {
         commonPages.forEach(page => {
             if (!window.location.href.includes(page)) {
@@ -28,25 +11,14 @@ function warmPageCache() {
                 link.rel = 'prefetch';
                 link.href = page;
                 document.head.appendChild(link);
-<<<<<<< HEAD
-            }
-        });
-        }, 2000);
-    }
-=======
                 console.log('Prefetched:', page);
             }
         });
     }, 2000); // Wait for the current page to finish loading first
->>>>>>> parent of 4cc0256 (perf)
 }
 
 // Initialize page - optimized for speed
 function initPage() {
-    // Reset any transition effects that might be lingering
-    document.body.style.filter = 'none';
-    document.body.style.opacity = '1';
-    
     // Handle the fade-in of the page
     if (document.querySelector('.page-transition')) {
         document.querySelector('.page-transition').style.transform = 'translateX(-100%)';
@@ -68,10 +40,6 @@ function animateElementsOnLoad() {
     // Animate header elements with a water-like effect
     const header = document.querySelector('header');
     if (header) {
-<<<<<<< HEAD
-            header.style.opacity = '1';
-            header.style.transform = 'translateY(0)';
-=======
         header.style.opacity = '0';
         header.style.transform = 'translateY(-15px)';
         
@@ -80,7 +48,6 @@ function animateElementsOnLoad() {
             header.style.opacity = '1';
             header.style.transform = 'translateY(0)';
         });
->>>>>>> parent of 4cc0256 (perf)
     }
     
     // Create staggered wave-like animation for nav items - with performance optimizations
@@ -90,34 +57,6 @@ function animateElementsOnLoad() {
         item.style.transform = 'translateY(20px) scale(0.95)';
         
         setTimeout(() => {
-<<<<<<< HEAD
-            for (let j = i; j < endIndex; j++) {
-                const item = navItems[j];
-            item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }
-        }, i * 10); // Reduced delay between batches
-    }
-
-    // Add animation only to visible sections - using Intersection Observer for better performance
-    if ('IntersectionObserver' in window) {
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated-section');
-                    // Stop observing after animation is added
-                    sectionObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)').forEach(section => {
-            sectionObserver.observe(section);
-        });
-    } else {
-        // Fallback for older browsers
-        document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)').forEach(section => {
-=======
             item.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
             item.style.opacity = '1';
             item.style.transform = 'translateY(0) scale(1)';
@@ -127,32 +66,10 @@ function animateElementsOnLoad() {
     // Add liquid animation to sections - limit to visible sections only
     const sections = document.querySelectorAll('section:not(.animated-section), .career-description:not(.animated-section)');
     sections.forEach((section) => {
->>>>>>> parent of 4cc0256 (perf)
         if (isElementInViewport(section)) {
             section.classList.add('animated-section');
         }
     });
-<<<<<<< HEAD
-    }
-    
-    // Use Intersection Observer for reveal animations
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Stop observing after animation is added
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.reveal:not(.active)').forEach(el => {
-            revealObserver.observe(el);
-        });
-    }
-=======
->>>>>>> parent of 4cc0256 (perf)
 }
 
 // Handle browser back/forward navigation
@@ -174,25 +91,6 @@ window.addEventListener('load', function() {
     warmPageCache();
     
     const preloader = document.querySelector('.preloader');
-<<<<<<< HEAD
-    if (preloader) {
-        // Reduce preloader time
-    setTimeout(function() {
-        preloader.classList.add('fade-out');
-        
-            // Lazy load images for better performance
-            lazyLoadImages();
-            
-            // Show welcome toast - reduced delay
-        setTimeout(function() {
-            const toast = document.getElementById('toast');
-            if (toast) {
-                toast.classList.add('show');
-                
-                setTimeout(function() {
-                    toast.classList.remove('show');
-                    }, 2000); // Reduced toast display time
-=======
     setTimeout(function() {
         preloader.classList.add('fade-out');
         
@@ -208,7 +106,6 @@ window.addEventListener('load', function() {
                 // Fix for image loading issues
                 if (img.complete) {
                     card.classList.remove('skeleton');
->>>>>>> parent of 4cc0256 (perf)
                 }
             }
         });
@@ -234,9 +131,6 @@ window.addEventListener('load', function() {
         // Mute by default
         backgroundMusic.muted = true;
     }
-<<<<<<< HEAD
-}
-=======
     
     // Add audio toggle if not present
     const audioToggle = document.querySelector('.audio-toggle');
@@ -287,7 +181,6 @@ window.addEventListener('load', function() {
     
     // Initialize typing effect
     initTypingEffect();
->>>>>>> parent of 4cc0256 (perf)
 
     // Initialize back to top button
     const backToTop = document.getElementById('backToTop');
@@ -307,85 +200,7 @@ window.addEventListener('load', function() {
             });
         });
     }
-<<<<<<< HEAD
-}
-
-// Add scroll effects function
-function handleScrollEffects() {
-    const scrollPosition = window.scrollY;
-    const header = document.querySelector('header');
-    
-    // Add header scroll effect
-    if (header) {
-        if (scrollPosition > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    }
-}
-
-function updateProgressBar() {
-    const progressBar = document.getElementById('progressBar');
-    if (progressBar) {
-        const totalHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (window.pageYOffset / totalHeight) * 100;
-        progressBar.style.width = progress + '%';
-    }
-}
-
-function updateActiveSections() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
-    let currentSection = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= sectionTop - 60) {
-            currentSection = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + currentSection) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Optimize scroll handlers with throttling
-function throttle(callback, limit) {
-    let waiting = false;
-    return function() {
-        if (!waiting) {
-            callback.apply(this, arguments);
-            waiting = true;
-            setTimeout(() => {
-                waiting = false;
-            }, limit);
-        }
-    };
-}
-
-// Use throttled scroll handler for performance
-const throttledScrollHandler = throttle(function() {
-    // Handle scroll effects
-    handleScrollEffects();
-    
-    // Update progress bar
-    updateProgressBar();
-    
-    // Update active section in navigation
-    updateActiveSections();
-}, 100); // Run max 10 times per second
-
-window.addEventListener('scroll', throttledScrollHandler);
-=======
 });
->>>>>>> parent of 4cc0256 (perf)
 
 // Typing effect
 function initTypingEffect() {
@@ -476,9 +291,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Disable pointer events during transition
                 document.body.style.pointerEvents = 'none';
                 
-                // Smoother fade without blur for better performance
+                // Faster, more subtle fade for smoother transition
                 document.body.style.opacity = '0.95';
-                document.body.style.transition = 'opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1)';
+                document.body.style.filter = 'blur(2px)';
+                document.body.style.transition = 'opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), filter 0.2s cubic-bezier(0.19, 1, 0.22, 1)';
                 
                 // Show transition with minimal delay
                 setTimeout(() => {
@@ -722,11 +538,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Shrink navbar on scroll
     window.addEventListener('scroll', function() {
         const topBar = document.querySelector('.top-bar');
+        const backToTop = document.getElementById('backToTop');
         
         if (window.scrollY > 50) {
             topBar.classList.add('scrolled');
+            backToTop.classList.add('show');
         } else {
             topBar.classList.remove('scrolled');
+            backToTop.classList.remove('show');
         }
     });
     
@@ -772,26 +591,3 @@ function isElementInViewport(el) {
         rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
     );
 } 
-
-// Add event listener to clear any lingering blur effects when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    // Clear any lingering blur or opacity effects
-    document.body.style.filter = 'none';
-    document.body.style.opacity = '1';
-    document.body.style.transition = '';
-    
-    // Ensure page transition element is reset
-    const pageTransition = document.querySelector('.page-transition');
-    if (pageTransition) {
-        pageTransition.classList.remove('active');
-    }
-});
-
-// Add scroll event listener
-document.addEventListener('DOMContentLoaded', () => {
-    // Initial call
-    handleScrollEffects();
-    
-    // Add scroll listener
-    window.addEventListener('scroll', handleScrollEffects);
-}); 

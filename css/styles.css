@@ -18,52 +18,23 @@
     --animation-time: 0.3s;
 }
 
-html, body {
-    overflow-x: hidden;
-    position: relative;
-    width: 100%;
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    background-image: url('../assets/images/logo.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-=======
-=======
->>>>>>> parent of 4cc0256 (perf)
     background-image: url('/img/logo.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
->>>>>>> parent of 2e09445 (Add files via upload)
     min-height: 100vh;
-    margin: 0;
-    padding: 0;
     overflow-x: hidden;
     color: var(--text);
     transition: all 0.3s ease;
-<<<<<<< HEAD
-    animation: pageEnter 0.4s ease-out;
-    will-change: opacity, transform;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    max-height: 100vh;
-    overflow-y: auto;
-<<<<<<< HEAD
-    background-color: transparent;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-=======
->>>>>>> parent of 4c7d845 (X)
-=======
     animation: pageEnter 0.8s ease-out;
->>>>>>> parent of 4cc0256 (perf)
 }
 
 #particles-js {
@@ -74,85 +45,25 @@ body {
     left: 0;
     z-index: -1;
     pointer-events: none;
-    bottom: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-<<<<<<< HEAD
-    opacity: 0.3;
-    transition: opacity 0.5s ease;
-=======
->>>>>>> parent of 4c7d845 (X)
 }
 
 .overlay {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 0.85), rgba(0, 0, 0, 0.8));
     width: 100%;
-<<<<<<< HEAD
-    height: 100%;
-    background: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-/* Ensure content is above overlay */
-main, header, footer {
-    position: relative;
-    z-index: 3;
-}
-
-/* Ensure video background stays behind overlay */
-.video-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    opacity: 0.2;
-    bottom: 0;
-    right: 0;
-=======
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     z-index: 2;
->>>>>>> parent of 4c7d845 (X)
-    margin: 0;
-    padding: 0;
 }
 
-<<<<<<< HEAD
-/* Adjust body styles to work with overlay but preserve background image */
-body.maintain-bg {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-}
-
-/* Ensure top bar stays above overlay */
-=======
->>>>>>> parent of 4c7d845 (X)
 .top-bar {
     position: relative  ;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 10px 30px;
@@ -162,96 +73,8 @@ body.maintain-bg {
     z-index: 100;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-<<<<<<< HEAD
-/* Adjust container to work with overlay */
-.container {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 20px;
-}
-
-/* Ensure footer stays above overlay */
-footer {
-    position: relative;
-    z-index: 3;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    width: 100%;
-    padding: 40px 20px 0;
-    margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    #particles-js {
-        display: block;
-        opacity: 0.15;
-    }
-    
-    .overlay {
-        padding-top: 60px;
-        background: rgba(0, 0, 0, 0.7);
-    }
-    
-    .top-bar {
-        padding: 10px 15px;
-        height: 60px;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-    
-    .video-bg {
-        opacity: 0.15;
-    }
-    
-    .container {
-        margin: 10px;
-        padding: 15px;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-    }
-    
-    .nav-card {
-        margin: 5px;
-        transform: none !important;
-    }
-    
-    .nav-card img {
-        max-height: 150px;
-        object-fit: cover;
-    }
-}
-
-/* Light mode adjustments */
-body.light-mode .overlay {
-    background: none;
-}
-
-body.light-mode .top-bar,
-body.light-mode footer {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-=======
->>>>>>> parent of 4c7d845 (X)
 .top-bar.scrolled {
     padding: 5px 30px;
     background-color: rgba(0, 0, 0, 0.9);
@@ -365,7 +188,6 @@ header {
     animation: fadeDown 1s ease-out;
     max-width: 1400px;
     margin: 0 auto;
-    background: none;
 }
 
 .logo {
@@ -521,18 +343,8 @@ h5 {
 }
 
 .nav-item:hover .nav-card img {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    transform: translate(-50%, -50%) scale(1.05);
-    filter: brightness(1.1);
-=======
     filter: brightness(1.1);
     transform: translateX(-50%) scale(1.05);
->>>>>>> parent of 2e09445 (Add files via upload)
-=======
-    filter: brightness(1.1);
-    transform: translateX(-50%) scale(1.05);
->>>>>>> parent of 4cc0256 (perf)
 }
 
 .nav-card::before {
@@ -606,14 +418,12 @@ h5 {
 }
 
 footer {
-    padding: 40px 20px 0;
+    padding: 40px 20px;
     text-align: center;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    margin-bottom: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-content {
@@ -856,9 +666,7 @@ footer {
 /* Back to top button */
 .back-to-top {
     position: fixed;
-    bottom: auto;
-    margin: 0;
-    padding: 0;
+    bottom: 30px;
     right: 30px;
     width: 50px;
     height: 50px;
@@ -1015,9 +823,7 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
 /* Toast Notification */
 .toast {
     position: fixed;
-    bottom: auto;
-    margin: 0;
-    padding: 0;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
     background-color: rgba(0, 0, 0, 0.8);
@@ -1070,7 +876,7 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     z-index: 101;
     display: flex;
     flex-direction: column;
@@ -1152,6 +958,7 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:foc
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
+    backdrop-filter: blur(3px);
     will-change: transform;
 }
 
@@ -1220,10 +1027,6 @@ body:hover .cursor-outline {
     object-fit: cover;
     z-index: 0;
     opacity: 0.2;
-    bottom: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
 }
 
 /* Floating elements animation */
@@ -1246,6 +1049,30 @@ body:hover .cursor-outline {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+/* Audio toggle */
+.audio-toggle {
+    display: flex;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.audio-toggle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Color theme selector */
@@ -1383,17 +1210,8 @@ body:hover .cursor-outline {
 .feature-item {
     flex: 1 1 300px;
     padding: 1.5rem;
-<<<<<<< HEAD
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-=======
     background: rgba(0, 0, 0, 0.4);
     border-radius: 8px;
->>>>>>> parent of 4c7d845 (X)
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1451,7 +1269,7 @@ body:hover .cursor-outline {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-    will-change: transform, opacity;
+    will-change: transform, opacity, filter;
 }
 
 .delay-1 { animation-delay: 0.2s; }
@@ -1465,10 +1283,12 @@ body:hover .cursor-outline {
     from {
         opacity: 0;
         transform: translateY(20px);
+        filter: blur(3px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0);
     }
 }
 
@@ -1491,13 +1311,14 @@ body:hover .cursor-outline {
     animation: slideIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     z-index: -1;
     pointer-events: none;
+    filter: blur(15px);
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    will-change: transform;
+    will-change: transform, filter;
 }
 
 @keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(100%); }
+    from { transform: translateX(-100%); filter: blur(20px); }
+    to { transform: translateX(100%); filter: blur(15px); }
 }
 
 /* Enhanced fade-in animations with performance optimizations */
@@ -1505,17 +1326,19 @@ body:hover .cursor-outline {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-    will-change: transform, opacity;
+    will-change: transform, opacity, filter;
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
+        filter: blur(3px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0);
     }
 }
 
@@ -1535,18 +1358,8 @@ body:hover .cursor-outline {
 }
 
 .nav-item:hover .nav-card img {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    transform: translate(-50%, -50%) scale(1.05);
-    filter: brightness(1.1);
-=======
     transform: translateX(-50%) scale(1.08);
     filter: brightness(1.2) saturate(1.2);
->>>>>>> parent of 2e09445 (Add files via upload)
-=======
-    transform: translateX(-50%) scale(1.08);
-    filter: brightness(1.2) saturate(1.2);
->>>>>>> parent of 4cc0256 (perf)
 }
 
 /* Optimized ripple effect */
@@ -1612,545 +1425,4 @@ footer .footer-nav a:hover {
         width: 100%;
         text-align: center;
     }
-}
-
-main {
-    flex: 1 0 auto;
-    width: 100%;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-/* Remove audio toggle styles */
-.audio-toggle {
-    display: none;
-<<<<<<< HEAD
-}
-
-/* Enhanced Animation Classes */
-.reveal-visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.page-exit {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: all 0.3s ease;
-}
-
-/* Enhanced Card Effects */
-.nav-card {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.nav-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* Enhanced Feature Items */
-.feature-item {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.feature-item:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.7);
-}
-
-/* Enhanced Section Transitions */
-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Enhanced Particle Effects */
-#particles-js {
-    opacity: 0.7;
-    transition: opacity 0.5s ease;
-}
-
-.overlay:hover #particles-js {
-    opacity: 0.9;
-}
-
-/* Enhanced Container Layout */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-    z-index: 1;
-}
-
-/* Enhanced Background Effects */
-.overlay {
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.9),
-        rgba(20, 20, 40, 0.85),
-        rgba(0, 0, 0, 0.8)
-    );
-    backdrop-filter: blur(10px);
-}
-
-/* Enhanced Typography */
-h1, h2, h3, h4, h5 {
-    background: linear-gradient(90deg, #fff, var(--primary), #fff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: shine 5s linear infinite;
-}
-
-/* Enhanced Mobile Responsiveness */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-
-    .feature-item {
-        margin: 10px 0;
-    }
-
-    .nav-card {
-        transform: none !important;
-    }
-}
-
-/* Enhanced Loading States */
-.loading {
-    position: relative;
-    overflow: hidden;
-}
-
-.loading::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-/* Enhanced Hover Effects */
-.hover-glow:hover {
-    box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.3);
-}
-
-.hover-scale:hover {
-    transform: scale(1.05);
-}
-
-/* Enhanced Focus States */
-:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.5);
-}
-
-/* Enhanced Scrollbar */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(var(--primary), var(--secondary));
-    border-radius: 6px;
-    border: 3px solid transparent;
-    background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(var(--secondary), var(--primary));
-    border: 2px solid transparent;
-}
-
-/* Bid amount text colors */
-.auction-table .bid-amount {
-    font-weight: 600;
-}
-
-.auction-table .bid-amount:contains("NOT BID") {
-    color: #4caf50; /* Green color for "NOT BID" */
-}
-
-.auction-table .bid-amount:not(:contains("NOT BID")) {
-    color: #f44336; /* Red color for bid amounts */
-}
-
-/* Alternative approach using data attributes */
-.auction-table .bid-amount[data-status="not-bid"] {
-    color: #4caf50; /* Green color for "NOT BID" */
-}
-
-.auction-table .bid-amount[data-status="bid"] {
-    color: #f44336; /* Red color for bid amounts */
-}
-
-/* Mobile Enhancements - Completely Redesigned */
-@media (max-width: 768px) {
-    /* Ensure particles and video are visible on mobile */
-    #particles-js {
-        display: block !important;
-        opacity: 0.25;
-    }
-    
-    .video-bg {
-        opacity: 0.25;
-    }
-    
-    /* Preserve background image on mobile */
-    body {
-        background-image: url('../assets/images/logo.jpg') !important; 
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: fixed !important;
-    }
-    
-    /* Better glass-morphism containers on mobile */
-    .container, .career-description, .guide-section, .features, .auction-container {
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 15px;
-    }
-    
-    /* Better shaped cards for mobile */
-    .nav-card {
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Improved top-bar on mobile */
-    .top-bar {
-        height: 60px;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    /* Mobile menu improvements */
-    .mobile-menu {
-        background-color: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-    
-    .mobile-menu-links a {
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-}
-
-/* Ultra Small Screen Optimizations */
-@media (max-width: 380px) {
-    h1 {
-        font-size: 2.3em;
-    }
-    
-    .nav-item {
-        width: 95%;
-    }
-    
-    .top-bar {
-        padding: 10px;
-    }
-    
-    .feature-item i {
-        font-size: 2rem;
-        margin-bottom: 0.7rem;
-    }
-    
-    .feature-item h3 {
-        font-size: 1.2rem;
-    }
-    
-    .container {
-        padding: 15px 10px;
-    }
-}
-
-/* Updated styles from tournament-guide.html */
-.guide-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.guide-section {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.guide-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.section-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: var(--primary);
-}
-
-.section-title i {
-    color: var(--primary);
-}
-
-.info-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    border-left: 4px solid var(--primary);
-}
-
-.guide-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* FAQ/QA list styling */
-.qa-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.qa-item {
-    margin-bottom: 15px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.qa-item.active {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.question {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border: none;
-    color: white;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.question-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 0;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    transition: width 0.3s ease;
-}
-
-.qa-item.active .question-progress {
-    width: 100%;
-}
-
-.question:hover {
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.question::after {
-    content: '+';
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-.qa-item.active .question::after {
-    content: '−';
-    transform: rotate(0deg);
-}
-
-.answer {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.qa-item.active .answer {
-    padding: 15px 20px;
-    max-height: 1000px;
-}
-
-.highlight {
-    color: var(--primary);
-    font-weight: bold;
-}
-
-.bullet-list {
-    padding-left: 20px;
-}
-
-.bullet-list li {
-    margin-bottom: 15px;
-    position: relative;
-    padding-left: 25px;
-}
-
-.bullet-list li::before {
-    content: '•';
-    color: var(--primary);
-    font-size: 1.5rem;
-    position: absolute;
-    left: 0;
-    top: -5px;
-}
-
-/* Image gallery styles */
-.image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-.image-gallery img {
-    max-width: calc(50% - 15px);
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.image-gallery img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Mobile adjustments for tournament guide layout */
-@media (max-width: 768px) {
-    .guide-content {
-        padding: 15px;
-        gap: 20px;
-    }
-    
-    .guide-section {
-        padding: 20px;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
-    .question {
-        font-size: 1rem;
-        padding: 12px 15px;
-    }
-    
-    .qa-item.active .answer {
-        padding: 12px 15px;
-    }
-
-    .image-gallery img {
-        max-width: 100%;
-        margin-bottom: 15px;
-    }
-    
-    .container, .auction-container, .career-description, .guide-section {
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        border-radius: 15px;
-        margin: 0 auto 20px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-    
-    #particles-js {
-        opacity: 0.2;
-    }
-    
-    .video-bg {
-        opacity: 0.3;
-    }
-}
-
-@media (max-width: 480px) {
-    .image-gallery img {
-        max-width: 100%;
-    }
-    
-    .guide-section {
-        padding: 15px;
-    }
-}
-
-/* Fixes for iOS devices which don't handle background-attachment:fixed well */
-@supports (-webkit-overflow-scrolling: touch) {
-    body {
-        background-image: url('../assets/images/logo.jpg') !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: scroll !important; /* Use scroll instead of fixed for iOS */
-        min-height: 100vh;
-    }
-    
-    .overlay {
-        background: rgba(0, 0, 0, 0.3); /* Add slight overlay for contrast */
-    }
-=======
->>>>>>> parent of 4c7d845 (X)
 } 

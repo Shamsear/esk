@@ -2,44 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tournament Guide - Eskimos Road to Glory</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/tournament-guide.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="assets/images/logo11.png" type="image/x-icon">
-    <style>
-        /* Fix for horizontal scrolling on mobile */
-        html, body {
-            overflow-x: hidden;
-            position: relative;
-            width: 100%;
-        }
-        
-        .guide-img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .image-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .image-gallery img {
-            max-width: calc(50% - 10px);
-            height: auto;
-        }
-        
-        @media (max-width: 480px) {
-            .image-gallery img {
-                max-width: 100%;
-            }
-        }
-    </style>
+    <link rel="shortcut icon" href="img/logo11.png" type="image/x-icon">
 </head>
 <body>
     <!-- Skip link for accessibility -->
@@ -94,9 +63,8 @@
                 <a href="index.html">Home</a>
                 <a href="tournament-guide.html">Tournament Guide</a>
                 <a href="career-mode.html">Career Mode</a>
-                <a href="manager-ranking.html">Manager Ranking</a>
-                <a href="trophy-cabinet.html">Trophy Cabinet</a>
-                <a href="career-tournament.html">Career Tournament</a>
+                <a href="#">Manager Ranking</a>
+                <a href="#">Trophy Cabinet</a>
             </div>
         </div>
 
@@ -248,6 +216,12 @@
             </div>
         </main>
 
+        <!-- Image Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
         <!-- Back to top button -->
         <div class="back-to-top" id="backToTop">
             <i class="fas fa-chevron-up"></i>
@@ -272,9 +246,8 @@
                     <a href="index.html">Home</a>
                     <a href="tournament-guide.html">Tournament Guide</a>
                     <a href="career-mode.html">Career Mode</a>
-                    <a href="manager-ranking.html">Manager Ranking</a>
-                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
-                    <a href="career-tournament.html">Career Tournament</a>
+                    <a href="#">Manager Ranking</a>
+                    <a href="#">Trophy Cabinet</a>
                 </div>
                 <div class="copyright">&copy; 2025 Eskimos Road to Glory. All Rights Reserved.</div>
             </div>
@@ -282,55 +255,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
     <script src="js/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Plain simple accordion functionality
-            var questionButtons = document.querySelectorAll('.question');
-            
-            for (var i = 0; i < questionButtons.length; i++) {
-                questionButtons[i].addEventListener('click', function() {
-                    var qaItem = this.parentNode;
-                    var isActive = qaItem.classList.contains('active');
-                    
-                    // Close all first
-                    var allItems = document.querySelectorAll('.qa-item');
-                    for (var j = 0; j < allItems.length; j++) {
-                        allItems[j].classList.remove('active');
-                    }
-                    
-                    // If wasn't active, make it active
-                    if (!isActive) {
-                        qaItem.classList.add('active');
-                    }
-                });
-            }
-            
-            // Disable image click functionality
-            var images = document.querySelectorAll('.guide-img');
-            for (var i = 0; i < images.length; i++) {
-                images[i].style.cursor = 'default';
-                images[i].style.pointerEvents = 'none';
-            }
-            
-            // Back to top button functionality
-            var backToTopButton = document.getElementById('backToTop');
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            });
-            
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <script src="js/tournament-guide.js"></script>
 </body>
 </html> 
