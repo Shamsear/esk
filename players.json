@@ -4061,10 +4061,17 @@
         "team": "REAL MADRID CF",
         "value": "320 RC",
         "apps": "00"
+      },
+      {
+        "season": "6-",
+        "team": "FREE AGENTP",
+        "value": "100 RC",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/RUMMENIGGE_CARD.webp",
-    "id": 191
+    "id": 191,
+    "clubLogo": ""
   },
   {
     "name": "CLAUDIO PIZARRO",
