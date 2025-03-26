@@ -152,7 +152,7 @@
     </div>
     
     <!-- Video background with lazy loading -->
-    <video class="video-bg" autoplay muted loop playsinline preload="none" src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" data-type="video/mp4">
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" data-type="video/mp4">
     </video>
     
     <div id="particles-js"></div>
@@ -204,28 +204,48 @@
             <div class="navigation">
                 <a href="tournament-guide.html" class="nav-item tilt-effect reveal" data-prefetch="true">
                     <div class="nav-card">
-                        <!-- Only use WebP format -->
-                        <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" loading="lazy">
+                        <!-- Responsive images with multiple formats -->
+                        <picture>
+                            <source srcset="assets/images/home/h1.avif" type="image/avif">
+                            <source srcset="assets/images/home/h1.webp" type="image/webp">
+                            <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" loading="lazy">
+                        </picture>
                     </div>
                 </a>
                 <a href="career-mode.html" class="nav-item tilt-effect reveal" data-prefetch="true">
                     <div class="nav-card">
-                        <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" loading="lazy">
+                        <picture>
+                            <source srcset="assets/images/home/h2.avif" type="image/avif">
+                            <source srcset="assets/images/home/h2.webp" type="image/webp">
+                            <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" loading="lazy">
+                        </picture>
                     </div>
                 </a>
                 <a href="manager-ranking.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" loading="lazy">
+                        <picture>
+                            <source srcset="assets/images/home/h3.avif" type="image/avif">
+                            <source srcset="assets/images/home/h3.webp" type="image/webp">
+                            <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" loading="lazy">
+                        </picture>
                     </div>
                 </a>
                 <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
+                        <picture>
+                            <source srcset="assets/images/home/H4.avif" type="image/avif">
+                            <source srcset="assets/images/home/H4.webp" type="image/webp">
+                            <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
+                        </picture>
                     </div>
                 </a>
                 <a href="career-tournament.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168" loading="lazy">
+                        <picture>
+                            <source srcset="assets/images/home/H5.avif" type="image/avif">
+                            <source srcset="assets/images/home/H5.webp" type="image/webp">
+                            <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168" loading="lazy">
+                        </picture>
                     </div>
                 </a>
             </div>
@@ -300,21 +320,6 @@
             }, 3000);
         }, 2000);
         
-        // Check for WebP support
-        (function() {
-            const canvas = document.createElement('canvas');
-            if (canvas.getContext && canvas.getContext('2d')) {
-                // Check for WebP format support by attempting to encode and decode
-                const isWebPSupported = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-                if (isWebPSupported) {
-                    document.documentElement.classList.add('webp-support');
-                } else {
-                    document.documentElement.classList.add('no-webp-support');
-                    console.warn('WebP not supported in this browser. Fallback images will be used.');
-                }
-            }
-        })();
-        
         // Warm up DNS for third-party domains
         (function() {
             const domains = ['https://cdnjs.cloudflare.com', 'https://assets.mixkit.co'];
@@ -325,18 +330,6 @@
                 document.head.appendChild(link);
             });
         })();
-        
-        // Ensure all image src attributes end with .webp
-        window.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('img').forEach(img => {
-                if (img.src && !img.src.endsWith('.webp') && !img.src.startsWith('data:') && !img.src.includes('placeholder.com')) {
-                    const newSrc = img.src.replace(/\.(jpe?g|png|gif)$/i, '.webp');
-                    if (newSrc !== img.src) {
-                        img.src = newSrc;
-                    }
-                }
-            });
-        });
         
         // Inform service worker about pages to warm in cache
         if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {

@@ -101,30 +101,6 @@ body.low-end-device {
     position: relative;
 }
 
-/* WebP support specific styling */
-.webp-support .webp-bg {
-    display: block;
-}
-
-.no-webp-support .webp-bg {
-    display: none;
-}
-
-.webp-support .fallback-bg {
-    display: none;
-}
-
-.no-webp-support .fallback-bg {
-    display: block;
-}
-
-/* Background images with WebP */
-.webp-bg {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
 /* Loading states (skeleton) */
 .skeleton {
     position: relative;
@@ -192,30 +168,32 @@ body.low-end-device {
     font-size: 14px;
 }
 
-/* Image error states */
-.image-error {
-    border: 2px dashed rgba(255, 0, 0, 0.3);
-    background-color: rgba(255, 0, 0, 0.05);
+#update-button, #dismiss-update {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
 }
 
-/* Fade-in animation for lazy-loaded images */
-img.loaded {
-    animation: fadeIn 0.5s ease-in;
+#dismiss-update {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+#update-button:hover {
+    transform: translateY(-2px);
 }
 
-/* Delayed content loading animations */
-.delayed-content {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.delayed-content.loaded {
-    opacity: 1;
+/* Hide elements during animation for better performance */
+.page-hidden #particles-js, 
+.page-hidden .video-bg, 
+.page-hidden .float,
+.page-hidden .pulse-effect {
+    animation-play-state: paused !important;
 }
 
 /* Print styles - save ink and make printable */

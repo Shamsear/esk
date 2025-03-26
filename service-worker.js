@@ -10,7 +10,7 @@ const CRITICAL_ASSETS = [
   'offline.html',
   'css/critical.css',
   'js/performance.js',
-  'assets/images/logo11.webp'
+  'assets/images/logo11.png'
 ];
 
 // Assets that should be cached during installation but are not critical for initial render
@@ -82,7 +82,7 @@ self.addEventListener('activate', event => {
 // Helper function to determine if a request is for an image
 function isImageRequest(request) {
   return request.destination === 'image' || 
-         request.url.match(/\.(jpe?g|png|gif|svg|webp)$/i);
+         request.url.match(/\.(jpe?g|png|gif|svg|webp|avif)$/i);
 }
 
 // Helper function to check if a request should be cached
@@ -98,14 +98,6 @@ function shouldCache(url) {
   }
   
   return true;
-}
-
-// Convert non-WebP image URL to WebP
-function convertToWebP(url) {
-  if (url.match(/\.(jpe?g|png|gif)$/i)) {
-    return url.replace(/\.(jpe?g|png|gif)$/i, '.webp');
-  }
-  return url;
 }
 
 // Network-first strategy with timeout fallback
@@ -175,29 +167,17 @@ self.addEventListener('fetch', event => {
   
   // Special handling for image requests
   if (isImageRequest(event.request)) {
-    // For non-WebP images, try to serve WebP version instead
-    const isWebP = event.request.url.endsWith('.webp');
-    
-    // Create WebP request if original is not WebP
-    let webpRequest = event.request;
-    if (!isWebP) {
-      const webpUrl = convertToWebP(event.request.url);
-      webpRequest = new Request(webpUrl);
-    }
-    
     event.respondWith(
       caches.open(IMG_CACHE_NAME)
         .then(cache => {
-          // First try to match the WebP version
-          return cache.match(webpRequest)
+          return cache.match(event.request)
             .then(cachedResponse => {
-              // If WebP version is in cache, return it
+              // Try to refresh cache in the background if we have a cached response
               if (cachedResponse) {
-                // Refresh cache in background
-                fetch(webpRequest)
+                fetch(event.request)
                   .then(networkResponse => {
                     if (networkResponse.ok) {
-                      cache.put(webpRequest, networkResponse.clone());
+                      cache.put(event.request, networkResponse.clone());
                     }
                   })
                   .catch(() => { /* Silently fail background refresh */ });
@@ -205,32 +185,41 @@ self.addEventListener('fetch', event => {
                 return cachedResponse;
               }
               
-              // If not in cache, try network for WebP version
-              return fetch(webpRequest)
+              // If not in cache, try network
+              return fetch(event.request)
                 .then(networkResponse => {
                   if (networkResponse.ok) {
-                    cache.put(webpRequest, networkResponse.clone());
-                    return networkResponse;
+                    cache.put(event.request, networkResponse.clone());
                   }
-                  
-                  // If WebP fetch failed and original wasn't WebP, try original
-                  if (!isWebP) {
-                    return fetch(event.request)
-                      .then(origResponse => {
-                        if (origResponse.ok) {
-                          cache.put(event.request, origResponse.clone());
-                          return origResponse;
-                        }
-                        throw new Error('Both WebP and original fetch failed');
-                      });
-                  }
-                  
-                  throw new Error('WebP fetch failed');
+                  return networkResponse;
                 })
                 .catch(err => {
                   console.log('Image fetch failed:', err);
-                  return caches.match('assets/images/placeholder.webp')
-                    .catch(() => new Response('Image not found', { status: 404 }));
+                  
+                  // Check for alternate image formats
+                  if (requestUrl.pathname.match(/\.(jpe?g|png|gif)$/i)) {
+                    // Try WebP version
+                    const webpUrl = requestUrl.pathname.replace(/\.(jpe?g|png|gif)$/i, '.webp');
+                    return fetch(new Request(webpUrl))
+                      .then(webpResponse => {
+                        if (webpResponse.ok) {
+                          return webpResponse;
+                        }
+                        throw new Error('WebP version not available');
+                      })
+                      .catch(() => {
+                        // Try a lower quality version
+                        if (requestUrl.pathname.includes('/images/')) {
+                          const lowQualityUrl = requestUrl.pathname.replace(/\.(jpe?g|png|gif|webp)$/i, '-low.webp');
+                          return fetch(new Request(lowQualityUrl))
+                            .catch(() => caches.match('assets/images/placeholder.png'));
+                        }
+                        return caches.match('assets/images/placeholder.png');
+                      });
+                  }
+                  
+                  // Final fallback to placeholder
+                  return caches.match('assets/images/placeholder.png');
                 });
             });
         })
