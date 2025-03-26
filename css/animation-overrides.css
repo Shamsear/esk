@@ -1,0 +1,58 @@
+/**
+ * animation-overrides.css
+ * This file overrides animation properties to improve scrolling performance
+ */
+
+/* Global animation fixes */
+* {
+  --animation-duration: 0.2s;
+  --animation-delay: 0s;
+}
+
+/* Immediately display fade elements */
+.fade-in-up,
+.fade-in-down,
+.fade-in-left,
+.fade-in-right,
+.fade-in,
+[class*="fade-"],
+[class*="animated"],
+.delay-1,
+.delay-2,
+.delay-3 {
+  opacity: 1 !important;
+  animation-duration: var(--animation-duration) !important;
+  animation-delay: var(--animation-delay) !important;
+  transition-duration: var(--animation-duration) !important;
+  transition-delay: var(--animation-delay) !important;
+}
+
+/* Special fix for tournament cards */
+.tournament-card,
+.tournament-card:hover {
+  transform: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Remove the transform effect entirely */
+@media (max-width: 768px) {
+  .tournament-card:hover {
+    transform: none !important;
+  }
+}
+
+/* Disable animations during scrolling */
+.scrolling * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Completely disable animations for preload state */
+.preload * {
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}

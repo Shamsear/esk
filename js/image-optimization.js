@@ -17,12 +17,28 @@ function checkWebpSupport() {
     return false;
 }
 
-// Add WebP support class to document for CSS targeting
-document.addEventListener('DOMContentLoaded', function() {
+// Check for AVIF support
+function checkAvifSupport() {
+    const img = new Image();
+    img.src = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
+    return new Promise(resolve => {
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+    });
+}
+
+// Add WebP/AVIF support class to document for CSS targeting
+document.addEventListener('DOMContentLoaded', async function() {
+    // Check image format support
     if (checkWebpSupport()) {
         document.documentElement.classList.add('webp-support');
     } else {
         document.documentElement.classList.add('no-webp-support');
+    }
+    
+    const avifSupported = await checkAvifSupport();
+    if (avifSupported) {
+        document.documentElement.classList.add('avif-support');
     }
     
     // Apply responsive image handling
@@ -30,6 +46,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Prioritize visible images
     prioritizeVisibleImages();
+    
+    // Set up LQIP for main images
+    setupLQIP();
+    
+    // Optimize background images
+    optimizeBackgroundImages();
+    
+    // Set up lazy loading
+    loadLazyImages();
+    
+    // Set up error handling
+    setupImageErrorHandling();
 });
 
 // Set up responsive images based on viewport and screen resolution
@@ -40,6 +68,18 @@ function setupResponsiveImages() {
     
     images.forEach(img => {
         if (!img.dataset.srcset) return;
+        
+        // Add native lazy loading for images below the fold
+        if (!isElementInViewport(img) && 'loading' in HTMLImageElement.prototype) {
+            img.loading = 'lazy';
+        }
+        
+        // Add fetchpriority for important images
+        if (isElementInViewport(img) || img.classList.contains('critical')) {
+            img.fetchPriority = 'high';
+        } else {
+            img.fetchPriority = 'auto';
+        }
         
         // Parse srcset attribute
         const srcsetEntries = img.dataset.srcset.split(',');
@@ -88,6 +128,8 @@ function setupResponsiveImages() {
                             observer.unobserve(entry.target);
                         }
                     });
+                }, {
+                    rootMargin: '200px 0px' // Increased preload margin
                 });
                 
                 observer.observe(img);
@@ -97,6 +139,17 @@ function setupResponsiveImages() {
             }
         }
     });
+}
+
+// Helper function to check if element is in viewport
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
 }
 
 // Prioritize images that are in the viewport
@@ -109,6 +162,14 @@ function prioritizeVisibleImages() {
                     
                     // Set high fetchpriority for visible images
                     img.fetchPriority = 'high';
+                    
+                    // Preconnect to image domain if from external source
+                    if (img.src && img.src.startsWith('http') && !img.src.includes(window.location.hostname)) {
+                        const link = document.createElement('link');
+                        link.rel = 'preconnect';
+                        link.href = new URL(img.src).origin;
+                        document.head.appendChild(link);
+                    }
                     
                     // Remove low quality placeholder if it exists
                     if (img.classList.contains('lazy-placeholder')) {
@@ -130,7 +191,7 @@ function prioritizeVisibleImages() {
                 }
             });
         }, {
-            rootMargin: '100px 0px' // Start loading a bit before they come into view
+            rootMargin: '200px 0px' // Start loading further before they come into view
         });
         
         // Observe all images
@@ -149,6 +210,11 @@ function setupLQIP() {
         const highQualityImg = container.querySelector('.high-quality');
         
         if (placeholder && highQualityImg && highQualityImg.dataset.src) {
+            // Use native lazy loading when available
+            if ('loading' in HTMLImageElement.prototype && !isElementInViewport(container)) {
+                highQualityImg.loading = 'lazy';
+            }
+            
             // Preload high quality image
             const img = new Image();
             img.onload = function() {
@@ -172,6 +238,8 @@ function setupLQIP() {
                             observer.unobserve(container);
                         }
                     });
+                }, {
+                    rootMargin: '200px 0px' // Increased preload margin
                 });
                 
                 observer.observe(container);
@@ -206,6 +274,8 @@ function optimizeBackgroundImages() {
                             observer.unobserve(el);
                         }
                     });
+                }, {
+                    rootMargin: '200px 0px' // Increased preload margin
                 });
                 
                 observer.observe(el);
@@ -217,11 +287,31 @@ function optimizeBackgroundImages() {
     });
 }
 
-// Function to handle data-src lazy loading 
+// Function to handle data-src lazy loading with native lazy loading support
 function loadLazyImages() {
     const lazyImages = document.querySelectorAll('img[data-src]');
     
-    if ('IntersectionObserver' in window) {
+    // Use native lazy loading when available
+    if ('loading' in HTMLImageElement.prototype) {
+        lazyImages.forEach(img => {
+            // Don't apply to images in viewport or marked as critical
+            if (!isElementInViewport(img) && !img.classList.contains('critical')) {
+                img.loading = 'lazy';
+            }
+            
+            // Set proper priority hints
+            if (isElementInViewport(img) || img.classList.contains('critical')) {
+                img.fetchPriority = 'high';
+            } else {
+                img.fetchPriority = 'low';
+            }
+            
+            if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+    } else if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -238,7 +328,7 @@ function loadLazyImages() {
                 }
             });
         }, {
-            rootMargin: '100px 0px' // Start loading a bit before they come into view
+            rootMargin: '200px 0px' // Increased preload margin
         });
         
         lazyImages.forEach(img => {
@@ -250,57 +340,66 @@ function loadLazyImages() {
             if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
                 img.src = img.dataset.src;
                 img.removeAttribute('data-src');
-            } else if (img.dataset.src) {
-                // If data-src is undefined or contains undefined, hide the image
-                console.warn('Image has invalid data-src attribute:', img.dataset.src);
-                img.style.display = 'none';
             }
         });
     }
 }
 
-// Handle image loading errors
+// Function to handle error cases for images
 function setupImageErrorHandling() {
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
-        img.onerror = function() {
-            // Skip logging for undefined URLs
-            if (this.src.includes('undefined') || this.src.endsWith('/undefined')) {
-                this.style.display = 'none'; // Hide the broken image
-                return;
+    document.addEventListener('error', function(e) {
+        if (e.target.tagName.toLowerCase() === 'img') {
+            const img = e.target;
+            
+            // Try to use a fallback image if available
+            if (img.dataset.fallback) {
+                img.src = img.dataset.fallback;
+            } else if (img.src.includes('/assets/images/')) {
+                // Use a placeholder with matching dimensions
+                img.src = `https://via.placeholder.com/${img.width || '300'}x${img.height || '200'}?text=Image+Not+Found`;
             }
             
-            console.error(`Failed to load image: ${this.src}`);
-            
-            // Replace with placeholder if image is from assets folder
-            if (this.src.includes('/assets/images/')) {
-                // Use a valid fallback path
-                this.src = '../assets/images/logo11.webp';
-                
-                // Add class for styling
-                this.classList.add('image-error');
-                
-                // Add title with original path for debugging
-                this.title = `Failed to load: ${this.src}`;
-            }
-        };
-    });
+            // Add error class for styling
+            img.classList.add('image-error');
+        }
+    }, true);
 }
 
-// Initialize all optimizations
-document.addEventListener('DOMContentLoaded', function() {
-    setupLQIP();
-    optimizeBackgroundImages();
-    loadLazyImages(); // Add lazy loading for data-src images
-    setupImageErrorHandling(); // Handle image errors
+// Prefetch critical images on page load completion
+window.addEventListener('load', function() {
+    // Get next page links and prefetch their critical images
+    const nextPageLinks = document.querySelectorAll('a[data-prefetch="true"]');
     
-    // Re-check when window is resized
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-            setupResponsiveImages();
-        }, 300);
-    });
+    if ('IntersectionObserver' in window) {
+        const linkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const link = entry.target;
+                    const href = link.getAttribute('href');
+                    
+                    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                        // Create a preconnect link
+                        const preconnect = document.createElement('link');
+                        preconnect.rel = 'preconnect';
+                        preconnect.href = new URL(href, window.location.href).origin;
+                        document.head.appendChild(preconnect);
+                        
+                        // Create a prefetch link
+                        const prefetch = document.createElement('link');
+                        prefetch.rel = 'prefetch';
+                        prefetch.href = href;
+                        document.head.appendChild(prefetch);
+                    }
+                    
+                    linkObserver.unobserve(link);
+                }
+            });
+        }, {
+            rootMargin: '200px 0px'
+        });
+        
+        nextPageLinks.forEach(link => {
+            linkObserver.observe(link);
+        });
+    }
 }); 
