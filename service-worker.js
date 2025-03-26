@@ -13,7 +13,6 @@ const STATIC_ASSETS = [
   'css/critical.css',
   'js/script.js',
   'js/performance.js',
-  'js/image-optimization.js',
   'assets/images/logo11.png'
 ];
 
