@@ -17,28 +17,13 @@ function checkWebpSupport() {
     return false;
 }
 
-// Check for AVIF support
-function checkAvifSupport() {
-    const img = new Image();
-    img.src = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
-    return new Promise(resolve => {
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-    });
-}
-
-// Add WebP/AVIF support class to document for CSS targeting
-document.addEventListener('DOMContentLoaded', async function() {
+// Add WebP support class to document for CSS targeting
+document.addEventListener('DOMContentLoaded', function() {
     // Check image format support
     if (checkWebpSupport()) {
         document.documentElement.classList.add('webp-support');
     } else {
         document.documentElement.classList.add('no-webp-support');
-    }
-    
-    const avifSupported = await checkAvifSupport();
-    if (avifSupported) {
-        document.documentElement.classList.add('avif-support');
     }
     
     // Apply responsive image handling
@@ -102,20 +87,6 @@ function setupResponsiveImages() {
         if (!bestSrc && srcsetEntries.length > 0) {
             const lastEntry = srcsetEntries[srcsetEntries.length - 1].trim().split(' ');
             bestSrc = lastEntry[0];
-        }
-        
-        // If webp support is available and there's a webp version, use it
-        if (checkWebpSupport() && img.dataset.srcsetWebp) {
-            const webpSrcsetEntries = img.dataset.srcsetWebp.split(',');
-            
-            webpSrcsetEntries.forEach(entry => {
-                const [url, width] = entry.trim().split(' ');
-                const widthValue = parseInt(width.replace('w', ''));
-                
-                if (widthValue === bestWidth) {
-                    bestSrc = url;
-                }
-            });
         }
         
         // Set the appropriate source when in viewport
@@ -257,11 +228,13 @@ function optimizeBackgroundImages() {
     
     elements.forEach(el => {
         if (el.dataset.background) {
-            // Choose format based on support
+            // Use WebP format for background images
             let bgUrl = el.dataset.background;
             
-            if (checkWebpSupport() && el.dataset.backgroundWebp) {
-                bgUrl = el.dataset.backgroundWebp;
+            // Ensure all background images end with .webp
+            if (!bgUrl.endsWith('.webp')) {
+                // Try to convert path to WebP
+                bgUrl = bgUrl.replace(/\.(jpe?g|png|gif)$/i, '.webp');
             }
             
             // Only load when in viewport
@@ -306,6 +279,11 @@ function loadLazyImages() {
                 img.fetchPriority = 'low';
             }
             
+            // Ensure all image paths end with .webp
+            if (img.dataset.src && !img.dataset.src.endsWith('.webp')) {
+                img.dataset.src = img.dataset.src.replace(/\.(jpe?g|png|gif)$/i, '.webp');
+            }
+            
             if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
                 img.src = img.dataset.src;
                 img.removeAttribute('data-src');
@@ -316,6 +294,12 @@ function loadLazyImages() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
+                    
+                    // Ensure all image paths end with .webp
+                    if (img.dataset.src && !img.dataset.src.endsWith('.webp')) {
+                        img.dataset.src = img.dataset.src.replace(/\.(jpe?g|png|gif)$/i, '.webp');
+                    }
+                    
                     if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
                         img.src = img.dataset.src;
                         img.removeAttribute('data-src');
@@ -337,6 +321,11 @@ function loadLazyImages() {
     } else {
         // Fallback for browsers without IntersectionObserver
         lazyImages.forEach(img => {
+            // Ensure all image paths end with .webp
+            if (img.dataset.src && !img.dataset.src.endsWith('.webp')) {
+                img.dataset.src = img.dataset.src.replace(/\.(jpe?g|png|gif)$/i, '.webp');
+            }
+            
             if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
                 img.src = img.dataset.src;
                 img.removeAttribute('data-src');
@@ -356,7 +345,7 @@ function setupImageErrorHandling() {
                 img.src = img.dataset.fallback;
             } else if (img.src.includes('/assets/images/')) {
                 // Use a placeholder with matching dimensions
-                img.src = `https://via.placeholder.com/${img.width || '300'}x${img.height || '200'}?text=Image+Not+Found`;
+                img.src = `assets/images/placeholder.webp`;
             }
             
             // Add error class for styling
@@ -367,6 +356,17 @@ function setupImageErrorHandling() {
 
 // Prefetch critical images on page load completion
 window.addEventListener('load', function() {
+    // Ensure that all images are in WebP format
+    document.querySelectorAll('img').forEach(img => {
+        if (img.src && !img.src.endsWith('.webp') && !img.src.startsWith('data:') && !img.src.includes('placeholder.com')) {
+            // Try to convert any remaining non-WebP images
+            const newSrc = img.src.replace(/\.(jpe?g|png|gif)$/i, '.webp');
+            if (newSrc !== img.src) {
+                img.src = newSrc;
+            }
+        }
+    });
+    
     // Get next page links and prefetch their critical images
     const nextPageLinks = document.querySelectorAll('a[data-prefetch="true"]');
     
