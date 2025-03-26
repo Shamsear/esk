@@ -243,14 +243,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Cursor effect on links and buttons
         document.querySelectorAll('a, button, .nav-item, .back-to-top').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                cursorOutline.style.borderColor = 'var(--secondary)';
-                cursorDot.style.backgroundColor = 'var(--secondary)';
+                if (cursorOutline && cursorDot) {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.borderColor = 'var(--secondary)';
+                    cursorDot.style.backgroundColor = 'var(--secondary)';
+                }
             });
             el.addEventListener('mouseleave', () => {
-                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursorOutline.style.borderColor = 'var(--primary)';
-                cursorDot.style.backgroundColor = 'var(--primary)';
+                if (cursorOutline && cursorDot) {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.borderColor = 'var(--primary)';
+                    cursorDot.style.backgroundColor = 'var(--primary)';
+                }
             });
         });
     }
@@ -358,9 +362,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Progress bar
     window.addEventListener('scroll', function() {
-        const totalHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (window.pageYOffset / totalHeight) * 100;
-        document.getElementById('progressBar').style.width = progress + '%';
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            progressBar.style.width = progress + '%';
+        }
     });
     
     // Function to check if element is in viewport
@@ -541,13 +548,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const backToTop = document.getElementById('backToTop');
         
         if (window.scrollY > 50) {
-            topBar.classList.add('scrolled');
-            backToTop.classList.add('show');
+            if (topBar) topBar.classList.add('scrolled');
+            if (backToTop) backToTop.classList.add('show');
         } else {
-            topBar.classList.remove('scrolled');
-            backToTop.classList.remove('show');
+            if (topBar) topBar.classList.remove('scrolled');
+            if (backToTop) backToTop.classList.remove('show');
         }
     });
+    
+    // Back to top button click handler
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
     
     // Add hover sound effect for navigation items
     const navItems = document.querySelectorAll('.nav-item');

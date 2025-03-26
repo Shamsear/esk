@@ -791,7 +791,7 @@
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.png" alt="Mini Logo" width="300" height="200">
+                <img src="assets/images/logo11.png" alt="Mini Logo" width="40" height="40">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -1118,135 +1118,183 @@
     <script defer src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
     <script defer src="js/script.js"></script>
     <script>
-        // Initialize page functionality
-        $(document).ready(function() {
-            // Add hover effects
-            $('.moze-gallery li').hover(
-                function() {
-                    $(this).find('img').css('transform', 'scale(1.05)');
-                },
-                function() {
-                    $(this).find('img').css('transform', 'scale(1)');
-                }
-            );
+        // Initialize page functionality after jQuery is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if jQuery is loaded
+            if (typeof jQuery !== 'undefined') {
+                initializeFirstFeatures();
+            } else {
+                // If jQuery isn't loaded yet, wait for it
+                var checkJquery = setInterval(function() {
+                    if (typeof jQuery !== 'undefined') {
+                        clearInterval(checkJquery);
+                        initializeFirstFeatures();
+                    }
+                }, 100);
+            }
             
-            // Show toast message
-            $('#toast').addClass('show');
-            setTimeout(function() {
-                $('#toast').removeClass('show');
-            }, 3000);
-        });
-    </script>
-    
-    <script>
-        // Initialize page functionality
-        $(document).ready(function() {
-            // Add hover effects
-            $('.moze-gallery li').hover(
-                function() {
-                    $(this).find('img').css('transform', 'scale(1.05)');
-                },
-                function() {
-                    $(this).find('img').css('transform', 'scale(1)');
-                }
-            );
-            
-            // Add animation to section headers
-            $('.season-heading h2').each(function(index) {
-                $(this).addClass('animated-header');
-                
-                // Add border corners for decoration
-                $(this).append('<span class="corner-tl"></span>')
-                       .append('<span class="corner-tr"></span>')
-                       .append('<span class="corner-bl"></span>')
-                       .append('<span class="corner-br"></span>');
-                
-                // Add hover effect
-                $(this).hover(
+            function initializeFirstFeatures() {
+                // Add hover effects
+                jQuery('.moze-gallery li').hover(
                     function() {
-                        $(this).find('.corner-tl, .corner-tr, .corner-bl, .corner-br').addClass('expanded');
+                        jQuery(this).find('img').css('transform', 'scale(1.05)');
                     },
                     function() {
-                        $(this).find('.corner-tl, .corner-tr, .corner-bl, .corner-br').removeClass('expanded');
+                        jQuery(this).find('img').css('transform', 'scale(1)');
                     }
                 );
-            });
-            
-            // Show toast message
-            $('#toast').addClass('show');
-            setTimeout(function() {
-                $('#toast').removeClass('show');
-            }, 3000);
+                
+                // Show toast message
+                jQuery('#toast').addClass('show');
+                setTimeout(function() {
+                    jQuery('#toast').removeClass('show');
+                }, 3000);
+            }
         });
     </script>
     
     <script>
-        // Initialize page functionality with trophy animations
-        $(document).ready(function() {
-            // Add hover effects
-            $('.moze-gallery li').hover(
-                function() {
-                    // Create trophy particles on hover
-                    const rect = this.getBoundingClientRect();
-                    createTrophyParticles(rect.left + rect.width/2, rect.top + rect.height/2);
-                }
-            );
+        // Initialize page functionality after jQuery is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if jQuery is loaded
+            if (typeof jQuery !== 'undefined') {
+                initializeSecondFeatures();
+            } else {
+                // If jQuery isn't loaded yet, wait for it
+                var checkJquery = setInterval(function() {
+                    if (typeof jQuery !== 'undefined') {
+                        clearInterval(checkJquery);
+                        initializeSecondFeatures();
+                    }
+                }, 100);
+            }
             
-            // Add click handler for trophy pulse animation
-            $('.moze-gallery li').on('click', function() {
-                // Remove existing animation class from all items
-                $('.moze-gallery li').removeClass('trophy-pulse');
+            function initializeSecondFeatures() {
+                // Add hover effects
+                jQuery('.moze-gallery li').hover(
+                    function() {
+                        jQuery(this).find('img').css('transform', 'scale(1.05)');
+                    },
+                    function() {
+                        jQuery(this).find('img').css('transform', 'scale(1)');
+                    }
+                );
                 
-                // Add animation class to clicked item
-                $(this).addClass('trophy-pulse');
-                
-                // Create more particles for click effect
-                const rect = this.getBoundingClientRect();
-                for (let i = 0; i < 6; i++) {
-                    createTrophyParticles(
-                        rect.left + rect.width * Math.random(), 
-                        rect.top + rect.height * Math.random()
+                // Add animation to section headers
+                jQuery('.season-heading h2').each(function(index) {
+                    jQuery(this).addClass('animated-header');
+                    
+                    // Add border corners for decoration
+                    jQuery(this).append('<span class="corner-tl"></span>')
+                           .append('<span class="corner-tr"></span>')
+                           .append('<span class="corner-bl"></span>')
+                           .append('<span class="corner-br"></span>');
+                    
+                    // Add hover effect
+                    jQuery(this).hover(
+                        function() {
+                            jQuery(this).find('.corner-tl, .corner-tr, .corner-bl, .corner-br').addClass('expanded');
+                        },
+                        function() {
+                            jQuery(this).find('.corner-tl, .corner-tr, .corner-bl, .corner-br').removeClass('expanded');
+                        }
                     );
-                }
+                });
                 
-                // Show toast with trophy info
-                const trophyName = $(this).find('img').attr('alt') || "Trophy";
-                showToast(`${trophyName} selected!`, 2000);
-            });
-            
-            // Create trophy icons for decoration
-            createTrophyIcons();
-            
-            // Create animated headers
-            $('.trophy-heading h2, .awards-heading h2').each(function() {
-                const text = $(this).text();
-                $(this).empty();
-                $(this).addClass('animated-header');
-                $(this).html(`
-                    <span class="corner-tl"></span>
-                    <span class="corner-tr"></span>
-                    ${text}
-                    <span class="corner-bl"></span>
-                    <span class="corner-br"></span>
-                `);
-            });
-            
-            // Function to show custom toast messages
-            window.showToast = function(message, duration = 3000) {
-                const toast = $('#toast');
-                toast.text(message);
-                toast.addClass('show');
+                // Show toast message
+                jQuery('#toast').addClass('show');
                 setTimeout(function() {
-                    toast.removeClass('show');
-                }, duration);
-            };
+                    jQuery('#toast').removeClass('show');
+                }, 3000);
+            }
+        });
+    </script>
+    
+    <script>
+        // Initialize page functionality after jQuery is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if jQuery is loaded
+            if (typeof jQuery !== 'undefined') {
+                initializeTrophyFeatures();
+            } else {
+                // If jQuery isn't loaded yet, wait for it
+                var checkJquery = setInterval(function() {
+                    if (typeof jQuery !== 'undefined') {
+                        clearInterval(checkJquery);
+                        initializeTrophyFeatures();
+                    }
+                }, 100);
+            }
+            
+            function initializeTrophyFeatures() {
+                // Add hover effects
+                jQuery('.moze-gallery li').hover(
+                    function() {
+                        // Create trophy particles on hover
+                        const rect = this.getBoundingClientRect();
+                        createTrophyParticles(rect.left + rect.width/2, rect.top + rect.height/2);
+                    }
+                );
+                
+                // Add click handler for trophy pulse animation
+                jQuery('.moze-gallery li').on('click', function() {
+                    // Remove existing animation class from all items
+                    jQuery('.moze-gallery li').removeClass('trophy-pulse');
+                    
+                    // Add animation class to clicked item
+                    jQuery(this).addClass('trophy-pulse');
+                    
+                    // Create more particles for click effect
+                    const rect = this.getBoundingClientRect();
+                    for (let i = 0; i < 6; i++) {
+                        createTrophyParticles(
+                            rect.left + rect.width * Math.random(), 
+                            rect.top + rect.height * Math.random()
+                        );
+                    }
+                    
+                    // Show toast with trophy info
+                    const trophyName = jQuery(this).find('img').attr('alt') || "Trophy";
+                    showToast(`${trophyName} selected!`, 2000);
+                });
+                
+                // Create trophy icons for decoration
+                createTrophyIcons();
+                
+                // Create animated headers
+                jQuery('.trophy-heading h2, .awards-heading h2').each(function() {
+                    const text = jQuery(this).text();
+                    jQuery(this).empty();
+                    jQuery(this).addClass('animated-header');
+                    jQuery(this).html(`
+                        <span class="corner-tl"></span>
+                        <span class="corner-tr"></span>
+                        ${text}
+                        <span class="corner-bl"></span>
+                        <span class="corner-br"></span>
+                    `);
+                });
+                
+                // Function to show custom toast messages
+                window.showToast = function(message, duration = 3000) {
+                    const toast = jQuery('#toast');
+                    toast.text(message);
+                    toast.addClass('show');
+                    setTimeout(function() {
+                        toast.removeClass('show');
+                    }, duration);
+                };
+            }
         });
         
         // Function to create floating trophy icons
         function createTrophyIcons() {
+            // Check if jQuery is available
+            if (typeof jQuery === 'undefined') return;
+            
             // Create 8 trophy icons with random positions and animations
             for (let i = 0; i < 8; i++) {
-                const icon = $('<div class="trophy-icon"></div>');
+                const icon = jQuery('<div class="trophy-icon"></div>');
                 
                 // Set random positions and animation duration
                 const left = Math.random() * 100;
@@ -1263,15 +1311,18 @@
                     'animation-delay': delay + 's'
                 });
                 
-                $('body').append(icon);
+                jQuery('body').append(icon);
             }
         }
         
         // Function to create trophy particles effect
         function createTrophyParticles(x, y) {
+            // Check if jQuery is available
+            if (typeof jQuery === 'undefined') return;
+            
             // Create 8 particles in a circle pattern
             for (let i = 0; i < 8; i++) {
-                const particle = $('<div class="trophy-particle"></div>');
+                const particle = jQuery('<div class="trophy-particle"></div>');
                 const angle = (i / 8) * Math.PI * 2;
                 const distance = 20 + Math.random() * 10;
                 
@@ -1280,7 +1331,7 @@
                     'top': y + Math.sin(angle) * distance + 'px'
                 });
                 
-                $('body').append(particle);
+                jQuery('body').append(particle);
                 
                 // Remove after animation completes
                 setTimeout(function() {

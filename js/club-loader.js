@@ -19,6 +19,56 @@ const clubCache = {
 };
 
 /**
+ * Normalize club name to match file naming conventions
+ * @param {string} clubName - Original club name
+ * @returns {string} - Normalized club name for file paths
+ */
+function normalizeClubName(clubName) {
+    if (!clubName) return '';
+    
+    // Map for common club name variations that have issues
+    const clubNameMap = {
+        'BORSUSIA DORTMUND': 'Borussia Dortmund',
+        'CHELSEA FC(LOAN)': 'Chelsea FC',
+        'FREE AGENT': 'FREE AGENT',
+        'FREE AGENTP': 'FREE AGENT',
+        'INTER MIMAI': 'Inter Miami',
+        'MANCEHESTER CITY': 'Manchester City FC',
+        'MANCHERSTER CITY': 'Manchester City FC',
+        'MANCHESTER CITY': 'Manchester City FC',
+        'MANCHESTER UNITED': 'Manchester United FC',
+        'MANCHESTER UNITED(LOAN)': 'Manchester United FC',
+        'MUMBAI CITY FC(LOAN)': 'Mumbai City FC',
+        'TOTTENHAM HOTSPUR': 'Tottenham Hotspur FC',
+        // Additional mappings for other potentially problematic club names
+        'AC MILAN': 'AC Milan',
+        'ARSENAL': 'Arsenal FC',
+        'ARSENAL FC': 'Arsenal FC',
+        'ATLETICO MADRID': 'Atletico de Madrid',
+        'BARCELONA': 'FC Barcelona',
+        'BAYERN MUNICH': 'FC Bayern Munich',
+        'CHELSEA': 'Chelsea FC',
+        'DORTMUND': 'Borussia Dortmund',
+        'INTER': 'Inter Milan',
+        'JUVENTUS': 'Juventus',
+        'LIVERPOOL': 'Liverpool FC',
+        'MAN CITY': 'Manchester City FC',
+        'MAN UTD': 'Manchester United FC',
+        'PSG': 'Paris Saint-Germain FC',
+        'REAL MADRID': 'Real Madrid CF',
+        'SPURS': 'Tottenham Hotspur FC',
+        'TOTTENHAM': 'Tottenham Hotspur FC'
+    };
+    
+    // Check if we have a direct mapping
+    if (clubNameMap[clubName]) {
+        return clubNameMap[clubName];
+    }
+    
+    return clubName;
+}
+
+/**
  * Initialize club data
  * - Loads club data from players.json
  * - Preloads club logos
@@ -72,9 +122,11 @@ async function initializeClubData() {
         playersData.forEach(player => {
             if (player.club && !clubsSet.has(player.club)) {
                 clubsSet.add(player.club);
+                const normalizedClubName = normalizeClubName(player.club);
                 clubsList.push({
                     name: player.club,
-                    logo: player.clubLogo || `assets/images/players/club/${player.club}.webp`
+                    normalizedName: normalizedClubName,
+                    logo: player.clubLogo || `assets/images/players/club/${normalizedClubName}.webp`
                 });
             }
         });
@@ -85,9 +137,11 @@ async function initializeClubData() {
                 player.stats.forEach(stat => {
                     if (stat.team && !clubsSet.has(stat.team)) {
                         clubsSet.add(stat.team);
+                        const normalizedClubName = normalizeClubName(stat.team);
                         clubsList.push({
                             name: stat.team,
-                            logo: `assets/images/players/club/${stat.team}.webp`
+                            normalizedName: normalizedClubName,
+                            logo: `assets/images/players/club/${normalizedClubName}.webp`
                         });
                     }
                 });
@@ -107,13 +161,24 @@ async function initializeClubData() {
                     // Check if -low quality version exists for performance optimization
                     const lowQualityLogo = club.logo.replace('.webp', '-low.webp');
                     const img = new Image();
+                    
+                    // Handle loading errors for low quality logo
+                    img.onerror = function() {
+                        console.log(`Could not load low quality logo for ${club.name}, trying original`);
+                        // If low quality fails, try original directly
+                        clubCache.logos[club.name] = club.logo;
+                    };
+                    
                     img.src = lowQualityLogo;
                     
                     // Set a timeout to use high quality after 500ms
                     setTimeout(() => {
                         const highQualityImg = new Image();
                         highQualityImg.src = club.logo;
-                        clubCache.logos[club.name] = club.logo;
+                        // Only update if load is successful
+                        highQualityImg.onload = () => {
+                            clubCache.logos[club.name] = club.logo;
+                        };
                     }, 500);
                     
                     // Store low quality initially
@@ -161,6 +226,13 @@ function getClubLogo(clubName) {
         return clubCache.logos[clubName];
     }
     
+    // Special case for FREE AGENT
+    if (clubName === 'FREE AGENT' || clubName === 'FREE AGENTP') {
+        const svgPath = 'assets/images/players/club/FREE AGENT.svg';
+        clubCache.logos[clubName] = svgPath;
+        return svgPath;
+    }
+    
     // Try to find in clubs list
     const club = getClub(clubName);
     if (club && club.logo) {
@@ -169,7 +241,19 @@ function getClubLogo(clubName) {
         return club.logo;
     }
     
-    // Default club logo path
+    // Try with normalized name if direct lookup fails
+    const normalizedName = normalizeClubName(clubName);
+    if (normalizedName !== clubName) {
+        // First try the high-quality version
+        const highQualityPath = `assets/images/players/club/${normalizedName}.webp`;
+        
+        // For cache purposes, store the high-quality path
+        // The actual image loading error handling is done in the UI components
+        clubCache.logos[clubName] = highQualityPath;
+        return highQualityPath;
+    }
+    
+    // Default club logo path as last resort
     const defaultLogo = `assets/images/players/club/${clubName}.webp`;
     clubCache.logos[clubName] = defaultLogo; // Cache default path
     return defaultLogo;
@@ -284,12 +368,38 @@ function populateClubOptions(container, inputElement, searchTerm = '', onSelect 
             
             const logo = document.createElement('img');
             logo.className = 'club-logo';
-            logo.src = getClubLogo(club.name);
+            
+            // Handle FREE AGENT specially since we know it has SVG and WEBP formats
+            if (club.name === 'FREE AGENT' || club.name === 'FREE AGENTP') {
+                logo.src = 'assets/images/players/club/FREE AGENT.svg';
+                logo.onerror = function() {
+                    this.src = 'assets/images/players/club/freeagent.WEBP';
+                    this.onerror = function() {
+                        this.src = 'https://via.placeholder.com/20';
+                    };
+                };
+            } else {
+                logo.src = getClubLogo(club.name);
+                logo.onerror = function() {
+                    // Try with the normalized name directly
+                    const normalizedName = normalizeClubName(club.name);
+                    if (normalizedName !== club.name) {
+                        this.src = `assets/images/players/club/${normalizedName}.webp`;
+                        this.onerror = function() {
+                            // Try the low quality version as last resort
+                            this.src = `assets/images/players/club/${normalizedName}-low.webp`;
+                            this.onerror = function() {
+                                this.src = 'https://via.placeholder.com/20';
+                            };
+                        };
+                        return;
+                    }
+                    this.src = 'https://via.placeholder.com/20';
+                };
+            }
+            
             logo.alt = club.name;
             logo.loading = 'lazy';
-            logo.onerror = function() {
-                this.src = 'https://via.placeholder.com/20';
-            };
             
             const name = document.createElement('span');
             name.textContent = club.name;
@@ -333,5 +443,6 @@ window.ClubManager = {
     getClub,
     getClubLogo,
     createClubDropdown,
-    populateClubOptions
+    populateClubOptions,
+    normalizeClubName // Expose the normalizeClubName function
 }; 

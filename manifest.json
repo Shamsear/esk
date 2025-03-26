@@ -2,50 +2,50 @@
   "name": "Eskimos Road to Glory",
   "short_name": "R2G",
   "description": "FIFA Pro Clubs community for tournaments, career progression and player rankings",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#3498db",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/assets/images/icon-72x72.png",
+      "src": "assets/images/logo11.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/icon-96x96.png",
+      "src": "assets/images/logo11.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/icon-128x128.png",
+      "src": "assets/images/logo11.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/icon-144x144.png",
+      "src": "assets/images/icon-144x144.svg",
       "sizes": "144x144",
-      "type": "image/png"
+      "type": "image/svg+xml"
     },
     {
-      "src": "/assets/images/icon-152x152.png",
+      "src": "assets/images/logo11.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/icon-192x192.png",
+      "src": "assets/images/logo11.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/images/icon-384x384.png",
+      "src": "assets/images/logo11.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/icon-512x512.png",
+      "src": "assets/images/logo11.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -55,27 +55,22 @@
       "name": "Tournament Guide",
       "short_name": "Tournaments",
       "description": "View tournament guide and rules",
-      "url": "/tournament-guide.html",
-      "icons": [{ "src": "/assets/images/icon-tournament-96x96.png", "sizes": "96x96" }]
+      "url": "tournament-guide.html",
+      "icons": [{ "src": "assets/images/logo11.png", "sizes": "96x96" }]
     },
     {
       "name": "Career Mode",
       "short_name": "Career",
       "description": "Explore career mode features",
-      "url": "/career-mode.html",
-      "icons": [{ "src": "/assets/images/icon-career-96x96.png", "sizes": "96x96" }]
+      "url": "career-mode.html",
+      "icons": [{ "src": "assets/images/logo11.png", "sizes": "96x96" }]
     }
   ],
   "screenshots": [
     {
-      "src": "/assets/images/screenshot1.jpg",
+      "src": "assets/images/home/background.webp",
       "sizes": "1280x720",
-      "type": "image/jpeg"
-    },
-    {
-      "src": "/assets/images/screenshot2.jpg",
-      "sizes": "1280x720",
-      "type": "image/jpeg"
+      "type": "image/webp"
     }
   ],
   "related_applications": [],

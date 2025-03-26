@@ -1,20 +1,20 @@
 // Service Worker for caching and offline functionality
 const CACHE_NAME = 'r2g-cache-v1';
 const STATIC_ASSETS = [
-  './',
-  'index.html',
-  'career-mode.html',
-  'career-tournament.html',
-  'manager-ranking.html',
-  'registered-clubs.html',
-  'trophy-cabinet.html',
-  'tournament-guide.html',
-  'css/styles.css',
-  'css/critical.css',
-  'js/script.js',
-  'js/performance.js',
-  'js/image-optimization.js',
-  'assets/images/logo11.png'
+  '/',
+  '/index.html',
+  '/career-mode.html',
+  '/career-tournament.html',
+  '/manager-ranking.html',
+  '/registered-clubs.html',
+  '/trophy-cabinet.html',
+  '/tournament-guide.html',
+  '/css/styles.css',
+  '/css/critical.css',
+  '/js/script.js',
+  '/js/performance.js',
+  '/js/image-optimization.js',
+  '/assets/images/logo11.png'
 ];
 
 // Cache critical resources during installation
@@ -78,7 +78,7 @@ self.addEventListener('fetch', event => {
           .catch(err => {
             console.log('Fetch failed:', err);
             // If the network fails and we don't have a cached response, handle offline
-            return caches.match('offline.html');
+            return caches.match('/offline.html');
           });
           
         // Return the cached response or wait for network
@@ -121,9 +121,9 @@ self.addEventListener('fetch', event => {
                       
                       // Try different formats in order
                       const formats = [
-                        `assets/images/players/club/${clubName}.svg`,
-                        `assets/images/players/club/${clubName}.webp`,
-                        `assets/images/players/club/${clubName}-low.webp`
+                        `/assets/images/players/club/${clubName}.svg`,
+                        `/assets/images/players/club/${clubName}.webp`,
+                        `/assets/images/players/club/${clubName}-low.webp`
                       ];
                       
                       // Try each format
@@ -133,13 +133,13 @@ self.addEventListener('fetch', event => {
                         )
                       ).catch(() => {
                         // If all fail, use a placeholder
-                        return caches.match('assets/images/placeholder.png')
+                        return caches.match('/assets/images/placeholder.png')
                           .catch(() => new Response('Not found', { status: 404 }));
                       });
                     }
                     
                     // Fallback to generic placeholder
-                    return caches.match('assets/images/placeholder.png')
+                    return caches.match('/assets/images/placeholder.png')
                       .catch(() => new Response('Not found', { status: 404 }));
                   });
                   
@@ -167,7 +167,7 @@ self.addEventListener('fetch', event => {
                   .catch(err => {
                     console.log('Image fetch failed:', err);
                     // Try to serve a placeholder image if available
-                    return caches.match('assets/images/placeholder.png')
+                    return caches.match('/assets/images/placeholder.png')
                       .catch(() => new Response('Not found', { status: 404 }));
                   });
                   
