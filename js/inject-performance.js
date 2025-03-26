@@ -3,7 +3,7 @@
  * 
  * This script:
  * 1. Adds the service worker registration
- * 2. Adds performance.js and image-optimization.js scripts
+ * 2. Adds performance.js script
  * 3. Optimizes image loading with width and height attributes
  * 4. Converts synchronous scripts to deferred loading
  * 5. Adds critical CSS link
@@ -23,7 +23,6 @@ const performanceScripts = `
     
     <!-- Performance optimizations -->
     <script defer src="js/performance.js"></script>
-    <script defer src="js/image-optimization.js"></script>
 `;
 
 // CSS tags to inject in the head
@@ -90,47 +89,6 @@ htmlFiles.forEach(file => {
         if (imgCount > 0) {
             modified = true;
             console.log(`  ✓ Added dimensions to ${imgCount} images in ${file}`);
-        }
-        
-        // Add lazy loading to images if not already present
-        let lazyImgCount = 0;
-        content = content.replace(/<img([^>]*)src="([^"]+)"([^>]*)>/g, (match, beforeSrc, src, afterSrc) => {
-            // Skip if already lazy loaded or is logo
-            if ((beforeSrc + afterSrc).includes('loading=') || 
-                (beforeSrc + afterSrc).includes('logo') ||
-                src.includes('logo')) {
-                return match;
-            }
-            
-            // Add lazy loading
-            lazyImgCount++;
-            return `<img${beforeSrc}src="${src}"${afterSrc} loading="lazy">`;
-        });
-        
-        if (lazyImgCount > 0) {
-            modified = true;
-            console.log(`  ✓ Added lazy loading to ${lazyImgCount} images in ${file}`);
-        }
-        
-        // Convert regular images to data-src for js lazy loading
-        // This is more advanced than native lazy loading
-        let dataSrcCount = 0;
-        content = content.replace(/<img([^>]*)src="(assets\/images\/[^"]+)"([^>]*)>/g, (match, beforeSrc, src, afterSrc) => {
-            // Skip if already using data-src or is logo
-            if ((beforeSrc + afterSrc).includes('data-src') || 
-                (beforeSrc + afterSrc).includes('logo') ||
-                src.includes('logo')) {
-                return match;
-            }
-            
-            // Convert to data-src
-            dataSrcCount++;
-            return `<img${beforeSrc}data-src="${src}"${afterSrc}>`;
-        });
-        
-        if (dataSrcCount > 0) {
-            modified = true;
-            console.log(`  ✓ Converted ${dataSrcCount} images to use data-src in ${file}`);
         }
         
         // Save the file if it was modified

@@ -278,22 +278,6 @@
     <script>
         // Immediately executed critical JS
         document.addEventListener('DOMContentLoaded', function() {
-            // Make sure all images are loaded correctly
-            const allImages = document.querySelectorAll('img');
-            allImages.forEach(img => {
-                // If image has a data-src but no src, set src from data-src
-                if (img.dataset.src && !img.src) {
-                    img.src = img.dataset.src;
-                }
-                
-                // If image failed to load or has an empty src, try using a fallback
-                img.onerror = function() {
-                    if (this.src.includes('/assets/images/')) {
-                        this.src = 'https://via.placeholder.com/' + (this.width || '300') + 'x' + (this.height || '200') + '?text=Image+Not+Found';
-                    }
-                };
-            });
-            
             // Load the video after page content
             setTimeout(function() {
                 const video = document.querySelector('.video-bg');
