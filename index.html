@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="js-loading">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -12,32 +12,25 @@
     <meta name="theme-color" content="#3498db">
     <link rel="apple-touch-icon" href="assets/images/logo11.webp">
     
-    <!-- Resource hints -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://assets.mixkit.co" crossorigin>
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
     <!-- Preload critical assets -->
     <link rel="preload" href="css/critical.css" as="style">
-    <link rel="preload" href="assets/images/logo11.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="preload" href="js/performance.js" as="script">
+    <link rel="preload" href="assets/images/logo11.webp" as="image" type="image/png">
 
-    <!-- Critical CSS inline for immediate rendering -->
+    <!-- Critical CSS inline -->
     <style>
         /* Critical path CSS */
-        :root {
-            --primary: #3498db;
-            --primary-rgb: 52, 152, 219;
-            --text: #ecf0f1;
-        }
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
             background-color: #1a1a1a;
             overflow-x: hidden;
         }
@@ -52,88 +45,38 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease;
         }
         .loader {
             width: 40px;
             height: 40px;
             border: 3px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            border-top-color: var(--primary);
+            border-top-color: #3498db;
             animation: spin 1s ease-in-out infinite;
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        .js-loading img:not(.logo) {
-            opacity: 0;
-            transition: opacity 0.3s ease-in;
-        }
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-        }
-        .mini-logo {
-            height: 40px;
-            display: flex;
-            align-items: center;
-        }
-        .mini-logo img {
-            height: 100%;
-            margin-right: 10px;
-        }
-        header {
-            padding: 140px 20px 50px;
-            text-align: center;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .logo {
-            max-width: 250px;
-            width: 250px;
-            height: auto;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
     </style>
     
-    <!-- Critical CSS loaded with high priority -->
-    <link rel="stylesheet" href="css/critical.css" fetchpriority="high">
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="css/critical.css">
     
-    <!-- Font loading with display swap for better FOUT handling -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" fetchpriority="low">
+    <!-- Load fonts with display swap -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
     
     <!-- Defer non-critical CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin fetchpriority="low" data-priority="low">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     
-    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'" fetchpriority="low" data-priority="low">
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
 
     <!-- Performance optimized CSS -->
-    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'" fetchpriority="low" data-priority="low">
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
 
-    <!-- Preload script -->
-    <script src="js/performance.js" fetchpriority="high"></script>
 </head>
 <body>
     <div class="skip-link">Skip to content</div>
@@ -152,7 +95,7 @@
     </div>
     
     <!-- Video background with lazy loading -->
-    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4" data-type="video/mp4">
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4">
     </video>
     
     <div id="particles-js"></div>
@@ -160,7 +103,7 @@
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40" fetchpriority="high" class="critical">
+                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
@@ -184,8 +127,8 @@
             </button>
             <div class="mobile-menu-links">
                 <a href="#home">Home</a>
-                <a href="tournament-guide.html" data-prefetch="true">Tournament Guide</a>
-                <a href="career-mode.html" data-prefetch="true">Career Mode</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
                 <a href="manager-ranking.html">Manager Ranking</a>
                 <a href="trophy-cabinet.html">Trophy Cabinet</a>
                 <a href="career-tournament.html">Career Tournament</a>
@@ -195,82 +138,80 @@
         <main>
             <header id="home">
                 <!-- Logo with width and height for better CLS -->
-                <img src="assets/images/logo11.webp" alt="Eskimos Road to Glory Logo" class="logo float critical" width="250" height="250" fetchpriority="high">
+                <img src="assets/images/logo11.webp" alt="Eskimos Road to Glory Logo" class="logo float" width="250" height="250">
                 <h1 class="reveal typing-effect">ESKIMOS ROAD TO GLORY</h1>
                 <div class="subtitle reveal">JOURNEY TO EXCELLENCE</div>
                 <a href="#" class="cta-button pulse-effect reveal">JOIN THE JOURNEY</a>
             </header>
 
             <div class="navigation">
-                <a href="tournament-guide.html" class="nav-item tilt-effect reveal" data-prefetch="true">
+                <a href="tournament-guide.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <!-- Responsive images with multiple formats -->
-                        <picture>
-                            <source srcset="assets/images/home/h1.avif" type="image/avif">
-                            <source srcset="assets/images/home/h1.webp" type="image/webp">
-                            <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" loading="lazy">
-                        </picture>
+                        <!-- Lazy loaded images with width and height -->
+                        <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" loading="lazy">
                     </div>
                 </a>
-                <a href="career-mode.html" class="nav-item tilt-effect reveal" data-prefetch="true">
+                <a href="career-mode.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <picture>
-                            <source srcset="assets/images/home/h2.avif" type="image/avif">
-                            <source srcset="assets/images/home/h2.webp" type="image/webp">
-                            <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" loading="lazy">
-                        </picture>
+                        <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" loading="lazy">
                     </div>
                 </a>
                 <a href="manager-ranking.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <picture>
-                            <source srcset="assets/images/home/h3.avif" type="image/avif">
-                            <source srcset="assets/images/home/h3.webp" type="image/webp">
-                            <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" loading="lazy">
-                        </picture>
+                        <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" loading="lazy">
                     </div>
                 </a>
                 <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <picture>
-                            <source srcset="assets/images/home/H4.avif" type="image/avif">
-                            <source srcset="assets/images/home/H4.webp" type="image/webp">
-                            <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
-                        </picture>
+                        <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168" loading="lazy">
                     </div>
                 </a>
                 <a href="career-tournament.html" class="nav-item tilt-effect reveal">
                     <div class="nav-card">
-                        <picture>
-                            <source srcset="assets/images/home/H5.avif" type="image/avif">
-                            <source srcset="assets/images/home/H5.webp" type="image/webp">
-                            <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168" loading="lazy">
-                        </picture>
+                        <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168" loading="lazy">
                     </div>
                 </a>
             </div>
             
-            <div class="home-description fade-in-up delay-2 animate-on-scroll">
+            <div class="home-description fade-in-up delay-2">
                 <h2 class="section-heading">Your Road to Glory Journey</h2>
                 <p class="section-text">Welcome to Eskimos Road to Glory, the ultimate FIFA Pro Clubs experience. Join our community of passionate players, build your team, develop your skills, and compete in thrilling tournaments to become legends in the world of virtual football.</p>
                 
                 <div class="features">
-                    <div class="feature-item fade-in-up delay-3 animate-on-scroll">
+                    <div class="feature-item fade-in-up delay-3">
                         <i class="fas fa-trophy"></i>
                         <h3>Tournaments</h3>
                         <p>Compete in regular tournaments with different formats and prize pools. Test your skills against other clubs and climb the ranks.</p>
                     </div>
-                    <div class="feature-item fade-in-up delay-4 animate-on-scroll">
+                    <div class="feature-item fade-in-up delay-4">
                         <i class="fas fa-chart-line"></i>
                         <h3>Progression</h3>
                         <p>Track your growth with detailed statistics and earn recognition for your achievements. Rise through the ranks from rookie to legend.</p>
                     </div>
                 </div>
                 
-                <div class="cta-section fade-in-up delay-5 animate-on-scroll">
+                <div class="cta-section fade-in-up delay-5">
                     <h3 class="cta-heading">Ready to Begin Your Journey?</h3>
                     <p class="cta-text">Join hundreds of players already competing in our tournaments and enjoying the Eskimos experience.</p>
                     <a href="#" class="cta-button pulse-effect">JOIN NOW</a>
+                </div>
+            </div>
+            
+            <div class="testimonials fade-in-up delay-6">
+                <h2 class="section-heading">What Our Community Says</h2>
+                <div class="testimonial-container">
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"The tournaments are incredibly well organized, and the community is one of the most supportive I've found in gaming."</p>
+                        </div>
+                        <div class="testimonial-author">- Alex M., Tournament Champion</div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"From my first match to becoming a team captain, the Road to Glory journey has been an amazing experience!"</p>
+                        </div>
+                        <div class="testimonial-author">- Sophia K., Team Captain</div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -305,12 +246,12 @@
         Welcome to Eskimos Road to Glory!
     </div>
     
-    <!-- Inline critical JavaScript to avoid render-blocking -->
+    <!-- Load scripts optimized -->
     <script>
-        // Set current year
+        // Inline critical JS functions
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Show toast notification
+        // Add minimal toast functionality
         setTimeout(function() {
             const toast = document.getElementById('toast');
             if (toast) toast.classList.add('show');
@@ -319,80 +260,48 @@
                 if (toast) toast.classList.remove('show');
             }, 3000);
         }, 2000);
-        
-        // Warm up DNS for third-party domains
-        (function() {
-            const domains = ['https://cdnjs.cloudflare.com', 'https://assets.mixkit.co'];
-            domains.forEach(domain => {
-                const link = document.createElement('link');
-                link.rel = 'dns-prefetch';
-                link.href = domain;
-                document.head.appendChild(link);
-            });
-        })();
-        
-        // Inform service worker about pages to warm in cache
-        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-            // Prefetch pages user is likely to visit
-            navigator.serviceWorker.controller.postMessage({
-                type: 'WARM_CACHE',
-                urls: [
-                    'tournament-guide.html',
-                    'career-mode.html'
-                ]
-            });
-        }
     </script>
     
     <!-- Service worker registration -->
     <script defer src="js/sw-register.js"></script>
     
-    <!-- Core functionality - load with higher priority but still deferred -->
+    <!-- Performance optimizations - Load in correct order -->
+    <script defer src="js/performance.js"></script>
     <script defer src="js/image-optimization.js"></script>
     
-    <!-- Use async for third-party scripts to not block rendering -->
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" 
-            onload="setTimeout(function() { 
-                if(typeof particlesJS !== 'undefined') {
-                    particlesJS.load('particles-js', 'js/particles-config.json');
-                }
-            }, 1000);">
-    </script>
-    
-    <!-- Secondary scripts - loaded after critical content -->
+    <!-- Defer main script loading -->
     <script defer src="js/script.js"></script>
-    <script defer src="js/background-scroll.js"></script>
     
-    <!-- Dynamic script loading for non-critical scripts -->
+    <!-- Defer third-party scripts -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Performance optimization JS -->
     <script>
-        // Function to load scripts dynamically after page load
-        function loadScript(src, callback) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.async = true;
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure all images are loaded correctly
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach(img => {
+                // If image has a data-src but no src, set src from data-src
+                if (img.dataset.src && !img.src) {
+                    img.src = img.dataset.src;
+                }
+                
+                // If image failed to load or has an empty src, try using a fallback
+                img.onerror = function() {
+                    if (this.src.includes('/assets/images/')) {
+                        this.src = 'https://via.placeholder.com/' + (this.width || '300') + 'x' + (this.height || '200') + '?text=Image+Not+Found';
+                    }
+                };
+            });
             
-            if (callback) {
-                script.onload = callback;
-            }
-            
-            document.body.appendChild(script);
-        }
-        
-        // Load non-critical scripts after page load
-        window.addEventListener('load', function() {
-            // Allow some time for main content to be processed
-            setTimeout(function() {
-                // Load analytics and other non-essential scripts here
-                // loadScript('js/analytics.js');
-            }, 2000);
-            
-            // Defer video loading
+            // Load the video after page content
             setTimeout(function() {
                 const video = document.querySelector('.video-bg');
                 if (video && video.dataset.src) {
                     const source = document.createElement('source');
                     source.src = video.dataset.src;
-                    source.type = video.dataset.type || 'video/mp4';
+                    source.type = 'video/mp4';
                     video.appendChild(source);
                     video.load();
                     video.play().catch(e => console.log('Autoplay prevented:', e));
@@ -400,27 +309,21 @@
             }, 1000);
             
             // Set fade out for preloader
-            const preloader = document.querySelector('.preloader');
-            if (preloader) {
-                setTimeout(function() {
-                    preloader.style.opacity = '0';
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
                     setTimeout(function() {
-                        preloader.style.display = 'none';
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
                     }, 500);
-                }, 500);
-            }
+                }
+            });
         });
-
-        // Monitor performance metrics for analytics
-        if ('performance' in window && 'PerformanceObserver' in window) {
-            // Track largest contentful paint
-            new PerformanceObserver((list) => {
-                const entries = list.getEntries();
-                const lastEntry = entries[entries.length - 1];
-                // Log LCP time in seconds
-                console.log('LCP:', lastEntry.startTime / 1000, 'seconds');
-            }).observe({type: 'largest-contentful-paint', buffered: true});
-        }
     </script>
+    
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
 </body>
 </html> 

@@ -1,20 +1,8 @@
 // Service Worker for caching and offline functionality
-const CACHE_NAME = 'r2g-cache-v2';
-const IMG_CACHE_NAME = 'r2g-images-v2';
-const STATIC_CACHE_NAME = 'r2g-static-v2';
-
-// Assets that should be cached immediately during installation
-const CRITICAL_ASSETS = [
+const CACHE_NAME = 'r2g-cache-v1';
+const STATIC_ASSETS = [
   './',
   'index.html',
-  'offline.html',
-  'css/critical.css',
-  'js/performance.js',
-  'assets/images/logo11.png'
-];
-
-// Assets that should be cached during installation but are not critical for initial render
-const STATIC_ASSETS = [
   'career-mode.html',
   'career-tournament.html',
   'manager-ranking.html',
@@ -22,8 +10,11 @@ const STATIC_ASSETS = [
   'trophy-cabinet.html',
   'tournament-guide.html',
   'css/styles.css',
+  'css/critical.css',
   'js/script.js',
-  'js/image-optimization.js'
+  'js/performance.js',
+  'js/image-optimization.js',
+  'assets/images/logo11.png'
 ];
 
 // Cache critical resources during installation
@@ -31,28 +22,8 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Caching critical assets');
-        return cache.addAll(CRITICAL_ASSETS);
-      })
-      .then(() => {
-        // Cache non-critical assets in the background
-        return caches.open(STATIC_CACHE_NAME)
-          .then(cache => {
-            console.log('Caching static assets in the background');
-            // Use a background sync pattern with Promise.allSettled to continue even if some assets fail
-            return Promise.allSettled(STATIC_ASSETS.map(url => {
-              return fetch(url, { cache: 'no-cache' })
-                .then(response => {
-                  if (response.ok) {
-                    return cache.put(url, response);
-                  }
-                  console.warn(`Failed to cache: ${url}`);
-                })
-                .catch(error => {
-                  console.warn(`Failed to fetch for caching: ${url}`, error);
-                });
-            }));
-          });
+        console.log('Caching static assets');
+        return cache.addAll(STATIC_ASSETS);
       })
       .then(() => self.skipWaiting())
   );
@@ -60,199 +31,42 @@ self.addEventListener('install', event => {
 
 // Activate and clean up old caches
 self.addEventListener('activate', event => {
-  const currentCaches = [CACHE_NAME, IMG_CACHE_NAME, STATIC_CACHE_NAME];
+  const cacheWhitelist = [CACHE_NAME];
   
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          if (!currentCaches.includes(cacheName)) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
             console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => {
-      // Take control of all clients immediately
-      return self.clients.claim();
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
-// Helper function to determine if a request is for an image
-function isImageRequest(request) {
-  return request.destination === 'image' || 
-         request.url.match(/\.(jpe?g|png|gif|svg|webp|avif)$/i);
-}
-
-// Helper function to check if a request should be cached
-function shouldCache(url) {
-  // Skip analytics, tracking, and API calls
-  if (url.includes('/api/') || url.includes('/analytics/') || url.includes('/track/')) {
-    return false;
-  }
-  
-  // Skip large JSON files
-  if (url.includes('players.json')) {
-    return false;
-  }
-  
-  return true;
-}
-
-// Network-first strategy with timeout fallback
-async function networkFirstWithTimeout(request, timeout = 3000) {
-  return new Promise(resolve => {
-    let timeoutId;
-    
-    // Create a timeout promise
-    const timeoutPromise = new Promise(resolveTimeout => {
-      timeoutId = setTimeout(() => {
-        resolveTimeout('TIMEOUT');
-      }, timeout);
-    });
-    
-    // Try network first
-    fetch(request.clone())
-      .then(networkResponse => {
-        clearTimeout(timeoutId);
-        
-        // Cache successful responses
-        if (networkResponse.ok && shouldCache(request.url)) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(request, responseToCache);
-            });
-        }
-        
-        resolve(networkResponse);
-      })
-      .catch(err => {
-        clearTimeout(timeoutId);
-        console.log('Network fetch failed, falling back to cache');
-        resolve(caches.match(request));
-      });
-    
-    // If timeout occurs, try cache
-    timeoutPromise.then(result => {
-      if (result === 'TIMEOUT') {
-        console.log('Network request timed out, falling back to cache');
-        resolve(caches.match(request));
-      }
-    });
-  });
-}
-
-// Handle fetch events with appropriate strategies
+// Stale-while-revalidate strategy for all requests
 self.addEventListener('fetch', event => {
   // Skip cross-origin requests
   if (!event.request.url.startsWith(self.location.origin)) {
     return;
   }
   
-  // Get the URL for easier pattern matching
-  const requestUrl = new URL(event.request.url);
-  
-  // Special handling for navigation requests (HTML pages)
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      networkFirstWithTimeout(event.request)
-        .then(response => {
-          return response || caches.match('offline.html');
-        })
-    );
+  // Skip requests for players.json as it might be large
+  if (event.request.url.includes('players.json')) {
     return;
   }
   
-  // Special handling for image requests
-  if (isImageRequest(event.request)) {
-    event.respondWith(
-      caches.open(IMG_CACHE_NAME)
-        .then(cache => {
-          return cache.match(event.request)
-            .then(cachedResponse => {
-              // Try to refresh cache in the background if we have a cached response
-              if (cachedResponse) {
-                fetch(event.request)
-                  .then(networkResponse => {
-                    if (networkResponse.ok) {
-                      cache.put(event.request, networkResponse.clone());
-                    }
-                  })
-                  .catch(() => { /* Silently fail background refresh */ });
-                  
-                return cachedResponse;
-              }
-              
-              // If not in cache, try network
-              return fetch(event.request)
-                .then(networkResponse => {
-                  if (networkResponse.ok) {
-                    cache.put(event.request, networkResponse.clone());
-                  }
-                  return networkResponse;
-                })
-                .catch(err => {
-                  console.log('Image fetch failed:', err);
-                  
-                  // Check for alternate image formats
-                  if (requestUrl.pathname.match(/\.(jpe?g|png|gif)$/i)) {
-                    // Try WebP version
-                    const webpUrl = requestUrl.pathname.replace(/\.(jpe?g|png|gif)$/i, '.webp');
-                    return fetch(new Request(webpUrl))
-                      .then(webpResponse => {
-                        if (webpResponse.ok) {
-                          return webpResponse;
-                        }
-                        throw new Error('WebP version not available');
-                      })
-                      .catch(() => {
-                        // Try a lower quality version
-                        if (requestUrl.pathname.includes('/images/')) {
-                          const lowQualityUrl = requestUrl.pathname.replace(/\.(jpe?g|png|gif|webp)$/i, '-low.webp');
-                          return fetch(new Request(lowQualityUrl))
-                            .catch(() => caches.match('assets/images/placeholder.png'));
-                        }
-                        return caches.match('assets/images/placeholder.png');
-                      });
-                  }
-                  
-                  // Final fallback to placeholder
-                  return caches.match('assets/images/placeholder.png');
-                });
-            });
-        })
-    );
-    return;
-  }
-  
-  // For other assets (CSS, JS, etc.) use stale-while-revalidate
   event.respondWith(
     caches.match(event.request)
       .then(cachedResponse => {
-        // Return cached response if available and refresh in background
-        if (cachedResponse) {
-          // Refresh cache in background
-          if (shouldCache(event.request.url)) {
-            fetch(event.request)
-              .then(networkResponse => {
-                if (networkResponse.ok) {
-                  caches.open(CACHE_NAME)
-                    .then(cache => cache.put(event.request, networkResponse));
-                }
-              })
-              .catch(() => {});
-          }
-          
-          return cachedResponse;
-        }
-        
-        // Otherwise fetch from network
-        return fetch(event.request)
+        // Return cached response if available
+        const fetchPromise = fetch(event.request)
           .then(networkResponse => {
-            // Cache new version if it's a successful response and cacheable
-            if (networkResponse.ok && shouldCache(event.request.url)) {
+            // Cache new version if it's a successful response
+            if (networkResponse && networkResponse.ok && networkResponse.type === 'basic') {
               const responseToCache = networkResponse.clone();
               caches.open(CACHE_NAME)
                 .then(cache => {
@@ -263,18 +77,107 @@ self.addEventListener('fetch', event => {
           })
           .catch(err => {
             console.log('Fetch failed:', err);
-            
-            // For JS/CSS files that might have fallbacks
-            if (event.request.destination === 'script' || event.request.destination === 'style') {
-              // Try to serve a cached version of any script or stylesheet
-              return caches.match(event.request, { ignoreSearch: true })
-                .then(wildcardMatch => wildcardMatch || Response.error());
-            }
-            
-            return Response.error();
+            // If the network fails and we don't have a cached response, handle offline
+            return caches.match('offline.html');
           });
+          
+        // Return the cached response or wait for network
+        return cachedResponse || fetchPromise;
       })
   );
+});
+
+// Cache images using a separate cache with longer expiration
+self.addEventListener('fetch', event => {
+  // Only handle image requests
+  if (event.request.destination === 'image') {
+    // Special handling for club logos
+    if (event.request.url.includes('/club/')) {
+      event.respondWith(
+        caches.open('club-logo-cache-v1')
+          .then(cache => {
+            return cache.match(event.request)
+              .then(cachedResponse => {
+                // Return cached response if available
+                const fetchPromise = fetch(event.request)
+                  .then(networkResponse => {
+                    // Cache new version if it's a successful response
+                    if (networkResponse && networkResponse.ok) {
+                      cache.put(event.request, networkResponse.clone());
+                    }
+                    return networkResponse;
+                  })
+                  .catch(err => {
+                    console.log('Club logo fetch failed:', err);
+                    
+                    // Try alternative versions (handle -low.webp, .webp, .svg variations)
+                    const url = new URL(event.request.url);
+                    const path = url.pathname;
+                    
+                    // Extract the club name from the URL
+                    const clubNameMatch = path.match(/\/club\/([^-\.]+)/);
+                    if (clubNameMatch && clubNameMatch[1]) {
+                      const clubName = clubNameMatch[1];
+                      
+                      // Try different formats in order
+                      const formats = [
+                        `assets/images/players/club/${clubName}.svg`,
+                        `assets/images/players/club/${clubName}.webp`,
+                        `assets/images/players/club/${clubName}-low.webp`
+                      ];
+                      
+                      // Try each format
+                      return Promise.any(
+                        formats.map(format => 
+                          fetch(format).catch(() => Promise.reject())
+                        )
+                      ).catch(() => {
+                        // If all fail, use a placeholder
+                        return caches.match('assets/images/placeholder.png')
+                          .catch(() => new Response('Not found', { status: 404 }));
+                      });
+                    }
+                    
+                    // Fallback to generic placeholder
+                    return caches.match('assets/images/placeholder.png')
+                      .catch(() => new Response('Not found', { status: 404 }));
+                  });
+                  
+                // Return the cached response or wait for network
+                return cachedResponse || fetchPromise;
+              });
+          })
+      );
+    } else {
+      // Handle other image types
+      event.respondWith(
+        caches.open('image-cache-v1')
+          .then(cache => {
+            return cache.match(event.request)
+              .then(cachedResponse => {
+                // Return cached response if available
+                const fetchPromise = fetch(event.request)
+                  .then(networkResponse => {
+                    // Cache new version if it's a successful response
+                    if (networkResponse && networkResponse.ok) {
+                      cache.put(event.request, networkResponse.clone());
+                    }
+                    return networkResponse;
+                  })
+                  .catch(err => {
+                    console.log('Image fetch failed:', err);
+                    // Try to serve a placeholder image if available
+                    return caches.match('assets/images/placeholder.png')
+                      .catch(() => new Response('Not found', { status: 404 }));
+                  });
+                  
+                // Return the cached response or wait for network
+                return cachedResponse || fetchPromise;
+              });
+          })
+      );
+    }
+  }
 });
 
 // Background sync for saving data when offline
@@ -284,38 +187,10 @@ self.addEventListener('sync', event => {
   }
 });
 
-// Periodic cache update for frequently accessed resources
-self.addEventListener('periodicsync', event => {
-  if (event.tag === 'refresh-content') {
-    event.waitUntil(refreshFrequentlyAccessedContent());
-  }
-});
-
 // Handle messages from the main thread
 self.addEventListener('message', event => {
-  // Handle skip waiting message
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
-    return;
-  }
-  
-  // Handle cache warming for specific pages
-  if (event.data && event.data.type === 'WARM_CACHE' && event.data.urls) {
-    event.waitUntil(
-      caches.open(CACHE_NAME).then(cache => {
-        return Promise.all(
-          event.data.urls.map(url => {
-            return fetch(url, { cache: 'no-cache' })
-              .then(response => {
-                if (response.ok) {
-                  return cache.put(url, response);
-                }
-              })
-              .catch(err => console.warn(`Failed to warm cache for ${url}`, err));
-          })
-        );
-      })
-    );
   }
 });
 
@@ -325,7 +200,7 @@ async function syncData() {
   const offlineData = await db.getAll('offlineData');
   
   // Process each saved offline data item
-  const syncPromises = offlineData.map(async item => {
+  for (const item of offlineData) {
     try {
       const response = await fetch(item.url, {
         method: item.method,
@@ -337,38 +212,10 @@ async function syncData() {
         // Delete from the offline store once successfully synced
         await db.delete('offlineData', item.id);
       }
-      return response.ok;
     } catch (error) {
       console.error('Failed to sync data:', error);
-      return false;
     }
-  });
-  
-  return Promise.all(syncPromises);
-}
-
-// Refresh frequently accessed content
-async function refreshFrequentlyAccessedContent() {
-  const frequentlyAccessedUrls = [
-    'index.html',
-    'css/styles.css',
-    'js/script.js'
-  ];
-  
-  const cache = await caches.open(CACHE_NAME);
-  
-  const refreshPromises = frequentlyAccessedUrls.map(url => {
-    return fetch(url, { cache: 'no-cache' })
-      .then(response => {
-        if (response.ok) {
-          return cache.put(url, response);
-        }
-        throw new Error(`Failed to refresh ${url}`);
-      })
-      .catch(err => console.warn(`Failed to refresh ${url}`, err));
-  });
-  
-  return Promise.all(refreshPromises);
+  }
 }
 
 // Simple IndexedDB utility for storing offline data
@@ -379,8 +226,6 @@ function openDB() {
     request.onupgradeneeded = event => {
       const db = event.target.result;
       db.createObjectStore('offlineData', { keyPath: 'id', autoIncrement: true });
-      // Create additional store for analytics data that can be sent when back online
-      db.createObjectStore('offlineAnalytics', { keyPath: 'id', autoIncrement: true });
     };
     
     request.onsuccess = event => {
@@ -405,22 +250,12 @@ function openDB() {
             request.onsuccess = () => resolve();
             request.onerror = () => reject(request.error);
           });
-        },
-        add: (storeName, data) => {
-          return new Promise((resolve, reject) => {
-            const transaction = db.transaction([storeName], 'readwrite');
-            const store = transaction.objectStore(storeName);
-            const request = store.add(data);
-            
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => reject(request.error);
-          });
         }
       });
     };
     
     request.onerror = event => {
-      reject(event.target.error);
+      reject(new Error('Failed to open IndexedDB'));
     };
   });
 } 
