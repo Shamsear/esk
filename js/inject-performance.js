@@ -4,9 +4,10 @@
  * This script:
  * 1. Adds the service worker registration
  * 2. Adds performance.js script
- * 3. Optimizes image loading with width and height attributes
- * 4. Converts synchronous scripts to deferred loading
- * 5. Adds critical CSS link
+ * 3. Adds Vercel Analytics script
+ * 4. Optimizes image loading with width and height attributes
+ * 5. Converts synchronous scripts to deferred loading
+ * 6. Adds critical CSS link
  */
 
 const fs = require('fs');
@@ -23,6 +24,9 @@ const performanceScripts = `
     
     <!-- Performance optimizations -->
     <script defer src="js/performance.js"></script>
+    
+    <!-- Vercel Analytics -->
+    <script defer src="js/vercel-analytics.js"></script>
 `;
 
 // CSS tags to inject in the head
