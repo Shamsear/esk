@@ -226,9 +226,13 @@ function loadLazyImages() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    if (img.dataset.src) {
+                    if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
                         img.src = img.dataset.src;
                         img.removeAttribute('data-src');
+                    } else if (img.dataset.src) {
+                        // If data-src is undefined or contains undefined, hide the image
+                        console.warn('Image has invalid data-src attribute:', img.dataset.src);
+                        img.style.display = 'none';
                     }
                     imageObserver.unobserve(img);
                 }
@@ -243,9 +247,13 @@ function loadLazyImages() {
     } else {
         // Fallback for browsers without IntersectionObserver
         lazyImages.forEach(img => {
-            if (img.dataset.src) {
+            if (img.dataset.src && img.dataset.src !== 'undefined' && !img.dataset.src.includes('undefined')) {
                 img.src = img.dataset.src;
                 img.removeAttribute('data-src');
+            } else if (img.dataset.src) {
+                // If data-src is undefined or contains undefined, hide the image
+                console.warn('Image has invalid data-src attribute:', img.dataset.src);
+                img.style.display = 'none';
             }
         });
     }
@@ -257,11 +265,18 @@ function setupImageErrorHandling() {
     
     images.forEach(img => {
         img.onerror = function() {
+            // Skip logging for undefined URLs
+            if (this.src.includes('undefined') || this.src.endsWith('/undefined')) {
+                this.style.display = 'none'; // Hide the broken image
+                return;
+            }
+            
             console.error(`Failed to load image: ${this.src}`);
             
             // Replace with placeholder if image is from assets folder
             if (this.src.includes('/assets/images/')) {
-                this.src = `https://via.placeholder.com/${this.width || 300}x${this.height || 200}?text=Image+Not+Found`;
+                // Use a valid fallback path
+                this.src = '../assets/images/logo11.webp';
                 
                 // Add class for styling
                 this.classList.add('image-error');

@@ -68,10 +68,11 @@
             flex: 1;
             background-color: #282828;
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px;
             overflow-y: auto;
-            max-width: 300px;
+            max-width: 320px;
             margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         .player-list h2 {
             margin-top: 0;
@@ -124,8 +125,9 @@
             flex: 3;
             background-color: #282828;
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px;
             overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         .form-group {
             margin-bottom: 15px;
@@ -169,16 +171,33 @@
         }
         .stat-item {
             background-color: #333;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 10px;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .stat-item:hover {
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .add-stat-btn {
             background-color: #3f51b5;
-            margin-top: 10px;
+            transition: background-color 0.2s;
+            padding: 10px 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .add-stat-btn:hover {
+            background-color: #303f9f;
+        }
+        .add-stat-btn i {
+            font-size: 16px;
         }
         .club-dropdown {
             position: relative;
@@ -244,23 +263,27 @@
         /* Tab system */
         .tabs {
             display: flex;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #444;
-            overflow-x: auto; /* Allow tabs to scroll on mobile */
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            gap: 5px;
         }
         .tab {
-            padding: 10px 15px;
+            padding: 12px 20px;
             cursor: pointer;
             border-bottom: 2px solid transparent;
-            white-space: nowrap; /* Prevent tab text from wrapping */
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            border-radius: 4px 4px 0 0;
         }
         .tab:hover {
             background-color: #333;
         }
         .tab.active {
             border-bottom: 2px solid #4caf50;
-            font-weight: bold;
+            font-weight: 600;
+            background-color: #333;
         }
         .tab-content {
             display: none;
@@ -307,35 +330,65 @@
         /* Stats reordering controls */
         .stat-controls {
             display: flex;
-            gap: 5px;
+            gap: 8px;
             position: absolute;
-            right: 10px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
         }
         
         .stat-move-btn {
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #555;
+            background-color: #3f51b5;
             color: white;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
         }
         
         .stat-move-btn:hover {
-            background-color: #777;
+            background-color: #303f9f;
+            transform: scale(1.05);
         }
         
-        .stats-controls-container {
+        .stat-move-btn.btn-delete {
+            background-color: #f44336;
+        }
+        
+        .stat-move-btn.btn-delete:hover {
+            background-color: #d32f2f;
+        }
+        
+        .stats-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .add-stat-btn {
+            background-color: #3f51b5;
+            transition: background-color 0.2s;
+            padding: 10px 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-stat-btn:hover {
+            background-color: #303f9f;
+        }
+        
+        .add-stat-btn i {
+            font-size: 16px;
         }
         
         /* Mobile optimizations */
@@ -343,7 +396,7 @@
             .container {
                 flex-direction: column;
                 height: auto;
-                padding: 10px;
+                padding: 15px;
             }
             
             .player-list {
@@ -355,13 +408,13 @@
             
             .header {
                 flex-direction: column;
-                padding: 10px;
+                padding: 15px;
                 text-align: center;
             }
             
             .header h1 {
                 margin-bottom: 10px;
-                font-size: 20px;
+                font-size: 22px;
             }
             
             .user-info {
@@ -371,7 +424,7 @@
             
             .buttons-container {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
             
             .btn-delete {
@@ -384,14 +437,14 @@
             }
             
             .tab {
-                padding: 8px 10px;
-                font-size: 14px;
+                padding: 10px 15px;
+                font-size: 15px;
             }
             
             /* Adjust stat items for mobile */
             .stat-item {
                 flex-wrap: wrap;
-                padding: 15px 10px;
+                padding: 15px;
             }
             
             .stat-item > div {
@@ -399,14 +452,24 @@
                 margin-bottom: 10px;
             }
             
+            .stat-controls {
+                position: relative;
+                transform: none;
+                justify-content: flex-end;
+                margin-top: 10px;
+                right: 0;
+            }
+            
             /* Adjust form elements for touch */
             button, input, select {
-                padding: 12px 15px;
+                padding: 14px 16px;
                 font-size: 16px; /* Prevents iOS zoom on focus */
+                border-radius: 6px;
             }
             
             label {
-                font-size: 14px;
+                font-size: 15px;
+                margin-bottom: 8px;
             }
         }
     </style>
@@ -500,22 +563,13 @@
             
             <div class="tab-content" data-tab="stats">
                 <h3>Player Stats & History</h3>
-                <div class="stats-controls-container">
+                <div class="stats-header">
                     <div>
-                        <button id="add-stat-btn" class="add-stat-btn">+ Add Stat</button>
-                    </div>
-                    <div>
-                        <button id="sort-by-season" title="Sort by Season">Sort by Season</button>
-                        <button id="sort-by-value" title="Sort by Value">Sort by Value</button>
+                        <button id="add-stat-btn" class="add-stat-btn"><i class="fas fa-plus"></i> Add New Stat</button>
                     </div>
                 </div>
                 <div id="stats-container" class="stats-container">
                     <!-- Stat items will be added here dynamically -->
-                </div>
-                <div class="stats-controls-container">
-                    <div>
-                        <button id="add-stat-btn-bottom" class="add-stat-btn">+ Add Stat</button>
-                    </div>
                 </div>
             </div>
             
@@ -994,11 +1048,6 @@
             
             // Add stat buttons (both top and bottom)
             document.getElementById('add-stat-btn').addEventListener('click', () => addStatItem());
-            document.getElementById('add-stat-btn-bottom').addEventListener('click', () => addStatItem());
-            
-            // Sorting buttons
-            document.getElementById('sort-by-season').addEventListener('click', sortStatsBySeason);
-            document.getElementById('sort-by-value').addEventListener('click', sortStatsByValue);
             
             // Image path input change
             const imagePathInput = document.getElementById('player-image-path');
@@ -1476,7 +1525,7 @@
             // Create move up button
             const moveUpBtn = document.createElement('button');
             moveUpBtn.className = 'stat-move-btn';
-            moveUpBtn.innerHTML = '&uarr;';
+            moveUpBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
             moveUpBtn.title = 'Move Up';
             moveUpBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1486,7 +1535,7 @@
             // Create move down button
             const moveDownBtn = document.createElement('button');
             moveDownBtn.className = 'stat-move-btn';
-            moveDownBtn.innerHTML = '&darr;';
+            moveDownBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
             moveDownBtn.title = 'Move Down';
             moveDownBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1496,7 +1545,7 @@
             // Create delete button
             const deleteButton = document.createElement('button');
             deleteButton.className = 'stat-move-btn btn-delete';
-            deleteButton.innerHTML = '&times;';
+            deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
             deleteButton.title = 'Delete Stat';
             deleteButton.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1577,36 +1626,6 @@
             }
         }
         
-        // Sort stats by season
-        function sortStatsBySeason() {
-            const container = document.getElementById('stats-container');
-            const stats = Array.from(container.children);
-            
-            stats.sort((a, b) => {
-                const seasonA = a.querySelector('[data-stat-season]').value;
-                const seasonB = b.querySelector('[data-stat-season]').value;
-                return seasonA.localeCompare(seasonB);
-            });
-            
-            // Re-append in sorted order
-            stats.forEach(stat => container.appendChild(stat));
-        }
-        
-        // Sort stats by value
-        function sortStatsByValue() {
-            const container = document.getElementById('stats-container');
-            const stats = Array.from(container.children);
-            
-            stats.sort((a, b) => {
-                const valueA = parseInt(a.querySelector('[data-stat-value]').value) || 0;
-                const valueB = parseInt(b.querySelector('[data-stat-value]').value) || 0;
-                return valueB - valueA; // Sort by highest value first
-            });
-            
-            // Re-append in sorted order
-            stats.forEach(stat => container.appendChild(stat));
-        }
-
         // Populate team options for stat dropdowns
         function populateTeamOptions(container, inputElement, searchTerm = '') {
             // Use the ClubManager to populate team options
