@@ -1716,9 +1716,9 @@ window.onload = function() {
             loadingElement.style.display = 'none';  // Hide the welcome screen
         }
     }, 4500);  // 4000 milliseconds = 4 seconds
-    resetFilters();
-    resetModalFilters(); // Reset the filters when the page loads
-    sortPlayers();  // Sort players when the page loads
+    // resetFilters();
+    // resetModalFilters(); // Reset the filters when the page loads
+    // sortPlayers();  // Sort players when the page loads
 };
 
 // Function to fetch and load player data from the JSON file
@@ -1792,6 +1792,9 @@ async function fetchPlayersData() {
         });
         
         // Apply initial filters and pagination
+        resetFilters();
+        resetModalFilters(); 
+        sortPlayers();
         applyFiltersAndDisplay();
         
         // Hide the loading screen after a short delay to ensure smooth transition
@@ -2304,14 +2307,18 @@ function resetFilters() {
     
     // Update state
     const state = window.playerState;
-    state.filters.searchTerm = '';
-    state.filters.star = 'all';
-    state.filters.club = 'ALL';
-    state.filters.position = [];
-    state.currentPage = 1;
     
-    // Apply filters
-    applyFiltersAndDisplay();
+    // Safety check - make sure playerState is initialized
+    if (state && state.filters) {
+        state.filters.searchTerm = '';
+        state.filters.star = 'all';
+        state.filters.club = 'ALL';
+        state.filters.position = [];
+        state.currentPage = 1;
+        
+        // Apply filters
+        applyFiltersAndDisplay();
+    }
 }
 
     </script>
@@ -2336,5 +2343,6 @@ function resetFilters() {
     
     <!-- Performance optimizations -->
     <script defer src="js/performance.js"></script>
+    <script defer src="js/vercel-analytics.js"></script>
     </body>
 </html>
