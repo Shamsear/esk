@@ -407,7 +407,7 @@
 
         /* Filter Button for Mobile/Tablets */
         .filter-btn {
-            display: block !important; /* Always show filter button for all screen sizes */
+            display: none;
             background: rgba(40, 40, 40, 0.9);
             color: #fff;
             border: none;
@@ -415,15 +415,16 @@
             font-size: 15px;
             border-radius: 25px;
             cursor: pointer;
-            position: fixed !important; /* Fixed to viewport */
-            right: 20px !important;
-            bottom: 20px !important;
-            z-index: 1000; /* Higher z-index but below modal */
+            position: fixed;
+            right: 20px;
+            bottom: 20px; /* Changed from top: 50% to bottom: 20px */
+            transform: none; /* Removed transform */
+            z-index: 98;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            display: flex !important;
+            display: flex;
             align-items: center;
             gap: 8px;
         }
@@ -456,7 +457,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1500; /* Higher z-index to ensure it's above everything */
+    z-index: 1000; /* Increased z-index */
     left: 0;
     top: 0;
     width: 100%;
@@ -467,8 +468,8 @@
 
 /* Modal Content */
 .modal-content {
-    position: absolute;
-    top: 50vh;
+    position: relative;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #1a1a1a;
@@ -481,8 +482,9 @@
     overflow-y: auto;
     box-sizing: border-box;
     animation: modalFadeIn 0.3s ease-out;
-    z-index: 1550; /* Higher than modal background */
+    z-index: 1001; /* Higher than modal background */
 }
+
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -1008,7 +1010,6 @@
             top: 20px;
             right: 20px;
             z-index: 99; /* Lower z-index than modal */
-            display: flex; /* Use flex display for proper alignment */
         }
         
         .admin-link a {
@@ -1040,7 +1041,6 @@
             top: 20px;
             left: 20px;
             z-index: 99; /* Lower z-index than modal */
-            display: flex; /* Use flex display for proper alignment */
         }
         
         .back-link a {
@@ -1224,9 +1224,6 @@
     <!-- Performance optimized CSS -->
     <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
-    
-    <!-- Fix for filter button position -->
-    <link rel="stylesheet" href="fix-filter-position.css">
 
 </head>
 <body>
@@ -1256,7 +1253,7 @@
         <div class="logo-search-container">
             <div class="logo">
                 <!-- Add your logo here -->
-                <img src="../assets/images/logo11.webp" alt="Logo" class="logo-img" width="40" height="40">
+                <img src="assets/images/logo11.webp" alt="Logo" class="logo-img" width="40" height="40">
                 <h1>R2G Player Data</h1>
             </div>
 
@@ -1274,7 +1271,7 @@
 
 
     <!-- Filter Button for Mobile/Tablets -->
-    <button class="filter-btn" onclick="openFilterModal()" style="position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 1000 !important; display: flex !important;">
+    <button class="filter-btn" onclick="openFilterModal()">
         Filters <i class="fas fa-filter"></i>
     </button>
     <!-- Main content -->
@@ -1295,19 +1292,19 @@
                 <div class="dropdown-options">
                     <div class="dropdown-item" data-value="all">All</div>
                     <div class="dropdown-item" data-value="3-star-standard">
-                        <img src="../assets/images/players/modal/4STAR.webp" alt="3 Star Standard" width="300" height="200" > 3 Star Standard
+                        <img src="assets/images/players/modal/4STAR.webp" alt="3 Star Standard" width="300" height="200" > 3 Star Standard
                     </div>
                     <div class="dropdown-item" data-value="4-star-standard">
-                        <img src="../assets/images/players/modal/4STAR.webp" alt="4 Star Standard" width="300" height="200" > 4 Star Standard
+                        <img src="assets/images/players/modal/4STAR.webp" alt="4 Star Standard" width="300" height="200" > 4 Star Standard
                     </div>
                     <div class="dropdown-item" data-value="5-star-standard">
-                        <img src="../assets/images/players/modal/5STAR.webp" alt="5 Star Standard" width="300" height="200" > 5 Star Standard
+                        <img src="assets/images/players/modal/5STAR.webp" alt="5 Star Standard" width="300" height="200" > 5 Star Standard
                     </div>
                     <div class="dropdown-item" data-value="4-star-legend">
-                        <img src="../assets/images/players/modal/3STARLEGEND.webp" alt="4 Star Legend" width="300" height="200" > 4 Star Legend
+                        <img src="assets/images/players/modal/3STARLEGEND.webp" alt="4 Star Legend" width="300" height="200" > 4 Star Legend
                     </div>
                     <div class="dropdown-item" data-value="5-star-legend">
-                        <img src="../assets/images/players/modal/5STARLEGEND.webp" alt="5 Star Legend" width="300" height="200" > 5 Star Legend
+                        <img src="assets/images/players/modal/5STARLEGEND.webp" alt="5 Star Legend" width="300" height="200" > 5 Star Legend
                     </div>
                 </div>
     </div>
@@ -1318,114 +1315,114 @@
                 <div class="dropdown-options">
                     <div class="dropdown-item" data-value="ALL">All</div>
                     <div class="dropdown-item" data-value="FREE AGENT">
-                        <img src="../assets/images/players/FREEAGENT.webp" alt="" width="300" height="200" > Free Agent
+                        <img src="assets/images/players/FREEAGENT.webp" alt="" width="300" height="200" > Free Agent
                     </div>                    
                     <div class="dropdown-item" data-value="AC MILAN">
-                        <img src="../assets/images/players/club/AC Milan.webp" alt="" width="300" height="200" > AC Milan
+                        <img src="assets/images/players/club/AC Milan.webp" alt="" width="300" height="200" > AC Milan
                     </div>
                     <div class="dropdown-item" data-value="AFC AJAX">
-                        <img src="../assets/images/players/club/AFC Ajax.webp" alt="" width="300" height="200" > AFC Ajax
+                        <img src="assets/images/players/club/AFC Ajax.webp" alt="" width="300" height="200" > AFC Ajax
                     </div>
                     <div class="dropdown-item" data-value="AL HILAL SFC">
-                        <img src="../assets/images/players/club/Al Hilal SFC.webp" alt="" width="300" height="200" > Al Hilal SFC
+                        <img src="assets/images/players/club/Al Hilal SFC.webp" alt="" width="300" height="200" > Al Hilal SFC
                     </div>
                     <div class="dropdown-item" data-value="AL-NASSR FC">
-                        <img src="../assets/images/players/club/AL-NASSR FC.webp" alt="" width="300" height="200" > Al-Nassr FC
+                        <img src="assets/images/players/club/AL-NASSR FC.webp" alt="" width="300" height="200" > Al-Nassr FC
                     </div>
                     <div class="dropdown-item" data-value="ARSENAL FC">
-                        <img src="../assets/images/players/club/Arsenal FC.webp" alt="" width="300" height="200" > Arsenal FC
+                        <img src="assets/images/players/club/Arsenal FC.webp" alt="" width="300" height="200" > Arsenal FC
                     </div>
                     <div class="dropdown-item" data-value="AS ROMA">
-                        <img src="../assets/images/players/club/AS ROMA.webp" alt="" width="300" height="200" > AS Roma
+                        <img src="assets/images/players/club/AS ROMA.webp" alt="" width="300" height="200" > AS Roma
                     </div>
                     <div class="dropdown-item" data-value="ASTON VILLA FC">
-                        <img src="../assets/images/players/club/Aston Villa FC.webp" alt="" width="300" height="200" > Aston Villa FC
+                        <img src="assets/images/players/club/Aston Villa FC.webp" alt="" width="300" height="200" > Aston Villa FC
                     </div>
                     <div class="dropdown-item" data-value="ATALANTA BC">
-                        <img src="../assets/images/players/club/Atalanta BC.webp" alt="" width="300" height="200" > Atalanta BC
+                        <img src="assets/images/players/club/Atalanta BC.webp" alt="" width="300" height="200" > Atalanta BC
                     </div>
                     <div class="dropdown-item" data-value="ATLETICO DE MADRID">
-                        <img src="../assets/images/players/club/Atletico de Madrid.webp" alt="" width="300" height="200" > Atletico de Madrid
+                        <img src="assets/images/players/club/Atletico de Madrid.webp" alt="" width="300" height="200" > Atletico de Madrid
                     </div>
                     <div class="dropdown-item" data-value="BAYER LEVERKUSEN">
-                        <img src="../assets/images/players/club/Bayer Leverkusen.webp" alt="" width="300" height="200" > Bayer Leverkusen
+                        <img src="assets/images/players/club/Bayer Leverkusen.webp" alt="" width="300" height="200" > Bayer Leverkusen
                     </div>
                     <div class="dropdown-item" data-value="BORUSSIA DORTMUND">
-                        <img src="../assets/images/players/club/Borussia Dortmund.webp" alt="" width="300" height="200" > Borussia Dortmund
+                        <img src="assets/images/players/club/Borussia Dortmund.webp" alt="" width="300" height="200" > Borussia Dortmund
                     </div>
                     <div class="dropdown-item" data-value="CHELSEA FC">
-                        <img src="../assets/images/players/club/Chelsea FC.webp" alt="" width="300" height="200" > Chelsea FC
+                        <img src="assets/images/players/club/Chelsea FC.webp" alt="" width="300" height="200" > Chelsea FC
                     </div>
                     <div class="dropdown-item" data-value="FC BARCELONA">
-                        <img src="../assets/images/players/club/FC Barcelona.webp" alt="" width="300" height="200" > FC Barcelona
+                        <img src="assets/images/players/club/FC Barcelona.webp" alt="" width="300" height="200" > FC Barcelona
                     </div>
                     <div class="dropdown-item" data-value="FC BAYERN MUNICH">
-                        <img src="../assets/images/players/club/FC Bayern Munich.webp" alt="" width="300" height="200" > FC Bayern Munich
+                        <img src="assets/images/players/club/FC Bayern Munich.webp" alt="" width="300" height="200" > FC Bayern Munich
                     </div>
                     <div class="dropdown-item" data-value="FC PORTO">
-                        <img src="../assets/images/players/club/FC Porto.webp" alt="" width="300" height="200" > FC Porto
+                        <img src="assets/images/players/club/FC Porto.webp" alt="" width="300" height="200" > FC Porto
                     </div>
                     <div class="dropdown-item" data-value="FSV MAINZ 05">
-                        <img src="../assets/images/players/club/FSV Mainz 05.webp" alt="" width="300" height="200" > FSV Mainz 05
+                        <img src="assets/images/players/club/FSV Mainz 05.webp" alt="" width="300" height="200" > FSV Mainz 05
                     </div>
                     <div class="dropdown-item" data-value="INTER MIAMI">
-                        <img src="../assets/images/players/club/Inter Miami.webp" alt="" width="300" height="200" > Inter Miami
+                        <img src="assets/images/players/club/Inter Miami.webp" alt="" width="300" height="200" > Inter Miami
                     </div>
                     <div class="dropdown-item" data-value="INTER MILAN">
-                        <img src="../assets/images/players/club/Inter Milan.webp" alt="" width="300" height="200" > Inter Milan
+                        <img src="assets/images/players/club/Inter Milan.webp" alt="" width="300" height="200" > Inter Milan
                     </div>
                     <div class="dropdown-item" data-value="LIVERPOOL FC">
-                        <img src="../assets/images/players/club/Liverpool FC.webp" alt="" width="300" height="200" > Liverpool FC
+                        <img src="assets/images/players/club/Liverpool FC.webp" alt="" width="300" height="200" > Liverpool FC
                     </div>
                     <div class="dropdown-item" data-value="LOSC LILLE">
-                        <img src="../assets/images/players/club/LOSC Lille.webp" alt="" width="300" height="200" > LOSC Lille
+                        <img src="assets/images/players/club/LOSC Lille.webp" alt="" width="300" height="200" > LOSC Lille
                     </div>
                     <div class="dropdown-item" data-value="MANCHESTER CITY">
-                        <img src="../assets/images/players/club/Manchester City FC.webp" alt="" width="300" height="200" > Manchester City FC
+                        <img src="assets/images/players/club/Manchester City FC.webp" alt="" width="300" height="200" > Manchester City FC
                     </div>
                     <div class="dropdown-item" data-value="MANCHESTER UNITED">
-                        <img src="../assets/images/players/club/Manchester United FC.webp" alt="" width="300" height="200" > Manchester United FC
+                        <img src="assets/images/players/club/Manchester United FC.webp" alt="" width="300" height="200" > Manchester United FC
                     </div>
                     
                     <div class="dropdown-item" data-value="MUMBAI CITY FC">
-                        <img src="../assets/images/players/club/MUMBAI CITY FC.webp" alt="" width="300" height="200" > Mumbai City FC
+                        <img src="assets/images/players/club/MUMBAI CITY FC.webp" alt="" width="300" height="200" > Mumbai City FC
                     </div>
                     <div class="dropdown-item" data-value="NEWCASTLE UNITED FC">
-                        <img src="../assets/images/players/club/Newcastle United FC.webp" alt="" width="300" height="200" > Newcastle United FC
+                        <img src="assets/images/players/club/Newcastle United FC.webp" alt="" width="300" height="200" > Newcastle United FC
                     </div>
                     <div class="dropdown-item" data-value="PARIS SAINT-GERMAIN FC">
-                        <img src="../assets/images/players/club/Paris Saint-Germain FC.webp" alt="" width="300" height="200" > Paris Saint-Germain FC
+                        <img src="assets/images/players/club/Paris Saint-Germain FC.webp" alt="" width="300" height="200" > Paris Saint-Germain FC
                     </div>
                     <div class="dropdown-item" data-value="RANDERS FC">
-                        <img src="../assets/images/players/club/Randers FC.webp" alt="" width="300" height="200" > Randers FC
+                        <img src="assets/images/players/club/Randers FC.webp" alt="" width="300" height="200" > Randers FC
                     </div>
                     <div class="dropdown-item" data-value="RANGERS FC">
-                        <img src="../assets/images/players/club/Rangers FC.webp" alt="" width="300" height="200" > Rangers FC
+                        <img src="assets/images/players/club/Rangers FC.webp" alt="" width="300" height="200" > Rangers FC
                     </div>
                     <div class="dropdown-item" data-value="RB LEIPZIG">
-                        <img src="../assets/images/players/club/RB Leipzig.webp" alt="" width="300" height="200" > RB Leipzig
+                        <img src="assets/images/players/club/RB Leipzig.webp" alt="" width="300" height="200" > RB Leipzig
                     </div>
                     <div class="dropdown-item" data-value="REAL MADRID CF">
-                        <img src="../assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
+                        <img src="assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
                     </div>
                     
                     <div class="dropdown-item" data-value="SEPAHAN SC">
-                        <img src="../assets/images/players/club/Sepahan SC.webp" alt="" width="300" height="200" > Sepahan SC
+                        <img src="assets/images/players/club/Sepahan SC.webp" alt="" width="300" height="200" > Sepahan SC
                     </div>
                     <div class="dropdown-item" data-value="SL BENFICA">
-                        <img src="../assets/images/players/club/SL Benfica.webp" alt="" width="300" height="200" > SL Benfica
+                        <img src="assets/images/players/club/SL Benfica.webp" alt="" width="300" height="200" > SL Benfica
                     </div>
                     <div class="dropdown-item" data-value="SS LAZIO">
-                        <img src="../assets/images/players/club/SS Lazio.webp" alt="" width="300" height="200" > SS Lazio
+                        <img src="assets/images/players/club/SS Lazio.webp" alt="" width="300" height="200" > SS Lazio
                     </div>
                     <div class="dropdown-item" data-value="TOTTENHAM HOTSPUR FC">
-                        <img src="../assets/images/players/club/Tottenham Hotspur FC.webp" alt="" width="300" height="200" > Tottenham Hotspur FC
+                        <img src="assets/images/players/club/Tottenham Hotspur FC.webp" alt="" width="300" height="200" > Tottenham Hotspur FC
                     </div>
                     <div class="dropdown-item" data-value="VFL WOLFSBURG">
-                        <img src="../assets/images/players/club/VfL Wolfsburg.webp" alt="" width="300" height="200" > VfL Wolfsburg
+                        <img src="assets/images/players/club/VfL Wolfsburg.webp" alt="" width="300" height="200" > VfL Wolfsburg
                     </div>
                     <div class="dropdown-item" data-value="WOLVES">
-                        <img src="../assets/images/players/club/Wolves.webp" alt="" width="300" height="200" > Wolves
+                        <img src="assets/images/players/club/Wolves.webp" alt="" width="300" height="200" > Wolves
                     </div>
                 </div>
             </div>
@@ -1521,19 +1518,19 @@
                 <div class="dropdown-options">
                     <div class="dropdown-item" data-value="all">All</div>
                     <div class="dropdown-item" data-value="3-star-standard">
-                        <img src="../assets/images/players/modal/4STAR.webp" alt="3 Star Standard" width="300" height="200" > 3 Star Standard
+                        <img src="assets/images/players/modal/4STAR.webp" alt="3 Star Standard" width="300" height="200" > 3 Star Standard
                     </div>
                     <div class="dropdown-item" data-value="4-star-standard">
-                        <img src="../assets/images/players/modal/4STAR.webp" alt="4 Star Standard" width="300" height="200" > 4 Star Standard
+                        <img src="assets/images/players/modal/4STAR.webp" alt="4 Star Standard" width="300" height="200" > 4 Star Standard
                     </div>
                     <div class="dropdown-item" data-value="5-star-standard">
-                        <img src="../assets/images/players/modal/5STAR.webp" alt="5 Star Standard" width="300" height="200" > 5 Star Standard
+                        <img src="assets/images/players/modal/5STAR.webp" alt="5 Star Standard" width="300" height="200" > 5 Star Standard
                     </div>
                     <div class="dropdown-item" data-value="4-star-legend">
-                        <img src="../assets/images/players/modal/3STARLEGEND.webp" alt="4 Star Legend" width="300" height="200" > 4 Star Legend
+                        <img src="assets/images/players/modal/3STARLEGEND.webp" alt="4 Star Legend" width="300" height="200" > 4 Star Legend
                     </div>
                     <div class="dropdown-item" data-value="5-star-legend">
-                        <img src="../assets/images/players/modal/5STARLEGEND.webp" alt="5 Star Legend" width="300" height="200" > 5 Star Legend
+                        <img src="assets/images/players/modal/5STARLEGEND.webp" alt="5 Star Legend" width="300" height="200" > 5 Star Legend
                     </div>
                 </div>
             </div>
@@ -1546,114 +1543,114 @@
                 <div class="dropdown-options">
                     <div class="dropdown-item" data-value="ALL">All</div>
                     <div class="dropdown-item" data-value="FREE AGENT">
-                        <img src="../assets/images/players/FREEAGENT.webp" alt="" width="300" height="200" > Free Agent
+                        <img src="assets/images/players/FREEAGENT.webp" alt="" width="300" height="200" > Free Agent
                     </div>                    
                     <div class="dropdown-item" data-value="AC MILAN">
-                        <img src="../assets/images/players/club/AC Milan.webp" alt="" width="300" height="200" > AC Milan
+                        <img src="assets/images/players/club/AC Milan.webp" alt="" width="300" height="200" > AC Milan
                     </div>
                     <div class="dropdown-item" data-value="AFC AJAX">
-                        <img src="../assets/images/players/club/AFC Ajax.webp" alt="" width="300" height="200" > AFC Ajax
+                        <img src="assets/images/players/club/AFC Ajax.webp" alt="" width="300" height="200" > AFC Ajax
                     </div>
                     <div class="dropdown-item" data-value="AL HILAL SFC">
-                        <img src="../assets/images/players/club/Al Hilal SFC.webp" alt="" width="300" height="200" > Al Hilal SFC
+                        <img src="assets/images/players/club/Al Hilal SFC.webp" alt="" width="300" height="200" > Al Hilal SFC
                     </div>
                     <div class="dropdown-item" data-value="AL-NASSR FC">
-                        <img src="../assets/images/players/club/AL-NASSR FC.webp" alt="" width="300" height="200" > Al-Nassr FC
+                        <img src="assets/images/players/club/AL-NASSR FC.webp" alt="" width="300" height="200" > Al-Nassr FC
                     </div>
                     <div class="dropdown-item" data-value="ARSENAL FC">
-                        <img src="../assets/images/players/club/Arsenal FC.webp" alt="" width="300" height="200" > Arsenal FC
+                        <img src="assets/images/players/club/Arsenal FC.webp" alt="" width="300" height="200" > Arsenal FC
                     </div>
                     <div class="dropdown-item" data-value="AS ROMA">
-                        <img src="../assets/images/players/club/AS ROMA.webp" alt="" width="300" height="200" > AS Roma
+                        <img src="assets/images/players/club/AS ROMA.webp" alt="" width="300" height="200" > AS Roma
                     </div>
                     <div class="dropdown-item" data-value="ASTON VILLA FC">
-                        <img src="../assets/images/players/club/Aston Villa FC.webp" alt="" width="300" height="200" > Aston Villa FC
+                        <img src="assets/images/players/club/Aston Villa FC.webp" alt="" width="300" height="200" > Aston Villa FC
                     </div>
                     <div class="dropdown-item" data-value="ATALANTA BC">
-                        <img src="../assets/images/players/club/Atalanta BC.webp" alt="" width="300" height="200" > Atalanta BC
+                        <img src="assets/images/players/club/Atalanta BC.webp" alt="" width="300" height="200" > Atalanta BC
                     </div>
                     <div class="dropdown-item" data-value="ATLETICO DE MADRID">
-                        <img src="../assets/images/players/club/Atletico de Madrid.webp" alt="" width="300" height="200" > Atletico de Madrid
+                        <img src="assets/images/players/club/Atletico de Madrid.webp" alt="" width="300" height="200" > Atletico de Madrid
                     </div>
                     <div class="dropdown-item" data-value="BAYER LEVERKUSEN">
-                        <img src="../assets/images/players/club/Bayer Leverkusen.webp" alt="" width="300" height="200" > Bayer Leverkusen
+                        <img src="assets/images/players/club/Bayer Leverkusen.webp" alt="" width="300" height="200" > Bayer Leverkusen
                     </div>
                     <div class="dropdown-item" data-value="BORUSSIA DORTMUND">
-                        <img src="../assets/images/players/club/Borussia Dortmund.webp" alt="" width="300" height="200" > Borussia Dortmund
+                        <img src="assets/images/players/club/Borussia Dortmund.webp" alt="" width="300" height="200" > Borussia Dortmund
                     </div>
                     <div class="dropdown-item" data-value="CHELSEA FC">
-                        <img src="../assets/images/players/club/Chelsea FC.webp" alt="" width="300" height="200" > Chelsea FC
+                        <img src="assets/images/players/club/Chelsea FC.webp" alt="" width="300" height="200" > Chelsea FC
                     </div>
                     <div class="dropdown-item" data-value="FC BARCELONA">
-                        <img src="../assets/images/players/club/FC Barcelona.webp" alt="" width="300" height="200" > FC Barcelona
+                        <img src="assets/images/players/club/FC Barcelona.webp" alt="" width="300" height="200" > FC Barcelona
                     </div>
                     <div class="dropdown-item" data-value="FC BAYERN MUNICH">
-                        <img src="../assets/images/players/club/FC Bayern Munich.webp" alt="" width="300" height="200" > FC Bayern Munich
+                        <img src="assets/images/players/club/FC Bayern Munich.webp" alt="" width="300" height="200" > FC Bayern Munich
                     </div>
                     <div class="dropdown-item" data-value="FC PORTO">
-                        <img src="../assets/images/players/club/FC Porto.webp" alt="" width="300" height="200" > FC Porto
+                        <img src="assets/images/players/club/FC Porto.webp" alt="" width="300" height="200" > FC Porto
                     </div>
                     <div class="dropdown-item" data-value="FSV MAINZ 05">
-                        <img src="../assets/images/players/club/FSV Mainz 05.webp" alt="" width="300" height="200" > FSV Mainz 05
+                        <img src="assets/images/players/club/FSV Mainz 05.webp" alt="" width="300" height="200" > FSV Mainz 05
                     </div>
                     <div class="dropdown-item" data-value="INTER MIAMI">
-                        <img src="../assets/images/players/club/Inter Miami.webp" alt="" width="300" height="200" > Inter Miami
+                        <img src="assets/images/players/club/Inter Miami.webp" alt="" width="300" height="200" > Inter Miami
                     </div>
                     <div class="dropdown-item" data-value="INTER MILAN">
-                        <img src="../assets/images/players/club/Inter Milan.webp" alt="" width="300" height="200" > Inter Milan
+                        <img src="assets/images/players/club/Inter Milan.webp" alt="" width="300" height="200" > Inter Milan
                     </div>
                     <div class="dropdown-item" data-value="LIVERPOOL FC">
-                        <img src="../assets/images/players/club/Liverpool FC.webp" alt="" width="300" height="200" > Liverpool FC
+                        <img src="assets/images/players/club/Liverpool FC.webp" alt="" width="300" height="200" > Liverpool FC
                     </div>
                     <div class="dropdown-item" data-value="LOSC LILLE">
-                        <img src="../assets/images/players/club/LOSC Lille.webp" alt="" width="300" height="200" > LOSC Lille
+                        <img src="assets/images/players/club/LOSC Lille.webp" alt="" width="300" height="200" > LOSC Lille
                     </div>
                     <div class="dropdown-item" data-value="MANCHESTER CITY">
-                        <img src="../assets/images/players/club/Manchester City FC.webp" alt="" width="300" height="200" > Manchester City FC
+                        <img src="assets/images/players/club/Manchester City FC.webp" alt="" width="300" height="200" > Manchester City FC
                     </div>
                     <div class="dropdown-item" data-value="MANCHESTER UNITED">
-                        <img src="../assets/images/players/club/Manchester United FC.webp" alt="" width="300" height="200" > Manchester United FC
+                        <img src="assets/images/players/club/Manchester United FC.webp" alt="" width="300" height="200" > Manchester United FC
                     </div>
                     
                     <div class="dropdown-item" data-value="MUMBAI CITY FC">
-                        <img src="../assets/images/players/club/MUMBAI CITY FC.webp" alt="" width="300" height="200" > Mumbai City FC
+                        <img src="assets/images/players/club/MUMBAI CITY FC.webp" alt="" width="300" height="200" > Mumbai City FC
                     </div>
                     <div class="dropdown-item" data-value="NEWCASTLE UNITED FC">
-                        <img src="../assets/images/players/club/Newcastle United FC.webp" alt="" width="300" height="200" > Newcastle United FC
+                        <img src="assets/images/players/club/Newcastle United FC.webp" alt="" width="300" height="200" > Newcastle United FC
                     </div>
                     <div class="dropdown-item" data-value="PARIS SAINT-GERMAIN FC">
-                        <img src="../assets/images/players/club/Paris Saint-Germain FC.webp" alt="" width="300" height="200" > Paris Saint-Germain FC
+                        <img src="assets/images/players/club/Paris Saint-Germain FC.webp" alt="" width="300" height="200" > Paris Saint-Germain FC
                     </div>
                     <div class="dropdown-item" data-value="RANDERS FC">
-                        <img src="../assets/images/players/club/Randers FC.webp" alt="" width="300" height="200" > Randers FC
+                        <img src="assets/images/players/club/Randers FC.webp" alt="" width="300" height="200" > Randers FC
                     </div>
                     <div class="dropdown-item" data-value="RANGERS FC">
-                        <img src="../assets/images/players/club/Rangers FC.webp" alt="" width="300" height="200" > Rangers FC
+                        <img src="assets/images/players/club/Rangers FC.webp" alt="" width="300" height="200" > Rangers FC
                     </div>
                     <div class="dropdown-item" data-value="RB LEIPZIG">
-                        <img src="../assets/images/players/club/RB Leipzig.webp" alt="" width="300" height="200" > RB Leipzig
+                        <img src="assets/images/players/club/RB Leipzig.webp" alt="" width="300" height="200" > RB Leipzig
                     </div>
                     <div class="dropdown-item" data-value="REAL MADRID CF">
-                        <img src="../assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
+                        <img src="assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
                     </div>
                     
                     <div class="dropdown-item" data-value="SEPAHAN SC">
-                        <img src="../assets/images/players/club/Sepahan SC.webp" alt="" width="300" height="200" > Sepahan SC
+                        <img src="assets/images/players/club/Sepahan SC.webp" alt="" width="300" height="200" > Sepahan SC
                     </div>
                     <div class="dropdown-item" data-value="SL BENFICA">
-                        <img src="../assets/images/players/club/SL Benfica.webp" alt="" width="300" height="200" > SL Benfica
+                        <img src="assets/images/players/club/SL Benfica.webp" alt="" width="300" height="200" > SL Benfica
                     </div>
                     <div class="dropdown-item" data-value="SS LAZIO">
-                        <img src="../assets/images/players/club/SS Lazio.webp" alt="" width="300" height="200" > SS Lazio
+                        <img src="assets/images/players/club/SS Lazio.webp" alt="" width="300" height="200" > SS Lazio
                     </div>
                     <div class="dropdown-item" data-value="TOTTENHAM HOTSPUR FC">
-                        <img src="../assets/images/players/club/Tottenham Hotspur FC.webp" alt="" width="300" height="200" > Tottenham Hotspur FC
+                        <img src="assets/images/players/club/Tottenham Hotspur FC.webp" alt="" width="300" height="200" > Tottenham Hotspur FC
                     </div>
                     <div class="dropdown-item" data-value="VFL WOLFSBURG">
-                        <img src="../assets/images/players/club/VfL Wolfsburg.webp" alt="" width="300" height="200" > VfL Wolfsburg
+                        <img src="assets/images/players/club/VfL Wolfsburg.webp" alt="" width="300" height="200" > VfL Wolfsburg
                     </div>
                     <div class="dropdown-item" data-value="WOLVES">
-                        <img src="../assets/images/players/club/Wolves.webp" alt="" width="300" height="200" > Wolves
+                        <img src="assets/images/players/club/Wolves.webp" alt="" width="300" height="200" > Wolves
                     </div>
                 </div>
             </div>            
@@ -1718,21 +1715,7 @@ window.onload = function() {
         if (loadingElement) {
             loadingElement.style.display = 'none';  // Hide the welcome screen
         }
-        
-        // Ensure content is visible
-        const contentElement = document.getElementById('content');
-        if (contentElement) {
-            contentElement.style.display = 'block';
-            contentElement.style.opacity = '1';
-        }
-        
-        // Ensure filter button is visible
-        const filterBtn = document.querySelector('.filter-btn');
-        if (filterBtn) {
-            filterBtn.style.display = 'flex';
-        }
-    }, 4500);  // 4500 milliseconds = 4.5 seconds
-    
+    }, 4500);  // 4000 milliseconds = 4 seconds
     resetFilters();
     resetModalFilters(); // Reset the filters when the page loads
     sortPlayers();  // Sort players when the page loads
@@ -1933,6 +1916,7 @@ function createPlayerCard(player) {
     
     img.src = player.imagePath;
     img.alt = player.name;
+    img.loading = 'lazy'; // Lazy load images
     
     // Append the image to the card
     playerCard.appendChild(img);
@@ -1979,47 +1963,18 @@ function hideFilterButton() {
 
 // Function to show the filter button
 function showFilterButton() {
-    document.querySelector('.filter-btn').style.display = 'flex';
+    document.querySelector('.filter-btn').style.display = 'block';
 }
 
 // Open the filter modal and hide the filter button
 function openFilterModal() {
-    const modal = document.getElementById('filterModal');
-    const modalContent = modal.querySelector('.modal-content');
-    
-    // Adjust the modal position to be centered in the current viewport
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-    
-    // Save current scroll position and prevent body scrolling
-    document.body.style.overflow = 'hidden';
-    document.body.dataset.scrollY = scrollTop;
-    
-    // Hide admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'none';
-    if (backBtn) backBtn.style.display = 'none';
-    
-    modal.style.display = 'block';
+    document.getElementById('filterModal').style.display = 'block';
     hideFilterButton();  // Hide filter button when modal is opened
 }
 
 // Close the filter modal and show the filter button
 function closeFilterModal() {
     document.getElementById('filterModal').style.display = 'none';
-    
-    // Restore body scrolling and scroll position
-    document.body.style.overflow = '';
-    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-    window.scrollTo(0, scrollY);
-    
-    // Show admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'flex';
-    if (backBtn) backBtn.style.display = 'flex';
-    
     showFilterButton();  // Show filter button when modal is closed
 }
 
@@ -2084,22 +2039,6 @@ function openModal(card) {
 
     // Show the modal
     const modal = document.getElementById('playerModal');
-    const modalContent = modal.querySelector('.modal-content');
-    
-    // Adjust the modal position to be centered in the current viewport
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-    
-    // Save current scroll position and prevent body scrolling
-    document.body.style.overflow = 'hidden';
-    document.body.dataset.scrollY = scrollTop;
-    
-    // Hide admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'none';
-    if (backBtn) backBtn.style.display = 'none';
-    
     modal.style.display = "block";
     hideFilterButton();
 }
@@ -2108,18 +2047,6 @@ function openModal(card) {
 function closeModal() {
     const modal = document.getElementById('playerModal');
     modal.style.display = "none";
-    
-    // Restore body scrolling and scroll position
-    document.body.style.overflow = '';
-    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-    window.scrollTo(0, scrollY);
-    
-    // Show admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'flex';
-    if (backBtn) backBtn.style.display = 'flex';
-    
     showFilterButton();  // Show filter button when player modal is closed
 }
 
@@ -2245,30 +2172,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Trigger the input event to update results
         const inputEvent = new Event('input', { bubbles: true });
         searchInput.dispatchEvent(inputEvent);
-    });
-    
-    // Handle filter button scroll visibility
-    let lastScrollTop = 0;
-    let filterBtn = document.querySelector('.filter-btn');
-    
-    window.addEventListener('scroll', function() {
-        const playerModal = document.getElementById('playerModal');
-        const filterModal = document.getElementById('filterModal');
-        
-        // Modal position adjustment on scroll
-        if (playerModal.style.display === 'block') {
-            const modalContent = playerModal.querySelector('.modal-content');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-        }
-        
-        if (filterModal.style.display === 'block') {
-            const modalContent = filterModal.querySelector('.modal-content');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-        }
-        
-        // No need to modify filter button position - it's fixed to viewport with CSS
     });
     
     // Set up position filters
@@ -2434,6 +2337,6 @@ function resetFilters() {
     
     <!-- Performance optimizations -->
     <script defer src="js/performance.js"></script>
+    <script defer src="js/vercel-analytics.js"></script>
     </body>
 </html>
-

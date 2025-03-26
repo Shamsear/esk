@@ -126,11 +126,6 @@ body.low-end-device {
     }
 }
 
-/* Hidden during page load */
-.js-loading img:not(.logo) {
-    opacity: 0;
-}
-
 /* Update notification for service worker updates */
 .update-notification {
     position: fixed;

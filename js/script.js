@@ -92,22 +92,24 @@ window.addEventListener('load', function() {
     
     const preloader = document.querySelector('.preloader');
     setTimeout(function() {
-        preloader.classList.add('fade-out');
+        if (preloader) {
+            preloader.classList.add('fade-out');
+        }
         
         // Initialize navigation items with skeleton loading effect
         const navCards = document.querySelectorAll('.nav-card');
         navCards.forEach(card => {
             const img = card.querySelector('img');
             if (img) {
-                card.classList.add('skeleton');
-                img.onload = function() {
-                    card.classList.remove('skeleton');
-                };
-                // Fix for image loading issues
-                if (img.complete) {
-                    card.classList.remove('skeleton');
-                }
+                card.classList.remove('skeleton');
+                // Ensure all images are visible
+                img.style.opacity = '1';
             }
+        });
+        
+        // Make sure all images are visible
+        document.querySelectorAll('img').forEach(img => {
+            img.style.opacity = '1';
         });
         
         // Show welcome toast
@@ -261,54 +263,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Page transition for links
     document.querySelectorAll('a[href]:not([href^="#"])').forEach(link => {
-        // Prefetch the linked page when hovering over the link
-        link.addEventListener('mouseenter', function() {
-            const href = this.getAttribute('href');
-            if (this.hostname === window.location.hostname && !this._prefetched) {
-                const prefetchLink = document.createElement('link');
-                prefetchLink.rel = 'prefetch';
-                prefetchLink.href = href;
-                document.head.appendChild(prefetchLink);
-                this._prefetched = true;
-            }
-        });
-        
         link.addEventListener('click', function(e) {
             if (this.hostname === window.location.hostname) {
                 e.preventDefault();
                 const pageTransition = document.querySelector('.page-transition');
-                const href = this.getAttribute('href');
                 
-                // Create ripple effect from click point with faster animation
-                const ripple = document.createElement('div');
-                ripple.className = 'ripple-effect fast';
-                
-                // Position the ripple at click position
-                const rect = link.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                link.appendChild(ripple);
-                
-                // Disable pointer events during transition
-                document.body.style.pointerEvents = 'none';
-                
-                // Faster, more subtle fade for smoother transition
-                document.body.style.opacity = '0.95';
-                document.body.style.filter = 'blur(2px)';
-                document.body.style.transition = 'opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), filter 0.2s cubic-bezier(0.19, 1, 0.22, 1)';
-                
-                // Show transition with minimal delay
-                setTimeout(() => {
+                if (pageTransition) {
                     pageTransition.classList.add('active');
                     
-                    // Navigate after shorter transition
                     setTimeout(() => {
-                        window.location.href = href;
-                    }, 400); // Shorter transition time for quicker navigation
-                }, 100);
+                        window.location = this.href;
+                    }, 500);
+                } else {
+                    window.location = this.href;
+                }
             }
         });
     });
@@ -370,52 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Function to check if element is in viewport
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
-        );
-    }
-    
-    // Reveal elements on scroll
-    window.addEventListener('scroll', function() {
-        const reveals = document.querySelectorAll('.reveal:not(.active)');
-        reveals.forEach(el => {
-            if (isElementInViewport(el)) {
-                el.classList.add('active');
-            }
-        });
-    });
-    
-    // 3D Tilt effect for cards
-    const tiltElements = document.querySelectorAll('.tilt-effect');
-    
-    tiltElements.forEach(el => {
-        el.addEventListener('mousemove', function(e) {
-            const card = this.querySelector('.nav-card');
-            if (!card) return;
-            
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-            
-            card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(10px)`;
-        });
-        
-        el.addEventListener('mouseleave', function() {
-            const card = this.querySelector('.nav-card');
-            if (!card) return;
-            card.style.transform = '';
-        });
-    });
-    
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -455,10 +377,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     "polygon": {
                         "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
                     }
                 },
                 "opacity": {
-                    "value": 0.3,
+                    "value": 0.5,
                     "random": false,
                     "anim": {
                         "enable": false,
@@ -481,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     "enable": true,
                     "distance": 150,
                     "color": "#ffffff",
-                    "opacity": 0.2,
+                    "opacity": 0.4,
                     "width": 1
                 },
                 "move": {
@@ -542,67 +469,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Shrink navbar on scroll
-    window.addEventListener('scroll', function() {
-        const topBar = document.querySelector('.top-bar');
-        const backToTop = document.getElementById('backToTop');
+    // 3D Tilt effect for cards
+    const tiltElements = document.querySelectorAll('.tilt-effect');
+    
+    tiltElements.forEach(el => {
+        el.addEventListener('mousemove', function(e) {
+            const card = this.querySelector('.nav-card');
+            if (!card) return;
+            
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(10px)`;
+        });
         
-        if (window.scrollY > 50) {
-            if (topBar) topBar.classList.add('scrolled');
-            if (backToTop) backToTop.classList.add('show');
-        } else {
-            if (topBar) topBar.classList.remove('scrolled');
-            if (backToTop) backToTop.classList.remove('show');
-        }
-    });
-    
-    // Back to top button click handler
-    const backToTop = document.getElementById('backToTop');
-    if (backToTop) {
-        backToTop.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
-    // Add hover sound effect for navigation items
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            const hoverSound = new Audio();
-            hoverSound.volume = 0.2;
-            hoverSound.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAEluZm8AAAAPAAAAAwAAAbsAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MUZAAAAAGkAAAAAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MUZAMAAAGkAAAAAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MUZAYAAAGkAAAAAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MUZAkAAAGkAAAAAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
-            hoverSound.play().catch(e => console.log('Audio play failed:', e));
+        el.addEventListener('mouseleave', function() {
+            const card = this.querySelector('.nav-card');
+            if (!card) return;
+            card.style.transform = '';
         });
     });
     
-    // Smooth scrolling for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                if (mobileMenu && mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
+    // Reveal elements on scroll
+    window.addEventListener('scroll', function() {
+        const reveals = document.querySelectorAll('.reveal:not(.active)');
+        reveals.forEach(el => {
+            if (isElementInViewport(el)) {
+                el.classList.add('active');
             }
         });
     });
 });
 
-// Function to check if element is in viewport - needs to be global for the load event
+// Check if element is in viewport
 function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (

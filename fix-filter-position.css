@@ -1,0 +1,13 @@
+/* Fix for filter button position */
+.filter-btn {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 1000 !important;
+    display: flex !important;
+}
+
+/* Add margin to pagination to avoid overlap */
+.pagination {
+    margin-bottom: 70px !important;
+} 

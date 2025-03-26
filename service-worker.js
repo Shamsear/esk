@@ -1,5 +1,5 @@
 // Service Worker for caching and offline functionality
-const CACHE_NAME = 'r2g-cache-v1';
+const CACHE_NAME = 'r2g-cache-v2';
 const STATIC_ASSETS = [
   './',
   'index.html',
@@ -9,11 +9,12 @@ const STATIC_ASSETS = [
   'registered-clubs.html',
   'trophy-cabinet.html',
   'tournament-guide.html',
+  'offline.html',
   'css/styles.css',
   'css/critical.css',
   'js/script.js',
   'js/performance.js',
-  'assets/images/logo11.png'
+  'assets/images/logo11.webp'
 ];
 
 // Cache critical resources during installation
@@ -22,7 +23,14 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
+        // Cache each asset individually to allow the rest to continue if one fails
+        return Promise.allSettled(
+          STATIC_ASSETS.map(asset => 
+            cache.add(asset).catch(error => {
+              console.error(`Failed to cache asset: ${asset}`, error);
+            })
+          )
+        );
       })
       .then(() => self.skipWaiting())
   );
@@ -131,14 +139,14 @@ self.addEventListener('fetch', event => {
                           fetch(format).catch(() => Promise.reject())
                         )
                       ).catch(() => {
-                        // If all fail, use a placeholder
-                        return caches.match('assets/images/placeholder.png')
+                        // If all fail, use a fallback
+                        return caches.match('assets/images/logo11.webp')
                           .catch(() => new Response('Not found', { status: 404 }));
                       });
                     }
                     
-                    // Fallback to generic placeholder
-                    return caches.match('assets/images/placeholder.png')
+                    // Fallback to logo
+                    return caches.match('assets/images/logo11.webp')
                       .catch(() => new Response('Not found', { status: 404 }));
                   });
                   
@@ -165,8 +173,8 @@ self.addEventListener('fetch', event => {
                   })
                   .catch(err => {
                     console.log('Image fetch failed:', err);
-                    // Try to serve a placeholder image if available
-                    return caches.match('assets/images/placeholder.png')
+                    // Try to serve a fallback image
+                    return caches.match('assets/images/logo11.webp')
                       .catch(() => new Response('Not found', { status: 404 }));
                   });
                   
