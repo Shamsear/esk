@@ -4567,19 +4567,22 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
-        "team": "REAL MADRID CF",
-        "value": "308 RC"
-      },
-      {
         "season": "4-5",
         "team": "CHELSEA FC",
-        "value": "304 RC"
+        "value": "304 RC",
+        "apps": "00"
       },
       {
         "season": "4-5",
         "team": "MANCHESTER UNITED(LOAN)",
-        "value": "165 RC"
+        "value": "165 RC",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "REAL MADRID CF",
+        "value": "308 RC",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/K. MBAPPE_CARD.webp",
@@ -18496,16 +18499,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-5.5",
-        "team": "RED BULL BRAGANTINO",
-        "value": "70 RC",
-        "apps": "00"
-      },
-      {
         "season": "5.5-7.5",
         "team": "BORSUSIA DORTMUND",
-        "value": "230 RC",
-        "apps": "00"
+        "value": "230 RC"
+      },
+      {
+        "season": "4.5-5.5",
+        "team": "RED BULL BRAGANTINO",
+        "value": "70 RC"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SUAREZ_CARD.webp",
