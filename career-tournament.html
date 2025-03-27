@@ -56,10 +56,21 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             position: relative;
             min-height: 150px;
-            display: block;
-            visibility: visible;
+            transition: all 0.5s ease;
+        }
+        
+        /* Apply animation to header, content, and images */
+        .tournament-header, 
+        .tournament-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+        
+        .tournament-card.visible .tournament-header,
+        .tournament-card.visible .tournament-content {
             opacity: 1;
-            will-change: transform, opacity;
+            transform: translateY(0);
         }
         
         .tournament-header {
@@ -68,17 +79,53 @@
             border-bottom: 2px solid var(--accent-color, #2196F3);
         }
         
+        .tournament-header h2 {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tournament-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color, #2196F3);
+            transition: width 0.4s ease;
+        }
+        
+        .tournament-card:hover .tournament-header h2::after {
+            width: 100%;
+        }
+        
         .tournament-content {
             padding: 20px;
         }
         
+        /* Tournament section styles */
         .tournament-images {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
         }
         
-        .white-box, .black-box {
+        .tournament-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        /* Image hover effects - applied via JS */
+        .tournament-section img:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* White/Black box styles */
+        .white-box {
             background-color: rgba(255, 255, 255, 0.1);
             padding: 15px;
             margin: 0;
@@ -91,15 +138,20 @@
         .black-box {
             background-color: rgba(0, 0, 0, 0.6);
             border-left: 3px solid var(--accent-color, #2196F3);
+            padding: 15px;
+            margin: 0 0 20px 0;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
         }
         
-        .tournament-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            object-fit: cover;
-            width: 100%;
+        .black-box.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .moze-center {
@@ -135,40 +187,15 @@
         
         /* Scroll Animation Styles */
         .hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            will-change: transform, opacity;
+            display: none;
         }
         
-        .animate-in {
-            opacity: 1;
-            transform: translateY(0);
+        /* Tournament card hover effects */
+        .tournament-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
         
         /* Ensure elements are eventually visible regardless of animation */
-        @media (max-width: 768px) {
-            .hidden {
-                transition-delay: 0.1s !important;
-            }
-            
-            /* Fallback to ensure visibility */
-            .tournament-card, .black-box {
-                animation: ensure-visible 3s forwards;
-            }
-            
-            @keyframes ensure-visible {
-                0% { }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .tournament-images {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
         @media (max-width: 768px) {
             .tournament-section {
                 padding: 10px;
@@ -184,6 +211,12 @@
             
             .tournament-content {
                 padding: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .tournament-images {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -422,24 +455,14 @@
     <div class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </div>
-
     <script src="js/remove-conflicting-styles.js"></script>
-    
-    
     <script src="js/background-fix.js"></script>
+    <script src="js/background-mobile-scroll.js"></script>
     
     <script src="js/script.js"></script>
-    <script src="js/background-mobile-scroll.js"></script>
     <script src="js/fix-scroll.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Make images non-clickable
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.style.pointerEvents = 'none';
-                img.style.cursor = 'default';
-            });
-            
             // Back to top button functionality
             const backToTopBtn = document.getElementById('backToTop');
             
@@ -458,56 +481,64 @@
                 });
             });
             
-            // Scroll animations
-            const animatedElements = document.querySelectorAll('.tournament-card, .black-box');
+            // Simple scroll animations
+            const cards = document.querySelectorAll('.tournament-card');
+            const headers = document.querySelectorAll('.black-box');
             
-            // Add hidden class to all elements initially
-            animatedElements.forEach(el => {
-                el.classList.add('hidden');
-            });
-            
-            // Check if element is in viewport
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.95 && 
-                    rect.bottom >= 0
-                );
+            // Add visible class to the first header and first card immediately
+            if (headers.length > 0) {
+                headers[0].classList.add('visible');
             }
             
-            // Function to check elements and animate them if in viewport
-            function checkElements() {
-                animatedElements.forEach(el => {
-                    if (isInViewport(el)) {
-                        el.classList.add('animate-in');
+            if (cards.length > 0) {
+                cards[0].classList.add('visible');
+            }
+            
+            // Check elements on scroll
+            function checkVisibility() {
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const isVisible = (
+                        rect.top <= window.innerHeight * 0.8 &&
+                        rect.bottom >= 0
+                    );
+                    
+                    if (isVisible) {
+                        card.classList.add('visible');
                     }
-                });
-            }
-            
-            // Run on initial load - show the first element immediately to avoid empty screen
-            setTimeout(() => {
-                // Show first elements immediately
-                const firstCards = document.querySelectorAll('.tournament-card:first-child, .tournament-card:nth-child(2)');
-                firstCards.forEach(card => {
-                    card.classList.add('animate-in');
                 });
                 
-                // Then check all elements
-                checkElements();
-            }, 100);
-            
-            // Add scroll event listener
-            window.addEventListener('scroll', checkElements);
-            
-            // Force visibility for all elements after a delay
-            // This ensures elements are shown even if animations fail
-            setTimeout(() => {
-                animatedElements.forEach(el => {
-                    if (!el.classList.contains('animate-in')) {
-                        el.classList.add('animate-in');
+                headers.forEach(header => {
+                    const rect = header.getBoundingClientRect();
+                    const isVisible = (
+                        rect.top <= window.innerHeight * 0.8 &&
+                        rect.bottom >= 0
+                    );
+                    
+                    if (isVisible) {
+                        header.classList.add('visible');
                     }
                 });
-            }, 2000);
+            }
+            
+            // Check visibility on scroll
+            window.addEventListener('scroll', checkVisibility);
+            
+            // Initial check
+            checkVisibility();
+            
+            // Make sure everything is visible after 3 seconds
+            setTimeout(function() {
+                cards.forEach(card => card.classList.add('visible'));
+                headers.forEach(header => header.classList.add('visible'));
+            }, 3000);
+            
+            // Disable image clicks
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.pointerEvents = 'none';
+                img.style.cursor = 'default';
+            });
         });
     </script>
 </body>
