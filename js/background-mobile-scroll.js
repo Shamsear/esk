@@ -4,74 +4,6 @@
  * This script should run AFTER background-fix.js to ensure it overrides the fixed styles
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Apply scrollbar hiding to all devices
-    const hideScrollbars = () => {
-        const scrollbarStyle = document.createElement('style');
-        scrollbarStyle.setAttribute('data-scrollbar-hide', 'true');
-        
-        // Style to hide scrollbars across browsers while maintaining scroll functionality
-        scrollbarStyle.textContent = `
-            /* Hide scrollbars but keep scrolling functionality */
-            html, body {
-                scrollbar-width: none !important; /* Firefox */
-                -ms-overflow-style: none !important; /* IE and Edge */
-            }
-            
-            /* Chrome, Safari and Opera */
-            html::-webkit-scrollbar, 
-            body::-webkit-scrollbar {
-                display: none !important;
-                width: 0 !important;
-                height: 0 !important;
-            }
-            
-            /* Hide scrollbars on all elements */
-            * {
-                scrollbar-width: none !important;
-                -ms-overflow-style: none !important;
-            }
-            
-            *::-webkit-scrollbar {
-                display: none !important;
-                width: 0 !important;
-                height: 0 !important;
-            }
-            
-            /* Ensure the page still scrolls properly */
-            html, body {
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                height: auto !important;
-                min-height: 100vh !important;
-            }
-            
-            /* Fix for content visibility on career-tournament page */
-            .overlay {
-                min-height: 100vh !important;
-                display: block !important;
-            }
-            
-            /* Ensure all animated elements are visible */
-            .tournament-card, .black-box {
-                min-height: auto !important;
-                visibility: visible !important;
-                display: block !important;
-            }
-            
-            /* Fix body height calculation */
-            body {
-                height: auto !important;
-                min-height: 100vh !important;
-            }
-        `;
-        
-        // Add the scrollbar hiding style to the document head
-        document.head.appendChild(scrollbarStyle);
-    };
-    
-    // Apply scrollbar hiding for all devices
-    hideScrollbars();
-    
     // Check if we're on a mobile device
     const isMobile = window.innerWidth <= 768 || 
                      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -104,28 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     position: relative !important;
                     background-attachment: scroll !important;
                     overflow-x: hidden !important;
-                    height: auto !important;
-                    min-height: 100vh !important;
                 }
                 
                 /* Make overlay properly scroll over the background */
                 .overlay {
                     position: relative !important;
                     z-index: 2 !important;
-                    min-height: 100vh !important;
-                }
-                
-                /* Fix animation issues */
-                .hidden {
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                }
-                
-                /* Fix for tournament-card visibility */
-                .tournament-card {
-                    opacity: 1 !important;
-                    visibility: visible !important;
-                    transform: translateY(0) !important;
                 }
             `;
             
@@ -134,11 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Create a dedicated scrollable background element for mobile
             createScrollableBackground();
-            
-            // Force recalculation of animations
-            setTimeout(() => {
-                checkContentVisibility();
-            }, 500);
         };
         
         // Create an actual background element instead of using ::before
@@ -203,25 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.documentElement.offsetHeight
                 );
                 
-                bgElement.style.height = `${docHeight + 100}px`; // Add extra padding to ensure coverage
-            }
-        };
-        
-        // Check that all content is visible, especially for career-tournament page
-        const checkContentVisibility = () => {
-            // Force all tournament cards to be visible
-            const cards = document.querySelectorAll('.tournament-card, .black-box');
-            if (cards.length > 0) {
-                cards.forEach(card => {
-                    card.style.opacity = '1';
-                    card.style.visibility = 'visible';
-                    card.style.transform = 'translateY(0)';
-                    card.classList.add('animate-in');
-                    card.classList.remove('hidden');
-                });
-                
-                // Force recalculation of document height
-                updateBackgroundHeight();
+                bgElement.style.height = `${docHeight}px`;
             }
         };
         
