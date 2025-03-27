@@ -285,6 +285,48 @@
             transform: scale(1);
         }
         
+        /* Collapsible season sections */
+        .season-box {
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .season-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+        
+        .season-box::after {
+            content: "\f107";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            color: var(--accent-color);
+        }
+        
+        .season-box.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        .season-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .season-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         /* Trophy gallery items animations */
         .moze-gallery li.hidden {
             opacity: 0;
@@ -446,42 +488,6 @@
                     </li>
                     <li>
                         <img src="assets/images/trophy/3t12.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et1.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et2.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et3.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et4.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et5.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et6.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et7.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et8.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et9.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et10.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et11.webp" alt="Season 5 Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/et12.webp" alt="Season 5 Trophy" width="300" height="200">
                     </li>
                 </ul>
             </div>
