@@ -2,102 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Eskimos Road to Glory - FIFA Pro Clubs</title>
     <meta name="description" content="Official website for Eskimos Road to Glory FIFA Pro Clubs community. Join tournaments, view rankings, and explore career mode features.">
     
-    <!-- PWA support -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#3498db">
-    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+    <!-- CSS resources -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Resource hints -->
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://assets.mixkit.co">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="css/critical.css" as="style">
-    <link rel="preload" href="assets/images/logo11.webp" as="image" type="image/webp">
-
-    <!-- Critical CSS inline -->
     <style>
-        /* Critical path CSS */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
             color: #fff;
             background-color: #1a1a1a;
-            overflow-x: hidden;
-        }
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top-color: #3498db;
-            animation: spin 1s ease-in-out infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
-    
-    <!-- CSS resources -->
-    <link rel="stylesheet" href="css/critical.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
-    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="css/scroll-animations.css" media="print" onload="this.media='all'">
-    
-    <!-- Fallbacks for no-JS environments -->
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/scroll-animations.css">
-    </noscript>
 </head>
-<body class="mobile-optimize">
-    <div class="skip-link">Skip to content</div>
-    
-    <div class="preloader">
-        <div class="loader"></div>
-    </div>
-    
-    <!-- Video background with lazy loading -->
-    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4">
-    </video>
-    
-    <div id="particles-js"></div>
-    
-    <!-- Progress bar container -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <!-- Page transition -->
-    <div class="page-transition"></div>
-    
-    <!-- Custom cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
+<body>
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
@@ -105,14 +30,11 @@
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
-                <div class="theme-toggle">
-                    <div class="toggle-circle"></div>
-                </div>
                 <div class="social-icons">
-                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
                 <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
                     <span></span>
@@ -138,38 +60,38 @@
         
         <main>
             <header id="home">
-                <img src="assets/images/logo11.webp" alt="Eskimos Road to Glory Logo" class="logo float" width="250" height="250">
-                <h1 class="reveal">ESKIMOS ROAD TO GLORY</h1>
+                <img src="assets/images/logo11.webp" alt="Eskimos Road to Glory Logo" class="logo" width="250" height="250">
+                <h1>ESKIMOS ROAD TO GLORY</h1>
                 <div class="subtitle">JOURNEY TO EXCELLENCE</div>
-                <a href="#" class="cta-button pulse-effect">JOIN THE JOURNEY</a>
+                <a href="#" class="cta-button">JOIN THE JOURNEY</a>
             </header>
 
             <div class="navigation">
-                <a href="tournament-guide.html" class="nav-item tilt-effect">
+                <a href="tournament-guide.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168">
                         <div class="nav-title">Tournament Guide</div>
                     </div>
                 </a>
-                <a href="career-mode.html" class="nav-item tilt-effect">
+                <a href="career-mode.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168">
                         <div class="nav-title">Career Mode</div>
                     </div>
                 </a>
-                <a href="manager-ranking.html" class="nav-item tilt-effect">
+                <a href="manager-ranking.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168">
                         <div class="nav-title">Manager Ranking</div>
                     </div>
                 </a>
-                <a href="trophy-cabinet.html" class="nav-item tilt-effect">
+                <a href="trophy-cabinet.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168">
                         <div class="nav-title">Trophy Cabinet</div>
                     </div>
                 </a>
-                <a href="career-tournament.html" class="nav-item tilt-effect">
+                <a href="career-tournament.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168">
                         <div class="nav-title">Career Tournament</div>
@@ -197,7 +119,7 @@
                 <div class="cta-section">
                     <h3 class="cta-heading">Ready to Begin Your Journey?</h3>
                     <p class="cta-text">Join hundreds of players already competing in our tournaments and enjoying the Eskimos experience.</p>
-                    <a href="#" class="cta-button pulse-effect">JOIN NOW</a>
+                    <a href="#" class="cta-button">JOIN NOW</a>
                 </div>
             </div>
             
@@ -230,10 +152,10 @@
                     <a href="trophy-cabinet.html">Trophy Cabinet</a>
                 </div>
                 <div class="social-icons">
-                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" data-tooltip="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
                 </div>
                 <div class="copyright">
                     &copy; <span id="year"></span> Eskimos Road to Glory. All rights reserved.
@@ -242,110 +164,13 @@
         </footer>
     </div>
     
-    <div class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </div>
-    
-    <div id="toast" class="toast">
-        Welcome to Eskimos Road to Glory!
-    </div>
-    
     <!-- Essential scripts -->
     <script>
         // Set copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Toast functionality
-        setTimeout(function() {
-            const toast = document.getElementById('toast');
-            if (toast) toast.classList.add('show');
-            
-            setTimeout(function() {
-                if (toast) toast.classList.remove('show');
-            }, 3000);
-        }, 2000);
-        
-        // Main initialization function
+        // Mobile menu
         document.addEventListener('DOMContentLoaded', function() {
-            // Load video after page content
-            setTimeout(function() {
-                const video = document.querySelector('.video-bg');
-                if (video && video.dataset.src) {
-                    const source = document.createElement('source');
-                    source.src = video.dataset.src;
-                    source.type = 'video/mp4';
-                    video.appendChild(source);
-                    video.load();
-                    video.play().catch(e => console.log('Autoplay prevented:', e));
-                }
-            }, 1000);
-            
-            // Initialize animation classes
-            document.querySelectorAll('.reveal').forEach(function(el) {
-                el.classList.add('active');
-            });
-            
-            // Preloader fadeout
-            function fadeOutPreloader() {
-                const preloader = document.querySelector('.preloader');
-                if (preloader) {
-                    setTimeout(function() {
-                        preloader.style.opacity = '0';
-                        setTimeout(function() {
-                            preloader.style.display = 'none';
-                        }, 500);
-                    }, 500);
-                }
-            }
-            
-            // Handle page load
-            if (document.readyState === 'complete') {
-                fadeOutPreloader();
-            } else {
-                window.addEventListener('load', fadeOutPreloader);
-            }
-            
-            // Progress bar functionality
-            const progressBar = document.getElementById('progressBar');
-            if (progressBar) {
-                window.addEventListener('scroll', function() {
-                    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scrolled = (window.scrollY / totalHeight) * 100;
-                    progressBar.style.width = scrolled + '%';
-                });
-            }
-            
-            // Back to top button
-            const backToTop = document.querySelector('.back-to-top');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    if (window.scrollY > 300) {
-                        backToTop.classList.add('show');
-                    } else {
-                        backToTop.classList.remove('show');
-                    }
-                });
-                
-                backToTop.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-            
-            // Theme toggle
-            const themeToggle = document.querySelector('.theme-toggle');
-            if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
-                    document.body.classList.toggle('light-mode');
-                    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-                });
-                
-                // Check for saved theme
-                if (localStorage.getItem('theme') === 'light') {
-                    document.body.classList.add('light-mode');
-                }
-            }
-            
-            // Mobile menu
             const menuToggle = document.getElementById('menuToggle');
             const closeMenu = document.getElementById('closeMenu');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -361,31 +186,7 @@
                     mobileMenu.classList.remove('active');
                 });
             }
-            
-            // Custom cursor for desktop only
-            if (window.innerWidth > 768) {
-                const cursorDot = document.querySelector('.cursor-dot');
-                const cursorOutline = document.querySelector('.cursor-outline');
-                
-                if (cursorDot && cursorOutline) {
-                    document.addEventListener('mousemove', function(e) {
-                        cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-                        cursorOutline.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-                    });
-                }
-            } else {
-                // Hide cursor elements on mobile
-                const cursorElements = document.querySelectorAll('.cursor-dot, .cursor-outline');
-                cursorElements.forEach(el => {
-                    if (el) el.style.display = 'none';
-                });
-            }
         });
     </script>
-    
-    <!-- Core functionality scripts -->
-    <script defer src="js/script.js" onerror="console.warn('Could not load script.js file')"></script>
-    <script defer src="js/scroll-animation.js" onerror="console.warn('Could not load scroll-animation.js file')"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 </body>
 </html> 
