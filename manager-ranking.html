@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- PWA support -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#3498db">
-    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.webp">
-
-    <!-- DNS prefetch and preconnect -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://assets.mixkit.co">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager Ranking - Eskimos Road to Glory</title>
     <meta name="description" content="View the current manager rankings in the Eskimos Road to Glory tournament, featuring performance statistics and achievements.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Manager Ranking Specific Styles */
@@ -78,7 +65,6 @@
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 1/1;
             display: flex;
             align-items: center;
@@ -88,32 +74,13 @@
             pointer-events: none;
         }
         
-        .moze-gallery li:hover {
-            transform: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .moze-gallery li::after {
-            display: none; /* Remove fullscreen icon */
-        }
-        
-        .moze-gallery li:hover::after {
-            display: none; /* Remove fullscreen icon on hover */
-        }
-        
         .moze-gallery img {
             width: 80%;
             height: 80%;
             object-fit: contain;
-            transition: none;
             background-color: transparent;
             padding: 10px;
             pointer-events: none;
-        }
-        
-        .moze-gallery li:hover img {
-            transform: none;
-            opacity: 1;
         }
         
         .moze-gallery-overlay {
@@ -126,7 +93,6 @@
             color: white;
             text-decoration: none;
             opacity: 1;
-            transition: none;
             cursor: default;
             pointer-events: none;
         }
@@ -273,6 +239,68 @@
             background: #cd7f32; /* bronze */
         }
         
+        /* Scroll Animation Styles */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Different animation delays for cascade effect */
+        .black-box.hidden {
+            transform: translateY(-30px);
+        }
+        
+        .club-info.hidden {
+            transform: scale(0.95);
+        }
+        
+        /* Manager ranking items specific animations */
+        .moze-gallery li.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .moze-gallery li.animate-in {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Staggered delays for gallery items */
+        .moze-gallery li:nth-child(1) { transition-delay: 0.05s; }
+        .moze-gallery li:nth-child(2) { transition-delay: 0.1s; }
+        .moze-gallery li:nth-child(3) { transition-delay: 0.15s; }
+        .moze-gallery li:nth-child(4) { transition-delay: 0.2s; }
+        .moze-gallery li:nth-child(5) { transition-delay: 0.25s; }
+        .moze-gallery li:nth-child(6) { transition-delay: 0.3s; }
+        .moze-gallery li:nth-child(7) { transition-delay: 0.35s; }
+        .moze-gallery li:nth-child(8) { transition-delay: 0.4s; }
+        .moze-gallery li:nth-child(9) { transition-delay: 0.45s; }
+        .moze-gallery li:nth-child(10) { transition-delay: 0.5s; }
+        .moze-gallery li:nth-child(11) { transition-delay: 0.55s; }
+        .moze-gallery li:nth-child(12) { transition-delay: 0.6s; }
+        
+        /* Animations for top ranked managers */
+        .first.hidden, .second.hidden, .third.hidden {
+            transform: translateY(-20px) scale(0.9);
+            transition-delay: 0.2s;
+        }
+        
+        .first.animate-in, .second.animate-in, .third.animate-in {
+            transform: translateY(0) scale(1);
+        }
+        
+        .gallery-loader.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition-delay: 0.7s;
+        }
+        
         @media screen and (max-width: 768px) {
             .moze-gallery {
                 gap: 5px;
@@ -295,10 +323,6 @@
                 height: auto;
                 max-height: none;
                 background-color: rgba(0, 0, 0, 0.1);
-            }
-            
-            .moze-gallery li:hover {
-                transform: translateY(-5px);
             }
             
             .moze-gallery-overlay {
@@ -345,32 +369,8 @@
             }
         }
     </style>
-
-    <!-- Performance optimized CSS -->
-    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
-
 </head>
 <body>
-    <div class="skip-link">Skip to content</div>
-    
-    <div class="page-transition"></div>
-    
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div class="preloader">
-        <div class="loader"></div>
-    </div>
-    
-    <video class="video-bg" autoplay muted loop playsinline preload="none" src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
-    
-    <div id="particles-js"></div>
-    
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
@@ -379,10 +379,10 @@
             </div>
             <div class="controls">
                 <div class="social-icons">
-                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
                 <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
                     <span></span>
@@ -406,158 +406,162 @@
         </div>
         
         <main>
-            <header id="career-header" class="animated-section">
-                <a href="career-mode.html" class="back-link reveal" style="display: none;"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
-                <h1 class="fade-in-up">Manager Ranking</h1>
-                <p class="subtitle fade-in-up delay-1">Current performance ranking of all managers</p>
+            <header id="career-header">
+                <a href="career-mode.html" class="back-link" style="display: none;"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
+                <h1>Manager Ranking</h1>
+                <p class="subtitle">Current performance ranking of all managers</p>
             </header>
 
-            <div class="black-box fade-in-up delay-2">
+            <div class="black-box">
                 <h1>MANAGER RANKING</h1>
             </div>
             
-            <div class="club-info fade-in-up delay-3">
+            <div class="club-info">
                 <h2>Season 2024-2025</h2>
                 <p>Below are the current rankings of all managers competing in the Eskimos Road to Glory tournament. Rankings are based on performance, points, and achievements.</p>
             </div>
 
             <div class="club-gallery">
-                <ul class="moze-gallery pictures fade-in-up delay-4">
+                <ul class="moze-gallery pictures">
                     <li data-name="Arsenal FC" data-manager="Mikel Arteta" class="first">
                         <div class="rank-badge">TOP</div>
                         <div class="rank-number">1</div>
-                        <img src="assets/images/managers/p1.webp" alt="Mikel Arteta" width="300" height="200">
+                        <img src="assets/images/ranking/m1.webp" alt="Mikel Arteta" width="300" height="200">
                     </li>
                     <li data-name="Manchester City" data-manager="Pep Guardiola" class="second">
                         <div class="rank-badge">TOP</div>
                         <div class="rank-number">2</div>
-                        <img src="assets/images/managers/p3.webp" alt="Pep Guardiola" width="300" height="200">
+                        <img src="assets/images/ranking/m2.webp" alt="Pep Guardiola" width="300" height="200">
                     </li>
                     <li data-name="Liverpool FC" data-manager="Jürgen Klopp" class="third">
                         <div class="rank-badge">TOP</div>
                         <div class="rank-number">3</div>
-                        <img src="assets/images/managers/p4.webp" alt="Jürgen Klopp" width="300" height="200">
+                        <img src="assets/images/ranking/m3.webp" alt="Jürgen Klopp" width="300" height="200">
                     </li>
                     <li data-name="Chelsea FC" data-manager="Mauricio Pochettino">
                         <div class="rank-number">4</div>
-                        <img src="assets/images/managers/p5.webp" alt="Mauricio Pochettino" width="300" height="200">
+                        <img src="assets/images/ranking/m4.webp" alt="Mauricio Pochettino" width="300" height="200">
                     </li>
                     <li data-name="Tottenham Hotspur" data-manager="Ange Postecoglou">
                         <div class="rank-number">5</div>
-                        <img src="assets/images/managers/p6.webp" alt="Ange Postecoglou" width="300" height="200">
+                        <img src="assets/images/ranking/m5.webp" alt="Ange Postecoglou" width="300" height="200">
                     </li>
                     <li data-name="Aston Villa" data-manager="Unai Emery">
                         <div class="rank-number">6</div>
-                        <img src="assets/images/managers/p7.webp" alt="Unai Emery" width="300" height="200">
+                        <img src="assets/images/ranking/m6.webp" alt="Unai Emery" width="300" height="200">
                     </li>
                     <li data-name="Newcastle United" data-manager="Eddie Howe">
                         <div class="rank-number">7</div>
-                        <img src="assets/images/managers/p8.webp" alt="Eddie Howe" width="300" height="200" >
+                        <img src="assets/images/ranking/m7.webp" alt="Eddie Howe" width="300" height="200">
                     </li>
                     <li data-name="Brighton & Hove Albion" data-manager="Roberto De Zerbi">
                         <div class="rank-number">8</div>
-                        <img src="assets/images/managers/p9.webp" alt="Roberto De Zerbi" width="300" height="200" >
+                        <img src="assets/images/ranking/m8.webp" alt="Roberto De Zerbi" width="300" height="200">
                     </li>
                     <li data-name="West Ham United" data-manager="David Moyes">
                         <div class="rank-number">9</div>
-                        <img src="assets/images/managers/p10.webp" alt="David Moyes" width="300" height="200" >
+                        <img src="assets/images/ranking/m9.webp" alt="David Moyes" width="300" height="200">
                     </li>
                     <li data-name="Brentford FC" data-manager="Thomas Frank">
                         <div class="rank-number">10</div>
-                        <img src="assets/images/managers/p11.webp" alt="Thomas Frank" width="300" height="200" >
+                        <img src="assets/images/ranking/m10.webp" alt="Thomas Frank" width="300" height="200">
                     </li>
                     <li data-name="Crystal Palace" data-manager="Oliver Glasner">
                         <div class="rank-number">11</div>
-                        <img src="assets/images/managers/p14.webp" alt="Oliver Glasner" width="300" height="200" >
+                        <img src="assets/images/ranking/m11.webp" alt="Oliver Glasner" width="300" height="200">
                     </li>
                     <li data-name="Everton FC" data-manager="Sean Dyche">
                         <div class="rank-number">12</div>
-                        <img src="assets/images/managers/p15.webp" alt="Sean Dyche" width="300" height="200" >
+                        <img src="assets/images/ranking/m12.webp" alt="Sean Dyche" width="300" height="200">
                     </li>
                     <li data-name="Leicester City" data-manager="Steve Cooper">
                         <div class="rank-number">13</div>
-                        <img src="assets/images/managers/p16.webp" alt="Steve Cooper" width="300" height="200" >
+                        <img src="assets/images/ranking/m13.webp" alt="Steve Cooper" width="300" height="200">
                     </li>
                     <li data-name="Leeds United" data-manager="Daniel Farke">
                         <div class="rank-number">14</div>
-                        <img src="assets/images/managers/p17.webp" alt="Daniel Farke" width="300" height="200" >
+                        <img src="assets/images/ranking/m14.webp" alt="Daniel Farke" width="300" height="200">
                     </li>
                     <li data-name="Wolverhampton Wanderers" data-manager="Gary O'Neil">
                         <div class="rank-number">15</div>
-                        <img src="assets/images/managers/p19.webp" alt="Gary O'Neil" width="300" height="200" >
+                        <img src="assets/images/ranking/m15.webp" alt="Gary O'Neil" width="300" height="200">
                     </li>
                     <li data-name="Burnley FC" data-manager="Vincent Kompany">
                         <div class="rank-number">16</div>
-                        <img src="assets/images/managers/p21.webp" alt="Vincent Kompany" width="300" height="200" >
+                        <img src="assets/images/ranking/m16.webp" alt="Vincent Kompany" width="300" height="200">
                     </li>
                     <li data-name="Nottingham Forest" data-manager="Nuno Espírito Santo">
                         <div class="rank-number">17</div>
-                        <img src="assets/images/managers/p22.webp" alt="Nuno Espírito Santo" width="300" height="200" >
+                        <img src="assets/images/ranking/m17.webp" alt="Nuno Espírito Santo" width="300" height="200">
                     </li>
                     <li data-name="Southampton FC" data-manager="Russell Martin">
                         <div class="rank-number">18</div>
-                        <img src="assets/images/managers/p23.webp" alt="Russell Martin" width="300" height="200" >
+                        <img src="assets/images/ranking/m18.webp" alt="Russell Martin" width="300" height="200">
                     </li>
                     <li data-name="Fulham FC" data-manager="Marco Silva">
                         <div class="rank-number">19</div>
-                        <img src="assets/images/managers/p24.webp" alt="Marco Silva" width="300" height="200" >
+                        <img src="assets/images/ranking/m19.webp" alt="Marco Silva" width="300" height="200">
                     </li>
                     <li data-name="West Bromwich Albion" data-manager="Carlos Corberán">
                         <div class="rank-number">20</div>
-                        <img src="assets/images/managers/p25.webp" alt="Carlos Corberán" width="300" height="200" >
+                        <img src="assets/images/ranking/m20.webp" alt="Carlos Corberán" width="300" height="200">
                     </li>
                     <li data-name="Sheffield United" data-manager="Chris Wilder">
                         <div class="rank-number">21</div>
-                        <img src="assets/images/managers/p26.webp" alt="Chris Wilder" width="300" height="200" >
+                        <img src="assets/images/ranking/m21.webp" alt="Chris Wilder" width="300" height="200">
                     </li>
                     <li data-name="Watford FC" data-manager="Tom Cleverley">
                         <div class="rank-number">22</div>
-                        <img src="assets/images/managers/p27.webp" alt="Tom Cleverley" width="300" height="200" >
+                        <img src="assets/images/ranking/m22.webp" alt="Tom Cleverley" width="300" height="200">
                     </li>
                     <li data-name="AFC Bournemouth" data-manager="Andoni Iraola">
                         <div class="rank-number">23</div>
-                        <img src="assets/images/managers/p28.webp" alt="Andoni Iraola" width="300" height="200" >
+                        <img src="assets/images/ranking/m23.webp" alt="Andoni Iraola" width="300" height="200">
                     </li>
                     <li data-name="Norwich City" data-manager="David Wagner">
                         <div class="rank-number">24</div>
-                        <img src="assets/images/managers/p29.webp" alt="David Wagner" width="300" height="200" >
+                        <img src="assets/images/ranking/m24.webp" alt="David Wagner" width="300" height="200">
                     </li>
                     <li data-name="Stoke City" data-manager="Steven Schumacher">
                         <div class="rank-number">25</div>
-                        <img src="assets/images/managers/p30.webp" alt="Steven Schumacher" width="300" height="200" >
+                        <img src="assets/images/ranking/m25.webp" alt="Steven Schumacher" width="300" height="200">
                     </li>
                     <li data-name="Swansea City" data-manager="Luke Williams">
                         <div class="rank-number">26</div>
-                        <img src="assets/images/managers/p31.webp" alt="Luke Williams" width="300" height="200" >
+                        <img src="assets/images/ranking/m26.webp" alt="Luke Williams" width="300" height="200">
                     </li>
                     <li data-name="Middlesbrough FC" data-manager="Michael Carrick">
                         <div class="rank-number">27</div>
-                        <img src="assets/images/managers/p32.webp" alt="Michael Carrick" width="300" height="200" >
+                        <img src="assets/images/ranking/m27.webp" alt="Michael Carrick" width="300" height="200">
                     </li>
                     <li data-name="Derby County" data-manager="Paul Warne">
                         <div class="rank-number">28</div>
-                        <img src="assets/images/managers/p33.webp" alt="Paul Warne" width="300" height="200" >
+                        <img src="assets/images/ranking/m28.webp" alt="Paul Warne" width="300" height="200">
                     </li>
                     <li data-name="Queens Park Rangers" data-manager="Marti Cifuentes">
                         <div class="rank-number">29</div>
-                        <img src="assets/images/managers/p34.webp" alt="Marti Cifuentes" width="300" height="200" >
+                        <img src="assets/images/ranking/m29.webp" alt="Marti Cifuentes" width="300" height="200">
                     </li>
                     <li data-name="Blackburn Rovers" data-manager="John Eustace">
                         <div class="rank-number">30</div>
-                        <img src="assets/images/managers/p36.webp" alt="John Eustace" width="300" height="200" >
+                        <img src="assets/images/ranking/m30.webp" alt="John Eustace" width="300" height="200">
                     </li>
                     <li data-name="Millwall FC" data-manager="Neil Harris">
                         <div class="rank-number">31</div>
-                        <img src="assets/images/managers/p37.webp" alt="Neil Harris" width="300" height="200" >
+                        <img src="assets/images/ranking/m31.webp" alt="Neil Harris" width="300" height="200">
                     </li>
                     <li data-name="Bristol City" data-manager="Liam Manning">
                         <div class="rank-number">32</div>
-                        <img src="assets/images/managers/p38.webp" alt="Liam Manning" width="300" height="200" >
+                        <img src="assets/images/ranking/m32.webp" alt="Liam Manning" width="300" height="200">
+                    </li>
+                    <li data-name="Bristol City" data-manager="Liam Manning">
+                        <div class="rank-number">33</div>
+                        <img src="assets/images/ranking/m33.webp" alt="Liam Manning" width="300" height="200">
                     </li>
                 </ul>
             </div>
 
-            <div class="gallery-loader fade-in-up">
+            <div class="gallery-loader">
                 <button id="viewStandings"><i class="fas fa-table"></i> View Detailed Statistics</button>
             </div>
         </main>
@@ -577,20 +581,9 @@
             </div>
         </footer>
     </div>
-    
-    <div class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </div>
 
-    <div class="toast" id="toast">Welcome to Manager Rankings!</div>
-    
-    <audio id="backgroundMusic" autoplay loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
-    </audio>
-
-    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script defer src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
-    <script defer src="js/script.js"></script>
+    <script src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
+    <script src="js/script.js"></script>
     <script>
         // Initialize page functionality after jQuery is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -626,51 +619,5 @@
             }
         });
     </script>
-
-    <!-- Performance optimization JS -->
-    <script>
-        // Immediately executed critical JS
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load the video after page content
-            setTimeout(function() {
-                const video = document.querySelector('.video-bg');
-                if (video && video.dataset.src) {
-                    const source = document.createElement('source');
-                    source.src = video.dataset.src;
-                    source.type = 'video/mp4';
-                    video.appendChild(source);
-                    video.load();
-                    video.play().catch(e => console.log('Autoplay prevented:', e));
-                }
-            }, 1000);
-            
-            // Set fade out for preloader
-            window.addEventListener('load', function() {
-                const preloader = document.querySelector('.preloader');
-                if (preloader) {
-                    setTimeout(function() {
-                        preloader.style.opacity = '0';
-                        setTimeout(function() {
-                            preloader.style.display = 'none';
-                        }, 500);
-                    }, 500);
-                }
-            });
-        });
-    </script>
-    
-    <!-- Load performance optimizations -->
-    <script defer src="js/performance.js"></script>
-    <!-- Load background scroll handling -->
-    <script defer src="js/background-scroll.js"></script>
-    <!-- Fix infinite scrolling -->
-    <script defer src="js/fix-overflow.js"></script>
-
-    <!-- Service worker registration -->
-    <script defer src="js/sw-register.js"></script>
-    
-    <!-- Performance optimizations -->
-    <script defer src="js/performance.js"></script>
-    <script defer src="js/vercel-analytics.js"></script>
-    </body>
+</body>
 </html> 

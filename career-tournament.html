@@ -1,35 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- PWA support -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#3498db">
-    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.webp">
-
-    <!-- DNS prefetch and preconnect -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://assets.mixkit.co">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Career Tournament - Eskimos Road to Glory</title>
     <meta name="description" content="Explore the career tournaments in Eskimos Road to Glory, featuring division leagues, champions league, and more special tournaments.">
-    <!-- Preload critical resources -->
-    <link rel="preload" href="css/styles.css" as="style">
-    <link rel="preload" href="js/script.js" as="script">
-    <!-- Load fonts with display=swap for better rendering -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
-    <!-- Defer non-critical CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-
-    <!-- Scroll animations CSS -->
-    <link rel="stylesheet" href="css/scroll-animations.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/scroll-animations.css"></noscript>
     
     <style>
         /* Fix for horizontal scrolling on mobile */
@@ -60,13 +38,7 @@
             overflow: hidden;
             margin-bottom: 30px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-        }
-        
-        .tournament-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
         
         .tournament-header {
@@ -92,9 +64,7 @@
             border-radius: 10px;
             width: 100%;
             text-align: center;
-            backdrop-filter: blur(5px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .black-box {
@@ -107,29 +77,12 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
             object-fit: cover;
             width: 100%;
         }
         
         .moze-center {
             text-align: center;
-        }
-        
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-color, #2196F3);
-            border-radius: 10px;
         }
         
         /* Back to top button styling */
@@ -159,11 +112,6 @@
             transform: translateY(0);
         }
         
-        .back-to-top:hover {
-            background: #fff;
-            transform: translateY(-5px);
-        }
-        
         @media (min-width: 768px) {
             .tournament-images {
                 grid-template-columns: 1fr 1fr;
@@ -188,32 +136,8 @@
             }
         }
     </style>
-
-    <!-- Performance optimized CSS -->
-    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
-
 </head>
-<body class="mobile-optimize">
-    <div class="skip-link">Skip to content</div>
-    
-    <div class="page-transition"></div>
-    
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div class="preloader">
-        <div class="loader"></div>
-    </div>
-    
-    <video class="video-bg" autoplay muted loop playsinline preload="none" src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
-    
-    <div id="particles-js"></div>
-    
+<body>
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
@@ -222,10 +146,10 @@
             </div>
             <div class="controls">
                 <div class="social-icons">
-                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
                 <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
                     <span></span>
@@ -250,19 +174,19 @@
         </div>
         
         <main>
-            <header id="career-header" class="animated-section">
-                <a href="index.html" class="back-link reveal scroll-fade-in"><i class="fas fa-arrow-left"></i> Back to Home</a>
-                <h1 class="fade-in-up scroll-fade-in">Career Tournament</h1>
-                <p class="subtitle fade-in-up delay-1 scroll-fade-in">Compete in prestigious tournaments</p>
+            <header id="career-header">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <h1>Career Tournament</h1>
+                <p class="subtitle">Compete in prestigious tournaments</p>
             </header>
 
             <div class="tournament-section">
-                <div class="black-box fade-in-up delay-2 scroll-fade-in">
+                <div class="black-box">
                     <h1 class="moze-center" style="font-size: 28px;">DIVISION LEAGUE</h1>
                 </div>
                 
                 <!-- Division One -->
-                <div class="tournament-card fade-in-up delay-3 scroll-fade-left">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION ONE</h2>
                     </div>
@@ -275,7 +199,7 @@
                 </div>
                 
                 <!-- Division Two -->
-                <div class="tournament-card fade-in-up scroll-fade-right">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION TWO</h2>
                     </div>
@@ -288,7 +212,7 @@
                 </div>
                 
                 <!-- Division Three -->
-                <div class="tournament-card fade-in-up scroll-fade-left">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION THREE</h2>
                     </div>
@@ -301,7 +225,7 @@
                 </div>
                 
                 <!-- Division Four -->
-                <div class="tournament-card fade-in-up scroll-fade-right">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION FOUR</h2>
                     </div>
@@ -314,7 +238,7 @@
                 </div>
                 
                 <!-- Division Five -->
-                <div class="tournament-card fade-in-up scroll-fade-left">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION FIVE</h2>
                     </div>
@@ -327,7 +251,7 @@
                 </div>
                 
                 <!-- Division Cup -->
-                <div class="tournament-card fade-in-up scroll-fade-right">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">DIVISION CUP</h2>
                     </div>
@@ -338,13 +262,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="black-box fade-in-up delay-2 scroll-fade-in">
+                <div class="black-box">
                     <h1 class="moze-center" style="font-size: 28px;">R2G EUROPEAN LEAGUE</h1>
                 </div>
                 
                 
                 <!-- Champions League -->
-                <div class="tournament-card fade-in-up scroll-zoom-in">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G CHAMPIONS LEAGUE</h2>
                     </div>
@@ -357,7 +281,7 @@
                 </div>
                 
                 <!-- Europa League -->
-                <div class="tournament-card fade-in-up scroll-zoom-in">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G EUROPA LEAGUE</h2>
                     </div>
@@ -370,7 +294,7 @@
                 </div>
                 
                 <!-- Conference League -->
-                <div class="tournament-card fade-in-up scroll-zoom-in">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G CONFERENCE LEAGUE</h2>
                     </div>
@@ -383,7 +307,7 @@
                 </div>
                 
                 <!-- Super League -->
-                <div class="tournament-card fade-in-up scroll-zoom-in">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G SUPER LEAGUE</h2>
                     </div>
@@ -394,13 +318,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="black-box fade-in-up delay-2 scroll-fade-in">
+                <div class="black-box">
                     <h1 class="moze-center" style="font-size: 28px;">R2G SPECIAL TOUR</h1>
                 </div>
                 
                 
                 <!-- Authentic Tour -->
-                <div class="tournament-card fade-in-up scroll-fade-left">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G AUTHENTIC TOUR</h2>
                     </div>
@@ -413,7 +337,7 @@
                 </div>
                 
                 <!-- Inter Clash -->
-                <div class="tournament-card fade-in-up scroll-fade-right">
+                <div class="tournament-card">
                     <div class="tournament-header">
                         <h2 class="moze-center" style="font-size: 24px; margin: 0;">R2G INTER CLASH</h2>
                     </div>
@@ -427,7 +351,7 @@
             </div>
         </main>
         
-        <footer class="scroll-fade-in">
+        <footer>
             <div class="footer-content">
                 <div class="footer-nav">
                     <a href="index.html">Home</a>
@@ -448,16 +372,7 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <div class="toast" id="toast">Welcome to Career Tournaments!</div>
-    
-    <audio id="backgroundMusic" preload="none">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Load particles.js only when needed with defer -->
-    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Defer main script to improve initial page load -->
-    <script defer src="js/script.js"></script>
+    <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Make images non-clickable
@@ -484,83 +399,7 @@
                     behavior: 'smooth'
                 });
             });
-            
-            // Smooth scroll for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Show welcome toast with delay
-            const toast = document.getElementById('toast');
-            setTimeout(() => {
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }, 1500);
         });
     </script>
-
-    <!-- Performance optimization JS -->
-    <script>
-        // Immediately executed critical JS
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load the video after page content
-            setTimeout(function() {
-                const video = document.querySelector('.video-bg');
-                if (video && video.dataset.src) {
-                    const source = document.createElement('source');
-                    source.src = video.dataset.src;
-                    source.type = 'video/mp4';
-                    video.appendChild(source);
-                    video.load();
-                    video.play().catch(e => console.log('Autoplay prevented:', e));
-                }
-            }, 1000);
-            
-            // Set fade out for preloader
-            window.addEventListener('load', function() {
-                const preloader = document.querySelector('.preloader');
-                if (preloader) {
-                    setTimeout(function() {
-                        preloader.style.opacity = '0';
-                        setTimeout(function() {
-                            preloader.style.display = 'none';
-                        }, 500);
-                    }, 500);
-                }
-            });
-        });
-    </script>
-    
-    <!-- Load performance optimizations -->
-    <script defer src="js/performance.js"></script>
-    
-    <!-- Mobile device detection - load early -->
-    <script src="js/mobile-detector.js"></script>
-    
-    <!-- Scroll animation script -->
-    <script defer src="js/scroll-animation.js"></script>
-    
-    <!-- Parallax effect script -->
-    <script defer src="js/mini-parallax.js"></script>
-    
-    <!-- Load background scroll handling -->
-    <script defer src="js/background-scroll.js"></script>
-    <!-- Fix infinite scrolling -->
-    <script defer src="js/fix-overflow.js"></script>
-
-    <!-- Service worker registration -->
-    <script defer src="js/sw-register.js"></script>
-    
-    <!-- Performance optimizations -->
-    <script defer src="js/vercel-analytics.js"></script>
-    </body>
+</body>
 </html>

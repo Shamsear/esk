@@ -1,72 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- PWA support -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#3498db">
-    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.webp">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Player Signing Auction Results - Eskimos Road to Glory</title>
     <meta name="description" content="View player signing auction results for Eskimos Road to Glory, featuring bidding details for each position and player.">
     
-    <!-- DNS prefetch and preconnect -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://assets.mixkit.co">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="css/styles.css" as="style">
-    <link rel="preload" href="js/script.js" as="script">
-    <link rel="preload" href="assets/images/logo11.webp" as="image" type="image/png">
-    
-    <!-- Critical CSS inline for faster rendering -->
-    <style>
-        /* Critical path CSS */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            color: #fff;
-            background-color: #1a1a1a;
-            overflow-x: hidden;
-        }
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top-color: #3498db;
-            animation: spin 1s ease-in-out infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
-    
-    <!-- Load fonts with display swap for better rendering -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
-    
-    <!-- Defer non-critical CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- Page specific styles -->
@@ -80,7 +22,6 @@
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
             overflow: hidden;
         }
         
@@ -104,13 +45,7 @@
             cursor: pointer;
             font-weight: 600;
             white-space: nowrap;
-            transition: all 0.3s ease;
             flex-shrink: 0;
-        }
-        
-        .position-tab:hover {
-            background: linear-gradient(135deg, rgba(61, 71, 112, 0.9), rgba(51, 61, 102, 0.9));
-            transform: translateY(-2px);
         }
         
         .position-tab.active {
@@ -155,18 +90,8 @@
             white-space: nowrap;
         }
         
-        .auction-table tr {
-            transition: all 0.3s ease;
-        }
-        
         .auction-table tr:nth-child(odd) {
             background-color: rgba(255, 255, 255, 0.05);
-        }
-        
-        .auction-table tr:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .auction-table td {
@@ -203,12 +128,6 @@
         
         .position-content.active {
             display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .search-container {
@@ -307,46 +226,20 @@
             }
         }
     </style>
-
-    <!-- Performance optimized CSS -->
-    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
-
 </head>
 <body>
-    <div class="skip-link">Skip to content</div>
-    
-    <div class="page-transition"></div>
-    
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div class="preloader">
-        <div class="loader"></div>
-    </div>
-    
-    <!-- Defer loading of background video -->
-    <video class="video-bg" autoplay muted loop playsinline preload="none" src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4">
-    </video>
-    
-    <div id="particles-js"></div>
-    
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
-                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40" loading="eager">
+                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40">
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
                 <div class="social-icons">
-                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
                 <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
                     <span></span>
@@ -371,13 +264,13 @@
         </div>
         
         <main>
-            <header id="player-signing-header" class="animated-section">
-                <a href="career-mode.html" class="back-link reveal"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
-                <h1 class="fade-in-up">Player Signing Auction Results</h1>
-                <p class="subtitle fade-in-up delay-1">View the latest player auction results by position</p>
+            <header id="player-signing-header">
+                <a href="career-mode.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
+                <h1>Player Signing Auction Results</h1>
+                <p class="subtitle">View the latest player auction results by position</p>
             </header>
 
-            <div class="auction-container fade-in-up delay-2">
+            <div class="auction-container">
                 <div class="search-container">
                     <input type="text" id="playerSearch" class="search-input" placeholder="Search for player, team, or position...">
                 </div>
@@ -668,61 +561,8 @@
             </div>
         </footer>
     </div>
-
-    <div class="toast" id="toast">View player auction results!</div>
     
-    <!-- Performance optimization JS -->
-    <script>
-        // Immediately executed critical JS
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load the video after page content
-            setTimeout(function() {
-                const video = document.querySelector('.video-bg');
-                if (video && video.dataset.src) {
-                    const source = document.createElement('source');
-                    source.src = video.dataset.src;
-                    source.type = 'video/mp4';
-                    video.appendChild(source);
-                    video.load();
-                    video.play().catch(e => console.log('Autoplay prevented:', e));
-                }
-            }, 1000);
-            
-            // Set fade out for preloader
-            window.addEventListener('load', function() {
-                const preloader = document.querySelector('.preloader');
-                if (preloader) {
-                    setTimeout(function() {
-                        preloader.style.opacity = '0';
-                        setTimeout(function() {
-                            preloader.style.display = 'none';
-                        }, 500);
-                    }, 500);
-                }
-            });
-        });
-    </script>
-    
-    <!-- Load particles.js only when needed with defer -->
-    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <!-- Defer main script to improve initial load -->
-    <script defer src="js/script.js"></script>
-    
-    <!-- Load performance optimizations -->
-    <script defer src="js/performance.js"></script>
-    
-    <!-- Auction data script -->
-    <script defer src="js/player-auction.js"></script>
-    <!-- Load background scroll handling -->
-    <script defer src="js/background-scroll.js"></script>
-    <!-- Fix infinite scrolling -->
-    <script defer src="js/fix-overflow.js"></script>
-
-    <!-- Service worker registration -->
-    <script defer src="js/sw-register.js"></script>
-    
-    <!-- Performance optimizations -->
-    <script defer src="js/performance.js"></script>
-    </body>
+    <script src="js/script.js"></script>
+    <script src="js/player-auction.js"></script>
+</body>
 </html> 

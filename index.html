@@ -19,6 +19,157 @@
             font-family: 'Montserrat', sans-serif;
             color: #fff;
             background-color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .overlay {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .mini-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            text-align: center;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .nav-item {
+            text-align: center;
+        }
+        
+        .nav-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .home-description {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-item {
+            text-align: center;
+            max-width: 300px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        .feature-item h3 {
+            margin-bottom: 10px;
+        }
+        
+        .feature-item p {
+            margin: 0 auto;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .testimonials {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .testimonial-item {
+            text-align: center;
+            max-width: 350px;
+        }
+        
+        footer {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .copyright {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -70,31 +221,26 @@
                 <a href="tournament-guide.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168">
-                        <div class="nav-title">Tournament Guide</div>
                     </div>
                 </a>
                 <a href="career-mode.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168">
-                        <div class="nav-title">Career Mode</div>
                     </div>
                 </a>
                 <a href="manager-ranking.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168">
-                        <div class="nav-title">Manager Ranking</div>
                     </div>
                 </a>
                 <a href="trophy-cabinet.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/H4.webp" alt="Trophy Cabinet" width="300" height="168">
-                        <div class="nav-title">Trophy Cabinet</div>
                     </div>
                 </a>
                 <a href="career-tournament.html" class="nav-item">
                     <div class="nav-card">
                         <img src="assets/images/home/H5.webp" alt="Career Tournament" width="300" height="168">
-                        <div class="nav-title">Career Tournament</div>
                     </div>
                 </a>
             </div>
@@ -122,24 +268,6 @@
                     <a href="#" class="cta-button">JOIN NOW</a>
                 </div>
             </div>
-            
-            <div class="testimonials">
-                <h2 class="section-heading">What Our Community Says</h2>
-                <div class="testimonial-container">
-                    <div class="testimonial-item">
-                        <div class="testimonial-content">
-                            <p>"The tournaments are incredibly well organized, and the community is one of the most supportive I've found in gaming."</p>
-                        </div>
-                        <div class="testimonial-author">- Alex M., Tournament Champion</div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-content">
-                            <p>"From my first match to becoming a team captain, the Road to Glory journey has been an amazing experience!"</p>
-                        </div>
-                        <div class="testimonial-author">- Sophia K., Team Captain</div>
-                    </div>
-                </div>
-            </div>
         </main>
             
         <footer>
@@ -165,28 +293,6 @@
     </div>
     
     <!-- Essential scripts -->
-    <script>
-        // Set copyright year
-        document.getElementById('year').textContent = new Date().getFullYear();
-        
-        // Mobile menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const closeMenu = document.getElementById('closeMenu');
-            const mobileMenu = document.getElementById('mobileMenu');
-            
-            if (menuToggle && mobileMenu) {
-                menuToggle.addEventListener('click', function() {
-                    mobileMenu.classList.add('active');
-                });
-            }
-            
-            if (closeMenu && mobileMenu) {
-                closeMenu.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
-                });
-            }
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html> 
