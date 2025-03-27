@@ -489,9 +489,11 @@ footer {
 @media (max-width: 768px) {
     /* Mobile background fix */
     body {
-        background-image: url('../assets/images/logo.jpg');
+        background-image: url('../assets/images/logo.webp');
         background-size: contain;
         background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         background-color: #000;
         font-size: 14px;
     }
