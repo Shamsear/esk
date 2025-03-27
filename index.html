@@ -12,8 +12,7 @@
     <meta name="theme-color" content="#3498db">
     <link rel="apple-touch-icon" href="assets/images/logo11.webp">
     
-    <!-- DNS prefetch and preconnect -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <!-- Resource hints -->
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://assets.mixkit.co">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -21,7 +20,7 @@
     
     <!-- Preload critical assets -->
     <link rel="preload" href="css/critical.css" as="style">
-    <link rel="preload" href="assets/images/logo11.webp" as="image" type="image/png">
+    <link rel="preload" href="assets/images/logo11.webp" as="image" type="image/webp">
 
     <!-- Critical CSS inline -->
     <style>
@@ -59,40 +58,23 @@
         }
     </style>
     
-    <!-- Critical CSS -->
+    <!-- CSS resources -->
     <link rel="stylesheet" href="css/critical.css">
-    
-    <!-- Load fonts with display swap -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
-    
-    <!-- Defer non-critical CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
-    
     <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
-
-    <!-- Scroll animations CSS -->
     <link rel="stylesheet" href="css/scroll-animations.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/scroll-animations.css"></noscript>
-
-    <!-- Performance optimized CSS -->
-    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
-
+    
+    <!-- Fallbacks for no-JS environments -->
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/scroll-animations.css">
+    </noscript>
 </head>
 <body class="mobile-optimize">
     <div class="skip-link">Skip to content</div>
-    
-    <div class="page-transition"></div>
-    
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
     
     <div class="preloader">
         <div class="loader"></div>
@@ -104,6 +86,18 @@
     
     <div id="particles-js"></div>
     
+    <!-- Progress bar container -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- Page transition -->
+    <div class="page-transition"></div>
+    
+    <!-- Custom cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
     <div class="overlay">
         <div class="top-bar">
             <div class="mini-logo">
@@ -111,6 +105,9 @@
                 <span>ESKIMOS</span>
             </div>
             <div class="controls">
+                <div class="theme-toggle">
+                    <div class="toggle-circle"></div>
+                </div>
                 <div class="social-icons">
                     <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
@@ -141,76 +138,79 @@
         
         <main>
             <header id="home">
-                <!-- Logo with width and height for better CLS -->
-                <img src="assets/images/logo11.webp" alt="Eskimos Road to Glory Logo" class="logo float scroll-zoom-in" width="250" height="250">
-                <h1 class="reveal typing-effect scroll-fade-in">ESKIMOS ROAD TO GLORY</h1>
-                <div class="subtitle reveal scroll-fade-in">JOURNEY TO EXCELLENCE</div>
-                <a href="#" class="cta-button pulse-effect reveal scroll-fade-in">JOIN THE JOURNEY</a>
+                <img src="assets/images/logo11.webp" alt="Eskimos Road to Glory Logo" class="logo float" width="250" height="250">
+                <h1 class="reveal">ESKIMOS ROAD TO GLORY</h1>
+                <div class="subtitle">JOURNEY TO EXCELLENCE</div>
+                <a href="#" class="cta-button pulse-effect">JOIN THE JOURNEY</a>
             </header>
 
-            <div class="navigation stagger-children">
-                <a href="tournament-guide.html" class="nav-item tilt-effect reveal scroll-fade-left">
+            <div class="navigation">
+                <a href="tournament-guide.html" class="nav-item tilt-effect">
                     <div class="nav-card">
-                        <!-- Lazy loaded images with width and height -->
-                        <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168" >
+                        <img src="assets/images/home/h1.webp" alt="Tournament Guide" width="300" height="168">
+                        <div class="nav-title">Tournament Guide</div>
                     </div>
                 </a>
-                <a href="career-mode.html" class="nav-item tilt-effect reveal scroll-fade-left">
+                <a href="career-mode.html" class="nav-item tilt-effect">
                     <div class="nav-card">
-                        <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168" >
+                        <img src="assets/images/home/h2.webp" alt="Career Mode" width="300" height="168">
+                        <div class="nav-title">Career Mode</div>
                     </div>
                 </a>
-                <a href="manager-ranking.html" class="nav-item tilt-effect reveal scroll-fade-left">
+                <a href="manager-ranking.html" class="nav-item tilt-effect">
                     <div class="nav-card">
-                        <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168" >
+                        <img src="assets/images/home/h3.webp" alt="Manager Ranking" width="300" height="168">
+                        <div class="nav-title">Manager Ranking</div>
                     </div>
                 </a>
-                <a href="trophy-cabinet.html" class="nav-item tilt-effect reveal scroll-fade-left">
+                <a href="trophy-cabinet.html" class="nav-item tilt-effect">
                     <div class="nav-card">
-                        <img src="assets/images/home/h4.webp" alt="Trophy Cabinet" width="300" height="168" >
+                        <img src="assets/images/home/h4.webp" alt="Trophy Cabinet" width="300" height="168">
+                        <div class="nav-title">Trophy Cabinet</div>
                     </div>
                 </a>
-                <a href="career-tournament.html" class="nav-item tilt-effect reveal scroll-fade-left">
+                <a href="career-tournament.html" class="nav-item tilt-effect">
                     <div class="nav-card">
-                        <img src="assets/images/home/h5.webp" alt="Career Tournament" width="300" height="168" >
+                        <img src="assets/images/home/h5.webp" alt="Career Tournament" width="300" height="168">
+                        <div class="nav-title">Career Tournament</div>
                     </div>
                 </a>
             </div>
             
-            <div class="home-description fade-in-up delay-2">
-                <h2 class="section-heading scroll-fade-in">Your Road to Glory Journey</h2>
-                <p class="section-text scroll-fade-in">Welcome to Eskimos Road to Glory, the ultimate FIFA Pro Clubs experience. Join our community of passionate players, build your team, develop your skills, and compete in thrilling tournaments to become legends in the world of virtual football.</p>
+            <div class="home-description">
+                <h2 class="section-heading">Your Road to Glory Journey</h2>
+                <p class="section-text">Welcome to Eskimos Road to Glory, the ultimate FIFA Pro Clubs experience. Join our community of passionate players, build your team, develop your skills, and compete in thrilling tournaments to become legends in the world of virtual football.</p>
                 
-                <div class="features stagger-children">
-                    <div class="feature-item fade-in-up delay-3 scroll-fade-right">
+                <div class="features">
+                    <div class="feature-item">
                         <i class="fas fa-trophy"></i>
                         <h3>Tournaments</h3>
                         <p>Compete in regular tournaments with different formats and prize pools. Test your skills against other clubs and climb the ranks.</p>
                     </div>
-                    <div class="feature-item fade-in-up delay-4 scroll-fade-right">
+                    <div class="feature-item">
                         <i class="fas fa-chart-line"></i>
                         <h3>Progression</h3>
                         <p>Track your growth with detailed statistics and earn recognition for your achievements. Rise through the ranks from rookie to legend.</p>
                     </div>
                 </div>
                 
-                <div class="cta-section fade-in-up delay-5 scroll-zoom-in">
+                <div class="cta-section">
                     <h3 class="cta-heading">Ready to Begin Your Journey?</h3>
                     <p class="cta-text">Join hundreds of players already competing in our tournaments and enjoying the Eskimos experience.</p>
                     <a href="#" class="cta-button pulse-effect">JOIN NOW</a>
                 </div>
             </div>
             
-            <div class="testimonials fade-in-up delay-6 stagger-children">
-                <h2 class="section-heading scroll-fade-in">What Our Community Says</h2>
+            <div class="testimonials">
+                <h2 class="section-heading">What Our Community Says</h2>
                 <div class="testimonial-container">
-                    <div class="testimonial-item scroll-fade-right">
+                    <div class="testimonial-item">
                         <div class="testimonial-content">
                             <p>"The tournaments are incredibly well organized, and the community is one of the most supportive I've found in gaming."</p>
                         </div>
                         <div class="testimonial-author">- Alex M., Tournament Champion</div>
                     </div>
-                    <div class="testimonial-item scroll-fade-right">
+                    <div class="testimonial-item">
                         <div class="testimonial-content">
                             <p>"From my first match to becoming a team captain, the Road to Glory journey has been an amazing experience!"</p>
                         </div>
@@ -220,7 +220,7 @@
             </div>
         </main>
             
-        <footer class="scroll-fade-in">
+        <footer>
             <div class="footer-content">
                 <div class="footer-nav">
                     <a href="#home">Home</a>
@@ -250,12 +250,12 @@
         Welcome to Eskimos Road to Glory!
     </div>
     
-    <!-- Load scripts optimized -->
+    <!-- Essential scripts -->
     <script>
-        // Inline critical JS functions
+        // Set copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Add minimal toast functionality
+        // Toast functionality
         setTimeout(function() {
             const toast = document.getElementById('toast');
             if (toast) toast.classList.add('show');
@@ -264,37 +264,9 @@
                 if (toast) toast.classList.remove('show');
             }, 3000);
         }, 2000);
-    </script>
-    
-    <!-- Service worker registration -->
-    <script defer src="js/sw-register.js"></script>
-    
-    <!-- Mobile device detection - load early -->
-    <script src="js/mobile-detector.js"></script>
-    
-    <!-- Performance optimizations - Load in correct order -->
-    <script defer src="js/performance.js"></script>
-    
-    <!-- Scroll animation script -->
-    <script defer src="js/scroll-animation.js"></script>
-    
-    <!-- Parallax effect script -->
-    <script defer src="js/mini-parallax.js"></script>
-    
-    <!-- Defer main script loading -->
-    <script defer src="js/script.js"></script>
-    
-    <!-- Background scroll script -->
-    <script defer src="js/background-scroll.js"></script>
-    
-    <!-- Defer third-party scripts -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-
-    <!-- Performance optimization JS -->
-    <script>
-        // Immediately executed critical JS
+        
+        // Load video after page content
         document.addEventListener('DOMContentLoaded', function() {
-            // Load the video after page content
             setTimeout(function() {
                 const video = document.querySelector('.video-bg');
                 if (video && video.dataset.src) {
@@ -307,7 +279,7 @@
                 }
             }, 1000);
             
-            // Set fade out for preloader
+            // Preloader fadeout
             window.addEventListener('load', function() {
                 const preloader = document.querySelector('.preloader');
                 if (preloader) {
@@ -319,7 +291,64 @@
                     }, 500);
                 }
             });
+            
+            // Initialize animation classes
+            document.querySelectorAll('.reveal').forEach(function(el) {
+                el.classList.add('active');
+            });
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            if (backToTop) {
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // Theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-mode');
+                    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+                });
+                
+                // Check for saved theme
+                if (localStorage.getItem('theme') === 'light') {
+                    document.body.classList.add('light-mode');
+                }
+            }
+            
+            // Mobile menu
+            const menuToggle = document.getElementById('menuToggle');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                });
+            }
+            
+            if (closeMenu && mobileMenu) {
+                closeMenu.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
+            }
         });
     </script>
+    
+    <!-- Core functionality scripts -->
+    <script defer src="js/script.js"></script>
+    <script defer src="js/scroll-animation.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 </body>
 </html> 
