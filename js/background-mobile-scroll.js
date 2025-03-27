@@ -43,6 +43,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     position: relative !important;
                     z-index: 2 !important;
                 }
+
+                /* Add styles for the centered background */
+                #mobile-scrollable-bg {
+                    position: fixed !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    z-index: -9 !important;
+                    background-color: #000 !important;
+                }
             `;
             
             // Add the style to the document head
@@ -69,15 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const bgElement = document.createElement('div');
             bgElement.id = 'mobile-scrollable-bg';
             
-            // Style the background element
-            bgElement.style.position = 'absolute';
+            // Style the background element - use fixed positioning for center-in-viewport effect
+            bgElement.style.position = 'fixed';
             bgElement.style.top = '0';
             bgElement.style.left = '0';
             bgElement.style.width = '100%';
-            bgElement.style.height = '100%';
+            bgElement.style.height = '100vh';
             bgElement.style.backgroundImage = `url('${backgroundPath}')`;
             bgElement.style.backgroundSize = 'contain';
-            bgElement.style.backgroundPosition = 'center top';
+            bgElement.style.backgroundPosition = 'center center';
             bgElement.style.backgroundRepeat = 'no-repeat';
             bgElement.style.backgroundAttachment = 'scroll';
             bgElement.style.backgroundColor = '#000';
@@ -86,35 +97,34 @@ document.addEventListener('DOMContentLoaded', function() {
             // Insert at the beginning of body
             document.body.insertBefore(bgElement, document.body.firstChild);
             
-            // Set initial height to be at least the height of the document
-            updateBackgroundHeight();
-            
-            // Add an onscroll event to move the background with scroll
-            window.addEventListener('scroll', function() {
-                // Calculate scroll percentage - this is what synchronizes the image with content
-                let scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-                
-                // Calculate background position to match scroll position of content
-                // This makes the background stay with the content instead of falling behind
-                bgElement.style.transform = `translateY(${window.scrollY}px)`;
-                
-                // Update background height as needed while scrolling
-                updateBackgroundHeight();
-            });
-            
-            // Function to ensure background is always tall enough
-            function updateBackgroundHeight() {
-                // Make sure background is at least as tall as the document + viewport height
-                // This ensures it covers the entire page even during scroll
-                const docHeight = Math.max(
-                    document.body.scrollHeight,
-                    document.body.offsetHeight,
-                    document.documentElement.clientHeight,
-                    document.documentElement.scrollHeight,
-                    document.documentElement.offsetHeight
+            // Make sure content has enough space to scroll
+            ensureContentHeight();
+
+            // Function to ensure content area is tall enough for scrolling
+            function ensureContentHeight() {
+                // Make sure the content area has a minimum height
+                // This ensures we can see the background even with minimal content
+                const minHeight = Math.max(
+                    window.innerHeight * 1.5, // At least 1.5x viewport height
+                    document.body.scrollHeight
                 );
                 
-                bgElement.style.height = `${docHeight}px`;
+                // Add a spacer element if needed
+                let spacer = document.getElementById('content-height-spacer');
+                if (!spacer) {
+                    spacer = document.createElement('div');
+                    spacer.id = 'content-height-spacer';
+                    spacer.style.height = '0';
+                    spacer.style.width = '100%';
+                    spacer.style.position = 'relative';
+                    spacer.style.zIndex = '-5';
+                    document.body.appendChild(spacer);
+                }
+                
+                // Set minimum body height while preserving actual content height if larger
+                if (document.body.scrollHeight < minHeight) {
+                    spacer.style.height = (minHeight - document.body.scrollHeight + spacer.offsetHeight) + 'px';
+                }
             }
         };
         
