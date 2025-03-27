@@ -265,8 +265,9 @@
             }, 3000);
         }, 2000);
         
-        // Load video after page content
+        // Main initialization function
         document.addEventListener('DOMContentLoaded', function() {
+            // Load video after page content
             setTimeout(function() {
                 const video = document.querySelector('.video-bg');
                 if (video && video.dataset.src) {
@@ -279,8 +280,13 @@
                 }
             }, 1000);
             
+            // Initialize animation classes
+            document.querySelectorAll('.reveal').forEach(function(el) {
+                el.classList.add('active');
+            });
+            
             // Preloader fadeout
-            window.addEventListener('load', function() {
+            function fadeOutPreloader() {
                 const preloader = document.querySelector('.preloader');
                 if (preloader) {
                     setTimeout(function() {
@@ -290,24 +296,36 @@
                         }, 500);
                     }, 500);
                 }
-            });
+            }
             
-            // Initialize animation classes
-            document.querySelectorAll('.reveal').forEach(function(el) {
-                el.classList.add('active');
-            });
+            // Handle page load
+            if (document.readyState === 'complete') {
+                fadeOutPreloader();
+            } else {
+                window.addEventListener('load', fadeOutPreloader);
+            }
+            
+            // Progress bar functionality
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (window.scrollY / totalHeight) * 100;
+                    progressBar.style.width = scrolled + '%';
+                });
+            }
             
             // Back to top button
             const backToTop = document.querySelector('.back-to-top');
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTop.classList.add('show');
-                } else {
-                    backToTop.classList.remove('show');
-                }
-            });
-            
             if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add('show');
+                    } else {
+                        backToTop.classList.remove('show');
+                    }
+                });
+                
                 backToTop.addEventListener('click', function() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
@@ -343,12 +361,31 @@
                     mobileMenu.classList.remove('active');
                 });
             }
+            
+            // Custom cursor for desktop only
+            if (window.innerWidth > 768) {
+                const cursorDot = document.querySelector('.cursor-dot');
+                const cursorOutline = document.querySelector('.cursor-outline');
+                
+                if (cursorDot && cursorOutline) {
+                    document.addEventListener('mousemove', function(e) {
+                        cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                        cursorOutline.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                    });
+                }
+            } else {
+                // Hide cursor elements on mobile
+                const cursorElements = document.querySelectorAll('.cursor-dot, .cursor-outline');
+                cursorElements.forEach(el => {
+                    if (el) el.style.display = 'none';
+                });
+            }
         });
     </script>
     
     <!-- Core functionality scripts -->
-    <script defer src="js/script.js"></script>
-    <script defer src="js/scroll-animation.js"></script>
+    <script defer src="js/script.js" onerror="console.warn('Could not load script.js file')"></script>
+    <script defer src="js/scroll-animation.js" onerror="console.warn('Could not load scroll-animation.js file')"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 </body>
 </html> 
