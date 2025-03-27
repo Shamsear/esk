@@ -2324,13 +2324,28 @@ function resetFilters() {
         // Performance optimizations are now handled in separate files
         // This avoids duplicate event listeners that were causing issues
     </script>
+    <!-- Defer main script to improve initial load -->
+    <script defer src="js/script.js"></script>
     <script src="js/remove-conflicting-styles.js"></script>
-    <script src="js/background-mobile-scroll.js"></script>
     
     <script src="js/background-fix.js"></script>
+    <script src="js/background-mobile-scroll.js"></script>
     
-    <script src="js/script.js"></script>
+    
+    <!-- Load performance optimizations -->
+    
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
     <script src="js/fix-scroll.js"></script>
+    <script defer src="js/performance.js"></script>
     </body>
 </html>
 

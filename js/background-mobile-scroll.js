@@ -41,6 +41,27 @@ document.addEventListener('DOMContentLoaded', function() {
             html, body {
                 overflow-y: auto !important;
                 overflow-x: hidden !important;
+                height: auto !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Fix for content visibility on career-tournament page */
+            .overlay {
+                min-height: 100vh !important;
+                display: block !important;
+            }
+            
+            /* Ensure all animated elements are visible */
+            .tournament-card, .black-box {
+                min-height: auto !important;
+                visibility: visible !important;
+                display: block !important;
+            }
+            
+            /* Fix body height calculation */
+            body {
+                height: auto !important;
+                min-height: 100vh !important;
             }
         `;
         
@@ -83,12 +104,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     position: relative !important;
                     background-attachment: scroll !important;
                     overflow-x: hidden !important;
+                    height: auto !important;
+                    min-height: 100vh !important;
                 }
                 
                 /* Make overlay properly scroll over the background */
                 .overlay {
                     position: relative !important;
                     z-index: 2 !important;
+                    min-height: 100vh !important;
+                }
+                
+                /* Fix animation issues */
+                .hidden {
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                }
+                
+                /* Fix for tournament-card visibility */
+                .tournament-card {
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    transform: translateY(0) !important;
                 }
             `;
             
@@ -97,6 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Create a dedicated scrollable background element for mobile
             createScrollableBackground();
+            
+            // Force recalculation of animations
+            setTimeout(() => {
+                checkContentVisibility();
+            }, 500);
         };
         
         // Create an actual background element instead of using ::before
@@ -161,7 +203,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.documentElement.offsetHeight
                 );
                 
-                bgElement.style.height = `${docHeight}px`;
+                bgElement.style.height = `${docHeight + 100}px`; // Add extra padding to ensure coverage
+            }
+        };
+        
+        // Check that all content is visible, especially for career-tournament page
+        const checkContentVisibility = () => {
+            // Force all tournament cards to be visible
+            const cards = document.querySelectorAll('.tournament-card, .black-box');
+            if (cards.length > 0) {
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.visibility = 'visible';
+                    card.style.transform = 'translateY(0)';
+                    card.classList.add('animate-in');
+                    card.classList.remove('hidden');
+                });
+                
+                // Force recalculation of document height
+                updateBackgroundHeight();
             }
         };
         
