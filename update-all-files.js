@@ -32,6 +32,64 @@ function updateHtmlFiles() {
         let content = fs.readFileSync(file, 'utf8');
         let modified = false;
         
+        // Add additional-fixes.css if not already present
+        if (!content.includes('additional-fixes.css')) {
+            // Find the position to insert the CSS link (after existing CSS links)
+            const headCloseTag = content.indexOf('</head>');
+            
+            if (headCloseTag !== -1) {
+                // Find the last CSS link
+                const lastCssPos = content.lastIndexOf('css', headCloseTag);
+                
+                if (lastCssPos !== -1) {
+                    const closingLinkTag = content.indexOf('>', lastCssPos);
+                    
+                    if (closingLinkTag !== -1 && closingLinkTag < headCloseTag) {
+                        // Insert after the last CSS link
+                        const insertPos = closingLinkTag + 1;
+                        content = 
+                            content.substring(0, insertPos) + 
+                            '\n    <link rel="stylesheet" href="css/additional-fixes.css">' +
+                            content.substring(insertPos);
+                        modified = true;
+                    }
+                } else {
+                    // No CSS links found, add right before closing head tag
+                    content = 
+                        content.substring(0, headCloseTag) + 
+                        '    <link rel="stylesheet" href="css/additional-fixes.css">\n' +
+                        content.substring(headCloseTag);
+                    modified = true;
+                }
+            }
+        }
+        
+        // Add fix-scroll.js if not already present (should be the first script)
+        if (!content.includes('fix-scroll.js')) {
+            // Find the position to insert the script (as the first script in the body)
+            const bodyCloseTag = content.lastIndexOf('</body>');
+            
+            if (bodyCloseTag !== -1) {
+                const scriptInsertPos = content.lastIndexOf('<script', bodyCloseTag);
+                
+                if (scriptInsertPos !== -1) {
+                    // Insert before the first script
+                    content = 
+                        content.substring(0, scriptInsertPos) + 
+                        '<script src="js/fix-scroll.js"></script>\n    ' +
+                        content.substring(scriptInsertPos);
+                    modified = true;
+                } else {
+                    // No scripts found, add right before closing body tag
+                    content = 
+                        content.substring(0, bodyCloseTag) + 
+                        '    <script src="js/fix-scroll.js"></script>\n' +
+                        content.substring(bodyCloseTag);
+                    modified = true;
+                }
+            }
+        }
+        
         // Add remove-conflicting-styles.js if not already present
         if (!content.includes('remove-conflicting-styles.js')) {
             // Find the position to insert the script (before the closing body tag)

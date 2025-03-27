@@ -1,0 +1,45 @@
+/* 
+ * Additional Fixes for Mobile Scroll Issues
+ * This CSS file fixes scrolling issues on mobile devices
+ */
+
+/* Ensure proper document height */
+html, body {
+    height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+/* Disable smooth scrolling on mobile devices which can cause scroll positioning issues */
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: auto !important;
+    }
+    
+    body {
+        /* Ensure the overflow is properly handled */
+        overflow-x: hidden;
+        overflow-y: auto;
+        
+        /* Prevent scroll restoration */
+        scroll-behavior: auto !important;
+    }
+    
+    /* Fix for iOS specific issues */
+    @supports (-webkit-touch-callout: none) {
+        html, body {
+            /* Prevent overscroll/bounce effect on iOS */
+            -webkit-overflow-scrolling: auto;
+            overscroll-behavior: none;
+        }
+    }
+}
+
+/* Ensure the overlay properly contains content */
+.overlay {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+} 

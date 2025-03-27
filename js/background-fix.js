@@ -3,6 +3,9 @@
  * This script ensures consistent background image behavior across all HTML files
  */
 document.addEventListener('DOMContentLoaded', function() {
+    // Reset scroll position to top on page load/refresh
+    window.scrollTo(0, 0);
+    
     // Get current page to determine the correct path to logo.webp
     const currentPath = window.location.pathname;
     const isInSubdirectory = currentPath.split('/').length > 2; 
@@ -18,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create a pseudo-element for the background if not already added by CSS
     const styleElement = document.createElement('style');
     styleElement.textContent = `
+        html {
+            scroll-behavior: auto !important;
+        }
+        
         body::before {
             content: '';
             position: fixed;
@@ -58,6 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
         styleElement.setAttribute('data-background-fix', 'true');
         document.head.appendChild(styleElement);
     }
+    
+    // Reset scroll position again after styles are applied
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 50);
     
     // Remove all inline background styles from the body to avoid conflicts
     const propsToRemove = [
