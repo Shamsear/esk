@@ -67,6 +67,37 @@
             transition: all 0.5s ease;
         }
         
+        /* Transition delay for different cards */
+        .tournament-card:nth-child(3) .tournament-header,
+        .tournament-card:nth-child(3) .tournament-content {
+            transition-delay: 0.1s;
+        }
+        
+        .tournament-card:nth-child(4) .tournament-header,
+        .tournament-card:nth-child(4) .tournament-content {
+            transition-delay: 0.2s;
+        }
+        
+        .tournament-card:nth-child(5) .tournament-header,
+        .tournament-card:nth-child(5) .tournament-content {
+            transition-delay: 0.3s;
+        }
+        
+        .tournament-card:nth-child(6) .tournament-header,
+        .tournament-card:nth-child(6) .tournament-content {
+            transition-delay: 0.4s;
+        }
+        
+        .tournament-card:nth-child(7) .tournament-header,
+        .tournament-card:nth-child(7) .tournament-content {
+            transition-delay: 0.5s;
+        }
+        
+        .tournament-card:nth-child(8) .tournament-header,
+        .tournament-card:nth-child(8) .tournament-content {
+            transition-delay: 0.6s;
+        }
+        
         .tournament-card.visible .tournament-header,
         .tournament-card.visible .tournament-content {
             opacity: 1;
@@ -108,15 +139,41 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            transition-delay: 0.1s; /* Slight delay after header animation */
         }
         
-        .tournament-section img {
+        .tournament-card.visible .tournament-images {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Individual image animations */
+        .tournament-images img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             object-fit: cover;
             width: 100%;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease, box-shadow 0.3s ease;
+        }
+        
+        .tournament-images img:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+        
+        .tournament-images img:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+        
+        .tournament-card.visible .tournament-images img {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Image hover effects - applied via JS */
@@ -146,7 +203,16 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             opacity: 0;
             transform: translateY(-10px);
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
+        }
+        
+        /* Staggered delays for section headers */
+        .black-box:nth-child(3) {
+            transition-delay: 0.15s;
+        }
+        
+        .black-box:nth-child(10) {
+            transition-delay: 0.2s;
         }
         
         .black-box.visible {
@@ -456,10 +522,10 @@
         <i class="fas fa-arrow-up"></i>
     </div>
     <script src="js/remove-conflicting-styles.js"></script>
-    <script src="js/background-fix.js"></script>
-    <script src="js/background-mobile-scroll.js"></script>
     
-    <script src="js/script.js"></script>
+    <script src="js/background-fix.js"></script>
+    <scri<script src="js/background-mobile-scroll.js"></script>
+    pt src="js/script.js"></script>
     <script src="js/fix-scroll.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -481,44 +547,69 @@
                 });
             });
             
-            // Simple scroll animations
+            // One-by-one scroll animations
             const cards = document.querySelectorAll('.tournament-card');
             const headers = document.querySelectorAll('.black-box');
+            let animationQueue = [];
             
-            // Add visible class to the first header and first card immediately
+            // Add visible class to the first header immediately
             if (headers.length > 0) {
                 headers[0].classList.add('visible');
             }
             
+            // Show first card immediately
             if (cards.length > 0) {
                 cards[0].classList.add('visible');
             }
             
             // Check elements on scroll
             function checkVisibility() {
+                // Clear previous animation queue
+                animationQueue = [];
+                
+                // Queue up cards that are in viewport but not visible
                 cards.forEach(card => {
                     const rect = card.getBoundingClientRect();
-                    const isVisible = (
+                    const isInViewport = (
                         rect.top <= window.innerHeight * 0.8 &&
                         rect.bottom >= 0
                     );
                     
-                    if (isVisible) {
-                        card.classList.add('visible');
+                    if (isInViewport && !card.classList.contains('visible')) {
+                        animationQueue.push(card);
                     }
                 });
                 
+                // Queue up headers that are in viewport but not visible
                 headers.forEach(header => {
                     const rect = header.getBoundingClientRect();
-                    const isVisible = (
+                    const isInViewport = (
                         rect.top <= window.innerHeight * 0.8 &&
                         rect.bottom >= 0
                     );
                     
-                    if (isVisible) {
-                        header.classList.add('visible');
+                    if (isInViewport && !header.classList.contains('visible')) {
+                        animationQueue.push(header);
                     }
                 });
+                
+                // Process animation queue with staggered timing
+                if (animationQueue.length > 0) {
+                    processQueue();
+                }
+            }
+            
+            // Process animation queue with delays
+            function processQueue() {
+                if (animationQueue.length === 0) return;
+                
+                const element = animationQueue.shift();
+                element.classList.add('visible');
+                
+                // Process next item after delay
+                if (animationQueue.length > 0) {
+                    setTimeout(processQueue, 150); // 150ms between animations
+                }
             }
             
             // Check visibility on scroll
@@ -527,11 +618,20 @@
             // Initial check
             checkVisibility();
             
-            // Make sure everything is visible after 3 seconds
+            // Make sure everything is visible after 5 seconds
             setTimeout(function() {
-                cards.forEach(card => card.classList.add('visible'));
-                headers.forEach(header => header.classList.add('visible'));
-            }, 3000);
+                cards.forEach(card => {
+                    if (!card.classList.contains('visible')) {
+                        card.classList.add('visible');
+                    }
+                });
+                
+                headers.forEach(header => {
+                    if (!header.classList.contains('visible')) {
+                        header.classList.add('visible');
+                    }
+                });
+            }, 5000);
             
             // Disable image clicks
             const images = document.querySelectorAll('img');
