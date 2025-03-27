@@ -63,4 +63,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize animations
     animateOnScroll();
+    
+    // Trophy Cabinet - Collapsible season sections
+    const seasonBoxes = document.querySelectorAll('.season-box');
+    
+    if (seasonBoxes.length > 0) {
+        // Initially all seasons should be collapsed
+        const seasonContents = document.querySelectorAll('.season-content');
+        seasonContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        seasonBoxes.forEach(box => {
+            box.classList.remove('active');
+        });
+        
+        // Add click event listeners to all season boxes
+        seasonBoxes.forEach(box => {
+            box.addEventListener('click', function() {
+                const seasonId = this.getAttribute('data-season');
+                const seasonContent = document.getElementById(seasonId + '-content');
+                
+                // Toggle current season
+                this.classList.toggle('active');
+                
+                if (seasonContent) {
+                    seasonContent.classList.toggle('active');
+                    
+                    // Smooth scroll to the season box if it's being opened
+                    if (seasonContent.classList.contains('active')) {
+                        // Add a slight bounce effect to the season box
+                        this.style.transform = 'scale(1.08)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1.03)';
+                        }, 150);
+                        
+                        // Slight delay to allow animation to start
+                        setTimeout(() => {
+                            this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                }
+                
+                // Close all other seasons
+                seasonBoxes.forEach(otherBox => {
+                    if (otherBox !== this) {
+                        const otherSeasonId = otherBox.getAttribute('data-season');
+                        const otherContent = document.getElementById(otherSeasonId + '-content');
+                        
+                        otherBox.classList.remove('active');
+                        if (otherContent) {
+                            otherContent.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        });
+    }
 }); 
