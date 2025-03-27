@@ -82,7 +82,7 @@
     <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
 
 </head>
-<body>
+<body class="mobile-optimize">
     <div class="skip-link">Skip to content</div>
     
     <div class="page-transition"></div>
@@ -268,6 +268,9 @@
     
     <!-- Service worker registration -->
     <script defer src="js/sw-register.js"></script>
+    
+    <!-- Mobile device detection - load early -->
+    <script src="js/mobile-detector.js"></script>
     
     <!-- Performance optimizations - Load in correct order -->
     <script defer src="js/performance.js"></script>
