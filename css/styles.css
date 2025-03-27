@@ -25,11 +25,6 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-image: url('../assets/images/logo.webp');
-    background-size: contain;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     background-color: #000;
     min-height: 100vh;
     overflow-x: hidden;
