@@ -28,18 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileScrollStyle.textContent = `
                 /* Override fixed background on mobile */
                 body::before {
-                    position: absolute !important;
-                    background-attachment: scroll !important;
-                    height: 100% !important;
-                    min-height: 100vh !important;
-                    top: 0 !important;
-                    left: 0 !important;
-                    width: 100% !important;
-                    background-position: center top !important;
-                    z-index: -10 !important;
-                    background-size: contain !important;
-                    background-repeat: no-repeat !important;
-                    background-color: #000 !important;
+                    display: none !important; /* Hide the default background element */
                 }
                 
                 /* Ensure body has proper setup for scrolling background */
@@ -59,14 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add the style to the document head
             document.head.appendChild(mobileScrollStyle);
             
-            // Force background to be in document flow (not fixed)
-            document.body.style.backgroundAttachment = 'scroll';
-            
             // Create a dedicated scrollable background element for mobile
             createScrollableBackground();
         };
         
-        // Alternative approach: create an actual background element instead of using ::before
+        // Create an actual background element instead of using ::before
         const createScrollableBackground = () => {
             // Remove existing background element if it exists
             const existingBg = document.getElementById('mobile-scrollable-bg');
@@ -84,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bgElement.id = 'mobile-scrollable-bg';
             
             // Style the background element
-            bgElement.style.position = 'fixed';
+            bgElement.style.position = 'absolute';
             bgElement.style.top = '0';
             bgElement.style.left = '0';
             bgElement.style.width = '100%';
@@ -100,11 +86,36 @@ document.addEventListener('DOMContentLoaded', function() {
             // Insert at the beginning of body
             document.body.insertBefore(bgElement, document.body.firstChild);
             
-            // Add an onscroll event to move the background
+            // Set initial height to be at least the height of the document
+            updateBackgroundHeight();
+            
+            // Add an onscroll event to move the background with scroll
             window.addEventListener('scroll', function() {
-                // Move the background with scroll
-                bgElement.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+                // Calculate scroll percentage - this is what synchronizes the image with content
+                let scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                
+                // Calculate background position to match scroll position of content
+                // This makes the background stay with the content instead of falling behind
+                bgElement.style.transform = `translateY(${window.scrollY}px)`;
+                
+                // Update background height as needed while scrolling
+                updateBackgroundHeight();
             });
+            
+            // Function to ensure background is always tall enough
+            function updateBackgroundHeight() {
+                // Make sure background is at least as tall as the document + viewport height
+                // This ensures it covers the entire page even during scroll
+                const docHeight = Math.max(
+                    document.body.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.clientHeight,
+                    document.documentElement.scrollHeight,
+                    document.documentElement.offsetHeight
+                );
+                
+                bgElement.style.height = `${docHeight}px`;
+            }
         };
         
         // Wait a bit for background-fix.js to finish, then apply our fix
