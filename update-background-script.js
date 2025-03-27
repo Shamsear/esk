@@ -32,23 +32,31 @@ function updateHtmlFiles() {
         let content = fs.readFileSync(file, 'utf8');
         let modified = false;
         
-        // Add background-mobile-scroll.js if not already present
-        if (!content.includes('background-mobile-scroll.js')) {
-            // Find the position right before background-fix.js
-            const backgroundFixPos = content.indexOf('background-fix.js');
+        // Check if background-fix.js exists in the file
+        const backgroundFixPos = content.indexOf('background-fix.js');
+        
+        if (backgroundFixPos !== -1) {
+            // Find the end of the script tag containing background-fix.js
+            const scriptEndPos = content.indexOf('</script>', backgroundFixPos) + 9;
             
-            if (backgroundFixPos !== -1) {
-                // Find the script tag opening position
-                const scriptTagPos = content.lastIndexOf('<script', backgroundFixPos);
+            // First, remove any existing background-mobile-scroll.js script
+            if (content.includes('background-mobile-scroll.js')) {
+                const mobileScriptStartPos = content.indexOf('<script', content.indexOf('background-mobile-scroll.js') - 50);
+                const mobileScriptEndPos = content.indexOf('</script>', content.indexOf('background-mobile-scroll.js')) + 9;
                 
-                if (scriptTagPos !== -1) {
-                    // Insert our script right before background-fix.js
-                    content = 
-                        content.substring(0, scriptTagPos) + 
-                        '<script src="js/background-mobile-scroll.js"></script>\n    ' +
-                        content.substring(scriptTagPos);
+                if (mobileScriptStartPos !== -1 && mobileScriptEndPos !== -1) {
+                    content = content.substring(0, mobileScriptStartPos) + content.substring(mobileScriptEndPos);
                     modified = true;
                 }
+            }
+            
+            // Now add the script right after background-fix.js
+            if (scriptEndPos !== -1) {
+                content = 
+                    content.substring(0, scriptEndPos) + 
+                    '\n    <script src="js/background-mobile-scroll.js"></script>' +
+                    content.substring(scriptEndPos);
+                modified = true;
             }
         }
         
@@ -57,12 +65,12 @@ function updateHtmlFiles() {
             updatedCount++;
             console.log(`Updated ${file}`);
         } else {
-            console.log(`${file} already has the script reference or couldn't be updated`);
+            console.log(`${file} either doesn't include background-fix.js or couldn't be updated`);
         }
     }
     
     console.log(`\nUpdated ${updatedCount} HTML files with background-mobile-scroll.js reference`);
 }
 
-console.log('Updating HTML files to include background-mobile-scroll.js...');
+console.log('Updating HTML files to include background-mobile-scroll.js after background-fix.js...');
 updateHtmlFiles(); 
