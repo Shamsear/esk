@@ -8,7 +8,9 @@
 
     <!-- DNS prefetch and preconnect -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://assets.mixkit.co">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -27,7 +29,7 @@
     <style>
         /* Main page style */
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             background-image: url('assets/images/logo.webp');
             color: #e3e3e3;
             margin: 0;
@@ -36,6 +38,8 @@
             -webkit-user-select: none; /* Safari */
             -ms-user-select: none; /* Internet Explorer/Edge */
             position: relative;
+            font-weight: 300;
+            letter-spacing: 0.2px;
         }
 
         /* Background overlay */
@@ -65,19 +69,23 @@
 
         /* Welcome screen styles */
         #loading {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-color: #121212; /* Dark theme background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            color: #fff;
-            text-align: center;
-            font-size: 32px;
-            flex-direction: column;
-            animation: fadeIn 1s ease-in-out; /* Fade in effect */
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background-color: #121212 !important; /* Dark theme background */
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 9999 !important;
+            color: #fff !important;
+            text-align: center !important;
+            font-size: 32px !important;
+            flex-direction: column !important;
+            animation: fadeIn 1s ease-in-out !important; /* Fade in effect */
+            overflow: hidden !important;
+            transition: opacity 0.5s ease-out !important;
         }
         /* Welcome message styling */
         .welcome-message {
@@ -86,6 +94,8 @@
             color: #b0b0b0; /* Dark gray color for the welcome message */
             opacity: 0;
             animation: fadeIn 2s ease-in-out forwards, bounce 2s ease-in-out infinite;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            letter-spacing: 0.3px;
         }
         @media screen and (max-width: 768px) {
             .welcome-message {
@@ -94,6 +104,7 @@
             color: #b0b0b0; /* Dark gray color for the welcome message */
             opacity: 0;
             animation: fadeIn 2s ease-in-out forwards, bounce 2s ease-in-out infinite;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
         }
     }
 
@@ -104,6 +115,8 @@
             color: #888; /* Light gray for the loading message */
             opacity: 0;
             animation: fadeIn 2.5s ease-in-out forwards;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            font-weight: 300;
         }
 
         /* Keyframes for fading in and background animation */
@@ -122,6 +135,31 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
+        /* Background animation for loading screen */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                #121212 0%, 
+                #1a1a1a 25%, 
+                #202020 50%, 
+                #1a1a1a 75%, 
+                #121212 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         #content {
             display: none; /* Make sure it's hidden by default */
             opacity: 0;
@@ -130,10 +168,14 @@
 
         h1 {
             text-align: center;
-            font-size: 24px;
+            font-size: 28px;
             margin-top: 20px;
             color: #fff;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
+        
         h2 {
             display: block;
             font-size: 1.5em;
@@ -141,7 +183,9 @@
             margin-block-end: 0.83em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
-            font-weight: normal;
+            font-weight: 500;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            letter-spacing: 0.3px;
             unicode-bidi: isolate;
         }
 
@@ -172,6 +216,7 @@
             border: 2px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
             font-size: 15px;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
             color: #fff;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -361,12 +406,15 @@
             font-size: 20px;
             margin-bottom: 15px;
             color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
         .filters label {
             font-size: 16px;
             display: block;
             margin-bottom: 10px;
+            font-weight: 400;
         }
 
         .filters select {
@@ -1092,6 +1140,8 @@
             align-items: center;
             gap: 8px;
             padding-left: 8px;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            letter-spacing: 0.2px;
         }
 
         .stats-header i {
@@ -1105,6 +1155,7 @@
             border-spacing: 0 8px;
             background: transparent;
             margin-top: -8px;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
         }
 
         #playerStatsTable thead tr {
@@ -1136,6 +1187,7 @@
             font-size: 14px;
             border: none;
             position: relative;
+            font-weight: 300;
         }
 
         #playerStatsTable td:first-child {
@@ -1257,7 +1309,7 @@
             <div class="logo">
                 <!-- Add your logo here -->
                 <img src="../assets/images/logo11.webp" alt="Logo" class="logo-img" width="40" height="40">
-                <h1>R2G Player Data</h1>
+                <h1 style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight: 600;">R2G Player Data</h1>
             </div>
 
     </div>
@@ -1274,7 +1326,7 @@
 
 
     <!-- Filter Button for Mobile/Tablets -->
-    <button class="filter-btn" onclick="openFilterModal()">
+    <button class="filter-btn" onclick="openFilterModal()" style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight: 500;">
         Filters <i class="fas fa-filter"></i>
     </button>
     <!-- Main content -->
@@ -1716,9 +1768,18 @@ window.onload = function() {
     setTimeout(function() {
         const loadingElement = document.getElementById('loading');
         if (loadingElement) {
-            loadingElement.style.display = 'none';  // Hide the welcome screen
+            // Ensure we reset any inline styles that might be interfering
+            loadingElement.style.opacity = '0';
+            setTimeout(function() {
+                loadingElement.style.display = 'none';
+                // Unblock scrolling on body
+                document.body.style.overflow = 'auto';
+            }, 500);
         }
-    }, 4500);  // 4000 milliseconds = 4 seconds
+    }, 4500);  // 4500 milliseconds = 4.5 seconds
+    
+    // Block scrolling on body until loading completes
+    document.body.style.overflow = 'hidden';
     resetFilters();
     resetModalFilters(); // Reset the filters when the page loads
     sortPlayers();  // Sort players when the page loads

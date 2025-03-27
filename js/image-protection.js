@@ -3,23 +3,39 @@
  * Prevents image zooming, clicking, and right-click functionality
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Disable image dragging
+    // Add CSS to prevent touch actions at the beginning to avoid flickering
+    const style = document.createElement('style');
+    style.innerHTML = `
+        img {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none !important;
+        }
+        
+        body {
+            touch-action: pan-x pan-y;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Disable image dragging without cloning
     const allImages = document.querySelectorAll('img');
     allImages.forEach(img => {
         // Prevent dragging
         img.setAttribute('draggable', 'false');
         
-        // Disable pointer events
-        img.style.pointerEvents = 'none';
+        // Set cursor to default
+        img.style.cursor = 'default';
         
         // Prevent context menu
         img.addEventListener('contextmenu', function(e) {
             e.preventDefault();
             return false;
         });
-        
-        // Set cursor to default
-        img.style.cursor = 'default';
     });
     
     // Prevent pinch zoom on mobile
@@ -44,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Disable image click modal functionality in tournament guide
+    // Disable image click modal functionality in tournament guide only
     const imageModal = document.getElementById('imageModal');
     if (imageModal) {
         const closeModal = document.querySelector('.close-modal');
@@ -54,30 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Prevent image click event in tournament guide
+        // Prevent image click event in tournament guide only
         const guideImages = document.querySelectorAll('.guide-img');
-        guideImages.forEach(img => {
-            const newImg = img.cloneNode(true);
-            img.parentNode.replaceChild(newImg, img);
-        });
+        if (guideImages.length > 0) {
+            guideImages.forEach(img => {
+                const newImg = img.cloneNode(true);
+                img.parentNode.replaceChild(newImg, img);
+            });
+        }
     }
-    
-    // Add CSS to prevent touch actions that might enable zooming
-    const style = document.createElement('style');
-    style.innerHTML = `
-        img {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            pointer-events: none !important;
-        }
-        
-        body {
-            touch-action: pan-x pan-y;
-        }
-    `;
-    document.head.appendChild(style);
 }); 

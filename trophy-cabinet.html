@@ -81,8 +81,37 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-
+        
+        /* Add down arrow indicator to season box */
+        .season-box::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Rotate arrow when active */
+        .season-box.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        /* Enhance hover effect */
+        .season-box:hover {
+            background-color: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            transform: translateY(-2px);
+        }
+        
         /* Season heading text */
         .season-box h1 {
             color: white;
@@ -204,12 +233,12 @@
         }
 
         .season-number {
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 5px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
             font-weight: 500;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         @media screen and (max-width: 768px) {
@@ -394,11 +423,15 @@
             padding-top: 20px;
             overflow: hidden;
             transition: all 0.4s ease-out;
+            max-height: 0;
+            opacity: 0;
         }
         
         .season-content.active {
             display: block;
             animation: expandContent 0.6s ease-out;
+            max-height: 3000px; /* Large enough to accommodate all content */
+            opacity: 1;
         }
         
         @keyframes fadeIn {
@@ -410,10 +443,12 @@
             from { 
                 opacity: 0;
                 transform: translateY(-20px);
+                max-height: 0;
             }
             to { 
                 opacity: 1;
                 transform: translateY(0);
+                max-height: 3000px;
             }
         }
         
@@ -889,5 +924,47 @@
     <script src="https://dss4hwpyv4qfp.cloudfront.net/libs/js/jquery/2.2.4/jquery.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/image-protection.js"></script>
+    <script>
+        // Document ready function to ensure DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all season boxes
+            const seasonBoxes = document.querySelectorAll('.season-box');
+            
+            // Add click event listener to each season box
+            seasonBoxes.forEach(function(box) {
+                box.addEventListener('click', function() {
+                    // Get the season ID from the data-season attribute
+                    const seasonId = this.getAttribute('data-season');
+                    const seasonContentId = seasonId + '-content';
+                    const seasonContent = document.getElementById(seasonContentId);
+                    
+                    // Toggle active class on the season box
+                    this.classList.toggle('active');
+                    
+                    // Toggle active class on the season content
+                    if (seasonContent) {
+                        if (seasonContent.classList.contains('active')) {
+                            // Hide the content
+                            seasonContent.classList.remove('active');
+                            // Change arrow direction
+                            this.classList.remove('active');
+                        } else {
+                            // Show the content
+                            seasonContent.classList.add('active');
+                            // Change arrow direction
+                            this.classList.add('active');
+                        }
+                    }
+                });
+            });
+            
+            // Add cursor pointer to season boxes to indicate they're clickable
+            seasonBoxes.forEach(function(box) {
+                box.style.cursor = 'pointer';
+            });
+            
+            // All seasons are collapsed by default (removed the code that expands season 5)
+        });
+    </script>
 </body>
 </html> 
