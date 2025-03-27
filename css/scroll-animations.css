@@ -1,0 +1,221 @@
+/* Scroll Animations CSS */
+
+/* Base animation settings */
+[class*="scroll-"] {
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+/* Fade In animation */
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    visibility: hidden;
+}
+
+.scroll-fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+/* Fade In From Left */
+.scroll-fade-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    visibility: hidden;
+}
+
+.scroll-fade-left.active {
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
+}
+
+/* Fade In From Right */
+.scroll-fade-right {
+    opacity: 0;
+    transform: translateX(60px);
+    visibility: hidden;
+}
+
+.scroll-fade-right.active {
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
+}
+
+/* Zoom In animation */
+.scroll-zoom-in {
+    opacity: 0;
+    transform: scale(0.8);
+    visibility: hidden;
+}
+
+.scroll-zoom-in.active {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+/* Zoom Out animation */
+.scroll-zoom-out {
+    opacity: 0;
+    transform: scale(1.2);
+    visibility: hidden;
+}
+
+.scroll-zoom-out.active {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+/* Rotate animation */
+.scroll-rotate {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+    visibility: hidden;
+}
+
+.scroll-rotate.active {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+    visibility: visible;
+}
+
+/* Flip animation */
+.scroll-flip {
+    opacity: 0;
+    transform: perspective(800px) rotateY(90deg);
+    transform-origin: center;
+    visibility: hidden;
+}
+
+.scroll-flip.active {
+    opacity: 1;
+    transform: perspective(800px) rotateY(0);
+    visibility: visible;
+}
+
+/* Staggered animations for child elements */
+.stagger-children > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { transition-delay: 0.6s; }
+.stagger-children > *:nth-child(7) { transition-delay: 0.7s; }
+.stagger-children > *:nth-child(8) { transition-delay: 0.8s; }
+
+/* Blurry reveal animation */
+.scroll-blur {
+    opacity: 0;
+    filter: blur(15px);
+    transform: scale(0.95);
+    visibility: hidden;
+}
+
+.scroll-blur.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+    visibility: visible;
+}
+
+/* Scrolling parallax effects */
+.parallax-slow {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+}
+
+.parallax-medium {
+    transition-duration: 0.05s !important;
+    transition-timing-function: linear !important;
+}
+
+.parallax-fast {
+    transition-duration: 0.02s !important;
+    transition-timing-function: linear !important;
+}
+
+/* Scroll-triggered background effect */
+.scroll-bg-change {
+    transition: background-color 0.8s ease;
+}
+
+.scroll-bg-change.active {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Scroll-triggered border animation */
+.scroll-border {
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transition: width 0.8s ease;
+}
+
+.scroll-border.active::after {
+    width: 100%;
+}
+
+/* Subtle text highlight on scroll */
+.scroll-highlight {
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.scroll-highlight.active {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(52, 152, 219, 0.6);
+}
+
+/* Custom animation for navigation items */
+.nav-item.scroll-fade-left.active {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Make animations work with prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    [class*="scroll-"] {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    [class*="scroll-"].active {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        visibility: visible;
+    }
+    
+    .stagger-children > * {
+        transition-delay: 0s !important;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    [class*="scroll-"] {
+        transition-duration: 0.4s;
+    }
+    
+    .scroll-fade-left, 
+    .scroll-fade-right {
+        transform: translateY(30px);
+    }
+    
+    .scroll-fade-left.active, 
+    .scroll-fade-right.active {
+        transform: translateY(0);
+    }
+} 

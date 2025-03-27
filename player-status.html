@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="js-loading">
 <head>
     <!-- PWA support -->
     <link rel="manifest" href="manifest.json">
@@ -407,7 +407,7 @@
 
         /* Filter Button for Mobile/Tablets */
         .filter-btn {
-            display: block !important; /* Always show filter button for all screen sizes */
+            display: none;
             background: rgba(40, 40, 40, 0.9);
             color: #fff;
             border: none;
@@ -415,15 +415,16 @@
             font-size: 15px;
             border-radius: 25px;
             cursor: pointer;
-            position: fixed !important; /* Fixed to viewport */
-            right: 20px !important;
-            bottom: 20px !important;
-            z-index: 1000; /* Higher z-index but below modal */
+            position: fixed;
+            right: 20px;
+            bottom: 20px; /* Changed from top: 50% to bottom: 20px */
+            transform: none; /* Removed transform */
+            z-index: 98;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            display: flex !important;
+            display: flex;
             align-items: center;
             gap: 8px;
         }
@@ -449,6 +450,7 @@
                 font-size: 14px;
                 right: 15px;
                 bottom: 15px;
+                display: block; /* Always show on mobile */
             }
         }
 
@@ -456,7 +458,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1500; /* Higher z-index to ensure it's above everything */
+    z-index: 1000; /* Increased z-index */
     left: 0;
     top: 0;
     width: 100%;
@@ -467,8 +469,8 @@
 
 /* Modal Content */
 .modal-content {
-    position: absolute;
-    top: 50vh;
+    position: relative;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #1a1a1a;
@@ -481,7 +483,7 @@
     overflow-y: auto;
     box-sizing: border-box;
     animation: modalFadeIn 0.3s ease-out;
-    z-index: 1550; /* Higher than modal background */
+    z-index: 1001; /* Higher than modal background */
 }
 @keyframes modalFadeIn {
     from {
@@ -1008,7 +1010,6 @@
             top: 20px;
             right: 20px;
             z-index: 99; /* Lower z-index than modal */
-            display: flex; /* Use flex display for proper alignment */
         }
         
         .admin-link a {
@@ -1040,7 +1041,6 @@
             top: 20px;
             left: 20px;
             z-index: 99; /* Lower z-index than modal */
-            display: flex; /* Use flex display for proper alignment */
         }
         
         .back-link a {
@@ -1224,9 +1224,6 @@
     <!-- Performance optimized CSS -->
     <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
-    
-    <!-- Fix for filter button position -->
-    <link rel="stylesheet" href="fix-filter-position.css">
 
 </head>
 <body>
@@ -1274,7 +1271,7 @@
 
 
     <!-- Filter Button for Mobile/Tablets -->
-    <button class="filter-btn" onclick="openFilterModal()" style="position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 1000 !important; display: flex !important;">
+    <button class="filter-btn" onclick="openFilterModal()">
         Filters <i class="fas fa-filter"></i>
     </button>
     <!-- Main content -->
@@ -1718,21 +1715,7 @@ window.onload = function() {
         if (loadingElement) {
             loadingElement.style.display = 'none';  // Hide the welcome screen
         }
-        
-        // Ensure content is visible
-        const contentElement = document.getElementById('content');
-        if (contentElement) {
-            contentElement.style.display = 'block';
-            contentElement.style.opacity = '1';
-        }
-        
-        // Ensure filter button is visible
-        const filterBtn = document.querySelector('.filter-btn');
-        if (filterBtn) {
-            filterBtn.style.display = 'flex';
-        }
-    }, 4500);  // 4500 milliseconds = 4.5 seconds
-    
+    }, 4500);  // 4000 milliseconds = 4 seconds
     resetFilters();
     resetModalFilters(); // Reset the filters when the page loads
     sortPlayers();  // Sort players when the page loads
@@ -1933,6 +1916,7 @@ function createPlayerCard(player) {
     
     img.src = player.imagePath;
     img.alt = player.name;
+    img.loading = 'lazy'; // Lazy load images
     
     // Append the image to the card
     playerCard.appendChild(img);
@@ -1979,47 +1963,18 @@ function hideFilterButton() {
 
 // Function to show the filter button
 function showFilterButton() {
-    document.querySelector('.filter-btn').style.display = 'flex';
+    document.querySelector('.filter-btn').style.display = 'block';
 }
 
 // Open the filter modal and hide the filter button
 function openFilterModal() {
-    const modal = document.getElementById('filterModal');
-    const modalContent = modal.querySelector('.modal-content');
-    
-    // Adjust the modal position to be centered in the current viewport
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-    
-    // Save current scroll position and prevent body scrolling
-    document.body.style.overflow = 'hidden';
-    document.body.dataset.scrollY = scrollTop;
-    
-    // Hide admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'none';
-    if (backBtn) backBtn.style.display = 'none';
-    
-    modal.style.display = 'block';
+    document.getElementById('filterModal').style.display = 'block';
     hideFilterButton();  // Hide filter button when modal is opened
 }
 
 // Close the filter modal and show the filter button
 function closeFilterModal() {
     document.getElementById('filterModal').style.display = 'none';
-    
-    // Restore body scrolling and scroll position
-    document.body.style.overflow = '';
-    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-    window.scrollTo(0, scrollY);
-    
-    // Show admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'flex';
-    if (backBtn) backBtn.style.display = 'flex';
-    
     showFilterButton();  // Show filter button when modal is closed
 }
 
@@ -2084,22 +2039,6 @@ function openModal(card) {
 
     // Show the modal
     const modal = document.getElementById('playerModal');
-    const modalContent = modal.querySelector('.modal-content');
-    
-    // Adjust the modal position to be centered in the current viewport
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-    
-    // Save current scroll position and prevent body scrolling
-    document.body.style.overflow = 'hidden';
-    document.body.dataset.scrollY = scrollTop;
-    
-    // Hide admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'none';
-    if (backBtn) backBtn.style.display = 'none';
-    
     modal.style.display = "block";
     hideFilterButton();
 }
@@ -2108,18 +2047,6 @@ function openModal(card) {
 function closeModal() {
     const modal = document.getElementById('playerModal');
     modal.style.display = "none";
-    
-    // Restore body scrolling and scroll position
-    document.body.style.overflow = '';
-    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-    window.scrollTo(0, scrollY);
-    
-    // Show admin and back buttons
-    const adminBtn = document.querySelector('.admin-link');
-    const backBtn = document.querySelector('.back-link');
-    if (adminBtn) adminBtn.style.display = 'flex';
-    if (backBtn) backBtn.style.display = 'flex';
-    
     showFilterButton();  // Show filter button when player modal is closed
 }
 
@@ -2245,30 +2172,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Trigger the input event to update results
         const inputEvent = new Event('input', { bubbles: true });
         searchInput.dispatchEvent(inputEvent);
-    });
-    
-    // Handle filter button scroll visibility
-    let lastScrollTop = 0;
-    let filterBtn = document.querySelector('.filter-btn');
-    
-    window.addEventListener('scroll', function() {
-        const playerModal = document.getElementById('playerModal');
-        const filterModal = document.getElementById('filterModal');
-        
-        // Modal position adjustment on scroll
-        if (playerModal.style.display === 'block') {
-            const modalContent = playerModal.querySelector('.modal-content');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-        }
-        
-        if (filterModal.style.display === 'block') {
-            const modalContent = filterModal.querySelector('.modal-content');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            modalContent.style.top = `calc(${scrollTop}px + 50vh)`;
-        }
-        
-        // No need to modify filter button position - it's fixed to viewport with CSS
     });
     
     // Set up position filters

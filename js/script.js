@@ -33,6 +33,31 @@ function initPage() {
     
     // Add smooth entrance animations to elements - using requestAnimationFrame for better performance
     requestAnimationFrame(() => animateElementsOnLoad());
+    
+    // Initialize scroll animations for all scroll-animation elements
+    initScrollAnimationElements();
+}
+
+// Initialize scroll animation elements
+function initScrollAnimationElements() {
+    // Get all scroll animation elements
+    const scrollElements = document.querySelectorAll('[class*="scroll-"]');
+    
+    // Initial check for elements in viewport on page load
+    scrollElements.forEach(el => {
+        if (isElementInViewport(el)) {
+            el.classList.add('active');
+        }
+    });
+    
+    // Add scroll listener for all scroll animation elements
+    window.addEventListener('scroll', throttle(function() {
+        scrollElements.forEach(el => {
+            if (isElementInViewport(el) && !el.classList.contains('active')) {
+                el.classList.add('active');
+            }
+        });
+    }, 50));
 }
 
 // Animate elements on page load - optimized for speed
@@ -202,7 +227,55 @@ window.addEventListener('load', function() {
             });
         });
     }
+    
+    // Add scroll event listeners
+    addScrollEventListeners();
 });
+
+// Add scroll event listeners for various scroll effects
+function addScrollEventListeners() {
+    // Add scroll listener for revealing elements
+    window.addEventListener('scroll', throttle(function() {
+        // Get all reveal and scroll animation elements
+        const reveals = document.querySelectorAll('.reveal:not(.active), [class*="scroll-"]:not(.active)');
+        
+        // Check if they're in viewport and activate if needed
+        reveals.forEach(el => {
+            if (isElementInViewport(el)) {
+                el.classList.add('active');
+            }
+        });
+        
+        // Update navigation bar
+        updateNavOnScroll();
+        
+        // Update progress bar
+        updateProgressBar();
+    }, 50));
+}
+
+// Update navigation bar on scroll
+function updateNavOnScroll() {
+    const topBar = document.querySelector('.top-bar');
+    if (topBar) {
+        if (window.scrollY > 50) {
+            topBar.classList.add('scrolled');
+        } else {
+            topBar.classList.remove('scrolled');
+        }
+    }
+}
+
+// Update progress bar on scroll
+function updateProgressBar() {
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+    }
+}
 
 // Typing effect
 function initTypingEffect() {
@@ -223,6 +296,33 @@ function initTypingEffect() {
             }
         }, 100);
     }
+}
+
+// Throttle function to limit how often a function is called
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Check if element is in viewport
+function isElementInViewport(el) {
+    if (!el) return false;
+    
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
+        rect.left >= 0 &&
+        rect.bottom >= 0 &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
 }
 
 // Custom cursor
@@ -248,14 +348,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cursorOutline && cursorDot) {
                     cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
                     cursorOutline.style.borderColor = 'var(--secondary)';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
                     cursorDot.style.backgroundColor = 'var(--secondary)';
                 }
             });
+            
             el.addEventListener('mouseleave', () => {
                 if (cursorOutline && cursorDot) {
                     cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorOutline.style.borderColor = 'var(--primary)';
-                    cursorDot.style.backgroundColor = 'var(--primary)';
+                    cursorOutline.style.borderColor = 'white';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorDot.style.backgroundColor = 'white';
                 }
             });
         });

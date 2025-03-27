@@ -1,0 +1,135 @@
+/* Emergency Q&A Visibility Fix */
+
+/* Make sure all QA lists and items are visible */
+.qa-list,
+.qa-item,
+.question {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-height: none !important; /* Ensure max-height doesn't hide elements */
+}
+
+/* Modern question styling */
+.question {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    padding: 15px 50px 15px 20px !important;
+    background: rgba(20, 20, 30, 0.4) !important;
+    border-left: 3px solid #3498db !important;
+    border-radius: 4px !important;
+    margin-bottom: 8px !important;
+    z-index: 10 !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+}
+
+.question:hover {
+    background: rgba(30, 30, 40, 0.5) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Arrow indicator for questions */
+.question::after {
+    content: "▼";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #3498db !important;
+    font-size: 12px !important;
+}
+
+.qa-item.active .question::after {
+    transform: translateY(-50%) rotate(180deg);
+    color: #e74c3c !important;
+}
+
+.qa-item.active .question {
+    border-left-color: #e74c3c !important;
+    background: rgba(30, 30, 40, 0.6) !important;
+}
+
+/* Collapsed answer styling */
+.qa-item:not(.active) .answer {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease !important;
+}
+
+/* Expanded answer styling */
+.qa-item.active .answer {
+    max-height: 500px !important;
+    padding: 20px 25px !important;
+    opacity: 1 !important;
+    background: rgba(15, 15, 25, 0.3) !important;
+    border-left: 3px solid #e74c3c !important;
+    margin-left: 15px !important;
+    margin-bottom: 15px !important;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease, padding 0.3s ease !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    line-height: 1.6 !important;
+    border-radius: 0 4px 4px 0 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+}
+
+/* Highlight important text within answers */
+.answer .highlight {
+    color: #e74c3c !important;
+    font-weight: 600 !important;
+}
+
+/* Question progress indicator */
+.question-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(to right, #3498db, #e74c3c) !important;
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    border-radius: 0 3px 3px 0 !important;
+}
+
+/* QA list styling */
+.qa-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 20px 0 !important;
+}
+
+/* Fix any potential issues with stagger-children class */
+.stagger-children {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fix issues with scroll animations */
+.scroll-fade-right,
+.scroll-fade-in,
+.qa-item.scroll-fade-left,
+.qa-item.scroll-fade-right,
+.qa-item.scroll-fade-in,
+.qa-item.scroll-zoom-in {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Reset any transforms that might be applied */
+.guide-section .qa-list {
+    transform: none !important;
+} 
