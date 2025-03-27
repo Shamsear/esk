@@ -8,22 +8,10 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Scroll animation enhancements for tournament guide */
 .guide-section {
     margin-bottom: 50px;
     padding-top: 20px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    will-change: opacity, transform;
-}
-
-.guide-section:not(.active) {
-    opacity: 0.7;
-    transform: translateY(20px);
-}
-
-.guide-section.active {
-    opacity: 1;
-    transform: translateY(0);
+    transition: opacity 0.3s ease;
 }
 
 .guide-section:hover {
@@ -40,13 +28,6 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     border-left: 4px solid var(--accent-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
-}
-
-.guide-section h2:hover {
-    transform: translateX(5px);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-    border-left-color: var(--primary);
 }
 
 .section-anchor {
@@ -83,7 +64,6 @@
     object-fit: cover;
 }
 
-/* Q&A styles with enhanced animations */
 .qa-list {
     list-style: none;
     padding-left: 0;
@@ -94,16 +74,8 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: box-shadow 0.3s ease;
     background: rgba(0, 0, 0, 0.4);
-    position: relative;
-    z-index: 1;
-}
-
-.qa-item.active {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px);
-    z-index: 2;
 }
 
 .qa-item:hover {
@@ -125,13 +97,12 @@
     color: white;
     font-family: 'Montserrat', sans-serif;
     border-left: 3px solid transparent;
-    transition: border-left 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    transition: border-left 0.3s ease, background 0.3s ease;
 }
 
 .question:hover {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
     border-left: 3px solid var(--accent-color);
-    transform: translateX(3px);
 }
 
 .question:focus {
@@ -171,24 +142,21 @@
     background-color: rgba(0, 0, 0, 0.2);
     font-size: 1.05rem;
     line-height: 1.6;
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 20px;
+    display: none;
+    padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
 .qa-item.active .answer {
-    max-height: 500px !important;
-    padding: 20px !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    overflow: visible !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    pointer-events: auto !important;
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .answer::before {
@@ -205,7 +173,7 @@
     background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
     border-radius: 5px;
     font-size: 1.1rem;
-    transition: transform 0.3s ease, background-color 0.3s ease, border-left 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
     border-left: 3px solid transparent;
 }
 
@@ -240,129 +208,6 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     border-bottom: 3px solid var(--accent-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease;
-}
-
-.section-title:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    border-bottom-color: var(--primary);
-}
-
-/* Info card enhancements */
-.info-card {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border-left: 3px solid var(--primary);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.info-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transform: translateY(-3px);
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.info-card p {
-    margin: 0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-.info-card-title {
-    margin-top: 0;
-    color: var(--accent-color);
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-}
-
-/* Progress bar for questions */
-.question-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 0;
-    background: linear-gradient(to right, var(--primary), var(--accent-color));
-    transition: width 0.8s ease;
-}
-
-.qa-item.active .question-progress {
-    width: 100%;
-}
-
-/* Scroll animations overrides to ensure functionality */
-.qa-item.scroll-fade-right.active,
-.qa-item.scroll-fade-left.active {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-    visibility: visible !important;
-}
-
-.qa-item.active .answer {
-    max-height: 500px !important;
-    padding: 20px !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-
-/* Staggered animations for tournament guide */
-.stagger-children.qa-list > *:nth-child(1) { transition-delay: 0.1s; }
-.stagger-children.qa-list > *:nth-child(2) { transition-delay: 0.2s; }
-.stagger-children.qa-list > *:nth-child(3) { transition-delay: 0.3s; }
-.stagger-children.qa-list > *:nth-child(4) { transition-delay: 0.4s; }
-.stagger-children.qa-list > *:nth-child(5) { transition-delay: 0.5s; }
-
-/* Add a special pulsing effect for important elements */
-@keyframes border-pulse {
-    0% { border-color: var(--accent-color); }
-    50% { border-color: var(--primary); }
-    100% { border-color: var(--accent-color); }
-}
-
-.highlight {
-    position: relative;
-    display: inline-block;
-    animation: color-pulse 3s infinite;
-}
-
-@keyframes color-pulse {
-    0% { color: var(--accent-color); }
-    50% { color: var(--primary); }
-    100% { color: var(--accent-color); }
-}
-
-/* Add perspective effect to images */
-.guide-img.scroll-zoom-in.active {
-    transform: perspective(1000px) rotateX(0) rotateY(0) scale(1);
-}
-
-.guide-img.scroll-zoom-in:not(.active) {
-    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(0.9);
-}
-
-/* Responsive styles for mobile */
-@media (max-width: 768px) {
-    .qa-item.scroll-fade-right,
-    .qa-item.scroll-fade-left {
-        transform: translateY(20px);
-    }
-    
-    .qa-item.scroll-fade-right.active,
-    .qa-item.scroll-fade-left.active {
-        transform: translateY(0);
-    }
-    
-    .question:hover {
-        transform: none;
-    }
-    
-    .guide-section h2:hover {
-        transform: none;
-    }
 }
 
 /* Table of Contents */
@@ -566,45 +411,4 @@ footer .footer-nav a:hover {
         width: 100%;
         text-align: center;
     }
-}
-
-/* Fix for FAQ items to ensure they stay collapsed */
-.qa-item:not(.active) .answer {
-    max-height: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    opacity: 0 !important;
-    overflow: hidden !important;
-    border-top: none !important;
-    pointer-events: none !important;
-}
-
-.qa-item.active .answer {
-    max-height: 500px !important;
-    padding: 20px !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    overflow: visible !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    pointer-events: auto !important;
-}
-
-/* Higher specificity selector to override any scroll animation issues */
-body .qa-list .qa-item .question {
-    pointer-events: auto !important;
-    cursor: pointer !important;
-}
-
-body .qa-list .qa-item:not(.active) .answer {
-    display: block !important;
-    max-height: 0 !important;
-    overflow: hidden !important;
-    visibility: visible !important; /* Keep visible but hidden by max-height */
-}
-
-body .qa-list .qa-item.active .answer {
-    display: block !important;
-    max-height: 500px !important;
-    overflow: visible !important;
-    visibility: visible !important;
 } 
