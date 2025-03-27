@@ -12,6 +12,7 @@
             visibility: visible !important;
             opacity: 1 !important;
             max-height: none !important;
+            will-change: transform, opacity !important;
         }
         .question {
             pointer-events: auto !important;
@@ -22,8 +23,9 @@
             color: #fff !important;
             border-left: 3px solid #3498db !important;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-            backdrop-filter: blur(5px) !important;
-            -webkit-backdrop-filter: blur(5px) !important;
+            backdrop-filter: blur(2px) !important;
+            -webkit-backdrop-filter: blur(2px) !important;
+            transition: background 0.2s ease, transform 0.2s ease !important;
         }
         .qa-item.active .question {
             border-left-color: #e74c3c !important;
@@ -33,9 +35,10 @@
             background: rgba(15, 15, 25, 0.3) !important;
             color: rgba(255, 255, 255, 0.9) !important;
             border-left: 3px solid #e74c3c !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-            backdrop-filter: blur(5px) !important;
-            -webkit-backdrop-filter: blur(5px) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: blur(2px) !important;
+            -webkit-backdrop-filter: blur(2px) !important;
+            will-change: max-height, opacity !important;
         }
         .answer .highlight {
             color: #e74c3c !important;
@@ -44,35 +47,41 @@
     `;
     document.head.appendChild(emergencyStyle);
     
-    // Try to immediately reveal Q&A elements
+    // Performance-optimized version of revealQA function
     const revealQA = function() {
-        const qaElements = document.querySelectorAll('.qa-list, .qa-item, .question');
+        // Use performance-focused selector
+        const qaElements = document.querySelectorAll('.qa-item, .question');
         if (qaElements.length > 0) {
-            qaElements.forEach(el => {
-                el.style.display = 'block';
-                el.style.visibility = 'visible';
-                el.style.opacity = '1';
-                el.style.pointerEvents = 'auto';
-            });
-            
-            // Fix answer styling
-            const answers = document.querySelectorAll('.answer');
-            answers.forEach(answer => {
-                answer.style.color = 'rgba(255, 255, 255, 0.9)';
-                answer.style.background = 'rgba(15, 15, 25, 0.3)';
-                
-                // Style highlights inside answers
-                const highlights = answer.querySelectorAll('.highlight');
-                highlights.forEach(highlight => {
-                    highlight.style.color = '#e74c3c';
-                    highlight.style.fontWeight = '600';
+            // Use requestAnimationFrame for smoother rendering
+            requestAnimationFrame(() => {
+                qaElements.forEach(el => {
+                    el.style.display = 'block';
+                    el.style.visibility = 'visible';
+                    el.style.opacity = '1';
+                    el.style.pointerEvents = 'auto';
                 });
+                
+                // Fix answer styling
+                const answers = document.querySelectorAll('.answer');
+                answers.forEach(answer => {
+                    answer.style.color = 'rgba(255, 255, 255, 0.9)';
+                    answer.style.background = 'rgba(15, 15, 25, 0.3)';
+                    
+                    // Style highlights inside answers
+                    const highlights = answer.querySelectorAll('.highlight');
+                    if (highlights.length > 0) {
+                        highlights.forEach(highlight => {
+                            highlight.style.color = '#e74c3c';
+                            highlight.style.fontWeight = '600';
+                        });
+                    }
+                });
+                
+                console.log('IMMEDIATE QA visibility fix applied!');
             });
-            
-            console.log('IMMEDIATE QA visibility fix applied!');
         } else {
-            // If elements aren't found yet, try again in a moment
-            setTimeout(revealQA, 50);
+            // If elements aren't found yet, try again in a moment (using a shorter timeout)
+            setTimeout(revealQA, 30);
         }
     };
     
@@ -116,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
         });
     });
-});
+}); 
 
 // EMERGENCY FIX: Direct replacement of Q&A elements to fix visibility issues
 function fixQuestionsAndAnswers() {
@@ -170,9 +179,9 @@ function fixQuestionsAndAnswers() {
             
             const progressBar = document.createElement('div');
             progressBar.className = 'question-progress';
-            progressBar.style.background = 'linear-gradient(to right, #3498db, #e74c3c)';
-            progressBar.style.transition = 'width 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
-            progressBar.style.borderRadius = '0 3px 3px 0';
+            progressBar.style.background = '#e74c3c'; // Solid color for better performance
+            progressBar.style.transition = 'width 0.25s ease'; // Faster, simpler transition
+            progressBar.style.willChange = 'width'; // Hardware acceleration hint
             question.appendChild(progressBar);
             
             const answer = document.createElement('div');
@@ -185,8 +194,9 @@ function fixQuestionsAndAnswers() {
             answer.style.background = 'rgba(15, 15, 25, 0.3)';
             answer.style.lineHeight = '1.6';
             answer.style.borderRadius = '0 4px 4px 0';
-            answer.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-            answer.style.backdropFilter = 'blur(5px)';
+            answer.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+            answer.style.backdropFilter = 'blur(2px)'; // Reduced blur for better performance
+            answer.style.willChange = 'max-height, opacity'; // Hardware acceleration hint
             
             newItem.appendChild(question);
             newItem.appendChild(answer);
@@ -198,27 +208,41 @@ function fixQuestionsAndAnswers() {
                 
                 // Update progress bar and answer visibility
                 if (newItem.classList.contains('active')) {
-                    progressBar.style.width = '100%';
-                    answer.style.maxHeight = '500px';
-                    answer.style.padding = '20px 25px';
-                    answer.style.opacity = '1';
-                    answer.style.background = 'rgba(15, 15, 25, 0.3)';
-                    answer.style.borderLeft = '3px solid #e74c3c';
-                    answer.style.marginLeft = '15px';
-                    answer.style.marginBottom = '15px';
-                    
-                    question.style.borderLeftColor = '#e74c3c';
-                    question.style.background = 'rgba(30, 30, 40, 0.6)';
+                    requestAnimationFrame(() => { // Use RAF for smoother animation
+                        progressBar.style.width = '100%';
+                        
+                        // Add small delay to avoid choppiness
+                        setTimeout(() => {
+                            answer.style.maxHeight = '500px';
+                            answer.style.padding = '20px 25px';
+                            answer.style.opacity = '1';
+                            answer.style.background = 'rgba(15, 15, 25, 0.3)';
+                            answer.style.borderLeft = '3px solid #e74c3c';
+                            answer.style.marginLeft = '15px';
+                            answer.style.marginBottom = '15px';
+                            
+                            question.style.borderLeftColor = '#e74c3c';
+                            question.style.background = 'rgba(30, 30, 40, 0.6)';
+                        }, 20);
+                    });
                 } else {
-                    progressBar.style.width = '0';
-                    answer.style.maxHeight = '0';
-                    answer.style.padding = '0 25px';
-                    answer.style.opacity = '0';
-                    answer.style.marginLeft = '15px';
-                    answer.style.marginBottom = '0';
-                    
-                    question.style.borderLeftColor = '#3498db';
-                    question.style.background = 'rgba(20, 20, 30, 0.4)';
+                    requestAnimationFrame(() => { // Use RAF for smoother animation
+                        progressBar.style.width = '0';
+                        
+                        // Hide elements first, then resize
+                        answer.style.opacity = '0';
+                        
+                        // Use timeout to ensure proper sequence
+                        setTimeout(() => {
+                            answer.style.maxHeight = '0';
+                            answer.style.padding = '0 25px';
+                            answer.style.marginLeft = '15px';
+                            answer.style.marginBottom = '0';
+                            
+                            question.style.borderLeftColor = '#3498db';
+                            question.style.background = 'rgba(20, 20, 30, 0.4)';
+                        }, 50);
+                    });
                 }
             });
             
@@ -377,12 +401,12 @@ const style = document.createElement('style');
 style.textContent = `
     @keyframes highlight-pulse {
         0% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.7); }
-        50% { box-shadow: 0 0 20px rgba(52, 152, 219, 0.9); }
+        50% { box-shadow: 0 0 15px rgba(52, 152, 219, 0.8); }
         100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.7); }
     }
     
     .highlight-pulse {
-        animation: highlight-pulse 1s ease;
+        animation: highlight-pulse 0.8s ease;
     }
     
     /* Emergency fixes for QA visibility */
@@ -390,6 +414,7 @@ style.textContent = `
         opacity: 1 !important;
         visibility: visible !important;
         display: block !important;
+        will-change: transform, opacity !important;
     }
     
     .question {
@@ -403,15 +428,15 @@ style.textContent = `
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
         font-weight: 500 !important;
         letter-spacing: 0.5px !important;
-        backdrop-filter: blur(5px) !important;
-        -webkit-backdrop-filter: blur(5px) !important;
-        transition: all 0.3s ease !important;
+        backdrop-filter: blur(2px) !important;
+        -webkit-backdrop-filter: blur(2px) !important;
+        transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
     }
     
     .question:hover {
         background: rgba(30, 30, 40, 0.5) !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25) !important;
     }
     
     .qa-item.active .question {
@@ -425,6 +450,7 @@ style.textContent = `
         padding-bottom: 0 !important;
         opacity: 0 !important;
         overflow: hidden !important;
+        transition: opacity 0.2s ease-out, max-height 0.25s ease-out 0.05s, padding 0.2s ease-out !important;
     }
     
     .qa-item.active .answer {
@@ -438,9 +464,11 @@ style.textContent = `
         margin-bottom: 15px !important;
         line-height: 1.6 !important;
         border-radius: 0 4px 4px 0 !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-        backdrop-filter: blur(5px) !important;
-        -webkit-backdrop-filter: blur(5px) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(2px) !important;
+        -webkit-backdrop-filter: blur(2px) !important;
+        will-change: max-height, opacity, padding !important;
+        transition: opacity 0.2s ease-in, max-height 0.25s ease-in, padding 0.2s ease-in !important;
     }
     
     .answer .highlight {
@@ -449,8 +477,9 @@ style.textContent = `
     }
     
     .question-progress {
-        background: linear-gradient(to right, #3498db, #e74c3c) !important; 
-        transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        background: #e74c3c !important;
+        transition: width 0.25s ease !important;
+        will-change: width !important;
     }
 `;
 document.head.appendChild(style); 
