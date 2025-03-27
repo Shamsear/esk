@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Career Mode - Eskimos Road to Glory</title>
+    <meta name="description" content="Explore career mode options for Eskimos Road to Glory, featuring different career paths, achievements, and strategies.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css"></noscript>
+
+</head>
+<body>
+    <div class="skip-link">Skip to content</div>
+    
+    <div class="page-transition"></div>
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    
+    <video class="video-bg" autoplay muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
+    
+    <div id="particles-js"></div>
+    
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40">
+                <span>ESKIMOS</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                <a href="career-tournament.html">Career Tournament</a>
+            </div>
+        </div>
+        
+        <main>
+            <header id="career-header" class="animated-section">
+                <a href="index.html" class="back-link reveal"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <h1 class="fade-in-up">Career Mode</h1>
+                <p class="subtitle fade-in-up delay-1">Select your path to glory</p>
+            </header>
+
+            <div class="navigation">
+                <a href="registered-clubs.html" class="nav-item tilt-effect reveal">
+                    <div class="nav-card">
+                        <img data-src="assets/images/careerhome/C1.webp" alt="Registered Clubs" width="300" height="200" >
+                    </div>
+                </a>
+                <a href="player-signing.html" class="nav-item tilt-effect reveal">
+                    <div class="nav-card">
+                        <img data-src="assets/images/careerhome/C2.webp" alt="Player Signing" width="300" height="200" >
+                    </div>
+                </a>
+                <a href="#" class="nav-item tilt-effect reveal">
+                    <div class="nav-card">
+                        <img data-src="assets/images/careerhome/C3.webp" alt="Manager Status" width="300" height="200" >
+                    </div>
+                </a>
+                <a href="player-status.html" class="nav-item tilt-effect reveal">
+                    <div class="nav-card">
+                        <img data-src="assets/images/careerhome/C4.webp" alt="Player Status" width="300" height="200" >
+                    </div>
+                </a>
+                <a href="#" class="nav-item tilt-effect reveal">
+                    <div class="nav-card">
+                        <img data-src="assets/images/careerhome/C5.webp" alt="Player Salary" width="300" height="200" >
+                    </div>
+                </a>
+            </div>
+
+            <div class="career-description">
+                <h2 class="fade-in-up delay-2">Your Career Journey</h2>
+                <p class="fade-in-up delay-3">Embark on an immersive career experience in our football management simulation. Choose your path, develop your skills, and lead your team to glory through strategic decisions, player management, and tactical brilliance.</p>
+                
+                <div class="features">
+                    <div class="feature-item fade-in-up delay-4">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Achievements</h3>
+                        <p>Unlock trophies and awards as you progress through your career, showcasing your managerial excellence.</p>
+                    </div>
+                    <div class="feature-item fade-in-up delay-5">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progress</h3>
+                        <p>Track your career development with detailed statistics, performance metrics, and milestone achievements.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="career-timeline fade-in-up delay-7">
+                <h2 class="section-heading">Career Path</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Rookie</h3>
+                            <p>Begin your journey as a new player or manager. Learn the basics and establish your reputation in the community.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Contender</h3>
+                            <p>Start competing in tournaments and leagues. Build your team and develop your strategic approach.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Professional</h3>
+                            <p>Master advanced techniques and tactics. Qualify for elite tournaments and establish yourself among the top performers.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Champion</h3>
+                            <p>Compete at the highest level. Win major tournaments and earn your place in the Eskimos Road to Glory hall of fame.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="#">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="#">Manager Ranking</a>
+                    <a href="#">Trophy Cabinet</a>
+                    <a href="#">Career Tournament</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="toast" id="toast">Welcome to Career Mode!</div>
+    
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-932.mp3" type="audio/mpeg">
+    </audio>
+
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="js/script.js"></script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
+    <!-- Load performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    <!-- Load background scroll handling -->
+    <script defer src="js/background-scroll.js"></script>
+    <!-- Fix infinite scrolling -->
+    <script defer src="js/fix-overflow.js"></script>
+
+    <!-- Service worker registration -->
+    <script defer src="js/sw-register.js"></script>
+    
+    <!-- Performance optimizations -->
+    <script defer src="js/performance.js"></script>
+    </body>
+</html> 
