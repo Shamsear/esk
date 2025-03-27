@@ -3,8 +3,19 @@
  * This script ensures consistent background image behavior across all HTML files
  */
 document.addEventListener('DOMContentLoaded', function() {
+    // Get current page to determine the correct path to logo.webp
+    const currentPath = window.location.pathname;
+    const isInSubdirectory = currentPath.split('/').length > 2; 
+    
+    // Determine the correct path to the background image
+    let backgroundPath = 'assets/images/logo.webp';
+    
+    // If we're in a subdirectory (like /pages/something.html), adjust the path
+    if (isInSubdirectory) {
+        backgroundPath = '../assets/images/logo.webp';
+    }
+    
     // Create a pseudo-element for the background if not already added by CSS
-    // This will handle pages using inline styles
     const styleElement = document.createElement('style');
     styleElement.textContent = `
         body::before {
@@ -15,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             width: 100%;
             height: 100%;
             z-index: -10;
-            background-image: url('assets/images/logo.webp');
+            background-image: url('${backgroundPath}');
             background-size: contain;
             background-position: center top;
             background-repeat: no-repeat;
@@ -48,6 +59,32 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(styleElement);
     }
     
-    // Remove any inline background styles on the body to ensure consistent behavior
-    document.body.style.backgroundImage = 'none';
+    // Remove all inline background styles from the body to avoid conflicts
+    const propsToRemove = [
+        'backgroundImage',
+        'backgroundAttachment',
+        'backgroundPosition',
+        'backgroundRepeat',
+        'backgroundSize'
+    ];
+    
+    // Remove the inline styles that would conflict with our solution
+    propsToRemove.forEach(prop => {
+        document.body.style[prop] = '';
+    });
+    
+    // Find and update any inline style in the HTML files
+    const inlineStyles = document.querySelectorAll('style');
+    inlineStyles.forEach(style => {
+        if (style.getAttribute('data-background-fix') !== 'true') {
+            // Only modify styles with background-image properties but preserve the style element
+            let cssText = style.textContent;
+            if (cssText.includes('background-image') && cssText.includes('logo.webp')) {
+                // Replace background properties in body selector
+                cssText = cssText.replace(/body\s*{[^}]*background-image[^}]*}/g, 'body { }');
+                cssText = cssText.replace(/body\s*{[^}]*background-attachment[^}]*}/g, 'body { }');
+                style.textContent = cssText;
+            }
+        }
+    });
 }); 
