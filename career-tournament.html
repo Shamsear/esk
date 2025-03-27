@@ -145,16 +145,7 @@
             transform: translateY(0);
         }
         
-        /* Simplified animation styles to prevent display issues */
-        .hidden {
-            opacity: 1 !important;
-            transform: none !important;
-        }
-        
-        .animate-in {
-            opacity: 1 !important;
-            transform: none !important;
-        }
+        /* Animation styles will be added by JavaScript */
         
         @media (min-width: 768px) {
             .tournament-images {
@@ -169,8 +160,6 @@
             
             .tournament-card {
                 margin-bottom: 20px;
-                opacity: 1 !important;
-                transform: translateY(0) !important;
             }
             
             .tournament-header {
@@ -185,12 +174,6 @@
             body, html {
                 height: auto !important;
                 min-height: 100vh;
-            }
-            
-            /* Force visibility of all elements */
-            * {
-                opacity: 1 !important;
-                transform: none !important;
             }
         }
     </style>

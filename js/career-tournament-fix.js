@@ -1,6 +1,6 @@
 /**
  * Career Tournament Page Specific Fixes
- * Ensures content is fully visible and scrollable
+ * Ensures content is fully visible and scrollable with animations
  */
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Career Tournament Page Fix loaded');
@@ -35,11 +35,82 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
+    // Add scroll animation styles
+    const addScrollAnimationStyles = () => {
+        // Remove any existing animation styles
+        const existingStyle = document.querySelector('style[data-animation-styles="true"]');
+        if (existingStyle) {
+            existingStyle.remove();
+        }
+        
+        // Create a style element for animations
+        const animationStyle = document.createElement('style');
+        animationStyle.setAttribute('data-animation-styles', 'true');
+        
+        // Define animation styles
+        animationStyle.textContent = `
+            /* Base animation classes */
+            .hidden {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            
+            .animate-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            /* Tournament card specific animations */
+            .tournament-card.hidden {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            
+            /* Black box specific animations */
+            .black-box.hidden {
+                opacity: 0;
+                transform: translateY(-15px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            }
+            
+            /* Staggered delays for tournament cards */
+            .tournament-card:nth-child(3n+1) { transition-delay: 0.1s; }
+            .tournament-card:nth-child(3n+2) { transition-delay: 0.2s; }
+            .tournament-card:nth-child(3n+3) { transition-delay: 0.3s; }
+            
+            /* Ensure animations take precedence */
+            .tournament-card, .black-box {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            
+            .tournament-card.hidden, .black-box.hidden {
+                opacity: 0 !important;
+                transform: translateY(30px) !important;
+            }
+            
+            .black-box.hidden {
+                transform: translateY(-15px) !important;
+            }
+        `;
+        
+        // Add the style to the document head
+        document.head.appendChild(animationStyle);
+    };
+    
     // Set up scroll animations
     const setupScrollAnimations = () => {
-        const animatedElements = document.querySelectorAll('.tournament-card, .black-box');
+        // First reset any existing animations
+        document.querySelectorAll('.tournament-card, .black-box').forEach(el => {
+            el.classList.remove('hidden');
+            el.classList.remove('animate-in');
+        });
         
-        // Add hidden class to all elements initially
+        // Then add hidden class to all elements
+        const animatedElements = document.querySelectorAll('.tournament-card, .black-box');
         animatedElements.forEach(el => {
             el.classList.add('hidden');
         });
@@ -57,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function checkElements() {
             animatedElements.forEach(el => {
                 if (isInViewport(el) && el.classList.contains('hidden')) {
+                    console.log('Animating element into view:', el);
                     el.classList.add('animate-in');
                 }
             });
@@ -69,47 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', checkElements);
     };
     
-    // Add scroll animation styles
-    const addScrollAnimationStyles = () => {
-        // Create a style element for animations
-        const animationStyle = document.createElement('style');
-        animationStyle.setAttribute('data-animation-styles', 'true');
-        
-        // Define animation styles
-        animationStyle.textContent = `
-            .hidden {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            }
-            
-            .animate-in {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            
-            .tournament-card.hidden {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            }
-            
-            .black-box.hidden {
-                opacity: 0;
-                transform: translateY(-15px);
-                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            }
-            
-            /* Staggered delays for tournament cards */
-            .tournament-card:nth-child(3n+1) { transition-delay: 0.1s; }
-            .tournament-card:nth-child(3n+2) { transition-delay: 0.2s; }
-            .tournament-card:nth-child(3n+3) { transition-delay: 0.3s; }
-        `;
-        
-        // Add the style to the document head
-        document.head.appendChild(animationStyle);
-    };
-    
     // Fix iOS height issues
     const setDocHeight = () => {
         document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -118,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize in the correct order
     const initialize = () => {
+        console.log('Initializing career tournament page');
+        
         // First hide the mobile menu
         hideMobileMenu();
         
@@ -128,7 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
         addScrollAnimationStyles();
         
         // Set up animations
-        setupScrollAnimations();
+        setTimeout(() => {
+            setupScrollAnimations();
+        }, 100);
         
         // Override any event listeners that might show the mobile menu
         const menuToggle = document.getElementById('menuToggle');
