@@ -23,16 +23,17 @@ function getFiles(directory, extension, files = []) {
     return files;
 }
 
-// Update each HTML file to include the background-fix.js script
+// Update each HTML file to include the necessary scripts
 function updateHtmlFiles() {
     const htmlFiles = getFiles('.', '.html');
     let updatedCount = 0;
     
     for (const file of htmlFiles) {
         let content = fs.readFileSync(file, 'utf8');
+        let modified = false;
         
-        // Check if the file already has the script
-        if (!content.includes('background-fix.js')) {
+        // Add remove-conflicting-styles.js if not already present
+        if (!content.includes('remove-conflicting-styles.js')) {
             // Find the position to insert the script (before the closing body tag)
             const scriptPosition = content.lastIndexOf('</body>');
             
@@ -45,29 +46,56 @@ function updateHtmlFiles() {
                         const insertPosition = closingScriptTagPos + '</script>'.length;
                         content = 
                             content.substring(0, insertPosition) + 
+                            '\n    <script src="js/remove-conflicting-styles.js"></script>' +
+                            content.substring(insertPosition);
+                        modified = true;
+                    }
+                }
+            }
+        }
+        
+        // Add background-fix.js if not already present
+        if (!content.includes('background-fix.js')) {
+            // Find the position to insert the script (before the closing body tag or after remove-conflicting-styles.js)
+            const scriptPosition = content.lastIndexOf('</body>');
+            
+            if (scriptPosition !== -1) {
+                // Check if remove-conflicting-styles.js is already present
+                const removeConflictingPos = content.lastIndexOf('remove-conflicting-styles.js');
+                
+                if (removeConflictingPos !== -1 && removeConflictingPos < scriptPosition) {
+                    // Add after remove-conflicting-styles.js
+                    const closingScriptTagPos = content.indexOf('</script>', removeConflictingPos);
+                    if (closingScriptTagPos !== -1 && closingScriptTagPos < scriptPosition) {
+                        const insertPosition = closingScriptTagPos + '</script>'.length;
+                        content = 
+                            content.substring(0, insertPosition) + 
                             '\n    <script src="js/background-fix.js"></script>' +
                             content.substring(insertPosition);
-                        updatedCount++;
+                        modified = true;
                     }
                 } else {
-                    // If no script.js, add before closing body tag
+                    // If no remove-conflicting-styles.js, add before closing body tag
                     content = 
                         content.substring(0, scriptPosition) + 
                         '    <script src="js/background-fix.js"></script>\n' +
                         content.substring(scriptPosition);
-                    updatedCount++;
+                    modified = true;
                 }
-                
-                fs.writeFileSync(file, content, 'utf8');
-                console.log(`Updated ${file}`);
             }
+        }
+        
+        if (modified) {
+            fs.writeFileSync(file, content, 'utf8');
+            updatedCount++;
+            console.log(`Updated ${file}`);
         } else {
-            console.log(`${file} already has background-fix.js reference`);
+            console.log(`${file} already has necessary script references`);
         }
     }
     
-    console.log(`\nUpdated ${updatedCount} HTML files with background-fix.js reference`);
+    console.log(`\nUpdated ${updatedCount} HTML files with necessary script references`);
 }
 
-console.log('Updating HTML files to include background-fix.js...');
+console.log('Updating HTML files to include necessary scripts...');
 updateHtmlFiles(); 
