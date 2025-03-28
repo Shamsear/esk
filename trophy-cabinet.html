@@ -958,6 +958,22 @@
                                 setTimeout(() => {
                                     seasonContent.style.maxHeight = 'none';
                                     seasonContent.style.overflow = 'visible';
+                                    
+                                    // Get all trophy and award items in this season
+                                    const trophyItems = seasonContent.querySelectorAll('.moze-gallery li');
+                                    
+                                    // Add animations to each trophy with staggered delays
+                                    trophyItems.forEach((item, index) => {
+                                        // Reset item first
+                                        item.classList.remove('animate-in');
+                                        item.classList.add('hidden');
+                                        
+                                        // Set a delay based on the index to create staggered effect
+                                        setTimeout(() => {
+                                            item.classList.remove('hidden');
+                                            item.classList.add('animate-in');
+                                        }, 50 * index); // 50ms delay between each item
+                                    });
                                 }, 600); // Match animation duration
                             }, 10);
                         } else {
@@ -966,6 +982,13 @@
                             // First reset max-height to allow animation to work
                             seasonContent.style.maxHeight = '';
                             seasonContent.style.overflow = 'hidden';
+                            
+                            // Hide all trophy animations immediately
+                            const trophyItems = seasonContent.querySelectorAll('.moze-gallery li');
+                            trophyItems.forEach((item) => {
+                                item.classList.remove('animate-in');
+                                item.classList.add('hidden');
+                            });
                             
                             // Short delay to allow style to apply
                             setTimeout(() => {
@@ -996,6 +1019,12 @@
                         }
                     }
                 }
+                
+                // Make all trophy items initially hidden
+                const trophyItems = content.querySelectorAll('.moze-gallery li');
+                trophyItems.forEach((item) => {
+                    item.classList.add('hidden');
+                });
             });
             
             // Fix any hidden content that should be visible (if coming back to page)
@@ -1009,14 +1038,18 @@
                         seasonContent.style.maxHeight = 'none';
                         seasonContent.style.overflow = 'visible';
                         seasonContent.style.opacity = '1';
+                        
+                        // Animate all trophy items with staggered delay
+                        const trophyItems = seasonContent.querySelectorAll('.moze-gallery li');
+                        trophyItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.remove('hidden');
+                                item.classList.add('animate-in');
+                            }, 50 * index); // 50ms delay between each item
+                        });
                     }
                 });
             }, 100);
-            
-            // Fix all gallery items to ensure they're visible
-            document.querySelectorAll('.moze-gallery li').forEach(function(item) {
-                item.classList.add('animate-in');
-            });
         });
     </script>
     

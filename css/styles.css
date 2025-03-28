@@ -1953,18 +1953,48 @@ html {
     display: none !important;
 }
 
-/* Trophy gallery items animations */
+/* Trophy gallery items animations - Enhanced version */
 .moze-gallery li.hidden {
     opacity: 0;
-    transform: scale(0.8) translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0.8) translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
+    filter: blur(2px);
+    will-change: opacity, transform, filter;
 }
 
 .moze-gallery li.animate-in {
     opacity: 1;
     transform: scale(1) translateY(0);
     pointer-events: auto;
+    filter: blur(0);
+}
+
+/* Hover effects for trophy items */
+.moze-gallery li {
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                box-shadow 0.4s ease, 
+                filter 0.4s ease;
+    will-change: transform, box-shadow, filter;
+    cursor: pointer;
+}
+
+.moze-gallery li:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    filter: brightness(1.2);
+    z-index: 2;
+}
+
+.moze-gallery li img {
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                filter 0.4s ease;
+    will-change: transform, filter;
+}
+
+.moze-gallery li:hover img {
+    transform: scale(1.08);
+    filter: brightness(1.2) contrast(1.1);
 }
 
 /* Trophy Gallery specific styles - force visibility */
