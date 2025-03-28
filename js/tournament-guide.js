@@ -23,43 +23,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Image modal functionality - simplified
+    // Fix image paths to ensure they display correctly
     var images = document.querySelectorAll('.guide-img');
-    var modal = document.getElementById('imageModal');
-    var modalImg = document.getElementById('modalImage');
-    var closeModal = document.querySelector('.close-modal');
     
-    for (var i = 0; i < images.length; i++) {
-        images[i].addEventListener('click', function() {
-            modal.style.display = "flex";
-            modalImg.src = this.src;
-        });
-    }
-    
-    closeModal.addEventListener('click', function() {
-        modal.style.display = "none";
-    });
-    
-    window.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.style.display = "none";
+    // Fix image paths if needed - this helps with image display issues
+    images.forEach(function(img) {
+        // Check for relative path issues
+        if (img.src.includes('../assets/')) {
+            img.src = img.src.replace('../assets/', 'assets/');
         }
+        
+        // Force image reload to fix display issues
+        const currentSrc = img.src;
+        img.src = '';
+        setTimeout(() => {
+            img.src = currentSrc;
+        }, 10);
     });
+    
+    // Ensure the modal is disabled and not interfering
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.style.display = "none";
+    }
     
     // Back to top button functionality
     var backToTopButton = document.getElementById('backToTop');
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.classList.remove('visible');
-        }
-    });
-    
-    backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (backToTopButton) {
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
         });
-    });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 }); 

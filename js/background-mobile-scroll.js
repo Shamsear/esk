@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 body {
                     background-image: url('assets/images/logo.webp');
                     background-size: contain !important; /* Ensure image fits within viewport width */
-                    background-position: center !important; /* Center the image */
+                    background-position: center top !important; /* Center the image at the top */
                     background-repeat: no-repeat !important;
                     background-attachment: scroll !important; /* Changed from fixed to scroll */
                     background-color: #000 !important; /* Black background color */
@@ -99,13 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', updateBackgroundStyles);
     window.addEventListener('orientationchange', updateBackgroundStyles);
     
-    // Add slight parallax effect on scroll for mobile
-    if (window.innerWidth <= 768) {
-        window.addEventListener('scroll', function() {
-            const scrollPosition = window.scrollY;
-            const moveRate = scrollPosition * 0.03; // Reduced rate of movement
-            
-            document.body.style.backgroundPositionY = `calc(center + ${moveRate}px)`;
-        });
-    }
+    // Remove the problematic parallax effect on scroll for mobile
+    // This was causing the conflict between pages
 }); 

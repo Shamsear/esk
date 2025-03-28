@@ -60,23 +60,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Disable image click modal functionality in tournament guide only
+    // Disable modal functionality
     const imageModal = document.getElementById('imageModal');
     if (imageModal) {
-        const closeModal = document.querySelector('.close-modal');
-        if (closeModal) {
-            closeModal.addEventListener('click', function() {
-                imageModal.style.display = "none";
-            });
-        }
+        // Hide the modal completely
+        imageModal.style.display = "none";
         
-        // Prevent image click event in tournament guide only
-        const guideImages = document.querySelectorAll('.guide-img');
-        if (guideImages.length > 0) {
-            guideImages.forEach(img => {
-                const newImg = img.cloneNode(true);
-                img.parentNode.replaceChild(newImg, img);
-            });
-        }
+        // Make sure the modal can't be shown
+        Object.defineProperty(imageModal.style, 'display', {
+            set: function(value) {
+                this.setProperty('display', 'none');
+            }
+        });
     }
 }); 

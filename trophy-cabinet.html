@@ -15,7 +15,7 @@
         /* Add background image to the body */
         body {
             font-family: 'Montserrat', sans-serif;
-            background-image: url('../assets/images/logo.webp');
+            background-image: url('assets/images/logo.webp');
             background-size: contain;
             background-position: center top;
             background-repeat: no-repeat;
@@ -938,32 +938,29 @@
                     const seasonContentId = seasonId + '-content';
                     const seasonContent = document.getElementById(seasonContentId);
                     
-                    // Toggle active class on the season box
+                    // Toggle active class on the clicked season box
                     this.classList.toggle('active');
                     
                     // Toggle active class on the season content
                     if (seasonContent) {
-                        if (seasonContent.classList.contains('active')) {
-                            // Hide the content
-                            seasonContent.classList.remove('active');
-                            // Change arrow direction
-                            this.classList.remove('active');
-                        } else {
-                            // Show the content
-                            seasonContent.classList.add('active');
-                            // Change arrow direction
-                            this.classList.add('active');
-                        }
+                        seasonContent.classList.toggle('active');
                     }
                 });
             });
             
-            // Add cursor pointer to season boxes to indicate they're clickable
-            seasonBoxes.forEach(function(box) {
-                box.style.cursor = 'pointer';
+            // Make sure all season content sections have proper IDs matching the data-season attributes
+            document.querySelectorAll('.season-content').forEach(function(content) {
+                if (!content.id) {
+                    // If a season content is missing an ID, try to find it from nearby season box
+                    const nearestBox = content.previousElementSibling.querySelector('.season-box');
+                    if (nearestBox) {
+                        const seasonId = nearestBox.getAttribute('data-season');
+                        if (seasonId) {
+                            content.id = seasonId + '-content';
+                        }
+                    }
+                }
             });
-            
-            // All seasons are collapsed by default (removed the code that expands season 5)
         });
     </script>
     
