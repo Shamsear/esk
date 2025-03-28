@@ -932,6 +932,46 @@
             // Get all season boxes
             const seasonBoxes = document.querySelectorAll('.season-box');
             
+            // Create Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Function to animate season content elements
+            function animateSeasonContent(seasonContent) {
+                // Get all elements to animate
+                const elementsToAnimate = [
+                    ...seasonContent.querySelectorAll('.club-info'),
+                    ...seasonContent.querySelectorAll('.textbox'),
+                    ...seasonContent.querySelectorAll('p'),
+                    ...seasonContent.querySelectorAll('.moze-gallery li')
+                ];
+                
+                // Reset all elements
+                elementsToAnimate.forEach(element => {
+                    element.classList.remove('animate-in');
+                    element.classList.add('hidden');
+                });
+                
+                // Start observing each element
+                elementsToAnimate.forEach((element, index) => {
+                    // Add staggered delay based on index
+                    element.style.transitionDelay = `${index * 0.1}s`;
+                    scrollObserver.observe(element);
+                });
+            }
+            
             // Add click event listener to each season box
             seasonBoxes.forEach(function(box) {
                 box.addEventListener('click', function() {
@@ -945,63 +985,43 @@
                     
                     // Toggle active class on the season content
                     if (seasonContent) {
-                        // If we're activating the content, make sure it's visible
+                        // If we're activating the content
                         if (!seasonContent.classList.contains('active')) {
-                            // Show the content
+                            // Show the content first
                             seasonContent.style.display = 'block';
                             
-                            // Add active class to start animation
+                            // Short delay to ensure display is set
                             setTimeout(() => {
                                 seasonContent.classList.add('active');
                                 
-                                // After animation completes, ensure height is not limited
+                                // After content is expanded, start animations
                                 setTimeout(() => {
                                     seasonContent.style.maxHeight = 'none';
                                     seasonContent.style.overflow = 'visible';
-                                    
-                                    // Get all trophy and award items in this season
-                                    const trophyItems = seasonContent.querySelectorAll('.moze-gallery li');
-                                    
-                                    // Add animations to each trophy with staggered delays
-                                    trophyItems.forEach((item, index) => {
-                                        // Reset item first
-                                        item.classList.remove('animate-in');
-                                        item.classList.add('hidden');
-                                        
-                                        // Set a delay based on the index to create staggered effect
-                                        setTimeout(() => {
-                                            item.classList.remove('hidden');
-                                            item.classList.add('animate-in');
-                                        }, 50 * index); // 50ms delay between each item
-                                    });
+                                    // Trigger animations for all elements
+                                    animateSeasonContent(seasonContent);
                                 }, 600); // Match animation duration
                             }, 10);
                         } else {
                             // We're hiding the content
-                            
-                            // First reset max-height to allow animation to work
                             seasonContent.style.maxHeight = '';
                             seasonContent.style.overflow = 'hidden';
                             
-                            // Hide all trophy animations immediately
-                            const trophyItems = seasonContent.querySelectorAll('.moze-gallery li');
-                            trophyItems.forEach((item) => {
-                                item.classList.remove('animate-in');
-                                item.classList.add('hidden');
+                            // Remove animation classes
+                            const animatedElements = seasonContent.querySelectorAll('.animate-in');
+                            animatedElements.forEach(element => {
+                                element.classList.remove('animate-in');
+                                element.classList.add('hidden');
+                                element.style.transitionDelay = '0s';
                             });
                             
-                            // Short delay to allow style to apply
+                            // Remove active class and hide content
+                            seasonContent.classList.remove('active');
                             setTimeout(() => {
-                                // Remove active class to trigger animation
-                                seasonContent.classList.remove('active');
-                                
-                                // Allow time for the transition then hide completely
-                                setTimeout(() => {
-                                    if (!seasonContent.classList.contains('active')) {
-                                        seasonContent.style.display = 'none';
-                                    }
-                                }, 600); // Match animation duration
-                            }, 10);
+                                if (!seasonContent.classList.contains('active')) {
+                                    seasonContent.style.display = 'none';
+                                }
+                            }, 600);
                         }
                     }
                 });
@@ -1010,7 +1030,6 @@
             // Make sure all season content sections have proper IDs
             document.querySelectorAll('.season-content').forEach(function(content) {
                 if (!content.id) {
-                    // If a season content is missing an ID, try to find it from nearby season box
                     const nearestBox = content.previousElementSibling.querySelector('.season-box');
                     if (nearestBox) {
                         const seasonId = nearestBox.getAttribute('data-season');
@@ -1020,10 +1039,10 @@
                     }
                 }
                 
-                // Make all trophy items initially hidden
-                const trophyItems = content.querySelectorAll('.moze-gallery li');
-                trophyItems.forEach((item) => {
-                    item.classList.add('hidden');
+                // Initially hide all elements
+                const elementsToHide = content.querySelectorAll('.club-info, .textbox, p, .moze-gallery li');
+                elementsToHide.forEach(element => {
+                    element.classList.add('hidden');
                 });
             });
             
@@ -1037,16 +1056,8 @@
                         seasonContent.classList.add('active');
                         seasonContent.style.maxHeight = 'none';
                         seasonContent.style.overflow = 'visible';
-                        seasonContent.style.opacity = '1';
-                        
-                        // Animate all trophy items with staggered delay
-                        const trophyItems = seasonContent.querySelectorAll('.moze-gallery li');
-                        trophyItems.forEach((item, index) => {
-                            setTimeout(() => {
-                                item.classList.remove('hidden');
-                                item.classList.add('animate-in');
-                            }, 50 * index); // 50ms delay between each item
-                        });
+                        // Animate content elements
+                        animateSeasonContent(seasonContent);
                     }
                 });
             }, 100);
