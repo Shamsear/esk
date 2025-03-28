@@ -2160,4 +2160,87 @@ body.modal-open {
         top: -0.5rem;
         right: -0.5rem;
     }
+}
+
+/* Image Loading Optimizations */
+img {
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateZ(0);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+}
+
+img:not([src]):not([srcset]) {
+    visibility: hidden;
+}
+
+img[data-src] {
+    opacity: 0;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+/* Gallery image optimizations */
+.moze-gallery img {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.moze-gallery img.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Prevent layout shift during image load */
+.moze-gallery li {
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.moze-gallery li::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.moze-gallery img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.moze-gallery img.loaded {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .moze-gallery img {
+        transition-duration: 0.3s;
+    }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    img {
+        transition: opacity 0.1s ease;
+    }
+    
+    .moze-gallery img {
+        transition: opacity 0.1s ease;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .moze-gallery img.loaded {
+        transform: translate(-50%, -50%) scale(1);
+    }
 } 

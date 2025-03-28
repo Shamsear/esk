@@ -19,14 +19,65 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Image optimization code
+    function optimizeImageLoading() {
+        const images = document.querySelectorAll('img[data-src]');
+        const imageOptions = {
+            root: null,
+            rootMargin: '50px 0px', // Start loading images before they enter viewport
+            threshold: 0.1
+        };
+
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadImage(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, imageOptions);
+
+        function loadImage(image) {
+            const src = image.getAttribute('data-src');
+            if (!src) return;
+
+            // Preload image
+            const preloadImage = new Image();
+            preloadImage.src = src;
+            preloadImage.onload = () => {
+                image.src = src;
+                image.classList.add('loaded');
+            };
+            image.removeAttribute('data-src');
+        }
+
+        // Convert all images to lazy loading
+        images.forEach(img => {
+            // Save original src as data-src
+            if (!img.getAttribute('data-src')) {
+                img.setAttribute('data-src', img.src);
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+            }
+            imageObserver.observe(img);
+        });
+
+        // Preload visible images immediately
+        const visibleImages = Array.from(images).filter(img => {
+            const rect = img.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom >= 0;
+        });
+
+        visibleImages.forEach(loadImage);
+    }
+
     // Get current page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
     // Enhanced Intersection Observer options for faster animations
     const observerOptions = {
         root: null,
-        rootMargin: '50px', // Increased margin to start animations earlier
-        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] // Reduced threshold points for better performance
+        rootMargin: '50px',
+        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1]
     };
     
     // Function to check if element is in viewport with larger margin
@@ -86,6 +137,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to handle page-specific animations with optimized timing
     function initializePageAnimations() {
+        // Initialize image optimization first
+        optimizeImageLoading();
+
         switch(currentPage) {
             case 'registered-clubs.html':
                 const clubElements = [
