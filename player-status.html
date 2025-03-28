@@ -524,17 +524,45 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #1a1a1a;
-    padding: 20px;
+    padding: 25px;
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     width: 90vw;
     max-width: 600px;
-    max-height: 90vh;
+    max-height: 85vh; /* Reduced from 90vh to give more margin */
     overflow-y: auto;
     box-sizing: border-box;
     animation: modalFadeIn 0.3s ease-out;
     z-index: 1001; /* Higher than modal background */
+    margin: 0 auto; /* Center horizontally */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
 }
+
+/* Screen size specific modal adjustments */
+@media screen and (min-width: 1200px) {
+    .modal-content {
+        max-width: 650px; /* Slightly larger on very large screens */
+        padding: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 85vw;
+        padding: 22px;
+        max-height: 80vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .modal-content {
+        width: 92vw;
+        padding: 18px;
+        max-height: 82vh;
+        top: 52%; /* Move slightly down on mobile */
+    }
+}
+
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -554,9 +582,9 @@
     color: rgba(255, 255, 255, 0.8);
     font-size: 24px;
     font-weight: bold;
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -564,11 +592,23 @@
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-content .close:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(52, 152, 219, 0.3);
     transform: rotate(90deg);
+    color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+    .modal-content .close {
+        right: 10px;
+        top: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+    }
 }
 
 /* Player Name Header Styling */
@@ -599,12 +639,18 @@
 
 .modal-content img {
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
     height: auto;
     border-radius: 12px;
-    margin: 0 auto 20px;
+    margin: 10px auto 25px;
     display: block;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    transition: transform 0.3s ease;
+}
+
+.modal-content img:hover {
+    transform: scale(1.02);
 }
 
 /* Player Info Grid */
@@ -612,10 +658,41 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    margin-bottom: 25px;
+    margin: 0 8px 25px;
     background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 10px;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+    .modal-content img {
+        max-width: 220px;
+        margin: 8px auto 20px;
+    }
+    
+    .player-info-grid {
+        padding: 15px;
+        margin: 0 5px 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .modal-content img {
+        max-width: 180px;
+        margin: 5px auto 18px;
+    }
+    
+    .player-info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px;
+        margin: 0 3px 18px;
+    }
+
+    .info-label {
+        font-size: 11px;
+    }
 }
 
 .info-item {
@@ -642,23 +719,26 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin-top: 20px;
+    margin: 20px auto;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 #playerStatsTable th {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(52, 152, 219, 0.2);
     color: #fff;
     font-weight: 600;
-    padding: 12px;
+    padding: 14px;
     text-align: left;
     font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 #playerStatsTable td {
-    padding: 12px;
+    padding: 14px;
     color: #e3e3e3;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 14px;
@@ -669,37 +749,30 @@
 }
 
 #playerStatsTable tr:hover td {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Mobile Optimizations */
+@media screen and (max-width: 768px) {
+    #playerStatsTable {
+        margin: 15px auto;
+    }
+    
+    #playerStatsTable th, 
+    #playerStatsTable td {
+        padding: 12px;
+    }
+}
+
 @media screen and (max-width: 480px) {
-    .modal-content {
-        padding: 15px;
-        width: 95vw;
+    #playerStatsTable {
+        margin: 12px auto;
+        width: 98%;
     }
-
-    .modal-content h2 {
-        font-size: 20px;
-    }
-
-    .player-info-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
+    
     #playerStatsTable th,
     #playerStatsTable td {
-        padding: 10px;
+        padding: 10px 8px;
         font-size: 13px;
-    }
-
-    .info-label {
-        font-size: 11px;
-    }
-
-    .info-value {
-        font-size: 14px;
     }
 }
 
@@ -714,12 +787,18 @@
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(52, 152, 219, 0.3);
     border-radius: 4px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(52, 152, 219, 0.5);
+}
+
+.info-value {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
 }
 
         .modal-content h2 {
