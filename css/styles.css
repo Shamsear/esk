@@ -1917,8 +1917,11 @@ img, video {
 /* Scroll Animation Styles */
 .hidden {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.2, 0.6, 0.3, 1);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .animate-in {
@@ -1926,95 +1929,87 @@ img, video {
     transform: translateY(0);
 }
 
-/* Different animation delays for cascade effect */
-.nav-item:nth-child(1) { transition-delay: 0.1s; }
-.nav-item:nth-child(2) { transition-delay: 0.2s; }
-.nav-item:nth-child(3) { transition-delay: 0.3s; }
-.nav-item:nth-child(4) { transition-delay: 0.4s; }
-.nav-item:nth-child(5) { transition-delay: 0.5s; }
-
-.feature-item:nth-child(1) { transition-delay: 0.1s; }
-.feature-item:nth-child(2) { transition-delay: 0.2s; }
-
-.timeline-item:nth-child(1) { transition-delay: 0.1s; }
-.timeline-item:nth-child(2) { transition-delay: 0.2s; }
-.timeline-item:nth-child(3) { transition-delay: 0.3s; }
-.timeline-item:nth-child(4) { transition-delay: 0.4s; }
-
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Hide all nav titles */
-.nav-title, 
-.nav-card .nav-title,
-.nav-item .nav-title {
-    display: none !important;
-}
-
-/* Trophy gallery items animations - Enhanced version */
+/* Gallery Items Animation */
 .moze-gallery li.hidden {
     opacity: 0;
-    transform: translateY(50px) scale(0.95);
-    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), 
-                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
-                box-shadow 0.8s cubic-bezier(0.19, 1, 0.22, 1),
-                background-color 0.4s ease;
-    will-change: opacity, transform, box-shadow;
-    pointer-events: none;
-    backface-visibility: hidden;
-    perspective: 1000px;
-    -webkit-font-smoothing: antialiased;
+    transform: translateY(15px) scale(0.98);
+    transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.2, 0.6, 0.3, 1);
 }
 
 .moze-gallery li.animate-in {
     opacity: 1;
     transform: translateY(0) scale(1);
-    pointer-events: auto;
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* Enhanced hover effects for gallery items */
-.moze-gallery li {
-    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
-                box-shadow 0.6s cubic-bezier(0.19, 1, 0.22, 1),
-                background-color 0.4s ease;
-    transform-origin: center center;
+/* Header Elements Animation */
+.black-box.hidden {
+    transform: translateY(-15px);
+    transition-duration: 0.25s;
+}
+
+.club-info.hidden {
+    transform: translateY(15px);
+    transition-duration: 0.25s;
+}
+
+/* Tournament Cards Animation */
+.tournament-card.hidden {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.2, 0.6, 0.3, 1);
+}
+
+.tournament-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Season Box Animation */
+.season-box.hidden {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.2, 0.6, 0.3, 1);
+}
+
+.season-box.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .hidden {
+        transform: translateY(15px);
+    }
+    
+    .moze-gallery li.hidden {
+        transform: translateY(10px) scale(0.99);
+    }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+    .hidden {
+        transition-duration: 0.1s;
+        transform: translateY(10px);
+    }
+    
+    .moze-gallery li.hidden {
+        transition-duration: 0.1s;
+        transform: translateY(5px);
+    }
+}
+
+/* Performance Optimizations */
+.moze-gallery li,
+.tournament-card,
+.season-box,
+.black-box,
+.club-info {
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
-}
-
-.moze-gallery li:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    background: rgba(0, 0, 0, 0.4);
-}
-
-/* Optimized animation performance */
-@media (prefers-reduced-motion: no-preference) {
-    .moze-gallery li {
-        will-change: transform, opacity, box-shadow;
-    }
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-    .moze-gallery li.hidden {
-        transform: translateY(30px) scale(0.98);
-        transition-duration: 0.6s;
-    }
-    
-    .moze-gallery li {
-        transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-                    opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-                    box-shadow 0.4s ease;
-    }
-    
-    .moze-gallery li:hover {
-        transform: translateY(-5px) scale(1.01);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Custom styles for index and career pages to override animations */
@@ -2159,88 +2154,5 @@ body.modal-open {
     .modal-close {
         top: -0.5rem;
         right: -0.5rem;
-    }
-}
-
-/* Image Loading Optimizations */
-img {
-    opacity: 1;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateZ(0);
-    will-change: opacity, transform;
-    backface-visibility: hidden;
-}
-
-img:not([src]):not([srcset]) {
-    visibility: hidden;
-}
-
-img[data-src] {
-    opacity: 0;
-}
-
-img.loaded {
-    opacity: 1;
-}
-
-/* Gallery image optimizations */
-.moze-gallery img {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.moze-gallery img.loaded {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Prevent layout shift during image load */
-.moze-gallery li {
-    position: relative;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.moze-gallery li::before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-}
-
-.moze-gallery img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-}
-
-.moze-gallery img.loaded {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-    .moze-gallery img {
-        transition-duration: 0.3s;
-    }
-}
-
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce) {
-    img {
-        transition: opacity 0.1s ease;
-    }
-    
-    .moze-gallery img {
-        transition: opacity 0.1s ease;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    
-    .moze-gallery img.loaded {
-        transform: translate(-50%, -50%) scale(1);
     }
 } 

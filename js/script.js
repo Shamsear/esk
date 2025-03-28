@@ -19,147 +19,79 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Image optimization code
-    function optimizeImageLoading() {
-        const images = document.querySelectorAll('img[data-src]');
-        const imageOptions = {
-            root: null,
-            rootMargin: '50px 0px', // Start loading images before they enter viewport
-            threshold: 0.1
-        };
-
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadImage(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, imageOptions);
-
-        function loadImage(image) {
-            const src = image.getAttribute('data-src');
-            if (!src) return;
-
-            // Preload image
-            const preloadImage = new Image();
-            preloadImage.src = src;
-            preloadImage.onload = () => {
-                image.src = src;
-                image.classList.add('loaded');
-            };
-            image.removeAttribute('data-src');
-        }
-
-        // Convert all images to lazy loading
-        images.forEach(img => {
-            // Save original src as data-src
-            if (!img.getAttribute('data-src')) {
-                img.setAttribute('data-src', img.src);
-                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
-            }
-            imageObserver.observe(img);
-        });
-
-        // Preload visible images immediately
-        const visibleImages = Array.from(images).filter(img => {
-            const rect = img.getBoundingClientRect();
-            return rect.top < window.innerHeight && rect.bottom >= 0;
-        });
-
-        visibleImages.forEach(loadImage);
-    }
-
     // Get current page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
-    // Enhanced Intersection Observer options for faster animations
+    // Optimized Intersection Observer options for faster animations
     const observerOptions = {
         root: null,
-        rootMargin: '50px',
-        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1]
+        rootMargin: '50px', // Increased margin to start animations earlier
+        threshold: [0, 0.25, 0.5, 0.75, 1] // Reduced number of thresholds for better performance
     };
     
-    // Function to check if element is in viewport with larger margin
+    // Function to check if element is in viewport (optimized)
     function isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.95 && 
-            rect.bottom >= -50 // Allow elements slightly above viewport
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
         );
     }
     
-    // Create Intersection Observer for faster scroll animations
+    // Create Intersection Observer for scroll animations (optimized)
     const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (!entry.target.classList.contains('animate-in')) {
-                const progress = Math.min(entry.intersectionRatio * 2, 1); // Faster progress
-                
-                if (progress > 0) {
-                    entry.target.style.opacity = progress;
-                    // Reduced movement distance and faster scale
-                    entry.target.style.transform = `translateY(${20 * (1 - progress)}px) scale(${0.98 + (0.02 * progress)})`;
+                if (entry.isIntersecting) {
+                    // Simplified animation logic for better performance
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'none';
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
                     
-                    if (progress >= 0.8) { // Trigger animation earlier
-                        entry.target.classList.add('animate-in');
-                        entry.target.style.transform = 'none';
-                        observer.unobserve(entry.target);
-                    }
+                    // Remove transition delay after animation
+                    setTimeout(() => {
+                        entry.target.style.transitionDelay = '0s';
+                    }, 300);
                 }
             }
         });
     }, observerOptions);
 
-    // Function to set up faster scroll animations
+    // Function to set up scroll animations for elements (optimized)
     function setupScrollAnimations(elements, staggerDelay = 0.05) { // Reduced default stagger delay
         elements.forEach((element, index) => {
+            if (element.classList.contains('animate-in')) return;
+            
+            // Add initial hidden state with optimized transform
             element.classList.add('hidden');
+            element.style.transform = 'translateY(20px)'; // Reduced initial offset
+            element.style.opacity = '0';
             
-            const rect = element.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const delayMultiplier = rect.top < viewportHeight ? staggerDelay : staggerDelay / 2;
-            
-            // Faster transition delay
+            // Faster transition delay calculation
+            const delayMultiplier = isInViewport(element) ? staggerDelay : staggerDelay / 2;
             element.style.transitionDelay = `${index * delayMultiplier}s`;
-            element.style.transitionDuration = '0.4s'; // Faster transition duration
             
+            // Start observing
             scrollObserver.observe(element);
-            
-            // Clean up transitions after animation
-            element.addEventListener('transitionend', () => {
-                if (element.classList.contains('animate-in')) {
-                    element.style.transitionDelay = '0s';
-                    element.style.transitionDuration = '0.3s'; // Faster hover transitions
-                }
-            });
         });
     }
 
-    // Function to handle page-specific animations with optimized timing
+    // Function to handle page-specific animations (optimized)
     function initializePageAnimations() {
-        // Initialize image optimization first
-        optimizeImageLoading();
-
+        const commonDelay = 0.03; // Faster stagger delay for all pages
+        
         switch(currentPage) {
             case 'registered-clubs.html':
-                const clubElements = [
+            case 'manager-ranking.html':
+                const galleryElements = [
                     ...document.querySelectorAll('.black-box'),
                     ...document.querySelectorAll('.club-info'),
                     ...document.querySelectorAll('.moze-gallery li'),
                     ...document.querySelectorAll('.gallery-loader'),
                     ...document.querySelectorAll('.search-box')
                 ];
-                setupScrollAnimations(clubElements, 0.03); // Very fast stagger for many items
-                break;
-
-            case 'manager-ranking.html':
-                const managerElements = [
-                    ...document.querySelectorAll('.black-box'),
-                    ...document.querySelectorAll('.club-info'),
-                    ...document.querySelectorAll('.moze-gallery li'),
-                    ...document.querySelectorAll('.gallery-loader')
-                ];
-                setupScrollAnimations(managerElements, 0.04);
+                setupScrollAnimations(galleryElements, commonDelay);
                 break;
                 
             case 'trophy-cabinet.html':
@@ -169,20 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...document.querySelectorAll('.season-box'),
                     ...document.querySelectorAll('.moze-gallery li')
                 ];
-                setupScrollAnimations(trophyElements, 0.04);
+                setupScrollAnimations(trophyElements, commonDelay);
                 
-                // Optimized season content animations
+                // Optimized season content handling
                 document.querySelectorAll('.season-content').forEach(content => {
-                    const seasonElements = [
-                        ...content.querySelectorAll('.club-info'),
-                        ...content.querySelectorAll('.textbox'),
-                        ...content.querySelectorAll('p'),
-                        ...content.querySelectorAll('.moze-gallery li')
-                    ];
-                    seasonElements.forEach(element => {
-                        element.classList.add('hidden');
-                        element.style.transitionDuration = '0.4s';
-                    });
+                    const seasonElements = content.querySelectorAll('.club-info, .textbox, p, .moze-gallery li');
+                    seasonElements.forEach(element => element.classList.add('hidden'));
                 });
                 break;
                 
@@ -191,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...document.querySelectorAll('.tournament-card'),
                     ...document.querySelectorAll('.black-box')
                 ];
-                setupScrollAnimations(tournamentElements, 0.04);
+                setupScrollAnimations(tournamentElements, commonDelay);
                 break;
                 
             default:
@@ -199,23 +123,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
                     '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
                 );
-                setupScrollAnimations(elementsToAnimate, 0.05);
+                setupScrollAnimations(elementsToAnimate, commonDelay);
         }
     }
 
     // Initialize animations
     initializePageAnimations();
     
-    // Optimized scroll handler with reduced calculations
+    // Optimized scroll handler
     let scrollTimeout;
     let lastScroll = 0;
     const scrollThreshold = 50; // Only process every 50ms
-
+    
     window.addEventListener('scroll', () => {
         const now = Date.now();
         if (now - lastScroll < scrollThreshold) return;
         lastScroll = now;
-
+        
         if (scrollTimeout) {
             window.cancelAnimationFrame(scrollTimeout);
         }
@@ -225,12 +149,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (hiddenElements.length > 0) {
                 hiddenElements.forEach(element => {
                     if (isInViewport(element)) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'none';
                         element.classList.add('animate-in');
                     }
                 });
             }
         });
-    }, { passive: true }); // Optimize scroll performance
+    }, { passive: true }); // Add passive flag for better scroll performance
 
     // Set copyright year
     const yearElement = document.getElementById('year');
