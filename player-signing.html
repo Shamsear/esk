@@ -91,6 +91,25 @@
             top: 0;
             z-index: 10;
             white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+        
+        .auction-table th:hover {
+            background: linear-gradient(135deg, rgba(51, 61, 112, 0.9), rgba(41, 51, 102, 0.9));
+        }
+        
+        .auction-table th.sort-asc::after {
+            content: " ↑";
+            font-size: 14px;
+            color: #4fc3f7;
+        }
+        
+        .auction-table th.sort-desc::after {
+            content: " ↓";
+            font-size: 14px;
+            color: #4fc3f7;
         }
         
         .auction-table tr:nth-child(odd) {
@@ -573,5 +592,95 @@
     <script src="js/background-mobile-scroll.js"></script>
     <script src="js/player-auction.js"></script>
     <script src="js/image-protection.js"></script>
+    
+    <!-- Table Sorting Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize table sorting
+            initTableSorting();
+            
+            function initTableSorting() {
+                // Get all table headers across all position tables
+                const tables = document.querySelectorAll('.auction-table');
+                
+                tables.forEach(table => {
+                    const headers = table.querySelectorAll('th');
+                    
+                    headers.forEach((header, index) => {
+                        // Add click event listener to each header
+                        header.addEventListener('click', function() {
+                            sortTable(table, index);
+                        });
+                    });
+                });
+            }
+            
+            function sortTable(table, columnIndex) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                const headers = table.querySelectorAll('th');
+                
+                // Determine sort direction
+                const currentHeader = headers[columnIndex];
+                const isAscending = !currentHeader.classList.contains('sort-asc');
+                
+                // Remove sort classes from all headers
+                headers.forEach(header => {
+                    header.classList.remove('sort-asc', 'sort-desc');
+                });
+                
+                // Add appropriate sort class to the clicked header
+                currentHeader.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+                
+                // Sort the rows
+                rows.sort((rowA, rowB) => {
+                    // Get cell values to compare
+                    const cellA = rowA.cells[columnIndex].textContent.trim();
+                    const cellB = rowB.cells[columnIndex].textContent.trim();
+                    
+                    // Check if values are numbers (for numeric columns like Base Value, Value, Bid Amount)
+                    const numA = parseFloat(cellA.replace(/[^\d.-]/g, ''));
+                    const numB = parseFloat(cellB.replace(/[^\d.-]/g, ''));
+                    
+                    if (!isNaN(numA) && !isNaN(numB)) {
+                        // Numeric comparison
+                        return isAscending ? numA - numB : numB - numA;
+                    } else {
+                        // String comparison
+                        return isAscending 
+                            ? cellA.localeCompare(cellB) 
+                            : cellB.localeCompare(cellA);
+                    }
+                });
+                
+                // Remove all existing rows
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                
+                // Add sorted rows back to table
+                rows.forEach(row => {
+                    tbody.appendChild(row);
+                });
+                
+                // Add zebra striping after sorting
+                applyZebraStriping(tbody);
+            }
+            
+            function applyZebraStriping(tbody) {
+                // Reset background for all rows
+                const rows = tbody.querySelectorAll('tr');
+                
+                rows.forEach((row, index) => {
+                    row.classList.remove('odd', 'even');
+                    if (index % 2 === 0) {
+                        row.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    } else {
+                        row.style.backgroundColor = 'transparent';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html> 
