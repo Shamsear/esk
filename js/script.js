@@ -19,103 +19,96 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Get current page to set unique animation flag
+    // Get current page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const isManagerOrClubs = currentPage === 'manager-ranking.html' || currentPage === 'registered-clubs.html';
     
-    // Special handling for index and career pages to avoid delayed animations
-    const isIndexOrCareer = currentPage === 'index.html' || currentPage === 'career-mode.html';
+    // Enhanced Intersection Observer options for smoother animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '30px',  // Start animation slightly before element comes into view
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]  // Multiple thresholds for smoother animation
+    };
     
-    // Handle animations differently based on page type
-    if (isIndexOrCareer) {
-        // For index and career pages, immediately show all elements
-        const elements = document.querySelectorAll(
-            '.nav-item, .feature-item, .timeline-item, .cta-section'
-        );
-        
-        elements.forEach(element => {
-            // Make sure elements are visible immediately
-            element.classList.remove('hidden');
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-            element.style.transition = 'none';
-        });
-    } else {
-        // For other pages, use the normal animation system
-        const animationKey = 'animations_' + currentPage;
-        const animationsApplied = sessionStorage.getItem(animationKey);
-        
-        // Scroll animations using Intersection Observer
-        const animateOnScroll = function() {
-            // Don't animate again if already animated for this page
-            if (animationsApplied === 'true') {
-                console.log('Animations already applied for ' + currentPage);
+    // Create Intersection Observer for scroll animations
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.target.classList.contains('animate-in')) {
+                // Calculate animation progress based on intersection ratio
+                const progress = Math.min(entry.intersectionRatio * 1.5, 1);
                 
-                // Remove hidden class from all elements to ensure they're visible
-                const elementsToShow = document.querySelectorAll(
-                    '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
-                    '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
-                );
-                
-                elementsToShow.forEach(element => {
-                    element.classList.remove('hidden');
-                    element.classList.add('animate-in');
-                });
-                
-                return;
-            }
-            
-            // Elements to animate - including tournament guide elements
-            // IMPORTANT: Exclude season-content elements to avoid conflicts with trophy cabinet
-            const elementsToAnimate = document.querySelectorAll(
-                '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
-                '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
-            );
-            
-            // Special handling for trophy cabinet elements
-            if (currentPage === 'trophy-cabinet.html') {
-                // Make sure hidden season contents don't interfere with animations
-                document.querySelectorAll('.season-content').forEach(content => {
-                    if (!content.classList.contains('active')) {
-                        content.style.display = 'none';
-                    } else {
-                        content.style.display = 'block';
-                        content.style.opacity = '1';
-                        content.style.transform = 'translateY(0)';
-                    }
-                });
-            }
-            
-            // Intersection Observer options
-            const options = {
-                root: null, // viewport is the root
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of the element must be visible
-            };
-            
-            // Create observer
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                if (progress > 0) {
+                    // Apply smooth transition based on scroll position
+                    entry.target.style.opacity = progress;
+                    entry.target.style.transform = `translateY(${30 * (1 - progress)}px) scale(${0.95 + (0.05 * progress)})`;
+                    
+                    // Add animate-in class when fully visible
+                    if (progress >= 1) {
                         entry.target.classList.add('animate-in');
-                        // Stop observing after animation
+                        entry.target.style.transform = 'none';
                         observer.unobserve(entry.target);
                     }
-                });
-            }, options);
-            
-            // Start observing elements
-            elementsToAnimate.forEach(element => {
-                observer.observe(element);
-                // Add initial hidden state class
-                element.classList.add('hidden');
-            });
-            
-            // Set flag to prevent re-animation for this specific page
-            sessionStorage.setItem(animationKey, 'true');
-        };
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Function to set up scroll animations for gallery items
+    function setupGalleryAnimations() {
+        const galleryItems = document.querySelectorAll('.moze-gallery li');
         
-        // Initialize animations for non-index/career pages
-        animateOnScroll();
+        galleryItems.forEach((item, index) => {
+            // Add initial hidden state
+            item.classList.add('hidden');
+            
+            // Calculate staggered delay based on position in viewport
+            const rect = item.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const delayMultiplier = rect.top < viewportHeight ? 0.1 : 0.05;
+            
+            // Add staggered delay based on index and position
+            item.style.transitionDelay = `${index * delayMultiplier}s`;
+            
+            // Start observing
+            scrollObserver.observe(item);
+            
+            // Reset transition delay after animation
+            item.addEventListener('transitionend', () => {
+                if (item.classList.contains('animate-in')) {
+                    item.style.transitionDelay = '0s';
+                }
+            });
+        });
+    }
+
+    // Initialize animations based on page
+    if (isManagerOrClubs) {
+        setupGalleryAnimations();
+        
+        // Re-run animation setup on scroll to handle dynamic content
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(() => {
+                const hiddenItems = document.querySelectorAll('.moze-gallery li:not(.animate-in)');
+                if (hiddenItems.length > 0) {
+                    setupGalleryAnimations();
+                }
+            });
+        });
+    } else {
+        // Handle other pages' animations
+        const elementsToAnimate = document.querySelectorAll(
+            '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
+            '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
+        );
+        
+        elementsToAnimate.forEach(element => {
+            element.classList.add('hidden');
+            scrollObserver.observe(element);
+        });
     }
 
     // Set copyright year
