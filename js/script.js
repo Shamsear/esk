@@ -129,4 +129,80 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    // Calculate scrollbar width once
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+    
+    // Modal functionality
+    const modals = document.querySelectorAll('.modal');
+    const modalOverlays = document.querySelectorAll('.modal-overlay');
+    const modalCloseButtons = document.querySelectorAll('.modal-close');
+    
+    // Function to open modal
+    function openModal(modal, overlay) {
+        // Prevent body scroll and adjust for scrollbar removal
+        document.body.classList.add('modal-open');
+        
+        // Show modal and overlay with a slight delay to ensure smooth animation
+        requestAnimationFrame(() => {
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        });
+    }
+    
+    // Function to close modal
+    function closeModal(modal, overlay) {
+        modal.classList.remove('active');
+        overlay.classList.remove('active');
+        
+        // Remove body scroll lock after animation
+        setTimeout(() => {
+            if (!document.querySelector('.modal.active')) {
+                document.body.classList.remove('modal-open');
+            }
+        }, 300); // Match transition duration
+    }
+    
+    // Set up modal triggers
+    document.querySelectorAll('[data-modal-target]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = trigger.getAttribute('data-modal-target');
+            const modal = document.querySelector(modalId);
+            const overlay = modal.nextElementSibling;
+            
+            if (modal && overlay) {
+                openModal(modal, overlay);
+            }
+        });
+    });
+    
+    // Close modal on close button click
+    modalCloseButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            const overlay = modal.nextElementSibling;
+            closeModal(modal, overlay);
+        });
+    });
+    
+    // Close modal on overlay click
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', () => {
+            const modal = overlay.previousElementSibling;
+            closeModal(modal, overlay);
+        });
+    });
+    
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.modal.active');
+            const activeOverlay = document.querySelector('.modal-overlay.active');
+            if (activeModal && activeOverlay) {
+                closeModal(activeModal, activeOverlay);
+            }
+        }
+    });
 }); 
