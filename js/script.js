@@ -21,28 +21,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Get current page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const isManagerOrClubs = currentPage === 'manager-ranking.html' || currentPage === 'registered-clubs.html';
     
     // Enhanced Intersection Observer options for smoother animations
     const observerOptions = {
         root: null,
-        rootMargin: '30px',  // Start animation slightly before element comes into view
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]  // Multiple thresholds for smoother animation
+        rootMargin: '30px',
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     };
+    
+    // Function to check if element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 && 
+            rect.bottom >= 0
+        );
+    }
     
     // Create Intersection Observer for scroll animations
     const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (!entry.target.classList.contains('animate-in')) {
-                // Calculate animation progress based on intersection ratio
                 const progress = Math.min(entry.intersectionRatio * 1.5, 1);
                 
                 if (progress > 0) {
-                    // Apply smooth transition based on scroll position
                     entry.target.style.opacity = progress;
                     entry.target.style.transform = `translateY(${30 * (1 - progress)}px) scale(${0.95 + (0.05 * progress)})`;
                     
-                    // Add animate-in class when fully visible
                     if (progress >= 1) {
                         entry.target.classList.add('animate-in');
                         entry.target.style.transform = 'none';
@@ -53,63 +58,115 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Function to set up scroll animations for gallery items
-    function setupGalleryAnimations() {
-        const galleryItems = document.querySelectorAll('.moze-gallery li');
-        
-        galleryItems.forEach((item, index) => {
+    // Function to set up scroll animations for elements
+    function setupScrollAnimations(elements, staggerDelay = 0.1) {
+        elements.forEach((element, index) => {
             // Add initial hidden state
-            item.classList.add('hidden');
+            element.classList.add('hidden');
             
-            // Calculate staggered delay based on position in viewport
-            const rect = item.getBoundingClientRect();
+            // Calculate staggered delay based on position
+            const rect = element.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
-            const delayMultiplier = rect.top < viewportHeight ? 0.1 : 0.05;
+            const delayMultiplier = rect.top < viewportHeight ? staggerDelay : staggerDelay / 2;
             
-            // Add staggered delay based on index and position
-            item.style.transitionDelay = `${index * delayMultiplier}s`;
+            // Add staggered delay
+            element.style.transitionDelay = `${index * delayMultiplier}s`;
             
             // Start observing
-            scrollObserver.observe(item);
+            scrollObserver.observe(element);
             
             // Reset transition delay after animation
-            item.addEventListener('transitionend', () => {
-                if (item.classList.contains('animate-in')) {
-                    item.style.transitionDelay = '0s';
+            element.addEventListener('transitionend', () => {
+                if (element.classList.contains('animate-in')) {
+                    element.style.transitionDelay = '0s';
                 }
             });
         });
     }
 
-    // Initialize animations based on page
-    if (isManagerOrClubs) {
-        setupGalleryAnimations();
-        
-        // Re-run animation setup on scroll to handle dynamic content
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (scrollTimeout) {
-                window.cancelAnimationFrame(scrollTimeout);
-            }
-            scrollTimeout = window.requestAnimationFrame(() => {
-                const hiddenItems = document.querySelectorAll('.moze-gallery li:not(.animate-in)');
-                if (hiddenItems.length > 0) {
-                    setupGalleryAnimations();
-                }
-            });
-        });
-    } else {
-        // Handle other pages' animations
-        const elementsToAnimate = document.querySelectorAll(
-            '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
-            '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
-        );
-        
-        elementsToAnimate.forEach(element => {
-            element.classList.add('hidden');
-            scrollObserver.observe(element);
-        });
+    // Function to handle page-specific animations
+    function initializePageAnimations() {
+        switch(currentPage) {
+            case 'registered-clubs.html':
+                const clubElements = [
+                    ...document.querySelectorAll('.black-box'),
+                    ...document.querySelectorAll('.club-info'),
+                    ...document.querySelectorAll('.moze-gallery li'),
+                    ...document.querySelectorAll('.gallery-loader'),
+                    ...document.querySelectorAll('.search-box')
+                ];
+                setupScrollAnimations(clubElements, 0.08); // Slightly faster stagger for many club items
+                break;
+
+            case 'manager-ranking.html':
+                const managerElements = [
+                    ...document.querySelectorAll('.black-box'),
+                    ...document.querySelectorAll('.club-info'),
+                    ...document.querySelectorAll('.moze-gallery li'),
+                    ...document.querySelectorAll('.gallery-loader')
+                ];
+                setupScrollAnimations(managerElements);
+                break;
+                
+            case 'trophy-cabinet.html':
+                const trophyElements = [
+                    ...document.querySelectorAll('.club-info'),
+                    ...document.querySelectorAll('.stat-item'),
+                    ...document.querySelectorAll('.season-box'),
+                    ...document.querySelectorAll('.moze-gallery li')
+                ];
+                setupScrollAnimations(trophyElements);
+                
+                // Special handling for season content animations
+                document.querySelectorAll('.season-content').forEach(content => {
+                    const seasonElements = [
+                        ...content.querySelectorAll('.club-info'),
+                        ...content.querySelectorAll('.textbox'),
+                        ...content.querySelectorAll('p'),
+                        ...content.querySelectorAll('.moze-gallery li')
+                    ];
+                    seasonElements.forEach(element => element.classList.add('hidden'));
+                });
+                break;
+                
+            case 'career-tournament.html':
+                const tournamentElements = [
+                    ...document.querySelectorAll('.tournament-card'),
+                    ...document.querySelectorAll('.black-box')
+                ];
+                setupScrollAnimations(tournamentElements);
+                break;
+                
+            default:
+                // Handle other pages' animations
+                const elementsToAnimate = document.querySelectorAll(
+                    '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
+                    '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
+                );
+                setupScrollAnimations(elementsToAnimate);
+        }
     }
+
+    // Initialize animations
+    initializePageAnimations();
+    
+    // Re-run animation setup on scroll to handle dynamic content
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(() => {
+            const hiddenElements = document.querySelectorAll('.hidden:not(.animate-in)');
+            if (hiddenElements.length > 0) {
+                hiddenElements.forEach(element => {
+                    if (isInViewport(element)) {
+                        element.classList.add('animate-in');
+                    }
+                });
+            }
+        });
+    });
 
     // Set copyright year
     const yearElement = document.getElementById('year');
@@ -117,19 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
         yearElement.textContent = new Date().getFullYear();
     }
     
-    // Clear all animation flags when the browser is refreshed (not on normal navigation)
-    window.addEventListener('beforeunload', function(e) {
-        // The presence of returnValue indicates a page refresh rather than navigation
-        if (e.returnValue !== undefined) {
-            // Clear all animation flags on page refresh
-            Object.keys(sessionStorage).forEach(key => {
-                if (key.startsWith('animations_')) {
-                    sessionStorage.removeItem(key);
-                }
-            });
-        }
-    });
-
     // Calculate scrollbar width once
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);

@@ -282,6 +282,93 @@
             z-index: 5;
             display: none; /* Hide manager names */
         }
+
+        /* Scroll Animation Styles */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: opacity, transform;
+        }
+
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Club gallery specific animations */
+        .moze-gallery li.hidden {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .moze-gallery li.animate-in {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Black box and club info animations */
+        .black-box.hidden {
+            transform: translateY(-30px);
+            transition-delay: 0.1s;
+        }
+
+        .club-info.hidden {
+            transform: scale(0.95);
+            transition-delay: 0.2s;
+        }
+
+        /* Search box animation */
+        .search-box.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .search-box.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gallery loader animation */
+        .gallery-loader.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition-delay: 0.3s;
+        }
+
+        .gallery-loader.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced hover effects */
+        .moze-gallery li {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .moze-gallery li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Mobile optimizations */
+        @media screen and (max-width: 768px) {
+            .hidden {
+                transform: translateY(20px);
+            }
+            
+            .moze-gallery li.hidden {
+                transform: scale(0.9) translateY(15px);
+            }
+            
+            .black-box.hidden {
+                transform: translateY(-20px);
+            }
+        }
     </style>
 </head>
 <body>
