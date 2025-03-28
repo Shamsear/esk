@@ -494,10 +494,50 @@ footer {
     /* Mobile background fix */
     body {
         background-image: url('assets/images/logo.webp');
-        background-size: contain;
-        background-position: center top;
+        background-size: 95% auto;
+        background-position: center 15%;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
         background-color: #000;
         font-size: 14px;
+        position: relative;
+        overflow-x: hidden;
+    }
+    
+    /* Add pseudo-elements for top and bottom gradients - similar to JS version */
+    body::before,
+    body::after {
+        content: '';
+        position: fixed;
+        left: 0;
+        right: 0;
+        height: 25%;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    /* Top gradient matching logo colors */
+    body::before {
+        top: 0;
+        background: linear-gradient(to bottom, 
+            rgba(0, 0, 0, 1) 0%, 
+            rgba(0, 51, 102, 0.8) 50%, 
+            rgba(0, 0, 0, 0) 100%);
+    }
+    
+    /* Bottom gradient matching logo colors */
+    body::after {
+        bottom: 0;
+        background: linear-gradient(to top, 
+            rgba(0, 0, 0, 1) 0%, 
+            rgba(0, 51, 102, 0.8) 50%, 
+            rgba(0, 0, 0, 0) 100%);
+    }
+    
+    /* Ensure content can't cause horizontal scrolling */
+    .overlay {
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     /* Rest of mobile styles */
@@ -599,6 +639,19 @@ footer {
     
     .career-navigation .nav-item {
         margin: 0.5rem 0;
+    }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-width: 768px) and (orientation: landscape) {
+    body {
+        background-size: auto 50%;
+        background-position: center 10%;
+    }
+    
+    body::before,
+    body::after {
+        height: 20%;
     }
 }
 
@@ -1415,6 +1468,16 @@ img, video {
 }
 
 @media (max-width: 480px) {
+    body {
+        background-size: 100% auto;
+        background-position: center 12%;
+    }
+    
+    body::before,
+    body::after {
+        height: 30%;
+    }
+    
     h1 {
         font-size: 2em;
     }
@@ -2155,4 +2218,21 @@ body.modal-open {
         top: -0.5rem;
         right: -0.5rem;
     }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-width: 768px) and (orientation: landscape) {
+    body {
+        background-size: auto 50%;
+        background-position: center 10%;
+    }
+    
+    body::before,
+    body::after {
+        height: 20%;
+    }
+}
+
+@media (max-width: 576px) {
+    // ... existing code ...
 } 
