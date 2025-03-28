@@ -8,9 +8,7 @@
 
     <!-- DNS prefetch and preconnect -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://assets.mixkit.co">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -29,7 +27,7 @@
     <style>
         /* Main page style */
         body {
-            font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background-image: url('assets/images/logo.webp');
             color: #e3e3e3;
             margin: 0;
@@ -38,8 +36,6 @@
             -webkit-user-select: none; /* Safari */
             -ms-user-select: none; /* Internet Explorer/Edge */
             position: relative;
-            font-weight: 300;
-            letter-spacing: 0.2px;
         }
 
         /* Background overlay */
@@ -69,23 +65,22 @@
 
         /* Welcome screen styles */
         #loading {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            background-color: #121212 !important; /* Dark theme background */
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            z-index: 9999 !important;
-            color: #fff !important;
-            text-align: center !important;
-            font-size: 32px !important;
-            flex-direction: column !important;
-            animation: fadeIn 1s ease-in-out !important; /* Fade in effect */
-            overflow: hidden !important;
-            transition: opacity 0.5s ease-out !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050; /* Higher than modal z-index */
+            color: #fff;
+            text-align: center;
+            font-size: 32px;
+            flex-direction: column;
+            animation: fadeIn 1s ease-in-out;
+            transition: opacity 0.5s ease-out;
         }
         /* Welcome message styling */
         .welcome-message {
@@ -94,8 +89,6 @@
             color: #b0b0b0; /* Dark gray color for the welcome message */
             opacity: 0;
             animation: fadeIn 2s ease-in-out forwards, bounce 2s ease-in-out infinite;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
-            letter-spacing: 0.3px;
         }
         @media screen and (max-width: 768px) {
             .welcome-message {
@@ -104,7 +97,6 @@
             color: #b0b0b0; /* Dark gray color for the welcome message */
             opacity: 0;
             animation: fadeIn 2s ease-in-out forwards, bounce 2s ease-in-out infinite;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
         }
     }
 
@@ -115,8 +107,6 @@
             color: #888; /* Light gray for the loading message */
             opacity: 0;
             animation: fadeIn 2.5s ease-in-out forwards;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
-            font-weight: 300;
         }
 
         /* Keyframes for fading in and background animation */
@@ -135,31 +125,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
-        /* Background animation for loading screen */
-        .background-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                #121212 0%, 
-                #1a1a1a 25%, 
-                #202020 50%, 
-                #1a1a1a 75%, 
-                #121212 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            z-index: -1;
-            opacity: 0.8;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
         #content {
             display: none; /* Make sure it's hidden by default */
             opacity: 0;
@@ -168,14 +133,10 @@
 
         h1 {
             text-align: center;
-            font-size: 28px;
+            font-size: 24px;
             margin-top: 20px;
             color: #fff;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
-            font-weight: 600;
-            letter-spacing: 0.5px;
         }
-        
         h2 {
             display: block;
             font-size: 1.5em;
@@ -183,9 +144,7 @@
             margin-block-end: 0.83em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
-            font-weight: 500;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
-            letter-spacing: 0.3px;
+            font-weight: normal;
             unicode-bidi: isolate;
         }
 
@@ -216,7 +175,6 @@
             border: 2px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
             font-size: 15px;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
             color: #fff;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -406,15 +364,12 @@
             font-size: 20px;
             margin-bottom: 15px;
             color: #fff;
-            font-weight: 600;
-            letter-spacing: 0.3px;
         }
 
         .filters label {
             font-size: 16px;
             display: block;
             margin-bottom: 10px;
-            font-weight: 400;
         }
 
         .filters select {
@@ -519,50 +474,24 @@
 
 /* Modal Content */
 .modal-content {
-    position: relative;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #0a0e14 0%, #080d15 100%);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
     width: 90vw;
     max-width: 600px;
-    max-height: 85vh; /* Reduced from 90vh to give more margin */
+    max-height: 85vh;
     overflow-y: auto;
     box-sizing: border-box;
-    animation: modalFadeIn 0.3s ease-out;
-    z-index: 1001; /* Higher than modal background */
-    margin: 0 auto; /* Center horizontally */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    animation: modalFadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1001;
+    margin: 0 auto;
+    border: 1px solid rgba(40, 80, 150, 0.3);
 }
-
-/* Screen size specific modal adjustments */
-@media screen and (min-width: 1200px) {
-    .modal-content {
-        max-width: 650px; /* Slightly larger on very large screens */
-        padding: 30px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .modal-content {
-        width: 85vw;
-        padding: 22px;
-        max-height: 80vh;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .modal-content {
-        width: 92vw;
-        padding: 18px;
-        max-height: 82vh;
-        top: 52%; /* Move slightly down on mobile */
-    }
-}
-
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -579,12 +508,12 @@
     position: absolute;
     right: 15px;
     top: 15px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 24px;
     font-weight: bold;
-    width: 36px;
-    height: 36px;
-    background: rgba(0, 0, 0, 0.2);
+    width: 32px;
+    height: 32px;
+    background: rgba(40, 50, 70, 0.4);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -592,23 +521,11 @@
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-content .close:hover {
-    background: rgba(52, 152, 219, 0.3);
+    background: rgba(60, 70, 90, 0.6);
     transform: rotate(90deg);
-    color: #fff;
-}
-
-@media screen and (max-width: 480px) {
-    .modal-content .close {
-        right: 10px;
-        top: 10px;
-        width: 32px;
-        height: 32px;
-        font-size: 20px;
-    }
 }
 
 /* Player Name Header Styling */
@@ -639,18 +556,12 @@
 
 .modal-content img {
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     height: auto;
     border-radius: 12px;
-    margin: 10px auto 25px;
+    margin: 0 auto 20px;
     display: block;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.07);
-    transition: transform 0.3s ease;
-}
-
-.modal-content img:hover {
-    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Player Info Grid */
@@ -658,41 +569,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    margin: 0 8px 25px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 18px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-@media screen and (max-width: 768px) {
-    .modal-content img {
-        max-width: 220px;
-        margin: 8px auto 20px;
-    }
-    
-    .player-info-grid {
-        padding: 15px;
-        margin: 0 5px 20px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .modal-content img {
-        max-width: 180px;
-        margin: 5px auto 18px;
-    }
-    
-    .player-info-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 12px;
-        margin: 0 3px 18px;
-    }
-
-    .info-label {
-        font-size: 11px;
-    }
+    margin-bottom: 25px;
+    background: rgba(20, 25, 35, 0.5);
+    padding: 15px;
+    border-radius: 10px;
 }
 
 .info-item {
@@ -702,7 +582,7 @@
 
 .info-label {
     font-size: 12px;
-    color: #888;
+    color: #6e7888;
     margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -719,26 +599,23 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin: 20px auto;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    margin-top: 20px;
+    background: rgba(20, 25, 35, 0.5);
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 #playerStatsTable th {
-    background-color: rgba(52, 152, 219, 0.2);
-    color: #fff;
+    background-color: rgba(15, 20, 30, 0.7);
+    color: #a0a9b8;
     font-weight: 600;
-    padding: 14px;
+    padding: 12px;
     text-align: left;
     font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 #playerStatsTable td {
-    padding: 14px;
+    padding: 12px;
     color: #e3e3e3;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 14px;
@@ -749,30 +626,37 @@
 }
 
 #playerStatsTable tr:hover td {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-@media screen and (max-width: 768px) {
-    #playerStatsTable {
-        margin: 15px auto;
-    }
-    
-    #playerStatsTable th, 
-    #playerStatsTable td {
-        padding: 12px;
-    }
-}
-
+/* Mobile Optimizations */
 @media screen and (max-width: 480px) {
-    #playerStatsTable {
-        margin: 12px auto;
-        width: 98%;
+    .modal-content {
+        padding: 15px;
+        width: 95vw;
     }
-    
+
+    .modal-content h2 {
+        font-size: 20px;
+    }
+
+    .player-info-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
     #playerStatsTable th,
     #playerStatsTable td {
-        padding: 10px 8px;
+        padding: 10px;
         font-size: 13px;
+    }
+
+    .info-label {
+        font-size: 11px;
+    }
+
+    .info-value {
+        font-size: 14px;
     }
 }
 
@@ -787,18 +671,12 @@
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: rgba(52, 152, 219, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(52, 152, 219, 0.5);
-}
-
-.info-value {
-    font-size: 16px;
-    color: #fff;
-    font-weight: 500;
+    background: rgba(255, 255, 255, 0.3);
 }
 
         .modal-content h2 {
@@ -1205,13 +1083,13 @@
         
         .stats-container {
             margin-top: 25px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(20, 25, 35, 0.4);
             border-radius: 12px;
             padding: 20px;
         }
 
         .stats-header {
-            color: #fff;
+            color: #a0a9b8;
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 20px;
@@ -1219,8 +1097,6 @@
             align-items: center;
             gap: 8px;
             padding-left: 8px;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
-            letter-spacing: 0.2px;
         }
 
         .stats-header i {
@@ -1234,7 +1110,6 @@
             border-spacing: 0 8px;
             background: transparent;
             margin-top: -8px;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
         }
 
         #playerStatsTable thead tr {
@@ -1254,7 +1129,7 @@
         }
 
         #playerStatsTable tbody tr {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(20, 25, 35, 0.4);
             transition: all 0.2s ease;
             border-radius: 8px;
             margin-bottom: 8px;
@@ -1266,7 +1141,6 @@
             font-size: 14px;
             border: none;
             position: relative;
-            font-weight: 300;
         }
 
         #playerStatsTable td:first-child {
@@ -1278,13 +1152,13 @@
         }
 
         #playerStatsTable tbody tr:hover {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(30, 40, 55, 0.6);
             transform: translateX(4px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .season-badge {
-            background: rgba(76, 175, 80, 0.1);
+            background: rgba(76, 175, 80, 0.2);
             color: #4caf50;
             padding: 6px 10px;
             border-radius: 6px;
@@ -1388,7 +1262,7 @@
             <div class="logo">
                 <!-- Add your logo here -->
                 <img src="../assets/images/logo11.webp" alt="Logo" class="logo-img" width="40" height="40">
-                <h1 style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight: 600;">R2G Player Data</h1>
+                <h1>R2G Player Data</h1>
             </div>
 
     </div>
@@ -1405,7 +1279,7 @@
 
 
     <!-- Filter Button for Mobile/Tablets -->
-    <button class="filter-btn" onclick="openFilterModal()" style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight: 500;">
+    <button class="filter-btn" onclick="openFilterModal()">
         Filters <i class="fas fa-filter"></i>
     </button>
     <!-- Main content -->
@@ -1843,25 +1717,25 @@ window.onload = function() {
         }
     }, 1500);
 
-    // Add a 4-second delay before hiding the welcome message and showing content
+    // Hide welcome screen after 4.5 seconds
     setTimeout(function() {
         const loadingElement = document.getElementById('loading');
         if (loadingElement) {
-            // Ensure we reset any inline styles that might be interfering
             loadingElement.style.opacity = '0';
-            setTimeout(function() {
+            setTimeout(() => {
                 loadingElement.style.display = 'none';
-                // Unblock scrolling on body
-                document.body.style.overflow = 'auto';
+                document.body.style.removeProperty('overflow');
             }, 500);
         }
-    }, 4500);  // 4500 milliseconds = 4.5 seconds
+    }, 4500);
     
-    // Block scrolling on body until loading completes
+    // Block scrolling while welcome screen is visible
     document.body.style.overflow = 'hidden';
+    
     resetFilters();
     resetModalFilters(); // Reset the filters when the page loads
-    sortPlayers();  // Sort players when the page loads
+    
+    // Rest of your initialization code
 };
 
 // Function to fetch and load player data from the JSON file
@@ -2485,9 +2359,6 @@ function resetFilters() {
     <!-- Performance optimizations -->
     <script src="js/fix-scroll.js"></script>
     <script defer src="js/performance.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/club-loader.js"></script>
-    <script src="js/image-protection.js"></script>
-</body>
+    </body>
 </html>
 
