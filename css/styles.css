@@ -2003,4 +2003,34 @@ html {
     transform: scale(1) translateY(0) !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
     pointer-events: auto !important;
+}
+
+/* Custom styles for index and career pages to override animations */
+body[data-page="index"] .nav-item,
+body[data-page="index"] .feature-item,
+body[data-page="index"] .timeline-item,
+body[data-page="index"] .cta-section,
+body[data-page="career-mode"] .nav-item,
+body[data-page="career-mode"] .feature-item,
+body[data-page="career-mode"] .timeline-item,
+body[data-page="career-mode"] .cta-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Remove delay animations for index and career pages */
+body[data-page="index"] .nav-item:nth-child(1),
+body[data-page="index"] .nav-item:nth-child(2),
+body[data-page="index"] .nav-item:nth-child(3),
+body[data-page="index"] .nav-item:nth-child(4),
+body[data-page="index"] .nav-item:nth-child(5),
+body[data-page="career-mode"] .nav-item:nth-child(1),
+body[data-page="career-mode"] .nav-item:nth-child(2),
+body[data-page="career-mode"] .nav-item:nth-child(3),
+body[data-page="career-mode"] .nav-item:nth-child(4),
+body[data-page="career-mode"] .nav-item:nth-child(5) {
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
 } 

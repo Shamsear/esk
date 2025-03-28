@@ -5,8 +5,11 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get current page to set unique background flag
+    // Get current page to identify index and career pages
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const isIndexOrCareer = currentPage === 'index.html' || currentPage === 'career-mode.html';
+    
+    // Get unique background flag for this page
     const backgroundKey = 'background_' + currentPage;
     
     // Check if background styles have already been applied for this page
@@ -96,16 +99,19 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('orientationchange', updateBackgroundStyles);
     }
     
-    // Clear background flags on page refresh (not on normal navigation)
-    window.addEventListener('beforeunload', function(e) {
-        // The presence of returnValue indicates a page refresh rather than navigation
-        if (e.returnValue !== undefined) {
-            // Clear all background flags on page refresh
-            Object.keys(sessionStorage).forEach(key => {
-                if (key.startsWith('background_')) {
-                    sessionStorage.removeItem(key);
-                }
-            });
-        }
-    });
+    // Disable parallax effect on index and career mode pages
+    if (!isIndexOrCareer) {
+        // Clear background flags on page refresh (not on normal navigation)
+        window.addEventListener('beforeunload', function(e) {
+            // The presence of returnValue indicates a page refresh rather than navigation
+            if (e.returnValue !== undefined) {
+                // Clear all background flags on page refresh
+                Object.keys(sessionStorage).forEach(key => {
+                    if (key.startsWith('background_')) {
+                        sessionStorage.removeItem(key);
+                    }
+                });
+            }
+        });
+    }
 }); 
