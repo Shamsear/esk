@@ -46,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url('../assets/images/home/background.webp');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85));
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -1228,11 +1228,6 @@
         
     </style>
 
-    <!-- Performance optimized CSS -->
-    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/performance.css">
-    <link rel="stylesheet" href="css/additional-fixes.css"></noscript>
-
 </head>
 <body>
     <!-- Admin link -->
@@ -1714,6 +1709,23 @@ window.onload = function() {
     
     // Block scrolling while welcome screen is visible
     document.body.style.overflow = 'hidden';
+    
+    // Initialize playerState if it doesn't exist yet
+    if (!window.playerState) {
+        window.playerState = {
+            allPlayers: [],
+            filteredPlayers: [],
+            currentPage: 1,
+            itemsPerPage: 24,
+            totalPages: 1,
+            filters: {
+                searchTerm: '',
+                star: 'all',
+                club: 'ALL',
+                position: []
+            }
+        };
+    }
     
     resetFilters();
     resetModalFilters(); // Reset the filters when the page loads
@@ -2326,7 +2338,7 @@ function resetFilters() {
 
     </script>
 
-
+    <!-- Remove all non-existent JS files -->
     <!-- Performance optimization JS -->
     <script>
         // Immediately executed critical JS
@@ -2335,23 +2347,6 @@ function resetFilters() {
     </script>
     <!-- Defer main script to improve initial load -->
     <script defer src="js/script.js"></script>
-    <script src="js/remove-conflicting-styles.js"></script>
-    
-    <script src="js/background-fix.js"></script>
-    <!-- Load performance optimizations -->
-    <scri
-    <script src="js/background-mobile-scroll.js"></script>pt defer src="js/performance.js"></script>
-    <!-- Load background scroll handling -->
-    <script defer src="js/background-scroll.js"></script>
-    <!-- Fix infinite scrolling -->
-    <script defer src="js/fix-overflow.js"></script>
-
-    <!-- Service worker registration -->
-    <script defer src="js/sw-register.js"></script>
-    
-    <!-- Performance optimizations -->
-    <script src="js/fix-scroll.js"></script>
-    <script defer src="js/performance.js"></script>
-    </body>
+</body>
 </html>
 
