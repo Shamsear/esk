@@ -418,37 +418,39 @@
         
         .season-content {
             display: none;
-            animation: fadeIn 0.5s ease;
             margin-top: -20px;
             padding-top: 20px;
             overflow: hidden;
             transition: all 0.4s ease-out;
-            max-height: 0;
             opacity: 0;
+            transform: translateY(-20px);
+            animation: none;
+            will-change: opacity, transform, max-height;
         }
         
         .season-content.active {
             display: block;
-            animation: expandContent 0.6s ease-out;
-            max-height: 3000px; /* Large enough to accommodate all content */
             opacity: 1;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            transform: translateY(0);
+            overflow: visible;
+            animation: expandContent 0.6s ease-out forwards;
         }
         
         @keyframes expandContent {
-            from { 
+            0% { 
                 opacity: 0;
                 transform: translateY(-20px);
                 max-height: 0;
             }
-            to { 
+            50% {
                 opacity: 1;
                 transform: translateY(0);
-                max-height: 3000px;
+                max-height: 20000px;
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+                max-height: 100000px;
             }
         }
         
@@ -943,12 +945,46 @@
                     
                     // Toggle active class on the season content
                     if (seasonContent) {
-                        seasonContent.classList.toggle('active');
+                        // If we're activating the content, make sure it's visible
+                        if (!seasonContent.classList.contains('active')) {
+                            // Show the content
+                            seasonContent.style.display = 'block';
+                            
+                            // Add active class to start animation
+                            setTimeout(() => {
+                                seasonContent.classList.add('active');
+                                
+                                // After animation completes, ensure height is not limited
+                                setTimeout(() => {
+                                    seasonContent.style.maxHeight = 'none';
+                                    seasonContent.style.overflow = 'visible';
+                                }, 600); // Match animation duration
+                            }, 10);
+                        } else {
+                            // We're hiding the content
+                            
+                            // First reset max-height to allow animation to work
+                            seasonContent.style.maxHeight = '';
+                            seasonContent.style.overflow = 'hidden';
+                            
+                            // Short delay to allow style to apply
+                            setTimeout(() => {
+                                // Remove active class to trigger animation
+                                seasonContent.classList.remove('active');
+                                
+                                // Allow time for the transition then hide completely
+                                setTimeout(() => {
+                                    if (!seasonContent.classList.contains('active')) {
+                                        seasonContent.style.display = 'none';
+                                    }
+                                }, 600); // Match animation duration
+                            }, 10);
+                        }
                     }
                 });
             });
             
-            // Make sure all season content sections have proper IDs matching the data-season attributes
+            // Make sure all season content sections have proper IDs
             document.querySelectorAll('.season-content').forEach(function(content) {
                 if (!content.id) {
                     // If a season content is missing an ID, try to find it from nearby season box
@@ -960,6 +996,26 @@
                         }
                     }
                 }
+            });
+            
+            // Fix any hidden content that should be visible (if coming back to page)
+            setTimeout(() => {
+                document.querySelectorAll('.season-box.active').forEach(function(box) {
+                    const seasonId = box.getAttribute('data-season');
+                    const seasonContent = document.getElementById(seasonId + '-content');
+                    if (seasonContent) {
+                        seasonContent.style.display = 'block';
+                        seasonContent.classList.add('active');
+                        seasonContent.style.maxHeight = 'none';
+                        seasonContent.style.overflow = 'visible';
+                        seasonContent.style.opacity = '1';
+                    }
+                });
+            }, 100);
+            
+            // Fix all gallery items to ensure they're visible
+            document.querySelectorAll('.moze-gallery li').forEach(function(item) {
+                item.classList.add('animate-in');
             });
         });
     </script>

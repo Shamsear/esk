@@ -19,13 +19,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Get current page to set unique animation flag
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const animationKey = 'animations_' + currentPage;
+    
+    // Check if animations have already been applied for this specific page
+    const animationsApplied = sessionStorage.getItem(animationKey);
+
     // Scroll animations using Intersection Observer
     const animateOnScroll = function() {
+        // Don't animate again if already animated for this page
+        if (animationsApplied === 'true') {
+            console.log('Animations already applied for ' + currentPage);
+            
+            // Remove hidden class from all elements to ensure they're visible
+            const elementsToShow = document.querySelectorAll(
+                '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
+                '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
+            );
+            
+            elementsToShow.forEach(element => {
+                element.classList.remove('hidden');
+                element.classList.add('animate-in');
+            });
+            
+            return;
+        }
+        
         // Elements to animate - including tournament guide elements
+        // IMPORTANT: Exclude season-content elements to avoid conflicts with trophy cabinet
         const elementsToAnimate = document.querySelectorAll(
             '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
             '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
         );
+        
+        // Special handling for trophy cabinet elements
+        if (currentPage === 'trophy-cabinet.html') {
+            // Make sure hidden season contents don't interfere with animations
+            document.querySelectorAll('.season-content').forEach(content => {
+                if (!content.classList.contains('active')) {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }
+            });
+        }
         
         // Intersection Observer options
         const options = {
@@ -51,6 +91,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add initial hidden state class
             element.classList.add('hidden');
         });
+        
+        // Set flag to prevent re-animation for this specific page
+        sessionStorage.setItem(animationKey, 'true');
     };
 
     // Set copyright year
@@ -61,4 +104,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize animations
     animateOnScroll();
+    
+    // Clear all animation flags when the browser is refreshed (not on normal navigation)
+    window.addEventListener('beforeunload', function(e) {
+        // The presence of returnValue indicates a page refresh rather than navigation
+        if (e.returnValue !== undefined) {
+            // Clear all animation flags on page refresh
+            Object.keys(sessionStorage).forEach(key => {
+                if (key.startsWith('animations_')) {
+                    sessionStorage.removeItem(key);
+                }
+            });
+        }
+    });
 }); 

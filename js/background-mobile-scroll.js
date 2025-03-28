@@ -5,10 +5,16 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Get current page to set unique background flag
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const backgroundKey = 'background_' + currentPage;
+    
+    // Check if background styles have already been applied for this page
+    const styleUpdated = sessionStorage.getItem(backgroundKey);
+    
     function updateBackgroundStyles() {
         // Get viewport dimensions
         const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
         
         // Create or update the style element
         let styleEl = document.getElementById('dynamic-background-styles');
@@ -22,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (viewportWidth <= 768) { // Mobile devices
             styleEl.innerHTML = `
                 body {
-                    background-image: url('assets/images/logo.webp');
+                    background-image: url('assets/images/logo.webp') !important;
                     background-size: contain !important; /* Ensure image fits within viewport width */
                     background-position: center top !important; /* Center the image at the top */
                     background-repeat: no-repeat !important;
@@ -30,11 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     background-color: #000 !important; /* Black background color */
                     min-height: 100vh;
                     position: relative;
-                }
-                
-                /* For pages that might have a different image path */
-                body[data-alt-bg="true"] {
-                    background-image: url('../assets/images/logo.webp');
                 }
                 
                 /* Add pseudo-elements for top and bottom gradients */
@@ -70,35 +71,41 @@ document.addEventListener('DOMContentLoaded', function() {
         } else { // Desktop and larger devices
             styleEl.innerHTML = `
                 body {
-                    background-image: url('assets/images/logo.webp');
-                    background-size: contain;
-                    background-position: center top;
-                    background-repeat: no-repeat;
-                    background-attachment: fixed;
-                    background-color: #000;
+                    background-image: url('assets/images/logo.webp') !important;
+                    background-size: contain !important;
+                    background-position: center top !important;
+                    background-repeat: no-repeat !important;
+                    background-attachment: fixed !important;
+                    background-color: #000 !important;
                     min-height: 100vh;
-                }
-                
-                /* For pages that might have a different image path */
-                body[data-alt-bg="true"] {
-                    background-image: url('../assets/images/logo.webp');
                 }
             `;
         }
+        
+        // Set flag to prevent multiple updates in the same session for this page
+        sessionStorage.setItem(backgroundKey, 'true');
     }
     
-    // Check for relative path issues and set appropriate attribute
-    if (document.body.style.backgroundImage && document.body.style.backgroundImage.includes('../')) {
-        document.body.setAttribute('data-alt-bg', 'true');
+    // Only run the update if it hasn't been applied for this page
+    if (!styleUpdated) {
+        // Initialize on load
+        updateBackgroundStyles();
+        
+        // Update on resize or orientation change
+        window.addEventListener('resize', updateBackgroundStyles);
+        window.addEventListener('orientationchange', updateBackgroundStyles);
     }
     
-    // Initialize on load
-    updateBackgroundStyles();
-    
-    // Update on resize or orientation change
-    window.addEventListener('resize', updateBackgroundStyles);
-    window.addEventListener('orientationchange', updateBackgroundStyles);
-    
-    // Remove the problematic parallax effect on scroll for mobile
-    // This was causing the conflict between pages
+    // Clear background flags on page refresh (not on normal navigation)
+    window.addEventListener('beforeunload', function(e) {
+        // The presence of returnValue indicates a page refresh rather than navigation
+        if (e.returnValue !== undefined) {
+            // Clear all background flags on page refresh
+            Object.keys(sessionStorage).forEach(key => {
+                if (key.startsWith('background_')) {
+                    sessionStorage.removeItem(key);
+                }
+            });
+        }
+    });
 }); 
