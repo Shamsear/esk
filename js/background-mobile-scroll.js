@@ -1,7 +1,7 @@
 /**
  * Background Mobile Scroll JS
  * Handles responsive background image on mobile devices
- * Makes background fill the screen and move with scrolling
+ * Makes background centered, fit to sides, and fill top/bottom with logo-matching colors
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -23,16 +23,48 @@ document.addEventListener('DOMContentLoaded', function() {
             styleEl.innerHTML = `
                 body {
                     background-image: url('assets/images/logo.webp');
-                    background-size: cover !important;
-                    background-position: center center !important;
+                    background-size: contain !important; /* Ensure image fits within viewport width */
+                    background-position: center !important; /* Center the image */
                     background-repeat: no-repeat !important;
                     background-attachment: scroll !important; /* Changed from fixed to scroll */
-                    min-height: ${viewportHeight}px;
+                    background-color: #000 !important; /* Black background color */
+                    min-height: 100vh;
+                    position: relative;
                 }
                 
                 /* For pages that might have a different image path */
                 body[data-alt-bg="true"] {
                     background-image: url('../assets/images/logo.webp');
+                }
+                
+                /* Add pseudo-elements for top and bottom gradients */
+                body::before,
+                body::after {
+                    content: '';
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    height: 20%;
+                    pointer-events: none;
+                    z-index: -1;
+                }
+                
+                /* Top gradient matching logo colors */
+                body::before {
+                    top: 0;
+                    background: linear-gradient(to bottom, 
+                        rgba(0, 0, 0, 1) 0%, 
+                        rgba(0, 51, 102, 0.8) 50%, 
+                        rgba(0, 0, 0, 0) 100%);
+                }
+                
+                /* Bottom gradient matching logo colors */
+                body::after {
+                    bottom: 0;
+                    background: linear-gradient(to top, 
+                        rgba(0, 0, 0, 1) 0%, 
+                        rgba(0, 51, 102, 0.8) 50%, 
+                        rgba(0, 0, 0, 0) 100%);
                 }
             `;
         } else { // Desktop and larger devices
@@ -43,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     background-position: center top;
                     background-repeat: no-repeat;
                     background-attachment: fixed;
+                    background-color: #000;
                     min-height: 100vh;
                 }
                 
@@ -70,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth <= 768) {
         window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
-            const moveRate = scrollPosition * 0.05; // Adjust the rate of movement
+            const moveRate = scrollPosition * 0.03; // Reduced rate of movement
             
             document.body.style.backgroundPositionY = `calc(center + ${moveRate}px)`;
         });
