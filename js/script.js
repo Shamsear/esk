@@ -22,33 +22,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get current page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
-    // Enhanced Intersection Observer options for smoother animations
+    // Enhanced Intersection Observer options for faster animations
     const observerOptions = {
         root: null,
-        rootMargin: '30px',
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+        rootMargin: '50px', // Increased margin to start animations earlier
+        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] // Reduced threshold points for better performance
     };
     
-    // Function to check if element is in viewport
+    // Function to check if element is in viewport with larger margin
     function isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 && 
-            rect.bottom >= 0
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.95 && 
+            rect.bottom >= -50 // Allow elements slightly above viewport
         );
     }
     
-    // Create Intersection Observer for scroll animations
+    // Create Intersection Observer for faster scroll animations
     const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (!entry.target.classList.contains('animate-in')) {
-                const progress = Math.min(entry.intersectionRatio * 1.5, 1);
+                const progress = Math.min(entry.intersectionRatio * 2, 1); // Faster progress
                 
                 if (progress > 0) {
                     entry.target.style.opacity = progress;
-                    entry.target.style.transform = `translateY(${30 * (1 - progress)}px) scale(${0.95 + (0.05 * progress)})`;
+                    // Reduced movement distance and faster scale
+                    entry.target.style.transform = `translateY(${20 * (1 - progress)}px) scale(${0.98 + (0.02 * progress)})`;
                     
-                    if (progress >= 1) {
+                    if (progress >= 0.8) { // Trigger animation earlier
                         entry.target.classList.add('animate-in');
                         entry.target.style.transform = 'none';
                         observer.unobserve(entry.target);
@@ -58,33 +59,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Function to set up scroll animations for elements
-    function setupScrollAnimations(elements, staggerDelay = 0.1) {
+    // Function to set up faster scroll animations
+    function setupScrollAnimations(elements, staggerDelay = 0.05) { // Reduced default stagger delay
         elements.forEach((element, index) => {
-            // Add initial hidden state
             element.classList.add('hidden');
             
-            // Calculate staggered delay based on position
             const rect = element.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
             const delayMultiplier = rect.top < viewportHeight ? staggerDelay : staggerDelay / 2;
             
-            // Add staggered delay
+            // Faster transition delay
             element.style.transitionDelay = `${index * delayMultiplier}s`;
+            element.style.transitionDuration = '0.4s'; // Faster transition duration
             
-            // Start observing
             scrollObserver.observe(element);
             
-            // Reset transition delay after animation
+            // Clean up transitions after animation
             element.addEventListener('transitionend', () => {
                 if (element.classList.contains('animate-in')) {
                     element.style.transitionDelay = '0s';
+                    element.style.transitionDuration = '0.3s'; // Faster hover transitions
                 }
             });
         });
     }
 
-    // Function to handle page-specific animations
+    // Function to handle page-specific animations with optimized timing
     function initializePageAnimations() {
         switch(currentPage) {
             case 'registered-clubs.html':
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...document.querySelectorAll('.gallery-loader'),
                     ...document.querySelectorAll('.search-box')
                 ];
-                setupScrollAnimations(clubElements, 0.08); // Slightly faster stagger for many club items
+                setupScrollAnimations(clubElements, 0.03); // Very fast stagger for many items
                 break;
 
             case 'manager-ranking.html':
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...document.querySelectorAll('.moze-gallery li'),
                     ...document.querySelectorAll('.gallery-loader')
                 ];
-                setupScrollAnimations(managerElements);
+                setupScrollAnimations(managerElements, 0.04);
                 break;
                 
             case 'trophy-cabinet.html':
@@ -115,9 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...document.querySelectorAll('.season-box'),
                     ...document.querySelectorAll('.moze-gallery li')
                 ];
-                setupScrollAnimations(trophyElements);
+                setupScrollAnimations(trophyElements, 0.04);
                 
-                // Special handling for season content animations
+                // Optimized season content animations
                 document.querySelectorAll('.season-content').forEach(content => {
                     const seasonElements = [
                         ...content.querySelectorAll('.club-info'),
@@ -125,7 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         ...content.querySelectorAll('p'),
                         ...content.querySelectorAll('.moze-gallery li')
                     ];
-                    seasonElements.forEach(element => element.classList.add('hidden'));
+                    seasonElements.forEach(element => {
+                        element.classList.add('hidden');
+                        element.style.transitionDuration = '0.4s';
+                    });
                 });
                 break;
                 
@@ -134,28 +137,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     ...document.querySelectorAll('.tournament-card'),
                     ...document.querySelectorAll('.black-box')
                 ];
-                setupScrollAnimations(tournamentElements);
+                setupScrollAnimations(tournamentElements, 0.04);
                 break;
                 
             default:
-                // Handle other pages' animations
                 const elementsToAnimate = document.querySelectorAll(
                     '.nav-item, .feature-item, .timeline-item, .cta-section, ' + 
                     '.guide-section, .qa-item, .info-card, .image-gallery, .guide-img, .bullet-list li'
                 );
-                setupScrollAnimations(elementsToAnimate);
+                setupScrollAnimations(elementsToAnimate, 0.05);
         }
     }
 
     // Initialize animations
     initializePageAnimations();
     
-    // Re-run animation setup on scroll to handle dynamic content
+    // Optimized scroll handler with reduced calculations
     let scrollTimeout;
+    let lastScroll = 0;
+    const scrollThreshold = 50; // Only process every 50ms
+
     window.addEventListener('scroll', () => {
+        const now = Date.now();
+        if (now - lastScroll < scrollThreshold) return;
+        lastScroll = now;
+
         if (scrollTimeout) {
             window.cancelAnimationFrame(scrollTimeout);
         }
+        
         scrollTimeout = window.requestAnimationFrame(() => {
             const hiddenElements = document.querySelectorAll('.hidden:not(.animate-in)');
             if (hiddenElements.length > 0) {
@@ -166,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-    });
+    }, { passive: true }); // Optimize scroll performance
 
     // Set copyright year
     const yearElement = document.getElementById('year');
