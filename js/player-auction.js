@@ -1,6 +1,8 @@
 // Google Sheets API URLs
 const SHEET_ID = '1DO93v-xB2cPZn31-drgOggeVFgaH-0V0XLPjhfkB5Ek';
-const POSITIONS = ['GK', 'CB', 'RB', 'LB', 'CM', 'DM', 'AM', 'ST', 'CF', 'RW', 'LW'];
+const POSITIONS = ['GK', 'CB', 'LB', 'RB', 'DM', 'CM', 'AM', 'LW', 'RW', 'ST'];
+// Debug flag to help diagnose issues
+const DEBUG = true;
 
 // DOM Elements
 let searchInput, positionTabs, tables, loadingOverlay, loadingMessage;
@@ -128,7 +130,10 @@ async function fetchPositionData(position) {
         return cachedData.data;
     }
 
-    const sheetURL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${position}&headers=1`;
+    // Use tqx=out:json to get a more reliable format and no headers parameter to ensure all data is included
+    const sheetURL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${position}`;
+    
+    if (DEBUG) console.log(`Fetching data from ${sheetURL}`);
     
     try {
         const response = await fetch(sheetURL);
@@ -137,25 +142,37 @@ async function fetchPositionData(position) {
         }
         
         const text = await response.text();
+        // Remove the Google Sheet response prefix and suffix to get valid JSON
         const jsonText = text
             .replace(/^[^{]*{/, '{')
             .replace(/}[^}]*$/, '}');
         
-        const data = JSON.parse(jsonText);
-        
-        if (!data?.table?.rows) {
-            throw new Error('Invalid data structure');
+        try {
+            const data = JSON.parse(jsonText);
+            
+            if (DEBUG) console.log(`Parsed data for ${position}:`, data);
+            
+            if (!data?.table?.rows) {
+                throw new Error('Invalid data structure');
+            }
+
+            const players = processSheetData(data, position);
+            
+            if (DEBUG) console.log(`Processed ${players.length} players for ${position}`);
+            
+            // Cache the processed data
+            sheetCache.set(position, {
+                data: players,
+                timestamp: Date.now()
+            });
+
+            return players;
+        } catch (parseError) {
+            console.error(`Error parsing JSON for ${position}:`, parseError);
+            console.log('Raw text:', text);
+            console.log('Processed JSON text:', jsonText);
+            throw parseError;
         }
-
-        const players = processSheetData(data, position);
-        
-        // Cache the processed data
-        sheetCache.set(position, {
-            data: players,
-            timestamp: Date.now()
-        });
-
-        return players;
     } catch (error) {
         console.error(`Error fetching ${position} data:`, error);
         throw error;
@@ -166,17 +183,41 @@ async function fetchPositionData(position) {
 function processSheetData(data, sheetPosition) {
     if (!data?.table?.rows?.length) return [];
 
-    return data.table.rows.slice(1)
+    // Skip header row(s) by checking if the first cell contains a numeric value
+    // or has a player name value in the second cell
+    return data.table.rows
+        .filter(row => {
+            if (!row.c) return false;
+            
+            // Check if this is likely not a header row
+            // Headers typically don't have numbers in the first column or names in the second
+            const values = row.c.map(cell => cell?.v ?? '');
+            
+            // First column often has row number or is empty in data rows
+            const isNumber = !isNaN(parseFloat(values[0]));
+            
+            // Second column should have player name for valid data rows
+            const hasPlayerName = values[1] && String(values[1]).trim() !== '';
+            
+            // Skip if likely a header (first cell is not a number and has text, or second cell is empty)
+            const isHeader = (!isNumber && values[0] && String(values[0]).trim() !== '') || !hasPlayerName;
+            
+            if (DEBUG && isHeader) {
+                console.log(`Skipping likely header row in ${sheetPosition}:`, values);
+            }
+            
+            return !isHeader;
+        })
         .map(row => {
             if (!row.c) return null;
             
             const values = row.c.map(cell => cell?.v ?? '');
             
-            // Early return for invalid rows
-            if (!values[1]?.trim()) return null;
+            // Check for any text in player name field - more permissive check
+            if (!values[1] && values[1] !== 0) return null;
             
             return {
-                name: String(values[1]).trim(),
+                name: String(values[1] || '').trim(),
                 position: sheetPosition,
                 team: String(values[2] || '').trim(),
                 rating: parseInt(values[3]) || 0,
@@ -291,15 +332,27 @@ function populateTables(players) {
     });
 
     players.forEach(player => {
+        // Store ALL players in the allPlayers array regardless of position validity
+        allPlayers.push(player);
+        
+        // Now handle position-specific tables
         const normalized = mapPosition(player.position);
         
         if (playersByPosition[normalized]) {
             playersByPosition[normalized].push(player);
-            allPlayers.push(player);
         } else {
             console.warn(`Unknown position: ${player.position}`);
+            // Add to GK as fallback to ensure player is shown somewhere
+            playersByPosition[POSITIONS[0]].push(player);
         }
     });
+
+    if (DEBUG) {
+        console.log(`Total players in all players table: ${allPlayers.length}`);
+        POSITIONS.forEach(pos => {
+            console.log(`${pos} players: ${playersByPosition[pos].length}`);
+        });
+    }
 
     // Populate position tables
     POSITIONS.forEach(position => {
@@ -352,20 +405,19 @@ function mapPosition(sheetPosition) {
         return pos;
     }
     
-    // Handle variations
-    if (pos.includes('GOALKEEPER') || pos === 'G' || pos === 'GOALIE') return 'GK';
-    if (pos.includes('CENTER BACK') || pos === 'CD' || pos === 'DC') return 'CB';
-    if (pos.includes('LEFT BACK') || pos === 'LWB' || pos === 'LD') return 'LB';
-    if (pos.includes('RIGHT BACK') || pos === 'RWB' || pos === 'RD') return 'RB';
-    if (pos.includes('CENTER MID') || pos === 'CMF' || pos === 'MC') return 'CM';
-    if (pos.includes('DEFENSIVE MID') || pos === 'CDM' || pos === 'DMF') return 'DM';
-    if (pos.includes('ATTACKING MID') || pos === 'CAM' || pos === 'AMF') return 'AM';
-    if (pos.includes('STRIKER') || pos === 'FW') return 'ST';
-    if (pos.includes('CENTER FORWARD') || pos === 'CF') return 'CF';
-    if (pos.includes('RIGHT WING') || pos === 'RM' || pos === 'RMF') return 'RW';
-    if (pos.includes('LEFT WING') || pos === 'LM' || pos === 'LMF') return 'LW';
+    // Handle variations with more comprehensive mapping
+    if (pos.includes('GOALKEEPER') || pos === 'G' || pos === 'GOALIE' || pos === 'GK') return 'GK';
+    if (pos.includes('CENTER BACK') || pos === 'CD' || pos === 'DC' || pos === 'CB' || pos.includes('CENTRE BACK')) return 'CB';
+    if (pos.includes('LEFT BACK') || pos === 'LWB' || pos === 'LD' || pos === 'LB' || pos === 'LFB') return 'LB';
+    if (pos.includes('RIGHT BACK') || pos === 'RWB' || pos === 'RD' || pos === 'RB' || pos === 'RFB') return 'RB';
+    if (pos.includes('CENTER MID') || pos === 'CMF' || pos === 'MC' || pos === 'CM' || pos.includes('CENTRE MID')) return 'CM';
+    if (pos.includes('DEFENSIVE MID') || pos === 'CDM' || pos === 'DMF' || pos === 'DM' || pos === 'DCM') return 'DM';
+    if (pos.includes('ATTACKING MID') || pos === 'CAM' || pos === 'AMF' || pos === 'AM' || pos === 'ACM') return 'AM';
+    if (pos.includes('STRIKER') || pos === 'FW' || pos === 'ST' || pos === 'CF' || pos.includes('FORWARD')) return 'ST';
+    if (pos.includes('RIGHT WING') || pos === 'RM' || pos === 'RMF' || pos === 'RW' || pos === 'RF') return 'RW';
+    if (pos.includes('LEFT WING') || pos === 'LM' || pos === 'LMF' || pos === 'LW' || pos === 'LF') return 'LW';
     
-    // Default to first position if no match (should handle properly)
+    // If we can't determine the position, log it but use a default rather than failing
     console.warn(`Unknown position "${sheetPosition}" - defaulting to ${POSITIONS[0]}`);
     return POSITIONS[0];
 }
