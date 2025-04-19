@@ -5814,22 +5814,20 @@
     "name": "YOUSSOUFA MOUKOKO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "ST",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "SPORTING CP",
-        "value": "58",
-        "apps": "00"
+        "value": "58"
       },
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "80",
-        "apps": "00"
+        "value": "80"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MOUKOKO_CARD.webp",
