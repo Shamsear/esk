@@ -2956,15 +2956,14 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "CB",
-    "value": 60,
+    "position": "RB",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-6",
         "team": "NEWCASTLE UNITED FC",
-        "value": "60",
-        "apps": "00"
+        "value": "60"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. TIMBER_CARD.webp",
