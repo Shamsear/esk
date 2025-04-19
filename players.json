@@ -8988,16 +8988,15 @@
     "name": "N'GOLO KANTE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "TOTTENHAM HOTSPUR FC",
+    "club": "FREE AGENT ",
     "position": "DM",
-    "value": 252,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-6",
         "team": "TOTTENHAM HOTSPUR FC",
-        "value": "252",
-        "apps": "00"
+        "value": "252"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N'GOLO KANTE_CARD.webp",
