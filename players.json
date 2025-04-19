@@ -7420,7 +7420,7 @@
     "name": "JEREMIE FRIMPONG",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "RB",
     "value": 80,
     "gamesPlayed": 0,
@@ -7428,14 +7428,12 @@
       {
         "season": "4-5",
         "team": "MANCHESTER CITY",
-        "value": "100",
-        "apps": "00"
+        "value": "100"
       },
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "80",
-        "apps": "00"
+        "value": "80"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/J. FRIMPONG_CARD.webp",
