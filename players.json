@@ -2633,7 +2633,7 @@
     "name": "FIKAYO TOMORI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -5063,22 +5063,20 @@
     "name": "BRIAN BROBBEY",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "ST",
-    "value": 144,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "MUMBAI CITY FC",
-        "value": "66",
-        "apps": "00"
+        "value": "66"
       },
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "144",
-        "apps": "00"
+        "value": "144"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. BROBBEY_CARD.webp",
