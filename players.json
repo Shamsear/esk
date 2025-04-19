@@ -498,7 +498,7 @@
     "name": "FERNANDO MUSLERA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "REAL MADRID CF",
+    "club": "FREE AGENT ",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -506,8 +506,7 @@
       {
         "season": "4-6",
         "team": "AL HILAL SFC",
-        "value": "50",
-        "apps": "00"
+        "value": "50"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/F. MUSLERA_CARD.webp",
