@@ -8316,22 +8316,20 @@
     "name": "FRANK RIJKAARD",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "CHELSEA FC",
+    "club": "FREE AGENT ",
     "position": "DM",
-    "value": 106,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-4.5",
         "team": "MOHUN BAGAN AC",
-        "value": "106",
-        "apps": "00"
+        "value": "106"
       },
       {
         "season": "4.5-6",
         "team": "CHELSEA FC",
-        "value": "76",
-        "apps": "00"
+        "value": "76"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/F. RIJKAARD_CARD.webp",
