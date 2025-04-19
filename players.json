@@ -15841,7 +15841,7 @@
     "name": "WESTON MCKENNIE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "CM",
     "value": 50,
     "gamesPlayed": 0,
@@ -15849,8 +15849,7 @@
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "50",
-        "apps": "00"
+        "value": "50"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/W. MCKENNIE_CARD.webp",
