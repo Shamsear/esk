@@ -437,22 +437,20 @@
     "name": "GIANLUIGI DONNARUMMA",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "GK",
-    "value": 90,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-4.5",
         "team": "WOLVES",
-        "value": "140",
-        "apps": "00"
+        "value": "140"
       },
       {
         "season": "4.5-6.5",
         "team": "AS ROMA",
-        "value": "90",
-        "apps": "00"
+        "value": "90"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/G. DONNARUMMA_CARD.webp",
