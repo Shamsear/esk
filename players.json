@@ -4440,22 +4440,20 @@
     "name": "NEYMAR JR",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FC BARCELONA",
+    "club": "FREE AGENT ",
     "position": "ST",
-    "value": 170,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "AFC AJAX",
-        "value": "170 ",
-        "apps": "13"
+        "value": "170 "
       },
       {
         "season": "5-6",
         "team": "FC BARCELONA",
-        "value": "124",
-        "apps": "00"
+        "value": "124"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/NEYMAR JR_CARD.webp",
