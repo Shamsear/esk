@@ -4805,16 +4805,15 @@
     "name": "ROBERT LEWANDOWSKI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "PARIS SAINT-GERMAIN FC",
+    "club": "FREE AGENT ",
     "position": "ST",
-    "value": 200,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-6",
         "team": "PARIS SAINT-GERMAIN FC",
-        "value": "200",
-        "apps": "00"
+        "value": "200"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/R. LEWANDOWSKI_CARD.webp",
