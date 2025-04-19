@@ -9123,22 +9123,20 @@
     "name": "DENIS ZAKARIA",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "DM",
-    "value": 88,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "MANCHESTER UNITED",
-        "value": "114",
-        "apps": "00"
+        "value": "114"
       },
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "88",
-        "apps": "00"
+        "value": "88"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/D. ZAKARIA_CARD.webp",
