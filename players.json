@@ -11167,22 +11167,20 @@
     "name": "MARCUS RASHFORD",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "LW",
-    "value": 134,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "FC PORTO",
-        "value": "74",
-        "apps": "00"
+        "value": "74"
       },
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "134",
-        "apps": "00"
+        "value": "134"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. RASHFORD_CARD.webp",
