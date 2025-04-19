@@ -19538,7 +19538,7 @@
     "name": "SAHAL ABDUL SAMAD",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT ",
     "position": "LW",
     "value": 40,
     "gamesPlayed": 0,
@@ -19546,8 +19546,7 @@
       {
         "season": "5-7",
         "team": "AC MILAN",
-        "value": "40",
-        "apps": "00"
+        "value": "40"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/SAHAL_CARD.webp",
