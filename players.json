@@ -5967,7 +5967,7 @@
     "name": "MEMPHIS DEPAY",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "ST",
     "value": 80,
     "gamesPlayed": 0,
@@ -5975,14 +5975,12 @@
       {
         "season": "4-5",
         "team": "SANTOS FC",
-        "value": "56",
-        "apps": "00"
+        "value": "56"
       },
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "80",
-        "apps": "00"
+        "value": "80"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. DEPAY_CARD.webp",
