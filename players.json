@@ -3930,16 +3930,15 @@
     "name": "SAMUEL ETO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "CHELSEA FC",
+    "club": "FREE AGENT ",
     "position": "ST",
-    "value": 220,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "CHELSEA FC",
-        "value": "220",
-        "apps": "00"
+        "value": "220"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/S. ETO_CARD.webp",
