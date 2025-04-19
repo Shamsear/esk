@@ -6357,22 +6357,20 @@
     "name": "A. COSTACURTA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "TOTTENHAM HOTSPUR FC",
+    "club": "FREE AGENT ",
     "position": "LB",
-    "value": 174,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "FC PORTO",
-        "value": "202",
-        "apps": "00"
+        "value": "202"
       },
       {
         "season": "5-7",
         "team": "TOTTENHAM HOTSPUR FC",
-        "value": "174",
-        "apps": "00"
+        "value": "174"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/A. COSTACURTA_CARD.webp",
