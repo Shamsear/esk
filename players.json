@@ -19357,7 +19357,7 @@
     "name": "BAFOFE DIAKITE",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FREE AGENT ",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -19365,14 +19365,12 @@
       {
         "season": "5-5.5",
         "team": "SL BENFICA",
-        "value": "112",
-        "apps": "00"
+        "value": "112"
       },
       {
         "season": "5.5-7.5",
         "team": "AS ROMA",
-        "value": "40",
-        "apps": "00"
+        "value": "40"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/B. DIAKITE_CARD.webp",
