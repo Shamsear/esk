@@ -6335,25 +6335,6 @@
     "id": 296
   },
   {
-    "name": "SAMU OMORODION",
-    "star": "4-star-standard",
-    "level": "STANDARD",
-    "club": "FREE AGENT",
-    "position": "ST",
-    "value": 60,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "4-6",
-        "team": "SEPAHAN SC",
-        "value": "60",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/S. OMORODION_CARD.webp",
-    "id": 297
-  },
-  {
     "name": "A. COSTACURTA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
