@@ -1,73 +1,68 @@
 /**
  * PWA Install Prompt
- * Shows a clearly visible install button for PWA installation
+ * Shows a custom install prompt for PWA installation when visiting the site
  */
 
 // Variables to manage install prompt
 let deferredPrompt;
+let hasPromptedUser = false;
 
-// Create floating install button
-function createInstallButton() {
-  // If install section already exists, return
-  if (document.getElementById('pwa-install-section')) {
+// Check if the user has already been prompted
+function hasUserBeenPrompted() {
+  return localStorage.getItem('pwaPromptShown') === 'true';
+}
+
+// Set that the user has been prompted
+function setUserPrompted() {
+  localStorage.setItem('pwaPromptShown', 'true');
+}
+
+// Create floating install banner
+function createInstallBanner() {
+  // If banner already exists, return
+  if (document.getElementById('pwa-install-banner')) {
     return;
   }
 
-  // Create a visible install section
-  const installSection = document.createElement('div');
-  installSection.id = 'pwa-install-section';
-  installSection.className = 'pwa-install-section';
+  // Create banner container
+  const banner = document.createElement('div');
+  banner.id = 'pwa-install-banner';
+  banner.className = 'pwa-install-banner';
   
-  // Section content with clear call to action
-  installSection.innerHTML = `
-    <div class="install-card">
-      <div class="install-header">
-        <img src="assets/images/logo11.webp" alt="R2G Logo" class="install-logo">
-        <div class="install-title">
-          <h3>Install Eskimos R2G</h3>
-          <p>Get the full app experience!</p>
-        </div>
+  // Banner content
+  banner.innerHTML = `
+    <div class="banner-content">
+      <img src="assets/images/logo11.webp" alt="R2G Logo" class="banner-logo">
+      <div class="banner-text">
+        <h3>Install Eskimos R2G</h3>
+        <p>Get quick access to Road to Glory on your device!</p>
       </div>
-      <div class="install-benefits">
-        <div class="benefit-item">
-          <i class="fas fa-bolt"></i>
-          <span>Faster access</span>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-wifi-slash"></i>
-          <span>Works offline</span>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-mobile-alt"></i>
-          <span>App-like experience</span>
-        </div>
-      </div>
-      <button id="install-pwa-now" class="install-button">
-        <i class="fas fa-download"></i> Install Now
-      </button>
     </div>
+    <div class="banner-actions">
+      <button id="pwa-install-btn" class="banner-install-btn">Install</button>
+      <button id="pwa-dismiss-btn" class="banner-dismiss-btn">Not now</button>
+    </div>
+    <button id="pwa-close-btn" class="banner-close-btn" aria-label="Close">&times;</button>
   `;
   
-  // Add to the page at a prominent location
-  // Try to insert after header or at top of main content
-  const targetLocation = document.querySelector('header') || 
-                         document.querySelector('main') || 
-                         document.querySelector('.overlay') ||
-                         document.body.firstElementChild;
+  // Add banner to page
+  document.body.appendChild(banner);
   
-  if (targetLocation) {
-    targetLocation.parentNode.insertBefore(installSection, targetLocation.nextSibling);
-  } else {
-    // Fallback: add to beginning of body
-    document.body.insertBefore(installSection, document.body.firstChild);
-  }
+  // Show banner with animation
+  setTimeout(() => {
+    banner.classList.add('show');
+  }, 100);
   
-  // Add click event for install
-  document.getElementById('install-pwa-now').addEventListener('click', promptInstall);
+  // Add event listeners
+  document.getElementById('pwa-install-btn').addEventListener('click', promptInstall);
+  document.getElementById('pwa-dismiss-btn').addEventListener('click', dismissBanner);
+  document.getElementById('pwa-close-btn').addEventListener('click', closeBanner);
 }
 
 // Show install prompt
 function promptInstall() {
+  const banner = document.getElementById('pwa-install-banner');
+  
   if (deferredPrompt) {
     // Show the browser install prompt
     deferredPrompt.prompt();
@@ -76,125 +71,93 @@ function promptInstall() {
     deferredPrompt.userChoice.then(choiceResult => {
       if (choiceResult.outcome === 'accepted') {
         console.log('User accepted the install prompt');
-        hideInstallOption();
       } else {
         console.log('User dismissed the install prompt');
       }
       
       // Reset the deferred prompt
       deferredPrompt = null;
+      
+      // Mark that we've prompted the user
+      setUserPrompted();
+      
+      // Remove the banner
+      if (banner) {
+        banner.classList.remove('show');
+        setTimeout(() => {
+          banner.remove();
+        }, 300);
+      }
     });
-  } else {
-    // If deferredPrompt is not available (e.g., already installed or not supported)
-    showInstallInstructions();
   }
 }
 
-// Hide install option after installation
-function hideInstallOption() {
-  const installSection = document.getElementById('pwa-install-section');
-  if (installSection) {
-    installSection.style.display = 'none';
-  }
-  
-  // Also hide any other install buttons
-  const otherButtons = document.querySelectorAll('#install-pwa-button');
-  otherButtons.forEach(button => {
-    button.style.display = 'none';
-  });
-}
-
-// Show manual install instructions if needed
-function showInstallInstructions() {
-  // Create instructions modal
-  const instructionsModal = document.createElement('div');
-  instructionsModal.id = 'install-instructions-modal';
-  instructionsModal.className = 'install-instructions-modal';
-  
-  instructionsModal.innerHTML = `
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Install Eskimos R2G</h3>
-        <button id="close-instructions" class="close-button">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>To install this app on your device:</p>
-        
-        <div class="install-steps chrome">
-          <h4>Chrome (Android)</h4>
-          <ol>
-            <li>Tap the menu button (three dots) in the upper right</li>
-            <li>Select "Install app" or "Add to Home Screen"</li>
-          </ol>
-        </div>
-        
-        <div class="install-steps safari">
-          <h4>Safari (iOS)</h4>
-          <ol>
-            <li>Tap the share button (box with arrow) at the bottom</li>
-            <li>Scroll and select "Add to Home Screen"</li>
-          </ol>
-        </div>
-        
-        <div class="install-steps desktop">
-          <h4>Desktop Chrome/Edge</h4>
-          <ol>
-            <li>Click the install icon in the address bar</li>
-            <li>Or click the menu and select "Install Eskimos R2G"</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  // Add to page
-  document.body.appendChild(instructionsModal);
-  
-  // Show modal
-  setTimeout(() => {
-    instructionsModal.classList.add('show');
-  }, 100);
-  
-  // Add event listener to close button
-  document.getElementById('close-instructions').addEventListener('click', () => {
-    instructionsModal.classList.remove('show');
+// Dismiss banner temporarily (will show again next visit)
+function dismissBanner() {
+  const banner = document.getElementById('pwa-install-banner');
+  if (banner) {
+    banner.classList.remove('show');
     setTimeout(() => {
-      instructionsModal.remove();
+      banner.remove();
     }, 300);
-  });
+  }
+  
+  // We'll set a session flag to not show again in this session
+  sessionStorage.setItem('pwaPromptDismissed', 'true');
+}
+
+// Close banner permanently
+function closeBanner() {
+  const banner = document.getElementById('pwa-install-banner');
+  if (banner) {
+    banner.classList.remove('show');
+    setTimeout(() => {
+      banner.remove();
+    }, 300);
+  }
+  
+  // Mark that we've prompted the user permanently
+  setUserPrompted();
 }
 
 // Check if PWA is already installed
 function isPWAInstalled() {
   // Check if in standalone mode or if display-mode is standalone
-  return window.matchMedia('(display-mode: standalone)').matches || 
-         window.navigator.standalone === true;
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    return true;
+  }
+  return false;
 }
 
 // Check if the browser supports PWA installation
-function isBrowserSupported() {
-  return 'serviceWorker' in navigator;
+function isInstallable() {
+  // Return true if:
+  // 1. We have a deferredPrompt (means beforeinstallprompt was fired)
+  // 2. The browser supports service workers
+  // 3. The browser supports PWA features
+  return deferredPrompt && 'serviceWorker' in navigator && window.matchMedia('(display-mode: browser)').matches;
 }
 
-// Initialize
-function init() {
-  // If already installed as PWA, don't show install option
-  if (isPWAInstalled()) {
+// Initialize the PWA prompt
+function initPWAPrompt() {
+  // Don't show if:
+  // 1. Already installed as PWA
+  // 2. Already prompted user
+  // 3. User dismissed in this session
+  // 4. Not installable
+  if (
+    isPWAInstalled() || 
+    hasUserBeenPrompted() || 
+    sessionStorage.getItem('pwaPromptDismissed') === 'true' || 
+    !isInstallable()
+  ) {
     return;
   }
   
-  // Show install button if the browser supports service workers
-  if (isBrowserSupported()) {
-    // Show a permanent install option
-    createInstallButton();
-    
-    // Also enable any existing install buttons
-    const existingButtons = document.querySelectorAll('#install-pwa-button');
-    existingButtons.forEach(button => {
-      button.style.display = 'block';
-      button.addEventListener('click', promptInstall);
-    });
-  }
+  // Show our custom banner after a short delay
+  setTimeout(() => {
+    createInstallBanner();
+  }, 3000);
 }
 
 // Listen for beforeinstallprompt event
@@ -204,14 +167,33 @@ window.addEventListener('beforeinstallprompt', (e) => {
   
   // Stash the event so it can be triggered later
   deferredPrompt = e;
+  
+  // Initialize our custom prompt
+  initPWAPrompt();
 });
 
 // Listen for appinstalled event
 window.addEventListener('appinstalled', () => {
+  // Log that the app was installed
   console.log('PWA was installed');
-  hideInstallOption();
+  
+  // Clear the deferredPrompt
   deferredPrompt = null;
+  
+  // Mark as prompted
+  setUserPrompted();
+  
+  // Remove the banner if it exists
+  const banner = document.getElementById('pwa-install-banner');
+  if (banner) {
+    banner.remove();
+  }
 });
 
 // Initialize when the DOM is loaded
-document.addEventListener('DOMContentLoaded', init); 
+document.addEventListener('DOMContentLoaded', () => {
+  // If we have a deferred prompt, initialize
+  if (deferredPrompt) {
+    initPWAPrompt();
+  }
+}); 
