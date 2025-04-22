@@ -14,14 +14,14 @@ const htmlFiles = fs.readdirSync('.').filter(file => file.endsWith('.html'));
 // PWA head tags to add
 const pwaHeadTags = `
     <!-- PWA support -->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
-    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
-    <link rel="icon" type="image/webp" sizes="192x192" href="/assets/images/logo11.webp">
-    <link rel="icon" type="image/webp" sizes="512x512" href="/assets/images/logo11.webp">
+    <link rel="apple-touch-icon" href="./assets/images/logo11.webp">
+    <link rel="icon" type="image/webp" sizes="192x192" href="./assets/images/logo11.webp">
+    <link rel="icon" type="image/webp" sizes="512x512" href="./assets/images/logo11.webp">
 `;
 
 // PWA scripts to add before </body>

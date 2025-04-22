@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
+    <link rel="apple-touch-icon" href="./assets/images/logo11.webp">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Offline Test - Eskimos Road to Glory</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+    
+    <!-- CSS resources -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/pwa.css">
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            background-color: #282828;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            background-color: #333;
+            font-weight: bold;
+        }
+        
+        .online {
+            color: #4caf50;
+        }
+        
+        .offline {
+            color: #f44336;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .test-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+        }
+        
+        .test-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #333;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        
+        .test-item {
+            display: flex;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+        }
+        
+        .test-name {
+            flex: 1;
+        }
+        
+        .test-result {
+            font-weight: bold;
+        }
+        
+        .test-success {
+            color: #4caf50;
+        }
+        
+        .test-failure {
+            color: #f44336;
+        }
+        
+        .nav-links {
+            margin-top: 30px;
+        }
+        
+        .nav-links a {
+            color: #3498db;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="assets/images/logo11.webp" alt="Eskimos Logo" class="logo">
+        <h1>PWA Offline Test</h1>
+        
+        <div id="connection-status" class="status">
+            Checking connection...
+        </div>
+        
+        <div>
+            <button id="test-offline" class="test-button">Run Offline Tests</button>
+            <button id="test-cache" class="test-button">Test Cache</button>
+        </div>
+        
+        <div id="test-results" class="result">
+            <p>Results will appear here...</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="player-status.html">Player Status</a>
+            <a href="tournament-guide.html">Tournament Guide</a>
+        </div>
+    </div>
+    
+    <script>
+        // Update connection status
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connection-status');
+            
+            if (navigator.onLine) {
+                statusEl.textContent = 'ONLINE: You are connected to the internet';
+                statusEl.className = 'status online';
+            } else {
+                statusEl.textContent = 'OFFLINE: You are not connected to the internet';
+                statusEl.className = 'status offline';
+            }
+        }
+        
+        // Test if files are cached
+        async function testCache() {
+            const resultsEl = document.getElementById('test-results');
+            resultsEl.innerHTML = '<p>Testing cache...</p>';
+            
+            const filesToTest = [
+                './index.html',
+                './js/service-worker.js',
+                './css/pwa.css',
+                './assets/images/logo11.webp',
+                './manifest.json',
+                './offline.html'
+            ];
+            
+            let results = '';
+            
+            try {
+                const cache = await caches.open('eskimos-r2g-v1');
+                
+                for (const file of filesToTest) {
+                    const match = await cache.match(file);
+                    
+                    results += `
+                        <div class="test-item">
+                            <div class="test-name">${file}</div>
+                            <div class="test-result ${match ? 'test-success' : 'test-failure'}">
+                                ${match ? 'Cached ✓' : 'Not Cached ✗'}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Add summary
+                results += `
+                    <div class="test-item">
+                        <div class="test-name"><strong>Service Worker Status</strong></div>
+                        <div class="test-result ${navigator.serviceWorker.controller ? 'test-success' : 'test-failure'}">
+                            ${navigator.serviceWorker.controller ? 'Active ✓' : 'Not Active ✗'}
+                        </div>
+                    </div>
+                `;
+                
+                resultsEl.innerHTML = results;
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<p class="test-failure">Error testing cache: ${error.message}</p>`;
+            }
+        }
+        
+        // Test offline capability
+        async function testOffline() {
+            const resultsEl = document.getElementById('test-results');
+            resultsEl.innerHTML = '<p>Testing offline capability...</p>';
+            
+            try {
+                // Test if Service Worker is registered
+                const registration = await navigator.serviceWorker.getRegistration();
+                
+                let results = `
+                    <div class="test-item">
+                        <div class="test-name">Service Worker Registered</div>
+                        <div class="test-result ${registration ? 'test-success' : 'test-failure'}">
+                            ${registration ? 'Yes ✓' : 'No ✗'}
+                        </div>
+                    </div>
+                `;
+                
+                // Test if Service Worker is active
+                results += `
+                    <div class="test-item">
+                        <div class="test-name">Service Worker Active</div>
+                        <div class="test-result ${navigator.serviceWorker.controller ? 'test-success' : 'test-failure'}">
+                            ${navigator.serviceWorker.controller ? 'Yes ✓' : 'No ✗'}
+                        </div>
+                    </div>
+                `;
+                
+                // Check if site can work offline
+                results += `
+                    <div class="test-item">
+                        <div class="test-name">Offline Ready</div>
+                        <div class="test-result ${registration && 'caches' in window ? 'test-success' : 'test-failure'}">
+                            ${registration && 'caches' in window ? 'Yes ✓' : 'No ✗'}
+                        </div>
+                    </div>
+                `;
+                
+                // Add instructions
+                results += `
+                    <div style="margin-top: 20px; padding: 10px; background-color: #333; border-radius: 5px;">
+                        <p><strong>How to test offline:</strong></p>
+                        <ol style="text-align: left; padding-left: 20px;">
+                            <li>Go to Chrome DevTools (F12)</li>
+                            <li>Go to Network tab</li>
+                            <li>Check "Offline" checkbox</li>
+                            <li>Try to navigate using the links below</li>
+                            <li>All links should work even when offline</li>
+                        </ol>
+                    </div>
+                `;
+                
+                resultsEl.innerHTML = results;
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<p class="test-failure">Error testing offline capability: ${error.message}</p>`;
+            }
+        }
+        
+        // Set up listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check initial connection status
+            updateConnectionStatus();
+            
+            // Add event listeners for connection changes
+            window.addEventListener('online', updateConnectionStatus);
+            window.addEventListener('offline', updateConnectionStatus);
+            
+            // Add event listeners for test buttons
+            document.getElementById('test-offline').addEventListener('click', testOffline);
+            document.getElementById('test-cache').addEventListener('click', testCache);
+            
+            // Run offline test on load
+            setTimeout(() => {
+                testOffline();
+            }, 2000);
+        });
+    </script>
+    
+    <!-- PWA scripts -->
+    <script src="js/pwa-init.js" defer></script>
+    <script src="js/offline-manager.js" defer></script>
+</body>
+</html> 

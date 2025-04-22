@@ -2,7 +2,7 @@
   "name": "Eskimos Road to Glory",
   "short_name": "R2G",
   "description": "FIFA Pro Clubs community for tournaments, career progression and player rankings",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#3498db",
