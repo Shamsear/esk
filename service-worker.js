@@ -135,26 +135,29 @@ self.addEventListener('fetch', event => {
 
   // For HTML navigation requests
   if (event.request.mode === 'navigate') {
-    // Always get player-status.html from network first
+    // Use stale-while-revalidate for player-status.html for faster initial load
     if (event.request.url.includes('player-status.html')) {
       event.respondWith(
-        fetch(event.request)
-          .then(networkResponse => {
-            // Cache the updated version
-            if (networkResponse.ok) {
-              const responseToCache = networkResponse.clone();
-              caches.open(CACHE_NAME).then(cache => {
-                cache.put(event.request, responseToCache);
+        caches.match(event.request)
+          .then(cachedResponse => {
+            const fetchPromise = fetch(event.request)
+              .then(networkResponse => {
+                // Cache the updated version
+                if (networkResponse.ok) {
+                  const responseToCache = networkResponse.clone();
+                  caches.open(CACHE_NAME).then(cache => {
+                    cache.put(event.request, responseToCache);
+                  });
+                }
+                return networkResponse;
+              })
+              .catch(() => {
+                // If network fails, try cache
+                return caches.match('./offline.html');
               });
-            }
-            return networkResponse;
-          })
-          .catch(() => {
-            // If network fails, try cache
-            return caches.match(event.request)
-              .then(cachedResponse => {
-                return cachedResponse || caches.match('./offline.html');
-              });
+            
+            // Return cached response immediately if available, otherwise wait for network
+            return cachedResponse || fetchPromise;
           })
       );
       return;

@@ -6,6 +6,12 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="players.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="js/script.js" as="script">
+    <link rel="preload" href="css/pwa.css" as="style">
+    <link rel="preload" href="/assets/images/logo11.webp" as="image" type="image/webp">
+    
     <!-- PWA support -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#3498db">
@@ -2328,7 +2334,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload();
         }
     });
-};
+};  // Closing parenthesis for document.addEventListener('DOMContentLoaded', function()...
 
 // Filter functions
 function filterPlayers() {
@@ -2394,23 +2400,145 @@ function resetFilters() {
     <!-- Defer main script to improve initial load -->
     <script defer src="js/script.js"></script>
 
-    <!-- JavaScript function to refresh player data -->
-    <script>
+    <!-- JavaScript function to refresh player data - Load with attribute for better performance -->
+    <script async>
+        // Performance optimization - Avoid layout thrashing
+        function requestAnimationFramePromise() {
+            return new Promise(resolve => requestAnimationFrame(resolve));
+        }
+        
         function refreshPlayerData() {
-            // Clear any existing cache for players.json
+            // Show loading indicator
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.style.position = 'fixed';
+            loadingIndicator.style.top = '0';
+            loadingIndicator.style.left = '0';
+            loadingIndicator.style.width = '100%';
+            loadingIndicator.style.height = '4px';
+            loadingIndicator.style.backgroundColor = '#4caf50';
+            loadingIndicator.style.zIndex = '9999';
+            loadingIndicator.style.animation = 'progress 1s linear infinite';
+            
+            // Add animation style
+            const style = document.createElement('style');
+            style.textContent = '@keyframes progress { 0% { width: 0; } 100% { width: 100%; }}';
+            document.head.appendChild(style);
+            document.body.appendChild(loadingIndicator);
+            
+            // Only refresh the data, not the entire page
             if ('caches' in window) {
                 caches.open('eskimos-r2g-v1').then(function(cache) {
                     cache.delete('players.json').then(function() {
                         console.log('Players data cache cleared');
-                        // Reload the page with cache busting parameter
-                        window.location.href = 'player-status.html?refresh=' + new Date().getTime();
+                        
+                        // Fetch new data
+                        const timestamp = new Date().getTime();
+                        fetch('players.json?v=' + timestamp, {
+                            headers: {
+                                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                                'Pragma': 'no-cache',
+                                'Expires': '0'
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(players => {
+                            window.playerState.allPlayers = players;
+                            
+                            // Re-sort and display
+                            window.playerState.allPlayers.sort((a, b) => {
+                                if (a.value !== b.value) {
+                                    return b.value - a.value;
+                                }
+                                return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+                            });
+                            
+                            // Reset to page 1
+                            window.playerState.currentPage = 1;
+                            
+                            // Apply filters and show updated data
+                            applyFiltersAndDisplay();
+                            
+                            // Remove loading indicator
+                            document.body.removeChild(loadingIndicator);
+                            document.head.removeChild(style);
+                            
+                            // Show success message
+                            const message = document.createElement('div');
+                            message.textContent = 'Data updated successfully!';
+                            message.style.position = 'fixed';
+                            message.style.top = '80px';
+                            message.style.right = '20px';
+                            message.style.padding = '10px 20px';
+                            message.style.backgroundColor = '#4caf50';
+                            message.style.color = 'white';
+                            message.style.borderRadius = '4px';
+                            message.style.zIndex = '9999';
+                            message.style.opacity = '0';
+                            message.style.transition = 'opacity 0.3s ease';
+                            
+                            document.body.appendChild(message);
+                            setTimeout(() => { message.style.opacity = '1'; }, 100);
+                            setTimeout(() => { 
+                                message.style.opacity = '0';
+                                setTimeout(() => document.body.removeChild(message), 300);
+                            }, 3000);
+                        })
+                        .catch(error => {
+                            console.error('Error refreshing data:', error);
+                            document.body.removeChild(loadingIndicator);
+                            document.head.removeChild(style);
+                            
+                            // Show error message
+                            const message = document.createElement('div');
+                            message.textContent = 'Error refreshing data. Please try again.';
+                            message.style.position = 'fixed';
+                            message.style.top = '80px';
+                            message.style.right = '20px';
+                            message.style.padding = '10px 20px';
+                            message.style.backgroundColor = '#f44336';
+                            message.style.color = 'white';
+                            message.style.borderRadius = '4px';
+                            message.style.zIndex = '9999';
+                            
+                            document.body.appendChild(message);
+                            setTimeout(() => document.body.removeChild(message), 3000);
+                        });
                     });
                 });
             } else {
-                // If caches API is not available, just reload with cache busting
+                // Fallback for browsers without cache API - reload the page
                 window.location.href = 'player-status.html?refresh=' + new Date().getTime();
             }
         }
+        
+        // Initialize loading animation once
+        if (!window.loadingAnimationStyle) {
+            window.loadingAnimationStyle = document.createElement('style');
+            window.loadingAnimationStyle.textContent = '@keyframes progress { 0% { width: 0; } 100% { width: 100%; }}';
+            document.head.appendChild(window.loadingAnimationStyle);
+        }
+        
+        // Optimize filtering and searching to run after animation frames
+        const originalFilterPlayers = window.filterPlayers;
+        window.filterPlayers = async function() {
+            // Show mini loading indicator
+            const indicator = document.createElement('div');
+            indicator.style.cssText = 'position:fixed;top:0;left:0;height:2px;background:#4caf50;z-index:9999;transition:width 0.3s ease;width:0;';
+            document.body.appendChild(indicator);
+            
+            await requestAnimationFramePromise();
+            indicator.style.width = '30%';
+            
+            await requestAnimationFramePromise();
+            originalFilterPlayers();
+            
+            await requestAnimationFramePromise();
+            indicator.style.width = '100%';
+            
+            setTimeout(() => {
+                document.body.removeChild(indicator);
+            }, 300);
+        };
     </script>
 </body>
 </html>
