@@ -1,0 +1,89 @@
+/* PWA-specific styles */
+
+/* Install button */
+#install-pwa-button {
+  display: none;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px 0;
+  transition: background-color 0.2s ease;
+}
+
+#install-pwa-button:hover {
+  background-color: #2980b9;
+}
+
+/* Update notification */
+#pwa-update-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+#pwa-update-notification button {
+  margin-left: 15px;
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Offline indicator */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f44336;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+/* App shell styles */
+body.pwa-mode {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide browser-specific elements in standalone mode */
+@media (display-mode: standalone) {
+  .browser-only {
+    display: none !important;
+  }
+  
+  .pwa-only {
+    display: block !important;
+  }
+  
+  /* Add safe area insets for notched devices */
+  body {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+}
+
+/* Default hide pwa-only elements */
+.pwa-only {
+  display: none !important;
+} 

@@ -4,9 +4,11 @@
   "description": "Admin interface for R2G player data management",
   "main": "save-players.js",
   "scripts": {
-    "start": "node save-players.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
     "dev": "python -m http.server",
-    "server": "node save-players.js"
+    "server": "node save-players.js",
+    "pwa-setup": "node update-pwa.js"
   },
   "keywords": [
     "admin",

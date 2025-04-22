@@ -4,7 +4,7 @@
     <!-- PWA support -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#3498db">
-    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
 
     <!-- DNS prefetch and preconnect -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
     <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
-    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>R2G Player Admin</title>
@@ -536,9 +536,9 @@
                 
                 <div class="form-group">
                     <label for="player-club">Club</label>
-                    <div class="club-dropdown">
-                        <input type="text" id="player-club" placeholder="Search club..." class="club-search">
-                        <div id="club-options" class="club-options"></div>
+                    <div class="team-dropdown">
+                        <input type="text" id="player-club" placeholder="Search club..." class="team-search">
+                        <div id="club-options" class="team-options"></div>
                     </div>
                     <div id="club-preview" class="club-preview"></div>
                 </div>
@@ -993,17 +993,27 @@
                 populatePlayersList(searchTerm);
             }, 250));
             
-            // Club dropdown
+            // Club dropdown in basic info tab
             const clubInput = document.getElementById('player-club');
             const clubOptions = document.getElementById('club-options');
             
-            clubInput.addEventListener('focus', () => {
-                populateClubOptions('');
+            clubInput.addEventListener('focus', async () => {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(clubOptions, clubInput, '');
                 clubOptions.style.display = 'block';
             });
             
-            clubInput.addEventListener('input', debounce(function() {
-                populateClubOptions(this.value);
+            clubInput.addEventListener('input', debounce(async function() {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(clubOptions, clubInput, this.value);
                 clubOptions.style.display = 'block';
             }, 200));
             
@@ -1248,10 +1258,10 @@
                     };
                 });
                 
-                // Update club logo if it exists
-                const matchingClub = clubsList.find(c => c.name === updatedPlayer.club);
-                if (matchingClub) {
-                    updatedPlayer.clubLogo = matchingClub.logo;
+                // Update club logo using ClubManager
+                const clubData = window.ClubManager.getClub(updatedPlayer.club);
+                if (clubData) {
+                    updatedPlayer.clubLogo = clubData.logo;
                 }
                 
                 // Update in memory immediately - don't wait for server
@@ -1637,26 +1647,27 @@
                 // Update any related UI or data after selection
                 inputElement.value = club.name;
                 container.style.display = 'none';
-            });
-        }
-
-        // Populate club options
-        function populateClubOptions(searchTerm = '') {
-            const container = document.getElementById('club-options');
-            const inputElement = document.getElementById('player-club');
-            
-            // Use the ClubManager to populate club options
-            window.ClubManager.populateClubOptions(container, inputElement, searchTerm, club => {
-                // Update player club and related UI
-                document.getElementById('player-club').value = club.name;
                 
-                // If we have club logo, update it
-                if (club.logo) {
-                    // Update club logo preview if it exists
+                // If in basic info tab, update club logo preview if it exists
+                if (inputElement.id === 'player-club') {
                     const clubLogoPreview = document.getElementById('club-logo-preview');
-                    if (clubLogoPreview) {
+                    if (clubLogoPreview && club.logo) {
                         clubLogoPreview.src = club.logo;
                         clubLogoPreview.style.display = 'block';
+                    }
+                    
+                    // Create preview if it doesn't exist
+                    const clubPreviewContainer = document.getElementById('club-preview');
+                    if (clubPreviewContainer && !clubLogoPreview) {
+                        const newClubLogoPreview = document.createElement('img');
+                        newClubLogoPreview.id = 'club-logo-preview';
+                        newClubLogoPreview.className = 'club-logo-preview';
+                        newClubLogoPreview.style.maxWidth = '50px';
+                        newClubLogoPreview.style.maxHeight = '50px';
+                        newClubLogoPreview.style.marginTop = '5px';
+                        newClubLogoPreview.src = club.logo;
+                        newClubLogoPreview.style.display = 'block';
+                        clubPreviewContainer.appendChild(newClubLogoPreview);
                     }
                 }
             });
@@ -1793,46 +1804,7 @@
             
             // Add event listeners
             setupEventListeners();
-            
-            // Setup club search functionality
-            setupClubSearchFunctionality();
         });
-
-        // Set up club search functionality
-        function setupClubSearchFunctionality() {
-            const clubInput = document.getElementById('player-club');
-            const clubOptions = document.getElementById('club-options');
-            
-            // Add event listeners for club search
-            clubInput.addEventListener('focus', function() {
-                populateClubOptions('');
-                clubOptions.style.display = 'block';
-            });
-            
-            clubInput.addEventListener('input', function() {
-                populateClubOptions(this.value);
-                clubOptions.style.display = 'block';
-            });
-            
-            clubInput.addEventListener('blur', function() {
-                setTimeout(() => {
-                    clubOptions.style.display = 'none';
-                }, 150);
-            });
-            
-            // Add club logo preview if not exists
-            const clubPreviewContainer = document.getElementById('club-preview');
-            if (clubPreviewContainer && !document.getElementById('club-logo-preview')) {
-                const clubLogoPreview = document.createElement('img');
-                clubLogoPreview.id = 'club-logo-preview';
-                clubLogoPreview.className = 'club-logo-preview';
-                clubLogoPreview.style.maxWidth = '50px';
-                clubLogoPreview.style.maxHeight = '50px';
-                clubLogoPreview.style.marginTop = '5px';
-                clubLogoPreview.style.display = 'none';
-                clubPreviewContainer.appendChild(clubLogoPreview);
-            }
-        }
     </script>
 
     <!-- Performance optimization JS -->

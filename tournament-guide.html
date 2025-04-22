@@ -1,12 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Tournament Guide - Eskimos Road to Glory</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/tournament-guide.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/pwa.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
     <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
@@ -322,5 +332,10 @@
     <script src="js/tournament-guide.js"></script>
     <script src="js/background-mobile-scroll.js"></script>
     <script src="js/image-protection.js"></script>
+
+    <!-- PWA scripts -->
+    <script src="js/pwa-init.js" defer></script>
+    <script src="js/offline-manager.js" defer></script>
+
 </body>
 </html> 
