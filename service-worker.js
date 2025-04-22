@@ -93,76 +93,8 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Special handling for club images with case sensitivity issues
-  if (event.request.url.includes('/assets/images/players/club/')) {
-    const url = new URL(event.request.url);
-    const imgPath = url.pathname;
-    
-    // Try to handle common case sensitivity issues
-    if (imgPath.includes('FREEAGENT.webp')) {
-      event.respondWith(
-        caches.match('/assets/images/players/club/freeagent.WEBP')
-          .then(response => response || fetch('/assets/images/players/club/freeagent.WEBP'))
-          .catch(() => caches.match('/assets/images/players/club/FREE AGENT.svg'))
-      );
-      return;
-    }
-    
-    if (imgPath.includes('FSV Mainz 05.webp')) {
-      event.respondWith(
-        caches.match('/assets/images/players/club/FSV MAINZ 05.webp')
-          .then(response => response || fetch('/assets/images/players/club/FSV MAINZ 05.webp'))
-      );
-      return;
-    }
-    
-    if (imgPath.includes('MUMBAI CITY FC.webp')) {
-      event.respondWith(
-        caches.match('/assets/images/players/club/Mumbai City FC.webp')
-          .then(response => response || fetch('/assets/images/players/club/Mumbai City FC.webp'))
-      );
-      return;
-    }
-    
-    if (imgPath.includes('AL-NASSR FC.webp')) {
-      event.respondWith(
-        caches.match('/assets/images/players/club/Al-Nassr FC.webp')
-          .then(response => response || fetch('/assets/images/players/club/Al-Nassr FC.webp'))
-      );
-      return;
-    }
-  }
-
   // For HTML navigation requests
   if (event.request.mode === 'navigate') {
-    // Use stale-while-revalidate for player-status.html for faster initial load
-    if (event.request.url.includes('player-status.html')) {
-      event.respondWith(
-        caches.match(event.request)
-          .then(cachedResponse => {
-            const fetchPromise = fetch(event.request)
-              .then(networkResponse => {
-                // Cache the updated version
-                if (networkResponse.ok) {
-                  const responseToCache = networkResponse.clone();
-                  caches.open(CACHE_NAME).then(cache => {
-                    cache.put(event.request, responseToCache);
-                  });
-                }
-                return networkResponse;
-              })
-              .catch(() => {
-                // If network fails, try cache
-                return caches.match('./offline.html');
-              });
-            
-            // Return cached response immediately if available, otherwise wait for network
-            return cachedResponse || fetchPromise;
-          })
-      );
-      return;
-    }
-    
     event.respondWith(
       // Stale-while-revalidate for navigation requests
       caches.match(event.request)
