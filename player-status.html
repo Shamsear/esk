@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="js-loading">
 <head>
+    <!-- Cache control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <!-- PWA support -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#3498db">
@@ -1226,10 +1231,25 @@
             }
         }
         
+        /* Add CSS for the refresh button hover effect */
+        .refresh-link a:hover {
+            background-color: #4caf50 !important;
+            transform: scale(1.1) rotate(180deg);
+        }
+        .refresh-link a {
+            transition: all 0.5s ease;
+        }
     </style>
 
 </head>
 <body>
+    <!-- Add refresh button next to Admin link -->
+    <div class="refresh-link" style="position: absolute; top: 20px; right: 80px; z-index: 99;">
+        <a href="javascript:refreshPlayerData();" title="Refresh Data" style="background-color: #282828; color: #e3e3e3; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;">
+            <i class="fas fa-sync-alt" style="font-size: 20px;"></i>
+        </a>
+    </div>
+    
     <!-- Admin link -->
     <div class="admin-link">
         <a href="admin-login.html" title="Admin Panel">
@@ -1318,16 +1338,13 @@
                 <div class="dropdown-options">
                     <div class="dropdown-item" data-value="ALL">All</div>
                     <div class="dropdown-item" data-value="FREE AGENT">
-                        <img src="/assets/images/players/club/FREEAGENT.webp" alt="" width="300" height="200" > Free Agent
+                        <img src="/assets/images/players/club/freeagent.WEBP" alt="" width="300" height="200" > Free Agent
                     </div>                    
                     <div class="dropdown-item" data-value="AC MILAN">
                         <img src="/assets/images/players/club/AC Milan.webp" alt="" width="300" height="200" > AC Milan
                     </div>
                     <div class="dropdown-item" data-value="AFC AJAX">
                         <img src="/assets/images/players/club/AFC Ajax.webp" alt="" width="300" height="200" > AFC Ajax
-                    </div>
-                    <div class="dropdown-item" data-value="REAL MADRID CF">
-                        <img src="/assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
                     </div>
                     <div class="dropdown-item" data-value="AL-NASSR FC">
                         <img src="/assets/images/players/club/Al-Nassr FC.webp" alt="" width="300" height="200" > Al-Nassr FC
@@ -1357,7 +1374,7 @@
                         <img src="/assets/images/players/club/FC Bayern Munich.webp" alt="" width="300" height="200" > FC Bayern Munich
                     </div>
                     <div class="dropdown-item" data-value="FSV MAINZ 05">
-                        <img src="/assets/images/players/club/FSV Mainz 05.webp" alt="" width="300" height="200" > FSV Mainz 05
+                        <img src="/assets/images/players/club/FSV MAINZ 05.webp" alt="" width="300" height="200" > FSV Mainz 05
                     </div>
                     <div class="dropdown-item" data-value="INTER MIAMI">
                         <img src="/assets/images/players/club/Inter Miami.webp" alt="" width="300" height="200" > Inter Miami
@@ -1379,7 +1396,7 @@
                     </div>
                     
                     <div class="dropdown-item" data-value="MUMBAI CITY FC">
-                        <img src="/assets/images/players/club/MUMBAI CITY FC.webp" alt="" width="300" height="200" > Mumbai City FC
+                        <img src="/assets/images/players/club/Mumbai City FC.webp" alt="" width="300" height="200" > Mumbai City FC
                     </div>
                     <div class="dropdown-item" data-value="NEWCASTLE UNITED FC">
                         <img src="/assets/images/players/club/Newcastle United FC.webp" alt="" width="300" height="200" > Newcastle United FC
@@ -1392,6 +1409,9 @@
                     </div>
                     <div class="dropdown-item" data-value="RANGERS FC">
                         <img src="/assets/images/players/club/Rangers FC.webp" alt="" width="300" height="200" > Rangers FC
+                    </div>
+                    <div class="dropdown-item" data-value="REAL MADRID CF">
+                        <img src="/assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
                     </div>
                     <div class="dropdown-item" data-value="NOTTINGHAM FOREST FC">
                         <img src="/assets/images/players/club/Nottingham Forest FC.webp" alt="" width="300" height="200" > Nottingham Forest FC
@@ -1532,7 +1552,7 @@
                 <div class="dropdown-options">
                     <div class="dropdown-item" data-value="ALL">All</div>
                     <div class="dropdown-item" data-value="FREE AGENT">
-                        <img src="/assets/images/players/club/FREEAGENT.webp" alt="" width="300" height="200" > Free Agent
+                        <img src="/assets/images/players/club/freeagent.WEBP" alt="" width="300" height="200" > Free Agent
                     </div>                    
                     <div class="dropdown-item" data-value="AC MILAN">
                         <img src="/assets/images/players/club/AC Milan.webp" alt="" width="300" height="200" > AC Milan
@@ -1540,11 +1560,8 @@
                     <div class="dropdown-item" data-value="AFC AJAX">
                         <img src="/assets/images/players/club/AFC Ajax.webp" alt="" width="300" height="200" > AFC Ajax
                     </div>
-                    <div class="dropdown-item" data-value="REAL MADRID CF">
-                        <img src="/assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
-                    </div>
                     <div class="dropdown-item" data-value="AL-NASSR FC">
-                        <img src="/assets/images/players/club/AL-NASSR FC.webp" alt="" width="300" height="200" > Al-Nassr FC
+                        <img src="/assets/images/players/club/Al-Nassr FC.webp" alt="" width="300" height="200" > Al-Nassr FC
                     </div>
                     <div class="dropdown-item" data-value="ARSENAL FC">
                         <img src="/assets/images/players/club/Arsenal FC.webp" alt="" width="300" height="200" > Arsenal FC
@@ -1571,7 +1588,7 @@
                         <img src="/assets/images/players/club/FC Bayern Munich.webp" alt="" width="300" height="200" > FC Bayern Munich
                     </div>
                     <div class="dropdown-item" data-value="FSV MAINZ 05">
-                        <img src="/assets/images/players/club/FSV Mainz 05.webp" alt="" width="300" height="200" > FSV Mainz 05
+                        <img src="/assets/images/players/club/FSV MAINZ 05.webp" alt="" width="300" height="200" > FSV Mainz 05
                     </div>
                     <div class="dropdown-item" data-value="INTER MIAMI">
                         <img src="/assets/images/players/club/Inter Miami.webp" alt="" width="300" height="200" > Inter Miami
@@ -1593,7 +1610,7 @@
                     </div>
                     
                     <div class="dropdown-item" data-value="MUMBAI CITY FC">
-                        <img src="/assets/images/players/club/MUMBAI CITY FC.webp" alt="" width="300" height="200" > Mumbai City FC
+                        <img src="/assets/images/players/club/Mumbai City FC.webp" alt="" width="300" height="200" > Mumbai City FC
                     </div>
                     <div class="dropdown-item" data-value="NEWCASTLE UNITED FC">
                         <img src="/assets/images/players/club/Newcastle United FC.webp" alt="" width="300" height="200" > Newcastle United FC
@@ -1606,6 +1623,9 @@
                     </div>
                     <div class="dropdown-item" data-value="RANGERS FC">
                         <img src="/assets/images/players/club/Rangers FC.webp" alt="" width="300" height="200" > Rangers FC
+                    </div>
+                    <div class="dropdown-item" data-value="REAL MADRID CF">
+                        <img src="/assets/images/players/club/Real Madrid CF.webp" alt="" width="300" height="200" > Real Madrid CF
                     </div>
                     <div class="dropdown-item" data-value="NOTTINGHAM FOREST FC">
                         <img src="/assets/images/players/club/Nottingham Forest FC.webp" alt="" width="300" height="200" > Nottingham Forest FC
@@ -1665,6 +1685,109 @@
     <script>
 
 window.onload = function() {
+    // Force cache refresh for the page and player data
+    const timestamp = new Date().getTime();
+    
+    // Add cache-busting parameter to player data fetch
+    async function fetchPlayersData() {
+        try {
+            // Show loading indicator with progress updates
+            const loadingElement = document.getElementById('loading');
+            const subtextElement = document.getElementById('subtext');
+            if (subtextElement) {
+                subtextElement.textContent = 'Fetching player data...';
+            }
+            
+            // Fetch the data with a timeout to handle very large files
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            // Add cache-busting timestamp parameter
+            const response = await fetch('players.json?v=' + timestamp, {
+                signal: controller.signal,
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                throw new Error('Failed to load player data');
+            }
+            
+            if (subtextElement) {
+                subtextElement.textContent = 'Processing player data...';
+            }
+            
+            // Use streaming approach for large JSON files
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let chunks = '';
+            
+            // Process the data in chunks
+            while(true) {
+                const {value, done} = await reader.read();
+                if (done) break;
+                chunks += decoder.decode(value, {stream: true});
+            }
+            
+            const players = JSON.parse(chunks);
+            if (subtextElement) {
+                subtextElement.textContent = 'Preparing display...';
+            }
+            
+            // Initialize pagination state
+            window.playerState = {
+                allPlayers: players,
+                filteredPlayers: [],
+                currentPage: 1,
+                itemsPerPage: 24,
+                totalPages: 1,
+                filters: {
+                    searchTerm: '',
+                    star: 'all',
+                    club: 'ALL',
+                    position: []
+                }
+            };
+            
+            // Basic pre-sorting (we'll sort filtered results as needed)
+            window.playerState.allPlayers.sort((a, b) => {
+                // Sort by value in descending order
+                if (a.value !== b.value) {
+                    return b.value - a.value; // Descending order
+                }
+                
+                // If values are the same, sort alphabetically by name
+                return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+            });
+            
+            // Apply initial filters and pagination
+            applyFiltersAndDisplay();
+            
+            // Hide the loading screen after a short delay to ensure smooth transition
+            setTimeout(function() {
+                if (loadingElement) {
+                    loadingElement.style.opacity = '0';
+                    setTimeout(function() {
+                        if (loadingElement) {
+                            loadingElement.style.display = 'none';
+                        }
+                    }, 500);
+                }
+            }, 1000);
+            
+        } catch (error) {
+            console.error('Error loading player data:', error);
+            const subtextElement = document.getElementById('subtext');
+            if (subtextElement) {
+                subtextElement.textContent = 'Error loading data. Please try again.';
+            }
+        }
+    }
+    
     const messages = [
         "Welcome to R2G Player Data",
         "Loading Data...",
@@ -1726,100 +1849,6 @@ window.onload = function() {
     
     // Rest of your initialization code
 };
-
-// Function to fetch and load player data from the JSON file
-async function fetchPlayersData() {
-    try {
-        // Show loading indicator with progress updates
-        const loadingElement = document.getElementById('loading');
-        const subtextElement = document.getElementById('subtext');
-        if (subtextElement) {
-            subtextElement.textContent = 'Fetching player data...';
-        }
-        
-        // Fetch the data with a timeout to handle very large files
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-        
-        const response = await fetch('players.json', {
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error('Failed to load player data');
-        }
-        
-        if (subtextElement) {
-            subtextElement.textContent = 'Processing player data...';
-        }
-        
-        // Use streaming approach for large JSON files
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let chunks = '';
-        
-        // Process the data in chunks
-        while(true) {
-            const {value, done} = await reader.read();
-            if (done) break;
-            chunks += decoder.decode(value, {stream: true});
-        }
-        
-        const players = JSON.parse(chunks);
-        if (subtextElement) {
-            subtextElement.textContent = 'Preparing display...';
-        }
-        
-        // Initialize pagination state
-        window.playerState = {
-            allPlayers: players,
-            filteredPlayers: [],
-            currentPage: 1,
-            itemsPerPage: 24,
-            totalPages: 1,
-            filters: {
-                searchTerm: '',
-                star: 'all',
-                club: 'ALL',
-                position: []
-            }
-        };
-        
-        // Basic pre-sorting (we'll sort filtered results as needed)
-        window.playerState.allPlayers.sort((a, b) => {
-            // Sort by value in descending order
-            if (a.value !== b.value) {
-                return b.value - a.value; // Descending order
-            }
-            
-            // If values are the same, sort alphabetically by name
-            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-        });
-        
-        // Apply initial filters and pagination
-        applyFiltersAndDisplay();
-        
-        // Hide the loading screen after a short delay to ensure smooth transition
-        setTimeout(function() {
-            if (loadingElement) {
-                loadingElement.style.opacity = '0';
-                setTimeout(function() {
-                    if (loadingElement) {
-                        loadingElement.style.display = 'none';
-                    }
-                }, 500);
-            }
-        }, 1000);
-        
-    } catch (error) {
-        console.error('Error loading player data:', error);
-        const subtextElement = document.getElementById('subtext');
-        if (subtextElement) {
-            subtextElement.textContent = 'Error loading data. Please try again.';
-        }
-    }
-}
 
 // Apply filters and display the current page
 function applyFiltersAndDisplay() {
@@ -2276,7 +2305,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Start loading the data
     fetchPlayersData();
-});
+    
+    // Add code to prevent browser caching
+    const metaNoCache = document.createElement('meta');
+    metaNoCache.httpEquiv = 'Cache-Control';
+    metaNoCache.content = 'no-cache, no-store, must-revalidate';
+    document.head.appendChild(metaNoCache);
+    
+    const metaNoPragma = document.createElement('meta');
+    metaNoPragma.httpEquiv = 'Pragma';
+    metaNoPragma.content = 'no-cache';
+    document.head.appendChild(metaNoPragma);
+    
+    const metaNoExpires = document.createElement('meta');
+    metaNoExpires.httpEquiv = 'Expires';
+    metaNoExpires.content = '0';
+    document.head.appendChild(metaNoExpires);
+    
+    // Force reload if coming from cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+};
 
 // Filter functions
 function filterPlayers() {
@@ -2341,6 +2393,25 @@ function resetFilters() {
     </script>
     <!-- Defer main script to improve initial load -->
     <script defer src="js/script.js"></script>
+
+    <!-- JavaScript function to refresh player data -->
+    <script>
+        function refreshPlayerData() {
+            // Clear any existing cache for players.json
+            if ('caches' in window) {
+                caches.open('eskimos-r2g-v1').then(function(cache) {
+                    cache.delete('players.json').then(function() {
+                        console.log('Players data cache cleared');
+                        // Reload the page with cache busting parameter
+                        window.location.href = 'player-status.html?refresh=' + new Date().getTime();
+                    });
+                });
+            } else {
+                // If caches API is not available, just reload with cache busting
+                window.location.href = 'player-status.html?refresh=' + new Date().getTime();
+            }
+        }
+    </script>
 </body>
 </html>
 

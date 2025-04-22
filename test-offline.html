@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/pwa.css">
     
+    <!-- Service Worker Reset Utility -->
+    <script src="js/fix-service-worker.js"></script>
+
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -150,6 +153,9 @@
         <div>
             <button id="test-offline" class="test-button">Run Offline Tests</button>
             <button id="test-cache" class="test-button">Test Cache</button>
+            <button id="force-cache" class="test-button">Force Cache Resources</button>
+            <button id="reset-sw" class="test-button" style="background-color: #e74c3c;">Reset Service Worker</button>
+            <button id="force-install-sw" class="test-button" style="background-color: #4caf50;">Force Install SW</button>
         </div>
         
         <div id="test-results" class="result">
@@ -226,6 +232,60 @@
             }
         }
         
+        // Force cache resources
+        async function forceCache() {
+            const resultsEl = document.getElementById('test-results');
+            resultsEl.innerHTML = '<p>Forcing cache of resources...</p>';
+            
+            const resources = [
+                './index.html',
+                './js/service-worker.js', 
+                './js/pwa-init.js',
+                './service-worker.js',
+                './css/pwa.css',
+                './assets/images/logo11.webp',
+                './manifest.json',
+                './offline.html'
+            ];
+            
+            try {
+                const cache = await caches.open('eskimos-r2g-v1');
+                
+                // Force cache all resources
+                const results = await Promise.allSettled(
+                    resources.map(resource => 
+                        fetch(resource)
+                            .then(response => {
+                                if (response.ok) {
+                                    return cache.put(resource, response);
+                                }
+                                throw new Error(`Failed to fetch ${resource}`);
+                            })
+                    )
+                );
+                
+                let successCount = 0;
+                let failureCount = 0;
+                
+                results.forEach((result, index) => {
+                    if (result.status === 'fulfilled') {
+                        successCount++;
+                    } else {
+                        failureCount++;
+                        console.error(`Failed to cache ${resources[index]}:`, result.reason);
+                    }
+                });
+                
+                resultsEl.innerHTML = `<p>Cache operation complete. ${successCount} resources cached, ${failureCount} failed.</p>`;
+                
+                // Run test cache again to confirm
+                setTimeout(testCache, 1000);
+                
+            } catch (error) {
+                resultsEl.innerHTML = `<p class="test-failure">Error forcing cache: ${error.message}</p>`;
+            }
+        }
+        
         // Test offline capability
         async function testOffline() {
             const resultsEl = document.getElementById('test-results');
@@ -254,29 +314,17 @@
                     </div>
                 `;
                 
-                // Check if site can work offline
-                results += `
-                    <div class="test-item">
-                        <div class="test-name">Offline Ready</div>
-                        <div class="test-result ${registration && 'caches' in window ? 'test-success' : 'test-failure'}">
-                            ${registration && 'caches' in window ? 'Yes ✓' : 'No ✗'}
+                // Test scope
+                if (registration) {
+                    results += `
+                        <div class="test-item">
+                            <div class="test-name">Service Worker Scope</div>
+                            <div class="test-result test-success">
+                                ${registration.scope}
+                            </div>
                         </div>
-                    </div>
-                `;
-                
-                // Add instructions
-                results += `
-                    <div style="margin-top: 20px; padding: 10px; background-color: #333; border-radius: 5px;">
-                        <p><strong>How to test offline:</strong></p>
-                        <ol style="text-align: left; padding-left: 20px;">
-                            <li>Go to Chrome DevTools (F12)</li>
-                            <li>Go to Network tab</li>
-                            <li>Check "Offline" checkbox</li>
-                            <li>Try to navigate using the links below</li>
-                            <li>All links should work even when offline</li>
-                        </ol>
-                    </div>
-                `;
+                    `;
+                }
                 
                 resultsEl.innerHTML = results;
                 
@@ -285,23 +333,107 @@
             }
         }
         
-        // Set up listeners
+        // Force install service worker
+        async function forceInstallServiceWorker() {
+            const resultsEl = document.getElementById('test-results');
+            resultsEl.innerHTML = '<p>Forcing service worker installation...</p>';
+            
+            try {
+                // Check if service worker is supported
+                if (!('serviceWorker' in navigator)) {
+                    resultsEl.innerHTML = '<p class="test-failure">Service Workers are not supported in this browser.</p>';
+                    return;
+                }
+                
+                // Unregister any existing service workers first
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (const registration of registrations) {
+                    await registration.unregister();
+                    console.log('Unregistered existing service worker');
+                }
+                
+                // Register the service worker with cache busting parameter
+                const swUrl = './service-worker.js?v=' + new Date().getTime();
+                const registration = await navigator.serviceWorker.register(swUrl);
+                
+                console.log('Service Worker registered with scope:', registration.scope);
+                
+                // Wait for the service worker to be installed
+                if (registration.installing) {
+                    resultsEl.innerHTML = '<p>Service Worker is installing...</p>';
+                    
+                    // Wait for the installation to complete
+                    const installingWorker = registration.installing;
+                    await new Promise(resolve => {
+                        installingWorker.onstatechange = () => {
+                            console.log('Service Worker state changed to:', installingWorker.state);
+                            if (installingWorker.state === 'activated') {
+                                resolve();
+                            }
+                        };
+                    });
+                }
+                
+                // Force the new service worker to activate and take control
+                if (registration.waiting) {
+                    // Send message to activate
+                    registration.waiting.postMessage({action: 'skipWaiting'});
+                    
+                    // Reload to allow the new service worker to take control
+                    resultsEl.innerHTML = '<p>Service Worker installed! Reloading page to activate...</p>';
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                    return;
+                }
+                
+                // Force cache the critical resources
+                await forceCache();
+                
+                resultsEl.innerHTML = '<p class="test-success">Service Worker successfully installed and activated!</p>';
+                
+                // Run the offline test to verify
+                setTimeout(testOffline, 1000);
+                
+            } catch (error) {
+                console.error('Error installing service worker:', error);
+                resultsEl.innerHTML = `<p class="test-failure">Failed to install Service Worker: ${error.message}</p>`;
+            }
+        }
+        
+        // Run on page load
         document.addEventListener('DOMContentLoaded', () => {
-            // Check initial connection status
+            // Update connection status
             updateConnectionStatus();
             
-            // Add event listeners for connection changes
+            // Listen for online/offline events
             window.addEventListener('online', updateConnectionStatus);
             window.addEventListener('offline', updateConnectionStatus);
             
-            // Add event listeners for test buttons
+            // Setup test buttons
             document.getElementById('test-offline').addEventListener('click', testOffline);
             document.getElementById('test-cache').addEventListener('click', testCache);
+            document.getElementById('force-cache').addEventListener('click', forceCache);
+            document.getElementById('reset-sw').addEventListener('click', function() {
+                if (window.SwReset && typeof window.SwReset.reset === 'function') {
+                    const resultEl = document.getElementById('test-results');
+                    resultEl.innerHTML = '<p>Resetting service worker and cache...</p>';
+                    
+                    window.SwReset.reset().then(success => {
+                        if (success) {
+                            resultEl.innerHTML = '<p>Service worker reset complete. Page will reload shortly...</p>';
+                        } else {
+                            resultEl.innerHTML = '<p>Service worker reset failed. Please try again.</p>';
+                        }
+                    });
+                } else {
+                    alert('Service Worker Reset utility not available');
+                }
+            });
+            document.getElementById('force-install-sw').addEventListener('click', forceInstallServiceWorker);
             
-            // Run offline test on load
-            setTimeout(() => {
-                testOffline();
-            }, 2000);
+            // Run the offline test on page load after a short delay
+            setTimeout(testOffline, 1000);
         });
     </script>
     

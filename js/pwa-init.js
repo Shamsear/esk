@@ -1,14 +1,29 @@
 // Register service worker for PWA functionality
 if ('serviceWorker' in navigator) {
+  console.log('Service Worker supported in this browser');
+  
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./js/service-worker.js')
+    console.log('Window loaded, registering service worker...');
+    navigator.serviceWorker.register('./service-worker.js')
       .then(registration => {
         console.log('Service Worker registered with scope:', registration.scope);
+        
+        // Check current state
+        if (registration.installing) {
+          console.log('Service Worker installing');
+        } else if (registration.waiting) {
+          console.log('Service Worker waiting');
+        } else if (registration.active) {
+          console.log('Service Worker active');
+        }
         
         // Check for updates to service worker
         registration.onupdatefound = () => {
           const installingWorker = registration.installing;
+          console.log('Update found for Service Worker');
+          
           installingWorker.onstatechange = () => {
+            console.log('Service Worker state changed to:', installingWorker.state);
             if (installingWorker.state === 'installed') {
               if (navigator.serviceWorker.controller) {
                 // New service worker available
@@ -29,16 +44,38 @@ if ('serviceWorker' in navigator) {
       });
   });
 
+  // Log service worker controlling status
+  if (navigator.serviceWorker.controller) {
+    console.log('This page is currently controlled by a service worker');
+  } else {
+    console.log('This page is not currently controlled by a service worker');
+  }
+
   // Handle sync for offline data
   window.addEventListener('online', () => {
+    console.log('Device back online, registering sync task');
     navigator.serviceWorker.ready
       .then(registration => {
         registration.sync.register('sync-player-data');
+        console.log('Sync task registered successfully');
       })
       .catch(err => {
         console.log('Sync registration failed:', err);
       });
   });
+  
+  // Add a function to manually check cache status
+  window.checkCache = async function() {
+    try {
+      const cache = await caches.open('eskimos-r2g-v1');
+      const keys = await cache.keys();
+      console.log('Cached resources:', keys.map(req => req.url));
+      return keys.length;
+    } catch (err) {
+      console.error('Error checking cache:', err);
+      return 0;
+    }
+  };
 }
 
 // Show update notification
