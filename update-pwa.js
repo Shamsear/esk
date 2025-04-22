@@ -31,6 +31,11 @@ const pwaScripts = `
     <script src="js/offline-manager.js" defer></script>
 `;
 
+// PWA install prompt script specifically for index.html
+const pwaInstallPromptScript = `
+    <script src="js/pwa-install-prompt.js" defer></script>
+`;
+
 // Process each HTML file
 htmlFiles.forEach(file => {
   console.log(`Processing ${file}...`);
@@ -55,6 +60,29 @@ htmlFiles.forEach(file => {
       console.log(`  - Updated favicon references in ${file}`);
     }
     
+    // If it's index.html and doesn't have the install prompt script, add it
+    if (file === 'index.html' && !content.includes('pwa-install-prompt.js')) {
+      console.log(`  - Adding install prompt to index.html`);
+      
+      // Add the install prompt script before the closing body tag
+      // but after the PWA scripts if they exist
+      if (content.includes('<!-- PWA scripts -->')) {
+        content = content.replace(
+          /(<script src="js\/offline-manager\.js" defer><\/script>)/,
+          '$1\n    <script src="js/pwa-install-prompt.js" defer></script>'
+        );
+      } else {
+        content = content.replace(
+          /<\/body>/,
+          `    <script src="js/pwa-install-prompt.js" defer></script>\n</body>`
+        );
+      }
+      
+      // Write updated content back to file
+      fs.writeFileSync(file, content, 'utf8');
+      console.log(`  - Added install prompt to index.html`);
+    }
+    
     return;
   }
   
@@ -62,7 +90,14 @@ htmlFiles.forEach(file => {
   content = content.replace(/<head>/, '<head>\n' + pwaHeadTags);
   
   // Add PWA scripts before </body>
-  content = content.replace(/<\/body>/, pwaScripts + '\n</body>');
+  let scriptsToAdd = pwaScripts;
+  
+  // If it's index.html, also add the install prompt script
+  if (file === 'index.html') {
+    scriptsToAdd += pwaInstallPromptScript;
+  }
+  
+  content = content.replace(/<\/body>/, scriptsToAdd + '\n</body>');
   
   // Include pwa.css if not already included
   if (!content.includes('css/pwa.css') && content.includes('<link rel="stylesheet"')) {
@@ -98,4 +133,5 @@ htmlFiles.forEach(file => {
 });
 
 console.log('\nAll HTML files have been updated with PWA support.');
+console.log('PWA install prompt has been added to index.html only.');
 console.log('Remember to test your Progressive Web App functionality!'); 
