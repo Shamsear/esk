@@ -13961,18 +13961,18 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 152,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "5-7",
         "team": "RANGERS FC",
-        "value": "152",
-        "apps": "00"
+        "value": "152"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/L. THURAM_CARD.webp",
-    "id": 662
+    "id": 662,
+    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
   },
   {
     "name": "BERGOMI",
