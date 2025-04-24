@@ -6123,9 +6123,9 @@
     "name": "ROBERTO CARLOS",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "RB LEIPZIG",
     "position": "CB",
-    "value": 50,
+    "value": 112,
     "gamesPlayed": 3,
     "stats": [
       {
@@ -6723,9 +6723,9 @@
     "name": "CAIO HENRIQUE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "TOTTENHAM HOTSPUR FC",
+    "club": "FREE AGENT",
     "position": "LB",
-    "value": 84,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8591,7 +8591,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 252,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
