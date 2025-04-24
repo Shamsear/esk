@@ -77,8 +77,13 @@ function setupEventListeners() {
             // Update active state styling
             if (teamFilter.value === 'all') {
                 teamFilter.classList.remove('active');
+                teamFilter.classList.remove('unsold-active');
+            } else if (teamFilter.value === 'Unsold') {
+                teamFilter.classList.add('active');
+                teamFilter.classList.add('unsold-active');
             } else {
                 teamFilter.classList.add('active');
+                teamFilter.classList.remove('unsold-active');
             }
         });
     }
@@ -483,7 +488,17 @@ function filterPlayers(searchTerm = '') {
             // Get team from the appropriate cell
             const teamIndex = positionId === 'all' ? 4 : 3;
             const team = row.querySelector(`td:nth-child(${teamIndex + 1})`)?.textContent || '';
-            const matchesTeam = selectedTeam === 'all' || team === selectedTeam;
+            
+            // Handle special "Unsold" filter case
+            let matchesTeam = false;
+            if (selectedTeam === 'all') {
+                matchesTeam = true;
+            } else if (selectedTeam === 'Unsold') {
+                // Check if the team cell contains "Unsold" or is empty
+                matchesTeam = team === 'Unsold' || team.trim() === '';
+            } else {
+                matchesTeam = team === selectedTeam;
+            }
             
             if (matchesSearch && matchesTeam) {
                 row.style.display = '';
@@ -528,10 +543,14 @@ function filterPlayers(searchTerm = '') {
         
         if (selectedTeam === 'all' && searchTerm === '') {
             countMessage = 'Showing all players';
+        } else if (selectedTeam === 'Unsold' && searchTerm === '') {
+            countMessage = `Showing ${totalVisibleCount} unsold players`;
         } else if (selectedTeam !== 'all' && searchTerm === '') {
             countMessage = `Showing ${totalVisibleCount} players from ${selectedTeam}`;
         } else if (selectedTeam === 'all' && searchTerm !== '') {
             countMessage = `Found ${totalVisibleCount} players named "${searchTerm}"`;
+        } else if (selectedTeam === 'Unsold' && searchTerm !== '') {
+            countMessage = `Found ${totalVisibleCount} unsold players named "${searchTerm}"`;
         } else {
             countMessage = `Found ${totalVisibleCount} ${selectedTeam} players named "${searchTerm}"`;
         }
