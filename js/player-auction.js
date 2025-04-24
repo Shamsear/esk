@@ -68,6 +68,21 @@ function setupEventListeners() {
         });
     }
 
+    // Team filter functionality
+    const teamFilter = document.getElementById('teamFilter');
+    if (teamFilter) {
+        teamFilter.addEventListener('change', () => {
+            filterPlayers(searchInput ? searchInput.value.toLowerCase() : '');
+            
+            // Update active state styling
+            if (teamFilter.value === 'all') {
+                teamFilter.classList.remove('active');
+            } else {
+                teamFilter.classList.add('active');
+            }
+        });
+    }
+
     // Position tab switching
     if (positionTabs.length > 0) {
         positionTabs.forEach(tab => {
@@ -105,6 +120,12 @@ async function loadAllPositionData() {
         if (allPlayers.length > 0) {
             populateTables(allPlayers);
             showSuccess(`Loaded ${allPlayers.length} players successfully!`);
+            
+            // Dispatch event with all player data for team filter
+            const auctionDataLoadedEvent = new CustomEvent('auctionDataLoaded', {
+                detail: allPlayers
+            });
+            document.dispatchEvent(auctionDataLoadedEvent);
         } else {
             throw new Error('No data loaded');
         }
@@ -118,6 +139,12 @@ async function loadAllPositionData() {
         console.error('Error loading auction data:', error);
         showError('Failed to load auction data. Please make sure the Google Sheet is publicly accessible.');
         populateTables(sampleData);
+        
+        // Dispatch event with sample data in case of error
+        const auctionDataLoadedEvent = new CustomEvent('auctionDataLoaded', {
+            detail: sampleData
+        });
+        document.dispatchEvent(auctionDataLoadedEvent);
     }
 }
 
@@ -422,47 +449,117 @@ function mapPosition(sheetPosition) {
     return POSITIONS[0];
 }
 
-// Filter players based on search term
-function filterPlayers(searchTerm) {
-    const tables = document.querySelectorAll('.auction-table');
+// Modified filterPlayers to integrate with team filter
+function filterPlayers(searchTerm = '') {
+    const teamFilter = document.getElementById('teamFilter');
+    const selectedTeam = teamFilter ? teamFilter.value : 'all';
+    const resultsCountElement = document.getElementById('resultsCount');
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    
+    if (DEBUG) console.log(`Filtering players by search: '${searchTerm}' and team: '${selectedTeam}'`);
+    
+    // Show/hide clear filters button if exists
+    if (clearFiltersBtn) {
+        const isFilterActive = selectedTeam !== 'all' || searchTerm.trim() !== '';
+        clearFiltersBtn.style.display = isFilterActive ? 'inline-flex' : 'none';
+    }
+    
+    // For correct counting, we need to count unique players
+    const uniquePlayerNames = new Set();
+    const activePosition = document.querySelector('.position-tab.active')?.getAttribute('data-position') || 'all';
     
     tables.forEach(table => {
+        const positionId = table.getAttribute('data-position');
         const rows = table.querySelectorAll('tbody tr');
-        
-        if (rows.length === 0) return;
-        
         let visibleCount = 0;
-        
+
         rows.forEach(row => {
-            // Skip "no results" rows
-            if (row.querySelector('.no-results')) return;
+            // Get player name for searching and unique counting
+            const playerName = row.querySelector('td:first-child')?.textContent.toLowerCase() || '';
             
-            const text = row.textContent.toLowerCase();
-            const match = text.includes(searchTerm);
+            // Check if player name matches search (no longer checking for team name matches)
+            const matchesSearch = searchTerm === '' || playerName.includes(searchTerm);
             
-            row.style.display = match ? '' : 'none';
+            // Get team from the appropriate cell
+            const teamIndex = positionId === 'all' ? 4 : 3;
+            const team = row.querySelector(`td:nth-child(${teamIndex + 1})`)?.textContent || '';
+            const matchesTeam = selectedTeam === 'all' || team === selectedTeam;
             
-            if (match) visibleCount++;
+            if (matchesSearch && matchesTeam) {
+                row.style.display = '';
+                visibleCount++;
+                
+                // Track unique player names for the active view
+                if ((activePosition === 'all' && positionId === 'all') || 
+                    (activePosition !== 'all' && positionId === activePosition)) {
+                    uniquePlayerNames.add(playerName);
+                }
+            } else {
+                row.style.display = 'none';
+            }
         });
-        
-        // Show no results message if needed
-        const tbody = table.querySelector('tbody');
-        const position = table.dataset.position;
-        
-        // Remove existing no-results row if it exists
-        const existingNoResults = tbody.querySelector('.no-results-row');
-        if (existingNoResults) {
-            tbody.removeChild(existingNoResults);
+
+        // Show message if no players match in this table
+        const container = document.getElementById(positionId);
+        if (container) {
+            let noResults = container.querySelector('.no-results');
+            
+            if (visibleCount === 0) {
+                if (!noResults) {
+                    noResults = document.createElement('div');
+                    noResults.className = 'no-results';
+                    noResults.textContent = 'No players match your search criteria';
+                    container.querySelector('.auction-table-container').appendChild(noResults);
+                }
+                noResults.style.display = 'block';
+            } else if (noResults) {
+                noResults.style.display = 'none';
+            }
         }
         
-        // Add no-results row if needed
-        if (visibleCount === 0 && searchTerm) {
-            const noResultsRow = document.createElement('tr');
-            noResultsRow.classList.add('no-results-row');
-            const colspan = position === 'all' ? 7 : 6;
-            noResultsRow.innerHTML = `<td colspan="${colspan}" class="no-results">No players matching "${searchTerm}"</td>`;
-            tbody.appendChild(noResultsRow);
+        // Apply zebra striping to visible rows
+        applyZebraStriping(table);
+    });
+    
+    // Update the results count display if present
+    if (resultsCountElement) {
+        const totalVisibleCount = uniquePlayerNames.size;
+        let countMessage = '';
+        
+        if (selectedTeam === 'all' && searchTerm === '') {
+            countMessage = 'Showing all players';
+        } else if (selectedTeam !== 'all' && searchTerm === '') {
+            countMessage = `Showing ${totalVisibleCount} players from ${selectedTeam}`;
+        } else if (selectedTeam === 'all' && searchTerm !== '') {
+            countMessage = `Found ${totalVisibleCount} players named "${searchTerm}"`;
+        } else {
+            countMessage = `Found ${totalVisibleCount} ${selectedTeam} players named "${searchTerm}"`;
         }
+        
+        resultsCountElement.textContent = countMessage;
+        
+        // Add highlight animation effect if class exists
+        if (resultsCountElement.classList.contains('count-update') || 
+            document.styleSheets.length > 0) {
+            resultsCountElement.classList.remove('count-update');
+            // Trigger reflow
+            void resultsCountElement.offsetWidth;
+            resultsCountElement.classList.add('count-update');
+        }
+    }
+    
+    return uniquePlayerNames.size;
+}
+
+// Apply zebra striping to table rows that are visible
+function applyZebraStriping(table) {
+    const visibleRows = Array.from(table.querySelectorAll('tbody tr'))
+        .filter(row => row.style.display !== 'none');
+    
+    visibleRows.forEach((row, index) => {
+        row.style.backgroundColor = index % 2 === 0 
+            ? 'rgba(255, 255, 255, 0.05)' 
+            : 'transparent';
     });
 }
 
@@ -486,6 +583,12 @@ function switchPosition(position) {
             content.style.display = content.id === position ? 'block' : 'none';
         }
     });
+    
+    // Re-run the filter to update count display for the new active tab
+    const searchInput = document.getElementById('playerSearch');
+    if (searchInput) {
+        filterPlayers(searchInput.value.toLowerCase());
+    }
 }
 
 // Loading state management
