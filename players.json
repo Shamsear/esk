@@ -5,7 +5,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 172,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -23,7 +23,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 264,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -59,7 +59,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 204,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -95,7 +95,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 210,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -113,7 +113,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 150,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -155,7 +155,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 142,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -197,7 +197,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 160,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -293,7 +293,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 112,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -311,7 +311,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 100,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -353,7 +353,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 112,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -377,7 +377,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 116,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -443,7 +443,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 92,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -527,7 +527,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -541,11 +541,11 @@
   },
   {
     "name": "EMILIANO MARTINEZ",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 126,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -623,7 +623,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -679,11 +679,11 @@
   },
   {
     "name": "PETER GULACSI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 54,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -719,7 +719,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 92,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -737,7 +737,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -755,7 +755,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 120,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -769,7 +769,7 @@
   },
   {
     "name": "DAVID RAYA",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "RAYONG FC",
     "position": "GK",
@@ -797,7 +797,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -815,7 +815,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -847,7 +847,7 @@
   },
   {
     "name": "JOSE SA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "SL BENFICA",
     "position": "GK",
@@ -871,11 +871,11 @@
   },
   {
     "name": "KASPER SCHMEICHEL",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -911,7 +911,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -929,7 +929,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 142,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -989,7 +989,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 84,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1151,7 +1151,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 142,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1169,7 +1169,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 132,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1187,7 +1187,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 132,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1241,7 +1241,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 194,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1295,7 +1295,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 136,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1315,11 +1315,11 @@
   },
   {
     "name": "DAVID ALABA",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 138,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1339,11 +1339,11 @@
   },
   {
     "name": "KIM MIN-JAE",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 138,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1403,7 +1403,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 180,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1433,7 +1433,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 130,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1457,7 +1457,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 162,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1475,7 +1475,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 182,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1541,7 +1541,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 144,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1555,11 +1555,11 @@
   },
   {
     "name": "MATTHIJS DE LIGT",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 206,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1577,7 +1577,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 120,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1595,7 +1595,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 114,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1613,7 +1613,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 90,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1637,7 +1637,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 192,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1655,7 +1655,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 132,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1675,11 +1675,11 @@
   },
   {
     "name": "NATHAN AKE",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 172,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1751,7 +1751,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 148,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1787,7 +1787,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 172,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1805,7 +1805,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 50,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1847,7 +1847,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1871,7 +1871,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1889,7 +1889,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1925,7 +1925,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1939,11 +1939,11 @@
   },
   {
     "name": "TOBY ALDERWEIRELD",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 72,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1961,7 +1961,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1979,7 +1979,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2015,7 +2015,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2033,7 +2033,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2051,7 +2051,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2069,7 +2069,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2087,7 +2087,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2143,11 +2143,11 @@
   },
   {
     "name": "DANILO PEREIRA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2207,7 +2207,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 120,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2225,7 +2225,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 72,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2291,7 +2291,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 190,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2333,7 +2333,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 68,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2351,7 +2351,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 118,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2375,7 +2375,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 72,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2389,7 +2389,7 @@
   },
   {
     "name": "JAN VERTONGHEN",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "ATALANTA BC",
     "position": "CB",
@@ -2417,7 +2417,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 172,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2465,7 +2465,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 168,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2537,7 +2537,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 154,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2591,7 +2591,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 90,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2615,7 +2615,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2633,7 +2633,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2699,7 +2699,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2717,7 +2717,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 72,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2735,7 +2735,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2777,7 +2777,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2825,7 +2825,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2843,7 +2843,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 1,
     "stats": [
       {
@@ -2897,7 +2897,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2921,7 +2921,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 110,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2945,7 +2945,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 162,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2965,11 +2965,11 @@
   },
   {
     "name": "VICTOR LINDELOF",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 52,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2987,7 +2987,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3005,7 +3005,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 100,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3023,7 +3023,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 82,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3041,7 +3041,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 76,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3059,7 +3059,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3077,7 +3077,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 132,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3119,7 +3119,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3143,7 +3143,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 98,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3181,11 +3181,11 @@
   },
   {
     "name": "PEPE",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3217,11 +3217,11 @@
   },
   {
     "name": "NICOLAS OTAMENDI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3275,7 +3275,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 98,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3341,7 +3341,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 82,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3373,7 +3373,7 @@
   },
   {
     "name": "DIEGO CARLOS",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "WOLVES",
     "position": "CB",
@@ -3455,7 +3455,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3473,7 +3473,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 48,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3515,7 +3515,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 44,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3581,7 +3581,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 118,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3641,7 +3641,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 184,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3659,7 +3659,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 136,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3791,7 +3791,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 200,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3827,7 +3827,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 110,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3869,7 +3869,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 320,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3977,7 +3977,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 164,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3995,7 +3995,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 180,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4127,7 +4127,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 128,
+    "value": 60,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4163,7 +4163,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 102,
+    "value": 60,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4241,7 +4241,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 170,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4264,7 +4264,7 @@
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "MANCHESTER UNITED",
-    "position": "ST",
+    "position": "LW",
     "value": 120,
     "gamesPlayed": 0,
     "stats": [
@@ -4285,11 +4285,11 @@
   },
   {
     "name": "PAULO DYBALA",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 130,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4361,7 +4361,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 308,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4435,11 +4435,11 @@
   },
   {
     "name": "GABRIEL JESUS",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 144,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4463,7 +4463,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 176,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4530,12 +4530,12 @@
     "imagePath": "../assets/images/players/5 STAR CARDS/D. VLAHOVIC_CARD.webp"
   },
   {
-    "name": "ALVARO MORATO",
-    "star": "5-star-standard",
+    "name": "ALVARO MORATA",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 130,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4577,7 +4577,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 134,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4595,7 +4595,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 200,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4613,7 +4613,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 106,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4667,7 +4667,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 180,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4703,7 +4703,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 72,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4721,7 +4721,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 104,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4739,7 +4739,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 94,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4757,7 +4757,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4775,7 +4775,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 108,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4793,7 +4793,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4817,7 +4817,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 86,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4907,7 +4907,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 68,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5011,11 +5011,11 @@
   },
   {
     "name": "NICOLAS JACKSON",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 86,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5033,7 +5033,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 150,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5087,7 +5087,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5159,7 +5159,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5243,7 +5243,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 162,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5257,11 +5257,11 @@
   },
   {
     "name": "LOIS OPENDA",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 70,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5285,7 +5285,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 88,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5317,11 +5317,11 @@
   },
   {
     "name": "MEHDI TAREMI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5339,7 +5339,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 110,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5363,7 +5363,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5380,8 +5380,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "ST",
-    "value": 60,
+    "position": "AM",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5395,11 +5395,11 @@
   },
   {
     "name": "ELYE WAHI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 76,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5483,7 +5483,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 78,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5527,7 +5527,7 @@
   },
   {
     "name": "VIKTOR GYOKERES",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "ST",
@@ -5575,11 +5575,11 @@
   },
   {
     "name": "CODY GAKPO",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "ST",
-    "value": 94,
+    "position": "LW",
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5596,8 +5596,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "ST",
-    "value": 102,
+    "position": "LW",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5647,11 +5647,11 @@
   },
   {
     "name": "GERARD DEULOFEU",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5675,7 +5675,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5741,7 +5741,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5783,7 +5783,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 44,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5819,7 +5819,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5873,7 +5873,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 70,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5891,7 +5891,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 56,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5933,7 +5933,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 46,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6001,11 +6001,11 @@
   },
   {
     "name": "PIERRE AUBAMEYANG",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6029,7 +6029,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6047,7 +6047,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6065,7 +6065,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6107,7 +6107,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 130,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6149,7 +6149,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 92,
+    "value": 60,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6191,7 +6191,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 100,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6269,7 +6269,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 82,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6287,7 +6287,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6301,11 +6301,11 @@
   },
   {
     "name": "KIERAN TIERNEY",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 60,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6341,7 +6341,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 102,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6383,7 +6383,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6415,11 +6415,11 @@
   },
   {
     "name": "TYRELL MALACIA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6437,7 +6437,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 74,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6473,7 +6473,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 54,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6491,7 +6491,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6541,11 +6541,11 @@
   },
   {
     "name": "BEN CHILWELL",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 72,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6611,7 +6611,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 84,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6629,7 +6629,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6671,7 +6671,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6707,7 +6707,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6743,7 +6743,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 72,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6799,11 +6799,11 @@
   },
   {
     "name": "MARCOS ACUNA",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6857,7 +6857,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 46,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6875,7 +6875,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 46,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7025,7 +7025,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 110,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7042,8 +7042,8 @@
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "RB",
-    "value": 100,
+    "position": "DM",
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7063,11 +7063,11 @@
   },
   {
     "name": "REECE JAMES",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 100,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7127,7 +7127,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 202,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7141,11 +7141,11 @@
   },
   {
     "name": "KYLE WALKER",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 98,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7163,7 +7163,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7199,7 +7199,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7217,7 +7217,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7235,7 +7235,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 132,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7259,7 +7259,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7283,7 +7283,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7307,7 +7307,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7325,7 +7325,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 94,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7343,7 +7343,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7379,7 +7379,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 82,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7595,7 +7595,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7613,7 +7613,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7649,7 +7649,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7691,7 +7691,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 82,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7715,7 +7715,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 84,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7775,7 +7775,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 42,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7793,7 +7793,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 52,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7811,7 +7811,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 62,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7847,7 +7847,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 56,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7865,7 +7865,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7883,7 +7883,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 70,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8033,7 +8033,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 90,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8057,7 +8057,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 100,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8153,7 +8153,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 100,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8207,7 +8207,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8243,7 +8243,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8261,7 +8261,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 54,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8285,7 +8285,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8309,7 +8309,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 82,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8333,7 +8333,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 90,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8351,7 +8351,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8365,11 +8365,11 @@
   },
   {
     "name": "ALEKSANDER PAVLOVIC",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 60,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8441,7 +8441,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8459,7 +8459,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8539,7 +8539,7 @@
   },
   {
     "name": "JERDY SCHOUTEN",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "BAYER LEVERKUSEN",
     "position": "DM",
@@ -8627,7 +8627,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8663,7 +8663,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8695,7 +8695,7 @@
   },
   {
     "name": "DENIS ZAKARIA",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "AS ROMA",
     "position": "DM",
@@ -8765,7 +8765,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 108,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8783,7 +8783,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 82,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8881,11 +8881,11 @@
   },
   {
     "name": "TONI KROOS",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8969,7 +8969,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 92,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8987,7 +8987,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 88,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9077,7 +9077,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 84,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9091,11 +9091,11 @@
   },
   {
     "name": "LUKA MODRIC",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 88,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9113,7 +9113,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 88,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9151,11 +9151,11 @@
   },
   {
     "name": "ILKAY GUNDOGAN",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 88,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9233,7 +9233,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9247,11 +9247,11 @@
   },
   {
     "name": "JAMES WARD PROWSE",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 76,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9269,7 +9269,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 54,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9287,7 +9287,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9301,11 +9301,11 @@
   },
   {
     "name": "GRANIT XHAKA",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 110,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9329,7 +9329,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 90,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9346,7 +9346,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "CM",
+    "position": "RW",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -9365,7 +9365,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9383,7 +9383,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9451,11 +9451,11 @@
   },
   {
     "name": "MARCEL SABITZER",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 44,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9497,7 +9497,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 42,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9515,7 +9515,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 122,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9605,7 +9605,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 166,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9737,7 +9737,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 62,
+    "value": 60,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9803,7 +9803,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 106,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9827,7 +9827,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 130,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9851,7 +9851,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 102,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9886,7 +9886,7 @@
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FSV MAINZ 05",
-    "position": "AM",
+    "position": "ST",
     "value": 86,
     "gamesPlayed": 0,
     "stats": [
@@ -9911,7 +9911,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 140,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9929,7 +9929,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 82,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9953,7 +9953,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 90,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9989,7 +9989,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10009,7 +10009,7 @@
   },
   {
     "name": "G. DE ARRASCAETA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FSV MAINZ 05",
     "position": "AM",
@@ -10037,7 +10037,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10079,7 +10079,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10139,7 +10139,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10199,7 +10199,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10217,7 +10217,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10313,7 +10313,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10355,7 +10355,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 44,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10379,7 +10379,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 44,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10397,7 +10397,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 48,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10499,7 +10499,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10513,11 +10513,11 @@
   },
   {
     "name": "YANNICK CARRASCO",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 62,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10535,7 +10535,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 84,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10553,7 +10553,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10571,7 +10571,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10589,7 +10589,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10613,7 +10613,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 104,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10631,7 +10631,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 130,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10702,7 +10702,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "LW",
+    "position": "AM",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -10723,11 +10723,11 @@
   },
   {
     "name": "BRADLEY BARCOLA",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 50,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10769,7 +10769,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 104,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10792,8 +10792,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "LW",
-    "value": 54,
+    "position": "RW",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10840,7 +10840,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "SL BENFICA",
-    "position": "LW",
+    "position": "ST",
     "value": 80,
     "gamesPlayed": 0,
     "stats": [
@@ -10861,7 +10861,7 @@
   },
   {
     "name": "RAHEEM STERLING",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "LW",
@@ -10889,7 +10889,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 88,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10955,7 +10955,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 90,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10993,11 +10993,11 @@
   },
   {
     "name": "FERRAN TORRES",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 156,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11015,7 +11015,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11033,7 +11033,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 112,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11051,7 +11051,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11074,7 +11074,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "LW",
+    "position": "RW",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -11093,7 +11093,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 50,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11107,7 +11107,7 @@
   },
   {
     "name": "FEDERICO CHIESA",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "RAYONG FC",
     "position": "LW",
@@ -11159,7 +11159,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 90,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11237,7 +11237,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11255,7 +11255,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11273,7 +11273,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 114,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11297,7 +11297,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11311,10 +11311,10 @@
   },
   {
     "name": "JULIAN BRANDT",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "RANGERS FC",
-    "position": "RW",
+    "position": "AM",
     "value": 40,
     "gamesPlayed": 0,
     "stats": [
@@ -11335,7 +11335,7 @@
   },
   {
     "name": "LEROY SANE",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "BAYER LEVERKUSEN",
     "position": "RW",
@@ -11363,7 +11363,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 82,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11381,7 +11381,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 96,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11398,8 +11398,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "RW",
-    "value": 68,
+    "position": "LW",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11441,7 +11441,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11465,7 +11465,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 62,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11525,7 +11525,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11597,7 +11597,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11615,7 +11615,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 102,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11657,7 +11657,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11681,7 +11681,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11699,7 +11699,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 54,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11717,7 +11717,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 110,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11735,7 +11735,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 130,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11753,7 +11753,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 92,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11789,7 +11789,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11857,10 +11857,10 @@
   },
   {
     "name": "RAPHINHA",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "REAL MADRID CF",
-    "position": "RW",
+    "position": "LW",
     "value": 86,
     "gamesPlayed": 0,
     "stats": [
@@ -11884,8 +11884,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "RW",
-    "value": 70,
+    "position": "LW",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11903,7 +11903,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 114,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11927,7 +11927,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 70,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11969,7 +11969,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 102,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11987,7 +11987,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 56,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12023,7 +12023,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12139,11 +12139,11 @@
   },
   {
     "name": "DAVID OSPINA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12689,7 +12689,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12811,11 +12811,11 @@
   },
   {
     "name": "SAM BEUKEMA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12833,7 +12833,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 78,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12869,7 +12869,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 100,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12923,7 +12923,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 76,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13013,7 +13013,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13031,7 +13031,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 64,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13073,7 +13073,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 90,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13115,7 +13115,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 42,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13301,7 +13301,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "RB",
-    "value": 152,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13673,7 +13673,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13823,7 +13823,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13949,7 +13949,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "DM",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14117,7 +14117,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 120,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14317,11 +14317,11 @@
   },
   {
     "name": "MIKEL MERINO",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14353,11 +14353,11 @@
   },
   {
     "name": "DOUGLAS LUIZ",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14389,11 +14389,11 @@
   },
   {
     "name": "PAUL POGBA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 54,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14417,7 +14417,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14485,7 +14485,7 @@
   },
   {
     "name": "TIJJANI REIJNDERS",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "AC MILAN",
     "position": "CM",
@@ -14597,7 +14597,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14629,11 +14629,11 @@
   },
   {
     "name": "BITELLO",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14863,11 +14863,11 @@
   },
   {
     "name": "EVER BANEGA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -15043,7 +15043,7 @@
   },
   {
     "name": "RYAN GRAVENBERCH",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "BAYER LEVERKUSEN",
     "position": "CM",
@@ -15121,11 +15121,11 @@
   },
   {
     "name": "MATTEO PESSINA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -15562,7 +15562,7 @@
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "AM",
+    "position": "LW",
     "value": 80,
     "gamesPlayed": 0,
     "stats": [
@@ -15618,12 +15618,12 @@
     "imagePath": "../assets/images/players/5 STAR CARDS/O. SANCET_CARD.webp"
   },
   {
-    "name": "ALEXANDR GOLOVIN",
-    "star": "4-star-standard",
+    "name": "ALEKSANDR GOLOVIN",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -15841,11 +15841,11 @@
   },
   {
     "name": "ALAN LESCANO",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -15859,11 +15859,11 @@
   },
   {
     "name": "HAMED TRAORE",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -15971,7 +15971,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 48,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16207,11 +16207,11 @@
   },
   {
     "name": "SAVIO",
-    "star": "5-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 80,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16228,7 +16228,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "LW",
+    "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -16300,7 +16300,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "LW",
+    "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -16319,7 +16319,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 54,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16405,11 +16405,11 @@
   },
   {
     "name": "STEPHY MAVIDIDI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16495,7 +16495,7 @@
   },
   {
     "name": "ROBIN GOSENS",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "SL BENFICA",
     "position": "LW",
@@ -16531,11 +16531,11 @@
   },
   {
     "name": "RYAN SESSEGNON",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16553,7 +16553,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LW",
-    "value": 56,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16703,7 +16703,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 96,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16720,7 +16720,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "RW",
+    "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -16753,7 +16753,7 @@
   },
   {
     "name": "FELIPE ANDERSON",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "SL BENFICA",
     "position": "RW",
@@ -16793,7 +16793,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16861,11 +16861,11 @@
   },
   {
     "name": "F. BERNARDESCHI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16915,11 +16915,11 @@
   },
   {
     "name": "PABLO SOLARI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -16951,11 +16951,11 @@
   },
   {
     "name": "ANDERS DREYER",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17005,11 +17005,11 @@
   },
   {
     "name": "MARCUS EDWARDS",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17080,7 +17080,7 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "RW",
+    "position": "LW",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
@@ -17189,7 +17189,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "RW",
-    "value": 52,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17351,7 +17351,7 @@
     "level": "LEGENDARY",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 60,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17383,11 +17383,11 @@
   },
   {
     "name": "ANDREA PINAMONTI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17401,11 +17401,11 @@
   },
   {
     "name": "ANDREJ KRAMARIC",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17419,11 +17419,11 @@
   },
   {
     "name": "ARMANDO BROJA",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17437,11 +17437,11 @@
   },
   {
     "name": "BENJAMIN SESKO",
-    "star": "4-star-standard",
+    "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17473,11 +17473,11 @@
   },
   {
     "name": "ENES UNAL",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17603,7 +17603,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 64,
+    "value": 50,
     "gamesPlayed": 4,
     "stats": [
       {
@@ -17674,7 +17674,7 @@
       },
       {
         "season": "5.5-7.5",
-        "team": "BORSUSIA DORTMUND",
+        "team": "BORUSSIA DORTMUND",
         "value": "230",
         "apps": "00"
       }
@@ -17683,7 +17683,7 @@
   },
   {
     "name": "LUUK DE JONG",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "AL-NASSR FC",
     "position": "ST",
@@ -17719,7 +17719,7 @@
   },
   {
     "name": "MAXIMILIAN BEIER",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "ST",
@@ -17754,12 +17754,12 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/M. BORJA_CARD.webp"
   },
   {
-    "name": "NICOLAS FULLKRUG",
-    "star": "4-star-standard",
+    "name": "NICLAS FULLKRUG",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17773,11 +17773,11 @@
   },
   {
     "name": "ODSONNE EDOUARD",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17827,7 +17827,7 @@
   },
   {
     "name": "SEBASTIEN HALLER",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "AL-NASSR FC",
     "position": "ST",
@@ -17899,11 +17899,11 @@
   },
   {
     "name": "TIQUINHO SOARES",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "ST",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -18289,7 +18289,7 @@
   },
   {
     "name": "OMAR MARMOUSH",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "NEWCASTLE UNITED FC",
     "position": "ST",
@@ -18367,11 +18367,11 @@
   },
   {
     "name": "KEYLOR NAVAS",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -18439,7 +18439,7 @@
   },
   {
     "name": "BAFOFE DIAKITE",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "AS ROMA",
     "position": "CB",
@@ -18503,7 +18503,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "LB",
-    "value": 58,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -18517,7 +18517,7 @@
   },
   {
     "name": "NUNO TAVARES",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "WOLVES",
     "position": "LB",
@@ -18643,11 +18643,11 @@
   },
   {
     "name": "SEBASTIAN DRIUSSI",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
-    "value": 50,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -18679,7 +18679,7 @@
   },
   {
     "name": "JUSTIN KLUIVERT",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "LIVERPOOL FC",
     "position": "AM",
