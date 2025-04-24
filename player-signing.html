@@ -170,7 +170,7 @@
         
         .search-input {
             flex: 1;
-            padding: 12px 20px 12px 48px;
+            padding: 12px 20px;
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
@@ -186,81 +186,6 @@
             outline: none;
             background-color: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        .filter-container {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .filter-container:before {
-            content: '\f0b0';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.6);
-            z-index: 10;
-        }
-        
-        .team-filter {
-            width: 100%;
-            padding: 12px 20px 12px 48px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            color: #fff;
-            font-size: 14px;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        
-        .team-filter:focus {
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
-        
-        .team-filter option {
-            background-color: #29335c;
-            color: #fff;
-        }
-        
-        .filters-wrapper {
-            position: relative;
-            background: rgba(20, 30, 70, 0.3);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            margin-bottom: 25px;
-        }
-        
-        .search-icon-wrapper {
-            position: relative;
-        }
-        
-        .search-icon-wrapper:before {
-            content: '\f002';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.6);
-            z-index: 10;
         }
         
         .no-results {
@@ -282,42 +207,10 @@
                 font-size: 12px;
             }
             
-            .team-filter {
-                padding: 10px 15px 10px 40px;
-                font-size: 13px;
-            }
-            
-            .search-input {
-                padding: 10px 15px 10px 40px;
-                font-size: 13px;
-            }
-            
-            .filter-container:before,
-            .search-icon-wrapper:before {
-                left: 15px;
-                font-size: 13px;
-            }
-            
-            .filters-wrapper {
-                gap: 10px;
-                display: flex;
-                flex-direction: column;
-                padding: 20px 15px 15px;
-            }
-            
-            .results-container {
-                margin-bottom: 10px;
-            }
-            
             .auction-container {
                 padding: 10px;
                 width: 100%;
                 max-width: 100%;
-            }
-            
-            .results-count {
-                font-size: 12px;
-                margin-bottom: 15px;
             }
             
             h1 {
@@ -350,41 +243,6 @@
                 font-size: 11px;
                 margin: 0 3px;
             }
-            
-            .team-filter {
-                padding: 8px 15px 8px 36px;
-                font-size: 12px;
-            }
-            
-            .search-input {
-                padding: 8px 15px 8px 36px;
-                font-size: 12px;
-            }
-            
-            .filter-container:before,
-            .search-icon-wrapper:before {
-                left: 12px;
-                font-size: 12px;
-            }
-            
-            .filters-wrapper {
-                gap: 8px;
-                margin-bottom: 15px;
-                padding: 18px 12px 12px;
-            }
-            
-            .filter-label {
-                font-size: 10px;
-                padding: 2px 10px;
-                left: 15px;
-                top: -8px;
-            }
-            
-            .results-count {
-                font-size: 10px;
-                padding: 3px 8px;
-                margin-bottom: 12px;
-            }
         }
         
         main {
@@ -398,181 +256,6 @@
             .auction-container {
                 max-width: 1200px;
             }
-        }
-        
-        /* Desktop Enhancements */
-        @media (min-width: 992px) {
-            .filters-wrapper {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 20px;
-            }
-            
-            .search-icon-wrapper {
-                flex: 2;
-            }
-            
-            .filter-container {
-                flex: 1;
-                margin-bottom: 0;
-            }
-            
-            .search-input:focus,
-            .team-filter:focus {
-                transform: translateY(-2px);
-                box-shadow: 0 5px 20px rgba(255, 255, 255, 0.15);
-            }
-            
-            .results-count {
-                font-size: 14px;
-                padding: 5px 12px;
-            }
-            
-            .clear-filters {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-        }
-        
-        /* Animation Effects */
-        .search-input, .team-filter {
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:hover, .team-filter:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Filter active state */
-        .team-filter.active {
-            background-color: rgba(79, 195, 247, 0.1);
-            border-color: rgba(79, 195, 247, 0.5);
-        }
-        
-        /* Unsold filter active state */
-        .team-filter.unsold-active {
-            background-color: rgba(150, 150, 200, 0.2);
-            border-color: rgba(150, 150, 200, 0.6);
-        }
-        
-        /* Additional filter improvements */
-        .filters-wrapper {
-            position: relative;
-            background: rgba(20, 30, 70, 0.3);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            margin-bottom: 25px;
-        }
-        
-        /* Filter label */
-        .filter-label {
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 3px 15px;
-            border-radius: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            z-index: 5;
-        }
-        
-        /* Count badge */
-        .results-count {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-left: 10px;
-            margin-bottom: 10px;
-            margin-right: 10px;
-        }
-        
-        /* Clear filters button */
-        .clear-filters {
-            display: none; /* Hidden by default */
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 12px;
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-        
-        .clear-filters:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.1);
-            opacity: 1;
-        }
-        
-        .clear-filters:active {
-            transform: scale(0.95);
-        }
-        
-        .results-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        /* Ripple effect on filter changes */
-        @keyframes ripple {
-            0% {
-                box-shadow: 0 0 0 0 rgba(79, 195, 247, 0.5);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(79, 195, 247, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(79, 195, 247, 0);
-            }
-        }
-        
-        .team-filter.active {
-            animation: ripple 1.5s ease-out;
-        }
-        
-        /* Count update animation */
-        @keyframes countUpdate {
-            0% {
-                transform: scale(1);
-                background-color: rgba(67, 97, 238, 0.3);
-            }
-            50% {
-                transform: scale(1.1);
-                background-color: rgba(67, 97, 238, 0.5);
-            }
-            100% {
-                transform: scale(1);
-                background-color: rgba(255, 255, 255, 0.15);
-            }
-        }
-        
-        .count-update {
-            animation: countUpdate 0.6s ease-in-out;
-        }
-        
-        /* Team filter options */
-        .team-filter option[value="Unsold"] {
-            background-color: rgba(80, 80, 120, 0.9);
-            font-style: italic;
         }
     </style>
 </head>
@@ -620,24 +303,8 @@
             </header>
 
             <div class="auction-container">
-                <div class="filters-wrapper">
-                    <span class="filter-label">Filters</span>
-                    <div class="search-icon-wrapper">
-                        <input type="text" id="playerSearch" class="search-input" placeholder="Search for player names...">
-                    </div>
-                    
-                    <div class="filter-container">
-                        <select id="teamFilter" class="team-filter">
-                            <option value="all">All Teams</option>
-                            <option value="Unsold">Unsold Players</option>
-                            <!-- Team options will be populated via JavaScript -->
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="results-container">
-                    <div id="resultsCount" class="results-count">Showing all players</div>
-                    <button id="clearFilters" class="clear-filters"><i class="fas fa-times"></i></button>
+                <div class="search-container">
+                    <input type="text" id="playerSearch" class="search-input" placeholder="Search for player, team, or position...">
                 </div>
                 
                 <div class="position-tabs">
@@ -921,9 +588,6 @@
             // Initialize table sorting
             initTableSorting();
             
-            // Initialize team filtering
-            initTeamFilter();
-            
             function initTableSorting() {
                 // Get all table headers across all position tables
                 const tables = document.querySelectorAll('.auction-table');
@@ -937,96 +601,6 @@
                             sortTable(table, index);
                         });
                     });
-                });
-            }
-            
-            function initTeamFilter() {
-                // Reference to the team filter dropdown
-                const teamFilter = document.getElementById('teamFilter');
-                const searchInput = document.getElementById('playerSearch');
-                const clearFiltersBtn = document.getElementById('clearFilters');
-                
-                // Initially hide clear button if no filters are active
-                updateClearButtonVisibility();
-                
-                // Clear filters button - click event
-                if (clearFiltersBtn) {
-                    clearFiltersBtn.addEventListener('click', function() {
-                        // Reset all filters
-                        if (teamFilter) {
-                            teamFilter.value = 'all';
-                            teamFilter.classList.remove('active');
-                        }
-                        
-                        if (searchInput) {
-                            searchInput.value = '';
-                        }
-                        
-                        // Apply the reset filters
-                        filterPlayers('');
-                        
-                        // Update the button visibility
-                        updateClearButtonVisibility();
-                    });
-                }
-                
-                // Function to update clear button visibility
-                function updateClearButtonVisibility() {
-                    if (!clearFiltersBtn) return;
-                    
-                    const isFilterActive = 
-                        (teamFilter && teamFilter.value !== 'all') || 
-                        (searchInput && searchInput.value.trim() !== '');
-                    
-                    clearFiltersBtn.style.display = isFilterActive ? 'inline-flex' : 'none';
-                }
-                
-                // When auction data is loaded, collect unique team names
-                document.addEventListener('auctionDataLoaded', function(e) {
-                    const auctionData = e.detail;
-                    const teams = new Set();
-                    
-                    // Collect all unique team names
-                    auctionData.forEach(player => {
-                        if (player.team && player.team.trim() !== '' && player.team !== 'Unsold') {
-                            teams.add(player.team);
-                        }
-                    });
-                    
-                    // Sort team names alphabetically
-                    const sortedTeams = Array.from(teams).sort();
-                    
-                    // Populate the team filter dropdown
-                    sortedTeams.forEach(team => {
-                        const option = document.createElement('option');
-                        option.value = team;
-                        option.textContent = team;
-                        teamFilter.appendChild(option);
-                    });
-                    
-                    // Add event listener for team filter changes
-                    teamFilter.addEventListener('change', function() {
-                        // Call the filterPlayers function from player-auction.js
-                        filterPlayers(searchInput ? searchInput.value.toLowerCase() : '');
-                        
-                        // Update active state styling
-                        if (this.value === 'all') {
-                            this.classList.remove('active');
-                        } else {
-                            this.classList.add('active');
-                        }
-                        
-                        // Update clear button visibility
-                        updateClearButtonVisibility();
-                    });
-                });
-                
-                // Add search input event listener
-                searchInput.addEventListener('input', function() {
-                    filterPlayers(this.value.toLowerCase());
-                    
-                    // Update clear button visibility
-                    updateClearButtonVisibility();
                 });
             }
             
@@ -1078,7 +652,7 @@
                     tbody.appendChild(row);
                 });
                 
-                // Apply zebra striping after sorting
+                // Add zebra striping after sorting
                 applyZebraStriping(tbody);
             }
             
