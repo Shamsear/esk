@@ -555,7 +555,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/E. MARTINEZ_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/E. MARTINEZ_CARD.webp"
   },
   {
     "name": "BRICE SAMBA",
@@ -693,7 +693,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/P. GULACSI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/P. GULACSI_CARD.webp"
   },
   {
     "name": "DAVID SORIA",
@@ -789,11 +789,47 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/D. RAYA_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/D. RAYA_CARD.webp"
+  },
+  {
+    "name": "ALEXANDER NUBEL",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "GK",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. NUBEL_CARD.webp"
+  },
+  {
+    "name": "DEAN HENDERSON",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "GK",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/D. HENDERSON_CARD.webp"
   },
   {
     "name": "ALVARO VALLES",
-    "star": "4-star-standard",
+    "star": "3-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "GK",
@@ -807,7 +843,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. VALLES_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/A. VALLES_CARD.webp"
   },
   {
     "name": "LUKAS HRADECKÝ",
@@ -867,7 +903,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/JOSE SA_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/JOSE SA_CARD.webp"
   },
   {
     "name": "KASPER SCHMEICHEL",
@@ -885,7 +921,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/K. SCHMEICHEL_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/K. SCHMEICHEL_CARD.webp"
   },
   {
     "name": "DIOGO COSTA",
@@ -1588,6 +1624,24 @@
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/I. KONATE_CARD.webp"
+  },
+  {
+    "name": "SVEN BOTMAN",
+    "star": "5-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "CB",
+    "value": 80,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "LIVERPOOL FC",
+        "value": "114",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/5 STAR CARDS/S. BOTMAN_CARD.webp"
   },
   {
     "name": "RICCARDO CALAFIORI",
@@ -3990,6 +4044,24 @@
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/F. TORRES_CARD.webp"
   },
   {
+    "name": "DIDIER DROGBA",
+    "star": "5-star-legend",
+    "level": "LEGENDARY",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 100,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "AS ROMA",
+        "value": "130",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/D. DROGBA_CARD.webp"
+  },
+  {
     "name": "DIEGO MARADONA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
@@ -4768,6 +4840,24 @@
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. OYARZABAL_CARD.webp"
+  },
+  {
+    "name": "RASMUS HOJLUND",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "ARSENAL FC",
+        "value": "108",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/R. HOJLUND_CARD.webp"
   },
   {
     "name": "THOMAS MULLER",
@@ -8676,6 +8766,30 @@
     "imagePath": "../assets/images/players/3 STAR CARDS/O. SKIPP_CARD.webp"
   },
   {
+    "name": "DENIS ZAKARIA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "AS ROMA",
+    "position": "DM",
+    "value": 88,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-5",
+        "team": "MANCHESTER UNITED",
+        "value": "114",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "88",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/D. ZAKARIA_CARD.webp"
+  },
+  {
     "name": "IDRISSA GUEYE",
     "star": "3-star-standard",
     "level": "STANDARD",
@@ -11271,7 +11385,7 @@
     "name": "JULIAN BRANDT",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "RANGERS FC",
     "position": "AM",
     "value": 40,
     "gamesPlayed": 0,
@@ -12111,7 +12225,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/D. OSPINA_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/D. OSPINA_CARD.webp"
   },
   {
     "name": "ĐORĐE PETROVIĆ",
@@ -13414,6 +13528,24 @@
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/O. SAMUEL_CARD.webp"
+  },
+  {
+    "name": "LUCAS KLOSTERMANN",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RB",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-5",
+        "team": "ATLETICO DE MADRID",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/L. KLOSTERMANN_CARD.webp"
   },
   {
     "name": "RASMUS KRISTENSEN",
@@ -18150,6 +18282,30 @@
     "imagePath": "../assets/images/players/3 STAR CARDS/S. KILICSOY_CARD.webp"
   },
   {
+    "name": "SHERALDO BECKER",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "LIVERPOOL FC",
+    "position": "ST",
+    "value": 58,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4.5-5",
+        "team": "MUMBAI CITY FC",
+        "value": "46",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LIVERPOOL FC",
+        "value": "58",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/S. BECKER_CARD.webp"
+  },
+  {
     "name": "YUYA YAMAGISHI",
     "star": "3-star-standard",
     "level": "STANDARD",
@@ -18282,7 +18438,7 @@
     "imagePath": "../assets/images/players/3 STAR CARDS/J. QUINONES_CARD.webp"
   },
   {
-    "name": "KEYLOR NAVAS",
+    "name": "KEILOR NAVAS",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -18297,7 +18453,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/K. NAVAS_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/K. NAVAS_CARD.webp"
   },
   {
     "name": "KYOGO FURUHASHI",
