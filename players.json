@@ -796,8 +796,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "GK",
-    "value": 40,
+    "position": "CB",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -814,8 +814,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "GK",
-    "value": 40,
+    "position": "CB",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -862,6 +862,258 @@
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/Y. OZCAN_CARD.webp"
+  },
+  {
+    "name": "ANTONEE ROBINSON",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. ROBINSON_CARD.webp"
+  },
+  {
+    "name": "JORREL HATO",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/J. HATO_CARD.webp"
+  },
+  {
+    "name": "PATRICK DORGU",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/P. DORGU_CARD.webp"
+  },
+  {
+    "name": "ALVARO CARRERAS",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. CARRERAS_CARD.webp"
+  },
+  {
+    "name": "MILOS KERKEZ",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/M. KERKEZ_CARD.webp"
+  },
+  {
+    "name": "ALEXANDRO BERNABEL",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. BERNABEL_CARD.webp"
+  },
+  {
+    "name": "LEWIS HALL",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/L. HALL_CARD.webp"
+  },
+  {
+    "name": "JAYDEN OOSTERWOLDE",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/J. OOSTERWOLDE_CARD.webp"
+  },
+  {
+    "name": "JESUS ANGULO",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LB",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/J. ANGULO_CARD.webp"
+  },  
+  {
+    "name": "GASTON MARTIRENA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/G. MARTIRENA_CARD.webp"
+  },
+  {
+    "name": "JOSIP STANISIC",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/J. STANISIC_CARD.webp"
+  },
+  {
+    "name": "NECO WILLIAMS",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/N. WILLIAMS_CARD.webp"
+  },
+  {
+    "name": "JOAQUIN GARCIA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/J. GARCIA_CARD.webp"
+  },
+  {
+    "name": "ARITZ ELUSTONDO",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RB",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "6-7",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/A. ELUSTONDO_CARD.webp"
   },  
   {
     "name": "EDMOND TAPSOBA",
@@ -869,7 +1121,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -887,7 +1139,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -905,7 +1157,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -923,7 +1175,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -941,7 +1193,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -959,7 +1211,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -977,7 +1229,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -995,7 +1247,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1013,7 +1265,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1023,7 +1275,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/L. FELIPE_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/LUIZ FELIPE_CARD.webp"
   },
   {
     "name": "VALENTIN GOMEZ",
@@ -1031,7 +1283,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1049,7 +1301,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1067,7 +1319,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1085,7 +1337,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1103,7 +1355,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1113,7 +1365,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/T. HARWOOD-BELLIS_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/H. BELLIS_CARD.webp"
   },
   {
     "name": "VITAO",
@@ -1121,7 +1373,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1139,7 +1391,7 @@
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "CB",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -1713,7 +1965,7 @@
         "apps": "14"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/K. MIN-JAE_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/KIM MIN-JAE_CARD.webp"
   },
   {
     "name": "ANTONIO RUDIGER",
@@ -2685,7 +2937,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/Y. ALAVAREZ_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/Y. ALVAREZ_CARD.webp"
   },
   {
     "name": "DAVID GARCIA",
@@ -2769,7 +3021,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/J. VERTONGHEN_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/JAN VERTONGHEN_CARD.webp"
   },
   {
     "name": "LUCAS HERNANDEZ",
@@ -3544,8 +3796,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "GK",
-    "value": 40,
+    "position": "CB",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3562,8 +3814,8 @@
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
-    "position": "GK",
-    "value": 40,
+    "position": "CB",
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4701,7 +4953,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/P. DYBALA_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/PAULO DYBALA_CARD.webp"
   },
   {
     "name": "KARIM BENZEMA",
@@ -4851,7 +5103,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/G. JESUS_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/GABRIEL JESUS_CARD.webp"
   },
   {
     "name": "ANTOINE GRIEZMANN",
@@ -5421,7 +5673,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/N. JACKSON_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/NICOLAS JACKSON_CARD.webp"
   },
   {
     "name": "OLLIE WATKINS",
@@ -5673,7 +5925,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/L. OPENDA_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/LOIS OPENDA_CARD.webp"
   },
   {
     "name": "RAFA SILVA",
@@ -5727,7 +5979,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/M. TAREMI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/MEHDI TAREMI_CARD.webp"
   },
   {
     "name": "NOAH OKAFOR",
@@ -5805,7 +6057,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/E. WAHI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp"
   },
   {
     "name": "ALBERT GUDMUNDSSON",
@@ -5943,7 +6195,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/V. GYOKERES_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/VIKTOR GYOKERES_CARD.webp"
   },
   {
     "name": "YOUSSOUFA MOUKOKO",
@@ -6063,7 +6315,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/G. DEULOFEU_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/GERARD DEULOFEU_CARD.webp"
   },
   {
     "name": "DOMINIC SOLANKE",
@@ -6711,7 +6963,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/K. TIERNEY_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/KIERAN TIERNEY_CARD.webp"
   },
   {
     "name": "RICO HENRY",
@@ -6825,7 +7077,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/T. MALACIA_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/TYRELL MALACIA_CARD.webp"
   },
   {
     "name": "TYRICK MITCHELL",
@@ -6951,7 +7203,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/B. CHILWELL_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/BEN CHILWELL_CARD.webp"
   },
   {
     "name": "MARC CUCURELLA",
@@ -7209,7 +7461,7 @@
         "apps": "02"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/M. ACUNA_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/MARCOS ACUNA_CARD.webp"
   },
   {
     "name": "REINILDO",
@@ -7473,7 +7725,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/R. JAMES_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/REECE JAMES_CARD.webp"
   },
   {
     "name": "JEREMIE FRIMPONG",
@@ -7551,7 +7803,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/K. WALKER_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/KYLE WALKER_CARD.webp"
   },
   {
     "name": "LUCAS VAZQUEZ",
@@ -17793,7 +18045,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/A. PINAMONTI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ANDREA PINAMONTI_CARD.webp"
   },
   {
     "name": "ANDREJ KRAMARIC",
@@ -17811,7 +18063,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/A. KRAMARIC_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ANDREJ KRAMARIC_CARD.webp"
   },
   {
     "name": "ARMANDO BROJA",
@@ -17829,7 +18081,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/A. BROJA_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ARMANDO BROJA_CARD.webp"
   },
   {
     "name": "BENJAMIN SESKO",
@@ -17847,7 +18099,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/B. SESKO_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/BENJAMIN SESKO_CARD.webp"
   },
   {
     "name": "DUVAN ZAPATA",
@@ -17883,7 +18135,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/E. UNAL_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ENES UNAL_CARD.webp"
   },
   {
     "name": "EVAN FERGUSON",
@@ -18093,7 +18345,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/L. DE JONG_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/LUUK DE JONG_CARD.webp"
   },
   {
     "name": "MATEO RETEGUI",
@@ -18129,7 +18381,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/M. BEIER_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/MAXIMILIAN BEIER_CARD.webp"
   },
   {
     "name": "MIGUEL BORJA",
@@ -18165,7 +18417,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/N. FULLKRUG_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/NICLAS FULLKRUG_CARD.webp"
   },
   {
     "name": "ODSONNE EDOUARD",
@@ -18183,7 +18435,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/O. EDOUARD_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ODSONNE EDOUARD_CARD.webp"
   },
   {
     "name": "RODRIGO MUNIZ",
@@ -18237,7 +18489,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/S. HALLER_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/SEBASTIEN HALLER_CARD.webp"
   },
   {
     "name": "SERGIO CAMELLO",
@@ -18309,7 +18561,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/T. SOARES_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/TIQUINHO SOARES_CARD.webp"
   },
   {
     "name": "VANGELIS PAVLIDIS",
@@ -18927,7 +19179,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/N. TAVARES_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/NUNO TAVARES_CARD.webp"
   },
   {
     "name": "MANVIR SINGH",
