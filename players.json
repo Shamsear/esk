@@ -1852,7 +1852,7 @@
     "name": "PAOLO MALDINI",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "REAL MADRID CF",
     "position": "CB",
     "value": 100,
     "gamesPlayed": 0,
@@ -1860,12 +1860,12 @@
       {
         "season": "4-6",
         "team": "AL-NASSR FC",
-        "value": "142",
-        "apps": "00"
+        "value": "142"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. MALDINI_CARD.webp",
-    "id": 92
+    "id": 92,
+    "clubLogo": "assets/images/players/club/REAL MADRID CF.webp"
   },
   {
     "name": "FRANCO BARESI",
@@ -4621,7 +4621,7 @@
     "name": "SAMUEL ETO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "BORUSSIA DORTMUND",
+    "club": "FREE AGENT",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4629,12 +4629,12 @@
       {
         "season": "4-5",
         "team": "CHELSEA FC",
-        "value": "220"
+        "value": "220",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/S. ETO_CARD.webp",
-    "id": 221,
-    "clubLogo": "assets/images/players/club/BORUSSIA DORTMUND.webp"
+    "id": 221
   },
   {
     "name": "HRISTO STOICHKOV",
