@@ -8009,28 +8009,25 @@
     "name": "CAFU",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "AL NASSR",
+    "club": "free",
     "position": "RB",
-    "value": 106,
+    "value": 100,
     "gamesPlayed": 6,
     "stats": [
       {
         "season": "4-4.5",
         "team": "SANTOS FC",
-        "value": "122 ",
-        "apps": "06"
+        "value": "122 "
       },
       {
         "season": "4.5-6.5",
         "team": "FREE AGENT",
-        "value": "100",
-        "apps": "00"
+        "value": "100"
       },
       {
         "season": "6-8",
         "team": "AL NASSR",
-        "value": "106",
-        "apps": "00"
+        "value": "106"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/CAFU_CARD.webp",
