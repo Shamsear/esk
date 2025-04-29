@@ -1618,7 +1618,7 @@
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify(managersData)
+                                body: JSON.stringify({ managers: managersData })
                             });
                             
                             if (savePlayersResponse.ok && saveManagersResponse.ok) {
@@ -1672,8 +1672,9 @@
                 // Save players.json
                 await saveFileToGitHub(playersData, 'players.json', 'Update players from transfer system');
                 
-                // Save manager_data.json
-                await saveFileToGitHub(managersData, 'manager_data.json', 'Update managers from transfer system');
+                // Save manager_data.json - wrap managers array in the correct object structure
+                const managersDataFormatted = { managers: managersData };
+                await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from transfer system');
                 
                 showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
                 return true;
