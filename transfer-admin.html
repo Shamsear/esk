@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>R2G Transfer Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/club-dropdown.css">
+    <!-- Load club manager scripts in the correct order -->
+    <script src="js/club-loader.js"></script>
+    <script src="js/club-manager.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #282828;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .username {
+            color: #bada55;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 70px);
+            box-sizing: border-box;
+        }
+        .team-selection {
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .players-container {
+            display: flex;
+            flex: 1;
+            gap: 20px;
+        }
+        .available-players {
+            flex: 1;
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            max-height: 700px;
+        }
+        .selected-players {
+            flex: 1;
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            max-height: 700px;
+        }
+        h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        .player-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        .player-item:hover {
+            background-color: #333;
+        }
+        .player-thumbnail {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .player-info {
+            flex-grow: 1;
+        }
+        .player-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: bold;
+        }
+        .player-details {
+            font-size: 12px;
+            color: #aaa;
+        }
+        .player-value {
+            color: #bada55;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .action-btn:hover {
+            transform: scale(1.1);
+            background-color: #303f9f;
+        }
+        .add-btn {
+            background-color: #4caf50;
+        }
+        .add-btn:hover {
+            background-color: #388e3c;
+        }
+        .remove-btn {
+            background-color: #f44336;
+        }
+        .remove-btn:hover {
+            background-color: #d32f2f;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        .team-dropdown {
+            position: relative;
+        }
+        .team-search {
+            padding-right: 30px;
+        }
+        .team-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 0 0 4px 4px;
+            z-index: 100;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        .team-option {
+            padding: 8px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .team-option:hover {
+            background-color: #444;
+        }
+        .team-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        .transfer-settings {
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .transfer-item {
+            background-color: #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .submit-container {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .submit-btn:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+        .status-message {
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .status-success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+        .status-error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid #f44336;
+        }
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+        .season-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .season-input input {
+            width: 80px;
+        }
+        .season-input span {
+            color: #bbb;
+        }
+        .selected-team-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+        .selected-team-logo {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+        .squad-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .squad-info-item {
+            background-color: #333;
+            border-radius: 6px;
+            padding: 10px;
+            flex: 1;
+            text-align: center;
+        }
+        .squad-info-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #bada55;
+        }
+        .squad-info-label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* Current Squad Styles */
+        .current-squad-section {
+            margin-bottom: 30px;
+        }
+
+        .current-squad-section h3 {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .squad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .squad-player-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .squad-player-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .squad-player-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .squad-player-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .squad-player-details {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .players-container {
+                flex-direction: column;
+            }
+            
+            .header {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                margin-bottom: 10px;
+                font-size: 22px;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .transfer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Adjust form elements for touch */
+            button, input, select {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents iOS zoom on focus */
+                border-radius: 6px;
+            }
+            
+            label {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css">
+    <link rel="stylesheet" href="css/additional-fixes.css"></noscript>
+
+    <!-- Club dropdown styles (inline since club-dropdown.css doesn't exist) -->
+    <style>
+        .team-dropdown {
+            position: relative;
+        }
+        
+        .team-search {
+            padding-right: 30px;
+        }
+        
+        .team-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 0 0 4px 4px;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .club-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            user-select: none;
+        }
+        
+        .club-option:hover {
+            background-color: #444;
+        }
+        
+        .club-option:last-child {
+            border-bottom: none;
+        }
+        
+        .club-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        
+        .club-option span {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>R2G Transfer Admin Panel</h1>
+        <div class="user-info">
+            <span>Logged in as: <span class="username" id="logged-user">Admin</span></span>
+            <button class="logout-btn" id="logout-btn">Logout</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="team-selection">
+            <h2>Select Team</h2>
+            <div class="form-group">
+                <label for="team-selector">Select Team to Transfer Players To:</label>
+                <select id="team-selector" class="search-box">
+                    <option value="">-- Select a team --</option>
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+            <div id="selected-team-display" style="display: none;" class="selected-team-display">
+                <img id="selected-team-logo" class="selected-team-logo" src="" alt="Team Logo">
+                <span id="selected-team-name"></span>
+            </div>
+            <div id="debug-controls" style="margin-top: 15px;">
+                <button id="debug-select-team" style="background-color: #555; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Debug: Select First Team</button>
+            </div>
+            <div id="squad-info" class="squad-info" style="display: none;">
+                <div class="squad-info-item">
+                    <div id="squad-size" class="squad-info-value">0</div>
+                    <div class="squad-info-label">Squad Size</div>
+                </div>
+                <div class="squad-info-item">
+                    <div id="squad-value" class="squad-info-value">0</div>
+                    <div class="squad-info-label">Squad Value</div>
+                </div>
+                <div class="squad-info-item">
+                    <div id="squad-budget" class="squad-info-value">0</div>
+                    <div class="squad-info-label">Budget</div>
+                </div>
+            </div>
+            <div class="form-group season-input">
+                <label for="season-start">Season:</label>
+                <input type="number" id="season-start" min="1" max="20" value="5" step="0.5">
+                <span>-</span>
+                <input type="number" id="season-end" min="1" max="20" value="7" step="0.5">
+                <span>(e.g. 5-7)</span>
+            </div>
+        </div>
+        
+        <div class="players-container">
+            <div class="available-players">
+                <h2>Available Players</h2>
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="player-search">Search:</label>
+                        <input type="text" id="player-search" placeholder="Search players..." class="search-box">
+                    </div>
+                    <div class="filter-group">
+                        <label for="position-filter">Position:</label>
+                        <select id="position-filter" class="search-box">
+                            <option value="">All Positions</option>
+                            <option value="GK">GK</option>
+                            <option value="CB">CB</option>
+                            <option value="LB">LB</option>
+                            <option value="RB">RB</option>
+                            <option value="DM">DM</option>
+                            <option value="CM">CM</option>
+                            <option value="AM">AM</option>
+                            <option value="LW">LW</option>
+                            <option value="RW">RW</option>
+                            <option value="ST">ST</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="star-filter">Rating:</label>
+                        <select id="star-filter" class="search-box">
+                            <option value="">All Ratings</option>
+                            <option value="3-star">3 Star</option>
+                            <option value="4-star">4 Star</option>
+                            <option value="5-star">5 Star</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="available-players-list">
+                    <!-- Players will be populated here -->
+                </div>
+            </div>
+            
+            <div class="selected-players">
+                <h2>Selected Players for Transfer</h2>
+                <div id="selected-players-list">
+                    <!-- Selected players will be populated here -->
+                </div>
+                <div id="transfer-settings" class="transfer-settings" style="display: none;">
+                    <h3>Transfer Settings</h3>
+                    <div class="form-group">
+                        <label for="default-contract">Default Contract Length (years):</label>
+                        <input type="number" id="default-contract" min="1" max="5" value="2" step="1">
+                    </div>
+                    <p>You can adjust individual values and contracts below:</p>
+                    <div id="transfer-details" class="transfer-grid">
+                        <!-- Transfer details will be populated here -->
+                    </div>
+                    <div class="submit-container">
+                        <button id="submit-transfers" class="submit-btn">Complete Transfers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="status-message" class="status-message"></div>
+    </div>
+
+    <!-- Add GitHub configuration script -->
+    <script defer src="github-config.js"></script>
+    <script>
+        // GitHub configuration check
+        let githubConfig = null;
+        
+        function initGitHubConfig() {
+            if (typeof window.githubConfig !== 'undefined') {
+                githubConfig = window.githubConfig;
+                console.log('GitHub config loaded from global object');
+                return true;
+            }
+            
+            // Fallback implementation if github-config.js is not available
+            githubConfig = {
+                isConfigured: function() {
+                    return !!localStorage.getItem('githubToken');
+                },
+                getToken: function() {
+                    return localStorage.getItem('githubToken');
+                },
+                getOwner: function() {
+                    return localStorage.getItem('githubOwner') || 'default-owner';
+                },
+                getRepo: function() {
+                    return localStorage.getItem('githubRepo') || 'default-repo';
+                },
+                getBranch: function() {
+                    return localStorage.getItem('githubBranch') || 'main';
+                }
+            };
+            
+            return githubConfig.isConfigured();
+        }
+    
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show loading indicator
+            const statusElement = document.getElementById('status-message');
+            statusElement.textContent = 'Loading...';
+            statusElement.className = 'status-message status-success';
+            statusElement.style.display = 'block';
+            
+            // Check if logged in
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (!isLoggedIn) {
+                // Redirect to login page
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Set logged in username
+            document.getElementById('logged-user').textContent = sessionStorage.getItem('adminUsername') || 'Admin';
+            
+            // Initialize the transfer panel
+            initTransferPanel().then(() => {
+                // Check GitHub config after UI is showing
+                if (!localStorage.getItem('githubToken')) {
+                    const configMessage = document.createElement('div');
+                    configMessage.className = 'status-message status-error';
+                    configMessage.style.display = 'block';
+                    configMessage.textContent = 'GitHub integration not configured. Changes will only be saved in memory.';
+                    configMessage.style.marginBottom = '10px';
+                    
+                    // Add setup button
+                    const setupButton = document.createElement('button');
+                    setupButton.textContent = 'Configure GitHub';
+                    setupButton.style.marginTop = '5px';
+                    setupButton.addEventListener('click', () => {
+                        window.location.href = 'token-setup.html';
+                    });
+                    
+                    configMessage.appendChild(setupButton);
+                    
+                    // Insert at the top of container
+                    const container = document.querySelector('.container');
+                    container.insertBefore(configMessage, container.firstChild);
+                }
+            });
+        });
+
+        // Logout function
+        function performLogout() {
+            // Clear session data
+            sessionStorage.removeItem('adminLoggedIn');
+            sessionStorage.removeItem('adminUsername');
+            
+            // Redirect to login page
+            window.location.href = 'admin-login.html';
+        }
+
+        // Global variables
+        let playersData = [];
+        let managersData = [];
+        let selectedTeam = null;
+        let selectedPlayers = [];
+        let filteredPlayers = [];
+        
+        // Initialize transfer panel
+        async function initTransferPanel() {
+            try {
+                // Show loading in status element
+                const statusElement = document.getElementById('status-message');
+                statusElement.textContent = 'Loading player and team data...';
+                statusElement.className = 'status-message status-success';
+                statusElement.style.display = 'block';
+                
+                // Initialize GitHub config first
+                initGitHubConfig();
+                
+                // Add GitHub configuration message if needed
+                checkGitHubConfigStatus();
+                
+                // Load data first before setting up the UI
+                let loadedData = false;
+                
+                const loadPromise = new Promise(async (resolve) => {
+                    try {
+                        // Check if server is available
+                        const serverAvailable = await isServerAvailable();
+                        
+                        if (serverAvailable) {
+                            // Load players from server
+                            const playersResponse = await fetch('http://localhost:3000/players.json');
+                            if (playersResponse.ok) {
+                                playersData = await playersResponse.json();
+                                
+                                // Load managers data
+                                const managersResponse = await fetch('http://localhost:3000/manager_data.json');
+                                if (managersResponse.ok) {
+                                    managersData = await managersResponse.json();
+                                    console.log('Loaded data from Node.js server');
+                                    resolve(true);
+                                    return;
+                                }
+                            }
+                        }
+                        
+                        // Fallback: Load from files
+                        console.log('Server not available, loading from files');
+                        const playersResponse = await fetch('players.json');
+                        const managersResponse = await fetch('manager_data.json');
+                        
+                        if (playersResponse.ok && managersResponse.ok) {
+                            playersData = await playersResponse.json();
+                            const managersRawData = await managersResponse.json();
+                            
+                            // Make sure managersData is in the right format
+                            if (Array.isArray(managersRawData.managers)) {
+                                // If the data is an object with a managers array property, use that
+                                console.log('Manager data has managers array property');
+                                managersData = managersRawData.managers;
+                            } else if (Array.isArray(managersRawData)) {
+                                // If it's already an array, use it directly
+                                managersData = managersRawData;
+                            } else {
+                                console.error('Manager data has unexpected format:', typeof managersRawData);
+                                managersData = [];
+                            }
+                            
+                            console.log(`Data loaded from files: ${playersData.length} players, ${managersData.length} managers`);
+                            console.log('First few managers:', managersData.slice(0, 3));
+                            
+                            // Show server warning
+                            showStatusMessage('Warning: Data server is not running. Changes will not be saved.', false);
+                            resolve(true);
+                        } else {
+                            throw new Error('Failed to load data');
+                        }
+                    } catch (error) {
+                        console.error('Error loading data:', error);
+                        resolve(false);
+                    }
+                });
+                
+                // Set timeout for loading
+                const timeoutPromise = new Promise(resolve => {
+                    setTimeout(() => {
+                        if (!loadedData) {
+                            statusElement.textContent = 'Still loading... This may take a moment.';
+                        }
+                        resolve(false);
+                    }, 1500);
+                });
+                
+                // Wait for data or timeout
+                loadedData = await Promise.race([loadPromise, timeoutPromise]);
+                
+                // Wait for actual data if timeout happened first
+                if (!loadedData) {
+                    loadedData = await loadPromise;
+                }
+                
+                if (!loadedData) {
+                    throw new Error('Failed to load data');
+                }
+                
+                // Add unique ID to each player if missing
+                playersData = playersData.map((player, index) => ({
+                    ...player,
+                    id: player.id ? Number(player.id) : (index + 1)
+                }));
+                
+                // Set up filtered players list
+                filteredPlayers = [...playersData];
+                
+                // Now set up event listeners after data is loaded
+                setupEventListeners();
+                
+                // Populate available players list
+                populateAvailablePlayers();
+                
+                // Hide loading status
+                statusElement.style.display = 'none';
+                
+                return Promise.resolve();
+                
+            } catch (error) {
+                showStatusMessage(`Error: ${error.message}`, false);
+                console.error('Error initializing transfer panel:', error);
+                return Promise.resolve(); // Still resolve to continue
+            }
+        }
+
+        // Helper function to check if server is available
+        async function isServerAvailable() {
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 500);  // 500ms timeout
+                
+                const response = await fetch('http://localhost:3000/players.json', {
+                    method: 'HEAD',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                return response.ok;
+            } catch (error) {
+                console.log('Server check failed:', error.name);
+                return false;
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Logout button
+            document.getElementById('logout-btn').addEventListener('click', performLogout);
+            
+            // Team selector
+            const teamSelector = document.getElementById('team-selector');
+            if (teamSelector) {
+                // Populate team selector options
+                populateTeamSelector();
+                
+                // Add change event handler
+                teamSelector.addEventListener('change', function() {
+                    const selectedTeamName = this.value;
+                    if (selectedTeamName) {
+                        selectTeam(selectedTeamName);
+                    }
+                });
+            }
+            
+            // Player filters
+            document.getElementById('player-search').addEventListener('input', filterPlayers);
+            document.getElementById('position-filter').addEventListener('change', filterPlayers);
+            document.getElementById('star-filter').addEventListener('change', filterPlayers);
+            
+            // Default contract change
+            document.getElementById('default-contract').addEventListener('change', updateAllContracts);
+            
+            // Submit transfers button
+            document.getElementById('submit-transfers').addEventListener('click', submitTransfers);
+            
+            // Debug button
+            const debugBtn = document.getElementById('debug-select-team');
+            if (debugBtn) {
+                debugBtn.addEventListener('click', function() {
+                    console.log('Debug button clicked');
+                    console.log('Manager data length:', managersData.length);
+                    
+                    if (managersData.length > 0) {
+                        // Find first manager with a club
+                        const firstManager = managersData.find(m => m.club);
+                        if (firstManager) {
+                            console.log('Selecting first team:', firstManager.club);
+                            const selector = document.getElementById('team-selector');
+                            if (selector) {
+                                selector.value = firstManager.club;
+                                selectTeam(firstManager.club);
+                            }
+                        } else {
+                            console.error('No manager with club found');
+                            showStatusMessage('No teams available', false);
+                        }
+                    } else {
+                        console.error('No managers data available');
+                        showStatusMessage('Manager data not loaded', false);
+                    }
+                });
+            }
+        }
+
+        // Populate the team selector dropdown
+        function populateTeamSelector() {
+            const selector = document.getElementById('team-selector');
+            if (!selector) {
+                console.error('Team selector element not found');
+                return;
+            }
+            
+            // Keep the first empty option
+            selector.innerHTML = '<option value="">-- Select a team --</option>';
+            
+            try {
+                if (!managersData || !Array.isArray(managersData) || managersData.length === 0) {
+                    console.error('No manager data available');
+                    return;
+                }
+                
+                // Get all teams with unique club names
+                const teams = managersData
+                    .filter(manager => manager.club)
+                    .sort((a, b) => a.club.localeCompare(b.club));
+                
+                console.log(`Found ${teams.length} teams to add to selector`);
+                
+                // Add each team as an option
+                teams.forEach(manager => {
+                    const option = document.createElement('option');
+                    option.value = manager.club;
+                    option.textContent = manager.club;
+                    selector.appendChild(option);
+                });
+                
+            } catch (error) {
+                console.error('Error populating team selector:', error);
+            }
+        }
+
+        // Select a team
+        function selectTeam(teamName) {
+            console.log('selectTeam called for:', teamName);
+            
+            if (!teamName) {
+                console.error('No team name provided');
+                showStatusMessage('Please select a valid team', false);
+                return;
+            }
+            
+            // Find the manager with this team
+            const manager = managersData.find(m => m.club === teamName);
+            
+            if (!manager) {
+                console.error(`Team "${teamName}" not found in manager data`);
+                showStatusMessage(`Team "${teamName}" not found in manager data`, false);
+                return;
+            }
+            
+            console.log('Found manager for team:', manager);
+            
+            // Try to get logo from club-manager if available
+            let logoPath = 'assets/images/logo11.webp'; // default logo
+            if (window.ClubManager && window.ClubManager.getClub) {
+                const club = window.ClubManager.getClub(teamName);
+                if (club && club.logo) {
+                    logoPath = club.logo;
+                }
+            }
+            
+            selectedTeam = {
+                name: teamName,
+                manager: manager,
+                logo: logoPath
+            };
+            
+            // Show the selected team display
+            const display = document.getElementById('selected-team-display');
+            const logo = document.getElementById('selected-team-logo');
+            const name = document.getElementById('selected-team-name');
+            
+            if (!display || !logo || !name) {
+                console.error('Selected team display elements not found');
+                return;
+            }
+            
+            display.style.display = 'flex';
+            logo.src = selectedTeam.logo;
+            name.textContent = selectedTeam.name;
+            
+            // Show squad info
+            updateSquadInfo();
+            
+            // Show current squad players
+            showCurrentSquadPlayers();
+            
+            // Re-filter available players to exclude current squad
+            filterPlayers();
+            
+            // Show success message
+            showStatusMessage(`Team "${teamName}" selected successfully`, true, 2000);
+        }
+
+        // Show current squad players
+        function showCurrentSquadPlayers() {
+            const container = document.getElementById('selected-players-list');
+            const transferSettings = document.getElementById('transfer-settings');
+            
+            // Clear the container
+            container.innerHTML = '';
+            
+            // Add a section for current squad
+            const currentSquadSection = document.createElement('div');
+            currentSquadSection.className = 'current-squad-section';
+            
+            const squadHeader = document.createElement('h3');
+            squadHeader.textContent = 'Current Squad';
+            currentSquadSection.appendChild(squadHeader);
+            
+            // Get current squad players
+            const currentSquad = selectedTeam.manager.squad?.players || [];
+            
+            if (currentSquad.length === 0) {
+                const noPlayers = document.createElement('p');
+                noPlayers.textContent = 'No players in current squad';
+                noPlayers.style.textAlign = 'center';
+                noPlayers.style.color = '#888';
+                noPlayers.style.padding = '20px';
+                currentSquadSection.appendChild(noPlayers);
+            } else {
+                // Create a grid for current squad players
+                const squadGrid = document.createElement('div');
+                squadGrid.className = 'squad-grid';
+                
+                currentSquad.forEach(player => {
+                    const playerCard = document.createElement('div');
+                    playerCard.className = 'squad-player-card';
+                    
+                    // Player info
+                    const playerInfo = document.createElement('div');
+                    playerInfo.className = 'squad-player-info';
+                    
+                    const playerName = document.createElement('div');
+                    playerName.className = 'squad-player-name';
+                    playerName.textContent = player.name;
+                    
+                    const playerDetails = document.createElement('div');
+                    playerDetails.className = 'squad-player-details';
+                    playerDetails.textContent = `${player.position} | Value: ${player.value.toLocaleString()} RC | Contract: ${player.contract} years`;
+                    
+                    playerInfo.appendChild(playerName);
+                    playerInfo.appendChild(playerDetails);
+                    
+                    playerCard.appendChild(playerInfo);
+                    squadGrid.appendChild(playerCard);
+                });
+                
+                currentSquadSection.appendChild(squadGrid);
+            }
+            
+            // Add a separator
+            const separator = document.createElement('hr');
+            separator.style.margin = '20px 0';
+            separator.style.border = 'none';
+            separator.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
+            
+            // Add the new players section header
+            const newPlayersHeader = document.createElement('h3');
+            newPlayersHeader.textContent = 'New Players to Transfer';
+            
+            // Add all elements to the container
+            container.appendChild(currentSquadSection);
+            container.appendChild(separator);
+            container.appendChild(newPlayersHeader);
+            
+            // Show transfer settings if there are selected players
+            if (selectedPlayers.length > 0) {
+                transferSettings.style.display = 'block';
+                updateTransferDetails();
+            } else {
+                transferSettings.style.display = 'none';
+            }
+        }
+
+        // Update squad information display
+        function updateSquadInfo() {
+            if (!selectedTeam || !selectedTeam.manager) return;
+            
+            const squadInfo = document.getElementById('squad-info');
+            const squadSize = document.getElementById('squad-size');
+            const squadValue = document.getElementById('squad-value');
+            const squadBudget = document.getElementById('squad-budget');
+            
+            const manager = selectedTeam.manager;
+            
+            // Show the squad info section
+            squadInfo.style.display = 'flex';
+            
+            // Update values
+            const currentSquadSize = manager.squad?.players?.length || 0;
+            squadSize.textContent = currentSquadSize;
+            
+            const currentSquadValue = manager.clubTotalValue || 0;
+            squadValue.textContent = currentSquadValue.toLocaleString();
+            
+            // Budget is coins
+            const budget = manager.coins || 0;
+            squadBudget.textContent = budget.toLocaleString();
+        }
+
+        // Populate available players list with filtered data
+        function populateAvailablePlayers() {
+            const container = document.getElementById('available-players-list');
+            container.innerHTML = '';
+            
+            if (filteredPlayers.length === 0) {
+                const noResults = document.createElement('p');
+                noResults.textContent = 'No players match your filters';
+                noResults.style.textAlign = 'center';
+                noResults.style.color = '#888';
+                noResults.style.padding = '20px';
+                container.appendChild(noResults);
+                return;
+            }
+            
+            // Use DocumentFragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            filteredPlayers.forEach(player => {
+                const playerElement = createPlayerElement(player, true);
+                fragment.appendChild(playerElement);
+            });
+            
+            container.appendChild(fragment);
+        }
+
+        // Create a player element
+        function createPlayerElement(player, isAvailable = true) {
+            const playerElement = document.createElement('div');
+            playerElement.className = 'player-item';
+            playerElement.dataset.id = player.id;
+            
+            const img = document.createElement('img');
+            img.className = 'player-thumbnail';
+            img.src = player.imagePath || 'https://via.placeholder.com/40';
+            img.alt = player.name;
+            img.loading = 'lazy'; // Lazy load images
+            img.onerror = function() {
+                this.src = 'https://via.placeholder.com/40';
+            };
+            
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'player-info';
+            
+            const nameSpan = document.createElement('div');
+            nameSpan.className = 'player-name';
+            nameSpan.textContent = player.name;
+            
+            const detailsSpan = document.createElement('div');
+            detailsSpan.className = 'player-details';
+            
+            // Extract star rating for display
+            let starRating = '⭐';
+            if (player.star) {
+                const starMatch = player.star.match(/(\d)-star/);
+                if (starMatch && starMatch[1]) {
+                    starRating = '⭐'.repeat(parseInt(starMatch[1]));
+                }
+            }
+            
+            detailsSpan.textContent = `${player.position} | ${starRating} | ${player.club || 'Free Agent'}`;
+            
+            const valueSpan = document.createElement('span');
+            valueSpan.className = 'player-value';
+            valueSpan.textContent = player.value;
+            
+            infoDiv.appendChild(nameSpan);
+            infoDiv.appendChild(detailsSpan);
+            
+            playerElement.appendChild(img);
+            playerElement.appendChild(infoDiv);
+            playerElement.appendChild(valueSpan);
+            
+            // Add action button
+            const actionBtn = document.createElement('button');
+            actionBtn.className = isAvailable ? 'action-btn add-btn' : 'action-btn remove-btn';
+            actionBtn.innerHTML = isAvailable ? '<i class="fas fa-plus"></i>' : '<i class="fas fa-minus"></i>';
+            actionBtn.title = isAvailable ? 'Add to transfer' : 'Remove from transfer';
+            
+            actionBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (isAvailable) {
+                    addPlayerToTransfer(player);
+                } else {
+                    removePlayerFromTransfer(player.id);
+                }
+            });
+            
+            playerElement.appendChild(actionBtn);
+            
+            return playerElement;
+        }
+
+        // Filter players based on search and filters
+        function filterPlayers() {
+            const searchTerm = document.getElementById('player-search').value.toLowerCase();
+            const positionFilter = document.getElementById('position-filter').value;
+            const starFilter = document.getElementById('star-filter').value;
+            
+            // Get IDs of already selected players to exclude them
+            const selectedIds = selectedPlayers.map(p => p.id);
+            
+            // Get IDs of players already in the selected team's squad
+            const teamSquadIds = [];
+            if (selectedTeam && selectedTeam.manager && selectedTeam.manager.squad && selectedTeam.manager.squad.players) {
+                selectedTeam.manager.squad.players.forEach(squadPlayer => {
+                    // Try to find this player in players data
+                    const matchingPlayer = playersData.find(p => p.name === squadPlayer.name);
+                    if (matchingPlayer) {
+                        teamSquadIds.push(matchingPlayer.id);
+                    }
+                });
+            }
+            
+            filteredPlayers = playersData.filter(player => {
+                // Exclude already selected players
+                if (selectedIds.includes(player.id)) return false;
+                
+                // Exclude players already in the team's squad
+                if (teamSquadIds.includes(player.id)) return false;
+                
+                // Apply search term filter
+                if (searchTerm && !player.name.toLowerCase().includes(searchTerm)) return false;
+                
+                // Apply position filter
+                if (positionFilter && player.position !== positionFilter) return false;
+                
+                // Apply star rating filter
+                if (starFilter && !player.star.includes(starFilter)) return false;
+                
+                return true;
+            });
+            
+            // Sort by value (highest first)
+            filteredPlayers.sort((a, b) => {
+                // Sort by value (highest first)
+                if (b.value !== a.value) {
+                    return b.value - a.value;
+                }
+                // If values are equal, sort alphabetically by name
+                return a.name.localeCompare(b.name);
+            });
+            
+            // Update the list
+            populateAvailablePlayers();
+        }
+
+        // Add player to transfer list
+        function addPlayerToTransfer(player) {
+            // Check if already added
+            if (selectedPlayers.some(p => p.id === player.id)) return;
+            
+            // Add to selected players
+            selectedPlayers.push(player);
+            
+            // Update UI
+            updateSelectedPlayersList();
+            
+            // Re-filter available players
+            filterPlayers();
+        }
+
+        // Remove player from transfer list
+        function removePlayerFromTransfer(playerId) {
+            // Find index of player
+            const index = selectedPlayers.findIndex(p => p.id === playerId);
+            if (index === -1) return;
+            
+            // Remove from array
+            selectedPlayers.splice(index, 1);
+            
+            // Update UI
+            updateSelectedPlayersList();
+            
+            // Re-filter available players
+            filterPlayers();
+        }
+
+        // Update the list of selected players
+        function updateSelectedPlayersList() {
+            const container = document.getElementById('selected-players-list');
+            const transferSettings = document.getElementById('transfer-settings');
+            
+            // Clear the container
+            container.innerHTML = '';
+            
+            if (selectedPlayers.length === 0) {
+                transferSettings.style.display = 'none';
+                
+                const noPlayers = document.createElement('p');
+                noPlayers.textContent = 'No players selected for transfer';
+                noPlayers.style.textAlign = 'center';
+                noPlayers.style.color = '#888';
+                noPlayers.style.padding = '20px';
+                container.appendChild(noPlayers);
+                return;
+            }
+            
+            // Show transfer settings
+            transferSettings.style.display = 'block';
+            
+            // Use DocumentFragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            // Add selected players
+            selectedPlayers.forEach(player => {
+                const playerElement = createPlayerElement(player, false);
+                fragment.appendChild(playerElement);
+            });
+            
+            container.appendChild(fragment);
+            
+            // Update transfer details
+            updateTransferDetails();
+        }
+        
+        // Update transfer details
+        function updateTransferDetails() {
+            const container = document.getElementById('transfer-details');
+            container.innerHTML = '';
+            
+            if (selectedPlayers.length === 0) return;
+            
+            // Get default contract length
+            const defaultContract = parseInt(document.getElementById('default-contract').value) || 2;
+            
+            // Use DocumentFragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            selectedPlayers.forEach(player => {
+                const transferItem = document.createElement('div');
+                transferItem.className = 'transfer-item';
+                transferItem.dataset.id = player.id;
+                
+                // Player name
+                const nameHeading = document.createElement('h4');
+                nameHeading.style.margin = '0 0 10px 0';
+                nameHeading.textContent = player.name;
+                
+                // Value input
+                const valueGroup = document.createElement('div');
+                valueGroup.className = 'form-group';
+                
+                const valueLabel = document.createElement('label');
+                valueLabel.textContent = 'Transfer Value:';
+                valueLabel.htmlFor = `value-${player.id}`;
+                
+                const valueInput = document.createElement('input');
+                valueInput.type = 'number';
+                valueInput.id = `value-${player.id}`;
+                valueInput.className = 'transfer-value';
+                valueInput.min = '1';
+                valueInput.value = player.value;
+                valueInput.dataset.id = player.id;
+                
+                valueInput.addEventListener('input', updatePlayerSalary);
+                valueGroup.appendChild(valueLabel);
+                valueGroup.appendChild(valueInput);
+                
+                // Contract input
+                const contractGroup = document.createElement('div');
+                contractGroup.className = 'form-group';
+                
+                const contractLabel = document.createElement('label');
+                contractLabel.textContent = 'Contract Length (years):';
+                contractLabel.htmlFor = `contract-${player.id}`;
+                
+                const contractInput = document.createElement('input');
+                contractInput.type = 'number';
+                contractInput.id = `contract-${player.id}`;
+                contractInput.className = 'transfer-contract';
+                contractInput.min = '1';
+                contractInput.max = '5';
+                contractInput.value = defaultContract;
+                contractInput.dataset.id = player.id;
+                
+                contractGroup.appendChild(contractLabel);
+                contractGroup.appendChild(contractInput);
+                
+                // Salary calculation (5% of value)
+                const salaryGroup = document.createElement('div');
+                salaryGroup.className = 'form-group';
+                
+                const salaryLabel = document.createElement('label');
+                salaryLabel.textContent = 'Salary (5% of value):';
+                
+                const salaryValue = document.createElement('div');
+                salaryValue.id = `salary-${player.id}`;
+                salaryValue.style.backgroundColor = '#333';
+                salaryValue.style.padding = '10px';
+                salaryValue.style.borderRadius = '4px';
+                salaryValue.style.color = '#bada55';
+                salaryValue.style.fontWeight = 'bold';
+                salaryValue.textContent = Math.round(player.value * 0.05).toLocaleString();
+                
+                salaryGroup.appendChild(salaryLabel);
+                salaryGroup.appendChild(salaryValue);
+                
+                // Append all elements
+                transferItem.appendChild(nameHeading);
+                transferItem.appendChild(valueGroup);
+                transferItem.appendChild(contractGroup);
+                transferItem.appendChild(salaryGroup);
+                
+                fragment.appendChild(transferItem);
+            });
+            
+            container.appendChild(fragment);
+        }
+        
+        // Update player salary based on value
+        function updatePlayerSalary(event) {
+            const value = parseInt(event.target.value) || 0;
+            const playerId = event.target.dataset.id;
+            const salaryElement = document.getElementById(`salary-${playerId}`);
+            
+            if (salaryElement) {
+                const salary = Math.round(value * 0.05);
+                salaryElement.textContent = salary.toLocaleString();
+            }
+        }
+        
+        // Update all contracts with default value
+        function updateAllContracts() {
+            const defaultContract = parseInt(document.getElementById('default-contract').value) || 2;
+            const contractInputs = document.querySelectorAll('.transfer-contract');
+            
+            contractInputs.forEach(input => {
+                input.value = defaultContract;
+            });
+        }
+
+        // Submit transfers
+        async function submitTransfers() {
+            if (!selectedTeam) {
+                showStatusMessage('Please select a team first', false);
+                return;
+            }
+            
+            if (selectedPlayers.length === 0) {
+                showStatusMessage('No players selected for transfer', false);
+                return;
+            }
+            
+            // Show saving indicator
+            const submitBtn = document.getElementById('submit-transfers');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Get the current season range
+                const seasonStart = document.getElementById('season-start').value;
+                const seasonEnd = document.getElementById('season-end').value;
+                const seasonRange = `${seasonStart}-${seasonEnd}`;
+                
+                // Validate season
+                if (!seasonStart || !seasonEnd || parseFloat(seasonStart) >= parseFloat(seasonEnd)) {
+                    throw new Error('Invalid season range. End season must be greater than start season.');
+                }
+                
+                // Get the manager to update
+                const managerIndex = managersData.findIndex(m => m.club === selectedTeam.name);
+                if (managerIndex === -1) {
+                    throw new Error('Team manager not found in data');
+                }
+                
+                // Create a deep copy of the manager data to modify
+                const manager = JSON.parse(JSON.stringify(managersData[managerIndex]));
+                
+                // Ensure the manager has a squad and players array
+                if (!manager.squad) {
+                    manager.squad = { totalPlayers: 0, players: [] };
+                }
+                if (!manager.squad.players) {
+                    manager.squad.players = [];
+                }
+                
+                // Process each transfer
+                const updatedPlayers = [];
+                let totalTransferSpend = 0;
+                let playersAdded = 0;
+                
+                for (const player of selectedPlayers) {
+                    // Get transfer details
+                    const valueInput = document.getElementById(`value-${player.id}`);
+                    const contractInput = document.getElementById(`contract-${player.id}`);
+                    
+                    const transferValue = parseInt(valueInput.value) || player.value;
+                    const contractYears = parseInt(contractInput.value) || 2;
+                    const salary = Math.round(transferValue * 0.05);
+                    
+                    // Track total spend
+                    totalTransferSpend += transferValue;
+                    
+                    // Create a new player for the squad
+                    const squadPlayer = {
+                        name: player.name,
+                        position: player.position,
+                        value: transferValue,
+                        contract: contractYears,
+                        salary: salary
+                    };
+                    
+                    // Add to squad
+                    manager.squad.players.push(squadPlayer);
+                    playersAdded++;
+                    
+                    // Update the player in players.json
+                    const playerIndex = playersData.findIndex(p => p.id === player.id);
+                    if (playerIndex !== -1) {
+                        // Create a deep copy of the player to modify
+                        const updatedPlayer = JSON.parse(JSON.stringify(playersData[playerIndex]));
+                        
+                        // Update club and value
+                        updatedPlayer.club = selectedTeam.name;
+                        updatedPlayer.value = transferValue;
+                        
+                        // Add the new season stats entry
+                        if (!updatedPlayer.stats) {
+                            updatedPlayer.stats = [];
+                        }
+                        
+                        updatedPlayer.stats.push({
+                            season: seasonRange,
+                            team: selectedTeam.name,
+                            value: transferValue.toString(),
+                            apps: "00"  // Start with 0 appearances
+                        });
+                        
+                        // Save to updated players array
+                        updatedPlayers.push({ index: playerIndex, player: updatedPlayer });
+                    }
+                }
+                
+                // Update manager data
+                manager.squad.totalPlayers = manager.squad.players.length;
+                
+                // Update club total value - sum of all player values
+                manager.clubTotalValue = manager.squad.players.reduce((total, p) => total + p.value, 0);
+                
+                // Deduct transfer spending from manager's coins
+                if (manager.coins) {
+                    manager.coins -= totalTransferSpend;
+                    if (manager.coins < 0) manager.coins = 0;
+                }
+                
+                // Update the managers data array
+                managersData[managerIndex] = manager;
+                
+                // Apply player updates
+                updatedPlayers.forEach(({ index, player }) => {
+                    playersData[index] = player;
+                });
+                
+                // Save changes - first try GitHub if configured
+                let savedToPermanentStorage = false;
+                
+                // Check if GitHub integration is configured
+                if (githubConfig && githubConfig.isConfigured()) {
+                    try {
+                        // Save both files to GitHub
+                        await saveToGitHub();
+                        savedToPermanentStorage = true;
+                    } catch (githubError) {
+                        console.error('GitHub save failed:', githubError);
+                        // Continue to try server save if GitHub fails
+                    }
+                } else {
+                    console.log('GitHub integration not configured');
+                }
+                
+                // If GitHub failed or not configured, try server
+                if (!savedToPermanentStorage) {
+                    const serverAvailable = await isServerAvailable();
+                    if (serverAvailable) {
+                        try {
+                            // Save players data
+                            const savePlayersResponse = await fetch('http://localhost:3000/save-players', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(playersData)
+                            });
+                            
+                            // Save managers data
+                            const saveManagersResponse = await fetch('http://localhost:3000/save-managers', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(managersData)
+                            });
+                            
+                            if (savePlayersResponse.ok && saveManagersResponse.ok) {
+                                savedToPermanentStorage = true;
+                            } else {
+                                throw new Error('Failed to save changes to server');
+                            }
+                        } catch (serverError) {
+                            console.error('Server save failed:', serverError);
+                        }
+                    }
+                }
+                
+                // Show success message with details
+                const successMsg = `Successfully transferred ${playersAdded} player${playersAdded !== 1 ? 's' : ''} to ${selectedTeam.name} for a total of ${totalTransferSpend.toLocaleString()} RC.`;
+                showStatusMessage(savedToPermanentStorage ? 
+                    successMsg + ' Changes saved to storage.' :
+                    successMsg + ' Warning: Changes are only in memory.', savedToPermanentStorage);
+                
+                // Clear the selected players and refresh the lists
+                selectedPlayers = [];
+                updateSelectedPlayersList();
+                
+                // Update squad info display
+                updateSquadInfo();
+                
+                // Re-filter available players
+                filterPlayers();
+                
+            } catch (error) {
+                showStatusMessage(`Error: ${error.message}`, false);
+                console.error('Error processing transfers:', error);
+            } finally {
+                // Restore button state
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Save to GitHub
+        async function saveToGitHub() {
+            try {
+                // Check if GitHub integration is configured
+                if (!githubConfig || !githubConfig.isConfigured()) {
+                    throw new Error('GitHub integration is not configured');
+                }
+                
+                // Show saving message
+                showStatusMessage('Saving to GitHub...', true);
+                
+                // Save players.json
+                await saveFileToGitHub(playersData, 'players.json', 'Update players from transfer system');
+                
+                // Save manager_data.json
+                await saveFileToGitHub(managersData, 'manager_data.json', 'Update managers from transfer system');
+                
+                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                return true;
+                
+            } catch (error) {
+                showStatusMessage(`GitHub Error: ${error.message}`, false);
+                console.error('GitHub save error:', error);
+                throw error; // Re-throw to be handled by the caller
+            }
+        }
+        
+        // Save a file to GitHub
+        async function saveFileToGitHub(data, filePath, commitMessage) {
+            try {
+                // Check if GitHub integration is configured
+                if (!githubConfig || !githubConfig.isConfigured()) {
+                    throw new Error('GitHub integration is not configured');
+                }
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: filePath,
+                    branch: githubConfig.getBranch()
+                };
+                
+                // Get the current file to get its SHA (required for the GitHub API)
+                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                let currentSHA = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    // File doesn't exist yet
+                    fileExists = false;
+                } else if (!fileInfoResponse.ok) {
+                    const errorData = await fileInfoResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                } else {
+                    // File exists, get its SHA
+                    const fileInfo = await fileInfoResponse.json();
+                    currentSHA = fileInfo.sha;
+                }
+                
+                // Prepare the content
+                const jsonString = JSON.stringify(data, null, 2);
+                const content = btoa(unescape(encodeURIComponent(jsonString)));
+                
+                // Prepare the commit message
+                const fullCommitMessage = `${commitMessage} - ${new Date().toISOString()}`;
+                
+                // Prepare the request body
+                const requestBody = {
+                    message: fullCommitMessage,
+                    content: content,
+                    branch: repoDetails.branch
+                };
+                
+                // Add SHA if the file exists
+                if (fileExists) {
+                    requestBody.sha = currentSHA;
+                }
+                
+                // Commit the updated file
+                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!commitResponse.ok) {
+                    const errorData = await commitResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                }
+                
+                return true;
+                
+            } catch (error) {
+                console.error(`GitHub save error for ${filePath}:`, error);
+                throw error; // Re-throw to be handled by the caller
+            }
+        }
+
+        // Show status message
+        function showStatusMessage(message, isSuccess, duration = 5000) {
+            const statusElement = document.getElementById('status-message');
+            statusElement.textContent = message;
+            statusElement.className = 'status-message';
+            statusElement.classList.add(isSuccess ? 'status-success' : 'status-error');
+            statusElement.style.display = 'block';
+            
+            // Auto-hide after duration, unless it's an error
+            if (isSuccess) {
+                setTimeout(() => {
+                    statusElement.style.display = 'none';
+                }, duration);
+            }
+        }
+
+        // Check GitHub configuration status and add UI elements if needed
+        function checkGitHubConfigStatus() {
+            if (!githubConfig || !githubConfig.isConfigured()) {
+                console.log('GitHub integration not configured');
+                
+                // Add a warning message at the top of the container
+                const container = document.querySelector('.container');
+                if (container) {
+                    const configMessage = document.createElement('div');
+                    configMessage.className = 'status-message status-error';
+                    configMessage.style.display = 'block';
+                    configMessage.style.margin = '0 0 20px 0';
+                    configMessage.textContent = 'GitHub integration not configured. Changes will not be saved permanently.';
+                    
+                    // Add a setup button
+                    const setupButton = document.createElement('button');
+                    setupButton.textContent = 'Configure GitHub';
+                    setupButton.style.marginTop = '5px';
+                    setupButton.style.backgroundColor = '#3f51b5';
+                    setupButton.style.color = 'white';
+                    setupButton.style.border = 'none';
+                    setupButton.style.padding = '8px 12px';
+                    setupButton.style.borderRadius = '4px';
+                    setupButton.style.cursor = 'pointer';
+                    
+                    setupButton.addEventListener('click', () => {
+                        window.location.href = 'token-setup.html';
+                    });
+                    
+                    configMessage.appendChild(setupButton);
+                    
+                    // Insert at the top of container
+                    container.insertBefore(configMessage, container.firstChild);
+                }
+                
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+    
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Focus on team selector
+            setTimeout(() => {
+                const teamSelector = document.getElementById('team-selector');
+                if (teamSelector) {
+                    teamSelector.focus();
+                }
+            }, 500);
+        });
+    </script>
+
+    <div class="nav-links">
+        <a href="transfer-admin.html"><i class="fas fa-exchange-alt"></i> Transfer Admin</a>
+        <a href="token-setup.html"><i class="fas fa-key"></i> GitHub Token Setup</a>
+        <a href="transfer-debug.html"><i class="fas fa-bug"></i> Debug Saving</a>
+    </div>
+</body>
+</html> 

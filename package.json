@@ -23,6 +23,7 @@
     "@vercel/analytics": "^1.5.0",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "xlsx": "^0.18.5"
   }
 }
