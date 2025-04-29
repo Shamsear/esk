@@ -8009,7 +8009,7 @@
     "name": "CAFU",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "free",
+    "club": "FREE AGENT",
     "position": "RB",
     "value": 100,
     "gamesPlayed": 6,
@@ -8031,7 +8031,8 @@
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/CAFU_CARD.webp",
-    "id": 381
+    "id": 381,
+    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
   },
   {
     "name": "BEN WHITE",
