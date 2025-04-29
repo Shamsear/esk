@@ -41,7 +41,7 @@
     "name": "JULIO CESAR",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "BORUSSIA DORTMUND",
     "position": "GK",
     "value": 100,
     "gamesPlayed": 0,
@@ -117,7 +117,7 @@
     "name": "DIDA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "BORUSSIA DORTMUND",
     "position": "GK",
     "value": 100,
     "gamesPlayed": 0,
@@ -126,6 +126,12 @@
         "season": "4-6",
         "team": "SS LAZIO",
         "value": "150",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "BORUSSIA DORTMUND",
+        "value": "100",
         "apps": "00"
       }
     ],
@@ -136,7 +142,7 @@
     "name": "SHAY GIVEN",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "RB LEIPZIG",
+    "club": "AC MILAN",
     "position": "GK",
     "value": 60,
     "gamesPlayed": 0,
@@ -150,6 +156,12 @@
       {
         "season": "5-7",
         "team": "RB LEIPZIG",
+        "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
         "value": "60",
         "apps": "00"
       }
@@ -324,7 +336,7 @@
     "name": "GREGOR KOBEL",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "GK",
     "value": 80,
     "gamesPlayed": 0,
@@ -333,6 +345,12 @@
         "season": "4-6",
         "team": "PARIS SAINT-GERMAIN FC",
         "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "80",
         "apps": "00"
       }
     ],
@@ -393,7 +411,7 @@
     "name": "YANN SOMMER",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "GK",
     "value": 80,
     "gamesPlayed": 0,
@@ -402,6 +420,12 @@
         "season": "4-6",
         "team": "SANTOS FC",
         "value": "116",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
+        "value": "80",
         "apps": "00"
       }
     ],
@@ -412,7 +436,7 @@
     "name": "YASSINE BOUNOU",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "GK",
     "value": 80,
     "gamesPlayed": 5,
@@ -426,6 +450,12 @@
       {
         "season": "4.5-6.5",
         "team": "FREE AGENT",
+        "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
         "value": "80",
         "apps": "00"
       }
@@ -462,7 +492,7 @@
     "name": "ANDRIY LUNIN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -472,6 +502,12 @@
         "team": "AC MILAN",
         "value": "92 ",
         "apps": "14"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. LUNIN_CARD.webp",
@@ -670,7 +706,7 @@
     "name": "BERND LENO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AL-NASSR FC",
+    "club": "AL NASSR",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -686,6 +722,12 @@
         "team": "AL-NASSR FC",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. LENO_CARD.webp",
@@ -695,7 +737,7 @@
     "name": "OLIVER BAUMANN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -703,6 +745,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ATLETICO DE MADRID",
         "value": "50",
         "apps": "00"
       }
@@ -714,7 +762,7 @@
     "name": "PETER GULACSI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "GK",
     "value": 40,
     "gamesPlayed": 0,
@@ -733,7 +781,7 @@
     "name": "DAVID SORIA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -741,6 +789,12 @@
       {
         "season": "4-6",
         "team": "LOSC LILLE",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
       }
@@ -771,7 +825,7 @@
     "name": "RUI PATRICIO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -780,6 +834,12 @@
         "season": "4-6",
         "team": "MANCHESTER CITY",
         "value": "56",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -790,7 +850,7 @@
     "name": "ANDRE ONANA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -799,6 +859,12 @@
         "season": "4-5.5",
         "team": "MOHUN BAGAN AC",
         "value": "120",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -1176,7 +1242,7 @@
     "name": "EDMOND TAPSOBA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "INTER MILAN",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -1185,6 +1251,12 @@
         "season": "6-7",
         "team": "FREE AGENT",
         "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "INTER MILAN",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -1233,7 +1305,7 @@
     "name": "PIERO HINCAPIE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -1242,6 +1314,12 @@
         "season": "6-7",
         "team": "FREE AGENT",
         "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -1385,7 +1463,7 @@
     "name": "MARCOS SENESI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -1394,6 +1472,12 @@
         "season": "6-7",
         "team": "FREE AGENT",
         "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ATLETICO DE MADRID",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -1644,7 +1728,7 @@
     "name": "JORDAN PICKFORD",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -1653,6 +1737,12 @@
         "season": "4-6",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -1745,7 +1835,7 @@
     "name": "KEPA",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "GK",
     "value": 40,
     "gamesPlayed": 0,
@@ -1760,6 +1850,12 @@
         "season": "5-6",
         "team": "FC BARCELONA",
         "value": "30",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -1814,7 +1910,7 @@
     "name": "TONY ADAMS",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "CB",
     "value": 100,
     "gamesPlayed": 0,
@@ -1824,6 +1920,12 @@
         "team": "AFC AJAX",
         "value": "100 ",
         "apps": "14"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/T. ADAMS_CARD.webp",
@@ -1890,7 +1992,7 @@
     "name": "ALESSANDRO NESTA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "FC BAYERN MUNICH",
     "position": "CB",
     "value": 100,
     "gamesPlayed": 0,
@@ -2192,7 +2294,7 @@
     "name": "CRISTIAN ROMERO",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "CB",
     "value": 80,
     "gamesPlayed": 0,
@@ -2211,7 +2313,7 @@
     "name": "MANUEL AKANJI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "CRYSTAL PALACE FC",
     "position": "CB",
     "value": 172,
     "gamesPlayed": 0,
@@ -2225,6 +2327,12 @@
       {
         "season": "5-7",
         "team": "AS ROMA",
+        "value": "172",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
         "value": "172",
         "apps": "00"
       }
@@ -2337,7 +2445,7 @@
     "name": "RICCARDO CALAFIORI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "CB",
     "value": 80,
     "gamesPlayed": 0,
@@ -2353,6 +2461,12 @@
         "team": "INTER MILAN",
         "value": "90",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "80",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/R. CALAFIORI_CARD.webp",
@@ -2362,7 +2476,7 @@
     "name": "VIRGIL VAN DIJK",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "CB",
     "value": 80,
     "gamesPlayed": 0,
@@ -2371,6 +2485,12 @@
         "season": "4-6",
         "team": "RANDERS FC",
         "value": "192",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "80",
         "apps": "00"
       }
     ],
@@ -2381,7 +2501,7 @@
     "name": "MALICK THIAW",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "CB",
     "value": 80,
     "gamesPlayed": 0,
@@ -2396,6 +2516,12 @@
         "season": "5-6",
         "team": "AC MILAN",
         "value": "120",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
+        "value": "80",
         "apps": "00"
       }
     ],
@@ -2582,7 +2708,7 @@
     "name": "GIORGIO SCALVINI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2607,7 +2733,7 @@
     "name": "AXEL WITSEL",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2617,6 +2743,12 @@
         "team": "AL HILAL SFC",
         "value": "52 ",
         "apps": "02"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. WITSEL_CARD.webp",
@@ -2626,7 +2758,7 @@
     "name": "MURILLO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2636,6 +2768,12 @@
         "team": "AL HILAL SFC",
         "value": "56 ",
         "apps": "13"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MURILLO_CARD.webp",
@@ -2645,7 +2783,7 @@
     "name": "EVAN NDICKA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2654,6 +2792,12 @@
         "season": "4-5",
         "team": "AL-NASSR FC",
         "value": "58",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LIVERPOOL FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -2702,7 +2846,7 @@
     "name": "INIGO MARTINEZ",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2711,6 +2855,12 @@
         "season": "4-6",
         "team": "BORUSSIA DORTMUND",
         "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -2759,7 +2909,7 @@
     "name": "ARTHUR THEATE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2768,6 +2918,12 @@
         "season": "4-6",
         "team": "ARSENAL FC",
         "value": "56",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -2797,7 +2953,7 @@
     "name": "DANI VIVIAN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2806,6 +2962,12 @@
         "season": "4-6",
         "team": "ASTON VILLA FC",
         "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -2917,7 +3079,7 @@
     "name": "DAVID HANCKO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2926,6 +3088,12 @@
         "season": "4-5",
         "team": "CHELSEA FC",
         "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -2961,7 +3129,7 @@
     "name": "NICO SCHLOTTERBECK",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2970,6 +3138,12 @@
         "season": "4-6",
         "team": "FC BAYERN MUNICH",
         "value": "120",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -2980,7 +3154,7 @@
     "name": "IGOR ZUBELDIA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -2989,6 +3163,12 @@
         "season": "4-6",
         "team": "FC BAYERN MUNICH",
         "value": "72",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3093,7 +3273,7 @@
     "name": "DAVID GARCIA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3362,7 +3542,7 @@
     "name": "PIERRE KALULU",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3377,6 +3557,12 @@
         "season": "5-7",
         "team": "INTER MIAMI",
         "value": "90",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LIVERPOOL FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3475,7 +3661,7 @@
     "name": "MATS HUMMELS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3484,6 +3670,12 @@
         "season": "4-6",
         "team": "PARIS SAINT-GERMAIN FC",
         "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3513,7 +3705,7 @@
     "name": "AITOR PAREDES",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3522,6 +3714,12 @@
         "season": "4-6",
         "team": "PARIS SAINT-GERMAIN FC",
         "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3557,7 +3755,7 @@
     "name": "HIROKI ITO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FC BAYERN MUNICH",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3571,6 +3769,12 @@
       {
         "season": "5-6",
         "team": "PARIS SAINT-GERMAIN FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FC BAYERN MUNICH",
         "value": "50",
         "apps": "00"
       }
@@ -3757,7 +3961,7 @@
     "name": "VICTOR LINDELOF",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -3766,6 +3970,12 @@
         "season": "4-5.5",
         "team": "RED BULL BRAGANTINO",
         "value": "52",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -3833,7 +4043,7 @@
     "name": "FRANCESCO ACERBI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3842,6 +4052,12 @@
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "76",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3852,7 +4068,7 @@
     "name": "LENY YORO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3861,6 +4077,12 @@
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "52",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3871,7 +4093,7 @@
     "name": "HARRY MAGUIRE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3887,6 +4109,12 @@
         "team": "FC BARCELONA",
         "value": "132",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/H. MAGUIRE_CARD.webp",
@@ -3896,7 +4124,7 @@
     "name": "LOIC BADE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FC BAYERN MUNICH",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3905,6 +4133,12 @@
         "season": "4-5",
         "team": "SPORTING CP",
         "value": "76",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FC BAYERN MUNICH",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -3915,7 +4149,7 @@
     "name": "MAX KILMAN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "INTER MILAN",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3931,6 +4165,12 @@
         "team": "FC BARCELONA",
         "value": "64",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "INTER MILAN",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. KILMAN_CARD.webp",
@@ -3940,7 +4180,7 @@
     "name": "PERR SCHUURS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3949,6 +4189,12 @@
         "season": "5-7",
         "team": "FC BARCELONA",
         "value": "98",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -4041,7 +4287,7 @@
     "name": "ALESSIO ROMAGNOLI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -4050,6 +4296,12 @@
         "season": "4-6",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "84",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -4079,7 +4331,7 @@
     "name": "WESLEY FOFANA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -4087,6 +4339,12 @@
       {
         "season": "4-6",
         "team": "TOTTENHAM HOTSPUR FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LIVERPOOL FC",
         "value": "50",
         "apps": "00"
       }
@@ -4098,7 +4356,7 @@
     "name": "LEVI COLWILL",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -4106,6 +4364,12 @@
       {
         "season": "4-6",
         "team": "SANTOS FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
         "value": "50",
         "apps": "00"
       }
@@ -4117,7 +4381,7 @@
     "name": "GUSTAVO GOMEZ",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "INTER MILAN",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -4132,6 +4396,12 @@
         "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "90",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "INTER MILAN",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -4186,7 +4456,7 @@
     "name": "ISSA DIOP",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -4195,6 +4465,12 @@
         "season": "4-6",
         "team": "SANTOS FC",
         "value": "82",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -4205,7 +4481,7 @@
     "name": "ANDREAS CHRISTENSEN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -4214,6 +4490,12 @@
         "season": "4-6",
         "team": "WOLVES",
         "value": "70",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -4306,7 +4588,7 @@
     "name": "DALEY BLIND",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -4315,6 +4597,12 @@
         "season": "4-6",
         "team": "ATLETICO DE MADRID",
         "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -4325,7 +4613,7 @@
     "name": "SAMUEL UMTITI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -4413,7 +4701,7 @@
     "name": "BEN MEE",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "ATALANTA BC",
+    "club": "AL NASSR",
     "position": "CB",
     "value": 54,
     "gamesPlayed": 2,
@@ -4427,6 +4715,12 @@
       {
         "season": "5-7",
         "team": "ATALANTA BC",
+        "value": "54",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "54",
         "apps": "00"
       }
@@ -4482,7 +4776,7 @@
     "name": "ROMARIO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4577,7 +4871,7 @@
     "name": "DENNIS BERGKAMP",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4586,6 +4880,12 @@
         "season": "4-5",
         "team": "CHELSEA FC",
         "value": "120",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "100",
         "apps": "00"
       }
     ],
@@ -4621,7 +4921,7 @@
     "name": "SAMUEL ETO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "BORUSSIA DORTMUND",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4630,6 +4930,12 @@
         "season": "4-5",
         "team": "CHELSEA FC",
         "value": "220",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "BORUSSIA DORTMUND",
+        "value": "100",
         "apps": "00"
       }
     ],
@@ -4678,7 +4984,7 @@
     "name": "DENIS LAW",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "RB LEIPZIG",
+    "club": "ATLETICO DE MADRID",
     "position": "ST",
     "value": 150,
     "gamesPlayed": 0,
@@ -4686,6 +4992,12 @@
       {
         "season": "4-6",
         "team": "RB LEIPZIG",
+        "value": "150",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ATLETICO DE MADRID",
         "value": "150",
         "apps": "00"
       }
@@ -4810,7 +5122,7 @@
     "name": "PATRICK KLUIVERT",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4819,6 +5131,12 @@
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
         "value": "102",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
+        "value": "100",
         "apps": "00"
       }
     ],
@@ -4873,7 +5191,7 @@
     "name": "DIEGO MARADONA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4882,6 +5200,12 @@
         "season": "4-6",
         "team": "SS LAZIO",
         "value": "180",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
+        "value": "100",
         "apps": "00"
       }
     ],
@@ -4987,7 +5311,7 @@
     "name": "JAN KOLLER",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "FC BAYERN MUNICH",
     "position": "ST",
     "value": 60,
     "gamesPlayed": 1,
@@ -5001,6 +5325,12 @@
       {
         "season": "4.5-6.5",
         "team": "FREE AGENT",
+        "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FC BAYERN MUNICH",
         "value": "60",
         "apps": "00"
       }
@@ -5050,7 +5380,7 @@
     "name": "DWIGHT YORKE",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "FC BAYERN MUNICH",
     "position": "ST",
     "value": 60,
     "gamesPlayed": 0,
@@ -5182,7 +5512,7 @@
     "name": "PAULO DYBALA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5197,6 +5527,12 @@
         "season": "5-6",
         "team": "ASTON VILLA FC",
         "value": "102",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -5304,6 +5640,12 @@
         "team": "RANGERS FC",
         "value": "136",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "INTER MILAN",
+        "value": "136",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/L. MARTINEZ_CARD.webp",
@@ -5338,7 +5680,7 @@
     "name": "GABRIEL JESUS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5457,7 +5799,7 @@
     "name": "CRISTIANO RONALDO",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FSV MAINZ 05",
+    "club": "FEYENOORD",
     "position": "ST",
     "value": 174,
     "gamesPlayed": 0,
@@ -5473,6 +5815,12 @@
         "team": "FSV MAINZ 05",
         "value": "174",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "174",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/C. RONALDO_CARD.webp",
@@ -5482,7 +5830,7 @@
     "name": "JULIAN ALVAREZ",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "ST",
     "value": 80,
     "gamesPlayed": 0,
@@ -5491,6 +5839,12 @@
         "season": "4-6",
         "team": "PARIS SAINT-GERMAIN FC",
         "value": "134",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ATLETICO DE MADRID",
+        "value": "80",
         "apps": "00"
       }
     ],
@@ -5595,7 +5949,7 @@
     "name": "EDIN DZEKO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5605,6 +5959,12 @@
         "team": "AFC AJAX",
         "value": "80 ",
         "apps": "3"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/E. DZEKO_CARD.webp",
@@ -5614,7 +5974,7 @@
     "name": "EDDIE NKETIAH",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5624,6 +5984,12 @@
         "team": "AL-NASSR FC",
         "value": "72 ",
         "apps": "10"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/E. NKETIAH_CARD.webp",
@@ -5652,7 +6018,7 @@
     "name": "ENDRICK",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5661,6 +6027,12 @@
         "season": "4-6",
         "team": "REAL MADRID CF",
         "value": "94",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -5671,7 +6043,7 @@
     "name": "MIKEL OYARZABAL",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5680,6 +6052,12 @@
         "season": "4-6",
         "team": "ARSENAL FC",
         "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -5690,7 +6068,7 @@
     "name": "RASMUS HOJLUND",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5699,6 +6077,12 @@
         "season": "4-6",
         "team": "ARSENAL FC",
         "value": "108",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -5734,7 +6118,7 @@
     "name": "RANDAL KOLO MUANI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FSV MAINZ 05",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5743,6 +6127,12 @@
         "season": "4-6",
         "team": "ATLETICO DE MADRID",
         "value": "86",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FSV MAINZ 05",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -5778,7 +6168,7 @@
     "name": "EVANILSON",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 6,
@@ -5792,6 +6182,12 @@
       {
         "season": "4.5-6.5",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
         "value": "50",
         "apps": "00"
       }
@@ -5828,7 +6224,7 @@
     "name": "VITOR ROQUE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -5837,6 +6233,12 @@
         "season": "4-6",
         "team": "BORUSSIA DORTMUND",
         "value": "68",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -5998,7 +6400,7 @@
     "name": "JHON DURAN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6006,6 +6408,12 @@
       {
         "season": "4-6",
         "team": "LIVERPOOL FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "50",
         "apps": "00"
       }
@@ -6112,7 +6520,7 @@
     "name": "FOLARIN BALOGUN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6120,6 +6528,12 @@
       {
         "season": "4-5.5",
         "team": "MOHUN BAGAN AC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
       }
@@ -6200,7 +6614,7 @@
     "name": "LOIS OPENDA",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "ST",
     "value": 80,
     "gamesPlayed": 0,
@@ -6216,6 +6630,12 @@
         "team": "SANTOS FC",
         "value": "70",
         "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
+        "value": "80",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/LOIS OPENDA_CARD.webp",
@@ -6225,7 +6645,7 @@
     "name": "RAFA SILVA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6234,6 +6654,12 @@
         "season": "4-6",
         "team": "NEWCASTLE UNITED FC",
         "value": "88",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -6282,7 +6708,7 @@
     "name": "NOAH OKAFOR",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6297,6 +6723,12 @@
         "season": "4.5-6",
         "team": "FREE AGENT",
         "value": "90",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -6345,7 +6777,7 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -6354,6 +6786,12 @@
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "76",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -6364,7 +6802,7 @@
     "name": "ALBERT GUDMUNDSSON",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "BAYER LEVERKUSEN",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6372,6 +6810,12 @@
       {
         "season": "4-6",
         "team": "SPORTING CP",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
       }
@@ -6433,7 +6877,7 @@
     "name": "GONCALO RAMOS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6448,6 +6892,12 @@
         "season": "5-7",
         "team": "FC BARCELONA",
         "value": "78",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -6508,7 +6958,7 @@
     "name": "YOUSSOUFA MOUKOKO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FEYENOORD",
     "position": "ST",
     "value": 80,
     "gamesPlayed": 0,
@@ -6522,6 +6972,12 @@
       {
         "season": "5-7",
         "team": "AS ROMA",
+        "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
         "value": "80",
         "apps": "00"
       }
@@ -6590,7 +7046,7 @@
     "name": "JOAO PEDRO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LIVERPOOL FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6599,6 +7055,12 @@
         "season": "4-6",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "68",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LIVERPOOL FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -6634,7 +7096,7 @@
     "name": "DOMINIC SOLANKE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6643,6 +7105,12 @@
         "season": "4-6",
         "team": "SANTOS FC",
         "value": "70",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -6653,7 +7121,7 @@
     "name": "MEMPHIS DEPAY",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "FSV MAINZ 05",
     "position": "ST",
     "value": 80,
     "gamesPlayed": 0,
@@ -6667,6 +7135,12 @@
       {
         "season": "5-7",
         "team": "AS ROMA",
+        "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FSV MAINZ 05",
         "value": "80",
         "apps": "00"
       }
@@ -6703,7 +7177,7 @@
     "name": "GERARD MORENO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6718,6 +7192,12 @@
         "season": "5-7",
         "team": "RANGERS FC",
         "value": "64",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AFC AJAX",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -6785,7 +7265,7 @@
     "name": "BREEL EMBOLO",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -6842,7 +7322,7 @@
     "name": "ARNAUT DANJUMA",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "BORUSSIA DORTMUND",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -6905,7 +7385,7 @@
     "name": "PATSON DAKA",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "BORUSSIA DORTMUND",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -6930,7 +7410,7 @@
     "name": "LUKA JOVIC",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -6944,6 +7424,12 @@
       {
         "season": "4.5-6.5",
         "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
         "value": "40",
         "apps": "00"
       }
@@ -6980,7 +7466,7 @@
     "name": "PIERRE AUBAMEYANG",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6995,6 +7481,12 @@
         "season": "5-7",
         "team": "MOHUN BAGAN AC",
         "value": "66",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -7276,9 +7768,9 @@
     "name": "JORDI ALBA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AL NASSR",
+    "club": "FREE AGENT",
     "position": "LB",
-    "value": 66,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7286,12 +7778,6 @@
         "team": "AL-NASSR FC",
         "value": "62 ",
         "apps": "11"
-      },
-      {
-        "season": "6-8",
-        "team": "AL NASSR",
-        "value": "66",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. ALBA_CARD.webp",
@@ -8015,9 +8501,9 @@
     "name": "CAFU",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "AL NASSR",
+    "club": "FREE AGENT",
     "position": "RB",
-    "value": 106,
+    "value": 100,
     "gamesPlayed": 6,
     "stats": [
       {
@@ -8030,12 +8516,6 @@
         "season": "4.5-6.5",
         "team": "FREE AGENT",
         "value": "100",
-        "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AL NASSR",
-        "value": "106",
         "apps": "00"
       }
     ],
@@ -9848,7 +10328,7 @@
     "name": "IDRISSA GUEYE",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AL-NASSR FC",
+    "club": "AL NASSR",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -9862,6 +10342,12 @@
       {
         "season": "5-7",
         "team": "AL-NASSR FC",
+        "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "40",
         "apps": "00"
       }
@@ -13492,7 +13978,7 @@
     "name": "IVAN PROVEDEL",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -13500,6 +13986,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
         "value": "50",
         "apps": "00"
       }
@@ -13511,7 +14003,7 @@
     "name": "LUCAS CHEVALIER",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -13519,6 +14011,12 @@
       {
         "season": "4-6",
         "team": "ARSENAL FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AFC AJAX",
         "value": "50",
         "apps": "00"
       }
@@ -13745,7 +14243,7 @@
     "name": "HUGO LLORIS",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FC BAYERN MUNICH",
     "position": "GK",
     "value": 40,
     "gamesPlayed": 0,
@@ -13755,6 +14253,12 @@
         "team": "AFC AJAX",
         "value": "40 ",
         "apps": "14"
+      },
+      {
+        "season": "5-7",
+        "team": "FC BAYERN MUNICH",
+        "value": "40",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/H. LLORIS_CARD.webp",
@@ -13802,7 +14306,7 @@
     "name": "MATTIA PERIN",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FEYENOORD",
     "position": "GK",
     "value": 40,
     "gamesPlayed": 0,
@@ -13810,6 +14314,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FEYENOORD",
         "value": "40",
         "apps": "00"
       }
@@ -13954,7 +14464,7 @@
     "name": "K. MAVROPANOS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -13962,6 +14472,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
       }
@@ -13973,7 +14489,7 @@
     "name": "JHON LUCUMI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -13981,6 +14497,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
       }
@@ -14011,7 +14533,7 @@
     "name": "PHILIPP LIENHART",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14020,6 +14542,12 @@
         "season": "5-7",
         "team": "FC BARCELONA",
         "value": "58",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -14125,7 +14653,7 @@
     "name": "ODILON KOSSOUNOU",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14133,6 +14661,12 @@
       {
         "season": "4-6",
         "team": "NEWCASTLE UNITED FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AFC AJAX",
         "value": "50",
         "apps": "00"
       }
@@ -14144,7 +14678,7 @@
     "name": "SAM BEUKEMA",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -14153,6 +14687,12 @@
         "season": "4-6",
         "team": "FREE AGENT",
         "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -14163,7 +14703,7 @@
     "name": "WILFRIED SINGO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14172,6 +14712,12 @@
         "season": "5-7",
         "team": "FC BARCELONA",
         "value": "78",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -14182,7 +14728,7 @@
     "name": "JAN PAUL VAN HECKE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FSV MAINZ 05",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14190,6 +14736,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FSV MAINZ 05",
         "value": "50",
         "apps": "00"
       }
@@ -14201,7 +14753,7 @@
     "name": "MURILO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14210,6 +14762,12 @@
         "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
+        "value": "50",
         "apps": "00"
       }
     ],
@@ -14239,7 +14797,7 @@
     "name": "ILLIA ZABARNYI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14247,6 +14805,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
         "value": "50",
         "apps": "00"
       }
@@ -14315,7 +14879,7 @@
     "name": "MAXENCE LACROIX",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14323,6 +14887,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "50",
         "apps": "00"
       }
@@ -14460,7 +15030,7 @@
     "name": "CLEMENT LENGLET",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ATLETICO DE MADRID",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -14469,6 +15039,12 @@
         "season": "4.5-6.5",
         "team": "ASTON VILLA FC",
         "value": "42",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ATLETICO DE MADRID",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -14498,7 +15074,7 @@
     "name": "JONNY EVANS",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -14506,6 +15082,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
         "value": "40",
         "apps": "00"
       }
@@ -17819,7 +18401,7 @@
     "name": "AMINE GOUIRI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FENERBAHCE SK",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -17827,6 +18409,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FENERBAHCE SK",
         "value": "50",
         "apps": "00"
       }
@@ -18813,7 +19401,7 @@
     "name": "ADRIANO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "CRYSTAL PALACE FC",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -18821,6 +19409,12 @@
       {
         "season": "5-7",
         "team": "INTER MIAMI",
+        "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "CRYSTAL PALACE FC",
         "value": "100",
         "apps": "00"
       }
@@ -18870,7 +19464,7 @@
     "name": "EVAIR",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -18878,6 +19472,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AC MILAN",
         "value": "100",
         "apps": "00"
       }
@@ -18908,7 +19508,7 @@
     "name": "ROBERTO BAGGIO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "JUVENTUS FC",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -18916,6 +19516,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "JUVENTUS FC",
         "value": "100",
         "apps": "00"
       }
@@ -19281,7 +19887,7 @@
     "name": "LUUK DE JONG",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AL-NASSR FC",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -19289,6 +19895,12 @@
       {
         "season": "4.5-6.5",
         "team": "AL-NASSR FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "50",
         "apps": "00"
       }
@@ -19376,7 +19988,7 @@
     "name": "ODSONNE EDOUARD",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "ARSENAL FC",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -19385,6 +19997,12 @@
         "season": "4.5-6.5",
         "team": "FREE AGENT",
         "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "ARSENAL FC",
+        "value": "40",
         "apps": "00"
       }
     ],
@@ -19433,7 +20051,7 @@
     "name": "SEBASTIEN HALLER",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AL-NASSR FC",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -19441,6 +20059,12 @@
       {
         "season": "4.5-6.5",
         "team": "AL-NASSR FC",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "50",
         "apps": "00"
       }
@@ -19471,7 +20095,7 @@
     "name": "TAIWO AWONIYI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "LEICESTER CITY",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -19479,6 +20103,12 @@
       {
         "season": "4-6",
         "team": "LOSC LILLE",
+        "value": "50",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "LEICESTER CITY",
         "value": "50",
         "apps": "00"
       }
@@ -19585,7 +20215,7 @@
     "name": "EDINSON CAVANI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AS ROMA",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -19593,6 +20223,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AS ROMA",
         "value": "40",
         "apps": "00"
       }
@@ -19623,7 +20259,7 @@
     "name": "ERIC CHOUPO MOTING",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -19633,6 +20269,12 @@
         "team": "AL-NASSR FC",
         "value": "40",
         "apps": "13"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
+        "value": "40",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/E. CHOUPO-MOTING_CARD.webp",
@@ -19680,7 +20322,7 @@
     "name": "LUIS MURIEL",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL NASSR",
     "position": "ST",
     "value": 40,
     "gamesPlayed": 0,
@@ -19688,6 +20330,12 @@
       {
         "season": "4-6",
         "team": "SS LAZIO",
+        "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "AL NASSR",
         "value": "40",
         "apps": "00"
       }
@@ -20002,7 +20650,7 @@
     "name": "KEILOR NAVAS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "FSV MAINZ 05",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -20011,6 +20659,12 @@
         "season": "4-6",
         "team": "FREE AGENT",
         "value": "40",
+        "apps": "00"
+      },
+      {
+        "season": "5-7",
+        "team": "FSV MAINZ 05",
+        "value": "50",
         "apps": "00"
       }
     ],
