@@ -19623,7 +19623,7 @@
     "name": "LUIS SUAREZ",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "REAL MADRID CF",
+    "club": "BORUSSIA DORTMUND",
     "position": "ST",
     "value": 230,
     "gamesPlayed": 0,
@@ -19641,7 +19641,7 @@
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SUAREZ_CARD.webp",
     "id": 956,
-    "clubLogo": "assets/images/players/club/REAL MADRID CF.webp"
+    "clubLogo": "assets/images/players/club/BORUSSIA DORTMUND.webp"
   },
   {
     "name": "LUUK DE JONG",
