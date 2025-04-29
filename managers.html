@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
+    <link rel="apple-touch-icon" href="./assets/images/logo11.webp">
+    <meta name="description" content="View all managers in the Eskimos Road to Glory FIFA Pro Clubs community.">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Managers - Eskimos Road to Glory</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+    
+    <!-- CSS resources -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pwa.css">
+    
+    <!-- Preload important PWA assets -->
+    <link rel="preload" href="js/pwa-init.js" as="script">
+    <link rel="preload" href="js/offline-manager.js" as="script">
+    
+    <style>
+        /* Managers page specific styling */
+        .managers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .manager-card {
+            background: rgba(22, 26, 29, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+            min-height: 320px;
+        }
+        
+        .manager-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border-color: var(--primary);
+        }
+        
+        .manager-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-rgb, 52, 152, 219), var(--secondary-rgb, 22, 160, 133));
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            border-radius: 15px;
+        }
+        
+        .manager-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .manager-header {
+            padding: 25px 20px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(22, 160, 133, 0.1));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .manager-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-align: center;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+        
+        .manager-card:hover .manager-name {
+            color: var(--primary);
+        }
+        
+        .manager-club {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .manager-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .manager-card:hover .manager-rating {
+            transform: scale(1.1);
+        }
+        
+        .manager-stats {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            flex-grow: 1;
+        }
+        
+        .stat-group {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .manager-card:hover .stat-group {
+            background: rgba(255, 255, 255, 0.07);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-label i {
+            margin-right: 6px;
+            color: var(--primary);
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        
+        .manager-footer {
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .view-profile {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .view-profile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.5);
+            padding: 10px 30px;
+        }
+        
+        /* Filters - Desktop Improvements */
+        .filters-section {
+            padding: 25px 30px;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(22, 26, 29, 0.7);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 10px 18px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .filter-group:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .filter-label {
+            font-size: 0.95rem;
+            margin-right: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+        }
+        
+        .filter-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-select:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .filter-select option {
+            background-color: #1a1a1a;
+            padding: 10px;
+        }
+        
+        .search-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            min-width: 250px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .reset-filters {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.7), rgba(192, 57, 43, 0.7));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .reset-filters:hover {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.9), rgba(192, 57, 43, 0.9));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .managers-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                padding: 15px;
+                gap: 20px;
+            }
+            
+            .filters-section {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                padding: 20px;
+                border-radius: 12px;
+                margin-bottom: 25px;
+            }
+            
+            .filter-group {
+                width: 100%;
+                justify-content: space-between;
+                padding: 10px 15px;
+            }
+            
+            .filter-select {
+                flex: 1;
+                margin-left: 10px;
+                text-align: right;
+            }
+            
+            .search-input {
+                width: 100%;
+                padding: 12px 15px;
+                margin-top: 5px;
+            }
+            
+            .reset-filters {
+                width: 100%;
+                margin-top: 5px;
+                padding: 12px;
+            }
+            
+            /* Section header mobile adjustments */
+            .section-header {
+                margin: 25px 0 30px;
+                padding: 0 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .section-header h1 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .section-header p {
+                font-size: 1rem;
+                line-height: 1.5;
+                padding: 0 10px;
+            }
+            
+            .section-header::after {
+                width: 80px;
+                height: 2px;
+                bottom: -10px;
+            }
+            
+            /* Back link mobile adjustments */
+            .back-link {
+                margin: 20px auto 0;
+                padding: 0 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .back-link a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                border-radius: 20px;
+            }
+            
+            .back-link a:active {
+                transform: translateX(-3px);
+                background: rgba(255, 255, 255, 0.15);
+                color: var(--primary);
+            }
+            
+            /* Sticky filter toggle for mobile */
+            .mobile-filter-toggle {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                z-index: 100;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: none;
+            }
+            
+            .mobile-filter-toggle:hover {
+                transform: scale(1.1);
+            }
+            
+            .mobile-filter-toggle i {
+                font-size: 1.2rem;
+            }
+            
+            .filters-section {
+                transition: all 0.3s ease;
+                max-height: 700px;
+                overflow: hidden;
+            }
+            
+            .filters-section.collapsed {
+                max-height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-top: 0;
+                margin-bottom: 0;
+                opacity: 0;
+            }
+            
+            /* Manager cards mobile improvements */
+            .manager-card {
+                min-height: auto;
+                border-radius: 12px;
+            }
+            
+            .manager-card:hover {
+                transform: translateY(-5px);
+            }
+            
+            .manager-header {
+                padding: 20px 15px;
+            }
+            
+            .manager-rating {
+                width: 50px;
+                height: 50px;
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            
+            .manager-name {
+                font-size: 1.3rem;
+            }
+            
+            .manager-club {
+                font-size: 0.9rem;
+            }
+            
+            .manager-stats {
+                padding: 15px;
+                gap: 10px;
+            }
+            
+            .stat-group {
+                padding: 10px;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+                margin-bottom: 5px;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .manager-footer {
+                padding: 15px;
+            }
+            
+            .view-profile {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .view-profile:hover {
+                padding: 8px 20px;
+                transform: none;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .managers-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 10px;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            
+            .manager-card {
+                max-width: 100%;
+            }
+            
+            .manager-header {
+                padding: 15px 12px;
+            }
+            
+            .manager-rating {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+            
+            .manager-name {
+                font-size: 1.2rem;
+                margin-bottom: 4px;
+            }
+            
+            .manager-club {
+                font-size: 0.85rem;
+                margin-bottom: 8px;
+            }
+            
+            .manager-stats {
+                padding: 12px 10px;
+                gap: 8px;
+            }
+            
+            .stat-group {
+                padding: 8px;
+            }
+            
+            .stat-label {
+                font-size: 0.75rem;
+                margin-bottom: 4px;
+            }
+            
+            .stat-value {
+                font-size: 1rem;
+            }
+            
+            .manager-footer {
+                padding: 12px 10px;
+            }
+            
+            .view-profile {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .section-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-header p {
+                font-size: 0.9rem;
+                padding: 0;
+            }
+            
+            .filters-section {
+                padding: 15px;
+                gap: 10px;
+                border-radius: 10px;
+            }
+            
+            .filter-group {
+                padding: 8px 12px;
+            }
+            
+            .filter-label {
+                font-size: 0.85rem;
+            }
+            
+            .filter-select {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+                padding-right: 28px;
+                background-position: right 6px center;
+                background-size: 14px;
+            }
+            
+            .search-input {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .reset-filters {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+            
+            .mobile-filter-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .mobile-filter-toggle i {
+                font-size: 1.1rem;
+            }
+            
+            /* Footer adjustments */
+            footer {
+                padding: 20px 10px;
+            }
+            
+            .footer-nav a {
+                font-size: 0.8rem;
+                margin: 0 5px 10px;
+            }
+            
+            .footer-content {
+                gap: 15px;
+            }
+            
+            .copyright {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Preloader for cards - Enhanced */
+        .manager-card.skeleton {
+            background: linear-gradient(90deg, rgba(30, 30, 30, 0.8), rgba(40, 40, 40, 0.8), rgba(30, 30, 30, 0.8));
+            background-size: 200% 100%;
+            animation: pulse-bg 1.5s infinite;
+            height: 360px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .skeleton-header {
+            height: 140px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .skeleton-rating {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+        }
+        
+        .skeleton-name {
+            width: 70%;
+            height: 24px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+        }
+        
+        .skeleton-club {
+            width: 50%;
+            height: 16px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .skeleton-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .skeleton-stat {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .skeleton-label {
+            width: 60%;
+            height: 12px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+        }
+        
+        .skeleton-value {
+            width: 40%;
+            height: 20px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .skeleton-footer {
+            height: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .skeleton-button {
+            width: 120px;
+            height: 36px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        @keyframes pulse-bg {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+        
+        /* Section Header - Desktop Improvements */
+        .section-header {
+            text-align: center;
+            margin: 50px 0 40px;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .section-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .section-header p {
+            max-width: 800px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        
+        /* Back link improvements */
+        .back-link {
+            margin: 30px auto 0;
+            max-width: 1400px;
+            padding: 0 20px;
+        }
+        
+        .back-link a {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+        
+        .back-link a:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-5px);
+        }
+        
+        .back-link i {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-link a:hover i {
+            transform: translateX(-3px);
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            color: var(--primary);
+        }
+        
+        .admin-link {
+            margin-left: 15px;
+            padding-left: 15px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-link a {
+            color: #2ecc71;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(46, 204, 113, 0.1);
+        }
+        
+        .admin-link a:hover {
+            transform: translateY(-3px);
+            background: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body data-page="managers">
+    <div class="overlay">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.webp" alt="Eskimos R2G Logo">
+                <span>Eskimos R2G</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+                <div class="admin-link">
+                    <a href="transfer-login.html" title="Transfer Admin"><i class="fas fa-exchange-alt"></i></a>
+                </div>
+                <div class="theme-toggle" id="theme-toggle">
+                    <div class="toggle-circle"></div>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="registered-clubs.html">Clubs</a>
+                <a href="managers.html" class="active">Managers</a>
+                <a href="player-status.html">Players</a>
+                <a href="trophy-cabinet.html">Trophies</a>
+            </div>
+            <div class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="back-link">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+        
+        <div class="section-header reveal">
+            <h1>Managers</h1>
+            <p>View all managers in the Eskimos Road to Glory community. Filter by club, rating, or search for specific managers.</p>
+        </div>
+        
+        <!-- Filter Section -->
+        <div class="filters-section reveal" id="filters-section">
+            <div class="filter-group">
+                <span class="filter-label">Sort By:</span>
+                <select class="filter-select" id="sort-select">
+                    <option value="rating-desc">Rating (High to Low)</option>
+                    <option value="rating-asc">Rating (Low to High)</option>
+                    <option value="name-asc">Name (A to Z)</option>
+                    <option value="name-desc">Name (Z to A)</option>
+                    <option value="trophies-desc">Trophies (High to Low)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">Club:</span>
+                <select class="filter-select" id="club-filter">
+                    <option value="all">All Clubs</option>
+                    <!-- Club options will be populated by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">Min Rating:</span>
+                <select class="filter-select" id="rating-filter">
+                    <option value="0">Any Rating</option>
+                    <option value="70">70+</option>
+                    <option value="75">75+</option>
+                    <option value="80">80+</option>
+                    <option value="85">85+</option>
+                    <option value="90">90+</option>
+                </select>
+            </div>
+            
+            <input type="text" class="search-input" id="search-input" placeholder="Search managers...">
+            
+            <button class="reset-filters" id="reset-filters">Reset Filters</button>
+        </div>
+        
+        <!-- Mobile filter toggle button -->
+        <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+            <i class="fas fa-filter"></i>
+        </button>
+        
+        <!-- Managers Container -->
+        <div class="managers-container" id="managers-container">
+            <!-- Manager cards will be dynamically inserted here -->
+            <!-- Skeleton loaders while data loads -->
+            <div class="manager-card skeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-rating"></div>
+                    <div class="skeleton-name"></div>
+                    <div class="skeleton-club"></div>
+                </div>
+                <div class="skeleton-stats">
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                </div>
+                <div class="skeleton-footer">
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+            
+            <div class="manager-card skeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-rating"></div>
+                    <div class="skeleton-name"></div>
+                    <div class="skeleton-club"></div>
+                </div>
+                <div class="skeleton-stats">
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                </div>
+                <div class="skeleton-footer">
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+            
+            <div class="manager-card skeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-rating"></div>
+                    <div class="skeleton-name"></div>
+                    <div class="skeleton-club"></div>
+                </div>
+                <div class="skeleton-stats">
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                </div>
+                <div class="skeleton-footer">
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+            
+            <div class="manager-card skeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-rating"></div>
+                    <div class="skeleton-name"></div>
+                    <div class="skeleton-club"></div>
+                </div>
+                <div class="skeleton-stats">
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                </div>
+                <div class="skeleton-footer">
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+            
+            <div class="manager-card skeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-rating"></div>
+                    <div class="skeleton-name"></div>
+                    <div class="skeleton-club"></div>
+                </div>
+                <div class="skeleton-stats">
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                </div>
+                <div class="skeleton-footer">
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+            
+            <div class="manager-card skeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-rating"></div>
+                    <div class="skeleton-name"></div>
+                    <div class="skeleton-club"></div>
+                </div>
+                <div class="skeleton-stats">
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                    <div class="skeleton-stat">
+                        <div class="skeleton-label"></div>
+                        <div class="skeleton-value"></div>
+                    </div>
+                </div>
+                <div class="skeleton-footer">
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="registered-clubs.html">Registered Clubs</a>
+                    <a href="managers.html">Managers</a>
+                    <a href="player-status.html">Player Status</a>
+                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/pwa-init.js"></script>
+    <script src="js/offline-manager.js"></script>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.add('active');
+        });
+        
+        document.getElementById('close-menu').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.remove('active');
+        });
+        
+        // Mobile filter toggle
+        const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+        const filtersSection = document.getElementById('filters-section');
+        
+        // Check screen size and collapse filters on mobile by default
+        function checkScreenSize() {
+            if (window.innerWidth <= 768) {
+                filtersSection.classList.add('collapsed');
+            } else {
+                filtersSection.classList.remove('collapsed');
+            }
+        }
+        
+        // Run on page load and when window is resized
+        window.addEventListener('resize', checkScreenSize);
+        checkScreenSize();
+        
+        // Toggle filters visibility on mobile
+        mobileFilterToggle.addEventListener('click', function() {
+            filtersSection.classList.toggle('collapsed');
+        });
+        
+        // Handle reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Load and display managers data
+        async function loadManagersData() {
+            try {
+                // Try multiple sources for manager data with fallbacks
+                let data = null;
+                let errors = [];
+                
+                // Array of potential data sources to try
+                const dataSources = [
+                    '/manager_data.json',  // Root path
+                    './manager_data.json', // Relative path
+                    'https://eskimos-r2g.vercel.app/manager_data.json', // Absolute path to Vercel deployment
+                    'manager_data.json'    // Simple path as last resort
+                ];
+                
+                // Try each data source until one works
+                for (const source of dataSources) {
+                    try {
+                        console.log(`Attempting to load managers data from: ${source}`);
+                        const response = await fetch(source);
+                        if (response.ok) {
+                            data = await response.json();
+                            console.log(`Successfully loaded data from: ${source}`);
+                            break; // Exit the loop if successful
+                        } else {
+                            errors.push(`Failed to load from ${source}: ${response.status} ${response.statusText}`);
+                        }
+                    } catch (error) {
+                        errors.push(`Error fetching from ${source}: ${error.message}`);
+                    }
+                }
+                
+                // If no data was loaded, throw an error
+                if (!data) {
+                    throw new Error(`Failed to load managers data from all sources. Errors: ${errors.join('; ')}`);
+                }
+                
+                // Clear skeleton loaders
+                document.getElementById('managers-container').innerHTML = '';
+                
+                // Extract managers data (handle both array and object formats)
+                const managers = Array.isArray(data) ? data : 
+                                (data.managers && Array.isArray(data.managers)) ? data.managers : [];
+                
+                if (managers.length === 0) {
+                    throw new Error('No manager data found in the loaded resource');
+                }
+                
+                console.log(`Loaded ${managers.length} managers`);
+                
+                // Populate club filter
+                const clubFilter = document.getElementById('club-filter');
+                clubFilter.innerHTML = '<option value="all">All Clubs</option>'; // Reset first
+                const clubs = [...new Set(managers.map(manager => manager.club))].sort();
+                
+                clubs.forEach(club => {
+                    const option = document.createElement('option');
+                    option.value = club;
+                    option.textContent = club;
+                    clubFilter.appendChild(option);
+                });
+                
+                // Render all managers
+                renderManagers(managers);
+                
+                // Set up filter event listeners
+                setupFilters(managers);
+                
+            } catch (error) {
+                console.error('Error loading managers data:', error);
+                document.getElementById('managers-container').innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 30px;">
+                        <h3>Error loading managers data</h3>
+                        <p>${error.message}</p>
+                        <p>Please try refreshing the page or check your connection.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderManagers(managers) {
+            const container = document.getElementById('managers-container');
+            
+            managers.forEach(manager => {
+                const card = document.createElement('div');
+                card.className = 'manager-card';
+                card.innerHTML = `
+                    <div class="manager-header">
+                        <div class="manager-rating">${parseFloat(manager.overall).toFixed(1)}</div>
+                        <h3 class="manager-name">${manager.name}</h3>
+                        <p class="manager-club">${manager.club}</p>
+                    </div>
+                    <div class="manager-stats">
+                        <div class="stat-group">
+                            <span class="stat-label"><i class="fas fa-sort-numeric-up"></i>Rank</span>
+                            <span class="stat-value">${manager.age}</span>
+                        </div>
+                        <div class="stat-group">
+                            <span class="stat-label"><i class="fas fa-trophy"></i>Trophies</span>
+                            <span class="stat-value">${manager.trophies_awards}</span>
+                        </div>
+                        <div class="stat-group">
+                            <span class="stat-label"><i class="fas fa-pound-sign"></i>Club Value</span>
+                            <span class="stat-value">${manager.club_total_value}M</span>
+                        </div>
+                        <div class="stat-group">
+                            <span class="stat-label"><i class="fas fa-star"></i>Rating</span>
+                            <span class="stat-value">${manager.manager_rating}</span>
+                        </div>
+                    </div>
+                    <div class="manager-footer">
+                        <a href="manager-detail.html?name=${encodeURIComponent(manager.name)}" class="view-profile">View Profile</a>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+                
+                // Add click event to navigate to detail page
+                card.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('view-profile')) {
+                        window.location.href = `manager-detail.html?name=${encodeURIComponent(manager.name)}`;
+                    }
+                });
+            });
+        }
+        
+        function setupFilters(allManagers) {
+            const sortSelect = document.getElementById('sort-select');
+            const clubFilter = document.getElementById('club-filter');
+            const ratingFilter = document.getElementById('rating-filter');
+            const searchInput = document.getElementById('search-input');
+            const resetButton = document.getElementById('reset-filters');
+            
+            function applyFilters() {
+                let filteredManagers = [...allManagers];
+                
+                // Apply club filter
+                if (clubFilter.value !== 'all') {
+                    filteredManagers = filteredManagers.filter(manager => 
+                        manager.club === clubFilter.value
+                    );
+                }
+                
+                // Apply rating filter
+                const minRating = parseInt(ratingFilter.value);
+                if (minRating > 0) {
+                    filteredManagers = filteredManagers.filter(manager => 
+                        parseFloat(manager.overall) >= minRating
+                    );
+                }
+                
+                // Apply search filter
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                if (searchTerm) {
+                    filteredManagers = filteredManagers.filter(manager => 
+                        manager.name.toLowerCase().includes(searchTerm) || 
+                        manager.club.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                // Apply sorting
+                const sortValue = sortSelect.value;
+                switch(sortValue) {
+                    case 'rating-desc':
+                        filteredManagers.sort((a, b) => parseFloat(b.overall) - parseFloat(a.overall));
+                        break;
+                    case 'rating-asc':
+                        filteredManagers.sort((a, b) => parseFloat(a.overall) - parseFloat(b.overall));
+                        break;
+                    case 'name-asc':
+                        filteredManagers.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    case 'name-desc':
+                        filteredManagers.sort((a, b) => b.name.localeCompare(a.name));
+                        break;
+                    case 'trophies-desc':
+                        filteredManagers.sort((a, b) => b.trophies_awards - a.trophies_awards);
+                        break;
+                }
+                
+                // Clear container and render filtered managers
+                document.getElementById('managers-container').innerHTML = '';
+                
+                if (filteredManagers.length === 0) {
+                    document.getElementById('managers-container').innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 30px;">
+                            <h3>No managers found</h3>
+                            <p>Try adjusting your filters or search criteria.</p>
+                        </div>
+                    `;
+                } else {
+                    renderManagers(filteredManagers);
+                }
+            }
+            
+            // Add event listeners
+            sortSelect.addEventListener('change', applyFilters);
+            clubFilter.addEventListener('change', applyFilters);
+            ratingFilter.addEventListener('change', applyFilters);
+            searchInput.addEventListener('input', applyFilters);
+            
+            resetButton.addEventListener('click', () => {
+                sortSelect.value = 'rating-desc';
+                clubFilter.value = 'all';
+                ratingFilter.value = '0';
+                searchInput.value = '';
+                applyFilters();
+            });
+        }
+        
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadManagersData);
+    </script>
+</body>
+</html> 

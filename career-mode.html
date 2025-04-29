@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Career Mode - Eskimos Road to Glory</title>
+    <meta name="description" content="Explore career mode options for Eskimos Road to Glory, featuring different career paths, achievements, and strategies.">
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pwa.css">
+
+    <style>
+        /* Add background image to the body */
+        body {
+            background-image: url('assets/images/logo.webp');
+            background-size: contain;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #000;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body data-page="career-mode">
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40">
+                <span>ESKIMOS</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="managers.html">Managers</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                <a href="career-tournament.html">Career Tournament</a>
+            </div>
+        </div>
+        
+        <main>
+            <header id="career-header">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <h1>Career Mode</h1>
+                <p class="subtitle">Select your path to glory</p>
+            </header>
+
+            <div class="navigation">
+                <a href="registered-clubs.html" class="nav-item">
+                    <div class="nav-card">
+                        <img src="assets/images/careerhome/C1.webp" alt="Registered Clubs" width="300" height="200">
+                    </div>
+                </a>
+                <a href="player-signing.html" class="nav-item">
+                    <div class="nav-card">
+                        <img src="assets/images/careerhome/C2.webp" alt="Player Signing" width="300" height="200">
+                    </div>
+                </a>
+                <a href="managers.html" class="nav-item">
+                    <div class="nav-card">
+                        <img src="assets/images/careerhome/C3.webp" alt="Managers" width="300" height="200">
+                    </div>
+                </a>
+                <a href="player-status.html" class="nav-item">
+                    <div class="nav-card">
+                        <img src="assets/images/careerhome/C4.webp" alt="Player Status" width="300" height="200">
+                    </div>
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-card">
+                        <img src="assets/images/careerhome/C5.webp" alt="Player Salary" width="300" height="200">
+                    </div>
+                </a>
+            </div>
+
+            <div class="career-description">
+                <h2>Your Career Journey</h2>
+                <p>Embark on an immersive career experience in our football management simulation. Choose your path, develop your skills, and lead your team to glory through strategic decisions, player management, and tactical brilliance.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Achievements</h3>
+                        <p>Unlock trophies and awards as you progress through your career, showcasing your managerial excellence.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progress</h3>
+                        <p>Track your career development with detailed statistics, performance metrics, and milestone achievements.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="career-timeline">
+                <h2 class="section-heading">Career Path</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Rookie</h3>
+                            <p>Begin your journey as a new player or manager. Learn the basics and establish your reputation in the community.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Contender</h3>
+                            <p>Start competing in tournaments and leagues. Build your team and develop your strategic approach.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Professional</h3>
+                            <p>Master advanced techniques and tactics. Qualify for elite tournaments and establish yourself among the top performers.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Champion</h3>
+                            <p>Compete at the highest level. Win major tournaments and earn your place in the Eskimos Road to Glory hall of fame.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="#">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="managers.html">Managers</a>
+                    <a href="manager-ranking.html">Manager Ranking</a>
+                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                    <a href="career-tournament.html">Career Tournament</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/background-mobile-scroll.js"></script>
+    <script src="js/image-protection.js"></script>
+
+    <!-- PWA scripts -->
+    <script src="js/pwa-init.js" defer></script>
+    <script src="js/offline-manager.js" defer></script>
+
+</body>
+</html> 
