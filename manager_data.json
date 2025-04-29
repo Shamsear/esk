@@ -8,6 +8,7 @@
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
       "club_total_value": 1062,
+      "star_rating": 3,
       "manager_rating": 8.6,
       "trophies_awards": 0,
       "squad": {
@@ -18,118 +19,133 @@
             "position": "GK",
             "value": 96,
             "contract": "SEASON 7.5",
-            "salary": 4.8
+            "salary": 4.8,
+            "type": "prime"
           },
           {
             "name": "MATTEO GABBIA",
             "position": "CB",
             "value": 44,
             "contract": "SEASON 7",
-            "salary": 2.2
+            "salary": 2.2,
+            "type": "prime"
           },
           {
             "name": "STRAHINJA PAVLOVIC",
             "position": "CB",
             "value": 44,
             "contract": "SEASON 7",
-            "salary": 2
+            "salary": 2,
+            "type": "prime"
           },
           {
             "name": "SAHAL ABDUL SAMAD",
             "position": "LW",
             "value": 40,
             "contract": "SEASON 7",
-            "salary": 2
+            "salary": 2,
+            "type": "prime"
           },
           {
             "name": "CHEICK DOUCOURE",
             "position": "DM",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "RUBEN LOFTUS-CHEEK",
             "position": "CM",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "prime"
           },
           {
             "name": "TIJJANI REIJNDERS",
             "position": "CM",
             "value": 54,
             "contract": "SEASON 6.5",
-            "salary": 2.7
+            "salary": 2.7,
+            "type": "prime"
           },
           {
             "name": "PATRICK KLUIVERT",
             "position": "ST",
             "value": 100,
             "contract": "SEASON 8",
-            "salary": 5
+            "salary": 5,
+            "type": "legend"
           },
           {
             "name": "EVAIR",
             "position": "ST",
             "value": 100,
             "contract": "SEASON 8",
-            "salary": 5
+            "salary": 5,
+            "type": "legend"
           },
           {
             "name": "PAULO DYBALA",
             "position": "ST",
             "value": 86,
             "contract": "SEASON 8",
-            "salary": 4.3
+            "salary": 4.3,
+            "type": "standard"
           },
           {
             "name": "YASSINE BOUNOU",
             "position": "GK",
             "value": 104,
             "contract": "SEASON 8",
-            "salary": 5.2
+            "salary": 5.2,
+            "type": "standard"
           },
           {
             "name": "SHAY GIVEN",
             "position": "GK",
             "value": 60,
             "contract": "SEASON 8",
-            "salary": 3
+            "salary": 3,
+            "type": "legend"
           },
           {
             "name": "BENOIT BADIASHILE",
             "position": "CB",
             "value": 84,
             "contract": "SEASON 8",
-            "salary": 4.2
+            "salary": 4.2,
+            "type": "standard"
           },
           {
             "name": "ALESSIO ROMAGNOLI",
             "position": "CB",
             "value": 84,
             "contract": "SEASON 8",
-            "salary": 4.2
+            "salary": 4.2,
+            "type": "standard"
           },
           {
             "name": "PHILIPP LIENHART",
             "position": "CB",
             "value": 70,
             "contract": "SEASON 8",
-            "salary": 3.5
+            "salary": 3.5,
+            "type": "standard"
           }
         ]
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
-        "matches": 110,
-        "wins": 76,
-        "draws": 17,
-        "losses": 21,
-        "goals_scored": 21,
-        "goals_conceded": 64,
-        "goal_difference": -25,
-        "clean_sheets": 5
+        "matches": 78,
+        "wins": 23,
+        "draws": 19,
+        "losses": 36,
+        "goals_scored": 124,
+        "goals_conceded": 147,
+        "goal_difference": -23,
+        "clean_sheets": 10
       },
       "seasons": [
         {
@@ -301,6 +317,7 @@
       "r2g_coin_balance": 2051,
       "r2g_token_balance": 155,
       "club_total_value": 520,
+      "star_rating": 2,
       "manager_rating": 15,
       "trophies_awards": 0,
       "squad": {
@@ -311,56 +328,64 @@
             "position": "CM",
             "value": 58,
             "contract": "SEASON 7",
-            "salary": 2.9
+            "salary": 2.9,
+            "type": "standard"
           },
           {
             "name": "ROMARIO",
             "position": "ST",
             "value": 124,
             "contract": "SEASON 8",
-            "salary": 6.2
+            "salary": 6.2,
+            "type": "legend"
           },
           {
             "name": "GERARD MORENO",
             "position": "ST",
             "value": 50,
             "contract": "SEASON 8",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "LUCAS CHEVALIER",
             "position": "GK",
             "value": 52,
             "contract": "SEASON 8",
-            "salary": 2.6
+            "salary": 2.6,
+            "type": "standard"
           },
           {
             "name": "DOMINIK LIVAKOVIC",
             "position": "GK",
             "value": 56,
             "contract": "SEASON 8",
-            "salary": 2.8
+            "salary": 2.8,
+            "type": "standard"
           },
           {
             "name": "GIORGIO SCALVINI",
             "position": "CB",
             "value": 70,
             "contract": "SEASON 8",
-            "salary": 3.5
+            "salary": 3.5,
+            "type": "standard"
           },
           {
             "name": "MIKA MARMOL",
             "position": "CB",
             "value": 60,
             "contract": "SEASON 8",
-            "salary": 3
+            "salary": 3,
+            "type": "standard"
           },
           {
             "name": "ODILON KOSSOUNOU",
             "position": "CB",
             "value": 50,
             "contract": "SEASON 8",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "standard"
           }
         ]
       },
@@ -545,6 +570,7 @@
       "r2g_coin_balance": 2035,
       "r2g_token_balance": 55,
       "club_total_value": 966,
+      "star_rating": 1,
       "manager_rating": -33.1,
       "trophies_awards": 0,
       "squad": {
@@ -555,112 +581,1051 @@
             "position": "GK",
             "value": 50,
             "contract": "SEASON 7.5",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "IDRISSA GUEYE",
             "position": "DM",
             "value": 40,
             "contract": "SEASON 7",
-            "salary": 2
+            "salary": 2,
+            "type": "standard"
           },
           {
             "name": "LUUK DE JONG",
             "position": "CB",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "SEBASTIEN HALLER",
             "position": "ST",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "EDIN DZEKO",
             "position": "ST",
             "value": 32,
             "contract": "SEASON 8",
-            "salary": 2.6
+            "salary": 2.6,
+            "type": "standard"
           },
           {
             "name": "EDDIE NKETIAH",
             "position": "ST",
             "value": 70,
             "contract": "SEASON 8",
-            "salary": 3.5
+            "salary": 3.5,
+            "type": "standard"
           },
           {
             "name": "JHON DURAN",
             "position": "ST",
             "value": 78,
             "contract": "SEASON 8",
-            "salary": 3.9
+            "salary": 3.9,
+            "type": "standard"
           },
           {
             "name": "ERIC CHOUPO MOTING",
             "position": "ST",
             "value": 40,
             "contract": "SEASON 8",
-            "salary": 2
+            "salary": 2,
+            "type": "standard"
           },
           {
             "name": "LUIS MURIEL",
             "position": "ST",
             "value": 48,
             "contract": "SEASON 8",
-            "salary": 2.2
+            "salary": 2.2,
+            "type": "standard"
           },
           {
             "name": "ANDRIY LUNIN",
             "position": "GK",
             "value": 72,
             "contract": "SEASON 8",
-            "salary": 3.6
+            "salary": 3.6,
+            "type": "standard"
           },
           {
             "name": "FRANCESCO ACERBI",
             "position": "CB",
             "value": 90,
             "contract": "SEASON 8",
-            "salary": 4.5
+            "salary": 4.5,
+            "type": "standard"
           },
           {
             "name": "ISSA DIOP",
             "position": "CB",
             "value": 76,
             "contract": "SEASON 8",
-            "salary": 3.8
+            "salary": 3.8,
+            "type": "standard"
           },
           {
             "name": "MAXENCE LACROIX",
             "position": "CB",
             "value": 70,
             "contract": "SEASON 8",
-            "salary": 3.5
+            "salary": 3.5,
+            "type": "standard"
           },
           {
             "name": "IGOR ZUBELDIA",
             "position": "CB",
             "value": 66,
             "contract": "SEASON 8",
-            "salary": 3.3
+            "salary": 3.3,
+            "type": "standard"
           },
           {
             "name": "WILFRIED SINGO",
             "position": "CB",
             "value": 60,
             "contract": "SEASON 8",
-            "salary": 3
+            "salary": 3,
+            "type": "standard"
           },
           {
             "name": "BEN MEE",
             "position": "CB",
             "value": 58,
             "contract": "SEASON 8",
-            "salary": 2.9
+            "salary": 2.9,
+            "type": "standard"
+          }
+        ]
+      },
+      "performance": {
+        "formula": "Sum of all season_stats (excluding sp_tour_stats)",
+        "matches": 73,
+        "wins": 9,
+        "draws": 14,
+        "losses": 50,
+        "goals_scored": 67,
+        "goals_conceded": 182,
+        "goal_difference": -115,
+        "clean_sheets": 2
+      },
+      "seasons": [
+        {
+          "number": 4,
+          "manager_rank": 31,
+          "rank_point": -8.6,
+          "team_income": 1161,
+          "team_expense": 1276,
+          "team_profit": 555,
+          "session_rewards": 670,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 4",
+              "placement": "8th"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Knocked out in Group Stage"
+            },
+            "ucel": {
+              "name": "UCEL",
+              "stage": "Knocked out in Group Stage"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "Round of 16"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 7,
+            "wins": 5,
+            "draws": 24,
+            "losses": 35,
+            "goals_scored": 85,
+            "goals_conceded": -50,
+            "goal_difference": 0,
+            "clean_sheets": 2
+          },
+          "season_stats": {
+            "matches": 36,
+            "wins": 7,
+            "draws": 5,
+            "losses": 24,
+            "goals_scored": 35,
+            "goals_conceded": 85,
+            "goal_difference": -50,
+            "clean_sheets": 2
+          }
+        },
+        {
+          "number": 5,
+          "manager_rank": "-",
+          "rank_point": -26,
+          "team_income": 1218,
+          "team_expense": 1079,
+          "team_profit": 839,
+          "session_rewards": 700,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 4",
+              "placement": "7th"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Knocked out in Group Stage"
+            },
+            "ucel": {
+              "name": "UCEL",
+              "stage": "Knocked out in Group Stage"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "Participated"
+            },
+            "club_world_cup": {
+              "name": "CLUB WC",
+              "stage": "Knocked out in Group Stage"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "Knocked out in Group Stage"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 11,
+            "wins": 1,
+            "draws": 3,
+            "losses": 7,
+            "goals_scored": 9,
+            "goals_conceded": 23,
+            "goal_difference": -18,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 26,
+            "wins": 1,
+            "draws": 6,
+            "losses": 19,
+            "goals_scored": 23,
+            "goals_conceded": 70,
+            "goal_difference": -47,
+            "clean_sheets": 0
+          }
+        },
+        {
+          "number": 6,
+          "status": "ongoing",
+          "manager_rank": "-",
+          "rank_point": 0,
+          "team_income": 0,
+          "team_expense": 0,
+          "team_profit": "-",
+          "session_rewards": 0,
+          "competitions": {
+            "division": {
+              "name": "DIVISION",
+              "placement": "In progress"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Not started/In progress"
+            },
+            "uefa": {
+              "name": "UEFA",
+              "stage": "Not started/In progress"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "In progress"
+            },
+            "world_cup": {
+              "name": "WORLD CUP",
+              "stage": "Not started/In progress"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "In progress"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          }
+        }
+      ],
+      "current_season": 6
+    },
+    {
+      "name": "FAYIS",
+      "age": 27,
+      "club": "ARSENAL FC",
+      "overall": 39.6,
+      "r2g_coin_balance": 1703,
+      "r2g_token_balance": 75,
+      "club_total_value": 990,
+      "star_rating": 2,
+      "manager_rating": -7.7,
+      "trophies_awards": 0,
+      "squad": {
+        "total_players": 15,
+        "players": [
+          {
+            "name": "BETO",
+            "position": "ST",
+            "value": 52,
+            "contract": "SEASON 7.5",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "MATIAS SOULE",
+            "position": "RW",
+            "value": 50,
+            "contract": "SEASON 7",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "RICCARDO ORSOLINI",
+            "position": "RW",
+            "value": 50,
+            "contract": "SEASON 7",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "PARK JI-SUNG",
+            "position": "LW",
+            "value": 100,
+{
+  "managers": [
+    {
+      "name": "MUBASHIR",
+      "age": 22,
+      "club": "AC MILAN",
+      "overall": 82.1,
+      "r2g_coin_balance": 1249,
+      "r2g_token_balance": 115,
+      "club_total_value": 1062,
+      "star_rating": 3,
+      "manager_rating": 8.6,
+      "trophies_awards": 0,
+      "squad": {
+        "total_players": 15,
+        "players": [
+          {
+            "name": "THIBAUT COURTOIS",
+            "position": "GK",
+            "value": 96,
+            "contract": "SEASON 7.5",
+            "salary": 4.8,
+            "type": "prime"
+          },
+          {
+            "name": "MATTEO GABBIA",
+            "position": "CB",
+            "value": 44,
+            "contract": "SEASON 7",
+            "salary": 2.2,
+            "type": "prime"
+          },
+          {
+            "name": "STRAHINJA PAVLOVIC",
+            "position": "CB",
+            "value": 44,
+            "contract": "SEASON 7",
+            "salary": 2,
+            "type": "prime"
+          },
+          {
+            "name": "SAHAL ABDUL SAMAD",
+            "position": "LW",
+            "value": 40,
+            "contract": "SEASON 7",
+            "salary": 2,
+            "type": "prime"
+          },
+          {
+            "name": "CHEICK DOUCOURE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 6.5",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "RUBEN LOFTUS-CHEEK",
+            "position": "CM",
+            "value": 50,
+            "contract": "SEASON 6.5",
+            "salary": 2.5,
+            "type": "prime"
+          },
+          {
+            "name": "TIJJANI REIJNDERS",
+            "position": "CM",
+            "value": 54,
+            "contract": "SEASON 6.5",
+            "salary": 2.7,
+            "type": "prime"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "legend"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "legend"
+          },
+          {
+            "name": "PAULO DYBALA",
+            "position": "ST",
+            "value": 86,
+            "contract": "SEASON 8",
+            "salary": 4.3,
+            "type": "standard"
+          },
+          {
+            "name": "YASSINE BOUNOU",
+            "position": "GK",
+            "value": 104,
+            "contract": "SEASON 8",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "SHAY GIVEN",
+            "position": "GK",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "legend"
+          },
+          {
+            "name": "BENOIT BADIASHILE",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 8",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "ALESSIO ROMAGNOLI",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 8",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "PHILIPP LIENHART",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          }
+        ]
+      },
+      "performance": {
+        "formula": "Sum of all season_stats (excluding sp_tour_stats)",
+        "matches": 78,
+        "wins": 23,
+        "draws": 19,
+        "losses": 36,
+        "goals_scored": 124,
+        "goals_conceded": 147,
+        "goal_difference": -23,
+        "clean_sheets": 10
+      },
+      "seasons": [
+        {
+          "number": 4,
+          "manager_rank": 17,
+          "rank_point": 75.2,
+          "team_income": 1231,
+          "team_expense": 1632,
+          "team_profit": 379,
+          "session_rewards": 780,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 4",
+              "placement": "2nd"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Round of 32"
+            },
+            "ucel": {
+              "name": "UCEL",
+              "stage": "Knocked out in Group Stage"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "Round of 8"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 37,
+            "wins": 15,
+            "draws": 10,
+            "losses": 12,
+            "goals_scored": 71,
+            "goals_conceded": 62,
+            "goal_difference": 9,
+            "clean_sheets": 5
+          }
+        },
+        {
+          "number": 5,
+          "manager_rank": "-",
+          "rank_point": 6.9,
+          "team_income": 1413,
+          "team_expense": 1600,
+          "team_profit": 763,
+          "session_rewards": 950,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 2",
+              "placement": "7th"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Round of 32"
+            },
+            "uel": {
+              "name": "UEL",
+              "stage": "Knocked out in Group Stage"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "Participated"
+            },
+            "club_world_cup": {
+              "name": "CLUB WC",
+              "stage": "Knocked out in Group Stage"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "Round of 16"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 12,
+            "wins": 3,
+            "draws": 1,
+            "losses": 8,
+            "goals_scored": 14,
+            "goals_conceded": 21,
+            "goal_difference": -7,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 29,
+            "wins": 5,
+            "draws": 8,
+            "losses": 16,
+            "goals_scored": 39,
+            "goals_conceded": 64,
+            "goal_difference": -25,
+            "clean_sheets": 5
+          }
+        },
+        {
+          "number": 6,
+          "status": "ongoing",
+          "manager_rank": "-",
+          "rank_point": 0,
+          "team_income": 0,
+          "team_expense": 0,
+          "team_profit": "-",
+          "session_rewards": 0,
+          "competitions": {
+            "division": {
+              "name": "DIVISION",
+              "placement": "In progress"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Not started/In progress"
+            },
+            "uefa": {
+              "name": "UEFA",
+              "stage": "Not started/In progress"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "In progress"
+            },
+            "world_cup": {
+              "name": "WORLD CUP",
+              "stage": "Not started/In progress"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "In progress"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          }
+        }
+      ],
+      "current_season": 6
+    },
+    {
+      "name": "WITCHR",
+      "age": 30,
+      "club": "AFC AJAX",
+      "overall": 25.4,
+      "r2g_coin_balance": 2051,
+      "r2g_token_balance": 155,
+      "club_total_value": 520,
+      "star_rating": 2,
+      "manager_rating": 15,
+      "trophies_awards": 0,
+      "squad": {
+        "total_players": 8,
+        "players": [
+          {
+            "name": "BRAIS MENDEZ",
+            "position": "CM",
+            "value": 58,
+            "contract": "SEASON 7",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "ROMARIO",
+            "position": "ST",
+            "value": 124,
+            "contract": "SEASON 8",
+            "salary": 6.2,
+            "type": "legend"
+          },
+          {
+            "name": "GERARD MORENO",
+            "position": "ST",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "LUCAS CHEVALIER",
+            "position": "GK",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "DOMINIK LIVAKOVIC",
+            "position": "GK",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "GIORGIO SCALVINI",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "MIKA MARMOL",
+            "position": "CB",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "ODILON KOSSOUNOU",
+            "position": "CB",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          }
+        ]
+      },
+      "performance": {
+        "formula": "Sum of all season_stats (excluding sp_tour_stats)",
+        "matches": 75,
+        "wins": 21,
+        "draws": 15,
+        "losses": 39,
+        "goals_scored": 111,
+        "goals_conceded": 147,
+        "goal_difference": -36,
+        "clean_sheets": 6
+      },
+      "seasons": [
+        {
+          "number": 4,
+          "manager_rank": 28,
+          "rank_point": 12.6,
+          "team_income": 1198,
+          "team_expense": 1846,
+          "team_profit": 112,
+          "session_rewards": 760,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 3",
+              "placement": "6th"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Knocked out in Group Stage"
+            },
+            "ucel": {
+              "name": "UCEL",
+              "stage": "Knocked out in Group Stage"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "Knocked out in Group Stage"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 8,
+            "wins": 19,
+            "draws": 46,
+            "losses": 75,
+            "goals_scored": 8,
+            "goals_conceded": -29,
+            "goal_difference": 0,
+            "clean_sheets": 4
+          },
+          "season_stats": {
+            "matches": 35,
+            "wins": 8,
+            "draws": 19,
+            "losses": 46,
+            "goals_scored": 75,
+            "goals_conceded": 8,
+            "goal_difference": -29,
+            "clean_sheets": 4
+          }
+        },
+        {
+          "number": 5,
+          "manager_rank": "-",
+          "rank_point": 12.8,
+          "team_income": 1381,
+          "team_expense": 1582,
+          "team_profit": 769,
+          "session_rewards": 970,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 3",
+              "placement": "5th"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Knocked out in Group Stage"
+            },
+            "ucel": {
+              "name": "UCEL",
+              "stage": "Runners-up"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "Participated"
+            },
+            "club_world_cup": {
+              "name": "CLUB WC",
+              "stage": "Round of 8"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "Knocked out in Group Stage"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 12,
+            "wins": 5,
+            "draws": 3,
+            "losses": 4,
+            "goals_scored": 16,
+            "goals_conceded": 49,
+            "goal_difference": 15,
+            "clean_sheets": 57
+          },
+          "season_stats": {
+            "matches": 28,
+            "wins": 5,
+            "draws": 4,
+            "losses": 16,
+            "goals_scored": 49,
+            "goals_conceded": 15,
+            "goal_difference": -8,
+            "clean_sheets": 2
+          }
+        },
+        {
+          "number": 6,
+          "status": "ongoing",
+          "manager_rank": "-",
+          "rank_point": 0,
+          "team_income": 0,
+          "team_expense": 0,
+          "team_profit": "-",
+          "session_rewards": 0,
+          "competitions": {
+            "division": {
+              "name": "DIVISION",
+              "placement": "In progress"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Not started/In progress"
+            },
+            "uefa": {
+              "name": "UEFA",
+              "stage": "Not started/In progress"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "In progress"
+            },
+            "world_cup": {
+              "name": "WORLD CUP",
+              "stage": "Not started/In progress"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "In progress"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          }
+        }
+      ],
+      "current_season": 6
+    },
+    {
+      "name": "DKM",
+      "age": 33,
+      "club": "AL NASSR",
+      "overall": -26,
+      "r2g_coin_balance": 2035,
+      "r2g_token_balance": 55,
+      "club_total_value": 966,
+      "star_rating": 1,
+      "manager_rating": -33.1,
+      "trophies_awards": 0,
+      "squad": {
+        "total_players": 16,
+        "players": [
+          {
+            "name": "BERND LENO",
+            "position": "GK",
+            "value": 50,
+            "contract": "SEASON 7.5",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "IDRISSA GUEYE",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 7",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "LUUK DE JONG",
+            "position": "CB",
+            "value": 50,
+            "contract": "SEASON 6.5",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "SEBASTIEN HALLER",
+            "position": "ST",
+            "value": 50,
+            "contract": "SEASON 6.5",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "EDIN DZEKO",
+            "position": "ST",
+            "value": 32,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "EDDIE NKETIAH",
+            "position": "ST",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "JHON DURAN",
+            "position": "ST",
+            "value": 78,
+            "contract": "SEASON 8",
+            "salary": 3.9,
+            "type": "standard"
+          },
+          {
+            "name": "ERIC CHOUPO MOTING",
+            "position": "ST",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "LUIS MURIEL",
+            "position": "ST",
+            "value": 48,
+            "contract": "SEASON 8",
+            "salary": 2.2,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRIY LUNIN",
+            "position": "GK",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "FRANCESCO ACERBI",
+            "position": "CB",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "ISSA DIOP",
+            "position": "CB",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "MAXENCE LACROIX",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "IGOR ZUBELDIA",
+            "position": "CB",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
+          },
+          {
+            "name": "WILFRIED SINGO",
+            "position": "CB",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "BEN MEE",
+            "position": "CB",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
           }
         ]
       },
