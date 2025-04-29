@@ -7890,18 +7890,17 @@
       {
         "season": "4-5.5",
         "team": "MOHUN BAGAN AC",
-        "value": "46",
-        "apps": "00"
+        "value": "46"
       },
       {
         "season": "6-8",
         "team": "AFC AJAX",
-        "value": "46",
-        "apps": "00"
+        "value": "46"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/N. TAGLIAFICO_CARD.webp",
-    "id": 374
+    "id": 374,
+    "clubLogo": "assets/images/players/club/AFC AJAX.webp"
   },
   {
     "name": "LUCAS DIGNE",
