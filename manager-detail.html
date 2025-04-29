@@ -730,7 +730,7 @@
             }
             
             .season-header:active::after {
-                opacity: 0.1;
+                opacity: 1;
             }
         }
         
@@ -1537,6 +1537,98 @@
                 border-radius: 20px;
             }
         }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+            
+            .manager-back-link {
+                margin-bottom: 1rem;
+            }
+            
+            .title-container {
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .manager-profile-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .manager-image-container {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1.5rem;
+            }
+            
+            .manager-info {
+                width: 100%;
+            }
+            
+            .stat-blocks {
+                flex-direction: column;
+            }
+            
+            .stat-block {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .footer {
+                padding: 1.5rem 1rem;
+            }
+        }
+        
+        /* Extra Small Screens */
+        @media (max-width: 480px) {
+            .section-header {
+                padding: 1.5rem 0.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .manager-stat {
+                font-size: 0.9rem;
+            }
+            
+            .manager-stat-value {
+                font-size: 1.25rem;
+            }
+            
+            .manager-profile-container {
+                padding: 0.75rem;
+            }
+            
+            .manager-name {
+                font-size: 1.5rem;
+            }
+            
+            .manager-position {
+                font-size: 1rem;
+            }
+            
+            .footer {
+                padding: 1rem 0.75rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body data-page="manager-detail">
@@ -1628,6 +1720,44 @@
     <script src="js/offline-manager.js"></script>
     
     <script>
+        // Handle image loading errors
+        document.addEventListener('DOMContentLoaded', function() {
+            // Array of possible logo paths to try
+            const logoPaths = [
+                'assets/images/logo11.webp',
+                './assets/images/logo11.webp',
+                '/assets/images/logo11.webp',
+                'https://eskimos-r2g.vercel.app/assets/images/logo11.webp',
+                'https://eskr2g.vercel.app/assets/images/logo11.webp'
+            ];
+            
+            // Function to set image src with fallbacks
+            function setImageWithFallbacks(imgElement) {
+                let currentIndex = 0;
+                
+                // Try loading the image
+                function tryNextSource() {
+                    if (currentIndex < logoPaths.length) {
+                        imgElement.src = logoPaths[currentIndex];
+                        currentIndex++;
+                    } else {
+                        // If all sources fail, set a base64 placeholder
+                        imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzM0OThkYiIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9IjcuNSI+RVI8L3RleHQ+PC9zdmc+';
+                    }
+                }
+                
+                // Set up error handler
+                imgElement.onerror = tryNextSource;
+                
+                // Start with first source
+                imgElement.src = logoPaths[currentIndex];
+                currentIndex++;
+            }
+            
+            // Apply to all logo images
+            document.querySelectorAll('img[src*="logo11.webp"]').forEach(setImageWithFallbacks);
+        });
+
         // Mobile menu toggle
         document.getElementById('hamburger').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.add('active');
@@ -1688,8 +1818,27 @@
                     throw new Error(`Failed to load manager data from all sources. Errors: ${errors.join('; ')}`);
                 }
                 
+                // Check if data is an array or has a managers property
+                let managers = [];
+                if (Array.isArray(data)) {
+                    console.log('Data is an array, using directly');
+                    managers = data;
+                } else if (data.managers && Array.isArray(data.managers)) {
+                    console.log('Data has managers property, using data.managers');
+                    managers = data.managers;
+                } else {
+                    console.error('Unexpected data structure:', data);
+                    throw new Error('Invalid data format: managers data not found');
+                }
+                
                 // Find the manager by name
-                const manager = data.managers.find(m => m.name === managerName);
+                console.log(`Looking for manager with name: ${managerName}`);
+                console.log(`Available managers: ${managers.length}`);
+                if (managers.length > 0) {
+                    console.log(`First manager name: ${managers[0].name}`);
+                }
+                
+                const manager = managers.find(m => m.name === managerName);
                 
                 // If manager not found, display error
                 if (!manager) {
