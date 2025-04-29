@@ -1654,9 +1654,39 @@
             }
             
             try {
-                // Fetch manager data
-                const response = await fetch('manager_data.json');
-                const data = await response.json();
+                // Try multiple sources for manager data with fallbacks
+                let data = null;
+                let errors = [];
+                
+                // Array of potential data sources to try
+                const dataSources = [
+                    '/manager_data.json',  // Root path
+                    './manager_data.json', // Relative path
+                    'https://eskimos-r2g.vercel.app/manager_data.json', // Absolute path to Vercel deployment
+                    'manager_data.json'    // Simple path as last resort
+                ];
+                
+                // Try each data source until one works
+                for (const source of dataSources) {
+                    try {
+                        console.log(`Attempting to load manager data from: ${source}`);
+                        const response = await fetch(source);
+                        if (response.ok) {
+                            data = await response.json();
+                            console.log(`Successfully loaded data from: ${source}`);
+                            break; // Exit the loop if successful
+                        } else {
+                            errors.push(`Failed to load from ${source}: ${response.status} ${response.statusText}`);
+                        }
+                    } catch (error) {
+                        errors.push(`Error fetching from ${source}: ${error.message}`);
+                    }
+                }
+                
+                // If no data was loaded, throw an error
+                if (!data) {
+                    throw new Error(`Failed to load manager data from all sources. Errors: ${errors.join('; ')}`);
+                }
                 
                 // Find the manager by name
                 const manager = data.managers.find(m => m.name === managerName);
