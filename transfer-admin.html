@@ -2391,6 +2391,8 @@
                 let totalTransferSpend = 0;
                 let playersAdded = 0;
                 
+                console.log('Processing player transfers...');
+                
                 for (const player of selectedPlayers) {
                     // Get transfer details
                     const valueInput = document.getElementById(`value-${player.id}`);
@@ -2402,6 +2404,13 @@
                     const salary = Math.round(transferValue * 0.05);
                     const playerType = playerTypeSelect ? playerTypeSelect.value : 'standard';
                     
+                    console.log(`Player ${player.name} transfer details:`, {
+                        value: transferValue,
+                        contract: contractYears,
+                        salary: salary,
+                        type: playerType
+                    });
+                    
                     // Track total spend
                     totalTransferSpend += transferValue;
                     
@@ -2410,7 +2419,7 @@
                         name: player.name,
                         position: player.position,
                         value: transferValue,
-                        contract: contractYears,
+                        contract: `SEASON ${seasonStart}`,
                         salary: salary,
                         type: playerType  // Add the player type
                     };
@@ -2420,7 +2429,7 @@
                     playersAdded++;
                     
                     // Update the player in players.json
-                    const playerIndex = playersData.findIndex(p => p.id === player.id);
+                    const playerIndex = playersData.findIndex(p => p.name === player.name);
                     if (playerIndex !== -1) {
                         // Create a deep copy of the player to modify
                         const updatedPlayer = JSON.parse(JSON.stringify(playersData[playerIndex]));
@@ -2428,7 +2437,15 @@
                         // Update club and value
                         updatedPlayer.club = selectedTeam.name;
                         updatedPlayer.value = transferValue;
-                        updatedPlayer.type = playerType;  // Add type to player data
+                        
+                        // Explicitly set the player type - this is the key fix
+                        updatedPlayer.type = playerType;
+                        
+                        console.log(`Updated player ${player.name} in players.json:`, {
+                            club: updatedPlayer.club,
+                            value: updatedPlayer.value,
+                            type: updatedPlayer.type
+                        });
                         
                         // Add the new season stats entry
                         if (!updatedPlayer.stats) {
@@ -2462,9 +2479,11 @@
                 // Update the managers data array
                 managersData[managerIndex] = manager;
                 
-                // Apply player updates
+                // Apply player updates to playersData array
                 updatedPlayers.forEach(({ index, player }) => {
                     playersData[index] = player;
+                    console.log(`Applied update to playersData[${index}]:`, 
+                        { name: player.name, club: player.club, value: player.value, type: player.type });
                 });
                 
                 // Save changes - first try GitHub if configured
@@ -2721,7 +2740,8 @@
                 const results = {
                     playersInManagerButNotInPlayers: [],
                     playersWithWrongClub: [],
-                    playersWithMissingStats: []
+                    playersWithMissingStats: [],
+                    playersWithMissingTypes: []  // Add new category for missing types
                 };
                 
                 // Get all players in manager data
@@ -2734,7 +2754,8 @@
                                 club: manager.club,
                                 value: squadPlayer.value,
                                 position: squadPlayer.position,
-                                manager: manager.name
+                                manager: manager.name,
+                                type: squadPlayer.type || 'standard'  // Include player type, default to standard
                             });
                         });
                     }
@@ -2760,7 +2781,8 @@
                             managerClub: squadPlayer.club,
                             playerDataClub: playerData.club || 'None',
                             manager: squadPlayer.manager,
-                            value: squadPlayer.value  // Include the value from manager data
+                            value: squadPlayer.value,  // Include the value from manager data
+                            type: squadPlayer.type     // Include the type from manager data
                         });
                     }
                     
@@ -2773,7 +2795,8 @@
                                 club: squadPlayer.club,
                                 stats: playerData.stats,
                                 manager: squadPlayer.manager,
-                                value: squadPlayer.value  // Include the value from manager data
+                                value: squadPlayer.value,  // Include the value from manager data
+                                type: squadPlayer.type     // Include the type from manager data
                             });
                         }
                     } else if (squadPlayer.club) {
@@ -2783,7 +2806,27 @@
                             club: squadPlayer.club,
                             stats: [],
                             manager: squadPlayer.manager,
-                            value: squadPlayer.value  // Include the value from manager data
+                            value: squadPlayer.value,  // Include the value from manager data
+                            type: squadPlayer.type     // Include the type from manager data
+                        });
+                    }
+                    
+                    // Check if player type is missing or doesn't match
+                    if (!playerData.type && squadPlayer.type) {
+                        results.playersWithMissingTypes.push({
+                            name: squadPlayer.name,
+                            club: squadPlayer.club,
+                            managerType: squadPlayer.type,
+                            playerDataType: playerData.type || 'None',
+                            manager: squadPlayer.manager
+                        });
+                    } else if (playerData.type !== squadPlayer.type && squadPlayer.type) {
+                        results.playersWithMissingTypes.push({
+                            name: squadPlayer.name,
+                            club: squadPlayer.club,
+                            managerType: squadPlayer.type,
+                            playerDataType: playerData.type || 'None',
+                            manager: squadPlayer.manager
                         });
                     }
                 });
@@ -2824,9 +2867,20 @@
                     }
                 }
                 
+                if (results.playersWithMissingTypes.length > 0) {
+                    message += `<br>Players with missing or mismatched type: ${results.playersWithMissingTypes.length}<br>`;
+                    results.playersWithMissingTypes.slice(0, 5).forEach(p => {
+                        message += `- ${p.name}: Manager shows ${p.managerType}, players.json shows ${p.playerDataType}<br>`;
+                    });
+                    if (results.playersWithMissingTypes.length > 5) {
+                        message += `... and ${results.playersWithMissingTypes.length - 5} more<br>`;
+                    }
+                }
+                
                 if (results.playersInManagerButNotInPlayers.length === 0 &&
                     results.playersWithWrongClub.length === 0 &&
-                    results.playersWithMissingStats.length === 0) {
+                    results.playersWithMissingStats.length === 0 &&
+                    results.playersWithMissingTypes.length === 0) {
                     message += '<br>No inconsistencies found. Data is in sync!';
                 } else {
                     // Add fix button if issues were found
@@ -2898,6 +2952,7 @@
                 showStatusMessage('Fixing data inconsistencies...', true);
                 
                 let fixedCount = 0;
+                let typeFixCount = 0;
                 
                 // Fix players with wrong club
                 results.playersWithWrongClub.forEach(player => {
@@ -2909,6 +2964,13 @@
                         if (typeof player.value !== 'undefined') {
                             console.log(`Updating ${player.name} value from ${playersData[playerIndex].value} to ${player.value} (from manager data)`);
                             playersData[playerIndex].value = player.value;
+                        }
+                        
+                        // Also update player type if available
+                        if (player.type) {
+                            console.log(`Updating ${player.name} type to ${player.type} (from manager data)`);
+                            playersData[playerIndex].type = player.type;
+                            typeFixCount++;
                         }
                         
                         fixedCount++;
@@ -2933,6 +2995,13 @@
                             playersData[playerIndex].value = player.value;
                         }
                         
+                        // Update player type if available
+                        if (player.type) {
+                            console.log(`Updating ${player.name} type to ${player.type} (from manager data)`);
+                            playersData[playerIndex].type = player.type;
+                            typeFixCount++;
+                        }
+                        
                         // Add missing stats with the correct value from manager data
                         const newStat = {
                             season: seasonRange,
@@ -2946,6 +3015,31 @@
                         fixedCount++;
                     }
                 });
+                
+                // Fix players with missing or incorrect types
+                results.playersWithMissingTypes.forEach(player => {
+                    const playerIndex = playersData.findIndex(p => p.name === player.name);
+                    if (playerIndex !== -1 && player.managerType) {
+                        const oldType = playersData[playerIndex].type || 'None';
+                        
+                        // Update player type from manager data
+                        console.log(`Updating ${player.name} type from ${oldType} to ${player.managerType} (from manager data)`);
+                        playersData[playerIndex].type = player.managerType;
+                        
+                        typeFixCount++;
+                        fixedCount++;
+                    }
+                });
+                
+                console.log(`Fixed ${fixedCount} issues, including ${typeFixCount} player type updates`);
+                
+                // Log a sample of the updated players to verify types are set
+                const sampleSize = Math.min(5, playersData.length);
+                console.log(`Sample of ${sampleSize} players from playersData after fixes:`);
+                for (let i = 0; i < sampleSize; i++) {
+                    const player = playersData[i];
+                    console.log(`- ${player.name}: type = ${player.type || 'undefined'}, club = ${player.club || 'None'}`);
+                }
                 
                 // 3. Save changes
                 let saved = false;
@@ -2983,9 +3077,9 @@
                 
                 // Show results
                 if (saved) {
-                    showStatusMessage(`Fixed ${fixedCount} data inconsistencies and saved changes successfully.`, true);
+                    showStatusMessage(`Fixed ${fixedCount} data inconsistencies (including ${typeFixCount} player types) and saved changes successfully.`, true);
                 } else {
-                    showStatusMessage(`Fixed ${fixedCount} data inconsistencies but couldn't save changes permanently.`, false);
+                    showStatusMessage(`Fixed ${fixedCount} data inconsistencies (including ${typeFixCount} player types) but couldn't save changes permanently.`, false);
                 }
                 
             } catch (error) {
