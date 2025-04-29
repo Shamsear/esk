@@ -661,8 +661,23 @@
             "value": 58,
             "contract": "SEASON 8",
             "salary": 2.9
+          },
+          {
+            "name": "JORDI ALBA",
+            "position": "LB",
+            "value": 66,
+            "contract": 2,
+            "salary": 3
+          },
+          {
+            "name": "CAFU",
+            "position": "RB",
+            "value": 106,
+            "contract": 2,
+            "salary": 5
           }
-        ]
+        ],
+        "totalPlayers": 18
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -835,7 +850,8 @@
           }
         }
       ],
-      "current_season": 6
+      "current_season": 6,
+      "clubTotalValue": 1122
     },
     {
       "name": "FAYIS",
@@ -8131,204 +8147,203 @@
     },
     {
       "name": "IEMXSIN",
-    "age": 17,
-    "club": "ASTON VILLA",
-    "overall_rating": 118.8,
-    "r2g_coin_balance": 1574,
-    "r2g_token_balance": 110,
-    "club_total_value": 626,
-    "manager_rating": -3,
+      "age": 17,
+      "club": "ASTON VILLA",
+      "overall_rating": 118.8,
+      "r2g_coin_balance": 1574,
+      "r2g_token_balance": 110,
+      "club_total_value": 626,
+      "manager_rating": -3,
       "trophies": 1,
       "squad": [
         {
-    "name": "VICTOR OSIMHEN",
-    "position": "ST",
-    "value": 126,
-    "contract": "SEASON 7",
-    "salary": 6.3
-    },
-    {
-    "name": "RAPHAEL GUERREIRO",
-    "position": "LB",
-    "value": 54,
-    "contract": "SEASON 7",
-    "salary": 2.7
-    },
-    {
-    "name": "THIAGO SILVA",
-    "position": "CB",
-    "value": 84,
-    "contract": "SEASON 7",
-    "salary": 4.2
-    },
-    {
-    "name": "ROBERT PIRES",
-    "position": "LW",
-    "value": 62,
-    "contract": "SEASON 7",
-    "salary": 3.1
-    },
-    {
-    "name": "MORGAN GIBBS-WHITE",
-    "position": "AM",
-    "value": 68,
-    "contract": "SEASON 7",
-    "salary": 3.4
-    },
-    {
-    "name": "EMMANUEL PETIT",
-    "position": "DM",
-    "value": 122,
-    "contract": "SEASON 7",
-    "salary": 6.1
-    },
-    {
-    "name": "PEDRI",
-    "position": "CM",
-    "value": 110,
-    "contract": "SEASON 7",
-    "salary": 5.5
-    }
-    ],
-    "performance": {
-    "matches_played": 78,
-    "wins": 29,
-    "draws": 8,
-    "losses": 41,
-    "goals_scored": 122,
-    "goals_conceded": 142,
-    "goal_difference": -20,
-    "clean_sheets": 11
-    },
-    "seasons": [
-    {
-    "season_number": 4,
-    "status": "completed",
-    "position": "i",
-    "manager_rank": 6,
-    "manager_points": 118.8,
-    "team_income": 1457,
-    "team_expense": 1890,
-    "team_profit": 502,
-    "season_rewards": 935,
-    "competitions": {
-        "division": {
-          "name": "DIVISION 4",
-          "placement": "1st"
+          "name": "VICTOR OSIMHEN",
+          "position": "ST",
+          "value": 126,
+          "contract": "SEASON 7",
+          "salary": 6.3
         },
-        "super_cup": {
-          "name": "SUPER CUP",
-          "stage": "R8"
+        {
+          "name": "RAPHAEL GUERREIRO",
+          "position": "LB",
+          "value": 54,
+          "contract": "SEASON 7",
+          "salary": 2.7
         },
-        "uel": {
-          "name": "UCEL",
-          "stage": "4th"
+        {
+          "name": "THIAGO SILVA",
+          "position": "CB",
+          "value": 84,
+          "contract": "SEASON 7",
+          "salary": 4.2
         },
-        "authentic": {
-          "name": "AUTHENTIC",
-          "stage": "R16"
+        {
+          "name": "ROBERT PIRES",
+          "position": "LW",
+          "value": 62,
+          "contract": "SEASON 7",
+          "salary": 3.1
+        },
+        {
+          "name": "MORGAN GIBBS-WHITE",
+          "position": "AM",
+          "value": 68,
+          "contract": "SEASON 7",
+          "salary": 3.4
+        },
+        {
+          "name": "EMMANUEL PETIT",
+          "position": "DM",
+          "value": 122,
+          "contract": "SEASON 7",
+          "salary": 6.1
+        },
+        {
+          "name": "PEDRI",
+          "position": "CM",
+          "value": 110,
+          "contract": "SEASON 7",
+          "salary": 5.5
         }
-    },
-    "performance": {
-        "matches": 41,
-        "wins": 23,
-        "draws": 3,
-        "losses": 15,
-        "goals_scored": 81,
-        "goals_conceded": 54,
-        "goal_difference": 27,
-        "clean_sheets": 8
-    }
-    },
-    {
-    "season_number": 5,
-    "status": "completed",
-    "position": "i",
-    "manager_rank": "-",
-    "manager_points": -18.6,
-    "team_income": 1484,
-    "team_expense": 1957,
-    "team_profit": 702,
-    "season_rewards": 1175,
-    "competitions": {
-        "division": {
-          "name": "DIVISION 1",
-          "placement": "7th"
-        },
-        "uel": {
-          "name": "UEL",
-          "stage": "KO"
-        },
-        "super_cup": {
-          "name": "SUPER CUP",
-          "stage": "Round of 32"
-        },
-        "authentic": {
-          "name": "AUTHENTIC",
-          "stage": "R16"
-        }
-      },
+      ],
       "performance": {
-        "matches": 11,
-        "wins": 5,
-        "draws": 1,
-        "losses": 5,
-        "goals_scored": 22,
-        "goals_conceded": 22,
-        "goal_difference": 0,
-        "clean_sheets": 1
-      }
-    },
-    {
-      "season_number": 5,
-      "status": "completed",
-      "position": "i",
-      "manager_rank": "-",
-      "manager_points": 149,
-      "team_income": 1878,
-      "team_expense": 2333,
-      "team_profit": 1120,
-      "season_rewards": 1575,
-      "competitions": {
-        "division": {
-          "name": "DIVISION 3",
-          "placement": "1st"
-        },
-        "uel": {
-          "name": "UEL",
-          "stage": "R8"
-        },
-        "super_cup": {
-          "name": "SUPER CUP",
-          "stage": "3rd"
-        },
-        "kings_cup": {
-          "name": "KINGS CUP",
-          "stage": "R8"
-        },
-        "club_world_cup": {
-          "name": "CLUB WC",
-          "stage": "Not started/In progress"
-        },
-        "authentic": {
-          "name": "AUTHENTIC",
-          "stage": "KO"
-        }
+        "matches_played": 78,
+        "wins": 29,
+        "draws": 8,
+        "losses": 41,
+        "goals_scored": 122,
+        "goals_conceded": 142,
+        "goal_difference": -20,
+        "clean_sheets": 11
       },
-      "performance": {
-        "matches": 36,
-        "wins": 22,
-        "draws": 3,
-        "losses": 11,
-        "goals_scored": 71,
-        "goals_conceded": 54,
-        "goal_difference": 17,
-        "clean_sheets": 12
-      }
+      "seasons": [
+        {
+          "season_number": 4,
+          "status": "completed",
+          "position": "i",
+          "manager_rank": 6,
+          "manager_points": 118.8,
+          "team_income": 1457,
+          "team_expense": 1890,
+          "team_profit": 502,
+          "season_rewards": 935,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 4",
+              "placement": "1st"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "R8"
+            },
+            "uel": {
+              "name": "UCEL",
+              "stage": "4th"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "R16"
+            }
+          },
+          "performance": {
+            "matches": 41,
+            "wins": 23,
+            "draws": 3,
+            "losses": 15,
+            "goals_scored": 81,
+            "goals_conceded": 54,
+            "goal_difference": 27,
+            "clean_sheets": 8
+          }
+        },
+        {
+          "season_number": 5,
+          "status": "completed",
+          "position": "i",
+          "manager_rank": "-",
+          "manager_points": -18.6,
+          "team_income": 1484,
+          "team_expense": 1957,
+          "team_profit": 702,
+          "season_rewards": 1175,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 1",
+              "placement": "7th"
+            },
+            "uel": {
+              "name": "UEL",
+              "stage": "KO"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Round of 32"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "R16"
+            }
+          },
+          "performance": {
+            "matches": 11,
+            "wins": 5,
+            "draws": 1,
+            "losses": 5,
+            "goals_scored": 22,
+            "goals_conceded": 22,
+            "goal_difference": 0,
+            "clean_sheets": 1
+          }
+        },
+        {
+          "season_number": 5,
+          "status": "completed",
+          "position": "i",
+          "manager_rank": "-",
+          "manager_points": 149,
+          "team_income": 1878,
+          "team_expense": 2333,
+          "team_profit": 1120,
+          "season_rewards": 1575,
+          "competitions": {
+            "division": {
+              "name": "DIVISION 3",
+              "placement": "1st"
+            },
+            "uel": {
+              "name": "UEL",
+              "stage": "R8"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "3rd"
+            },
+            "kings_cup": {
+              "name": "KINGS CUP",
+              "stage": "R8"
+            },
+            "club_world_cup": {
+              "name": "CLUB WC",
+              "stage": "Not started/In progress"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "KO"
+            }
+          },
+          "performance": {
+            "matches": 36,
+            "wins": 22,
+            "draws": 3,
+            "losses": 11,
+            "goals_scored": 71,
+            "goals_conceded": 54,
+            "goal_difference": 17,
+            "clean_sheets": 12
+          }
+        }
+      ],
+      "current_season": null
     }
-  ],
-  "current_season": null
-}
   ]
 }
-
