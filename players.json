@@ -872,7 +872,7 @@
     "name": "SERGIO RAMOS",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AL HILAL SFC",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -880,12 +880,12 @@
       {
         "season": "6-7",
         "team": "FREE AGENT",
-        "value": "40",
-        "apps": "00"
+        "value": "40"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. RAMOS_CARD.webp",
-    "id": 42
+    "id": 42,
+    "clubLogo": "assets/images/players/club/AL HILAL SFC.webp"
   },
   {
     "name": "YASIN OZCAN",
