@@ -19623,7 +19623,7 @@
     "name": "LUIS SUAREZ",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "BORUSSIA DORTMUND",
+    "club": "REAL MADRID CF",
     "position": "ST",
     "value": 230,
     "gamesPlayed": 0,
@@ -19631,18 +19631,17 @@
       {
         "season": "4.5-5.5",
         "team": "RED BULL BRAGANTINO",
-        "value": "70",
-        "apps": "00"
+        "value": "70"
       },
       {
         "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
-        "value": "230",
-        "apps": "00"
+        "value": "230"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SUAREZ_CARD.webp",
-    "id": 956
+    "id": 956,
+    "clubLogo": "assets/images/players/club/REAL MADRID CF.webp"
   },
   {
     "name": "LUUK DE JONG",
