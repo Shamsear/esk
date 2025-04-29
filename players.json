@@ -4781,30 +4781,28 @@
     "level": "LEGENDARY",
     "club": "RB LEIPZIG",
     "position": "ST",
-    "value": 214,
+    "value": 21,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
-        "value": "214",
-        "apps": "00"
+        "value": "214"
       },
       {
         "season": "4.5-5",
         "team": "CHELSEA FC(LOAN)",
-        "value": "80",
-        "apps": "00"
+        "value": "80"
       },
       {
         "season": "5-6",
         "team": "RB LEIPZIG",
-        "value": "150",
-        "apps": "00"
+        "value": "150"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/J. CRUYFF_CARD.webp",
-    "id": 229
+    "id": 229,
+    "clubLogo": "assets/images/players/club/RB LEIPZIG.webp"
   },
   {
     "name": "PATRICK KLUIVERT",
