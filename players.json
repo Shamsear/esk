@@ -7882,14 +7882,20 @@
     "name": "NICOLAS TAGLIAFICO",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "LB",
-    "value": 40,
+    "value": 46,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5.5",
         "team": "MOHUN BAGAN AC",
+        "value": "46",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
         "value": "46",
         "apps": "00"
       }
