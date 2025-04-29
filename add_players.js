@@ -5,12 +5,26 @@ let managerData = JSON.parse(fs.readFileSync('./manager_data.json', 'utf8'));
 
 // Players data from the image
 const playersToAdd = [
-  { name: "T. ALEXANDER-ARNOLD", team: "SS LAZIO", value: 102, season: "SEASON 8" },
-  { name: "JOSIP STANISIC", team: "SS LAZIO", value: 68, season: "SEASON 8" },
-  { name: "GIOVANNI DI LORENZO", team: "SSC NAPOLI", value: 56, season: "SEASON 8" },
-  { name: "JOAO MARIO", team: "SSC NAPOLI", value: 52, season: "SEASON 8" },
-  { name: "ARITZ ELUSTONDO", team: "SSC NAPOLI", value: 40, season: "SEASON 8" },
-  { name: "JEREMIE FRIMPONG", team: "TOTTENHAM HOTSPUR", value: 100, season: "SEASON 8" }
+  { name: "MATHEUS SAVIO", team: "LOSC LILLE", value: 58, season: "SEASON 8" },
+  { name: "CESAR HUERTA", team: "LOSC LILLE", value: 40, season: "SEASON 8" },
+  { name: "GALENO", team: "MUMBAI CITY", value: 50, season: "SEASON 8" },
+  { name: "SERGE GNABRY", team: "MUMBAI CITY", value: 72, season: "SEASON 8" },
+  { name: "SAVINHO", team: "NEWCASTLE UNITED", value: 90, season: "SEASON 8" },
+  { name: "FERRAN TORRES", team: "NEWCASTLE UNITED", value: 74, season: "SEASON 8" },
+  { name: "ANSU FATI", team: "NEWCASTLE UNITED", value: 82, season: "SEASON 8" },
+  { name: "JADON SANCHO", team: "NEWCASTLE UNITED", value: 102, season: "SEASON 8" },
+  { name: "PAU VICTOR", team: "NEWCASTLE UNITED", value: 40, season: "SEASON 8" },
+  { name: "K. KVARATSKHELIA", team: "PARIS SAINT-GERMAIN", value: 90, season: "SEASON 8" },
+  { name: "JACK GREALISH", team: "PARIS SAINT-GERMAIN", value: 56, season: "SEASON 8" },
+  { name: "JEREMY DOKU", team: "RAYONG FC", value: 84, season: "SEASON 8" },
+  { name: "MARCUS RASHFORD", team: "RAYONG FC", value: 146, season: "SEASON 8" },
+  { name: "KINGSLEY COMAN", team: "RAYONG FC", value: 88, season: "SEASON 8" },
+  { name: "ALLAN SAINT-MAXIMIN", team: "SANTOS FC", value: 50, season: "SEASON 8" },
+  { name: "CODY GAKPO", team: "SPORTING CP", value: 82, season: "SEASON 8" },
+  { name: "ALEJANDRO GARNACHO", team: "SPORTING CP", value: 54, season: "SEASON 8" },
+  { name: "HARVEY BARNES", team: "SSC NAPOLI", value: 50, season: "SEASON 8" },
+  { name: "MAXIMILINO ARAUJO", team: "SSC NAPOLI", value: 40, season: "SEASON 8" },
+  { name: "CHRISTIAN PULISIC", team: "TOTTENHAM HOTSPUR", value: 82, season: "SEASON 8" }
 ];
 
 // Function to add players to the respective team
@@ -27,11 +41,11 @@ function addPlayerToTeam(player) {
     // Create the new player object
     const newPlayer = {
       "name": player.name,
-      "position": "RB",
+      "position": "LW",
       "value": player.value,
       "contract": player.season,
       "salary": parseFloat(salary),
-      "type": "standard"
+      "type": "standard"  // All players in this list are standard type
     };
     
     // Ensure squad and players array exist
@@ -47,6 +61,9 @@ function addPlayerToTeam(player) {
     
     // Update total_players count
     managerData.managers[managerIndex].squad.total_players += 1;
+    
+    // Update club_total_value
+    managerData.managers[managerIndex].club_total_value += player.value;
     
     console.log(`Added ${player.name} to ${player.team}`);
   } else {
@@ -66,11 +83,11 @@ function addPlayerToTeam(player) {
         "total_players": 1,
         "players": [{
           "name": player.name,
-          "position": "RB",
+          "position": "LW",
           "value": player.value,
           "contract": player.season,
           "salary": parseFloat(salary),
-          "type": "standard"
+          "type": "standard"  // All players in this list are standard type
         }]
       },
       "performance": {
@@ -86,7 +103,7 @@ function addPlayerToTeam(player) {
       },
       "seasons": [
         {
-          "number": 6,
+          "number": 8,
           "status": "ongoing",
           "manager_rank": "-",
           "rank_point": 0,
@@ -142,7 +159,7 @@ function addPlayerToTeam(player) {
           }
         }
       ],
-      "current_season": 6
+      "current_season": 8
     };
     
     managerData.managers.push(newManager);
