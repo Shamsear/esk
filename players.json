@@ -11175,7 +11175,7 @@
         "apps": "12"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/Y. CARRASCO_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/Y. CARRASCO_CARD.webp"
   },
   {
     "name": "JEREMY DOKU",
@@ -11385,7 +11385,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/B. BARCOLA_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/B. BARCOLA_CARD.webp"
   },
   {
     "name": "KAORU MITOMA",
@@ -11529,7 +11529,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/R. STERLING_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/R. STERLING_CARD.webp"
   },
   {
     "name": "ALEJANDRO GARNACHO",
@@ -11655,7 +11655,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/F. TORRES_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/F. TORRES_CARD.webp"
   },
   {
     "name": "ALLAN SAINT-MAXIMIN",
@@ -11775,7 +11775,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/F. CHIESA_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/F. CHIESA_CARD.webp"
   },
   {
     "name": "FEDERICO DIMARCO",
@@ -12003,7 +12003,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/L. SANE_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/L. SANE_CARD.webp"
   },
   {
     "name": "PEDRO NETO",
@@ -14260,6 +14260,366 @@
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/E. CAMBIASSO_CARD.webp"
+  },
+  {
+    "name": "ANTONIE SEMENYO",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. SEMENYO_CARD.webp"
+  },
+  {
+    "name": "ESTEVAO",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/ESTEVAO_CARD.webp"
+  },
+  {
+    "name": "GEOVANY QUENDA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/G. QUENDA_CARD.webp"
+  },
+  {
+    "name": "MARTIN TERRIER",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/M. TERRIER_CARD.webp"
+  },
+  {
+    "name": "ALBERTO MOLEIRO",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. MOLEIRO_CARD.webp"
+  },
+  {
+    "name": "KEREM AKTURKOGLU",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/K. AKTURKOGLU_CARD.webp"
+  },
+  {
+    "name": "MARCUS TEVARNIER",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/M. TEVARNIER_CARD.webp"
+  },
+  {
+    "name": "LLIMAN NDIAYE",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/L. NDIAYE_CARD.webp"
+  },
+  {
+    "name": "MIKKEL DAMSGAARD",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/M. DAMSGAARD_CARD.webp"
+  },
+  {
+    "name": "ELIESSE BEN SEGHIR",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/E. BEN SEGHIR_CARD.webp"
+  },
+  {
+    "name": "THIAGO FERNANDEZ",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/T. FERNANDEZ_CARD.webp"
+  },
+  {
+    "name": "ANTONIO NUSA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. NUSA_CARD.webp"
+  },
+  {
+    "name": "PAU VICTOR",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/P. VICTOR_CARD.webp"
+  },
+  {
+    "name": "MATHEUS SAVIO",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/M. SAVIO_CARD.webp"
+  },
+  {
+    "name": "HAKON HARALDSSON",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/H. HARALDSSON_CARD.webp"
+  },
+  {
+    "name": "CESAR HUERTA",
+    "star": "3-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "LW",
+    "value": 40,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "40",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/3 STAR CARDS/C. HUERTA_CARD.webp"
+  },
+  {
+    "name": "ANTHONY ELANGA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. ELANGA_CARD.webp"
+  },
+  {
+    "name": "FACUNDO TORRES",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/F. TORRES_CARD.webp"
+  },
+  {
+    "name": "AMAD DIALLO",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/A. DIALLO_CARD.webp"
+  },
+  {
+    "name": "GEOVANY QUENDA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "RW",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/G. QUENDA_CARD.webp"
   },
   {
     "name": "EDMILSON",
@@ -16854,7 +17214,7 @@
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/DENILSON_CARD.webp"
   },
   {
-    "name": "SAVIO",
+    "name": "SAVINHO",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -16869,7 +17229,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/SAVIO_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/SAVINHO_CARD.webp"
   },
   {
     "name": "PAULINHO",
@@ -17067,7 +17427,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/S. MAVIDIDI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/S. MAVIDIDI_CARD.webp"
   },
   {
     "name": "STEVEN BERGWIJN",
@@ -17157,7 +17517,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/R. GOSENS_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/R. GOSENS_CARD.webp"
   },
   {
     "name": "NICOLA ZALEWSKI",
@@ -17193,7 +17553,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/R. SESSEGNON_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/R. SESSEGNON_CARD.webp"
   },
   {
     "name": "LUCAS OCAMPOS",
@@ -17415,7 +17775,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/F. ANDERSON_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/F. ANDERSON_CARD.webp"
   },
   {
     "name": "MATIAS SOULE",
@@ -17523,7 +17883,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/F. BERNARDESCHI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/F. BERNARDESCHI_CARD.webp"
   },
   {
     "name": "RITSU DOAN",
@@ -17577,7 +17937,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/P. SOLARI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/P. SOLARI_CARD.webp"
   },
   {
     "name": "FRANCISCO TRINCAO",
@@ -17613,7 +17973,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. DREYER_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/A. DREYER_CARD.webp"
   },
   {
     "name": "ANDREAS SKOV OLSEN",
@@ -17667,7 +18027,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/M. EDWARDS_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/M. EDWARDS_CARD.webp"
   },
   {
     "name": "ARTUR",
