@@ -1099,6 +1099,62 @@
             font-style: italic;
             margin-left: 10px;
         }
+
+        /* Add CSS for player type select */
+        .player-type-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #252525;
+            color: #fff;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        .player-type-select:focus {
+            border-color: #4ecca3;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(78, 204, 163, 0.2);
+        }
+        
+        /* Add visual indicators for player types */
+        .player-type-standard {
+            background-color: #555;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .player-type-prime {
+            background: linear-gradient(135deg, #00CED1, #20B2AA);
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .player-type-legend {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .player-type-prime-legend {
+            background: linear-gradient(135deg, #9400D3, #4B0082);
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -1791,6 +1847,15 @@
                     playerName.className = 'squad-player-name';
                     playerName.textContent = player.name;
                     
+                    // Add player type badge if available
+                    if (player.type) {
+                        const typeBadge = document.createElement('span');
+                        const typeClass = player.type.replace(' ', '-');
+                        typeBadge.className = `player-type-${typeClass}`;
+                        typeBadge.textContent = player.type;
+                        playerName.appendChild(typeBadge);
+                    }
+                    
                     const playerDetails = document.createElement('div');
                     playerDetails.className = 'squad-player-details';
                     playerDetails.textContent = `${player.position} | Value: ${player.value.toLocaleString()} RC | Contract: ${player.contract} years`;
@@ -1953,6 +2018,15 @@
             const nameSpan = document.createElement('div');
             nameSpan.className = 'player-name';
             nameSpan.textContent = player.name;
+            
+            // Add player type badge if available
+            if (player.type) {
+                const typeBadge = document.createElement('span');
+                const typeClass = player.type.replace(' ', '-');
+                typeBadge.className = `player-type-${typeClass}`;
+                typeBadge.textContent = player.type;
+                nameSpan.appendChild(typeBadge);
+            }
             
             const detailsSpan = document.createElement('div');
             detailsSpan.className = 'player-details';
@@ -2177,6 +2251,41 @@
                 contractGroup.appendChild(contractLabel);
                 contractGroup.appendChild(contractInput);
                 
+                // Add player type dropdown
+                const playerTypeGroup = document.createElement('div');
+                playerTypeGroup.className = 'form-group';
+                
+                const playerTypeLabel = document.createElement('label');
+                playerTypeLabel.textContent = 'Player Type:';
+                playerTypeLabel.htmlFor = `player-type-${player.id}`;
+                
+                const playerTypeSelect = document.createElement('select');
+                playerTypeSelect.id = `player-type-${player.id}`;
+                playerTypeSelect.className = 'player-type-select';
+                playerTypeSelect.dataset.id = player.id;
+                
+                // Add player type options
+                const typeOptions = [
+                    { value: 'standard', text: 'Standard' },
+                    { value: 'prime', text: 'Prime' },
+                    { value: 'legend', text: 'Legend' },
+                    { value: 'prime legend', text: 'Prime Legend' }
+                ];
+                
+                typeOptions.forEach(option => {
+                    const optElement = document.createElement('option');
+                    optElement.value = option.value;
+                    optElement.textContent = option.text;
+                    // Set default selection based on player name if possible
+                    if (player.type && player.type === option.value) {
+                        optElement.selected = true;
+                    }
+                    playerTypeSelect.appendChild(optElement);
+                });
+                
+                playerTypeGroup.appendChild(playerTypeLabel);
+                playerTypeGroup.appendChild(playerTypeSelect);
+                
                 // Salary calculation (5% of value)
                 const salaryGroup = document.createElement('div');
                 salaryGroup.className = 'form-group';
@@ -2200,6 +2309,7 @@
                 transferItem.appendChild(nameHeading);
                 transferItem.appendChild(valueGroup);
                 transferItem.appendChild(contractGroup);
+                transferItem.appendChild(playerTypeGroup);  // Add player type before salary
                 transferItem.appendChild(salaryGroup);
                 
                 fragment.appendChild(transferItem);
@@ -2285,10 +2395,12 @@
                     // Get transfer details
                     const valueInput = document.getElementById(`value-${player.id}`);
                     const contractInput = document.getElementById(`contract-${player.id}`);
+                    const playerTypeSelect = document.getElementById(`player-type-${player.id}`);
                     
                     const transferValue = parseInt(valueInput.value) || player.value;
                     const contractYears = parseInt(contractInput.value) || 2;
                     const salary = Math.round(transferValue * 0.05);
+                    const playerType = playerTypeSelect ? playerTypeSelect.value : 'standard';
                     
                     // Track total spend
                     totalTransferSpend += transferValue;
@@ -2299,7 +2411,8 @@
                         position: player.position,
                         value: transferValue,
                         contract: contractYears,
-                        salary: salary
+                        salary: salary,
+                        type: playerType  // Add the player type
                     };
                     
                     // Add to squad
@@ -2315,6 +2428,7 @@
                         // Update club and value
                         updatedPlayer.club = selectedTeam.name;
                         updatedPlayer.value = transferValue;
+                        updatedPlayer.type = playerType;  // Add type to player data
                         
                         // Add the new season stats entry
                         if (!updatedPlayer.stats) {
