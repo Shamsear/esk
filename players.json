@@ -2094,24 +2094,23 @@
     "level": "STANDARD",
     "club": "RB LEIPZIG",
     "position": "CB",
-    "value": 186,
+    "value": 18,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "LOSC LILLE",
-        "value": "150",
-        "apps": "00"
+        "value": "150"
       },
       {
         "season": "5-7",
         "team": "RB LEIPZIG",
-        "value": "186",
-        "apps": "00"
+        "value": "186"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/G. MAGALHAES_CARD.webp",
-    "id": 104
+    "id": 104,
+    "clubLogo": "assets/images/players/club/RB LEIPZIG.webp"
   },
   {
     "name": "MARQUINHOS",
