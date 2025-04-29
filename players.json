@@ -17376,24 +17376,6 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/D. TADIC_CARD.webp"
   },
   {
-    "name": "ANTHONY ELANGA",
-    "star": "4-star-standard",
-    "level": "STANDARD",
-    "club": "FREE AGENT",
-    "position": "LW",
-    "value": 50,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "4-6",
-        "team": "FREE AGENT",
-        "value": "50",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. ELANGA_CARD.webp"
-  },
-  {
     "name": "JAMINTON CAMPAZ",
     "star": "4-star-standard",
     "level": "STANDARD",

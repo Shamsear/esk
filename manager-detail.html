@@ -80,22 +80,17 @@
         .manager-avatar {
             width: 180px;
             height: 180px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 4rem;
-            font-weight: 700;
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.5);
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         
+        /* Remove hover effect */
         .profile-header:hover .manager-avatar {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.6);
+            transform: none;
         }
         
         .manager-info {
@@ -168,55 +163,6 @@
         .badge i {
             color: var(--primary);
             font-size: 1.2rem;
-        }
-        
-        .manager-rating-card {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            min-width: 120px;
-        }
-        
-        .profile-header:hover .manager-rating-card {
-            transform: translateY(-5px) rotate(3deg);
-            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.5);
-        }
-        
-        .rating-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        .rating-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: white;
-            line-height: 1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Add a subtle glow effect to the rating card */
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4); }
-            50% { box-shadow: 0 15px 30px rgba(52, 152, 219, 0.6); }
-            100% { box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4); }
-        }
-        
-        .manager-rating-card {
-            animation: pulse-glow 3s infinite ease-in-out;
         }
         
         /* Profile sections */
@@ -652,7 +598,6 @@
                 margin: 0 auto 25px;
                 width: 140px;
                 height: 140px;
-                font-size: 3rem;
             }
             
             .manager-name {
@@ -674,6 +619,7 @@
                 font-size: 0.9rem;
             }
             
+            /* Remove mobile rating card styles */
             .manager-rating-card {
                 position: relative;
                 top: auto;
@@ -752,7 +698,6 @@
                 height: 100px;
                 font-size: 2.5rem;
                 margin: 0 auto 10px;
-                box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
             }
             
             .manager-name {
@@ -1703,9 +1648,6 @@
                     <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
                 </div>
-                <div class="theme-toggle" id="theme-toggle">
-                    <div class="toggle-circle"></div>
-                </div>
                 <div class="hamburger" id="hamburger">
                     <span></span>
                     <span></span>
@@ -1954,7 +1896,7 @@
             }
             
             headerSection.innerHTML = `
-                <div class="manager-avatar">${initials}</div>
+                <div class="manager-avatar" style="background-image: url('assets/images/club-logos/${manager.club.replace(/\s+/g, '-')}.webp'), url('assets/images/default-club-logo.png')"></div>
                 <div class="manager-info">
                     <h1 class="manager-name">${manager.name}</h1>
                     <p class="manager-club">
@@ -1980,10 +1922,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="manager-rating-card">
-                    <span class="rating-label">Overall</span>
-                    <span class="rating-value">${parseFloat(manager.overall).toFixed(1)}</span>
-                </div>
             `;
             
             profileContainer.appendChild(headerSection);
@@ -1996,8 +1934,8 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <i class="fas fa-star stat-icon"></i>
-                        <span class="stat-value">${manager.manager_rating}</span>
-                        <span class="stat-label">Manager Rating</span>
+                        <span class="stat-value">${parseFloat(manager.overall).toFixed(1)}</span>
+                        <span class="stat-label">Overall</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-trophy stat-icon"></i>
@@ -2033,6 +1971,31 @@
                         <i class="fas fa-times-circle stat-icon"></i>
                         <span class="stat-value">${manager.performance.losses}</span>
                         <span class="stat-label">Losses</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-percentage stat-icon"></i>
+                        <span class="stat-value">${((manager.performance.wins / manager.performance.matches) * 100).toFixed(1)}%</span>
+                        <span class="stat-label">Win Rate</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-futbol stat-icon"></i>
+                        <span class="stat-value">${manager.performance.goals_scored}</span>
+                        <span class="stat-label">Goals Scored</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-shield-alt stat-icon"></i>
+                        <span class="stat-value">${manager.performance.goals_conceded}</span>
+                        <span class="stat-label">Goals Conceded</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-balance-scale-right stat-icon"></i>
+                        <span class="stat-value">${manager.performance.goal_difference}</span>
+                        <span class="stat-label">Goal Difference</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-lock stat-icon"></i>
+                        <span class="stat-value">${manager.performance.clean_sheets}</span>
+                        <span class="stat-label">Clean Sheets</span>
                     </div>
                 </div>
             `;
@@ -2171,6 +2134,22 @@
                                         <span class="stat-value">${season.season_stats.losses || 0}</span>
                                         <span class="stat-label">Losses</span>
                                     </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.season_stats.goals_scored || 0}</span>
+                                        <span class="stat-label">GS</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.season_stats.goals_conceded || 0}</span>
+                                        <span class="stat-label">GC</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.season_stats.goal_difference || 0}</span>
+                                        <span class="stat-label">GD</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.season_stats.clean_sheets || 0}</span>
+                                        <span class="stat-label">CS</span>
+                                    </div>
                                 </div>
                                 
                                 <h3 style="margin: 20px 0 15px; font-size: ${isMobile() ? '1rem' : '1.2rem'};">Competitions</h3>
@@ -2226,42 +2205,6 @@
                     });
                 }, 100);
             }
-            
-            // Add performance section
-            const performanceSection = document.createElement('div');
-            performanceSection.className = 'profile-section';
-            performanceSection.innerHTML = `
-                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Performance Summary</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-percentage stat-icon"></i>
-                        <span class="stat-value">${((manager.performance.wins / manager.performance.matches) * 100).toFixed(1)}%</span>
-                        <span class="stat-label">Win Rate</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-futbol stat-icon"></i>
-                        <span class="stat-value">${manager.performance.goals_scored}</span>
-                        <span class="stat-label">Goals Scored</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-shield-alt stat-icon"></i>
-                        <span class="stat-value">${manager.performance.goals_conceded}</span>
-                        <span class="stat-label">Goals Conceded</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-balance-scale-right stat-icon"></i>
-                        <span class="stat-value">${manager.performance.goal_difference}</span>
-                        <span class="stat-label">Goal Difference</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-lock stat-icon"></i>
-                        <span class="stat-value">${manager.performance.clean_sheets}</span>
-                        <span class="stat-label">Clean Sheets</span>
-                    </div>
-                </div>
-            `;
-            
-            profileContainer.appendChild(performanceSection);
         }
         
         // Load data when page loads
