@@ -6452,13 +6452,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1286,
+      "club_total_value": 1142,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 19,
+        "total_players": 16,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -6586,30 +6586,6 @@
             "value": 80,
             "contract": "SEASON 8",
             "salary": 4,
-            "type": "standard"
-          },
-          {
-            "name": "ANDRE",
-            "position": "DM",
-            "value": 50,
-            "contract": "SEASON 4-6",
-            "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "ALAN VARELA",
-            "position": "DM",
-            "value": 50,
-            "contract": "SEASON 4-6",
-            "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "WILIMAR BARRIOS",
-            "position": "DM",
-            "value": 40,
-            "contract": "SEASON 8",
-            "salary": 2,
             "type": "standard"
           }
         ]
@@ -10417,7 +10393,7 @@
             }
           },
           "awards": {
-            "league_golden_glove": true
+            "league_golden_glove":true
           },
           "sp_tour_stats": {
             "matches": 0,
