@@ -7,21 +7,18 @@
     <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
 
     <!-- DNS prefetch and preconnect -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://assets.mixkit.co">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://assets.mixkit.co" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
-    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
-    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>R2G Admin Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Inline critical CSS -->
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -91,14 +88,15 @@
             height: auto;
         }
         
-        h1 {
+        h1, h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #fff;
             font-weight: 600;
             letter-spacing: 1px;
-            font-size: 28px;
         }
+        
+        h1 { font-size: 28px; }
         
         .form-group {
             margin-bottom: 25px;
@@ -154,10 +152,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .login-btn:active {
-            transform: translateY(0);
-        }
-        
         .back-link {
             text-align: center;
             margin-top: 30px;
@@ -174,11 +168,6 @@
             gap: 8px;
         }
         
-        .back-link a:hover {
-            color: #2980b9;
-            transform: translateX(-5px);
-        }
-        
         .error-message {
             background-color: rgba(231, 76, 60, 0.2);
             border-left: 4px solid #e74c3c;
@@ -189,12 +178,6 @@
             font-size: 15px;
             display: none;
             animation: shake 0.5s ease-in-out;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
         
         .preloader {
@@ -240,18 +223,26 @@
         }
     </style>
 
-    <!-- Performance optimized CSS -->
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="css/performance.css">
-    <link rel="stylesheet" href="css/additional-fixes.css"></noscript>
-
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/performance.css">
+        <link rel="stylesheet" href="css/additional-fixes.css">
+    </noscript>
 </head>
 <body>
     <div class="preloader">
         <div class="loader"></div>
     </div>
     
-    <video class="video-bg" autoplay muted loop playsinline preload="none" src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4"></video>
+    <!-- Video placeholder - will be loaded via JS -->
+    <video class="video-bg" autoplay muted loop playsinline preload="none"></video>
     
     <div id="particles-js"></div>
     
@@ -286,8 +277,9 @@
         </div>
     </div>
     
-    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Combined and optimized script loading -->
     <script>
+        // Remove preloader immediately after DOM content is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Check if already logged in
             const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
@@ -296,6 +288,18 @@
                 return;
             }
             
+            // Hide preloader immediately
+            const preloader = document.querySelector('.preloader');
+            if (preloader) {
+                setTimeout(function() {
+                    preloader.style.opacity = '0';
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 300);
+                }, 200); // Reduced from 500ms to 200ms
+            }
+            
+            // Initialize login functionality
             const loginBtn = document.getElementById('login-btn');
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
@@ -327,9 +331,6 @@
                     return;
                 }
                 
-                // In a real application, you would validate credentials against a server
-                // For demonstration purposes, we're using hardcoded credentials
-                // IMPORTANT: In a production environment, use proper authentication with secure backend validation
                 if (username === 'admin' && password === 'r2gadmin123') {
                     // Add loading effect
                     loginBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Logging in...';
@@ -339,11 +340,10 @@
                     sessionStorage.setItem('adminLoggedIn', 'true');
                     sessionStorage.setItem('adminUsername', username);
                     
-                    // Short delay for better UX
+                    // Redirect to admin panel (reduced delay)
                     setTimeout(() => {
-                        // Redirect to admin panel
                         window.location.href = 'player-admin.html';
-                    }, 800);
+                    }, 400); // Reduced from 800ms to 400ms
                 } else {
                     showError('Invalid username or password');
                     passwordInput.value = '';
@@ -355,62 +355,62 @@
                 errorMessage.style.display = 'block';
             }
             
-            // Init particles.js if available
-            if (window.particlesJS) {
-                particlesJS('particles-js', {
-                    particles: {
-                        number: { value: 80, density: { enable: true, value_area: 800 } },
-                        color: { value: "#3498db" },
-                        shape: { type: "circle" },
-                        opacity: { value: 0.5, random: true },
-                        size: { value: 3, random: true },
-                        line_linked: { enable: true, distance: 150, color: "#3498db", opacity: 0.4, width: 1 },
-                        move: { enable: true, speed: 2 }
-                    },
-                    interactivity: {
-                        detect_on: "canvas",
-                        events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
-                    }
-                });
-            }
-        });
-        
-        // Handle preloader and video background
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load the video after page content
+            // Load video with a small delay but don't wait for it
             setTimeout(function() {
                 const video = document.querySelector('.video-bg');
-                if (video && video.dataset.src) {
-                    const source = document.createElement('source');
-                    source.src = video.dataset.src;
-                    source.type = 'video/mp4';
-                    video.appendChild(source);
+                if (video) {
+                    video.src = "https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-background-with-particles-2232-large.mp4";
                     video.load();
                     video.play().catch(e => console.log('Autoplay prevented:', e));
                 }
-            }, 1000);
-            
-            // Set fade out for preloader
-            window.addEventListener('load', function() {
-                const preloader = document.querySelector('.preloader');
-                if (preloader) {
-                    setTimeout(function() {
-                        preloader.style.opacity = '0';
-                        setTimeout(function() {
-                            preloader.style.display = 'none';
-                        }, 500);
-                    }, 500);
+            }, 500);
+        });
+        
+        // Lazy load particles.js
+        window.addEventListener('load', function() {
+            const particlesScript = document.createElement('script');
+            particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+            particlesScript.onload = function() {
+                if (window.particlesJS) {
+                    particlesJS('particles-js', {
+                        particles: {
+                            number: { value: 60, density: { enable: true, value_area: 800 } }, // Reduced particle count
+                            color: { value: "#3498db" },
+                            shape: { type: "circle" },
+                            opacity: { value: 0.5, random: true },
+                            size: { value: 3, random: true },
+                            line_linked: { enable: true, distance: 150, color: "#3498db", opacity: 0.4, width: 1 },
+                            move: { enable: true, speed: 2 }
+                        },
+                        interactivity: {
+                            detect_on: "canvas",
+                            events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
+                        }
+                    });
                 }
+            };
+            document.body.appendChild(particlesScript);
+            
+            // Load other scripts after critical content is displayed
+            const scriptUrls = [
+                'js/remove-conflicting-styles.js',
+                'js/background-fix.js',
+                'js/background-mobile-scroll.js',
+                'js/script.js',
+                'js/fix-scroll.js',
+                'js/image-protection.js'
+            ];
+            
+            // Load scripts with a small delay between each
+            scriptUrls.forEach((url, index) => {
+                setTimeout(() => {
+                    const script = document.createElement('script');
+                    script.src = url;
+                    document.body.appendChild(script);
+                }, index * 100); // 100ms delay between each script
             });
         });
     </script>
-   <script src="js/remove-conflicting-styles.js"></script>
-    
-   <script src="js/background-fix.js"></script>
-   <script src="js/background-mobile-scroll.js"></script>
-   <script src="js/script.js"></script>
-   <script src="js/fix-scroll.js"></script>
-   <script src="js/image-protection.js"></script>
 </body>
 </html> 
     
