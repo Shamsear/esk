@@ -1585,7 +1585,15 @@
         .star {
             color: gold;
             font-size: 1.4rem;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        
+        .star.empty {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .manager-info:hover .star {
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
         }
         
         /* Add styles for player type badges */
@@ -1886,12 +1894,24 @@
             let starRatingHTML = '';
             if (manager.hasOwnProperty('star_rating')) {
                 starRatingHTML = '<div class="star-rating">';
-                for (let i = 0; i < manager.star_rating; i++) {
-                    starRatingHTML += '<i class="fas fa-star star"></i>';
+                
+                // Convert rating to integer to ensure proper comparison
+                const rating = parseInt(manager.star_rating);
+                
+                // Generate 5 stars
+                for (let i = 1; i <= 5; i++) {
+                    if (i === 3 && rating >= 6) {
+                        // 6th star (special middle star)
+                        starRatingHTML += '<i class="fas fa-sun star" style="color: gold;"></i>';
+                    } else if (i <= rating) {
+                        // Normal filled star
+                        starRatingHTML += '<i class="fas fa-star star"></i>';
+                    } else {
+                        // Empty star
+                        starRatingHTML += '<i class="fas fa-star star empty"></i>';
+                    }
                 }
-                for (let i = manager.star_rating; i < 5; i++) {
-                    starRatingHTML += '<i class="far fa-star star"></i>';
-                }
+                
                 starRatingHTML += '</div>';
             }
             

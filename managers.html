@@ -137,10 +137,10 @@
         }
         
         .star-rating i {
-            color: #3498db;
+            color: gold;
             font-size: 1.2rem;
             margin: 0 2px;
-            text-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
         }
         
         .star-rating i.empty {
@@ -148,7 +148,18 @@
         }
         
         .manager-card:hover .star-rating i {
-            color: #2ecc71;
+            color: gold;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+        }
+        
+        .manager-card:hover .star-rating i.empty {
+            color: rgba(255, 255, 255, 0.2);
+            text-shadow: none;
+        }
+        
+        .manager-card:hover .star-rating i.fa-sun {
+            color: gold !important;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
         }
         
         .manager-photo {
@@ -1393,7 +1404,7 @@
                         </div>
                         <div class="stat-group">
                             <span class="stat-label"><i class="fas fa-star"></i>Overall</span>
-                            <span class="stat-value">${manager.overall}</span>
+                            <span class="stat-value">${manager.overall_rating}</span>
                         </div>
                         <div class="stat-group">
                             <span class="stat-label"><i class="fas fa-pound-sign"></i>Club Value</span>
@@ -1401,7 +1412,7 @@
                         </div>
                         <div class="stat-group">
                             <span class="stat-label"><i class="fas fa-trophy"></i>Trophies</span>
-                            <span class="stat-value">${manager.trophies_awards}</span>
+                            <span class="stat-value">${manager.trophies}</span>
                         </div>
                     </div>
                     <div class="manager-footer">
@@ -1441,7 +1452,7 @@
                 const minRating = parseInt(ratingFilter.value);
                 if (minRating > 0) {
                     filteredManagers = filteredManagers.filter(manager => 
-                        parseFloat(manager.overall) >= minRating
+                        parseFloat(manager.overall_rating) >= minRating
                     );
                 }
                 
@@ -1458,10 +1469,10 @@
                 const sortValue = sortSelect.value;
                 switch(sortValue) {
                     case 'rating-desc':
-                        filteredManagers.sort((a, b) => parseFloat(b.overall) - parseFloat(a.overall));
+                        filteredManagers.sort((a, b) => parseFloat(b.overall_rating) - parseFloat(a.overall_rating));
                         break;
                     case 'rating-asc':
-                        filteredManagers.sort((a, b) => parseFloat(a.overall) - parseFloat(b.overall));
+                        filteredManagers.sort((a, b) => parseFloat(a.overall_rating) - parseFloat(b.overall_rating));
                         break;
                     case 'name-asc':
                         filteredManagers.sort((a, b) => a.name.localeCompare(b.name));
@@ -1470,7 +1481,7 @@
                         filteredManagers.sort((a, b) => b.name.localeCompare(a.name));
                         break;
                     case 'trophies-desc':
-                        filteredManagers.sort((a, b) => b.trophies_awards - a.trophies_awards);
+                        filteredManagers.sort((a, b) => b.trophies - a.trophies);
                         break;
                 }
                 
@@ -1554,10 +1565,19 @@
         function generateStarRating(rating) {
             if (!rating) rating = 0;
             let starsHtml = '';
+            
+            // Convert rating to integer to ensure proper comparison
+            rating = parseInt(rating);
+            
             for (let i = 1; i <= 5; i++) {
-                if (i <= rating) {
+                if (i === 3 && rating >= 6) {
+                    // 6th star (special middle star)
+                    starsHtml += '<i class="fas fa-sun" style="color: gold;"></i>';
+                } else if (i <= rating) {
+                    // Normal filled star
                     starsHtml += '<i class="fas fa-star"></i>';
                 } else {
+                    // Empty star
                     starsHtml += '<i class="fas fa-star empty"></i>';
                 }
             }

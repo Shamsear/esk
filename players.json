@@ -7707,7 +7707,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/5 STAR CARDS/J. KIMMICH_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/JOSHUA KIMMICH_CARD.webp"
   },
   {
     "name": "REECE JAMES",
@@ -9027,8 +9027,171 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. PAVLOVIC_CARD.webp"
+    "imagePath": "../assets/images/players/5 STAR CARDS/A. PAVLOVIC_CARD.webp"
   },
+    {
+      "name": "MARCO REUS",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/MARCO REUS_CARD.webp"
+    },
+    {
+      "name": "THIAGO ALMADA",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/THIAGO ALMADA_CARD.webp"
+    },
+    {
+      "name": "AMINE ADLI",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/AMINE ADLI_CARD.webp"
+    },
+    {
+      "name": "DEISIRE DOUE",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/DEISIRE DOUE_CARD.webp"
+    },
+    {
+      "name": "HEORHII SUDAKOV",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/HEORHII SUDAKOV_CARD.webp"
+    },
+    {
+      "name": "MALIK TILLMAN",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/MALIK TILLMAN_CARD.webp"
+    },
+    {
+      "name": "MORGAN ROGERS",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/MORGAN ROGERS_CARD.webp"
+    },
+    {
+      "name": "NICO PAZ",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/NICO PAZ_CARD.webp"
+    },
+    {
+      "name": "TIAGO PALACIOS",
+      "star": "3-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "AMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/3 STAR CARDS/TIAGO PALACIOS_CARD.webp"
+    },
+  
   {
     "name": "SCOTT MCTOMINAY",
     "star": "4-star-standard",
@@ -9207,7 +9370,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/J. SCHOUTEN_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/JERDY SCHOUTEN_CARD.webp"
   },
   {
     "name": "ROMEO LAVIA",
@@ -9363,7 +9526,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/D. ZAKARIA_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/DENIS ZAKARIA_CARD.webp"
   },
   {
     "name": "IDRISSA GUEYE",
@@ -10677,7 +10840,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/DE ARRASCAETA_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/G. DE ARRASCAETA_CARD.webp"
   },
   {
     "name": "EBERECHI EZE",
@@ -14913,7 +15076,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/DANILO_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/aDANILO_CARD.webp"
   },
   {
     "name": "BILLY GILMOUR",
@@ -15063,7 +15226,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/S. AMRABAT_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/SOFYAN AMRABAT_CARD.webp"
   },
   {
     "name": "MAURO ARAMBARRI",
@@ -16627,7 +16790,7 @@
   },
   {
     "name": "ALEKSANDR GOLOVIN",
-    "star": "3-star-standard",
+    "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
     "position": "AM",
@@ -16641,7 +16804,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. GOLOVIN_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/ALEKSANDR GOLOVIN_CARD.webp"
   },
   {
     "name": "RAPHAEL VEIGA",
@@ -16737,7 +16900,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/PEPE_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/aPEPE_CARD.webp"
   },
   {
     "name": "MARIO PASALIC",
@@ -16863,7 +17026,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. LESCANO_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/ALAN LESCANO_CARD.webp"
   },
   {
     "name": "HAMED TRAORE",
@@ -16881,7 +17044,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/H. TRAORE_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/HAMED TRAORE_CARD.webp"
   },
   {
     "name": "BRAJAN GRUDA",
@@ -17867,6 +18030,150 @@
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/F. BERNARDESCHI_CARD.webp"
   },
+    {
+      "name": "JOHNNY CARDOSO",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/JOHNNY CARDOSO_CARD.webp"
+    },
+    {
+      "name": "CARLOS BALEBA",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/CARLOS BALEBA_CARD.webp"
+    },
+    {
+      "name": "MARC CASADO",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/MARC CASADO_CARD.webp"
+    },
+    {
+      "name": "SAMU COSTA",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/SAMU COSTA_CARD.webp"
+    },
+    {
+      "name": "BENAT PRADOS",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/BENAT PRADOS_CARD.webp"
+    },
+    {
+      "name": "LEWIS COOK",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/LEWIS COOK_CARD.webp"
+    },
+    {
+      "name": "ANGELO STILLER",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/ANGELO STILLER_CARD.webp"
+    },
+    {
+      "name": "NICO GONZALEZ",
+      "star": "4-star-standard",
+      "level": "STANDARD",
+      "club": "FREE AGENT",
+      "position": "DMF",
+      "value": 50,
+      "gamesPlayed": 0,
+      "stats": [
+        {
+          "season": "4-6",
+          "team": "FREE AGENT",
+          "value": "50",
+          "apps": "00"
+        }
+      ],
+      "imagePath": "../assets/images/players/4 STAR CARDS/NICO GONZALEZ_CARD.webp"
+    },  
   {
     "name": "RITSU DOAN",
     "star": "4-star-standard",
@@ -19647,7 +19954,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/S. DRIUSSI_CARD.webp"
+    "imagePath": "../assets/images/players/3 STAR CARDS/SEBASTIAN DRIUSSI_CARD.webp"
   },
   {
     "name": "PORTU",
@@ -19683,7 +19990,7 @@
         "apps": "00"
       }
     ],
-    "imagePath": "../assets/images/players/3 STAR CARDS/J. KLUIVERT_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/JUSTIN KLUIVERT_CARD.webp"
   },
   {
     "name": "SOFYAN AMBRABAT",
