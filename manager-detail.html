@@ -1919,7 +1919,7 @@
             }
             
             headerSection.innerHTML = `
-                <div class="manager-avatar" style="background-image: url('assets/images/club-logos/${encodeURIComponent(manager.club.replace(/\s+/g, '-'))}.webp'), url('assets/images/default-club-logo.png')"></div>
+                <div class="manager-avatar" style="background-image: url('assets/images/club-logos/${encodeURIComponent(manager.club.replace(/\s+/g, '-').toLowerCase())}.webp'),url('assets/images/club-logos/${encodeURIComponent(manager.club.replace(/\s+/g, '-'))}.webp'), url('assets/images/default-club-logo.png')"></div>
                 <div class="manager-info">
                     <h1 class="manager-name">${manager.name}</h1>
                     <p class="manager-club">
