@@ -10051,7 +10051,7 @@
     "name": "WILIMAR BARRIOS",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -10059,12 +10059,12 @@
       {
         "season": "4-6",
         "team": "SEPAHAN SC",
-        "value": "108",
-        "apps": "00"
+        "value": "108"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/W. BARRIOS_CARD.webp",
-    "id": 479
+    "id": 479,
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "KALVIN PHILLIPS",
