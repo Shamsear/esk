@@ -6452,13 +6452,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1246,
+      "club_total_value": 1286,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 18,
+        "total_players": 19,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -6602,6 +6602,14 @@
             "value": 50,
             "contract": "SEASON 4-6",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "WILIMAR BARRIOS",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
             "type": "standard"
           }
         ]
