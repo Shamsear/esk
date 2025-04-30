@@ -4,7 +4,7 @@
     <!-- PWA support -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#3498db">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
     <link rel="apple-touch-icon" href="./assets/images/logo11.webp">
@@ -1403,12 +1403,15 @@
         }
         
         .position-GK { background-color: #ffc107; color: #333; }
-        .position-CB { background-color: #4caf50; color: white; }
-        .position-LB, .position-RB { background-color: #8bc34a; color: white; }
-        .position-DM { background-color: #009688; color: white; }
-        .position-CM { background-color: #3f51b5; color: white; }
-        .position-LW, .position-RW { background-color: #673ab7; color: white; }
-        .position-ST { background-color: #e91e63; color: white; }
+        .position-CB { background-color: #3f51b5; color: white; }
+        .position-LB { background-color: #5c6bc0; color: white; }
+        .position-RB { background-color: #7986cb; color: white; }
+        .position-DM { background-color: #43a047; color: white; }
+        .position-CM { background-color: #4caf50; color: white; }
+        .position-AM { background-color: #66bb6a; color: white; }
+        .position-LW { background-color: #ec407a; color: white; }
+        .position-RW { background-color: #d81b60; color: white; }
+        .position-ST { background-color: #e53935; color: white; }
         
         /* Enhanced back link styling without changing position */
         .back-link {
@@ -1916,7 +1919,7 @@
             }
             
             headerSection.innerHTML = `
-                <div class="manager-avatar" style="background-image: url('assets/images/club-logos/${manager.club.replace(/\s+/g, '-')}.webp'), url('assets/images/default-club-logo.png')"></div>
+                <div class="manager-avatar" style="background-image: url('assets/images/club-logos/${encodeURIComponent(manager.club.replace(/\s+/g, '-'))}.webp'), url('assets/images/default-club-logo.png')"></div>
                 <div class="manager-info">
                     <h1 class="manager-name">${manager.name}</h1>
                     <p class="manager-club">
@@ -2066,10 +2069,10 @@
             // Sort players by position (GK first, then defenders, midfielders, forwards)
             const positionOrder = {
                 'GK': 1,
-                'CB': 2, 'LB': 2, 'RB': 2,
-                'DM': 3, 'CM': 4, 'CAM': 5,
-                'LW': 6, 'RW': 6,
-                'ST': 7
+                'CB': 2, 'LB': 3, 'RB': 4,
+                'DM': 5, 'CM': 6, 'AM': 7,
+                'LW': 8, 'RW': 9,
+                'ST': 10
             };
             
             const sortedPlayers = [...manager.squad.players].sort((a, b) => {

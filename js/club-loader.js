@@ -313,11 +313,25 @@ function createClubDropdown(options) {
         dropdown.style.display = 'block';
     });
     
+    // Track if mouse is in the dropdown
+    let mouseInDropdown = false;
+    
+    dropdown.addEventListener('mouseenter', () => {
+        mouseInDropdown = true;
+    });
+    
+    dropdown.addEventListener('mouseleave', () => {
+        mouseInDropdown = false;
+    });
+    
     input.addEventListener('blur', () => {
-        // Hide dropdown after a short delay (allows clicking on options)
+        // Hide dropdown after a longer delay (500ms instead of 150ms)
+        // This gives more time to select an option and prevents accidental closures
         setTimeout(() => {
-            dropdown.style.display = 'none';
-        }, 150);
+            if (!mouseInDropdown) { // Only close if mouse is not in dropdown
+                dropdown.style.display = 'none';
+            }
+        }, 500);
     });
     
     return container;
@@ -352,19 +366,21 @@ function populateClubOptions(container, inputElement, searchTerm = '', onSelect 
         ? clubCache.clubs.filter(club => club.name.toLowerCase().includes(lowerSearchTerm))
         : clubCache.clubs;
     
-    // Limit to maximum of 20 results to prevent UI lag
-    const maxResults = Math.min(filteredClubs.length, 20);
-    
     if (filteredClubs.length === 0) {
         const noResults = document.createElement('div');
         noResults.className = 'club-option';
         noResults.textContent = 'No clubs found';
         fragment.appendChild(noResults);
     } else {
-        for (let i = 0; i < maxResults; i++) {
-            const club = filteredClubs[i];
+        // Show all filtered clubs without limit
+        filteredClubs.forEach(club => {
             const option = document.createElement('div');
             option.className = 'club-option';
+            
+            // Mark as selected if it matches the current input value
+            if (inputElement.value === club.name) {
+                option.classList.add('active');
+            }
             
             const logo = document.createElement('img');
             logo.className = 'club-logo';
@@ -407,8 +423,27 @@ function populateClubOptions(container, inputElement, searchTerm = '', onSelect 
             option.appendChild(logo);
             option.appendChild(name);
             
-            option.addEventListener('click', () => {
+            // Improved click handling with mouse events
+            option.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // Prevent blur on the input
+                
+                // Remove active class from all options
+                container.querySelectorAll('.club-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                
+                // Add active class to selected option
+                option.classList.add('active');
+                
+                // Set input value
                 inputElement.value = club.name;
+                
+                // Keep dropdown open until mouseup
+                e.stopPropagation();
+            });
+            
+            option.addEventListener('mouseup', () => {
+                // Only close dropdown and trigger callback on mouseup
                 container.style.display = 'none';
                 
                 if (typeof onSelect === 'function') {
@@ -417,17 +452,7 @@ function populateClubOptions(container, inputElement, searchTerm = '', onSelect 
             });
             
             fragment.appendChild(option);
-        }
-        
-        // Add "more results" indicator if needed
-        if (filteredClubs.length > maxResults) {
-            const moreMessage = document.createElement('div');
-            moreMessage.className = 'club-option';
-            moreMessage.style.textAlign = 'center';
-            moreMessage.style.color = '#aaa';
-            moreMessage.textContent = `And ${filteredClubs.length - maxResults} more results...`;
-            fragment.appendChild(moreMessage);
-        }
+        });
     }
     
     // Append all elements at once
