@@ -1930,7 +1930,7 @@
                         </div>
                         <div class="badge">
                             <i class="fas fa-trophy"></i>
-                            <span>Trophies: ${manager.trophies_awards}</span>
+                            <span>Trophies: ${manager.trophies}</span>
                         </div>
                         <div class="badge">
                             <i class="fas fa-coins"></i>
@@ -1954,13 +1954,13 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <i class="fas fa-star stat-icon"></i>
-                        <span class="stat-value">${parseFloat(manager.overall).toFixed(1)}</span>
+                        <span class="stat-value">${parseFloat(manager.overall_rating).toFixed(1)}</span>
                         <span class="stat-label">Overall</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-trophy stat-icon"></i>
-                        <span class="stat-value">${manager.trophies_awards}</span>
-                        <span class="stat-label">Trophies & Awards</span>
+                        <span class="stat-value">${manager.trophies}</span>
+                        <span class="stat-label">Trophies</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-pound-sign stat-icon"></i>
@@ -1968,9 +1968,9 @@
                         <span class="stat-label">Club Value</span>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-users stat-icon"></i>
-                        <span class="stat-value">${manager.squad.total_players}</span>
-                        <span class="stat-label">Squad Size</span>
+                        <i class="fas fa-medal stat-icon"></i>
+                        <span class="stat-value">${manager.awards}</span>
+                        <span class="stat-label">Awards</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-futbol stat-icon"></i>
@@ -1993,11 +1993,6 @@
                         <span class="stat-label">Losses</span>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-percentage stat-icon"></i>
-                        <span class="stat-value">${((manager.performance.wins / manager.performance.matches) * 100).toFixed(1)}%</span>
-                        <span class="stat-label">Win Rate</span>
-                    </div>
-                    <div class="stat-card">
                         <i class="fas fa-futbol stat-icon"></i>
                         <span class="stat-value">${manager.performance.goals_scored}</span>
                         <span class="stat-label">Goals Scored</span>
@@ -2016,6 +2011,16 @@
                         <i class="fas fa-lock stat-icon"></i>
                         <span class="stat-value">${manager.performance.clean_sheets}</span>
                         <span class="stat-label">Clean Sheets</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-percentage stat-icon"></i>
+                        <span class="stat-value">${((manager.performance.wins / manager.performance.matches) * 100).toFixed(1)}%</span>
+                        <span class="stat-label">Win Rate</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-icon"></i>
+                        <span class="stat-value">${manager.squad.total_players}</span>
+                        <span class="stat-label">Squad Size</span>
                     </div>
                 </div>
             `;
