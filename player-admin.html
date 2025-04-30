@@ -655,7 +655,8 @@
                 getBranch: function() {
                     return localStorage.getItem('githubBranch') || 'main';
                 },
-                filePath: 'players.json'
+                filePath: 'players.json',
+                managerFilePath: 'manager_data.json'
             };
             
             return githubConfig.isConfigured();
@@ -722,6 +723,7 @@
 
         // Global variables
         let playersData = [];
+        let managerData = null; // Add manager data
         let currentPlayer = null;
         let clubsList = [];
         let isNewPlayer = false;
@@ -768,18 +770,26 @@
                         const serverAvailable = await isServerAvailable();
                         
                         if (serverAvailable) {
-                            // Load from server
-                            const response = await fetch('http://localhost:3000/players.json');
-                            if (response.ok) {
-                                playersData = await response.json();
-                                console.log('Loaded data from Node.js server');
+                            // Load players from server
+                            const playersResponse = await fetch('http://localhost:3000/players.json');
+                            if (playersResponse.ok) {
+                                playersData = await playersResponse.json();
+                                console.log('Loaded players data from Node.js server');
+                                
+                                // Load manager data from server
+                                const managerResponse = await fetch('http://localhost:3000/manager_data.json');
+                                if (managerResponse.ok) {
+                                    managerData = await managerResponse.json();
+                                    console.log('Loaded manager data from Node.js server');
+                                }
+                                
                                 resolve(true);
                                 return;
                             }
                         }
                         
-                        // Fallback: Load from file
-                        console.log('Server not available, loading from file');
+                        // Fallback: Load from files
+                        console.log('Server not available, loading from files');
                         const fallbackResponse = await fetch('players.json');
                         if (fallbackResponse.ok) {
                             playersData = await fallbackResponse.json();
@@ -791,6 +801,17 @@
                             }));
                             
                             console.log('Players loaded from file:', playersData.length);
+                            
+                            // Also load manager data from file
+                            try {
+                                const managerResponse = await fetch('manager_data.json');
+                                if (managerResponse.ok) {
+                                    managerData = await managerResponse.json();
+                                    console.log('Manager data loaded from file');
+                                }
+                            } catch (managerError) {
+                                console.error('Error loading manager data:', managerError);
+                            }
                             
                             // Show server warning
                             showStatusMessage('Warning: Data server is not running. Changes will not be saved.', false);
@@ -1367,6 +1388,11 @@
                 // Reselect the current player in the list
                 selectPlayer(currentPlayer.id);
                 
+                // Sync changes to manager data
+                if (managerData) {
+                    syncPlayerToManagerData(updatedPlayer);
+                }
+                
                 // Show immediate success message
                 showStatusMessage('Player saved in memory. Saving to storage...', true);
                 
@@ -1394,7 +1420,7 @@
                     const serverAvailable = await isServerAvailable();
                     if (serverAvailable) {
                         try {
-                            // Save updated data to JSON file using the Node.js server
+                            // Save updated players data to JSON file using the Node.js server
                             const saveResponse = await fetch('http://localhost:3000/save-players', {
                                 method: 'POST',
                                 headers: {
@@ -1406,6 +1432,21 @@
                             if (!saveResponse.ok) {
                                 const errorData = await saveResponse.json();
                                 throw new Error(errorData.message || 'Failed to save changes');
+                            }
+                            
+                            // Also save manager data if it exists
+                            if (managerData) {
+                                const saveManagerResponse = await fetch('http://localhost:3000/save-managers', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(managerData)
+                                });
+                                
+                                if (!saveManagerResponse.ok) {
+                                    console.error('Failed to save manager data');
+                                }
                             }
                             
                             savedPermanently = true;
@@ -1431,6 +1472,142 @@
             }
         }
 
+        // Sync player changes to manager data
+        function syncPlayerToManagerData(player) {
+            if (!managerData || !managerData.managers) {
+                console.log('No manager data available for syncing');
+                return;
+            }
+            
+            const playerName = player.name;
+            const playerPosition = player.position;
+            const playerValue = player.value;
+            const playerClub = player.club;
+            const playerContract = player.stats && player.stats.length > 0 ? `SEASON ${player.stats[0].season}` : "SEASON 7";
+            const playerType = player.level.toLowerCase();
+            
+            // Calculate a default salary based on player value (5% of value as a rough estimate)
+            const playerSalary = (playerValue * 0.05).toFixed(1);
+            
+            // Check if the player exists in any manager's squad
+            let foundInSquad = false;
+            let needsTransfer = false;
+            let oldManager = null;
+            let newManager = null;
+            
+            // First, find the player's current squad and the target squad
+            managerData.managers.forEach(manager => {
+                if (manager.squad && manager.squad.players) {
+                    // Check if player exists in this manager's squad
+                    const playerIndex = manager.squad.players.findIndex(p => 
+                        p.name.toUpperCase() === playerName.toUpperCase() && 
+                        p.position === playerPosition
+                    );
+                    
+                    if (playerIndex !== -1) {
+                        foundInSquad = true;
+                        // Check if the club has changed (player transfer needed)
+                        if (manager.club !== playerClub) {
+                            needsTransfer = true;
+                            oldManager = manager;
+                        } else {
+                            // Same club, just update the player details
+                            manager.squad.players[playerIndex].value = playerValue;
+                            
+                            // Don't override existing contract and salary if they exist
+                            if (!manager.squad.players[playerIndex].contract) {
+                                manager.squad.players[playerIndex].contract = playerContract;
+                            }
+                            if (!manager.squad.players[playerIndex].salary) {
+                                manager.squad.players[playerIndex].salary = parseFloat(playerSalary);
+                            }
+                            if (!manager.squad.players[playerIndex].type) {
+                                manager.squad.players[playerIndex].type = playerType;
+                            }
+                            
+                            // Recalculate club total value
+                            recalculateManagerTotalValue(manager);
+                            console.log(`Updated player "${playerName}" in ${manager.club}'s squad`);
+                        }
+                    }
+                    
+                    // Check if this is the target manager for a transfer
+                    if (manager.club === playerClub) {
+                        newManager = manager;
+                    }
+                }
+            });
+            
+            // Handle player transfers if needed
+            if (needsTransfer && oldManager && newManager) {
+                // 1. Remove the player from the old squad
+                const oldPlayerIndex = oldManager.squad.players.findIndex(p => 
+                    p.name.toUpperCase() === playerName.toUpperCase() && 
+                    p.position === playerPosition
+                );
+                
+                if (oldPlayerIndex !== -1) {
+                    // Get player data before removing (to preserve contract info if available)
+                    const playerData = oldManager.squad.players[oldPlayerIndex];
+                    
+                    // Remove from old squad
+                    oldManager.squad.players.splice(oldPlayerIndex, 1);
+                    oldManager.squad.total_players = oldManager.squad.players.length;
+                    
+                    // 2. Add the player to the new squad with updated info
+                    const newPlayerData = {
+                        name: playerName,
+                        position: playerPosition,
+                        value: playerValue,
+                        contract: playerData.contract || playerContract,
+                        salary: playerData.salary || parseFloat(playerSalary),
+                        type: playerData.type || playerType
+                    };
+                    
+                    newManager.squad.players.push(newPlayerData);
+                    newManager.squad.total_players = newManager.squad.players.length;
+                    
+                    // 3. Recalculate both squads' total values
+                    recalculateManagerTotalValue(oldManager);
+                    recalculateManagerTotalValue(newManager);
+                    
+                    console.log(`Transferred player "${playerName}" from ${oldManager.club} to ${newManager.club}`);
+                }
+            } else if (!foundInSquad && playerClub && newManager) {
+                // Player not found in any squad but has a club assigned - add to the new club
+                const newPlayerData = {
+                    name: playerName,
+                    position: playerPosition,
+                    value: playerValue,
+                    contract: playerContract,
+                    salary: parseFloat(playerSalary),
+                    type: playerType
+                };
+                
+                newManager.squad.players.push(newPlayerData);
+                newManager.squad.total_players = newManager.squad.players.length;
+                recalculateManagerTotalValue(newManager);
+                
+                console.log(`Added new player "${playerName}" to ${newManager.club}'s squad`);
+            } else if (!foundInSquad) {
+                console.log(`Player "${playerName}" not found in any squad and no matching club found`);
+            }
+        }
+        
+        // Recalculate manager's club total value
+        function recalculateManagerTotalValue(manager) {
+            if (!manager.squad || !manager.squad.players) return;
+            
+            let totalValue = 0;
+            manager.squad.players.forEach(player => {
+                totalValue += parseInt(player.value) || 0;
+            });
+            
+            // Update the manager's club total value
+            manager.club_total_value = totalValue;
+            console.log(`Recalculated total value for ${manager.name}: ${totalValue}`);
+        }
+
         // Delete player
         async function deletePlayer() {
             if (!currentPlayer || isNewPlayer) return;
@@ -1442,6 +1619,8 @@
             try {
                 // Store player ID for later use
                 const playerId = Number(currentPlayer.id);
+                const playerName = currentPlayer.name;
+                const playerPosition = currentPlayer.position;
                 
                 // Remove player from main array
                 const playerIndex = playersData.findIndex(p => Number(p.id) === playerId);
@@ -1452,6 +1631,30 @@
                     const filteredIndex = filteredPlayers.findIndex(p => Number(p.id) === playerId);
                     if (filteredIndex !== -1) {
                         filteredPlayers.splice(filteredIndex, 1);
+                    }
+                    
+                    // Remove from manager data if present
+                    if (managerData && managerData.managers) {
+                        managerData.managers.forEach(manager => {
+                            if (manager.squad && manager.squad.players) {
+                                const squadIndex = manager.squad.players.findIndex(p => 
+                                    p.name.toUpperCase() === playerName.toUpperCase() && 
+                                    p.position === playerPosition
+                                );
+                                
+                                if (squadIndex !== -1) {
+                                    manager.squad.players.splice(squadIndex, 1);
+                                    
+                                    // Update player count
+                                    manager.squad.total_players = manager.squad.players.length;
+                                    
+                                    // Recalculate club total value
+                                    recalculateManagerTotalValue(manager);
+                                    
+                                    console.log(`Removed player "${playerName}" from ${manager.name}'s squad`);
+                                }
+                            }
+                        });
                     }
                     
                     // Calculate new total pages
@@ -1485,6 +1688,21 @@
                             if (!saveResponse.ok) {
                                 const errorData = await saveResponse.json();
                                 throw new Error(errorData.message || 'Failed to save changes');
+                            }
+                            
+                            // Also save manager data if it exists
+                            if (managerData) {
+                                const saveManagerResponse = await fetch('http://localhost:3000/save-managers', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(managerData)
+                                });
+                                
+                                if (!saveManagerResponse.ok) {
+                                    console.error('Failed to save manager data');
+                                }
                             }
                         } else {
                             // Server not available, show warning
@@ -1799,7 +2017,7 @@
                     branch: githubConfig.getBranch()
                 };
                 
-                // Get the current file to get its SHA (required for the GitHub API)
+                // Get the current players file to get its SHA (required for the GitHub API)
                 const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
                     headers: {
                         'Authorization': `token ${githubConfig.getToken()}`
@@ -1853,6 +2071,65 @@
                 if (!commitResponse.ok) {
                     const errorData = await commitResponse.json();
                     throw new Error(`GitHub API error: ${errorData.message}`);
+                }
+                
+                // If manager data exists, save it too
+                if (managerData) {
+                    // Get manager data file path
+                    const managerPath = githubConfig.managerFilePath || 'manager_data.json';
+                    
+                    // Get the current manager file to get its SHA
+                    const managerInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}?ref=${repoDetails.branch}`, {
+                        headers: {
+                            'Authorization': `token ${githubConfig.getToken()}`
+                        }
+                    });
+                    
+                    let managerSHA = '';
+                    let managerExists = true;
+                    
+                    if (managerInfoResponse.status === 404) {
+                        // File doesn't exist yet
+                        managerExists = false;
+                    } else if (!managerInfoResponse.ok) {
+                        console.error('Error getting manager file info');
+                    } else {
+                        // File exists, get its SHA
+                        const fileInfo = await managerInfoResponse.json();
+                        managerSHA = fileInfo.sha;
+                    }
+                    
+                    // Prepare the manager data content
+                    const managerJsonString = JSON.stringify(managerData, null, 2);
+                    const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
+                    
+                    // Prepare the manager request body
+                    const managerRequestBody = {
+                        message: `Update manager data - ${new Date().toISOString()}`,
+                        content: managerContent,
+                        branch: repoDetails.branch
+                    };
+                    
+                    // Add SHA if the file exists
+                    if (managerExists) {
+                        managerRequestBody.sha = managerSHA;
+                    }
+                    
+                    // Commit the updated manager file
+                    const managerCommitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${githubConfig.getToken()}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(managerRequestBody)
+                    });
+                    
+                    if (!managerCommitResponse.ok) {
+                        console.error('Failed to save manager data to GitHub');
+                    } else {
+                        console.log('Manager data saved to GitHub');
+                    }
                 }
                 
                 showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
