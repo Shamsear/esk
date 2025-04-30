@@ -54,6 +54,9 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             height: 100%;
             min-height: 250px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
         .manager-card:hover {
@@ -281,13 +284,12 @@
             padding: 10px 30px;
         }
         
-        /* Filters - Desktop Improvements */
+        /* Filters - Simplified */
         .filters-section {
             padding: 25px 30px;
             max-width: 1400px;
             margin: 0 auto 30px;
             display: flex;
-            flex-wrap: wrap;
             gap: 15px;
             align-items: center;
             justify-content: center;
@@ -296,98 +298,90 @@
             box-shadow: var(--card-shadow);
         }
         
-        .filter-group {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            padding: 10px 18px;
-            margin: 5px;
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .filter-group:hover {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border-color: var(--primary);
-        }
-        
-        .filter-label {
-            font-size: 0.95rem;
-            margin-right: 12px;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 500;
-        }
-        
-        .filter-select {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 7px 15px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-select:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .filter-select:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-        
-        .filter-select option {
-            background-color: #1a1a1a;
-            padding: 10px;
         }
         
         .search-input {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 12px 20px;
+            padding: 15px 50px 15px 20px;
             border-radius: 30px;
-            font-size: 1rem;
-            min-width: 250px;
+            font-size: 1.1rem;
+            width: 100%;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .search-input:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
         }
         
         .search-input:focus {
             outline: none;
-            box-shadow: 0 0 0 2px var(--primary);
+            box-shadow: 0 0 0 2px var(--primary), 0 8px 30px rgba(52, 152, 219, 0.2);
             background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
         }
         
         .search-input::placeholder {
             color: rgba(255, 255, 255, 0.5);
         }
         
-        .reset-filters {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.7), rgba(192, 57, 43, 0.7));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            pointer-events: none;
         }
         
-        .reset-filters:hover {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.9), rgba(192, 57, 43, 0.9));
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        .search-input:focus + .search-icon {
+            color: var(--primary);
+        }
+        
+        .search-clear {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-clear:hover {
+            color: white;
+            background: rgba(231, 76, 60, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .search-clear.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .search-input:not(:placeholder-shown) + .search-icon {
+            opacity: 0;
         }
         
         /* Responsive adjustments */
@@ -399,36 +393,31 @@
             }
             
             .filters-section {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
                 padding: 20px;
-                border-radius: 12px;
-                margin-bottom: 25px;
+                margin-bottom: 20px;
+                border-radius: 10px;
             }
             
-            .filter-group {
-                width: 100%;
-                justify-content: space-between;
-                padding: 10px 15px;
-            }
-            
-            .filter-select {
-                flex: 1;
-                margin-left: 10px;
-                text-align: right;
+            .search-container {
+                max-width: 100%;
             }
             
             .search-input {
-                width: 100%;
-                padding: 12px 15px;
-                margin-top: 5px;
+                padding: 12px 45px 12px 15px;
+                font-size: 1rem;
+                border-radius: 25px;
             }
             
-            .reset-filters {
-                width: 100%;
-                margin-top: 5px;
-                padding: 12px;
+            .search-icon {
+                right: 15px;
+                font-size: 1rem;
+            }
+            
+            .search-clear {
+                right: 15px;
+                width: 18px;
+                height: 18px;
+                font-size: 0.9rem;
             }
             
             /* Section header mobile adjustments */
@@ -478,45 +467,22 @@
             
             /* Sticky filter toggle for mobile */
             .mobile-filter-toggle {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, var(--primary), var(--secondary));
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-                z-index: 100;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border: none;
+                display: none; /* Hide the mobile filter toggle button */
             }
             
-            .mobile-filter-toggle:hover {
-                transform: scale(1.1);
-            }
-            
-            .mobile-filter-toggle i {
-                font-size: 1.2rem;
-            }
-            
+            /* Make filters always visible on mobile */
             .filters-section {
                 transition: all 0.3s ease;
-                max-height: 700px;
-                overflow: hidden;
+                max-height: 1000px;
+                overflow: visible;
+                padding: 25px 30px;
+                opacity: 1;
             }
             
             .filters-section.collapsed {
-                max-height: 0;
-                padding-top: 0;
-                padding-bottom: 0;
-                margin-top: 0;
-                margin-bottom: 0;
-                opacity: 0;
+                max-height: 1000px;
+                padding: 25px 30px;
+                opacity: 1;
             }
             
             /* Manager cards mobile improvements */
@@ -599,7 +565,6 @@
             }
         }
         
-        /* Extra small screens */
         @media (max-width: 480px) {
             .managers-container {
                 grid-template-columns: 1fr;
@@ -673,8 +638,8 @@
             
             .filters-section {
                 padding: 15px;
-                gap: 10px;
-                border-radius: 10px;
+                margin-bottom: 15px;
+                border-radius: 8px;
             }
             
             .filter-group {
@@ -694,8 +659,20 @@
             }
             
             .search-input {
-                padding: 10px 12px;
+                padding: 10px 40px 10px 15px;
+                font-size: 0.95rem;
+                border-radius: 20px;
+            }
+            
+            .search-icon {
+                right: 15px;
                 font-size: 0.9rem;
+            }
+            
+            .search-clear {
+                width: 16px;
+                height: 16px;
+                font-size: 0.8rem;
             }
             
             .reset-filters {
@@ -949,6 +926,59 @@
                 margin-right: 10px;
             }
         }
+        
+        /* Animation styles for synchronized reveal */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered animations with different delays */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+        
+        /* Manager card animations */
+        .manager-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .manager-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile-specific animations */
+        @media (max-width: 768px) {
+            .fade-in {
+                transform: translateY(30px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            .manager-card {
+                transform: translateY(40px);
+                transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            }
+            
+            /* Longer stagger delays on mobile for more noticeable effect */
+            .stagger-1 { transition-delay: 0.15s; }
+            .stagger-2 { transition-delay: 0.3s; }
+            .stagger-3 { transition-delay: 0.45s; }
+            .stagger-4 { transition-delay: 0.6s; }
+            .stagger-5 { transition-delay: 0.75s; }
+            .stagger-6 { transition-delay: 0.9s; }
+        }
     </style>
 </head>
 <body data-page="managers">
@@ -991,62 +1021,28 @@
             </div>
         </div>
         
-        <div class="back-link">
+        <div class="back-link fade-in stagger-1">
             <a href="index.html">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
         
-        <div class="section-header reveal">
+        <div class="section-header fade-in stagger-2">
             <h1>Managers</h1>
             <p>View all managers in the Eskimos Road to Glory community. Filter by club, rating, or search for specific managers.</p>
         </div>
         
         <!-- Filter Section -->
-        <div class="filters-section reveal" id="filters-section">
-            <div class="filter-group">
-                <span class="filter-label">Sort By:</span>
-                <select class="filter-select" id="sort-select">
-                    <option value="rating-desc">Rating (High to Low)</option>
-                    <option value="rating-asc">Rating (Low to High)</option>
-                    <option value="name-asc">Name (A to Z)</option>
-                    <option value="name-desc">Name (Z to A)</option>
-                    <option value="trophies-desc">Trophies (High to Low)</option>
-                </select>
+        <div class="filters-section fade-in stagger-3" id="filters-section">
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Search managers...">
+                <i class="fas fa-search search-icon"></i>
+                <i class="fas fa-times search-clear" id="search-clear"></i>
             </div>
-            
-            <div class="filter-group">
-                <span class="filter-label">Club:</span>
-                <select class="filter-select" id="club-filter">
-                    <option value="all">All Clubs</option>
-                    <!-- Club options will be populated by JavaScript -->
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <span class="filter-label">Min Rating:</span>
-                <select class="filter-select" id="rating-filter">
-                    <option value="0">Any Rating</option>
-                    <option value="70">70+</option>
-                    <option value="75">75+</option>
-                    <option value="80">80+</option>
-                    <option value="85">85+</option>
-                    <option value="90">90+</option>
-                </select>
-            </div>
-            
-            <input type="text" class="search-input" id="search-input" placeholder="Search managers...">
-            
-            <button class="reset-filters" id="reset-filters">Reset Filters</button>
         </div>
         
-        <!-- Mobile filter toggle button -->
-        <button class="mobile-filter-toggle" id="mobile-filter-toggle">
-            <i class="fas fa-filter"></i>
-        </button>
-        
         <!-- Managers Container -->
-        <div class="managers-container" id="managers-container">
+        <div class="managers-container fade-in stagger-4" id="managers-container">
             <!-- Manager cards will be dynamically inserted here -->
             <!-- Skeleton loaders while data loads -->
             <div class="manager-card skeleton">
@@ -1248,7 +1244,74 @@
     </div>
     
     <!-- Scripts -->
-    <script src="js/theme-toggle.js"></script>
+    <script>
+        // Modified theme-toggle functionality with null check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            initializeAnimations();
+            
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) { // Add null check
+                const body = document.body;
+                
+                // Check for saved theme preference
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    body.classList.add('light-mode');
+                }
+                
+                themeToggle.addEventListener('click', function() {
+                    body.classList.toggle('light-mode');
+                    
+                    // Save theme preference
+                    if (body.classList.contains('light-mode')) {
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            }
+        });
+        
+        // Initialize page animations
+        function initializeAnimations() {
+            // Trigger initial animations after a small delay
+            setTimeout(() => {
+                const fadeElements = document.querySelectorAll('.fade-in');
+                fadeElements.forEach(element => {
+                    element.classList.add('active');
+                });
+            }, 300);
+            
+            // Observe intersection for scrolling animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // If the target is a container that needs its children animated
+                        if (entry.target.classList.contains('managers-container')) {
+                            animateChildrenSequentially(entry.target);
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe all elements with animation classes
+            document.querySelectorAll('.fade-in, .manager-card').forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // Animate children in sequence
+        function animateChildrenSequentially(container) {
+            const children = container.querySelectorAll('.manager-card:not(.active)');
+            children.forEach((child, index) => {
+                setTimeout(() => {
+                    child.classList.add('active');
+                }, 100 * index); // 100ms delay between each card
+            });
+        }
+    </script>
     <script src="js/pwa-init.js"></script>
     <script src="js/offline-manager.js"></script>
     
@@ -1260,42 +1323,6 @@
         
         document.getElementById('close-menu').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.remove('active');
-        });
-        
-        // Mobile filter toggle
-        const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
-        const filtersSection = document.getElementById('filters-section');
-        
-        // Check screen size and collapse filters on mobile by default
-        function checkScreenSize() {
-            if (window.innerWidth <= 768) {
-                filtersSection.classList.add('collapsed');
-            } else {
-                filtersSection.classList.remove('collapsed');
-            }
-        }
-        
-        // Run on page load and when window is resized
-        window.addEventListener('resize', checkScreenSize);
-        checkScreenSize();
-        
-        // Toggle filters visibility on mobile
-        mobileFilterToggle.addEventListener('click', function() {
-            filtersSection.classList.toggle('collapsed');
-        });
-        
-        // Handle reveal animations
-        const revealElements = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        revealElements.forEach(element => {
-            observer.observe(element);
         });
         
         // Load and display managers data
@@ -1335,8 +1362,14 @@
                     throw new Error(`Failed to load managers data from all sources. Errors: ${errors.join('; ')}`);
                 }
                 
+                // Get reference to managers container
+                const managersContainer = document.getElementById('managers-container');
+                if (!managersContainer) {
+                    throw new Error('Managers container element not found in the DOM');
+                }
+                
                 // Clear skeleton loaders
-                document.getElementById('managers-container').innerHTML = '';
+                managersContainer.innerHTML = '';
                 
                 // Extract managers data (handle both array and object formats)
                 const managers = Array.isArray(data) ? data : 
@@ -1348,16 +1381,28 @@
                 
                 console.log(`Loaded ${managers.length} managers`);
                 
-                // Populate club filter
-                const clubFilter = document.getElementById('club-filter');
-                clubFilter.innerHTML = '<option value="all">All Clubs</option>'; // Reset first
-                const clubs = [...new Set(managers.map(manager => manager.club))].sort();
-                
-                clubs.forEach(club => {
-                    const option = document.createElement('option');
-                    option.value = club;
-                    option.textContent = club;
-                    clubFilter.appendChild(option);
+                // Sort managers by rank - numeric values first (1,2,3...), then "-" or other values
+                managers.sort((a, b) => {
+                    // Check if both ranks are numeric
+                    const rankA = a.age ? a.age.toString().trim() : "";
+                    const rankB = b.age ? b.age.toString().trim() : "";
+                    
+                    const isNumericA = /^\d+$/.test(rankA);
+                    const isNumericB = /^\d+$/.test(rankB);
+                    
+                    // If both are numeric, sort numerically
+                    if (isNumericA && isNumericB) {
+                        return parseInt(rankA) - parseInt(rankB);
+                    }
+                    
+                    // If only A is numeric, A comes first
+                    if (isNumericA) return -1;
+                    
+                    // If only B is numeric, B comes first
+                    if (isNumericB) return 1;
+                    
+                    // If neither is numeric, sort alphabetically
+                    return rankA.localeCompare(rankB);
                 });
                 
                 // Render all managers
@@ -1368,22 +1413,31 @@
                 
             } catch (error) {
                 console.error('Error loading managers data:', error);
-                document.getElementById('managers-container').innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 30px;">
-                        <h3>Error loading managers data</h3>
-                        <p>${error.message}</p>
-                        <p>Please try refreshing the page or check your connection.</p>
-                    </div>
-                `;
+                const managersContainer = document.getElementById('managers-container');
+                if (managersContainer) {
+                    managersContainer.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 30px;">
+                            <h3>Error loading managers data</h3>
+                            <p>${error.message}</p>
+                            <p>Please try refreshing the page or check your connection.</p>
+                        </div>
+                    `;
+                }
             }
         }
         
         function renderManagers(managers) {
             const container = document.getElementById('managers-container');
+            if (!container) {
+                console.error('Managers container not found');
+                return;
+            }
             
-            managers.forEach(manager => {
+            container.innerHTML = ''; // Clear container first
+            
+            managers.forEach((manager, index) => {
                 const card = document.createElement('div');
-                card.className = 'manager-card';
+                card.className = 'manager-card'; // Remove 'active' class to start invisible
                 card.innerHTML = `
                     <div class="manager-header" style="background-image: url('assets/images/club-backgrounds/${manager.club.replace(/\s+/g, '%20')}.jpg')">
                         <div class="manager-photo" style="background-image: url('assets/images/managers/${manager.name.toLowerCase().replace(/\s+/g, '-')}.webp'), url('assets/images/default-manager.webp')"></div>
@@ -1428,33 +1482,60 @@
                         window.location.href = `manager-detail.html?name=${encodeURIComponent(manager.name)}`;
                     }
                 });
+                
+                // Animate cards with staggered delay
+                setTimeout(() => {
+                    card.classList.add('active');
+                }, window.innerWidth <= 768 ? 100 * index : 50 * index); // Longer delay on mobile
             });
         }
         
         function setupFilters(allManagers) {
-            const sortSelect = document.getElementById('sort-select');
-            const clubFilter = document.getElementById('club-filter');
-            const ratingFilter = document.getElementById('rating-filter');
             const searchInput = document.getElementById('search-input');
-            const resetButton = document.getElementById('reset-filters');
+            const searchClear = document.getElementById('search-clear');
+            
+            if (!searchInput) {
+                console.error('Search input not found');
+                return;
+            }
+            
+            // Show/hide clear button based on input content
+            function toggleClearButton() {
+                if (searchInput.value.trim() !== '') {
+                    searchClear.classList.add('visible');
+                } else {
+                    searchClear.classList.remove('visible');
+                }
+            }
             
             function applyFilters() {
+                toggleClearButton(); // Update clear button visibility
+                
                 let filteredManagers = [...allManagers];
                 
-                // Apply club filter
-                if (clubFilter.value !== 'all') {
-                    filteredManagers = filteredManagers.filter(manager => 
-                        manager.club === clubFilter.value
-                    );
-                }
-                
-                // Apply rating filter
-                const minRating = parseInt(ratingFilter.value);
-                if (minRating > 0) {
-                    filteredManagers = filteredManagers.filter(manager => 
-                        parseFloat(manager.overall_rating) >= minRating
-                    );
-                }
+                // Default sort by rank - numeric values first (1,2,3...), then "-" or other values
+                filteredManagers.sort((a, b) => {
+                    // Check if both ranks are numeric
+                    const rankA = a.age ? a.age.toString().trim() : "";
+                    const rankB = b.age ? b.age.toString().trim() : "";
+                    
+                    const isNumericA = /^\d+$/.test(rankA);
+                    const isNumericB = /^\d+$/.test(rankB);
+                    
+                    // If both are numeric, sort numerically
+                    if (isNumericA && isNumericB) {
+                        return parseInt(rankA) - parseInt(rankB);
+                    }
+                    
+                    // If only A is numeric, A comes first
+                    if (isNumericA) return -1;
+                    
+                    // If only B is numeric, B comes first
+                    if (isNumericB) return 1;
+                    
+                    // If neither is numeric, sort alphabetically
+                    return rankA.localeCompare(rankB);
+                });
                 
                 // Apply search filter
                 const searchTerm = searchInput.value.trim().toLowerCase();
@@ -1465,34 +1546,20 @@
                     );
                 }
                 
-                // Apply sorting
-                const sortValue = sortSelect.value;
-                switch(sortValue) {
-                    case 'rating-desc':
-                        filteredManagers.sort((a, b) => parseFloat(b.overall_rating) - parseFloat(a.overall_rating));
-                        break;
-                    case 'rating-asc':
-                        filteredManagers.sort((a, b) => parseFloat(a.overall_rating) - parseFloat(b.overall_rating));
-                        break;
-                    case 'name-asc':
-                        filteredManagers.sort((a, b) => a.name.localeCompare(b.name));
-                        break;
-                    case 'name-desc':
-                        filteredManagers.sort((a, b) => b.name.localeCompare(a.name));
-                        break;
-                    case 'trophies-desc':
-                        filteredManagers.sort((a, b) => b.trophies - a.trophies);
-                        break;
+                // Clear container and render filtered managers
+                const container = document.getElementById('managers-container');
+                if (!container) {
+                    console.error('Managers container not found when filtering');
+                    return;
                 }
                 
-                // Clear container and render filtered managers
-                document.getElementById('managers-container').innerHTML = '';
+                container.innerHTML = '';
                 
                 if (filteredManagers.length === 0) {
-                    document.getElementById('managers-container').innerHTML = `
+                    container.innerHTML = `
                         <div style="grid-column: 1/-1; text-align: center; padding: 30px;">
                             <h3>No managers found</h3>
-                            <p>Try adjusting your filters or search criteria.</p>
+                            <p>Try adjusting your search criteria.</p>
                         </div>
                     `;
                 } else {
@@ -1501,18 +1568,19 @@
             }
             
             // Add event listeners
-            sortSelect.addEventListener('change', applyFilters);
-            clubFilter.addEventListener('change', applyFilters);
-            ratingFilter.addEventListener('change', applyFilters);
             searchInput.addEventListener('input', applyFilters);
             
-            resetButton.addEventListener('click', () => {
-                sortSelect.value = 'rating-desc';
-                clubFilter.value = 'all';
-                ratingFilter.value = '0';
-                searchInput.value = '';
-                applyFilters();
-            });
+            // Add clear button functionality
+            if (searchClear) {
+                searchClear.addEventListener('click', () => {
+                    searchInput.value = '';
+                    searchInput.focus();
+                    applyFilters();
+                });
+            }
+            
+            // Initial check for search value (e.g. if page is refreshed with a value)
+            toggleClearButton();
         }
         
         // Load data when page loads
