@@ -626,6 +626,41 @@
     <!-- Add script tag with placeholder - will be filled in next edit -->
     <script defer src="github-config.js"></script>
     <script>
+        // GitHub configuration object
+        let githubConfig = null;
+        
+        // Initialize GitHub configuration
+        function initGitHubConfig() {
+            // If global config is available from github-config.js, use it
+            if (typeof window.githubConfig !== 'undefined') {
+                githubConfig = window.githubConfig;
+                console.log('GitHub config loaded from global object');
+                return true;
+            }
+            
+            // Fallback implementation if github-config.js is not available
+            githubConfig = {
+                isConfigured: function() {
+                    return !!localStorage.getItem('githubToken');
+                },
+                getToken: function() {
+                    return localStorage.getItem('githubToken');
+                },
+                getOwner: function() {
+                    return localStorage.getItem('githubOwner') || 'default-owner';
+                },
+                getRepo: function() {
+                    return localStorage.getItem('githubRepo') || 'default-repo';
+                },
+                getBranch: function() {
+                    return localStorage.getItem('githubBranch') || 'main';
+                },
+                filePath: 'players.json'
+            };
+            
+            return githubConfig.isConfigured();
+        }
+        
         // Authentication check
         document.addEventListener('DOMContentLoaded', function() {
             // Show loading indicator
@@ -644,6 +679,9 @@
             
             // Set logged in username immediately
             document.getElementById('logged-user').textContent = sessionStorage.getItem('adminUsername') || 'Admin';
+            
+            // Initialize GitHub config first
+            initGitHubConfig();
             
             // Initialize the admin panel right away to show UI faster
             initAdminPanel().then(() => {
@@ -1339,6 +1377,10 @@
                 const useGithub = localStorage.getItem('githubToken');
                 if (useGithub) {
                     try {
+                        // Initialize GitHub config if needed
+                        if (!githubConfig) {
+                            initGitHubConfig();
+                        }
                         await saveToGitHub();
                         savedPermanently = true;
                     } catch (githubError) {
@@ -1736,6 +1778,11 @@
         // Save to GitHub
         async function saveToGitHub() {
             try {
+                // Initialize GitHub config if not already done
+                if (!githubConfig) {
+                    initGitHubConfig();
+                }
+                
                 // Check if GitHub integration is configured
                 if (!githubConfig.isConfigured()) {
                     throw new Error('GitHub integration is not configured');
