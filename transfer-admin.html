@@ -2741,7 +2741,7 @@
                     playersInManagerButNotInPlayers: [],
                     playersWithWrongClub: [],
                     playersWithMissingStats: [],
-                    playersWithMissingTypes: []  // Add new category for missing types
+                    playersWithMissingTypes: []
                 };
                 
                 // Get all players in manager data
@@ -2755,7 +2755,7 @@
                                 value: squadPlayer.value,
                                 position: squadPlayer.position,
                                 manager: manager.name,
-                                type: squadPlayer.type || 'standard'  // Include player type, default to standard
+                                type: squadPlayer.type || 'standard'
                             });
                         });
                     }
@@ -2765,28 +2765,24 @@
                 
                 // Check each player in manager data
                 managerSquadPlayers.forEach(squadPlayer => {
-                    // Look for this player in players data
                     const playerData = playersData.find(p => p.name === squadPlayer.name);
                     
-                    // Player exists in manager data but not in players data
                     if (!playerData) {
                         results.playersInManagerButNotInPlayers.push(squadPlayer);
                         return;
                     }
                     
-                    // Player exists in both but club doesn't match
                     if (playerData.club !== squadPlayer.club) {
                         results.playersWithWrongClub.push({
                             name: squadPlayer.name,
                             managerClub: squadPlayer.club,
                             playerDataClub: playerData.club || 'None',
                             manager: squadPlayer.manager,
-                            value: squadPlayer.value,  // Include the value from manager data
-                            type: squadPlayer.type     // Include the type from manager data
+                            value: squadPlayer.value,
+                            type: squadPlayer.type
                         });
                     }
                     
-                    // Check if player has stats for their current club
                     if (playerData.stats && Array.isArray(playerData.stats)) {
                         const hasStatsForCurrentClub = playerData.stats.some(stat => stat.team === squadPlayer.club);
                         if (!hasStatsForCurrentClub) {
@@ -2795,30 +2791,29 @@
                                 club: squadPlayer.club,
                                 stats: playerData.stats,
                                 manager: squadPlayer.manager,
-                                value: squadPlayer.value,  // Include the value from manager data
-                                type: squadPlayer.type     // Include the type from manager data
+                                value: squadPlayer.value,
+                                type: squadPlayer.type
                             });
                         }
                     } else if (squadPlayer.club) {
-                        // Player has no stats at all
                         results.playersWithMissingStats.push({
                             name: squadPlayer.name,
                             club: squadPlayer.club,
                             stats: [],
                             manager: squadPlayer.manager,
-                            value: squadPlayer.value,  // Include the value from manager data
-                            type: squadPlayer.type     // Include the type from manager data
+                            value: squadPlayer.value,
+                            type: squadPlayer.type
                         });
                     }
                     
-                    // Check if player type is missing or doesn't match
                     if (!playerData.type && squadPlayer.type) {
                         results.playersWithMissingTypes.push({
                             name: squadPlayer.name,
                             club: squadPlayer.club,
                             managerType: squadPlayer.type,
                             playerDataType: playerData.type || 'None',
-                            manager: squadPlayer.manager
+                            manager: squadPlayer.manager,
+                            value: squadPlayer.value
                         });
                     } else if (playerData.type !== squadPlayer.type && squadPlayer.type) {
                         results.playersWithMissingTypes.push({
@@ -2826,68 +2821,13 @@
                             club: squadPlayer.club,
                             managerType: squadPlayer.type,
                             playerDataType: playerData.type || 'None',
-                            manager: squadPlayer.manager
+                            manager: squadPlayer.manager,
+                            value: squadPlayer.value
                         });
                     }
                 });
                 
-                // Show the results
-                console.log('Data consistency check results:', results);
-                
-                // Create a formatted message
-                let message = '<strong>Data Consistency Check Results:</strong><br>';
-                
-                if (results.playersInManagerButNotInPlayers.length > 0) {
-                    message += `<br>Players in manager data but missing from players.json: ${results.playersInManagerButNotInPlayers.length}<br>`;
-                    results.playersInManagerButNotInPlayers.slice(0, 5).forEach(p => {
-                        message += `- ${p.name} (${p.club})<br>`;
-                    });
-                    if (results.playersInManagerButNotInPlayers.length > 5) {
-                        message += `... and ${results.playersInManagerButNotInPlayers.length - 5} more<br>`;
-                    }
-                }
-                
-                if (results.playersWithWrongClub.length > 0) {
-                    message += `<br>Players with mismatched club data: ${results.playersWithWrongClub.length}<br>`;
-                    results.playersWithWrongClub.slice(0, 5).forEach(p => {
-                        message += `- ${p.name}: Manager shows ${p.managerClub}, players.json shows ${p.playerDataClub}<br>`;
-                    });
-                    if (results.playersWithWrongClub.length > 5) {
-                        message += `... and ${results.playersWithWrongClub.length - 5} more<br>`;
-                    }
-                }
-                
-                if (results.playersWithMissingStats.length > 0) {
-                    message += `<br>Players missing stats for current club: ${results.playersWithMissingStats.length}<br>`;
-                    results.playersWithMissingStats.slice(0, 5).forEach(p => {
-                        message += `- ${p.name} (${p.club})<br>`;
-                    });
-                    if (results.playersWithMissingStats.length > 5) {
-                        message += `... and ${results.playersWithMissingStats.length - 5} more<br>`;
-                    }
-                }
-                
-                if (results.playersWithMissingTypes.length > 0) {
-                    message += `<br>Players with missing or mismatched type: ${results.playersWithMissingTypes.length}<br>`;
-                    results.playersWithMissingTypes.slice(0, 5).forEach(p => {
-                        message += `- ${p.name}: Manager shows ${p.managerType}, players.json shows ${p.playerDataType}<br>`;
-                    });
-                    if (results.playersWithMissingTypes.length > 5) {
-                        message += `... and ${results.playersWithMissingTypes.length - 5} more<br>`;
-                    }
-                }
-                
-                if (results.playersInManagerButNotInPlayers.length === 0 &&
-                    results.playersWithWrongClub.length === 0 &&
-                    results.playersWithMissingStats.length === 0 &&
-                    results.playersWithMissingTypes.length === 0) {
-                    message += '<br>No inconsistencies found. Data is in sync!';
-                } else {
-                    // Add fix button if issues were found
-                    message += '<br><button id="fix-data-btn" style="background-color: #4ecca3; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-top: 10px;">Fix Data Issues</button>';
-                }
-                
-                // Create a modal or popup to display the results
+                // Create a modal with options
                 const resultsContainer = document.createElement('div');
                 resultsContainer.style.position = 'fixed';
                 resultsContainer.style.top = '10%';
@@ -2901,50 +2841,154 @@
                 resultsContainer.style.maxHeight = '80vh';
                 resultsContainer.style.overflow = 'auto';
                 resultsContainer.style.maxWidth = '90%';
-                resultsContainer.style.width = '600px';
+                resultsContainer.style.width = '800px';
                 
+                // Create buttons container
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.style.display = 'flex';
+                buttonsContainer.style.gap = '10px';
+                buttonsContainer.style.marginBottom = '20px';
+                buttonsContainer.style.justifyContent = 'space-between';
+                
+                // Create download CSV button
+                const downloadBtn = document.createElement('button');
+                downloadBtn.textContent = 'Download Full Report (CSV)';
+                downloadBtn.style.backgroundColor = '#4ecca3';
+                downloadBtn.style.color = 'white';
+                downloadBtn.style.border = 'none';
+                downloadBtn.style.borderRadius = '4px';
+                downloadBtn.style.cursor = 'pointer';
+                downloadBtn.style.padding = '10px 20px';
+                
+                downloadBtn.addEventListener('click', () => {
+                    generateAndDownloadCSV(results);
+                });
+                
+                // Create close button
                 const closeBtn = document.createElement('button');
                 closeBtn.textContent = 'Close';
-                closeBtn.style.position = 'absolute';
-                closeBtn.style.top = '10px';
-                closeBtn.style.right = '10px';
                 closeBtn.style.backgroundColor = '#e53935';
                 closeBtn.style.color = 'white';
                 closeBtn.style.border = 'none';
                 closeBtn.style.borderRadius = '4px';
                 closeBtn.style.cursor = 'pointer';
-                closeBtn.style.padding = '5px 10px';
+                closeBtn.style.padding = '10px 20px';
                 
                 closeBtn.addEventListener('click', () => {
                     resultsContainer.remove();
                 });
                 
-                const contentDiv = document.createElement('div');
-                contentDiv.style.marginTop = '20px';
-                contentDiv.innerHTML = message;
+                // Create fix button
+                const fixBtn = document.createElement('button');
+                fixBtn.textContent = 'Fix All Issues';
+                fixBtn.style.backgroundColor = '#3f51b5';
+                fixBtn.style.color = 'white';
+                fixBtn.style.border = 'none';
+                fixBtn.style.borderRadius = '4px';
+                fixBtn.style.cursor = 'pointer';
+                fixBtn.style.padding = '10px 20px';
                 
-                resultsContainer.appendChild(closeBtn);
+                fixBtn.addEventListener('click', () => {
+                    fixDataInconsistencies(results);
+                    resultsContainer.remove();
+                });
+                
+                // Add buttons to container
+                buttonsContainer.appendChild(downloadBtn);
+                buttonsContainer.appendChild(fixBtn);
+                buttonsContainer.appendChild(closeBtn);
+                
+                // Create summary text
+                let summaryText = '<h3>Data Consistency Check Summary:</h3>';
+                summaryText += `<p>Total issues found: ${
+                    results.playersInManagerButNotInPlayers.length +
+                    results.playersWithWrongClub.length +
+                    results.playersWithMissingStats.length +
+                    results.playersWithMissingTypes.length
+                }</p>`;
+                summaryText += `<ul>`;
+                summaryText += `<li>Players missing from players.json: ${results.playersInManagerButNotInPlayers.length}</li>`;
+                summaryText += `<li>Players with wrong club data: ${results.playersWithWrongClub.length}</li>`;
+                summaryText += `<li>Players missing stats: ${results.playersWithMissingStats.length}</li>`;
+                summaryText += `<li>Players with type issues: ${results.playersWithMissingTypes.length}</li>`;
+                summaryText += `</ul>`;
+                summaryText += `<p>Click "Download Full Report" to get a detailed CSV file with all issues.</p>`;
+                
+                // Create content container
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = summaryText;
+                contentDiv.style.marginTop = '20px';
+                
+                // Add everything to the modal
+                resultsContainer.appendChild(buttonsContainer);
                 resultsContainer.appendChild(contentDiv);
                 document.body.appendChild(resultsContainer);
-                
-                // Add event listener for fix button if it exists
-                setTimeout(() => {
-                    const fixButton = document.getElementById('fix-data-btn');
-                    if (fixButton) {
-                        fixButton.addEventListener('click', () => {
-                            fixDataInconsistencies(results);
-                            // Close the modal
-                            resultsContainer.remove();
-                        });
-                    }
-                }, 100);
                 
             } catch (error) {
                 console.error('Error checking data consistency:', error);
                 showStatusMessage(`Error checking data: ${error.message}`, false);
             }
         }
-        
+
+        // Function to generate and download CSV
+        function generateAndDownloadCSV(results) {
+            try {
+                // Create CSV content
+                let csvContent = 'Issue Type,Player Name,Current Club,Expected Club,Manager,Value,Player Type,Expected Type,Additional Info\n';
+                
+                // Add missing players
+                results.playersInManagerButNotInPlayers.forEach(player => {
+                    csvContent += `Missing from players.json,${escapeCsvField(player.name)},${escapeCsvField(player.club)},,${
+                        escapeCsvField(player.manager)},${player.value},${escapeCsvField(player.type)},,Player exists in manager data but not in players.json\n`;
+                });
+                
+                // Add wrong club players
+                results.playersWithWrongClub.forEach(player => {
+                    csvContent += `Wrong Club,${escapeCsvField(player.name)},${escapeCsvField(player.playerDataClub)},${
+                        escapeCsvField(player.managerClub)},${escapeCsvField(player.manager)},${player.value},${
+                        escapeCsvField(player.type)},,Club mismatch between manager and player data\n`;
+                });
+                
+                // Add missing stats players
+                results.playersWithMissingStats.forEach(player => {
+                    const currentStats = player.stats.map(stat => `${stat.season}:${stat.team}`).join('; ');
+                    csvContent += `Missing Stats,${escapeCsvField(player.name)},${escapeCsvField(player.club)},,${
+                        escapeCsvField(player.manager)},${player.value},${escapeCsvField(player.type)},,Current stats: ${escapeCsvField(currentStats)}\n`;
+                });
+                
+                // Add type issues players
+                results.playersWithMissingTypes.forEach(player => {
+                    csvContent += `Type Issue,${escapeCsvField(player.name)},${escapeCsvField(player.club)},,${
+                        escapeCsvField(player.manager)},${player.value},${escapeCsvField(player.playerDataType)},${
+                        escapeCsvField(player.managerType)},Type mismatch or missing\n`;
+                });
+                
+                // Create and trigger download
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                if (link.download !== undefined) {
+                    const url = URL.createObjectURL(blob);
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', `data_issues_${new Date().toISOString().split('T')[0]}.csv`);
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+                
+                showStatusMessage('CSV file downloaded successfully', true);
+            } catch (error) {
+                console.error('Error generating CSV:', error);
+                showStatusMessage('Error generating CSV file', false);
+            }
+        }
+
+        // Helper function to escape CSV fields
+        function escapeCsvField(field) {
+            if (field === null || field === undefined) return '';
+            return `"${String(field).replace(/"/g, '""')}"`;
+        }
+
         // Fix data inconsistencies
         async function fixDataInconsistencies(results) {
             try {

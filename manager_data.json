@@ -101,7 +101,7 @@
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 23,
+        "total_players": 27,
         "players": [
           {
             "name": "RAPHAEL VARANE",
@@ -285,6 +285,38 @@
             "value": 92,
             "contract": "SEASON 8",
             "salary": 4.6,
+            "type": "standard"
+          },
+          {
+            "name": "SANDRO TONALI",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ROMEO LAVIA",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "SANDRO TONALI",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ROMEO LAVIA",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
             "type": "standard"
           }
         ]
@@ -548,12 +580,12 @@
       "overall_rating": 287.1,
       "r2g_coin_balance": 3161,
       "r2g_token_balance": 430,
-      "club_total_value": 1492,
+      "club_total_value": 1620,
       "manager_rating": 109.9,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 32,
+        "total_players": 27,
         "players": [
           {
             "name": "ROBERT ANDRICH",
@@ -729,6 +761,46 @@
             "value": 40,
             "contract": "SEASON 8",
             "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "EBERECHI EZE",
+            "position": "AM",
+            "value": 128,
+            "contract": "SEASON 8",
+            "salary": 6.4,
+            "type": "standard"
+          },
+          {
+            "name": "MARTIN ZUBIMENDI",
+            "position": "DM",
+            "value": 128,
+            "contract": "SEASON 8",
+            "salary": 6.4,
+            "type": "standard"
+          },
+          {
+            "name": "EDSON ALVAREZ",
+            "position": "DM",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
+          },
+          {
+            "name": "MARTIN ZUBIMENDI",
+            "position": "DM",
+            "value": 128,
+            "contract": "SEASON 8",
+            "salary": 6.4,
+            "type": "standard"
+          },
+          {
+            "name": "EDSON ALVAREZ",
+            "position": "DM",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
             "type": "standard"
           }
         ]
@@ -919,12 +991,12 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 2072,
+      "club_total_value": 2592,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 23,
+        "total_players": 24,
         "players": [
           {
             "name": "ERLING HAALAND",
@@ -1068,6 +1140,54 @@
             "value": 120,
             "contract": "SEASON 8",
             "salary": 6,
+            "type": "standard"
+          },
+          {
+            "name": "JAMAL MUSIALA",
+            "position": "AM",
+            "value": 170,
+            "contract": "SEASON 8",
+            "salary": 8.5,
+            "type": "standard"
+          },
+          {
+            "name": "ARDA GULER",
+            "position": "AM",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "JAMAL MUSIALA",
+            "position": "AM",
+            "value": 170,
+            "contract": "SEASON 8",
+            "salary": 8.5,
+            "type": "standard"
+          },
+          {
+            "name": "ARDA GULER",
+            "position": "AM",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "SOFYAN AMRABAT",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "SOFYAN AMRABAT",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
             "type": "standard"
           }
         ]
@@ -1553,12 +1673,12 @@
       "overall_rating": 165.8,
       "r2g_coin_balance": 2723,
       "r2g_token_balance": 160,
-      "club_total_value": 1662,
+      "club_total_value": 1850,
       "manager_rating": 71.7,
       "trophies": 1,
       "awards": 0,
       "squad": {
-        "total_players": 27,
+        "total_players": 31,
         "players": [
           {
             "name": "GANSO",
@@ -1775,6 +1895,38 @@
             "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
+          },
+          {
+            "name": "BRUNO FERNANDES",
+            "position": "AM",
+            "value": 112,
+            "contract": "SEASON 8",
+            "salary": 5.6,
+            "type": "standard"
+          },
+          {
+            "name": "CHRISTOPHER NKUNKU",
+            "position": "AM",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "JOAO PALHINHA",
+            "position": "DM",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
+          },
+          {
+            "name": "JOAO PALHINHA",
+            "position": "DM",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
           }
         ]
       },
@@ -2050,7 +2202,7 @@
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 21,
         "players": [
           {
             "name": "NICOLAS JACKSON",
@@ -2187,6 +2339,38 @@
             "contract": "SEASON 8",
             "salary": 2.7,
             "type": "standard"
+          },
+          {
+            "name": "EDGAR DAVIDS",
+            "position": "DM",
+            "value": 142,
+            "contract": "SEASON 8",
+            "salary": 7.1,
+            "type": "standard"
+          },
+          {
+            "name": "THOMAS PARTEY",
+            "position": "DM",
+            "value": 80,
+            "contract": "SEASON 8",
+            "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "EDGAR DAVIDS",
+            "position": "DM",
+            "value": 142,
+            "contract": "SEASON 8",
+            "salary": 7.1,
+            "type": "standard"
+          },
+          {
+            "name": "THOMAS PARTEY",
+            "position": "DM",
+            "value": 80,
+            "contract": "SEASON 8",
+            "salary": 4,
+            "type": "standard"
           }
         ]
       },
@@ -2269,12 +2453,12 @@
       "overall_rating": 61.6,
       "r2g_coin_balance": 1007,
       "r2g_token_balance": 80,
-      "club_total_value": 1884,
+      "club_total_value": 1984,
       "manager_rating": 39,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 23,
+        "total_players": 24,
         "players": [
           {
             "name": "NICOLO ZANIOLO",
@@ -2459,6 +2643,14 @@
             "contract": "SEASON 8",
             "salary": 8.6,
             "type": "standard"
+          },
+          {
+            "name": "RIVALDO",
+            "position": "AM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
           }
         ]
       },
@@ -2599,12 +2791,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 1192,
       "r2g_token_balance": 50,
-      "club_total_value": 258,
+      "club_total_value": 406,
       "manager_rating": 0,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 4,
+        "total_players": 11,
         "players": [
           {
             "name": "CIRO IMMOBILE",
@@ -2633,6 +2825,62 @@
           {
             "name": "M. MITTELSTADT",
             "position": "LB",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "AMINE ADLI",
+            "position": "AM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "AMINE ADLI",
+            "position": "AM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "ABDOULAYE DOUCOURE",
+            "position": "AM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "TOMAS SOUCEK",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "NICO GONZALEZ",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "TOMAS SOUCEK",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "NICO GONZALEZ",
+            "position": "DM",
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
@@ -2766,13 +3014,13 @@
       "overall_rating": 152,
       "r2g_coin_balance": 1955,
       "r2g_token_balance": 210,
-      "club_total_value": 1140,
+      "club_total_value": 1348,
       "star_rating": 4,
       "manager_rating": 42,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 13,
+        "total_players": 18,
         "players": [
           {
             "name": "ALEXANDER ISAK",
@@ -2876,6 +3124,46 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "FRANCK RIBERY",
+            "position": "AM",
+            "value": 104,
+            "contract": "SEASON 8",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "FRANCK RIBERY",
+            "position": "AM",
+            "value": 104,
+            "contract": "SEASON 8",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "AMADOU ONANA",
+            "position": "DM",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "AMADOU ONANA",
+            "position": "DM",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "AMADOU ONANA",
+            "position": "DM",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
             "type": "standard"
           }
         ]
@@ -3247,12 +3535,12 @@
       "overall_rating": 98.9,
       "r2g_coin_balance": 918,
       "r2g_token_balance": 130,
-      "club_total_value": 818,
+      "club_total_value": 1158,
       "manager_rating": 11.7,
       "trophies": 1,
       "awards": 0,
       "squad": {
-        "total_players": 13,
+        "total_players": 15,
         "players": [
           {
             "name": "LAUTARO MARTINEZ",
@@ -3356,6 +3644,22 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "KAKA",
+            "position": "AM",
+            "value": 170,
+            "contract": "SEASON 8",
+            "salary": 8.5,
+            "type": "standard"
+          },
+          {
+            "name": "KAKA",
+            "position": "AM",
+            "value": 170,
+            "contract": "SEASON 8",
+            "salary": 8.5,
             "type": "standard"
           }
         ]
@@ -3891,12 +4195,12 @@
       "overall_rating": 32.6,
       "r2g_coin_balance": 2011,
       "r2g_token_balance": 135,
-      "club_total_value": 1370,
+      "club_total_value": 1630,
       "manager_rating": 18.2,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 23,
+        "total_players": 27,
         "players": [
           {
             "name": "ROBERTO FIRMINO",
@@ -4081,6 +4385,38 @@
             "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
+          },
+          {
+            "name": "LORENZO PELLEGRINI",
+            "position": "AM",
+            "value": 64,
+            "contract": "SEASON 8",
+            "salary": 3.2,
+            "type": "standard"
+          },
+          {
+            "name": "JAMES MADDISON",
+            "position": "AM",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
+          },
+          {
+            "name": "LORENZO PELLEGRINI",
+            "position": "AM",
+            "value": 64,
+            "contract": "SEASON 8",
+            "salary": 3.2,
+            "type": "standard"
+          },
+          {
+            "name": "JAMES MADDISON",
+            "position": "AM",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
           }
         ]
       },
@@ -4223,7 +4559,7 @@
       "trophies": 3,
       "awards": 2,
       "squad": {
-        "total_players": 22,
+        "total_players": 25,
         "players": [
           {
             "name": "TOMAS ROSICKY",
@@ -4399,6 +4735,30 @@
             "value": 86,
             "contract": "SEASON 8",
             "salary": 4.3,
+            "type": "standard"
+          },
+          {
+            "name": "FRANK RIJKAARD",
+            "position": "DM",
+            "value": 204,
+            "contract": "SEASON 8",
+            "salary": 10.2,
+            "type": "standard"
+          },
+          {
+            "name": "FRANK RIJKAARD",
+            "position": "DM",
+            "value": 204,
+            "contract": "SEASON 8",
+            "salary": 10.2,
+            "type": "standard"
+          },
+          {
+            "name": "FRANK RIJKAARD",
+            "position": "DM",
+            "value": 204,
+            "contract": "SEASON 8",
+            "salary": 10.2,
             "type": "standard"
           }
         ]
@@ -4594,7 +4954,7 @@
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 20,
+        "total_players": 23,
         "players": [
           {
             "name": "BETO",
@@ -4754,6 +5114,30 @@
             "value": 80,
             "contract": "SEASON 8",
             "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "KALVIN PHILLIPS",
+            "position": "DM",
+            "value": 42,
+            "contract": "SEASON 8",
+            "salary": 2.1,
+            "type": "standard"
+          },
+          {
+            "name": "KALVIN PHILLIPS",
+            "position": "DM",
+            "value": 42,
+            "contract": "SEASON 8",
+            "salary": 2.1,
+            "type": "standard"
+          },
+          {
+            "name": "KALVIN PHILLIPS",
+            "position": "DM",
+            "value": 42,
+            "contract": "SEASON 8",
+            "salary": 2.1,
             "type": "standard"
           }
         ]
@@ -4938,12 +5322,12 @@
       "overall_rating": 143.1,
       "r2g_coin_balance": 1618,
       "r2g_token_balance": 125,
-      "club_total_value": 1598,
+      "club_total_value": 1818,
       "manager_rating": 72,
       "trophies": 1,
       "awards": 0,
       "squad": {
-        "total_players": 18,
+        "total_players": 26,
         "players": [
           {
             "name": "ARTEM DOVBYK",
@@ -5087,6 +5471,70 @@
             "value": 40,
             "contract": "SEASON 8",
             "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "DEJAN KULUSEVSKI",
+            "position": "AM",
+            "value": 110,
+            "contract": "SEASON 8",
+            "salary": 5.5,
+            "type": "standard"
+          },
+          {
+            "name": "DEJAN KULUSEVSKI",
+            "position": "AM",
+            "value": 110,
+            "contract": "SEASON 8",
+            "salary": 5.5,
+            "type": "standard"
+          },
+          {
+            "name": "LOTHAR MATTHAUS",
+            "position": "DM",
+            "value": 120,
+            "contract": "SEASON 8",
+            "salary": 6,
+            "type": "standard"
+          },
+          {
+            "name": "BRUNO GUIMARAES",
+            "position": "DM",
+            "value": 82,
+            "contract": "SEASON 8",
+            "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "ALEKSANDER PAVLOVIC",
+            "position": "DM",
+            "value": 106,
+            "contract": "SEASON 8",
+            "salary": 5.3,
+            "type": "standard"
+          },
+          {
+            "name": "LOTHAR MATTHAUS",
+            "position": "DM",
+            "value": 120,
+            "contract": "SEASON 8",
+            "salary": 6,
+            "type": "standard"
+          },
+          {
+            "name": "BRUNO GUIMARAES",
+            "position": "DM",
+            "value": 82,
+            "contract": "SEASON 8",
+            "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "ALEKSANDER PAVLOVIC",
+            "position": "DM",
+            "value": 106,
+            "contract": "SEASON 8",
+            "salary": 5.3,
             "type": "standard"
           }
         ]
@@ -5665,12 +6113,12 @@
       "overall_rating": 42.9,
       "r2g_coin_balance": 1445,
       "r2g_token_balance": 135,
-      "club_total_value": 1028,
+      "club_total_value": 1138,
       "manager_rating": -19.8,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 16,
+        "total_players": 21,
         "players": [
           {
             "name": "GIANLUCA SCAMACCA",
@@ -5798,6 +6246,46 @@
             "value": 56,
             "contract": "SEASON 8",
             "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "WESLEY SNEIJDER",
+            "position": "AM",
+            "value": 110,
+            "contract": "SEASON 8",
+            "salary": 5.5,
+            "type": "standard"
+          },
+          {
+            "name": "JORGINHO",
+            "position": "DM",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "MANUEL LOCATELLI",
+            "position": "DM",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "JORGINHO",
+            "position": "DM",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "MANUEL LOCATELLI",
+            "position": "DM",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
             "type": "standard"
           }
         ]
@@ -5983,12 +6471,12 @@
       "overall_rating": 174.2,
       "r2g_coin_balance": 533,
       "r2g_token_balance": 625,
-      "club_total_value": 1086,
+      "club_total_value": 1166,
       "manager_rating": 0,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 8,
+        "total_players": 14,
         "players": [
           {
             "name": "SON HEUNG-MIN",
@@ -6052,6 +6540,54 @@
             "value": 58,
             "contract": "SEASON 8",
             "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "CHANATHIP SONGKRASIN",
+            "position": "AM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "CHANATHIP SONGKRASIN",
+            "position": "AM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "XABI ALONSO",
+            "position": "DM",
+            "value": 128,
+            "contract": "SEASON 8",
+            "salary": 6.4,
+            "type": "standard"
+          },
+          {
+            "name": "SCOTT MCTOMINAY",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "XABI ALONSO",
+            "position": "DM",
+            "value": 128,
+            "contract": "SEASON 8",
+            "salary": 6.4,
+            "type": "standard"
+          },
+          {
+            "name": "SCOTT MCTOMINAY",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
             "type": "standard"
           }
         ]
@@ -6187,12 +6723,12 @@
       "overall_rating": 157.1,
       "r2g_coin_balance": 1273,
       "r2g_token_balance": 105,
-      "club_total_value": 1284,
+      "club_total_value": 1384,
       "manager_rating": 34.5,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 25,
+        "total_players": 26,
         "players": [
           {
             "name": "RODRI",
@@ -6264,6 +6800,14 @@
             "value": 134,
             "contract": "SEASON 8",
             "salary": 6.7,
+            "type": "standard"
+          },
+          {
+            "name": "MICHEL PLATINI",
+            "position": "AM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
             "type": "standard"
           }
         ]
@@ -6458,7 +7002,7 @@
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 16,
+        "total_players": 28,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -6586,6 +7130,102 @@
             "value": 80,
             "contract": "SEASON 8",
             "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "WILIMAR BARRIOS",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "WILIMAR BARRIOS",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "WILIMAR BARRIOS",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
             "type": "standard"
           }
         ]
@@ -6770,12 +7410,12 @@
       "overall_rating": 245.4,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 295,
-      "club_total_value": 1926,
+      "club_total_value": 1976,
       "manager_rating": 101.5,
       "trophies": 2,
       "awards": 3,
       "squad": {
-        "total_players": 19,
+        "total_players": 22,
         "players": [
           {
             "name": "JAVIER SAVIOLA",
@@ -6927,6 +7567,30 @@
             "value": 82,
             "contract": "SEASON 8",
             "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "ALEKSANDR GOLOVIN",
+            "position": "AM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "N'GOLO KANTE",
+            "position": "DM",
+            "value": 190,
+            "contract": "SEASON 8",
+            "salary": 9.5,
+            "type": "standard"
+          },
+          {
+            "name": "N'GOLO KANTE",
+            "position": "DM",
+            "value": 190,
+            "contract": "SEASON 8",
+            "salary": 9.5,
             "type": "standard"
           }
         ]
@@ -7124,7 +7788,7 @@
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 23,
         "players": [
           {
             "name": "ROBERTO BAGGIO",
@@ -7261,6 +7925,54 @@
             "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
+          },
+          {
+            "name": "AURELIEN TCHOUAMENI",
+            "position": "DM",
+            "value": 142,
+            "contract": "SEASON 8",
+            "salary": 7.1,
+            "type": "standard"
+          },
+          {
+            "name": "OLIVER SKIPP",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "AURELIEN TCHOUAMENI",
+            "position": "DM",
+            "value": 142,
+            "contract": "SEASON 8",
+            "salary": 7.1,
+            "type": "standard"
+          },
+          {
+            "name": "OLIVER SKIPP",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "AURELIEN TCHOUAMENI",
+            "position": "DM",
+            "value": 142,
+            "contract": "SEASON 8",
+            "salary": 7.1,
+            "type": "standard"
+          },
+          {
+            "name": "OLIVER SKIPP",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
           }
         ]
       },
@@ -7343,13 +8055,13 @@
       "overall_rating": 446.3,
       "r2g_coin_balance": 2292,
       "r2g_token_balance": 595,
-      "club_total_value": 2246,
+      "club_total_value": 2486,
       "star_rating": 6,
       "manager_rating": 166,
       "trophies": 2,
       "awards": 1,
       "squad": {
-        "total_players": 22,
+        "total_players": 28,
         "players": [
           {
             "name": "MATHIAS CUNHA",
@@ -7542,6 +8254,38 @@
             "contract": "SEASON 8",
             "salary": 4.4,
             "type": "standard"
+          },
+          {
+            "name": "RUDI GULLIT",
+            "position": "AM",
+            "value": 108,
+            "contract": "SEASON 8",
+            "salary": 5.4,
+            "type": "standard"
+          },
+          {
+            "name": "ZICO",
+            "position": "AM",
+            "value": 132,
+            "contract": "SEASON 8",
+            "salary": 6.6,
+            "type": "standard"
+          },
+          {
+            "name": "GILBERTO SILVA",
+            "position": "DM",
+            "value": 182,
+            "contract": "SEASON 8",
+            "salary": 9.1,
+            "type": "standard"
+          },
+          {
+            "name": "GILBERTO SILVA",
+            "position": "DM",
+            "value": 182,
+            "contract": "SEASON 8",
+            "salary": 9.1,
+            "type": "standard"
           }
         ]
       },
@@ -7728,12 +8472,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 1168,
       "r2g_token_balance": 100,
-      "club_total_value": 1090,
+      "club_total_value": 1674,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 18,
+        "total_players": 33,
         "players": [
           {
             "name": "EVANILSON",
@@ -7878,6 +8622,126 @@
             "contract": "SEASON 8",
             "salary": 4.9,
             "type": "standard"
+          },
+          {
+            "name": "JUDE BELLINGHAM",
+            "position": "AM",
+            "value": 160,
+            "contract": "SEASON 8",
+            "salary": 8,
+            "type": "standard"
+          },
+          {
+            "name": "THIAGO ALMADA",
+            "position": "AM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "DEISIRE DOUE",
+            "position": "AM",
+            "value": 82,
+            "contract": "SEASON 8",
+            "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "JUDE BELLINGHAM",
+            "position": "AM",
+            "value": 160,
+            "contract": "SEASON 8",
+            "salary": 8,
+            "type": "standard"
+          },
+          {
+            "name": "THIAGO ALMADA",
+            "position": "AM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "DEISIRE DOUE",
+            "position": "AM",
+            "value": 82,
+            "contract": "SEASON 8",
+            "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "IBRAHIM SANGARE",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "MATEUS URIBE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "EMRE CAN",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "IBRAHIM SANGARE",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "MATEUS URIBE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "EMRE CAN",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "IBRAHIM SANGARE",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "MATEUS URIBE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "EMRE CAN",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
           }
         ]
       },
@@ -7965,7 +8829,7 @@
       "trophies": 2,
       "awards": 1,
       "squad": {
-        "total_players": 27,
+        "total_players": 31,
         "players": [
           {
             "name": "VIKTOR GYOKERES",
@@ -8181,6 +9045,38 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "WATARU ENDO",
+            "position": "DM",
+            "value": 82,
+            "contract": "SEASON 8",
+            "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "MARC CASADO",
+            "position": "DM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "WATARU ENDO",
+            "position": "DM",
+            "value": 82,
+            "contract": "SEASON 8",
+            "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "MARC CASADO",
+            "position": "DM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
             "type": "standard"
           }
         ]
@@ -8577,13 +9473,13 @@
       "overall_rating": 62.6,
       "r2g_coin_balance": 1661,
       "r2g_token_balance": 75,
-      "club_total_value": 1146,
+      "club_total_value": 1226,
       "star_rating": 4,
       "manager_rating": 27,
       "trophies": 0,
       "awards": 2,
       "squad": {
-        "total_players": 14,
+        "total_players": 22,
         "players": [
           {
             "name": "JUAN MUSSO",
@@ -8695,6 +9591,70 @@
             "value": 68,
             "contract": "SEASON 8",
             "salary": 3.4,
+            "type": "standard"
+          },
+          {
+            "name": "GIOVANI LO CELSO",
+            "position": "AM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "GIOVANI LO CELSO",
+            "position": "AM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "BOUBACAR KAMARA",
+            "position": "DM",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "SANTIAGO ASCACIBAR",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "BOUBACAR KAMARA",
+            "position": "DM",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "SANTIAGO ASCACIBAR",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "BOUBACAR KAMARA",
+            "position": "DM",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "SANTIAGO ASCACIBAR",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
             "type": "standard"
           }
         ]
@@ -8883,12 +9843,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2369,
       "r2g_token_balance": 330,
-      "club_total_value": 2314,
+      "club_total_value": 2244,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 26,
+        "total_players": 27,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -9093,9 +10053,17 @@
           {
             "name": "SERGIO BUSQUETS",
             "position": "DM",
-            "value": 70,
+            "value": 80,
             "contract": "SEASON 8",
-            "salary": 3.5,
+            "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "SERGIO BUSQUETS",
+            "position": "DM",
+            "value": 80,
+            "contract": "SEASON 8",
+            "salary": 4,
             "type": "standard"
           }
         ]
@@ -9288,12 +10256,12 @@
       "overall_rating": 173.4,
       "r2g_coin_balance": 844,
       "r2g_token_balance": 120,
-      "club_total_value": 1584,
+      "club_total_value": 1858,
       "manager_rating": 56.5,
       "trophies": 1,
       "awards": 2,
       "squad": {
-        "total_players": 15,
+        "total_players": 21,
         "players": [
           {
             "name": "PAU CUBARSI",
@@ -9413,6 +10381,54 @@
             "value": 68,
             "contract": "SEASON 8",
             "salary": 3.4,
+            "type": "standard"
+          },
+          {
+            "name": "KEVIN DE BRUYNE",
+            "position": "AM",
+            "value": 150,
+            "contract": "SEASON 8",
+            "salary": 7.5,
+            "type": "standard"
+          },
+          {
+            "name": "FLORIAN WIRTZ",
+            "position": "AM",
+            "value": 124,
+            "contract": "SEASON 8",
+            "salary": 6.2,
+            "type": "standard"
+          },
+          {
+            "name": "MARCELO BROZOVIC",
+            "position": "DM",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "CASEMIRO",
+            "position": "DM",
+            "value": 102,
+            "contract": "SEASON 8",
+            "salary": 5.1,
+            "type": "standard"
+          },
+          {
+            "name": "MARCELO BROZOVIC",
+            "position": "DM",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "CASEMIRO",
+            "position": "DM",
+            "value": 102,
+            "contract": "SEASON 8",
+            "salary": 5.1,
             "type": "standard"
           }
         ]
@@ -9602,12 +10618,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 830,
       "r2g_token_balance": 50,
-      "club_total_value": 890,
+      "club_total_value": 930,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 22,
         "players": [
           {
             "name": "GIOVANNI SIMEONE",
@@ -9743,6 +10759,46 @@
             "value": 40,
             "contract": "SEASON 8",
             "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "RAYAN CHERKI",
+            "position": "AM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "GUIDO RODRIGUEZ",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "BENAT PRADOS",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "GUIDO RODRIGUEZ",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "BENAT PRADOS",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
             "type": "standard"
           }
         ]
@@ -10241,12 +11297,12 @@
       "overall_rating": 106.2,
       "r2g_coin_balance": 584,
       "r2g_token_balance": 170,
-      "club_total_value": 1004,
+      "club_total_value": 1092,
       "manager_rating": 0,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 27,
+        "total_players": 17,
         "players": [
           {
             "name": "GABRIEL BATISTUTA",
@@ -10358,6 +11414,30 @@
             "value": 72,
             "contract": "SEASON 8",
             "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "XAVI SIMONS",
+            "position": "AM",
+            "value": 88,
+            "contract": "SEASON 8",
+            "salary": 4.4,
+            "type": "standard"
+          },
+          {
+            "name": "TYLER ADAMS",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "TYLER ADAMS",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
             "type": "standard"
           }
         ]
@@ -10836,12 +11916,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 1056,
       "r2g_token_balance": 100,
-      "club_total_value": 1058,
+      "club_total_value": 1414,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 14,
+        "total_players": 27,
         "players": [
           {
             "name": "LOIS OPENDA",
@@ -10954,6 +12034,110 @@
             "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
+          },
+          {
+            "name": "BRAHIM DIAZ",
+            "position": "AM",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "MORGAN ROGERS",
+            "position": "AM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "TAKUMI MINAMINO",
+            "position": "AM",
+            "value": 48,
+            "contract": "SEASON 8",
+            "salary": 2.4,
+            "type": "standard"
+          },
+          {
+            "name": "BRAHIM DIAZ",
+            "position": "AM",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "MORGAN ROGERS",
+            "position": "AM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "TAKUMI MINAMINO",
+            "position": "AM",
+            "value": 48,
+            "contract": "SEASON 8",
+            "salary": 2.4,
+            "type": "standard"
+          },
+          {
+            "name": "MARTEN DE ROON",
+            "position": "DM",
+            "value": 78,
+            "contract": "SEASON 8",
+            "salary": 3.9,
+            "type": "standard"
+          },
+          {
+            "name": "MARTEN DE ROON",
+            "position": "DM",
+            "value": 78,
+            "contract": "SEASON 8",
+            "salary": 3.9,
+            "type": "standard"
+          },
+          {
+            "name": "MARTEN DE ROON",
+            "position": "DM",
+            "value": 78,
+            "contract": "SEASON 8",
+            "salary": 3.9,
+            "type": "standard"
+          },
+          {
+            "name": "PEPELU",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "LEANDRO PAREDES",
+            "position": "DM",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "PEPELU",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "LEANDRO PAREDES",
+            "position": "DM",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
           }
         ]
       },
@@ -11036,13 +12220,13 @@
       "overall_rating": 25.4,
       "r2g_coin_balance": 2005,
       "r2g_token_balance": 155,
-      "club_total_value": 876,
+      "club_total_value": 1184,
       "star_rating": 3,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 14,
+        "total_players": 21,
         "players": [
           {
             "name": "BRAIS MENDEZ",
@@ -11154,6 +12338,62 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "DANI OLMO",
+            "position": "AM",
+            "value": 92,
+            "contract": "SEASON 8",
+            "salary": 4.6,
+            "type": "standard"
+          },
+          {
+            "name": "EMILE SMITH ROWE",
+            "position": "AM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "DANI OLMO",
+            "position": "AM",
+            "value": 92,
+            "contract": "SEASON 8",
+            "salary": 4.6,
+            "type": "standard"
+          },
+          {
+            "name": "EMILE SMITH ROWE",
+            "position": "AM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "KOKE",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "KOKE",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "KOKE",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
             "type": "standard"
           }
         ]
@@ -11330,6 +12570,238 @@
         }
       ],
       "current_season": 6
+    },
+    {
+      "name": "MANAGER",
+      "age": null,
+      "club": "CRYSTAL PALACE",
+      "overall": null,
+      "r2g_coin_balance": 1000,
+      "r2g_token_balance": 100,
+      "club_total_value": 280,
+      "star_rating": 1,
+      "manager_rating": 0,
+      "trophies_awards": 0,
+      "squad": {
+        "total_players": 13,
+        "players": [
+          {
+            "name": "COLE PALMER",
+            "position": "AM",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "ISCO",
+            "position": "AM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "COLE PALMER",
+            "position": "AM",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "ISCO",
+            "position": "AM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "YVES BISSOUMA",
+            "position": "DM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "MORTEN HJULMAND",
+            "position": "DM",
+            "value": 74,
+            "contract": "SEASON 8",
+            "salary": 3.7,
+            "type": "standard"
+          },
+          {
+            "name": "TEUN KOOPMEINERS",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "YVES BISSOUMA",
+            "position": "DM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "MORTEN HJULMAND",
+            "position": "DM",
+            "value": 74,
+            "contract": "SEASON 8",
+            "salary": 3.7,
+            "type": "standard"
+          },
+          {
+            "name": "TEUN KOOPMEINERS",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "YVES BISSOUMA",
+            "position": "DM",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "MORTEN HJULMAND",
+            "position": "DM",
+            "value": 74,
+            "contract": "SEASON 8",
+            "salary": 3.7,
+            "type": "standard"
+          },
+          {
+            "name": "TEUN KOOPMEINERS",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
+          }
+        ]
+      },
+      "performance": {
+        "formula": "Sum of all season_stats (excluding sp_tour_stats)",
+        "matches": 0,
+        "wins": 0,
+        "draws": 0,
+        "losses": 0,
+        "goals_scored": 0,
+        "goals_conceded": 0,
+        "goal_difference": 0,
+        "clean_sheets": 0
+      },
+      "seasons": [
+        {
+          "number": 8,
+          "status": "ongoing",
+          "manager_rank": "-",
+          "rank_point": 0,
+          "team_income": 0,
+          "team_expense": 0,
+          "team_profit": "-",
+          "session_rewards": 0,
+          "competitions": {
+            "division": {
+              "name": "DIVISION",
+              "placement": "In progress"
+            },
+            "super_cup": {
+              "name": "SUPER CUP",
+              "stage": "Not started/In progress"
+            },
+            "uefa": {
+              "name": "UEFA",
+              "stage": "Not started/In progress"
+            },
+            "elite_cup": {
+              "name": "ELITE CUP",
+              "stage": "In progress"
+            },
+            "world_cup": {
+              "name": "WORLD CUP",
+              "stage": "Not started/In progress"
+            },
+            "authentic": {
+              "name": "AUTHENTIC",
+              "stage": "In progress"
+            }
+          },
+          "sp_tour_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          },
+          "season_stats": {
+            "matches": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "goals_scored": 0,
+            "goals_conceded": 0,
+            "goal_difference": 0,
+            "clean_sheets": 0
+          }
+        }
+      ],
+      "current_season": 8
+    },
+    {
+      "name": "TBD",
+      "age": 0,
+      "club": "ARSENAL",
+      "overall_rating": 0,
+      "r2g_coin_balance": 0,
+      "r2g_token_balance": 0,
+      "club_total_value": 96,
+      "manager_rating": 0,
+      "trophies": 0,
+      "awards": 0,
+      "squad": {
+        "total_players": 3,
+        "players": [
+          {
+            "name": "DENIS ZAKARIA",
+            "position": "DM",
+            "value": 96,
+            "contract": "SEASON 8",
+            "salary": 4.8,
+            "type": "standard"
+          },
+          {
+            "name": "DENIS ZAKARIA",
+            "position": "DM",
+            "value": 96,
+            "contract": "SEASON 8",
+            "salary": 4.8,
+            "type": "standard"
+          },
+          {
+            "name": "DENIS ZAKARIA",
+            "position": "DM",
+            "value": 96,
+            "contract": "SEASON 8",
+            "salary": 4.8,
+            "type": "standard"
+          }
+        ]
+      }
     }
   ]
 }
