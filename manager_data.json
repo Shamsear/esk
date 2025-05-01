@@ -4578,6 +4578,14 @@
             "type": "prime"
           },
           {
+            "name": "FERNANDO TORRES",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 7.5",
+            "salary": 5,
+            "type": "prime legend"
+          },
+          {
             "name": "ANDRIY SHEVCHENKO",
             "position": "ST",
             "value": 200,
@@ -4624,14 +4632,6 @@
             "contract": "SEASON 8",
             "salary": 3,
             "type": "standard"
-          },
-          {
-            "name": "JULIO CESAR",
-            "position": "GK",
-            "value": 100,
-            "contract": "SEASON 8",
-            "salary": 5,
-            "type": "legend"
           },
           {
             "name": "DIDA",
@@ -8808,7 +8808,7 @@
       "overall_rating": 289,
       "r2g_coin_balance": 1869,
       "r2g_token_balance": 425,
-      "club_total_value": 2852,
+      "club_total_value": 2822,
       "manager_rating": 105.7,
       "trophies": 2,
       "awards": 1,
@@ -9064,12 +9064,12 @@
             "type": "standard"
           },
           {
-            "name": "FERNANDO TORRES",
-            "position": "ST",
-            "value": 130,
-            "contract": "SEASON 7.5",
+            "name": "JULIO CESAR",
+            "position": "GK",
+            "value": 100,
+            "contract": "SEASON 8",
             "salary": 5,
-            "type": "prime legend"
+            "type": "legend"
           }
         ]
       },
