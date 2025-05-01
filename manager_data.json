@@ -8883,12 +8883,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2369,
       "r2g_token_balance": 330,
-      "club_total_value": 2244,
+      "club_total_value": 2314,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 25,
+        "total_players": 26,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -9088,6 +9088,14 @@
             "value": 60,
             "contract": "SEASON 8",
             "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "SERGIO BUSQUETS",
+            "position": "DM",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
             "type": "standard"
           }
         ]
@@ -10393,7 +10401,7 @@
             }
           },
           "awards": {
-            "league_golden_glove":true
+            "league_golden_glove": true
           },
           "sp_tour_stats": {
             "matches": 0,
