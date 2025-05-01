@@ -6113,12 +6113,12 @@
       "overall_rating": 42.9,
       "r2g_coin_balance": 1445,
       "r2g_token_balance": 135,
-      "club_total_value": 1138,
+      "club_total_value": 1320,
       "manager_rating": -19.8,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 21,
+        "total_players": 20,
         "players": [
           {
             "name": "GIANLUCA SCAMACCA",
@@ -6126,14 +6126,6 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "HWANG HEE-CHAN",
-            "position": "ST",
-            "value": 58,
-            "contract": "SEASON 8",
-            "salary": 2.9,
             "type": "standard"
           },
           {
@@ -9835,12 +9827,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2009,
       "r2g_token_balance": 330,
-      "club_total_value": 2644,
+      "club_total_value": 2702,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 31,
+        "total_players": 32,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -10089,6 +10081,14 @@
             "contract": "SEASON 8",
             "salary": 7.6,
             "type": "legend"
+          },
+          {
+            "name": "HWANG HEE-CHAN",
+            "position": "ST",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
           }
         ],
         "totalPlayers": 31
