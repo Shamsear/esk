@@ -13580,20 +13580,25 @@
     "name": "SERGE GNABRY",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "MANCHESTER UNITED",
     "position": "LW",
-    "value": 50,
+    "value": 72,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5.5",
         "team": "RED BULL BRAGANTINO",
-        "value": "70",
-        "apps": "00"
+        "value": "70"
+      },
+      {
+        "season": "6-8",
+        "team": "MANCHESTER UNITED",
+        "value": "72"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/S. GNABRY_CARD.webp",
-    "id": 643
+    "id": 643,
+    "clubLogo": "assets/images/players/club/Manchester United FC.webp"
   },
   {
     "name": "DAVID BECKHAM",
