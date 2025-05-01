@@ -4554,12 +4554,12 @@
       "overall_rating": 396.4,
       "r2g_coin_balance": 2626,
       "r2g_token_balance": 465,
-      "club_total_value": 3016,
+      "club_total_value": 2916,
       "manager_rating": 171,
       "trophies": 3,
       "awards": 2,
       "squad": {
-        "total_players": 24,
+        "total_players": 23,
         "players": [
           {
             "name": "TOMAS ROSICKY",
@@ -4576,14 +4576,6 @@
             "contract": "SEASON 7.5",
             "salary": 11.5,
             "type": "prime"
-          },
-          {
-            "name": "FERNANDO TORRES",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 7.5",
-            "salary": 5,
-            "type": "prime legend"
           },
           {
             "name": "ANDRIY SHEVCHENKO",
@@ -8816,12 +8808,12 @@
       "overall_rating": 289,
       "r2g_coin_balance": 1869,
       "r2g_token_balance": 425,
-      "club_total_value": 2822,
+      "club_total_value": 2952,
       "manager_rating": 105.7,
       "trophies": 2,
       "awards": 1,
       "squad": {
-        "total_players": 32,
+        "total_players": 33,
         "players": [
           {
             "name": "VIKTOR GYOKERES",
@@ -9078,6 +9070,14 @@
             "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
+          },
+          {
+            "name": "FERNANDO TORRES",
+            "position": "ST",
+            "value": 130,
+            "contract": "SEASON 7.5",
+            "salary": 5,
+            "type": "prime legend"
           }
         ]
       },
