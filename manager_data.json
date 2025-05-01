@@ -1769,7 +1769,7 @@
             "type": "standard"
           },
           {
-            "name": "MALO GUTSO",
+            "name": "MALO GUSTO",
             "position": "RB",
             "value": 50,
             "contract": "SEASON 7",
@@ -1857,7 +1857,7 @@
             "type": "standard"
           },
           {
-            "name": "MARTIN DEMICHELLIS",
+            "name": "MARTIN DEMICHELIS",
             "position": "CB",
             "value": 102,
             "contract": "SEASON 8",
@@ -1865,7 +1865,7 @@
             "type": "standard"
           },
           {
-            "name": "IBAPOTE DIAKITE",
+            "name": "BAFOFE DIAKITE",
             "position": "CB",
             "value": 58,
             "contract": "SEASON 8",
@@ -2485,7 +2485,7 @@
             "type": "standard"
           },
           {
-            "name": "MARK GUEHI",
+            "name": "MARC GUEHI",
             "position": "CB",
             "value": 88,
             "contract": "SEASON 7",
@@ -3439,7 +3439,7 @@
             "type": "standard"
           },
           {
-            "name": "LUCAS KLOSTERMAN",
+            "name": "LUCAS KLOSTERMANN",
             "position": "RB",
             "value": 44,
             "contract": "SEASON 8",
@@ -4323,7 +4323,7 @@
             "type": "standard"
           },
           {
-            "name": "ELJIF ELMAS",
+            "name": "ELIJIF ELMAS",
             "position": "CM",
             "value": 56,
             "contract": "SEASON 7",
@@ -5362,7 +5362,7 @@
             "type": "standard"
           },
           {
-            "name": "NISTERLROOY",
+            "name": "RUUD VAN NISTELROOIJ",
             "position": "ST",
             "value": 120,
             "contract": "SEASON 8",
@@ -6551,14 +6551,6 @@
             "type": "standard"
           },
           {
-            "name": "CHANATHIP SONGKRASIN",
-            "position": "AM",
-            "value": 40,
-            "contract": "SEASON 8",
-            "salary": 2,
-            "type": "standard"
-          },
-          {
             "name": "XABI ALONSO",
             "position": "DM",
             "value": 128,
@@ -7498,7 +7490,7 @@
             "type": "standard"
           },
           {
-            "name": "COREA GURUZETA",
+            "name": "GORKA GURUZETA",
             "position": "ST",
             "value": 52,
             "contract": "SEASON 8",
@@ -8064,7 +8056,7 @@
         "total_players": 28,
         "players": [
           {
-            "name": "MATHIAS CUNHA",
+            "name": "MATHEUS CUNHA",
             "position": "ST",
             "value": 78,
             "contract": "SEASON 7.5",
@@ -8128,7 +8120,7 @@
             "type": "standard"
           },
           {
-            "name": "MATHEUS CAICEDO",
+            "name": "MOISES CAICEDO",
             "position": "DM",
             "value": 82,
             "contract": "SEASON 7",
@@ -8192,7 +8184,7 @@
             "type": "standard"
           },
           {
-            "name": "BIZENTE LIZARAZU",
+            "name": "BIXENTE LIZARAZU",
             "position": "CB",
             "value": 78,
             "contract": "SEASON 8",
@@ -9297,7 +9289,7 @@
             "type": "standard"
           },
           {
-            "name": "NESYRI",
+            "name": "YOUSSEF EN NESYRI",
             "position": "ST",
             "value": 78,
             "contract": "SEASON 8",
@@ -9586,7 +9578,7 @@
             "type": "standard"
           },
           {
-            "name": "CESER AZPILICUETA",
+            "name": "CESAR AZPILICUETA",
             "position": "RB",
             "value": 68,
             "contract": "SEASON 8",
@@ -10938,7 +10930,7 @@
             "type": "standard"
           },
           {
-            "name": "CHACEL MBEMBA",
+            "name": "CHANCEL MBEMBA",
             "position": "CB",
             "value": 88,
             "contract": "SEASON 7",
@@ -11313,7 +11305,7 @@
             "type": "legend"
           },
           {
-            "name": "ADEMOLA",
+            "name": "ADEMOLA LOOKMAN",
             "position": "ST",
             "value": 138,
             "contract": "SEASON 8",
@@ -11932,7 +11924,7 @@
             "type": "standard"
           },
           {
-            "name": "JORGEN STRAND",
+            "name": "JORGEN STRAND LARSEN",
             "position": "ST",
             "value": 70,
             "contract": "SEASON 8",

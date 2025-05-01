@@ -18,7 +18,7 @@
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/D. SEAMAN_CARD.webp"
   },
   {
-    "name": "CASILLAS",
+    "name": "IKER CASILLAS",
     "star": "5-star-legend",
     "level": "LEGENDARY",
     "club": "FREE AGENT",
@@ -192,7 +192,7 @@
     "imagePath": "../assets/images/players/5 STAR CARDS/EDERSON_CARD.webp"
   },
   {
-    "name": "TER STEGEN",
+    "name": "MARC TER STEGEN",
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -456,7 +456,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/A. LUNIN_CARD.webp"
   },
   {
-    "name": "DOMINIK LIVAKOVIĆ",
+    "name": "DOMINIK LIVAKOVIC",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -522,7 +522,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/A. MERET_CARD.webp"
   },
   {
-    "name": "WOJCIECH SZCZĘSNY",
+    "name": "WOJCIECH SZCZESNY",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -714,7 +714,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/D. SORIA_CARD.webp"
   },
   {
-    "name": "DE GEA",
+    "name": "DAVID DE GEA",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -1422,7 +1422,7 @@
     "imagePath": "../assets/images/players/3 STAR CARDS/A. VALLES_CARD.webp"
   },
   {
-    "name": "LUKAS HRADECKÝ",
+    "name": "LUKAS HRADECKY",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -1884,7 +1884,7 @@
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/PUYOL_CARD.webp"
   },
   {
-    "name": "CAMPBELL",
+    "name": "SOL CAMPBELL",
     "star": "5-star-legend",
     "level": "LEGENDARY",
     "club": "FREE AGENT",
@@ -1902,7 +1902,7 @@
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/CAMPBELL_CARD.webp"
   },
   {
-    "name": "EDER MILITÃO",
+    "name": "EDER MILITAO",
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -1986,7 +1986,7 @@
     "imagePath": "../assets/images/players/5 STAR CARDS/A. RUDIGER_CARD.webp"
   },
   {
-    "name": "GABRIEL MAGALHÃES",
+    "name": "GABRIEL MAGALHAES",
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "RB LEIPZIG",
@@ -2124,7 +2124,7 @@
     "imagePath": "../assets/images/players/5 STAR CARDS/M. AKANJI_CARD.webp"
   },
   {
-    "name": "RÚBEN DIAS",
+    "name": "RUBEN DIAS",
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "MANCHESTER CITY",
@@ -2358,7 +2358,7 @@
     "imagePath": "../assets/images/players/5 STAR CARDS/P. CUBARSI_CARD.webp"
   },
   {
-    "name": "RONALD ARAÚJO",
+    "name": "RONALD ARAUJO",
     "star": "5-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -2532,7 +2532,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/E. NDICKA_CARD.webp"
   },
   {
-    "name": "NIKOLA MILENKOVIĆ",
+    "name": "NIKOLA MILENKOVIC",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -2547,7 +2547,7 @@
         "apps": "12"
       }
     ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/N. MILENKOVIĆ_CARD.webp"
+    "imagePath": "../assets/images/players/4 STAR CARDS/N. MILENKOVIC_CARD.webp"
   },
   {
     "name": "TOBY ALDERWEIRELD",
@@ -7134,7 +7134,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/C. AUGUSTO_CARD.webp"
   },
   {
-    "name": "M. MITTELSTÄDT",
+    "name": "M. MITTELSTADT",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -7254,7 +7254,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/R. GUERREIRO_CARD.webp"
   },
   {
-    "name": "JOSE GAYÀ",
+    "name": "JOSE GAYA",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -7270,6 +7270,168 @@
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. GAYA_CARD.webp"
+  },
+  {
+    "name": "YOANE WISSA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/YOANE WISSA_CARD.webp"
+  },
+  {
+    "name": "VICTOR BONIFACE",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/VICTOR BONIFACE_CARD.webp"
+  },
+  {
+    "name": "MIKA MARMOL",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "CB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/MIKA MARMOL_CARD.webp"
+  },
+  {
+    "name": "MOISE KEAN",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/MOISE KEAN_CARD.webp"
+  },
+  {
+    "name": "KENAN YILDIZ",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/KENAN YILDIZ_CARD.webp"
+  },
+  {
+    "name": "T. HARWOOD BELLIS",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "CB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/T. HARWOOD BELLIS_CARD.webp"
+  },
+  {
+    "name": "MAME THIAM",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/MAME THIAM_CARD.webp"
+  },
+  {
+    "name": "FABIO SILVA",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "ST",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/FABIO SILVA_CARD.webp"
+  },
+  {
+    "name": "DORDE PETROVIC",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "GK",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/DORDE PETROVIC_CARD.webp"
   },
   {
     "name": "JOAKIM MAEHLE",
@@ -12967,7 +13129,7 @@
     "imagePath": "../assets/images/players/3 STAR CARDS/D. OSPINA_CARD.webp"
   },
   {
-    "name": "ĐORĐE PETROVIĆ",
+    "name": "ĐORĐE PETROVIC",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -12985,7 +13147,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/D. PETROVIC_CARD.webp"
   },
   {
-    "name": "FILIP JØRGENSEN",
+    "name": "FILIP JORGENSEN",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -13171,7 +13333,7 @@
     "imagePath": "../assets/images/players/4 STAR CARDS/R. SANCHEZ_CARD.webp"
   },
   {
-    "name": "V. MILINKOVIĆ-SAVIĆ",
+    "name": "V. MILINKOVIC-SAVIC",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "FREE AGENT",
@@ -13187,6 +13349,24 @@
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/V. MILINKOVIC-SAVIC_CARD.webp"
+  },
+  {
+    "name": "BENOIT BADIASHILE",
+    "star": "4-star-standard",
+    "level": "STANDARD",
+    "club": "FREE AGENT",
+    "position": "CB",
+    "value": 50,
+    "gamesPlayed": 0,
+    "stats": [
+      {
+        "season": "4-6",
+        "team": "FREE AGENT",
+        "value": "50",
+        "apps": "00"
+      }
+    ],
+    "imagePath": "../assets/images/players/4 STAR CARDS/BENOIT BADIASHILE_CARD.webp"
   },
   {
     "name": "ANTHONY LOPES",
@@ -19813,7 +19993,7 @@
     "imagePath": "../assets/images/players/3 STAR CARDS/N. SANTOS_CARD.webp"
   },
   {
-    "name": "NUNO TAVARES",
+    "name": "NUNO TEVARES",
     "star": "4-star-standard",
     "level": "STANDARD",
     "club": "WOLVES",
