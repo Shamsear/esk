@@ -6463,7 +6463,7 @@
       "overall_rating": 174.2,
       "r2g_coin_balance": 533,
       "r2g_token_balance": 625,
-      "club_total_value": 1166,
+      "club_total_value": 1578,
       "manager_rating": 0,
       "trophies": 1,
       "awards": 3,
@@ -6572,6 +6572,14 @@
             "value": 62,
             "contract": "SEASON 8",
             "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "SERGE GNABRY",
+            "position": "LW",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
             "type": "standard"
           }
         ]
@@ -11327,12 +11335,12 @@
       "overall_rating": 106.2,
       "r2g_coin_balance": 584,
       "r2g_token_balance": 170,
-      "club_total_value": 1092,
+      "club_total_value": 1100,
       "manager_rating": 0,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 17,
+        "total_players": 16,
         "players": [
           {
             "name": "GABRIEL BATISTUTA",
@@ -11436,14 +11444,6 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "SERGE GNABRY",
-            "position": "LW",
-            "value": 72,
-            "contract": "SEASON 8",
-            "salary": 3.6,
             "type": "standard"
           },
           {
