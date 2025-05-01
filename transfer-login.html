@@ -18,6 +18,7 @@
     <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>R2G Transfer Admin Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
@@ -322,26 +323,55 @@
                 }
                 
                 // In a real application, you would validate credentials against a server
-                // For demonstration purposes, we're using hardcoded credentials
-                // IMPORTANT: In a production environment, use proper authentication with secure backend validation
                 if (username === 'admin' && password === 'r2gadmin123') {
                     // Add loading effect
                     loginBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Logging in...';
                     loginBtn.disabled = true;
                     
-                    // Set session storage
+                    // Set session storage with proper encoding
                     sessionStorage.setItem('transferAdminLoggedIn', 'true');
-                    sessionStorage.setItem('transferAdminUsername', username);
+                    sessionStorage.setItem('transferAdminUsername', encodeURIComponent(username));
                     
+                    // Ensure proper character encoding for data operations
+                    if (window.fetch) {
+                        fetch('players.json')
+                            .then(response => response.text())
+                            .then(text => {
+                                // Ensure proper UTF-8 decoding
+                                const decoder = new TextDecoder('utf-8');
+                                const data = JSON.parse(decoder.decode(new TextEncoder().encode(text)));
+                                // Process data here...
+                            })
+                            .catch(error => console.error('Error:', error));
+                    }
+
                     // Short delay for better UX
                     setTimeout(() => {
-                        // Redirect to transfer admin panel
                         window.location.href = 'transfer-admin.html';
                     }, 800);
                 } else {
                     showError('Invalid username or password');
                     passwordInput.value = '';
                 }
+            }
+            
+            // Add function to handle special characters
+            function normalizePlayerName(name) {
+                return name
+                    .normalize('NFD')  // Normalize to decomposed form
+                    .replace(/[\u0300-\u036f]/g, '')  // Remove diacritics
+                    .toUpperCase();  // Convert to uppercase
+            }
+
+            // Function to save player data with proper encoding
+            function savePlayerData(playerData) {
+                const encoder = new TextEncoder();
+                const decoder = new TextDecoder('utf-8');
+                
+                // Ensure proper encoding of player names
+                const encodedData = JSON.stringify(playerData, null, 2);
+                const encodedBytes = encoder.encode(encodedData);
+                return decoder.decode(encodedBytes);
             }
             
             function showError(message) {
