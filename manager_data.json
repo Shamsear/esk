@@ -4554,12 +4554,12 @@
       "overall_rating": 396.4,
       "r2g_coin_balance": 2626,
       "r2g_token_balance": 465,
-      "club_total_value": 2916,
+      "club_total_value": 2764,
       "manager_rating": 171,
       "trophies": 3,
       "awards": 2,
       "squad": {
-        "total_players": 23,
+        "total_players": 22,
         "players": [
           {
             "name": "TOMAS ROSICKY",
@@ -4696,14 +4696,6 @@
             "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
-          },
-          {
-            "name": "GARETH BALE",
-            "position": "LW",
-            "value": 152,
-            "contract": "SEASON 8",
-            "salary": 7.6,
-            "type": "legend"
           },
           {
             "name": "PAVEL NEDVED",
@@ -9843,12 +9835,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2009,
       "r2g_token_balance": 330,
-      "club_total_value": 2244,
+      "club_total_value": 2818,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 27,
+        "total_players": 32,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -10097,6 +10089,14 @@
             "contract": "SEASON 6",
             "salary": 3,
             "type": "standard"
+          },
+          {
+            "name": "GARETH BALE",
+            "position": "LW",
+            "value": 174,
+            "contract": "SEASON 8",
+            "salary": 7.6,
+            "type": "legend"
           }
         ],
         "totalPlayers": 31
