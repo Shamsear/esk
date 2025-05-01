@@ -1180,6 +1180,228 @@
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
+        /* Add styles for transfer history table */
+        .transfer-history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: #e0e0e0;
+            background-color: #1e1e1e;
+        }
+
+        .transfer-history-table th,
+        .transfer-history-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .transfer-history-table th {
+            background-color: #252525;
+            font-weight: 600;
+            color: #4ecca3;
+        }
+
+        .transfer-history-table tr:hover {
+            background-color: #252525;
+        }
+
+        /* Add styles for confirmation modal */
+        .transfer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content h3 {
+            color: #fff;
+            margin-top: 0;
+            font-size: 24px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .player-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .player-card {
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 15px;
+            width: calc(33.33% - 15px);
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .player-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .player-card-info {
+            text-align: center;
+            width: 100%;
+        }
+
+        .player-card-info .name {
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .player-card-info .value {
+            display: block;
+            font-size: 14px;
+            color: #4ecca3;
+            margin-bottom: 5px;
+        }
+
+        .player-card-info .from {
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .confirm-btn, .cancel-btn {
+            padding: 12px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .confirm-btn {
+            background-color: #4ecca3;
+            color: #111;
+        }
+
+        .confirm-btn:hover {
+            background-color: #3db28f;
+        }
+
+        .cancel-btn {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .cancel-btn:hover {
+            background-color: #555;
+        }
+
+        /* Add styles for loading message */
+        .loading-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .loading-message i {
+            color: #4ecca3;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Add styles for season selection */
+        .season-selection {
+            margin-top: 20px;
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #4ecca3;
+        }
+        
+        .season-selection h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #fff;
+        }
+        
+        .season-inputs {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .season-inputs .form-group {
+            flex: 1;
+        }
+        
+        .season-input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 15px;
+        }
+        
+        .season-input:focus {
+            border-color: #4ecca3;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(78, 204, 163, 0.2);
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -1302,6 +1524,21 @@
             <div id="debug-controls">
                 <button id="debug-select-team" title="Automatically select the first available team">Debug Select Team</button>
                 <button id="debug-check-data" title="Check for inconsistencies between manager data and players data" style="background-color: #444; margin-left: 10px;">Check Data Consistency</button>
+            </div>
+
+            <!-- Add this inside your team-selection div, before the transfer button -->
+            <div class="season-selection">
+                <h3>Select Season Range</h3>
+                <div class="season-inputs">
+                    <div class="form-group">
+                        <label for="season-start">Season Start</label>
+                        <input type="number" id="season-start" min="1" max="20" step="0.5" value="6" class="season-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="season-end">Season End</label>
+                        <input type="number" id="season-end" min="1" max="20" step="0.5" value="8" class="season-input">
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -3160,151 +3397,140 @@
         // Function to handle player transfer
         async function handlePlayerTransfer(player, newTeam) {
             try {
+                // Fetch current players data
+                const response = await fetch('players.json');
+                const playersData = await response.json();
+                
                 // Get the current season range from inputs
-                const seasonStart = document.getElementById('season-start').value;
-                const seasonEnd = document.getElementById('season-end').value;
+                const seasonStart = document.getElementById('season-start').value || "6";
+                const seasonEnd = document.getElementById('season-end').value || "8";
                 const newSeasonRange = `${seasonStart}-${seasonEnd}`;
-
+                const newStartNum = parseFloat(seasonStart);
+                const newEndNum = parseFloat(seasonEnd);
+                
                 // Find the player in the data
                 const existingPlayer = playersData.find(p => p.name === player.name);
                 
                 if (existingPlayer) {
+                    // Store original state for possible revert
+                    storeOriginalPlayerState(player.name, existingPlayer);
+                    
+                    console.log(`Processing transfer for ${player.name} to ${newTeam} for seasons ${newSeasonRange}`);
+                    
                     // Initialize stats array if it doesn't exist
                     if (!existingPlayer.stats) {
                         existingPlayer.stats = [];
                     }
-
-                    // Sort stats by season start for easier processing
-                    existingPlayer.stats.sort((a, b) => {
+                    
+                    // Clone stats to avoid modifying while iterating
+                    let updatedStats = [...existingPlayer.stats];
+                    
+                    // CASE 1: Check if player is a FREE AGENT currently
+                    if (existingPlayer.club === "FREE AGENT" || !existingPlayer.club) {
+                        console.log(`${player.name} is currently a FREE AGENT`);
+                        
+                        // Look for FREE AGENT stat entries that overlap with new season
+                        const freeAgentEntries = updatedStats.filter(stat => 
+                            stat.team === "FREE AGENT" && seasonOverlaps(stat.season, newSeasonRange)
+                        );
+                        
+                        if (freeAgentEntries.length > 0) {
+                            console.log(`Found ${freeAgentEntries.length} FREE AGENT entries that overlap with ${newSeasonRange}`);
+                            
+                            // Replace FREE AGENT entries with new team entry
+                            updatedStats = updatedStats.filter(stat => 
+                                !(stat.team === "FREE AGENT" && seasonOverlaps(stat.season, newSeasonRange))
+                            );
+                            
+                            // Add the new team entry
+                            updatedStats.push(createNewStatEntry(newSeasonRange, newTeam, player.value));
+                        } else {
+                            // Just add new entry if no overlap
+                            updatedStats.push(createNewStatEntry(newSeasonRange, newTeam, player.value));
+                        }
+                    } else {
+                        // CASE 2: Regular player transfer (not FREE AGENT)
+                        console.log(`${player.name} is being transferred from ${existingPlayer.club} to ${newTeam}`);
+                        
+                        // Process overlapping stats
+                        const overlappingEntries = updatedStats.filter(stat => 
+                            seasonOverlaps(stat.season, newSeasonRange)
+                        );
+                        
+                        if (overlappingEntries.length > 0) {
+                            console.log(`Found ${overlappingEntries.length} entries that overlap with ${newSeasonRange}`);
+                            
+                            // Adjust each overlapping entry
+                            updatedStats = updatedStats.filter(stat => !seasonOverlaps(stat.season, newSeasonRange));
+                            
+                            // Handle each overlapping entry
+                            overlappingEntries.forEach(entry => {
+                                const [startSeason, endSeason] = entry.season.split('-').map(parseFloat);
+                                
+                                // If entry starts before new season, keep that part
+                                if (startSeason < newStartNum) {
+                                    updatedStats.push({
+                                        ...entry,
+                                        season: `${startSeason}-${newStartNum}`
+                                    });
+                                }
+                            });
+                        }
+                        
+                        // Add new entry for the new team and season
+                        updatedStats.push(createNewStatEntry(newSeasonRange, newTeam, player.value));
+                    }
+                    
+                    // Sort stats by season start
+                    updatedStats.sort((a, b) => {
                         const aStart = parseFloat(a.season.split('-')[0]);
                         const bStart = parseFloat(b.season.split('-')[0]);
                         return aStart - bStart;
                     });
-
-                    const newStart = parseFloat(seasonStart);
-                    const newEnd = parseFloat(seasonEnd);
-
-                    // First, handle any overlapping periods
-                    const updatedStats = [];
-                    let hasOverlap = false;
-
-                    for (const stat of existingPlayer.stats) {
-                        const [statStart, statEnd] = stat.season.split('-').map(Number);
-
-                        // Case 1: Stat period ends before new period starts
-                        if (statEnd <= newStart) {
-                            updatedStats.push(stat);
-                            continue;
-                        }
-
-                        // Case 2: Stat period starts after new period ends
-                        if (statStart >= newEnd) {
-                            updatedStats.push(stat);
-                            continue;
-                        }
-
-                        hasOverlap = true;
-
-                        // Case 3: Handle overlapping periods
-                        if (statStart < newStart) {
-                            // Keep the non-overlapping part
-                            updatedStats.push({
-                                ...stat,
-                                season: `${statStart}-${newStart}`
-                            });
-                        }
-
-                        // Special handling for Free Agent
-                        if (stat.team === "FREE AGENT") {
-                            // If it's a free agent period that overlaps, we just replace it
-                            continue;
-                        }
-
-                        // For regular teams, we might need to split the period
-                        if (statEnd > newEnd) {
-                            updatedStats.push({
-                                ...stat,
-                                season: `${newEnd}-${statEnd}`
-                            });
-                        }
-                    }
-
-                    // Create the new stat entry
-                    const newStat = {
-                        season: newSeasonRange,
-                        team: newTeam,
-                        value: player.value.toString(),
-                        apps: "00",
-                        goals: "00",
-                        assists: "00",
-                        clean_sheets: "00",
-                        cards: {
-                            yellow: "00",
-                            red: "00"
-                        }
-                    };
-
-                    // Find the correct position to insert the new stat
-                    let insertIndex = updatedStats.findIndex(stat => {
-                        const [statStart] = stat.season.split('-').map(Number);
-                        return statStart > newStart;
-                    });
-
-                    if (insertIndex === -1) {
-                        // Add to the end if no later stats found
-                        updatedStats.push(newStat);
-                    } else {
-                        // Insert at the correct position
-                        updatedStats.splice(insertIndex, 0, newStat);
-                    }
-
-                    // Update the player's stats
+                    
+                    // Update the player data
                     existingPlayer.stats = updatedStats;
-
-                    // Update current team and value
                     existingPlayer.club = newTeam;
                     existingPlayer.value = player.value;
-
-                    // If player type is specified, update it
-                    if (player.type) {
-                        existingPlayer.type = player.type;
+                    
+                    // Save the updated player data
+                    const playerIndex = playersData.findIndex(p => p.name === player.name);
+                    if (playerIndex !== -1) {
+                        playersData[playerIndex] = existingPlayer;
                     }
-
-                    // Validate the final stats
-                    let lastEnd = 0;
-                    for (const stat of existingPlayer.stats) {
-                        const [start, end] = stat.season.split('-').map(Number);
-                        if (start < lastEnd) {
-                            console.error('Overlapping periods detected:', existingPlayer.stats);
-                            throw new Error('Invalid stat periods: overlapping detected');
-                        }
-                        lastEnd = end;
-                    }
-
-                    // Log the update for debugging
-                    console.log(`Updated player ${player.name}:`, {
-                        newTeam,
-                        seasonRange: newSeasonRange,
-                        hadOverlap: hasOverlap,
-                        finalStats: existingPlayer.stats
-                    });
-
-                    return existingPlayer;
+                    
+                    // Save to players.json
+                    await savePlayersData(playersData);
+                    
+                    console.log(`Transfer completed for ${player.name} to ${newTeam}`);
+                    return true;
+                } else {
+                    console.error(`Player ${player.name} not found in data`);
+                    return false;
                 }
-                
             } catch (error) {
                 console.error('Error handling player transfer:', error);
                 throw error;
             }
         }
 
-        // Helper function to validate season format
-        function validateSeasonFormat(season) {
-            const [start, end] = season.split('-').map(Number);
-            if (isNaN(start) || isNaN(end)) return false;
-            if (start >= end) return false;
-            if (start % 0.5 !== 0 || end % 0.5 !== 0) return false;
-            return true;
+        // Helper function to create new stat entry
+        function createNewStatEntry(season, team, value) {
+            return {
+                season: season,
+                team: team,
+                value: value.toString(),
+                apps: "00"
+            };
+        }
+
+        // Helper function to check if two season ranges overlap
+        function seasonOverlaps(season1, season2) {
+            const [start1, end1] = season1.split('-').map(parseFloat);
+            const [start2, end2] = season2.split('-').map(parseFloat);
+            
+            // Check if one range starts before the other ends
+            return (start1 < end2 && start2 < end1);
         }
 
         // Function to save players data
@@ -3313,37 +3539,204 @@
                 const response = await fetch('players.json', {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json; charset=utf-8'
                     },
                     body: JSON.stringify(playersData, null, 2)
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to save players data');
+                    throw new Error(`Failed to save players data: ${response.status}`);
                 }
+                
+                return true;
             } catch (error) {
                 console.error('Error saving players data:', error);
                 throw error;
             }
         }
 
-        // Add this to your existing transfer button click handler
-        document.getElementById('transfer-button').addEventListener('click', async function() {
-            const selectedTeam = document.getElementById('team-selector').value;
-            const selectedPlayers = getSelectedPlayers(); // Your existing function to get selected players
+        // Function to sanitize team name
+        function sanitizeTeamName(teamName) {
+            // Remove any potentially problematic characters
+            return teamName.replace(/[^\w\s-]/g, '').trim().toUpperCase();
+        }
+
+        // Function to validate player data
+        function validatePlayer(player) {
+            if (!player || !player.name) {
+                throw new Error('Invalid player data');
+            }
             
+            if (typeof player.value !== 'number' && isNaN(parseInt(player.value))) {
+                throw new Error('Invalid player value');
+            }
+            
+            return {
+                ...player,
+                value: parseInt(player.value), // Ensure value is a number
+                name: player.name.trim().toUpperCase() // Normalize name
+            };
+        }
+
+        // Function to show transfer confirmation with player cards
+        function showTransferConfirmation(players, toTeam, seasonRange) {
+            const modal = document.createElement('div');
+            modal.className = 'transfer-modal';
+            
+            let content = `
+                <div class="modal-content">
+                    <h3>Confirm Transfer</h3>
+                    <p>The following players will be transferred to ${toTeam} for seasons ${seasonRange}:</p>
+                    <div class="player-cards">
+            `;
+            
+            players.forEach(player => {
+                content += `
+                    <div class="player-card">
+                        <img src="${player.imagePath || 'assets/images/default-player.webp'}" alt="${player.name}">
+                        <div class="player-card-info">
+                            <span class="name">${player.name}</span>
+                            <span class="value">${player.value}</span>
+                            <span class="from">${player.club || 'FREE AGENT'} → ${toTeam}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content += `
+                    </div>
+                    <div class="modal-actions">
+                        <button id="confirm-transfer" class="confirm-btn">Confirm Transfer</button>
+                        <button id="cancel-transfer" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            `;
+            
+            modal.innerHTML = content;
+            document.body.appendChild(modal);
+            
+            return new Promise((resolve, reject) => {
+                document.getElementById('confirm-transfer').addEventListener('click', () => {
+                    modal.remove();
+                    resolve(true);
+                });
+                
+                document.getElementById('cancel-transfer').addEventListener('click', () => {
+                    modal.remove();
+                    resolve(false);
+                });
+            });
+        }
+
+        // Update button handler to use confirmation
+        document.getElementById('transfer-button').addEventListener('click', async function() {
             try {
-                for (const player of selectedPlayers) {
-                    await handlePlayerTransfer(player, selectedTeam);
+                // Get and sanitize team name
+                const selectedTeam = sanitizeTeamName(document.getElementById('team-selector').value);
+                if (!selectedTeam) {
+                    showErrorMessage('Please select a valid team');
+                    return;
                 }
                 
-                // Refresh the display after transfers are complete
+                // Get selected players and validate them
+                const selectedPlayers = getSelectedPlayers().map(validatePlayer);
+                if (selectedPlayers.length === 0) {
+                    showErrorMessage('Please select at least one player');
+                    return;
+                }
+                
+                // Validate season range
+                const seasonStart = document.getElementById('season-start').value;
+                const seasonEnd = document.getElementById('season-end').value;
+                
+                if (!validateSeasonRange(seasonStart, seasonEnd)) {
+                    return;
+                }
+                
+                // Get season range for logging
+                const seasonRange = `${seasonStart}-${seasonEnd}`;
+                
+                // Show confirmation dialog
+                const confirmed = await showTransferConfirmation(selectedPlayers, selectedTeam, seasonRange);
+                if (!confirmed) {
+                    return; // User cancelled
+                }
+                
+                // Show loading indicator
+                showLoadingMessage('Transferring players...');
+                
+                // Process each player
+                const results = await batchTransferPlayers(selectedPlayers, selectedTeam, seasonRange);
+                
+                // Log transfers
+                results.success.forEach(playerName => {
+                    const player = selectedPlayers.find(p => p.name === playerName);
+                    if (player) {
+                        logTransferHistory(player, player.club, selectedTeam, seasonRange);
+                    }
+                });
+                
+                // Hide loading indicator and show results
+                hideLoadingMessage();
+                
+                if (results.success.length > 0) {
+                    showSuccessMessage(`${results.success.length} player(s) transferred to ${selectedTeam}`);
+                }
+                
+                if (results.failed.length > 0) {
+                    showErrorMessage(`Failed to transfer ${results.failed.length} player(s)`);
+                    console.error('Failed transfers:', results.failed);
+                }
+                
+                // Refresh the player lists
                 await refreshPlayerLists();
-                showSuccessMessage('Players transferred successfully!');
+                
             } catch (error) {
-                showErrorMessage('Error transferring players: ' + error.message);
+                hideLoadingMessage();
+                handleTransferError(error, 'processing transfers');
             }
         });
+
+        // Helper function to show loading message
+        function showLoadingMessage(message) {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loading-message';
+            loadingDiv.className = 'loading-message';
+            loadingDiv.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> ${message}`;
+            document.querySelector('.container').prepend(loadingDiv);
+        }
+
+        // Helper function to hide loading message
+        function hideLoadingMessage() {
+            const loadingDiv = document.getElementById('loading-message');
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        }
+
+        // Function to validate season range
+        function validateSeasonRange(start, end) {
+            const startNum = parseFloat(start);
+            const endNum = parseFloat(end);
+            
+            if (isNaN(startNum) || isNaN(endNum)) {
+                showErrorMessage('Please enter valid season numbers');
+                return false;
+            }
+            
+            if (startNum >= endNum) {
+                showErrorMessage('End season must be greater than start season');
+                return false;
+            }
+            
+            // Ensure seasons use .5 increments
+            if (startNum % 0.5 !== 0 || endNum % 0.5 !== 0) {
+                showErrorMessage('Seasons must be in .5 increments');
+                return false;
+            }
+            
+            return true;
+        }
 
         // Helper function to show success message
         function showSuccessMessage(message) {
@@ -3361,6 +3754,271 @@
             messageDiv.textContent = message;
             document.querySelector('.container').prepend(messageDiv);
             setTimeout(() => messageDiv.remove(), 3000);
+        }
+
+        // Function to handle batch transfers
+        async function batchTransferPlayers(players, newTeam, seasonRange) {
+            const results = {
+                success: [],
+                failed: []
+            };
+            
+            for (const player of players) {
+                try {
+                    const success = await handlePlayerTransfer(player, newTeam);
+                    if (success) {
+                        results.success.push(player.name);
+                    } else {
+                        results.failed.push({name: player.name, reason: 'Player not found'});
+                    }
+                } catch (error) {
+                    handleTransferError(error, `transferring ${player.name} to ${newTeam}`);
+                    results.failed.push({name: player.name, reason: error.message});
+                }
+            }
+            
+            return results;
+        }
+
+        // Function to log transfer history
+        function logTransferHistory(player, fromTeam, toTeam, seasonRange) {
+            const now = new Date();
+            const transferLog = {
+                player: player.name,
+                fromTeam: fromTeam,
+                toTeam: toTeam,
+                seasonRange: seasonRange,
+                timestamp: now.toISOString(),
+                user: sessionStorage.getItem('transferAdminUsername') || 'Unknown'
+            };
+            
+            // Get existing logs or initialize new array
+            let transferLogs = JSON.parse(localStorage.getItem('transferLogs') || '[]');
+            transferLogs.push(transferLog);
+            localStorage.setItem('transferLogs', JSON.stringify(transferLogs));
+        }
+
+        // Function to display transfer history
+        function displayTransferHistory() {
+            const transferLogs = JSON.parse(localStorage.getItem('transferLogs') || '[]');
+            
+            if (transferLogs.length === 0) {
+                return '<p>No transfer history available.</p>';
+            }
+            
+            let html = '<table class="transfer-history-table">';
+            html += '<thead><tr><th>Player</th><th>From</th><th>To</th><th>Season</th><th>Date</th><th>Admin</th></tr></thead><tbody>';
+            
+            transferLogs.forEach(log => {
+                const date = new Date(log.timestamp).toLocaleString();
+                html += `<tr>
+                    <td>${log.player}</td>
+                    <td>${log.fromTeam || 'N/A'}</td>
+                    <td>${log.toTeam}</td>
+                    <td>${log.seasonRange}</td>
+                    <td>${date}</td>
+                    <td>${log.user}</td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table>';
+            return html;
+        }
+
+        // Store original state before transfers
+        const originalPlayerStates = {};
+
+        // Function to store original player state before transfer
+        function storeOriginalPlayerState(playerName, playerData) {
+            originalPlayerStates[playerName] = JSON.parse(JSON.stringify(playerData));
+        }
+
+        // Function to revert a transfer
+        async function revertTransfer(playerName) {
+            if (originalPlayerStates[playerName]) {
+                try {
+                    const response = await fetch('players.json');
+                    const playersData = await response.json();
+                    
+                    const playerIndex = playersData.findIndex(p => p.name === playerName);
+                    if (playerIndex !== -1) {
+                        playersData[playerIndex] = originalPlayerStates[playerName];
+                        await savePlayersData(playersData);
+                        showSuccessMessage(`Reverted transfer for ${playerName}`);
+                        return true;
+                    } else {
+                        showErrorMessage(`Cannot find player ${playerName} to revert transfer`);
+                    }
+                } catch (error) {
+                    console.error('Error reverting transfer:', error);
+                    showErrorMessage(`Error reverting transfer: ${error.message}`);
+                }
+            } else {
+                showErrorMessage(`No original state found for ${playerName}`);
+            }
+            return false;
+        }
+
+        // Update handlePlayerTransfer to store original state
+        async function handlePlayerTransfer(player, newTeam) {
+            try {
+                // Fetch current players data
+                const response = await fetch('players.json');
+                const playersData = await response.json();
+                
+                // Get the current season range from inputs
+                const seasonStart = document.getElementById('season-start').value || "6";
+                const seasonEnd = document.getElementById('season-end').value || "8";
+                const newSeasonRange = `${seasonStart}-${seasonEnd}`;
+                const newStartNum = parseFloat(seasonStart);
+                const newEndNum = parseFloat(seasonEnd);
+                
+                // Find the player in the data
+                const existingPlayer = playersData.find(p => p.name === player.name);
+                
+                if (existingPlayer) {
+                    // Store original state for possible revert
+                    storeOriginalPlayerState(player.name, existingPlayer);
+                    
+                    console.log(`Processing transfer for ${player.name} to ${newTeam} for seasons ${newSeasonRange}`);
+                    
+                    // Initialize stats array if it doesn't exist
+                    if (!existingPlayer.stats) {
+                        existingPlayer.stats = [];
+                    }
+                    
+                    // Clone stats to avoid modifying while iterating
+                    let updatedStats = [...existingPlayer.stats];
+                    
+                    // CASE 1: Check if player is a FREE AGENT currently
+                    if (existingPlayer.club === "FREE AGENT" || !existingPlayer.club) {
+                        console.log(`${player.name} is currently a FREE AGENT`);
+                        
+                        // Look for FREE AGENT stat entries that overlap with new season
+                        const freeAgentEntries = updatedStats.filter(stat => 
+                            stat.team === "FREE AGENT" && seasonOverlaps(stat.season, newSeasonRange)
+                        );
+                        
+                        if (freeAgentEntries.length > 0) {
+                            console.log(`Found ${freeAgentEntries.length} FREE AGENT entries that overlap with ${newSeasonRange}`);
+                            
+                            // Replace FREE AGENT entries with new team entry
+                            updatedStats = updatedStats.filter(stat => 
+                                !(stat.team === "FREE AGENT" && seasonOverlaps(stat.season, newSeasonRange))
+                            );
+                            
+                            // Add the new team entry
+                            updatedStats.push(createNewStatEntry(newSeasonRange, newTeam, player.value));
+                        } else {
+                            // Just add new entry if no overlap
+                            updatedStats.push(createNewStatEntry(newSeasonRange, newTeam, player.value));
+                        }
+                    } else {
+                        // CASE 2: Regular player transfer (not FREE AGENT)
+                        console.log(`${player.name} is being transferred from ${existingPlayer.club} to ${newTeam}`);
+                        
+                        // Process overlapping stats
+                        const overlappingEntries = updatedStats.filter(stat => 
+                            seasonOverlaps(stat.season, newSeasonRange)
+                        );
+                        
+                        if (overlappingEntries.length > 0) {
+                            console.log(`Found ${overlappingEntries.length} entries that overlap with ${newSeasonRange}`);
+                            
+                            // Adjust each overlapping entry
+                            updatedStats = updatedStats.filter(stat => !seasonOverlaps(stat.season, newSeasonRange));
+                            
+                            // Handle each overlapping entry
+                            overlappingEntries.forEach(entry => {
+                                const [startSeason, endSeason] = entry.season.split('-').map(parseFloat);
+                                
+                                // If entry starts before new season, keep that part
+                                if (startSeason < newStartNum) {
+                                    updatedStats.push({
+                                        ...entry,
+                                        season: `${startSeason}-${newStartNum}`
+                                    });
+                                }
+                            });
+                        }
+                        
+                        // Add new entry for the new team and season
+                        updatedStats.push(createNewStatEntry(newSeasonRange, newTeam, player.value));
+                    }
+                    
+                    // Sort stats by season start
+                    updatedStats.sort((a, b) => {
+                        const aStart = parseFloat(a.season.split('-')[0]);
+                        const bStart = parseFloat(b.season.split('-')[0]);
+                        return aStart - bStart;
+                    });
+                    
+                    // Update the player data
+                    existingPlayer.stats = updatedStats;
+                    existingPlayer.club = newTeam;
+                    existingPlayer.value = player.value;
+                    
+                    // Save the updated player data
+                    const playerIndex = playersData.findIndex(p => p.name === player.name);
+                    if (playerIndex !== -1) {
+                        playersData[playerIndex] = existingPlayer;
+                    }
+                    
+                    // Save to players.json
+                    await savePlayersData(playersData);
+                    
+                    console.log(`Transfer completed for ${player.name} to ${newTeam}`);
+                    return true;
+                } else {
+                    console.error(`Player ${player.name} not found in data`);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error handling player transfer:', error);
+                throw error;
+            }
+        }
+
+        // Function to handle transfer errors with detailed messages
+        function handleTransferError(error, context) {
+            console.error(`Transfer error ${context}:`, error);
+            
+            // Check for specific error types
+            if (error.name === 'SyntaxError') {
+                showErrorMessage('Data format error. Please contact admin.');
+            } else if (error.name === 'TypeError') {
+                showErrorMessage('Operation failed due to incompatible data.');
+            } else if (error.message.includes('Failed to fetch')) {
+                showErrorMessage('Network error. Please check your connection.');
+            } else {
+                showErrorMessage(`Error: ${error.message}`);
+            }
+            
+            // Log detailed error for debugging
+            logErrorToStorage(error, context);
+        }
+
+        // Function to log errors to local storage
+        function logErrorToStorage(error, context) {
+            const now = new Date();
+            const errorLog = {
+                timestamp: now.toISOString(),
+                context: context,
+                message: error.message,
+                stack: error.stack,
+                user: sessionStorage.getItem('transferAdminUsername') || 'Unknown'
+            };
+            
+            // Get existing logs or initialize new array
+            let errorLogs = JSON.parse(localStorage.getItem('errorLogs') || '[]');
+            errorLogs.push(errorLog);
+            
+            // Keep only the most recent 100 errors
+            if (errorLogs.length > 100) {
+                errorLogs = errorLogs.slice(-100);
+            }
+            
+            localStorage.setItem('errorLogs', JSON.stringify(errorLogs));
         }
     </script>
     
