@@ -4834,26 +4834,30 @@
     "name": "FERNANDO TORRES",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "BORUSSIA DORTMUND",
+    "club": "SANTOS FC",
     "position": "ST",
-    "value": 100,
+    "value": 130,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5.5",
         "team": "SANTOS FC",
-        "value": "254",
-        "apps": "00"
+        "value": "254"
       },
       {
         "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
-        "value": "100",
-        "apps": "00"
+        "value": "100"
+      },
+      {
+        "season": "6-7.5",
+        "team": "SANTOS FC",
+        "value": "130"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/F. TORRES_CARD.webp",
-    "id": 231
+    "id": 231,
+    "clubLogo": "assets/images/players/club/SANTOS FC.webp"
   },
   {
     "name": "DIDIER DROGBA",
