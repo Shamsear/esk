@@ -4845,7 +4845,7 @@
         "value": "254"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
         "value": "100"
       },
@@ -12627,26 +12627,30 @@
     "name": "GARETH BALE",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "REAL MADRID CF",
     "position": "LW",
-    "value": 100,
+    "value": 174,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "RANDERS FC",
-        "value": "100",
-        "apps": "00"
+        "value": "100"
       },
       {
         "season": "5-6",
-        "team": "AL HILAL SFC",
-        "value": "84",
-        "apps": "00"
+        "team": "REAL MADRID CF",
+        "value": "84"
+      },
+      {
+        "season": "6-8",
+        "team": "REAL MADRID CF",
+        "value": "174"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/G. BALE_CARD.webp",
-    "id": 598
+    "id": 598,
+    "clubLogo": "assets/images/players/club/REAL MADRID CF.webp"
   },
   {
     "name": "FERRAN TORRES",
