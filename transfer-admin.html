@@ -1155,6 +1155,31 @@
             font-size: 0.8rem;
             margin-left: 5px;
         }
+
+        .success-message {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid #2ecc71;
+            color: #2ecc71;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .error-message {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-left: 4px solid #e74c3c;
+            color: #e74c3c;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -3130,6 +3155,120 @@
                 console.error('Error fixing data inconsistencies:', error);
                 showStatusMessage(`Error fixing data: ${error.message}`, false);
             }
+        }
+
+        // Function to handle player transfer
+        async function handlePlayerTransfer(player, newTeam) {
+            try {
+                // Fetch current players data
+                const response = await fetch('players.json');
+                const playersData = await response.json();
+                
+                // Find the player in the data
+                const existingPlayer = playersData.find(p => p.name === player.name);
+                
+                if (existingPlayer) {
+                    // Check the last season's team
+                    const lastSeason = existingPlayer.seasons[existingPlayer.seasons.length - 1];
+                    
+                    if (lastSeason.team === "FREE AGENT") {
+                        // Update the existing season for free agents
+                        lastSeason.team = newTeam;
+                        lastSeason.season = "SEASON 8";
+                        lastSeason.value = player.value;
+                    } else {
+                        // For players with previous teams, create new season entry
+                        // First, ensure seasons 6-7 exist and are preserved
+                        const updatedSeasons = existingPlayer.seasons.filter(s => 
+                            s.season === "SEASON 6" || s.season === "SEASON 7"
+                        );
+                        
+                        // Add the new season 8 entry
+                        updatedSeasons.push({
+                            season: "SEASON 8",
+                            team: newTeam,
+                            value: player.value,
+                            matches: 0,
+                            goals: 0,
+                            assists: 0,
+                            clean_sheets: 0,
+                            cards: {
+                                yellow: 0,
+                                red: 0
+                            }
+                        });
+                        
+                        existingPlayer.seasons = updatedSeasons;
+                    }
+                    
+                    // Update current team and value
+                    existingPlayer.current_team = newTeam;
+                    existingPlayer.value = player.value;
+                }
+                
+                // Save updated data back to players.json
+                await savePlayersData(playersData);
+                
+            } catch (error) {
+                console.error('Error handling player transfer:', error);
+                throw error;
+            }
+        }
+
+        // Function to save players data
+        async function savePlayersData(playersData) {
+            try {
+                const response = await fetch('players.json', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playersData, null, 2)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to save players data');
+                }
+            } catch (error) {
+                console.error('Error saving players data:', error);
+                throw error;
+            }
+        }
+
+        // Add this to your existing transfer button click handler
+        document.getElementById('transfer-button').addEventListener('click', async function() {
+            const selectedTeam = document.getElementById('team-selector').value;
+            const selectedPlayers = getSelectedPlayers(); // Your existing function to get selected players
+            
+            try {
+                for (const player of selectedPlayers) {
+                    await handlePlayerTransfer(player, selectedTeam);
+                }
+                
+                // Refresh the display after transfers are complete
+                await refreshPlayerLists();
+                showSuccessMessage('Players transferred successfully!');
+            } catch (error) {
+                showErrorMessage('Error transferring players: ' + error.message);
+            }
+        });
+
+        // Helper function to show success message
+        function showSuccessMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.textContent = message;
+            document.querySelector('.container').prepend(messageDiv);
+            setTimeout(() => messageDiv.remove(), 3000);
+        }
+
+        // Helper function to show error message
+        function showErrorMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'error-message';
+            messageDiv.textContent = message;
+            document.querySelector('.container').prepend(messageDiv);
+            setTimeout(() => messageDiv.remove(), 3000);
         }
     </script>
     
