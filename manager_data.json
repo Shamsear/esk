@@ -9833,7 +9833,7 @@
       "age": 3,
       "club": "REAL MADRID CF",
       "overall_rating": 297.6,
-      "r2g_coin_balance": 2369,
+      "r2g_coin_balance": 2009,
       "r2g_token_balance": 330,
       "club_total_value": 2244,
       "manager_rating": 129,
@@ -10057,8 +10057,41 @@
             "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
+          },
+          {
+            "name": "NICOLO BARELLA",
+            "position": "CM",
+            "value": 86,
+            "contract": "SEASON 6",
+            "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "FRANK ANGUISSA",
+            "position": "CM",
+            "value": 54,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "RODRIGO BENTANCUR",
+            "position": "CM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "LEON GORETZKA",
+            "position": "CM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 31
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -10239,7 +10272,12 @@
         }
       ],
       "current_season": 6,
-      "star_rating": 6
+      "star_rating": 6,
+      "r2gCoinBalance": 2009,
+      "r2g_coins": 2009,
+      "r2gCoins": 2009,
+      "coins": 1769,
+      "clubTotalValue": 2644
     },
     {
       "name": "SHAHANAB",
