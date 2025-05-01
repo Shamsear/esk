@@ -3181,95 +3181,85 @@
                         return aStart - bStart;
                     });
 
-                    // Check if player is currently a free agent
-                    const isCurrentlyFreeAgent = existingPlayer.club === "FREE AGENT" || !existingPlayer.club;
-                    const lastStat = existingPlayer.stats[existingPlayer.stats.length - 1];
-                    const isLastStatFreeAgent = lastStat && lastStat.team === "FREE AGENT";
+                    const newStart = parseFloat(seasonStart);
+                    const newEnd = parseFloat(seasonEnd);
 
-                    if (isCurrentlyFreeAgent || isLastStatFreeAgent) {
-                        // For free agents:
-                        // 1. If there's a FREE AGENT stat entry that overlaps with new season, update it
-                        // 2. If there's no overlap, create new stat entry
-                        const freeAgentStatIndex = existingPlayer.stats.findIndex(stat => {
-                            if (stat.team === "FREE AGENT") {
-                                const [statStart, statEnd] = stat.season.split('-').map(Number);
-                                const newStart = parseFloat(seasonStart);
-                                return statEnd >= newStart; // Check if free agent period overlaps
-                            }
-                            return false;
-                        });
+                    // First, handle any overlapping periods
+                    const updatedStats = [];
+                    let hasOverlap = false;
 
-                        if (freeAgentStatIndex !== -1) {
-                            // Update the existing free agent entry
-                            existingPlayer.stats[freeAgentStatIndex] = {
-                                season: newSeasonRange,
-                                team: newTeam,
-                                value: player.value.toString(),
-                                apps: "00",
-                                goals: "00",
-                                assists: "00",
-                                clean_sheets: "00",
-                                cards: {
-                                    yellow: "00",
-                                    red: "00"
-                                }
-                            };
-                        } else {
-                            // Add new stat entry
-                            existingPlayer.stats.push({
-                                season: newSeasonRange,
-                                team: newTeam,
-                                value: player.value.toString(),
-                                apps: "00",
-                                goals: "00",
-                                assists: "00",
-                                clean_sheets: "00",
-                                cards: {
-                                    yellow: "00",
-                                    red: "00"
-                                }
+                    for (const stat of existingPlayer.stats) {
+                        const [statStart, statEnd] = stat.season.split('-').map(Number);
+
+                        // Case 1: Stat period ends before new period starts
+                        if (statEnd <= newStart) {
+                            updatedStats.push(stat);
+                            continue;
+                        }
+
+                        // Case 2: Stat period starts after new period ends
+                        if (statStart >= newEnd) {
+                            updatedStats.push(stat);
+                            continue;
+                        }
+
+                        hasOverlap = true;
+
+                        // Case 3: Handle overlapping periods
+                        if (statStart < newStart) {
+                            // Keep the non-overlapping part
+                            updatedStats.push({
+                                ...stat,
+                                season: `${statStart}-${newStart}`
                             });
                         }
-                    } else {
-                        // Handle non-free agent cases (existing logic)
-                        // Process each existing stat entry
-                        existingPlayer.stats = existingPlayer.stats.map(stat => {
-                            if (!stat.season || !stat.team) return stat;
 
-                            const [statStart, statEnd] = stat.season.split('-').map(Number);
-                            const newStart = parseFloat(seasonStart);
-                            const newEnd = parseFloat(seasonEnd);
+                        // Special handling for Free Agent
+                        if (stat.team === "FREE AGENT") {
+                            // If it's a free agent period that overlaps, we just replace it
+                            continue;
+                        }
 
-                            // Case 1: Stat period overlaps with new transfer period
-                            if (statEnd > newStart) {
-                                // Adjust the end of the stat period to just before new transfer
-                                return {
-                                    ...stat,
-                                    season: `${statStart}-${newStart}`
-                                };
-                            }
-
-                            return stat;
-                        });
-
-                        // Add the new stats entry
-                        const newStat = {
-                            season: newSeasonRange,
-                            team: newTeam,
-                            value: player.value.toString(),
-                            apps: "00",
-                            goals: "00",
-                            assists: "00",
-                            clean_sheets: "00",
-                            cards: {
-                                yellow: "00",
-                                red: "00"
-                            }
-                        };
-
-                        // Add new stat entry
-                        existingPlayer.stats.push(newStat);
+                        // For regular teams, we might need to split the period
+                        if (statEnd > newEnd) {
+                            updatedStats.push({
+                                ...stat,
+                                season: `${newEnd}-${statEnd}`
+                            });
+                        }
                     }
+
+                    // Create the new stat entry
+                    const newStat = {
+                        season: newSeasonRange,
+                        team: newTeam,
+                        value: player.value.toString(),
+                        apps: "00",
+                        goals: "00",
+                        assists: "00",
+                        clean_sheets: "00",
+                        cards: {
+                            yellow: "00",
+                            red: "00"
+                        }
+                    };
+
+                    // Find the correct position to insert the new stat
+                    let insertIndex = updatedStats.findIndex(stat => {
+                        const [statStart] = stat.season.split('-').map(Number);
+                        return statStart > newStart;
+                    });
+
+                    if (insertIndex === -1) {
+                        // Add to the end if no later stats found
+                        updatedStats.push(newStat);
+                    } else {
+                        // Insert at the correct position
+                        updatedStats.splice(insertIndex, 0, newStat);
+                    }
+
+                    // Update the player's stats
+                    existingPlayer.stats = updatedStats;
 
                     // Update current team and value
                     existingPlayer.club = newTeam;
@@ -3280,15 +3270,27 @@
                         existingPlayer.type = player.type;
                     }
 
+                    // Validate the final stats
+                    let lastEnd = 0;
+                    for (const stat of existingPlayer.stats) {
+                        const [start, end] = stat.season.split('-').map(Number);
+                        if (start < lastEnd) {
+                            console.error('Overlapping periods detected:', existingPlayer.stats);
+                            throw new Error('Invalid stat periods: overlapping detected');
+                        }
+                        lastEnd = end;
+                    }
+
                     // Log the update for debugging
                     console.log(`Updated player ${player.name}:`, {
                         newTeam,
-                        wasFreeAgent: isCurrentlyFreeAgent || isLastStatFreeAgent,
-                        allStats: existingPlayer.stats
+                        seasonRange: newSeasonRange,
+                        hadOverlap: hasOverlap,
+                        finalStats: existingPlayer.stats
                     });
-                }
 
-                return existingPlayer;
+                    return existingPlayer;
+                }
                 
             } catch (error) {
                 console.error('Error handling player transfer:', error);
@@ -3296,23 +3298,12 @@
             }
         }
 
-        // Function to validate season range
-        function validateSeasonRange(start, end) {
-            const startNum = parseFloat(start);
-            const endNum = parseFloat(end);
-            
-            if (isNaN(startNum) || isNaN(endNum)) {
-                throw new Error('Invalid season numbers');
-            }
-            
-            if (startNum >= endNum) {
-                throw new Error('End season must be greater than start season');
-            }
-            
-            if (startNum % 0.5 !== 0 || endNum % 0.5 !== 0) {
-                throw new Error('Seasons must be in .5 increments');
-            }
-            
+        // Helper function to validate season format
+        function validateSeasonFormat(season) {
+            const [start, end] = season.split('-').map(Number);
+            if (isNaN(start) || isNaN(end)) return false;
+            if (start >= end) return false;
+            if (start % 0.5 !== 0 || end % 0.5 !== 0) return false;
             return true;
         }
 
