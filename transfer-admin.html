@@ -3160,59 +3160,160 @@
         // Function to handle player transfer
         async function handlePlayerTransfer(player, newTeam) {
             try {
-                // Fetch current players data
-                const response = await fetch('players.json');
-                const playersData = await response.json();
-                
+                // Get the current season range from inputs
+                const seasonStart = document.getElementById('season-start').value;
+                const seasonEnd = document.getElementById('season-end').value;
+                const newSeasonRange = `${seasonStart}-${seasonEnd}`;
+
                 // Find the player in the data
                 const existingPlayer = playersData.find(p => p.name === player.name);
                 
                 if (existingPlayer) {
-                    // Check the last season's team
-                    const lastSeason = existingPlayer.seasons[existingPlayer.seasons.length - 1];
-                    
-                    if (lastSeason.team === "FREE AGENT") {
-                        // Update the existing season for free agents
-                        lastSeason.team = newTeam;
-                        lastSeason.season = "SEASON 8";
-                        lastSeason.value = player.value;
-                    } else {
-                        // For players with previous teams, create new season entry
-                        // First, ensure seasons 6-7 exist and are preserved
-                        const updatedSeasons = existingPlayer.seasons.filter(s => 
-                            s.season === "SEASON 6" || s.season === "SEASON 7"
-                        );
-                        
-                        // Add the new season 8 entry
-                        updatedSeasons.push({
-                            season: "SEASON 8",
-                            team: newTeam,
-                            value: player.value,
-                            matches: 0,
-                            goals: 0,
-                            assists: 0,
-                            clean_sheets: 0,
-                            cards: {
-                                yellow: 0,
-                                red: 0
-                            }
-                        });
-                        
-                        existingPlayer.seasons = updatedSeasons;
+                    // Initialize stats array if it doesn't exist
+                    if (!existingPlayer.stats) {
+                        existingPlayer.stats = [];
                     }
-                    
+
+                    // Sort stats by season start for easier processing
+                    existingPlayer.stats.sort((a, b) => {
+                        const aStart = parseFloat(a.season.split('-')[0]);
+                        const bStart = parseFloat(b.season.split('-')[0]);
+                        return aStart - bStart;
+                    });
+
+                    // Check if player is currently a free agent
+                    const isCurrentlyFreeAgent = existingPlayer.club === "FREE AGENT" || !existingPlayer.club;
+                    const lastStat = existingPlayer.stats[existingPlayer.stats.length - 1];
+                    const isLastStatFreeAgent = lastStat && lastStat.team === "FREE AGENT";
+
+                    if (isCurrentlyFreeAgent || isLastStatFreeAgent) {
+                        // For free agents:
+                        // 1. If there's a FREE AGENT stat entry that overlaps with new season, update it
+                        // 2. If there's no overlap, create new stat entry
+                        const freeAgentStatIndex = existingPlayer.stats.findIndex(stat => {
+                            if (stat.team === "FREE AGENT") {
+                                const [statStart, statEnd] = stat.season.split('-').map(Number);
+                                const newStart = parseFloat(seasonStart);
+                                return statEnd >= newStart; // Check if free agent period overlaps
+                            }
+                            return false;
+                        });
+
+                        if (freeAgentStatIndex !== -1) {
+                            // Update the existing free agent entry
+                            existingPlayer.stats[freeAgentStatIndex] = {
+                                season: newSeasonRange,
+                                team: newTeam,
+                                value: player.value.toString(),
+                                apps: "00",
+                                goals: "00",
+                                assists: "00",
+                                clean_sheets: "00",
+                                cards: {
+                                    yellow: "00",
+                                    red: "00"
+                                }
+                            };
+                        } else {
+                            // Add new stat entry
+                            existingPlayer.stats.push({
+                                season: newSeasonRange,
+                                team: newTeam,
+                                value: player.value.toString(),
+                                apps: "00",
+                                goals: "00",
+                                assists: "00",
+                                clean_sheets: "00",
+                                cards: {
+                                    yellow: "00",
+                                    red: "00"
+                                }
+                            });
+                        }
+                    } else {
+                        // Handle non-free agent cases (existing logic)
+                        // Process each existing stat entry
+                        existingPlayer.stats = existingPlayer.stats.map(stat => {
+                            if (!stat.season || !stat.team) return stat;
+
+                            const [statStart, statEnd] = stat.season.split('-').map(Number);
+                            const newStart = parseFloat(seasonStart);
+                            const newEnd = parseFloat(seasonEnd);
+
+                            // Case 1: Stat period overlaps with new transfer period
+                            if (statEnd > newStart) {
+                                // Adjust the end of the stat period to just before new transfer
+                                return {
+                                    ...stat,
+                                    season: `${statStart}-${newStart}`
+                                };
+                            }
+
+                            return stat;
+                        });
+
+                        // Add the new stats entry
+                        const newStat = {
+                            season: newSeasonRange,
+                            team: newTeam,
+                            value: player.value.toString(),
+                            apps: "00",
+                            goals: "00",
+                            assists: "00",
+                            clean_sheets: "00",
+                            cards: {
+                                yellow: "00",
+                                red: "00"
+                            }
+                        };
+
+                        // Add new stat entry
+                        existingPlayer.stats.push(newStat);
+                    }
+
                     // Update current team and value
-                    existingPlayer.current_team = newTeam;
+                    existingPlayer.club = newTeam;
                     existingPlayer.value = player.value;
+
+                    // If player type is specified, update it
+                    if (player.type) {
+                        existingPlayer.type = player.type;
+                    }
+
+                    // Log the update for debugging
+                    console.log(`Updated player ${player.name}:`, {
+                        newTeam,
+                        wasFreeAgent: isCurrentlyFreeAgent || isLastStatFreeAgent,
+                        allStats: existingPlayer.stats
+                    });
                 }
-                
-                // Save updated data back to players.json
-                await savePlayersData(playersData);
+
+                return existingPlayer;
                 
             } catch (error) {
                 console.error('Error handling player transfer:', error);
                 throw error;
             }
+        }
+
+        // Function to validate season range
+        function validateSeasonRange(start, end) {
+            const startNum = parseFloat(start);
+            const endNum = parseFloat(end);
+            
+            if (isNaN(startNum) || isNaN(endNum)) {
+                throw new Error('Invalid season numbers');
+            }
+            
+            if (startNum >= endNum) {
+                throw new Error('End season must be greater than start season');
+            }
+            
+            if (startNum % 0.5 !== 0 || endNum % 0.5 !== 0) {
+                throw new Error('Seasons must be in .5 increments');
+            }
+            
+            return true;
         }
 
         // Function to save players data
