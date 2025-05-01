@@ -4554,12 +4554,12 @@
       "overall_rating": 396.4,
       "r2g_coin_balance": 2626,
       "r2g_token_balance": 465,
-      "club_total_value": 2964,
+      "club_total_value": 3138,
       "manager_rating": 171,
       "trophies": 3,
       "awards": 2,
       "squad": {
-        "total_players": 24,
+        "total_players": 25,
         "players": [
           {
             "name": "TOMAS ROSICKY",
@@ -4752,6 +4752,14 @@
             "contract": "SEASON 8",
             "salary": 10.2,
             "type": "standard"
+          },
+          {
+            "name": "PAOLO MALDINI",
+            "position": "CB",
+            "value": 174,
+            "contract": "SEASON 8",
+            "salary": 8.7,
+            "type": "legend"
           }
         ]
       },
@@ -9827,12 +9835,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2009,
       "r2g_token_balance": 330,
-      "club_total_value": 2818,
+      "club_total_value": 2644,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 32,
+        "total_players": 31,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -9944,14 +9952,6 @@
             "value": 214,
             "contract": "SEASON 8",
             "salary": 10.7,
-            "type": "legend"
-          },
-          {
-            "name": "PAOLO MALDINI",
-            "position": "CB",
-            "value": 174,
-            "contract": "SEASON 8",
-            "salary": 8.7,
             "type": "legend"
           },
           {
