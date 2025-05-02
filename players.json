@@ -162,7 +162,7 @@
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/S. GIVEN_CARD.webp",
     "id": 8,
-    "type": "legend"
+    "type": "standard"
   },
   {
     "name": "MANUEL NEUER",
@@ -434,6 +434,12 @@
         "season": "4.5-6.5",
         "team": "FREE AGENT",
         "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "104",
         "apps": "00"
       },
       {
@@ -4860,11 +4866,17 @@
         "team": "AC MILAN",
         "value": "100",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
     "id": 230,
-    "type": "standard"
+    "type": "legend"
   },
   {
     "name": "FERNANDO TORRES",
@@ -5238,6 +5250,12 @@
         "season": "5-6",
         "team": "ASTON VILLA FC",
         "value": "102",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "86",
         "apps": "00"
       },
       {
@@ -10153,6 +10171,12 @@
         "season": "4-6",
         "team": "SANTOS FC",
         "value": "62",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
         "apps": "00"
       },
       {
@@ -19895,11 +19919,17 @@
         "team": "AC MILAN",
         "value": "100",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/EVAIR_CARD.webp",
     "id": 965,
-    "type": "standard"
+    "type": "prime legend"
   },
   {
     "name": "JAVIER SAVIOLA",
