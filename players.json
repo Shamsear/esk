@@ -136,7 +136,7 @@
     "name": "SHAY GIVEN",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "AC MILAN",
+    "club": "RB LEIPZIG",
     "position": "GK",
     "value": 60,
     "gamesPlayed": 0,
@@ -152,17 +152,10 @@
         "team": "RB LEIPZIG",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "60",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/S. GIVEN_CARD.webp",
-    "id": 8,
-    "type": "standard"
+    "id": 8
   },
   {
     "name": "MANUEL NEUER",
@@ -6395,7 +6388,7 @@
     "level": "STANDARD",
     "club": "AC MILAN",
     "position": "ST",
-    "value": 40,
+    "value": 68,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6407,7 +6400,7 @@
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "40",
+        "value": "68",
         "apps": "00"
       }
     ],
@@ -14486,7 +14479,7 @@
     "name": "PHILIPP LIENHART",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14496,17 +14489,10 @@
         "team": "FC BARCELONA",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "50",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. LIENHART_CARD.webp",
-    "id": 687,
-    "type": "standard"
+    "id": 687
   },
   {
     "name": "JOACHIM ANDERSEN",
@@ -15967,7 +15953,7 @@
     "name": "ANDRE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "DM",
     "value": 50,
     "gamesPlayed": 0,
@@ -15977,17 +15963,10 @@
         "team": "FREE AGENT",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "50",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/ANDRE_CARD.webp",
-    "id": 763,
-    "type": "standard"
+    "id": 763
   },
   {
     "name": "TOMAS SOUCEK",
@@ -16328,7 +16307,7 @@
     "name": "MAURO ARAMBARRI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -16338,17 +16317,10 @@
         "team": "FREE AGENT",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "40",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. ARAMBARRI_CARD.webp",
-    "id": 781,
-    "type": "standard"
+    "id": 781
   },
   {
     "name": "MARIO LEMINA",
