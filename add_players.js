@@ -5,26 +5,35 @@ let managerData = JSON.parse(fs.readFileSync('./manager_data.json', 'utf8'));
 
 // Players data from the image
 const playersToAdd = [
-  { name: "DANI OLMO", team: "AFC AJAX", value: 92, season: "SEASON 8" },
-  { name: "EMILE SMITH ROWE", team: "AFC AJAX", value: 62, season: "SEASON 8" },
-  { name: "GIOVANI LO CELSO", team: "ATLETICO DE MADRID", value: 40, season: "SEASON 8" },
-  { name: "COLE PALMER", team: "CRYSTAL PALACE", value: 90, season: "SEASON 8" },
-  { name: "ISCO", team: "CRYSTAL PALACE", value: 50, season: "SEASON 8" },
-  { name: "FRANCK RIBERY", team: "FC BAYERN MUNICH", value: 104, season: "SEASON 8" },
-  { name: "JUDE BELLINGHAM", team: "FENERBAHCE SK", value: 160, season: "SEASON 8" },
-  { name: "THIAGO ALMADA", team: "FENERBAHCE SK", value: 50, season: "SEASON 8" },
-  { name: "DEISIRE DOUE", team: "FENERBAHCE SK", value: 82, season: "SEASON 8" },
-  { name: "LORENZO PELLEGRINI", team: "FSV MAINZ 05", value: 64, season: "SEASON 8" },
-  { name: "JAMES MADDISON", team: "FSV MAINZ 05", value: 66, season: "SEASON 8" },
-  { name: "KAKA", team: "INTER MILAN", value: 170, season: "SEASON 8" },
-  { name: "BRAHIM DIAZ", team: "LEICESTER CITY", value: 72, season: "SEASON 8" },
-  { name: "MORGAN ROGERS", team: "LEICESTER CITY", value: 58, season: "SEASON 8" },
-  { name: "TAKUMI MINAMINO", team: "LEICESTER CITY", value: 48, season: "SEASON 8" },
-  { name: "DEJAN KULUSEVSKI", team: "LOSC LILLE", value: 110, season: "SEASON 8" },
-  { name: "JAMAL MUSIALA", team: "MANCHESTER CITY", value: 170, season: "SEASON 8" },
-  { name: "ARDA GULER", team: "MANCHESTER CITY", value: 90, season: "SEASON 8" },
-  { name: "CHANATHIP SONGKRASIN", team: "MANCHESTER UNITED", value: 40, season: "SEASON 8" },
-  { name: "AMINE ADLI", team: "MOHUN BAGAN SG", value: 54, season: "SEASON 8" }
+  { name: "PEPELU", team: "LEICESTER CITY", value: 62, season: "SEASON 8" },
+  { name: "LEANDRO PAREDES", team: "LEICESTER CITY", value: 52, season: "SEASON 8" },
+  { name: "SANDRO TONALI", team: "LIVERPOOL FC", value: 100, season: "SEASON 8" },
+  { name: "ROMEO LAVIA", team: "LIVERPOOL FC", value: 62, season: "SEASON 8" },
+  { name: "LOTHAR MATTHAUS", team: "LOSC LILLE", value: 120, season: "SEASON 8" },
+  { name: "BRUNO GUIMARAES", team: "LOSC LILLE", value: 82, season: "SEASON 8" },
+  { name: "ALEKSANDER PAVLOVIC", team: "LOSC LILLE", value: 106, season: "SEASON 8" },
+  { name: "SOFYAN AMRABAT", team: "MANCHESTER CITY", value: 40, season: "SEASON 8" },
+  { name: "XABI ALONSO", team: "MANCHESTER UNITED", value: 128, season: "SEASON 8" },
+  { name: "SCOTT MCTOMINAY", team: "MANCHESTER UNITED", value: 62, season: "SEASON 8" },
+  { name: "TOMAS SOUCEK", team: "MOHUN BAGAN SG", value: 50, season: "SEASON 8" },
+  { name: "NICO GONZALEZ", team: "MOHUN BAGAN SG", value: 50, season: "SEASON 8" },
+  { name: "TYLER ADAMS", team: "MUMBAI CITY", value: 40, season: "SEASON 8" },
+  { name: "MARTIN ZUBIMENDI", team: "NEWCASTLE UNITED", value: 128, season: "SEASON 8" },
+  { name: "EDSON ALVAREZ", team: "NEWCASTLE UNITED", value: 66, season: "SEASON 8" },
+  { name: "JORGINHO", team: "PARIS SAINT-GERMAIN", value: 60, season: "SEASON 8" },
+  { name: "MANUEL LOCATELLI", team: "PARIS SAINT-GERMAIN", value: 60, season: "SEASON 8" },
+  { name: "GILBERTO SILVA", team: "RAYONG FC", value: 182, season: "SEASON 8" },
+  { name: "SERGIO BUSQUETS", team: "REAL MADRID CF", value: 80, season: "SEASON 8" },
+  { name: "WATARU ENDO", team: "SANTOS FC", value: 82, season: "SEASON 8" },
+  { name: "MARC CASADO", team: "SANTOS FC", value: 58, season: "SEASON 8" },
+  { name: "EDGAR DAVIDS", team: "SPORTING CP", value: 142, season: "SEASON 8" },
+  { name: "THOMAS PARTEY", team: "SPORTING CP", value: 80, season: "SEASON 8" },
+  { name: "MARCELO BROZOVIC", team: "SS LAZIO", value: 56, season: "SEASON 8" },
+  { name: "CASEMIRO", team: "SS LAZIO", value: 102, season: "SEASON 8" },
+  { name: "GUIDO RODRIGUEZ", team: "SSC NAPOLI", value: 50, season: "SEASON 8" },
+  { name: "BENAT PRADOS", team: "SSC NAPOLI", value: 50, season: "SEASON 8" },
+  { name: "N'GOLO KANTE", team: "TOTTENHAM HOTSPUR", value: 190, season: "SEASON 8" },
+  { name: "JOAO PALHINHA", team: "WOLVES", value: 66, season: "SEASON 8" }
 ];
 
 // Function to add players to the respective team
@@ -38,130 +47,52 @@ function addPlayerToTeam(player) {
   );
   
   if (managerIndex !== -1) {
-    // Create the new player object
+    // If the team exists, add the player to their squad
     const newPlayer = {
       "name": player.name,
-      "position": "AM",
+      "position": "DM",
       "value": player.value,
       "contract": player.season,
       "salary": parseFloat(salary),
-      "type": "standard"  // All players in this list are standard type
+      "type": "standard"
     };
-    
-    // Ensure squad and players array exist
+
+    // Initialize squad if it doesn't exist
     if (!managerData.managers[managerIndex].squad) {
-      managerData.managers[managerIndex].squad = { total_players: 0, players: [] };
-    } else if (!managerData.managers[managerIndex].squad.players) {
-      managerData.managers[managerIndex].squad.players = [];
-      managerData.managers[managerIndex].squad.total_players = 0;
+      managerData.managers[managerIndex].squad = {
+        "total_players": 0,
+        "players": []
+      };
     }
-    
-    // Add the player to the squad
+
     managerData.managers[managerIndex].squad.players.push(newPlayer);
-    
-    // Update total_players count
-    managerData.managers[managerIndex].squad.total_players += 1;
-    
-    // Update club_total_value
-    managerData.managers[managerIndex].club_total_value += player.value;
-    
+    managerData.managers[managerIndex].squad.total_players = managerData.managers[managerIndex].squad.players.length;
     console.log(`Added ${player.name} to ${player.team}`);
   } else {
-    // Create a new manager/team if it doesn't exist
+    // If the team doesn't exist, create a new team with the player
     const newManager = {
-      "name": "MANAGER",
-      "age": null,
+      "name": "TBD",
+      "age": 0,
       "club": player.team,
-      "overall": null,
-      "r2g_coin_balance": 1000,
-      "r2g_token_balance": 100,
+      "overall_rating": 0,
+      "r2g_coin_balance": 0,
+      "r2g_token_balance": 0,
       "club_total_value": player.value,
-      "star_rating": 1,
       "manager_rating": 0,
-      "trophies_awards": 0,
+      "trophies": 0,
+      "awards": 0,
       "squad": {
         "total_players": 1,
         "players": [{
           "name": player.name,
-          "position": "AM",
+          "position": "DM",
           "value": player.value,
           "contract": player.season,
           "salary": parseFloat(salary),
-          "type": "standard"  // All players in this list are standard type
+          "type": "standard"
         }]
-      },
-      "performance": {
-        "formula": "Sum of all season_stats (excluding sp_tour_stats)",
-        "matches": 0,
-        "wins": 0,
-        "draws": 0,
-        "losses": 0,
-        "goals_scored": 0,
-        "goals_conceded": 0,
-        "goal_difference": 0,
-        "clean_sheets": 0
-      },
-      "seasons": [
-        {
-          "number": 8,
-          "status": "ongoing",
-          "manager_rank": "-",
-          "rank_point": 0,
-          "team_income": 0,
-          "team_expense": 0,
-          "team_profit": "-",
-          "session_rewards": 0,
-          "competitions": {
-            "division": {
-              "name": "DIVISION",
-              "placement": "In progress"
-            },
-            "super_cup": {
-              "name": "SUPER CUP",
-              "stage": "Not started/In progress"
-            },
-            "uefa": {
-              "name": "UEFA",
-              "stage": "Not started/In progress"
-            },
-            "elite_cup": {
-              "name": "ELITE CUP",
-              "stage": "In progress"
-            },
-            "world_cup": {
-              "name": "WORLD CUP",
-              "stage": "Not started/In progress"
-            },
-            "authentic": {
-              "name": "AUTHENTIC",
-              "stage": "In progress"
-            }
-          },
-          "sp_tour_stats": {
-            "matches": 0,
-            "wins": 0,
-            "draws": 0,
-            "losses": 0,
-            "goals_scored": 0,
-            "goals_conceded": 0,
-            "goal_difference": 0,
-            "clean_sheets": 0
-          },
-          "season_stats": {
-            "matches": 0,
-            "wins": 0,
-            "draws": 0,
-            "losses": 0,
-            "goals_scored": 0,
-            "goals_conceded": 0,
-            "goal_difference": 0,
-            "clean_sheets": 0
-          }
-        }
-      ],
-      "current_season": 8
+      }
     };
-    
     managerData.managers.push(newManager);
     console.log(`Created new team ${player.team} and added ${player.name}`);
   }
