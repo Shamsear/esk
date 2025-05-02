@@ -13743,25 +13743,23 @@
       {
         "season": "4-4.5",
         "team": "SANTOS FC",
-        "value": "50",
-        "apps": "00"
+        "value": "50"
       },
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "AC MILAN",
-        "value": "60",
-        "apps": "00"
+        "value": "60"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "80",
-        "apps": "00"
+        "value": "80"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MALCOM_CARD.webp",
     "id": 650,
-    "type": "prime"
+    "type": "prime",
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "MIGUEL ALMIRON",
