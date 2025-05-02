@@ -28602,34 +28602,26 @@
     "name": "TALISCA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AFC AJAX",
+    "club": "PARIS SAINT-GERMAIN",
     "position": "RW",
-    "value": 52,
+    "value": 56,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "5-6",
         "team": "INTER MIAMI",
-        "value": "96",
-        "apps": "00"
+        "value": "96"
       },
       {
         "season": "6-8",
-        "team": "AFC AJAX",
-        "value": "52",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "team": "PARIS SAINT-GERMAIN",
+        "value": "56"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/TALISCA_CARD.webp",
     "id": 924,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/PARIS SAINT-GERMAIN.webp"
   },
   {
     "name": "MARCO ASENSIO",
