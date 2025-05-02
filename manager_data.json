@@ -9206,8 +9206,17 @@
             "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
+          },
+          {
+            "name": "DECLAN RICE",
+            "position": "DM",
+            "value": 140,
+            "contract": "SEASON 6",
+            "salary": 7,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 32
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -9384,7 +9393,8 @@
         }
       ],
       "current_season": 6,
-      "star_rating": 6
+      "star_rating": 6,
+      "clubTotalValue": 2862
     },
     {
       "name": "SAFVAN",
