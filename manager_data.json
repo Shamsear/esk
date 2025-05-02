@@ -4894,9 +4894,25 @@
             "contract": "SEASON 6",
             "salary": 4,
             "type": "prime"
+          },
+          {
+            "name": "PHILIPP LIENHART",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 6",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "SHAY GIVEN",
+            "position": "GK",
+            "value": 60,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "legend"
           }
         ],
-        "totalPlayers": 17
+        "totalPlayers": 19
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5070,7 +5086,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1324
+      "clubTotalValue": 1454
     },
     {
       "name": "NABEEL",
