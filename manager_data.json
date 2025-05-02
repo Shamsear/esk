@@ -4880,39 +4880,47 @@
             "type": "standard"
           },
           {
-            "name": "PATRICK KLUIVERT",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 6",
-            "salary": 5,
-            "type": "standard"
-          },
-          {
-            "name": "EVAIR",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 6",
-            "salary": 5,
-            "type": "standard"
-          },
-          {
-            "name": "ALESSIO ROMAGNOLI",
+            "name": "PHILIPP LIENHART",
             "position": "CB",
-            "value": 84,
+            "value": 50,
             "contract": "SEASON 6",
-            "salary": 4.2,
+            "salary": 2.5,
             "type": "standard"
           },
           {
-            "name": "MALCOM",
-            "position": "RW",
-            "value": 80,
+            "name": "SHAY GIVEN",
+            "position": "GK",
+            "value": 60,
             "contract": "SEASON 6",
-            "salary": 4,
-            "type": "prime"
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 6",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "ELYE WAHI",
+            "position": "ST",
+            "value": 40,
+            "contract": "SEASON 6",
+            "salary": 2,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 19
+        "totalPlayers": 20
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5086,7 +5094,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1524
+      "clubTotalValue": 1400
     },
     {
       "name": "NABEEL",
