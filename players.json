@@ -192,28 +192,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "120",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "120",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/EDERSON_CARD.webp",
-    "id": 10,
-    "type": "standard"
+    "id": 10
   },
   {
     "name": "MARC TER STEGEN",
@@ -250,28 +236,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "120",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "120",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/M. MAIGNAN_CARD.webp",
-    "id": 12,
-    "type": "standard"
+    "id": 12
   },
   {
     "name": "GIORGI MAMARDASHVILI",
@@ -320,28 +292,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "AC MILAN",
         "value": "96",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "96",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/T. COURTOIS_CARD.webp",
-    "id": 14,
-    "type": "prime"
+    "id": 14
   },
   {
     "name": "ALISSON BECKER",
@@ -387,7 +345,7 @@
     "level": "STANDARD",
     "club": "INTER MILAN",
     "position": "GK",
-    "value": 82,
+    "value": 110,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -397,28 +355,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "INTER MILAN",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "INTER MILAN",
-        "value": "82",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/UNAI SIMON_CARD.webp",
-    "id": 17,
-    "type": "standard"
+    "id": 17
   },
   {
     "name": "JAN OBLAK",
@@ -480,7 +424,7 @@
         "apps": "05"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "FREE AGENT",
         "value": "80",
         "apps": "00"
@@ -489,14 +433,7 @@
         "season": "6-8",
         "team": "AC MILAN",
         "value": "104",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/Y. BOUNOU_CARD.webp",
@@ -607,28 +544,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL HILAL SFC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. MERET_CARD.webp",
-    "id": 25,
-    "type": "standard"
+    "id": 25
   },
   {
     "name": "WOJCIECH SZCZESNY",
@@ -697,28 +620,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "76",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "76",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. RAMSDALE_CARD.webp",
-    "id": 29,
-    "type": "standard"
+    "id": 29
   },
   {
     "name": "NICK POPE",
@@ -736,28 +645,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. POPE_CARD.webp",
-    "id": 30,
-    "type": "standard"
+    "id": 30
   },
   {
     "name": "ALEX REMIRO",
@@ -782,7 +677,7 @@
     "name": "BERND LENO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AL NASSR",
+    "club": "AL-NASSR FC",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -794,28 +689,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "AL-NASSR FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AL NASSR",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. LENO_CARD.webp",
-    "id": 32,
-    "type": "standard"
+    "id": 32
   },
   {
     "name": "OLIVER BAUMANN",
@@ -947,28 +828,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "66",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "66",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. RAYA_CARD.webp",
-    "id": 39,
-    "type": "standard"
+    "id": 39
   },
   {
     "name": "ALEXANDER NUBEL",
@@ -1689,28 +1556,14 @@
         "apps": "02"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "64",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "64",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/JOSE SA_CARD.webp",
-    "id": 77,
-    "type": "standard"
+    "id": 77
   },
   {
     "name": "KASPER SCHMEICHEL",
@@ -1936,28 +1789,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "ATLETICO DE MADRID",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ATLETICO DE MADRID",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/J. MUSSO_CARD.webp",
-    "id": 88,
-    "type": "standard"
+    "id": 88
   },
   {
     "name": "RUI SILVA",
@@ -2416,28 +2255,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "MANCHESTER CITY",
         "value": "152",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "152",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/R. DIAS_CARD.webp",
-    "id": 110,
-    "type": "standard"
+    "id": 110
   },
   {
     "name": "PAU TORRES",
@@ -2625,28 +2450,14 @@
         "apps": "11"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "SANTOS FC",
         "value": "80",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "80",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/C. MOSQUERA_CARD.webp",
-    "id": 119,
-    "type": "standard"
+    "id": 119
   },
   {
     "name": "PAU CUBARSI",
@@ -2664,28 +2475,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SS LAZIO",
         "value": "128",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SS LAZIO",
-        "value": "128",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/P. CUBARSI_CARD.webp",
-    "id": 120,
-    "type": "standard"
+    "id": 120
   },
   {
     "name": "RONALD ARAUJO",
@@ -2779,28 +2576,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "196",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "196",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. UPAMECANO_CARD.webp",
-    "id": 125,
-    "type": "standard"
+    "id": 125
   },
   {
     "name": "GIORGIO SCALVINI",
@@ -3017,14 +2800,7 @@
         "season": "6-8",
         "team": "AC MILAN",
         "value": "84",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. BADIASHILE_CARD.webp",
@@ -3104,28 +2880,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "68",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "68",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. GOMEZ_CARD.webp",
-    "id": 140,
-    "type": "standard"
+    "id": 140
   },
   {
     "name": "EZRI KONSA",
@@ -3200,28 +2962,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "70",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "70",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. AGUERD_CARD.webp",
-    "id": 144,
-    "type": "standard"
+    "id": 144
   },
   {
     "name": "NICO SCHLOTTERBECK",
@@ -3277,28 +3025,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ATLETICO DE MADRID",
         "value": "130",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ATLETICO DE MADRID",
-        "value": "130",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/LISANDRO MARTINEZ_CARD.webp",
-    "id": 147,
-    "type": "standard"
+    "id": 147
   },
   {
     "name": "GIANLUCA MANCINI",
@@ -3316,34 +3050,20 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "90",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "90",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/G. MANCINI_CARD.webp",
-    "id": 148,
-    "type": "standard"
+    "id": 148
   },
   {
     "name": "PRESNEL KIMPEMBE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "WOLVES",
+    "club": "FREE AGENT",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3355,28 +3075,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "INTER MIAMI",
         "value": "190",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. KIMPEMBE_CARD.webp",
-    "id": 149,
-    "type": "standard"
+    "id": 149
   },
   {
     "name": "YERAY ALVAREZ",
@@ -3464,7 +3170,7 @@
     "name": "JAN VERTONGHEN",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "WOLVES",
+    "club": "ATALANTA BC",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -3476,28 +3182,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ATALANTA BC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/JAN VERTONGHEN_CARD.webp",
-    "id": 154,
-    "type": "standard"
+    "id": 154
   },
   {
     "name": "LUCAS HERNANDEZ",
@@ -3540,28 +3232,14 @@
         "apps": "08"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "130",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "130",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/GIMENEZ_CARD.webp",
-    "id": 156,
-    "type": "standard"
+    "id": 156
   },
   {
     "name": "AYMERIC LAPORTE",
@@ -3604,28 +3282,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "112",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "112",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/BREMER_CARD.webp",
-    "id": 158,
-    "type": "standard"
+    "id": 158
   },
   {
     "name": "FIKAYO TOMORI",
@@ -3656,9 +3320,9 @@
     "name": "MILAN SKRINIAR",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "RAYONG FC",
+    "club": "FREE AGENT",
     "position": "CB",
-    "value": 154,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -3668,34 +3332,20 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FREE AGENT",
         "value": "154",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "154",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. SKRINIAR_CARD.webp",
-    "id": 160,
-    "type": "standard"
+    "id": 160
   },
   {
     "name": "THIAGO SILVA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "CB",
     "value": 84,
     "gamesPlayed": 0,
@@ -3713,28 +3363,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "84",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "84",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/T. SILVA_CARD.webp",
-    "id": 161,
-    "type": "standard"
+    "id": 161
   },
   {
     "name": "PIERRE KALULU",
@@ -3815,28 +3451,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "88",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "88",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. GUEHI_CARD.webp",
-    "id": 165,
-    "type": "standard"
+    "id": 165
   },
   {
     "name": "JEAN-CLAIR TODIBO",
@@ -3854,28 +3476,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "56",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/TODIBO_CARD.webp",
-    "id": 166,
-    "type": "standard"
+    "id": 166
   },
   {
     "name": "MATS HUMMELS",
@@ -3950,28 +3558,14 @@
         "apps": "02"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LOSC LILLE",
         "value": "84",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LOSC LILLE",
-        "value": "84",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. HERMOSO_CARD.webp",
-    "id": 170,
-    "type": "standard"
+    "id": 170
   },
   {
     "name": "HIROKI ITO",
@@ -4014,28 +3608,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "120",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "120",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. PAVARD_CARD.webp",
-    "id": 172,
-    "type": "standard"
+    "id": 172
   },
   {
     "name": "JURRIEN TIMBER",
@@ -4103,28 +3683,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "AL HILAL SFC",
         "value": "68",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "68",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/DE VRIJ_CARD.webp",
-    "id": 175,
-    "type": "standard"
+    "id": 175
   },
   {
     "name": "KEVIN DANSO",
@@ -4155,9 +3721,9 @@
     "name": "A. BUONGIORNO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "RANGERS FC",
+    "club": "FREE AGENT",
     "position": "CB",
-    "value": 110,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4167,28 +3733,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "110",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. BUONGIORNO_CARD.webp",
-    "id": 177,
-    "type": "standard"
+    "id": 177
   },
   {
     "name": "ROBIN LE NORMAND",
@@ -4433,28 +3985,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "94",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "94",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. DUNK_CARD.webp",
-    "id": 189,
-    "type": "standard"
+    "id": 189
   },
   {
     "name": "ALEXANDER NUBEL",
@@ -4656,28 +4194,14 @@
         "apps": "04"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "78",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "78",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. COLLINS_CARD.webp",
-    "id": 199,
-    "type": "standard"
+    "id": 199
   },
   {
     "name": "ISSA DIOP",
@@ -4790,28 +4314,14 @@
         "apps": "00"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "WOLVES",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/E. PINNOCK_CARD.webp",
-    "id": 205,
-    "type": "standard"
+    "id": 205
   },
   {
     "name": "DALEY BLIND",
@@ -4857,7 +4367,7 @@
     "level": "STANDARD",
     "club": "LIVERPOOL FC",
     "position": "CB",
-    "value": 86,
+    "value": 110,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4867,28 +4377,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7",
         "team": "LIVERPOOL FC",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "86",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/R. VARANE_CARD.webp",
-    "id": 208,
-    "type": "prime"
+    "id": 208
   },
   {
     "name": "ABDULKERIM BARDAKCI",
@@ -4925,28 +4421,14 @@
         "apps": "02"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "88",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "88",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/R. ALBIOL_CARD.webp",
-    "id": 210,
-    "type": "standard"
+    "id": 210
   },
   {
     "name": "BEN MEE",
@@ -5084,28 +4566,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AL HILAL SFC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/M. OWEN_CARD.webp",
-    "id": 217,
-    "type": "legend"
+    "id": 217
   },
   {
     "name": "RUUD VAN NISTELROOIJ",
@@ -5161,28 +4629,14 @@
         "apps": "12"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "120",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "120",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/D. FORLAN_CARD.webp",
-    "id": 220,
-    "type": "prime"
+    "id": 220
   },
   {
     "name": "SAMUEL ETO",
@@ -5213,28 +4667,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL HILAL SFC",
         "value": "122",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "122",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/H. STOICHKOV_CARD.webp",
-    "id": 222,
-    "type": "prime legend"
+    "id": 222
   },
   {
     "name": "DAVID VILLA",
@@ -5399,26 +4839,18 @@
       {
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
-        "value": "102",
-        "apps": "00"
+        "value": "102"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "value": "100"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
     "id": 230,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "FERNANDO TORRES",
@@ -5436,28 +4868,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/F. TORRES_CARD.webp",
-    "id": 231,
-    "type": "prime legend"
+    "id": 231
   },
   {
     "name": "DIDIER DROGBA",
@@ -5539,7 +4957,7 @@
     "name": "RAUL",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "WOLVES",
+    "club": "FREE AGENT",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -5549,24 +4967,10 @@
         "team": "FREE AGENT",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/RAUL_CARD.webp",
-    "id": 236,
-    "type": "prime legend"
+    "id": 236
   },
   {
     "name": "ROY MAKAAY",
@@ -5660,28 +5064,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "110",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/F. INZAGHI_CARD.webp",
-    "id": 241,
-    "type": "legend"
+    "id": 241
   },
   {
     "name": "DWIGHT YORKE",
@@ -5800,7 +5190,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "MUMBAI CITY FC",
         "value": "120",
         "apps": "00"
@@ -5810,24 +5200,10 @@
         "team": "MANCHESTER UNITED",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER UNITED",
-        "value": "120",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/SON_CARD.webp",
-    "id": 247,
-    "type": "standard"
+    "id": 247
   },
   {
     "name": "PAULO DYBALA",
@@ -5854,14 +5230,7 @@
         "season": "6-8",
         "team": "AC MILAN",
         "value": "86",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/PAULO DYBALA_CARD.webp",
@@ -5899,7 +5268,7 @@
     "level": "STANDARD",
     "club": "MANCHESTER CITY",
     "position": "ST",
-    "value": 140,
+    "value": 350,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5909,28 +5278,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "MANCHESTER CITY",
         "value": "350",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "140",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/E. HAALAND_CARD.webp",
-    "id": 250,
-    "type": "standard"
+    "id": 250
   },
   {
     "name": "KYLIAN MBAPPE",
@@ -5969,7 +5324,7 @@
     "level": "STANDARD",
     "club": "INTER MILAN",
     "position": "ST",
-    "value": 90,
+    "value": 136,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5979,28 +5334,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "136",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "INTER MILAN",
-        "value": "90",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/L. MARTINEZ_CARD.webp",
-    "id": 252,
-    "type": "standard"
+    "id": 252
   },
   {
     "name": "JONATHAN DAVID",
@@ -6075,7 +5416,7 @@
     "name": "VICTOR OSIMHEN",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "ST",
     "value": 126,
     "gamesPlayed": 0,
@@ -6087,28 +5428,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "126",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "126",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/V. OSIMHEN_CARD.webp",
-    "id": 256,
-    "type": "standard"
+    "id": 256
   },
   {
     "name": "DUSAN VLAHOVIC",
@@ -6132,28 +5459,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-6.5",
         "team": "SS LAZIO",
         "value": "70",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SS LAZIO",
-        "value": "96",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. VLAHOVIC_CARD.webp",
-    "id": 257,
-    "type": "standard"
+    "id": 257
   },
   {
     "name": "ALVARO MORATA",
@@ -6284,28 +5597,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "FC BAYERN MUNICH",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FC BAYERN MUNICH",
-        "value": "110",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/A. ISAK_CARD.webp",
-    "id": 263,
-    "type": "prime"
+    "id": 263
   },
   {
     "name": "MARCUS THURAM",
@@ -6540,7 +5839,7 @@
     "level": "STANDARD",
     "club": "FSV MAINZ 05",
     "position": "ST",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6550,28 +5849,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. CALVERT-LEWIN_CARD.webp",
-    "id": 275,
-    "type": "standard"
+    "id": 275
   },
   {
     "name": "VITOR ROQUE",
@@ -6608,28 +5893,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/I. TONEY_CARD.webp",
-    "id": 277,
-    "type": "standard"
+    "id": 277
   },
   {
     "name": "J PEDRO",
@@ -6691,28 +5962,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LOSC LILLE",
         "value": "78",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LOSC LILLE",
-        "value": "78",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. DOVBYK_CARD.webp",
-    "id": 280,
-    "type": "standard"
+    "id": 280
   },
   {
     "name": "NICOLAS JACKSON",
@@ -6758,32 +6015,18 @@
     "level": "STANDARD",
     "club": "LIVERPOOL FC",
     "position": "ST",
-    "value": 50,
+    "value": 72,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "72",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. DE KETELAERE_CARD.webp",
-    "id": 283,
-    "type": "standard"
+    "id": 283
   },
   {
     "name": "JHON DURAN",
@@ -6959,28 +6202,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "AL HILAL SFC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. LUKAKU_CARD.webp",
-    "id": 292,
-    "type": "standard"
+    "id": 292
   },
   {
     "name": "ADEMOLA LOOKMAN",
@@ -7131,9 +6360,9 @@
     "name": "MATHEUS CUNHA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "RAYONG FC",
+    "club": "FREE AGENT",
     "position": "AM",
-    "value": 78,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7141,24 +6370,10 @@
         "team": "RED BULL BRAGANTINO",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "78",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. CUNHA_CARD.webp",
-    "id": 300,
-    "type": "standard"
+    "id": 300
   },
   {
     "name": "ELYE WAHI",
@@ -7214,28 +6429,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "82",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "82",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. SORLOTH_CARD.webp",
-    "id": 303,
-    "type": "standard"
+    "id": 303
   },
   {
     "name": "DARWIN NUNEZ",
@@ -7253,28 +6454,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-6.5",
         "team": "MANCHESTER CITY",
         "value": "104",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "104",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. NUNEZ_CARD.webp",
-    "id": 304,
-    "type": "standard"
+    "id": 304
   },
   {
     "name": "GONCALO RAMOS",
@@ -7317,28 +6504,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/JEAN-PHILIPPE MATETA_CARD.webp",
-    "id": 306,
-    "type": "standard"
+    "id": 306
   },
   {
     "name": "VIKTOR GYOKERES",
@@ -7346,7 +6519,7 @@
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "ST",
-    "value": 112,
+    "value": 186,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7356,28 +6529,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SANTOS FC",
         "value": "186",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "112",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/VIKTOR GYOKERES_CARD.webp",
-    "id": 307,
-    "type": "standard"
+    "id": 307
   },
   {
     "name": "YOUSSOUFA MOUKOKO",
@@ -7465,9 +6624,9 @@
     "name": "JOAO PEDRO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "LIVERPOOL FC",
+    "club": "FREE AGENT",
     "position": "ST",
-    "value": 40,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -7475,24 +6634,10 @@
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "68",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. PEDRO_CARD.webp",
-    "id": 312,
-    "type": "standard"
+    "id": 312
   },
   {
     "name": "GERARD DEULOFEU",
@@ -7781,28 +6926,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "ARSENAL FC",
         "value": "52",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ARSENAL FC",
-        "value": "52",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/BETO_CARD.webp",
-    "id": 326,
-    "type": "standard"
+    "id": 326
   },
   {
     "name": "PATSON DAKA",
@@ -7965,7 +7096,7 @@
     "name": "A. COSTACURTA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "TOTTENHAM HOTSPUR",
+    "club": "TOTTENHAM HOTSPUR FC",
     "position": "LB",
     "value": 174,
     "gamesPlayed": 0,
@@ -7977,28 +7108,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "174",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "TOTTENHAM HOTSPUR",
-        "value": "174",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/A. COSTACURTA_CARD.webp",
-    "id": 334,
-    "type": "legend"
+    "id": 334
   },
   {
     "name": "DENNIS IRWIN",
@@ -8069,7 +7186,7 @@
     "level": "STANDARD",
     "club": "MANCHESTER CITY",
     "position": "LB",
-    "value": 80,
+    "value": 118,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8079,28 +7196,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7",
         "team": "MANCHESTER CITY",
         "value": "118",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "80",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/T. HERNANDEZ_CARD.webp",
-    "id": 338,
-    "type": "standard"
+    "id": 338
   },
   {
     "name": "ALPHONSO DAVIES",
@@ -8137,28 +7240,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "90",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "90",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/N. MENDES_CARD.webp",
-    "id": 340,
-    "type": "standard"
+    "id": 340
   },
   {
     "name": "DESTINY UDOGIE",
@@ -8474,7 +7563,7 @@
     "name": "PERVIS ESTUPINAN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "WOLVES",
+    "club": "FREE AGENT",
     "position": "LB",
     "value": 50,
     "gamesPlayed": 0,
@@ -8484,24 +7573,10 @@
         "team": "RB LEIPZIG",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. ESTUPINAN_CARD.webp",
-    "id": 357,
-    "type": "standard"
+    "id": 357
   },
   {
     "name": "BEN CHILWELL",
@@ -8538,34 +7613,20 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL HILAL SFC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. CUCURELLA_CARD.webp",
-    "id": 359,
-    "type": "standard"
+    "id": 359
   },
   {
     "name": "RAPHAEL GUERREIRO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "LB",
     "value": 54,
     "gamesPlayed": 0,
@@ -8577,28 +7638,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "54",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. GUERREIRO_CARD.webp",
-    "id": 360,
-    "type": "standard"
+    "id": 360
   },
   {
     "name": "JOSE GAYA",
@@ -8964,28 +8011,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "80",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "80",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. GRIMALDO_CARD.webp",
-    "id": 379,
-    "type": "standard"
+    "id": 379
   },
   {
     "name": "MARCOS ACUNA",
@@ -9244,9 +8277,9 @@
     "name": "JOSHUA KIMMICH",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "RANGERS FC",
+    "club": "FREE AGENT",
     "position": "DM",
-    "value": 100,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9256,28 +8289,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/JOSHUA KIMMICH_CARD.webp",
-    "id": 393,
-    "type": "standard"
+    "id": 393
   },
   {
     "name": "REECE JAMES",
@@ -9661,28 +8680,14 @@
         "apps": "02"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "SANTOS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. MARTINEZ_CARD.webp",
-    "id": 412,
-    "type": "standard"
+    "id": 412
   },
   {
     "name": "BENJAMIN HENRICHS",
@@ -9690,32 +8695,18 @@
     "level": "STANDARD",
     "club": "LIVERPOOL FC",
     "position": "RB",
-    "value": 50,
+    "value": 62,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. HENRICHS_CARD.webp",
-    "id": 413,
-    "type": "standard"
+    "id": 413
   },
   {
     "name": "PABLO MAFFEO",
@@ -9752,34 +8743,20 @@
         "apps": "04"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "54",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. PORRO_CARD.webp",
-    "id": 415,
-    "type": "standard"
+    "id": 415
   },
   {
     "name": "NOUSSAIR MAZRAOUI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "WOLVES",
+    "club": "FREE AGENT",
     "position": "RB",
     "value": 50,
     "gamesPlayed": 0,
@@ -9789,24 +8766,10 @@
         "team": "FREE AGENT",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. MAZRAOUI_CARD.webp",
-    "id": 416,
-    "type": "standard"
+    "id": 416
   },
   {
     "name": "YUKINARI SUGAWARA",
@@ -9843,28 +8806,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. GUSTO_CARD.webp",
-    "id": 418,
-    "type": "standard"
+    "id": 418
   },
   {
     "name": "RICO LEWIS",
@@ -9996,28 +8945,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "62",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. MOLINA_CARD.webp",
-    "id": 425,
-    "type": "standard"
+    "id": 425
   },
   {
     "name": "DAVIDE CALABRIA",
@@ -10079,28 +9014,14 @@
         "apps": "05"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "RANDERS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/T. TOMIYASU_CARD.webp",
-    "id": 428,
-    "type": "standard"
+    "id": 428
   },
   {
     "name": "DIOGO DALOT",
@@ -10308,28 +9229,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BORUSSIA DORTMUND",
         "value": "150",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "150",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. VIEIRA_CARD.webp",
-    "id": 439,
-    "type": "prime legend"
+    "id": 439
   },
   {
     "name": "FRANK RIJKAARD",
@@ -10391,36 +9298,22 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/C. MAKELELE_CARD.webp",
-    "id": 442,
-    "type": "legend"
+    "id": 442
   },
   {
     "name": "EMMANUEL PETIT",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "DM",
-    "value": 122,
+    "value": 132,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10430,28 +9323,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "132",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "122",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/E. PETIT_CARD.webp",
-    "id": 443,
-    "type": "legend"
+    "id": 443
   },
   {
     "name": "SANDRO TONALI",
@@ -10482,9 +9361,9 @@
     "name": "DECLAN RICE",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "RAYONG FC",
+    "club": "FREE AGENT",
     "position": "DM",
-    "value": 106,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10494,34 +9373,20 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "106",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. RICE_CARD.webp",
-    "id": 445,
-    "type": "standard"
+    "id": 445
   },
   {
     "name": "RODRI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "NOTTINGHAM FOREST",
+    "club": "NOTTINGHAM FOREST FC",
     "position": "DM",
     "value": 174,
     "gamesPlayed": 0,
@@ -10533,28 +9398,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RB LEIPZIG",
         "value": "174",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NOTTINGHAM FOREST",
-        "value": "174",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/RODRI_CARD.webp",
-    "id": 446,
-    "type": "standard"
+    "id": 446
   },
   {
     "name": "MARTIN ZUBIMENDI",
@@ -10597,28 +9448,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "82",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "82",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/M. CAICEDO_CARD.webp",
-    "id": 448,
-    "type": "prime"
+    "id": 448
   },
   {
     "name": "AURELIEN TCHOUAMENI",
@@ -11154,28 +9991,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7",
         "team": "MANCHESTER CITY",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. NEVES_CARD.webp",
-    "id": 475,
-    "type": "standard"
+    "id": 475
   },
   {
     "name": "EDSON ALVAREZ",
@@ -11231,28 +10054,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/JERDY SCHOUTEN_CARD.webp",
-    "id": 478,
-    "type": "standard"
+    "id": 478
   },
   {
     "name": "ROMEO LAVIA",
@@ -11336,14 +10145,7 @@
         "season": "6-8",
         "team": "AC MILAN",
         "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. VARELA_CARD.webp",
@@ -11436,7 +10238,7 @@
     "name": "IDRISSA GUEYE",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AL NASSR",
+    "club": "AL-NASSR FC",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -11448,28 +10250,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL-NASSR FC",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AL NASSR",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/I. GUEYE_CARD.webp",
-    "id": 487,
-    "type": "standard"
+    "id": 487
   },
   {
     "name": "LEANDRO PAREDES",
@@ -11551,9 +10339,9 @@
     "name": "ULI HOENAB",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "TOTTENHAM HOTSPUR",
+    "club": "FREE AGENT",
     "position": "AM",
-    "value": 102,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11561,24 +10349,10 @@
         "team": "FREE AGENT",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "TOTTENHAM HOTSPUR",
-        "value": "102",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/U. HOENAB_CARD.webp",
-    "id": 492,
-    "type": "legend"
+    "id": 492
   },
   {
     "name": "MARTIN CACERES",
@@ -11615,28 +10389,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "104",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "104",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/S. GERRARD_CARD.webp",
-    "id": 494,
-    "type": "legend"
+    "id": 494
   },
   {
     "name": "ANDRES INIESTA",
@@ -11724,9 +10484,9 @@
     "name": "PEDRI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "CM",
-    "value": 110,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11736,28 +10496,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "110",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/PEDRI_CARD.webp",
-    "id": 499,
-    "type": "standard"
+    "id": 499
   },
   {
     "name": "GAVI",
@@ -11775,28 +10521,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "MANCHESTER CITY",
         "value": "82",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "82",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/GAVI_CARD.webp",
-    "id": 500,
-    "type": "standard"
+    "id": 500
   },
   {
     "name": "NICOLO BARELLA",
@@ -11852,28 +10584,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/H. CALHANOGLU_CARD.webp",
-    "id": 503,
-    "type": "standard"
+    "id": 503
   },
   {
     "name": "RODRIGO DE PAUL",
@@ -11891,28 +10609,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "ATLETICO DE MADRID",
         "value": "86",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ATLETICO DE MADRID",
-        "value": "86",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/R. DE PAUL_CARD.webp",
-    "id": 504,
-    "type": "prime"
+    "id": 504
   },
   {
     "name": "FEDERICO VALVERDE",
@@ -11930,28 +10634,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SANTOS FC",
         "value": "116",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "116",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/F. VALVERDE_CARD.webp",
-    "id": 505,
-    "type": "standard"
+    "id": 505
   },
   {
     "name": "FRENKIE DE JONG",
@@ -12026,28 +10716,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "124",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "124",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/M. ODEGAARD_CARD.webp",
-    "id": 509,
-    "type": "prime"
+    "id": 509
   },
   {
     "name": "ILKAY GUNDOGAN",
@@ -12091,7 +10767,7 @@
     "name": "CARLOS SOLER",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "TOTTENHAM HOTSPUR",
+    "club": "TOTTENHAM HOTSPUR FC",
     "position": "CM",
     "value": 72,
     "gamesPlayed": 7,
@@ -12103,28 +10779,14 @@
         "apps": "07"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "72",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "TOTTENHAM HOTSPUR",
-        "value": "72",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. SOLER_CARD.webp",
-    "id": 512,
-    "type": "standard"
+    "id": 512
   },
   {
     "name": "FABIAN RUIZ",
@@ -12414,28 +11076,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/J. HENDERSON_CARD.webp",
-    "id": 527,
-    "type": "standard"
+    "id": 527
   },
   {
     "name": "THOMAS LEMAR",
@@ -12541,28 +11189,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BORUSSIA DORTMUND",
         "value": "112",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "112",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/RONALDINHO_CARD.webp",
-    "id": 532,
-    "type": "prime legend"
+    "id": 532
   },
   {
     "name": "RUDI GULLIT",
@@ -12624,28 +11258,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "INTER MILAN",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "INTER MILAN",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/R. VAN DER VAART_CARD.webp",
-    "id": 535,
-    "type": "legend"
+    "id": 535
   },
   {
     "name": "SHUNSUKE NAKAMURA",
@@ -12682,28 +11302,14 @@
         "apps": "12"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/T. ROSICKY_CARD.webp",
-    "id": 537,
-    "type": "prime legend"
+    "id": 537
   },
   {
     "name": "HIDETOSHI NAKATA",
@@ -12790,28 +11396,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "MANCHESTER CITY",
         "value": "90",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "MANCHESTER CITY",
-        "value": "90",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/B. SILVA_CARD.webp",
-    "id": 541,
-    "type": "standard"
+    "id": 541
   },
   {
     "name": "KEVIN DE BRUYNE",
@@ -12917,28 +11509,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "86",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "86",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/KAI HAVERTZ_CARD.webp",
-    "id": 546,
-    "type": "standard"
+    "id": 546
   },
   {
     "name": "JUDE BELLINGHAM",
@@ -13063,28 +11641,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/G. DE ARRASCAETA_CARD.webp",
-    "id": 552,
-    "type": "standard"
+    "id": 552
   },
   {
     "name": "EBERECHI EZE",
@@ -13121,28 +11685,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "56",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "56",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. ZANIOLO_CARD.webp",
-    "id": 554,
-    "type": "standard"
+    "id": 554
   },
   {
     "name": "CHRISTOPHER NKUNKU",
@@ -13183,24 +11733,10 @@
         "team": "FSV MAINZ 05",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. MOUNT_CARD.webp",
-    "id": 556,
-    "type": "standard"
+    "id": 556
   },
   {
     "name": "BRAHIM DIAZ",
@@ -13439,28 +11975,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/R. MALINOVSKYI_CARD.webp",
-    "id": 568,
-    "type": "standard"
+    "id": 568
   },
   {
     "name": "DIMITRI PAYET",
@@ -13560,28 +12082,14 @@
         "apps": "10"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/S. LINO_CARD.webp",
-    "id": 573,
-    "type": "standard"
+    "id": 573
   },
   {
     "name": "RODRIGO RIQUELME",
@@ -13599,28 +12107,14 @@
         "apps": "11"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. RIQUELME_CARD.webp",
-    "id": 574,
-    "type": "standard"
+    "id": 574
   },
   {
     "name": "CALLUM HUDSON-ODOI",
@@ -13905,7 +12399,7 @@
     "level": "STANDARD",
     "club": "INTER MILAN",
     "position": "LW",
-    "value": 50,
+    "value": 62,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13915,28 +12409,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "INTER MILAN",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "INTER MILAN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/K. MITOMA_CARD.webp",
-    "id": 588,
-    "type": "standard"
+    "id": 588
   },
   {
     "name": "NICO WILLIAMS",
@@ -14004,28 +12484,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "68",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "68",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/S. MANE_CARD.webp",
-    "id": 591,
-    "type": "standard"
+    "id": 591
   },
   {
     "name": "DIOGO JOTA",
@@ -14043,28 +12509,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "80",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "80",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. JOTA_CARD.webp",
-    "id": 592,
-    "type": "standard"
+    "id": 592
   },
   {
     "name": "RAHEEM STERLING",
@@ -14072,7 +12524,7 @@
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "LW",
-    "value": 58,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14082,28 +12534,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7",
         "team": "SANTOS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/R. STERLING_CARD.webp",
-    "id": 593,
-    "type": "standard"
+    "id": 593
   },
   {
     "name": "ALEJANDRO GARNACHO",
@@ -14354,28 +12792,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "110",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/F. CHIESA_CARD.webp",
-    "id": 605,
-    "type": "standard"
+    "id": 605
   },
   {
     "name": "FEDERICO DIMARCO",
@@ -14393,28 +12817,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/F. DIMARCO_CARD.webp",
-    "id": 606,
-    "type": "standard"
+    "id": 606
   },
   {
     "name": "K. KVARATSKHELIA",
@@ -14596,28 +13006,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/J. BRANDT_CARD.webp",
-    "id": 615,
-    "type": "standard"
+    "id": 615
   },
   {
     "name": "LEROY SANE",
@@ -14635,28 +13031,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "120",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "120",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SANE_CARD.webp",
-    "id": 616,
-    "type": "standard"
+    "id": 616
   },
   {
     "name": "PEDRO NETO",
@@ -14731,28 +13113,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL HILAL SFC",
         "value": "202",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "202",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/L. MESSI_CARD.webp",
-    "id": 620,
-    "type": "prime"
+    "id": 620
   },
   {
     "name": "SAMUEL CHUKWUEZE",
@@ -14814,28 +13182,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SANTOS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/M. OLISE_CARD.webp",
-    "id": 623,
-    "type": "standard"
+    "id": 623
   },
   {
     "name": "MOHAMMED KUDUS",
@@ -14986,28 +13340,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL HILAL SFC",
         "value": "84",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "84",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/I. WILLIAMS_CARD.webp",
-    "id": 631,
-    "type": "prime"
+    "id": 631
   },
   {
     "name": "NICOLAS GONZALEZ",
@@ -15189,28 +13529,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "122",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "122",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/O. DEMBELE_CARD.webp",
-    "id": 640,
-    "type": "standard"
+    "id": 640
   },
   {
     "name": "MARTIN OJEDA",
@@ -15228,28 +13554,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "ATLETICO DE MADRID",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ATLETICO DE MADRID",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. OJEDA_CARD.webp",
-    "id": 641,
-    "type": "standard"
+    "id": 641
   },
   {
     "name": "RAPHINHA",
@@ -15267,28 +13579,14 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "AS ROMA",
         "value": "86",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "86",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/RAPHINHA_CARD.webp",
-    "id": 642,
-    "type": "prime"
+    "id": 642
   },
   {
     "name": "SERGE GNABRY",
@@ -15357,7 +13655,7 @@
     "name": "ANTONY",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "RW",
     "value": 58,
     "gamesPlayed": 0,
@@ -15369,28 +13667,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/ANTONY_CARD.webp",
-    "id": 646,
-    "type": "standard"
+    "id": 646
   },
   {
     "name": "DEJAN KULUSEVSKI",
@@ -15497,28 +13781,14 @@
         "apps": "01"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "92",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "92",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. ALMIRON_CARD.webp",
-    "id": 651,
-    "type": "standard"
+    "id": 651
   },
   {
     "name": "VITOR BAIA",
@@ -15530,28 +13800,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/V. BAIA_CARD.webp",
-    "id": 652,
-    "type": "legend"
+    "id": 652
   },
   {
     "name": "GIANLUIGI BUFFON",
@@ -15597,32 +13853,18 @@
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "GK",
-    "value": 54,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "SANTOS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/BENTO_CARD.webp",
-    "id": 655,
-    "type": "standard"
+    "id": 655
   },
   {
     "name": "DAVID OSPINA",
@@ -15780,7 +14022,7 @@
     "name": "MARCO CARNESECCHI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "GK",
     "value": 50,
     "gamesPlayed": 0,
@@ -15792,28 +14034,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. CARNESECCHI_CARD.webp",
-    "id": 664,
-    "type": "standard"
+    "id": 664
   },
   {
     "name": "MATVEI SAFONOV",
@@ -15867,24 +14095,10 @@
         "team": "LIVERPOOL FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. SANCHEZ_CARD.webp",
-    "id": 667,
-    "type": "standard"
+    "id": 667
   },
   {
     "name": "V. MILINKOVIC-SAVIC",
@@ -15934,28 +14148,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "42",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "42",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/A. LOPES_CARD.webp",
-    "id": 670,
-    "type": "standard"
+    "id": 670
   },
   {
     "name": "AUGUSTO BATALLA",
@@ -16290,28 +14490,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANDERS FC",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. ANDERSEN_CARD.webp",
-    "id": 688,
-    "type": "prime"
+    "id": 688
   },
   {
     "name": "OUSMANE DIOMANDE",
@@ -16342,28 +14528,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "76",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "76",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/OTAVIO_CARD.webp",
-    "id": 690,
-    "type": "standard"
+    "id": 690
   },
   {
     "name": "TOTI GOMES",
@@ -16394,28 +14566,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. RICHARDS_CARD.webp",
-    "id": 692,
-    "type": "standard"
+    "id": 692
   },
   {
     "name": "ODILON KOSSOUNOU",
@@ -16579,28 +14737,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SS LAZIO",
         "value": "88",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SS LAZIO",
-        "value": "88",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/E. GARCIA_CARD.webp",
-    "id": 701,
-    "type": "standard"
+    "id": 701
   },
   {
     "name": "DENIS POPOV",
@@ -16650,28 +14794,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "74",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "74",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/N. ELVEDI_CARD.webp",
-    "id": 704,
-    "type": "standard"
+    "id": 704
   },
   {
     "name": "DAVINSON SANCHEZ",
@@ -16727,28 +14857,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "88",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "88",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/C. MBEMBA_CARD.webp",
-    "id": 707,
-    "type": "standard"
+    "id": 707
   },
   {
     "name": "ERIC DIER",
@@ -16867,28 +14983,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "62",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/N. WOOD_CARD.webp",
-    "id": 713,
-    "type": "standard"
+    "id": 713
   },
   {
     "name": "BEN GODFREY",
@@ -17105,32 +15207,18 @@
     "level": "STANDARD",
     "club": "FSV MAINZ 05",
     "position": "RB",
-    "value": 40,
+    "value": 46,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "46",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/J. NAVAS_CARD.webp",
-    "id": 725,
-    "type": "standard"
+    "id": 725
   },
   {
     "name": "ODRIOZOLA",
@@ -17243,28 +15331,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/A. PIRLO_CARD.webp",
-    "id": 731,
-    "type": "prime legend"
+    "id": 731
   },
   {
     "name": "LOTHAR MATTHAUS",
@@ -17320,28 +15394,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/PEP GUARDIOLA_CARD.webp",
-    "id": 734,
-    "type": "legend"
+    "id": 734
   },
   {
     "name": "EDGAR DAVIDS",
@@ -17803,9 +15863,9 @@
     "name": "ROBERT ANDRICH",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "DM",
-    "value": 136,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -17813,24 +15873,10 @@
         "team": "NEWCASTLE UNITED FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "136",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. ANDRICH_CARD.webp",
-    "id": 759,
-    "type": "prime"
+    "id": 759
   },
   {
     "name": "MANUEL LOCATELLI",
@@ -18019,28 +16065,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AC MILAN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. DOUCOURE_CARD.webp",
-    "id": 769,
-    "type": "standard"
+    "id": 769
   },
   {
     "name": "MAXIME LOPEZ",
@@ -18071,28 +16103,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. CAMARA_CARD.webp",
-    "id": 771,
-    "type": "standard"
+    "id": 771
   },
   {
     "name": "DANILO",
@@ -18199,28 +16217,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/G. KONDOGBIA_CARD.webp",
-    "id": 777,
-    "type": "standard"
+    "id": 777
   },
   {
     "name": "FLORENTINO LUIS",
@@ -18257,28 +16261,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/L. TORREIRA_CARD.webp",
-    "id": 779,
-    "type": "standard"
+    "id": 779
   },
   {
     "name": "SOFYAN AMRABAT",
@@ -18410,28 +16400,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. SCHOLES_CARD.webp",
-    "id": 786,
-    "type": "legend"
+    "id": 786
   },
   {
     "name": "CLARENCE SEEDORF",
@@ -18471,14 +16447,7 @@
         "season": "6-8",
         "team": "AC MILAN",
         "value": "108",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/B. ROBSON_CARD.webp",
@@ -18748,28 +16717,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/O. KOKCU_CARD.webp",
-    "id": 802,
-    "type": "standard"
+    "id": 802
   },
   {
     "name": "NICOLAS DE LA CRUZ",
@@ -18777,32 +16732,18 @@
     "level": "STANDARD",
     "club": "SANTOS FC",
     "position": "CM",
-    "value": 50,
+    "value": 69,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SANTOS FC",
         "value": "69",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/N. DE LA CRUZ_CARD.webp",
-    "id": 803,
-    "type": "standard"
+    "id": 803
   },
   {
     "name": "TIJJANI REIJNDERS",
@@ -18818,24 +16759,10 @@
         "team": "AC MILAN",
         "value": "54",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/T. REIJNDERS_CARD.webp",
-    "id": 804,
-    "type": "prime"
+    "id": 804
   },
   {
     "name": "PASCAL GROB",
@@ -18847,28 +16774,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. GROB_CARD.webp",
-    "id": 805,
-    "type": "standard"
+    "id": 805
   },
   {
     "name": "KONRAD LAIMER",
@@ -18899,28 +16812,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AFC AJAX",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AFC AJAX",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. MENDEZ_CARD.webp",
-    "id": 807,
-    "type": "standard"
+    "id": 807
   },
   {
     "name": "JOHN MCGINN",
@@ -18932,28 +16831,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. MCGINN_CARD.webp",
-    "id": 808,
-    "type": "standard"
+    "id": 808
   },
   {
     "name": "DANI PAREJO",
@@ -18961,65 +16846,37 @@
     "level": "STANDARD",
     "club": "REAL MADRID CF",
     "position": "CM",
-    "value": 54,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AL HILAL SFC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. PAREJO_CARD.webp",
-    "id": 809,
-    "type": "standard"
+    "id": 809
   },
   {
     "name": "CONOR GALLAGHER",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "WOLVES",
+    "club": "FREE AGENT",
     "position": "CM",
-    "value": 60,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "INTER MILAN",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. GALLAGHER_CARD.webp",
-    "id": 810,
-    "type": "standard"
+    "id": 810
   },
   {
     "name": "PABLO BARRIOS",
@@ -19031,28 +16888,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LOSC LILLE",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LOSC LILLE",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. BARRIOS_CARD.webp",
-    "id": 811,
-    "type": "standard"
+    "id": 811
   },
   {
     "name": "BITELLO",
@@ -19121,28 +16964,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/EDERSON_CARD.webp",
-    "id": 815,
-    "type": "standard"
+    "id": 815
   },
   {
     "name": "ELIJIF ELMAS",
@@ -19154,28 +16983,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "56",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "56",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/E. ELMAS_CARD.webp",
-    "id": 816,
-    "type": "standard"
+    "id": 816
   },
   {
     "name": "DAVIDE FRATTESI",
@@ -19187,28 +17002,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "WOLVES",
         "value": "54",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. FRATTESI_CARD.webp",
-    "id": 817,
-    "type": "standard"
+    "id": 817
   },
   {
     "name": "MATTEO GUENDOUZI",
@@ -19220,28 +17021,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LOSC LILLE",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LOSC LILLE",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. GUENDOUZI_CARD.webp",
-    "id": 818,
-    "type": "standard"
+    "id": 818
   },
   {
     "name": "LUCAS ROBERTONE",
@@ -19329,28 +17116,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AC MILAN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. LOFTUS-CHEEK_CARD.webp",
-    "id": 823,
-    "type": "prime"
+    "id": 823
   },
   {
     "name": "SAUL",
@@ -19438,28 +17211,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "70",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "70",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/W. ZAIRE-EMERY_CARD.webp",
-    "id": 828,
-    "type": "standard"
+    "id": 828
   },
   {
     "name": "JAVI GUERRA",
@@ -19591,28 +17350,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "110",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "110",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. GRAVENBERCH_CARD.webp",
-    "id": 835,
-    "type": "standard"
+    "id": 835
   },
   {
     "name": "NICOLO FAGIOLI",
@@ -19871,28 +17616,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/C. ERIKSEN_CARD.webp",
-    "id": 849,
-    "type": "standard"
+    "id": 849
   },
   {
     "name": "DANI CEBALLOS",
@@ -19904,28 +17635,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/D. CEBALLOS_CARD.webp",
-    "id": 850,
-    "type": "standard"
+    "id": 850
   },
   {
     "name": "PHILIP BILLING",
@@ -20215,28 +17932,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "INTER MILAN",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "INTER MILAN",
-        "value": "80",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/O. SANCET_CARD.webp",
-    "id": 865,
-    "type": "standard"
+    "id": 865
   },
   {
     "name": "ALEKSANDR GOLOVIN",
@@ -20267,28 +17970,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "70",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "70",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. VEIGA_CARD.webp",
-    "id": 867,
-    "type": "standard"
+    "id": 867
   },
   {
     "name": "HENRIKH MKHITARYAN",
@@ -20382,28 +18071,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. PASALIC_CARD.webp",
-    "id": 872,
-    "type": "standard"
+    "id": 872
   },
   {
     "name": "LAZAR SAMARDZIC",
@@ -20415,28 +18090,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "WOLVES",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SAMARDZIC_CARD.webp",
-    "id": 873,
-    "type": "standard"
+    "id": 873
   },
   {
     "name": "FABIO VIEIRA",
@@ -20467,61 +18128,33 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BAYER LEVERKUSEN",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/H. ELLIOT_CARD.webp",
-    "id": 875,
-    "type": "standard"
+    "id": 875
   },
   {
     "name": "MORGAN GIBBS-WHITE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "AM",
     "value": 68,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "68",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "68",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. GIBBS-WHITE_CARD.webp",
-    "id": 876,
-    "type": "standard"
+    "id": 876
   },
   {
     "name": "GABRI-VEIGA",
@@ -20641,7 +18274,7 @@
     "name": "GANSO",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "WOLVES",
+    "club": "FREE AGENT",
     "position": "AM",
     "value": 40,
     "gamesPlayed": 0,
@@ -20651,24 +18284,10 @@
         "team": "FREE AGENT",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/GANSO_CARD.webp",
-    "id": 883,
-    "type": "standard"
+    "id": 883
   },
   {
     "name": "IKER MUNIAIN",
@@ -20813,61 +18432,33 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FC BAYERN MUNICH",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FC BAYERN MUNICH",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/R. GIGGS_CARD.webp",
-    "id": 891,
-    "type": "legend"
+    "id": 891
   },
   {
     "name": "ULI HOENAB",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "TOTTENHAM HOTSPUR",
+    "club": "TOTTENHAM HOTSPUR FC",
     "position": "AM",
     "value": 102,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "102",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "TOTTENHAM HOTSPUR",
-        "value": "102",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/U. HOENAB_CARD.webp",
-    "id": 892,
-    "type": "legend"
+    "id": 892
   },
   {
     "name": "PARK JI-SUNG",
@@ -20879,28 +18470,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ARSENAL FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ARSENAL FC",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/PARK JI-SUNG_CARD.webp",
-    "id": 893,
-    "type": "legend"
+    "id": 893
   },
   {
     "name": "ZE ROBERTO",
@@ -20925,7 +18502,7 @@
     "name": "ROBERT PIRES",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "ASTON VILLA",
+    "club": "ASTON VILLA FC",
     "position": "LW",
     "value": 62,
     "gamesPlayed": 0,
@@ -20937,28 +18514,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ASTON VILLA FC",
         "value": "62",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ASTON VILLA",
-        "value": "62",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/R. PIRES_CARD.webp",
-    "id": 895,
-    "type": "legend"
+    "id": 895
   },
   {
     "name": "ANDREI ARSHAVIN",
@@ -20989,28 +18552,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/DENILSON_CARD.webp",
-    "id": 897,
-    "type": "legend"
+    "id": 897
   },
   {
     "name": "SAVINHO",
@@ -21303,32 +18852,18 @@
     "level": "STANDARD",
     "club": "SL BENFICA",
     "position": "LW",
-    "value": 50,
+    "value": 59,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "59",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/R. GOSENS_CARD.webp",
-    "id": 913,
-    "type": "standard"
+    "id": 913
   },
   {
     "name": "NICOLA ZALEWSKI",
@@ -21441,28 +18976,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FC BAYERN MUNICH",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FC BAYERN MUNICH",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/L. GIULY_CARD.webp",
-    "id": 919,
-    "type": "legend"
+    "id": 919
   },
   {
     "name": "GAIZKA MENDIETA",
@@ -21531,28 +19052,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "60",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "60",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. BERARDI_CARD.webp",
-    "id": 923,
-    "type": "standard"
+    "id": 923
   },
   {
     "name": "TALISCA",
@@ -21621,28 +19128,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "52",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/F. ANDERSON_CARD.webp",
-    "id": 927,
-    "type": "standard"
+    "id": 927
   },
   {
     "name": "MATIAS SOULE",
@@ -21654,28 +19147,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ARSENAL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. SOULE_CARD.webp",
-    "id": 928,
-    "type": "standard"
+    "id": 928
   },
   {
     "name": "BRENNAN JOHNSON",
@@ -21706,28 +19185,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RANGERS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RANGERS FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. MBEUMO_CARD.webp",
-    "id": 930,
-    "type": "standard"
+    "id": 930
   },
   {
     "name": "DAVID NERES",
@@ -21758,28 +19223,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "ARSENAL FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. ORSOLINI_CARD.webp",
-    "id": 932,
-    "type": "standard"
+    "id": 932
   },
   {
     "name": "F. BERNARDESCHI",
@@ -22203,9 +19654,9 @@
     "name": "OTAVIO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "SL BENFICA",
+    "club": "FREE AGENT",
     "position": "RW",
-    "value": 76,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -22213,24 +19664,10 @@
         "team": "FREE AGENT",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "76",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/OTAVIO_CARD.webp",
-    "id": 955,
-    "type": "standard"
+    "id": 955
   },
   {
     "name": "SIMON ADINGRA",
@@ -22394,28 +19831,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "BORUSSIA DORTMUND",
         "value": "200",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "200",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/A. SHEVCHENKO_CARD.webp",
-    "id": 964,
-    "type": "prime legend"
+    "id": 964
   },
   {
     "name": "EVAIR",
@@ -22436,14 +19859,7 @@
         "season": "6-8",
         "team": "AC MILAN",
         "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/EVAIR_CARD.webp",
@@ -22460,28 +19876,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "TOTTENHAM HOTSPUR",
         "value": "120",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "TOTTENHAM HOTSPUR",
-        "value": "130",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/J. SAVIOLA_CARD.webp",
-    "id": 966,
-    "type": "legend"
+    "id": 966
   },
   {
     "name": "ROBERTO BAGGIO",
@@ -22664,28 +20066,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "LIVERPOOL FC",
         "value": "52",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "52",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/E. FERGUSON_CARD.webp",
-    "id": 976,
-    "type": "standard"
+    "id": 976
   },
   {
     "name": "FACUNDO COLIDIO",
@@ -22861,61 +20249,33 @@
         "apps": "00"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
         "value": "230",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "230",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SUAREZ_CARD.webp",
-    "id": 985,
-    "type": "prime"
+    "id": 985
   },
   {
     "name": "LUUK DE JONG",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AL NASSR",
+    "club": "AL-NASSR FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AL-NASSR FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AL NASSR",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/LUUK DE JONG_CARD.webp",
-    "id": 986,
-    "type": "standard"
+    "id": 986
   },
   {
     "name": "MATEO RETEGUI",
@@ -22946,28 +20306,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "SANTOS FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SANTOS FC",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/MAXIMILIAN BEIER_CARD.webp",
-    "id": 988,
-    "type": "standard"
+    "id": 988
   },
   {
     "name": "MIGUEL BORJA",
@@ -23068,34 +20414,20 @@
     "name": "SEBASTIEN HALLER",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AL NASSR",
+    "club": "AL-NASSR FC",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AL-NASSR FC",
         "value": "50",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AL NASSR",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/SEBASTIEN HALLER_CARD.webp",
-    "id": 994,
-    "type": "standard"
+    "id": 994
   },
   {
     "name": "SERGIO CAMELLO",
@@ -23301,24 +20633,10 @@
         "team": "LIVERPOOL FC",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/G. MIKAUTADZE_CARD.webp",
-    "id": 1005,
-    "type": "standard"
+    "id": 1005
   },
   {
     "name": "GERMAN CANO",
@@ -23450,28 +20768,14 @@
         "apps": "10"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FSV MAINZ 05",
         "value": "46",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "46",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/R. FIRMINO_CARD.webp",
-    "id": 1012,
-    "type": "standard"
+    "id": 1012
   },
   {
     "name": "ROMULO",
@@ -23527,28 +20831,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "58",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. BECKER_CARD.webp",
-    "id": 1015,
-    "type": "standard"
+    "id": 1015
   },
   {
     "name": "YUYA YAMAGISHI",
@@ -23598,34 +20888,20 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/J. MARTINEZ_CARD.webp",
-    "id": 1018,
-    "type": "standard"
+    "id": 1018
   },
   {
     "name": "OMAR MARMOUSH",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "ST",
     "value": 48,
     "gamesPlayed": 0,
@@ -23637,28 +20913,14 @@
         "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "48",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "48",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/O. MARMOUSH_CARD.webp",
-    "id": 1019,
-    "type": "standard"
+    "id": 1019
   },
   {
     "name": "SUNIL CHHETRI",
@@ -23708,36 +20970,22 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AL HILAL SFC",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/J. QUINONES_CARD.webp",
-    "id": 1022,
-    "type": "standard"
+    "id": 1022
   },
   {
     "name": "KEILOR NAVAS",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FSV MAINZ 05",
+    "club": "FREE AGENT",
     "position": "GK",
-    "value": 46,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -23745,57 +20993,29 @@
         "team": "FREE AGENT",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "46",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/K. NAVAS_CARD.webp",
-    "id": 1023,
-    "type": "standard"
+    "id": 1023
   },
   {
     "name": "KYOGO FURUHASHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "ST",
     "value": 70,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "58",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "70",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/K. FURUHASHI_CARD.webp",
-    "id": 1024,
-    "type": "standard"
+    "id": 1024
   },
   {
     "name": "MATTEO GABBIA",
@@ -23807,28 +21027,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AC MILAN",
         "value": "44",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "44",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. GABBIA_CARD.webp",
-    "id": 1025,
-    "type": "prime"
+    "id": 1025
   },
   {
     "name": "STRAHINJA PAVLOVIC",
@@ -23836,32 +21042,18 @@
     "level": "STANDARD",
     "club": "AC MILAN",
     "position": "CB",
-    "value": 44,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AC MILAN",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "44",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. PAVLOVIC_CARD.webp",
-    "id": 1026,
-    "type": "prime"
+    "id": 1026
   },
   {
     "name": "BAFOFE DIAKITE",
@@ -23892,34 +21084,20 @@
     "name": "IGOR JULIO",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "CB",
     "value": 52,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "52",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "52",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/I. JULIO_CARD.webp",
-    "id": 1028,
-    "type": "standard"
+    "id": 1028
   },
   {
     "name": "DAN BURN",
@@ -23931,28 +21109,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "SL BENFICA",
         "value": "72",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "SL BENFICA",
-        "value": "72",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/D. BURN_CARD.webp",
-    "id": 1029,
-    "type": "standard"
+    "id": 1029
   },
   {
     "name": "NUNO SANTOS",
@@ -23983,28 +21147,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "WOLVES",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "WOLVES",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/NUNO TAVARES_CARD.webp",
-    "id": 1031,
-    "type": "standard"
+    "id": 1031
   },
   {
     "name": "MANVIR SINGH",
@@ -24073,61 +21223,33 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AC MILAN",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/SAHAL_CARD.webp",
-    "id": 1035,
-    "type": "prime"
+    "id": 1035
   },
   {
     "name": "FILIP KOSTIC",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "TOTTENHAM HOTSPUR",
+    "club": "TOTTENHAM HOTSPUR FC",
     "position": "LW",
     "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "TOTTENHAM HOTSPUR",
-        "value": "100",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/F. KOSTIC_CARD.webp",
-    "id": 1036,
-    "type": "standard"
+    "id": 1036
   },
   {
     "name": "TOMAS SUSLOV",
@@ -24171,34 +21293,20 @@
     "name": "PORTU",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "NEWCASTLE UNITED",
+    "club": "NEWCASTLE UNITED FC",
     "position": "AM",
     "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "NEWCASTLE UNITED FC",
         "value": "40",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "NEWCASTLE UNITED",
-        "value": "40",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/PORTU_CARD.webp",
-    "id": 1039,
-    "type": "standard"
+    "id": 1039
   },
   {
     "name": "JUSTIN KLUIVERT",
@@ -24210,28 +21318,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "LIVERPOOL FC",
         "value": "42",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "LIVERPOOL FC",
-        "value": "42",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/JUSTIN KLUIVERT_CARD.webp",
-    "id": 1040,
-    "type": "standard"
+    "id": 1040
   },
   {
     "name": "SOFYAN AMBRABAT",
