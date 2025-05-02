@@ -4751,13 +4751,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1438,
+      "club_total_value": 1488,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 19,
+        "total_players": 20,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4910,6 +4910,14 @@
             "contract": "SEASON 8",
             "salary": 3,
             "type": "legendary"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
           }
         ],
         "totalPlayers": 16
