@@ -1180,6 +1180,137 @@
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
+        /* Add History Panel Styles */
+        .history-panel {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #4ecca3;
+        }
+
+        .history-container {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover {
+            background-color: #303030;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-timestamp {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .history-type {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .history-type.incoming {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .history-type.outgoing {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .history-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #393939;
+        }
+
+        .history-changes {
+            display: flex;
+            gap: 20px;
+        }
+
+        .history-old, .history-new {
+            flex: 1;
+        }
+
+        .history-label {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .history-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .history-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .history-btn:hover {
+            background-color: #303f9f;
+        }
+
+        .history-btn.revert {
+            background-color: #f44336;
+        }
+
+        .history-btn.revert:hover {
+            background-color: #d32f2f;
+        }
+
+        #history-filter {
+            padding: 8px;
+            background-color: #252525;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .history-panel {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .history-changes {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -1255,12 +1386,31 @@
     </div>
     
     <div class="container">
-        <!-- Mobile Quick Navigation -->
+        <!-- Add History Panel -->
+        <div class="history-panel">
+            <h2>Transfer History</h2>
+            <div class="history-controls">
+                <button id="refresh-history" class="history-btn">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+                <select id="history-filter">
+                    <option value="all">All Transfers</option>
+                    <option value="incoming">Incoming Transfers</option>
+                    <option value="outgoing">Outgoing Transfers</option>
+                </select>
+            </div>
+            <div id="history-container" class="history-container">
+                <!-- History items will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Existing content -->
         <div class="mobile-quick-nav" id="mobile-quick-nav" style="display: none;">
             <button class="quick-nav-btn" data-target="team-selection">Team</button>
             <button class="quick-nav-btn" data-target="available-players">Available</button>
             <button class="quick-nav-btn" data-target="selected-players">Selected</button>
             <button class="quick-nav-btn" data-target="transfer-settings">Settings</button>
+            <button class="quick-nav-btn" data-target="history-panel">History</button>
         </div>
         
         <div class="team-selection">
@@ -2578,6 +2728,18 @@
                 // Re-filter available players
                 filterPlayers();
                 
+                // Add to transfer history
+                selectedPlayers.forEach(player => {
+                    addToTransferHistory({
+                        type: 'outgoing',
+                        playerName: player.name,
+                        fromTeam: player.club || 'Free Agent',
+                        toTeam: selectedTeam.name,
+                        value: player.value,
+                        revertible: true
+                    });
+                });
+                
             } catch (error) {
                 showStatusMessage(`Error: ${error.message}`, false);
                 console.error('Error processing transfers:', error);
@@ -3290,33 +3452,56 @@
             });
         }
 
-        // Handle Overlapping Transfer
-        function handleOverlappingTransfer(player, overlappingStats, newTeam, newSeasonRange, newStart, newEnd) {
+        // Function to handle overlapping transfer periods
+        function handleOverlappingTransfer(existingPlayer, overlappingStats, newTeam, newSeasonRange, newStart, newEnd) {
+            // Remove any existing stats for the exact same period and new team
+            existingPlayer.stats = existingPlayer.stats.filter(stat => {
+                if (!stat.season || !stat.team) return true;
+                return !(stat.season === newSeasonRange && stat.team === newTeam);
+            });
+
+            // For each overlapping stat
             overlappingStats.forEach(stat => {
                 const [statStart, statEnd] = stat.season.split('-').map(Number);
-                const statIndex = player.stats.indexOf(stat);
+                
+                // If exact same season range, just update the team
+                if (stat.season === newSeasonRange) {
+                    stat.team = newTeam;
+                    return;
+                }
+                
+                // If this is a transfer within the same season range (e.g. 6-8 to 6-8)
+                // Remove the old entry completely and add the new one
+                if (statStart === newStart && statEnd === newEnd) {
+                    existingPlayer.stats = existingPlayer.stats.filter(s => s !== stat);
+                    existingPlayer.stats.push({
+                        season: newSeasonRange,
+                        team: newTeam,
+                        value: existingPlayer.value.toString(),
+                        apps: "00",
+                        goals: "00",
+                        assists: "00",
+                        clean_sheets: "00",
+                        cards: { yellow: "00", red: "00" }
+                    });
+                    return;
+                }
 
-                if (stat.team === newTeam) {
-                    // Case: Returning to previous team
-                    if (statEnd < newStart) {
-                        // No direct overlap, create new period
-                        player.stats.push(createNewStatEntry(newTeam, newSeasonRange));
-                    } else {
-                        // Extend existing period
-                        player.stats[statIndex].season = `${statStart}-${newEnd}`;
-                    }
-                } else {
-                    // Case: Different team overlap
-                    if (statStart < newStart) {
-                        // Trim end of previous period
-                        player.stats[statIndex].season = `${statStart}-${newStart}`;
-                    } else if (statEnd > newEnd) {
-                        // Split the period
-                        player.stats[statIndex].season = `${newEnd}-${statEnd}`;
-                    } else {
-                        // Remove completely overlapped period
-                        player.stats.splice(statIndex, 1);
-                    }
+                // For other overlapping cases, split the period
+                if (statEnd > newStart) {
+                    stat.season = `${statStart}-${newStart}`;
+                    
+                    // Add the new period
+                    existingPlayer.stats.push({
+                        season: newSeasonRange,
+                        team: newTeam,
+                        value: existingPlayer.value.toString(),
+                        apps: "00",
+                        goals: "00",
+                        assists: "00",
+                        clean_sheets: "00",
+                        cards: { yellow: "00", red: "00" }
+                    });
                 }
             });
         }
@@ -3493,6 +3678,143 @@
             document.querySelector('.container').prepend(messageDiv);
             setTimeout(() => messageDiv.remove(), 3000);
         }
+
+        // Add to transfer history
+        let transferHistory = [];
+
+        function addToTransferHistory(transfer) {
+            const timestamp = new Date().toISOString();
+            transferHistory.unshift({
+                timestamp,
+                ...transfer
+            });
+
+            // Save to localStorage
+            localStorage.setItem('transferHistory', JSON.stringify(transferHistory));
+            
+            // Update history display
+            displayTransferHistory();
+        }
+
+        function displayTransferHistory() {
+            const container = document.getElementById('history-container');
+            const filter = document.getElementById('history-filter').value;
+            container.innerHTML = '';
+
+            const filteredHistory = transferHistory.filter(transfer => {
+                if (filter === 'all') return true;
+                return transfer.type === filter;
+            });
+
+            filteredHistory.forEach(transfer => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const header = document.createElement('div');
+                header.className = 'history-header';
+                
+                const timestamp = new Date(transfer.timestamp).toLocaleString();
+                header.innerHTML = `
+                    <div class="history-timestamp">${timestamp}</div>
+                    <div class="history-type ${transfer.type}">${transfer.type.toUpperCase()}</div>
+                `;
+
+                const details = document.createElement('div');
+                details.className = 'history-details';
+                
+                details.innerHTML = `
+                    <div class="history-changes">
+                        <div class="history-old">
+                            <div class="history-label">From:</div>
+                            <div>${transfer.fromTeam || 'N/A'}</div>
+                        </div>
+                        <div class="history-new">
+                            <div class="history-label">To:</div>
+                            <div>${transfer.toTeam}</div>
+                        </div>
+                    </div>
+                    <div class="history-player" style="margin-top: 10px;">
+                        <div class="history-label">Player:</div>
+                        <div>${transfer.playerName} (${transfer.value} RC)</div>
+                    </div>
+                `;
+
+                // Add revert button if transfer is revertible
+                if (transfer.revertible) {
+                    const revertBtn = document.createElement('button');
+                    revertBtn.className = 'history-btn revert';
+                    revertBtn.innerHTML = '<i class="fas fa-undo"></i> Revert';
+                    revertBtn.onclick = () => revertTransfer(transfer);
+                    details.appendChild(revertBtn);
+                }
+
+                historyItem.appendChild(header);
+                historyItem.appendChild(details);
+                container.appendChild(historyItem);
+            });
+        }
+
+        function revertTransfer(transfer) {
+            if (confirm(`Are you sure you want to revert the transfer of ${transfer.playerName}?`)) {
+                // Add revert transfer to history
+                addToTransferHistory({
+                    type: transfer.type === 'incoming' ? 'outgoing' : 'incoming',
+                    playerName: transfer.playerName,
+                    fromTeam: transfer.toTeam,
+                    toTeam: transfer.fromTeam,
+                    value: transfer.value,
+                    description: `Reverted: ${transfer.description}`,
+                    revertible: false
+                });
+
+                // Trigger the actual transfer reversion
+                // This would need to be implemented based on your transfer system
+                handleTransferReversion(transfer);
+            }
+        }
+
+        // Load history from localStorage on init
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedHistory = localStorage.getItem('transferHistory');
+            if (savedHistory) {
+                transferHistory = JSON.parse(savedHistory);
+            }
+
+            // Add history filter change handler
+            document.getElementById('history-filter').addEventListener('change', displayTransferHistory);
+            
+            // Add refresh button handler
+            document.getElementById('refresh-history').addEventListener('click', displayTransferHistory);
+        });
+
+        // Modify your existing submitTransfers function to add to history
+        const originalSubmitTransfers = submitTransfers;
+        submitTransfers = async function() {
+            // Store the current state
+            const previousState = {
+                selectedPlayers: [...selectedPlayers],
+                selectedTeam: {...selectedTeam}
+            };
+
+            try {
+                // Call the original function
+                await originalSubmitTransfers();
+
+                // Add successful transfers to history
+                selectedPlayers.forEach(player => {
+                    addToTransferHistory({
+                        type: 'incoming',
+                        playerName: player.name,
+                        fromTeam: player.club || 'Free Agent',
+                        toTeam: selectedTeam.name,
+                        value: player.value,
+                        revertible: true
+                    });
+                });
+            } catch (error) {
+                console.error('Transfer failed:', error);
+            }
+        };
     </script>
     
     <!-- Performance optimization JS -->

@@ -502,6 +502,119 @@
         .setup-link i {
             margin-right: 5px;
         }
+
+        .history-container {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background-color: #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover {
+            background-color: #3a3a3a;
+            transform: translateY(-2px);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-timestamp {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .history-type {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .history-type.transfer {
+            background-color: #2196f3;
+            color: white;
+        }
+
+        .history-type.edit {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .history-type.stats {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .history-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+        }
+
+        .history-changes {
+            display: flex;
+            gap: 20px;
+        }
+
+        .history-old, .history-new {
+            flex: 1;
+        }
+
+        .history-label {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .history-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .history-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .history-btn:hover {
+            background-color: #303f9f;
+        }
+
+        .history-btn.revert {
+            background-color: #f44336;
+        }
+
+        .history-btn.revert:hover {
+            background-color: #d32f2f;
+        }
+
+        #history-filter {
+            padding: 8px;
+            background-color: #333;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -537,6 +650,7 @@
                 <div class="tab active" data-tab="basic">Basic Info</div>
                 <div class="tab" data-tab="stats">Stats & History</div>
                 <div class="tab" data-tab="image">Image</div>
+                <div class="tab" data-tab="history">Change History</div>
             </div>
             
             <div class="tab-content active" data-tab="basic">
@@ -615,6 +729,24 @@
                 </div>
                 <div id="image-preview" style="margin-top: 20px; text-align: center;">
                     <!-- Image preview will be shown here -->
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab="history">
+                <h3>Change History</h3>
+                <div class="history-controls">
+                    <button id="refresh-history" class="history-btn">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                    <select id="history-filter">
+                        <option value="all">All Changes</option>
+                        <option value="transfers">Transfers Only</option>
+                        <option value="edits">Edits Only</option>
+                        <option value="stats">Stats Changes</option>
+                    </select>
+                </div>
+                <div id="history-container" class="history-container">
+                    <!-- History items will be added here dynamically -->
                 </div>
             </div>
             
@@ -2244,6 +2376,135 @@
             
             // Add event listeners
             setupEventListeners();
+        });
+
+        // Add to your existing JavaScript
+        let changeHistory = [];
+
+        function addToHistory(change) {
+            const timestamp = new Date().toISOString();
+            changeHistory.unshift({
+                timestamp,
+                ...change
+            });
+
+            // Save to localStorage
+            localStorage.setItem('playerChangeHistory', JSON.stringify(changeHistory));
+            
+            // Update history display if tab is active
+            if (document.querySelector('.tab[data-tab="history"]').classList.contains('active')) {
+                displayHistory();
+            }
+        }
+
+        function displayHistory() {
+            const container = document.getElementById('history-container');
+            const filter = document.getElementById('history-filter').value;
+            container.innerHTML = '';
+
+            const filteredHistory = changeHistory.filter(change => {
+                if (filter === 'all') return true;
+                return change.type === filter;
+            });
+
+            filteredHistory.forEach(change => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const header = document.createElement('div');
+                header.className = 'history-header';
+                
+                const timestamp = new Date(change.timestamp).toLocaleString();
+                header.innerHTML = `
+                    <div class="history-timestamp">${timestamp}</div>
+                    <div class="history-type ${change.type}">${change.type.toUpperCase()}</div>
+                `;
+
+                const details = document.createElement('div');
+                details.className = 'history-details';
+                
+                if (change.type === 'transfer') {
+                    details.innerHTML = `
+                        <div class="history-changes">
+                            <div class="history-old">
+                                <div class="history-label">From:</div>
+                                <div>${change.oldTeam || 'N/A'}</div>
+                            </div>
+                            <div class="history-new">
+                                <div class="history-label">To:</div>
+                                <div>${change.newTeam}</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    details.innerHTML = `
+                        <div class="history-changes">
+                            <div class="history-old">
+                                <div class="history-label">Previous:</div>
+                                <pre>${JSON.stringify(change.oldValue, null, 2)}</pre>
+                            </div>
+                            <div class="history-new">
+                                <div class="history-label">New:</div>
+                                <pre>${JSON.stringify(change.newValue, null, 2)}</pre>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Add revert button if change is revertible
+                if (change.revertible) {
+                    const revertBtn = document.createElement('button');
+                    revertBtn.className = 'history-btn revert';
+                    revertBtn.innerHTML = '<i class="fas fa-undo"></i> Revert';
+                    revertBtn.onclick = () => revertChange(change);
+                    details.appendChild(revertBtn);
+                }
+
+                historyItem.appendChild(header);
+                historyItem.appendChild(details);
+                container.appendChild(historyItem);
+            });
+        }
+
+        function revertChange(change) {
+            if (confirm('Are you sure you want to revert this change?')) {
+                // Handle revert based on change type
+                if (change.type === 'transfer') {
+                    // Revert transfer
+                    currentPlayer.club = change.oldTeam;
+                    document.getElementById('player-club').value = change.oldTeam;
+                } else {
+                    // Revert other changes
+                    Object.assign(currentPlayer, change.oldValue);
+                    loadPlayerData(currentPlayer.id);
+                }
+
+                // Add revert action to history
+                addToHistory({
+                    type: 'revert',
+                    oldValue: change.newValue,
+                    newValue: change.oldValue,
+                    description: `Reverted: ${change.description}`,
+                    revertible: false
+                });
+
+                // Save changes
+                savePlayerChanges();
+            }
+        }
+
+        // Load history from localStorage on init
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedHistory = localStorage.getItem('playerChangeHistory');
+            if (savedHistory) {
+                changeHistory = JSON.parse(savedHistory);
+            }
+
+            // Add history filter change handler
+            document.getElementById('history-filter').addEventListener('change', displayHistory);
+            
+            // Add refresh button handler
+            document.getElementById('refresh-history').addEventListener('click', displayHistory);
         });
     </script>
 
