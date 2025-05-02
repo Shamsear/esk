@@ -10656,12 +10656,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 830,
       "r2g_token_balance": 50,
-      "club_total_value": 1212,
+      "club_total_value": 1280,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 23,
+        "total_players": 24,
         "players": [
           {
             "name": "GIOVANNI SIMEONE",
@@ -10845,6 +10845,14 @@
             "value": 82,
             "contract": "SEASON 8",
             "salary": 4.1,
+            "type": "standard"
+          },
+          {
+            "name": "ANATOLIY TRUBIN",
+            "position": "GK",
+            "value": 68,
+            "contract": "SEASON 8",
+            "salary": 3.4,
             "type": "standard"
           }
         ]
@@ -11343,12 +11351,12 @@
       "overall_rating": 106.2,
       "r2g_coin_balance": 584,
       "r2g_token_balance": 170,
-      "club_total_value": 1048,
+      "club_total_value": 980,
       "manager_rating": 0,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 15,
+        "total_players": 14,
         "players": [
           {
             "name": "GABRIEL BATISTUTA",
@@ -11372,14 +11380,6 @@
             "value": 100,
             "contract": "SEASON 8",
             "salary": 5,
-            "type": "standard"
-          },
-          {
-            "name": "ANATOLIY TRUBIN",
-            "position": "GK",
-            "value": 68,
-            "contract": "SEASON 8",
-            "salary": 3.4,
             "type": "standard"
           },
           {
