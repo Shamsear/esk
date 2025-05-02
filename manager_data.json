@@ -4854,9 +4854,25 @@
             "contract": "SEASON 6",
             "salary": 5,
             "type": "standard"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PAULO DYBALA",
+            "position": "ST",
+            "value": 86,
+            "contract": "SEASON 6",
+            "salary": 4.3,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 12
+        "totalPlayers": 14
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5030,7 +5046,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 890
+      "clubTotalValue": 1076
     },
     {
       "name": "NABEEL",
