@@ -412,9 +412,9 @@
     "name": "YASSINE BOUNOU",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "GK",
-    "value": 80,
+    "value": 104,
     "gamesPlayed": 5,
     "stats": [
       {
@@ -428,10 +428,17 @@
         "team": "FREE AGENT",
         "value": "80",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "104",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/Y. BOUNOU_CARD.webp",
-    "id": 20
+    "id": 20,
+    "type": "standard"
   },
   {
     "name": "GIANLUIGI DONNARUMMA",
