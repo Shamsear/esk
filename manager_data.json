@@ -4910,9 +4910,25 @@
             "contract": "SEASON 6",
             "salary": 3,
             "type": "legend"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 2.5,
+            "type": "prime"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 6",
+            "salary": 2,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 19
+        "totalPlayers": 21
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5086,7 +5102,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1454
+      "clubTotalValue": 1544
     },
     {
       "name": "NABEEL",
