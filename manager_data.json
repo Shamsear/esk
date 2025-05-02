@@ -4830,9 +4830,33 @@
             "contract": "SEASON 6",
             "salary": 5.2,
             "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 9
+        "totalPlayers": 12
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5006,7 +5030,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 590
+      "clubTotalValue": 890
     },
     {
       "name": "NABEEL",
