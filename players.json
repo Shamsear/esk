@@ -13520,7 +13520,7 @@
     "name": "PEDRO PORRO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "INTER MILAN",
+    "club": "RAYONG FC",
     "position": "RB",
     "value": 54,
     "gamesPlayed": 4,
@@ -13528,23 +13528,32 @@
       {
         "season": "4-4.5",
         "team": "RB LEIPZIG",
-        "value": "50 "
+        "value": "50 ",
+        "apps": "04"
       },
       {
         "season": "5-6",
-        "team": "RAYONG FC",
-        "value": "54"
+        "team": "RANDERS FC",
+        "value": "54",
+        "apps": "00"
       },
       {
-        "season": "6-7",
-        "team": "INTER MILAN",
-        "value": "50"
+        "season": "6-8",
+        "team": "RAYONG FC",
+        "value": "54",
+        "apps": "00",
+        "goals": "00",
+        "assists": "00",
+        "clean_sheets": "00",
+        "cards": {
+          "yellow": "00",
+          "red": "00"
+        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. PORRO_CARD.webp",
     "id": 415,
-    "type": "standard",
-    "clubLogo": "assets/images/players/club/INTER MILAN.webp"
+    "type": "standard"
   },
   {
     "name": "NOUSSAIR MAZRAOUI",
@@ -14580,7 +14589,7 @@
     "name": "MOISES CAICEDO",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "NOTTINGHAM FOREST",
+    "club": "RAYONG FC",
     "position": "DM",
     "value": 82,
     "gamesPlayed": 0,
@@ -14588,23 +14597,32 @@
       {
         "season": "4-5",
         "team": "MANCHESTER UNITED",
-        "value": "90"
+        "value": "90",
+        "apps": "00"
       },
       {
         "season": "5-6",
-        "team": "RAYONG FC",
-        "value": "82"
+        "team": "RANDERS FC",
+        "value": "82",
+        "apps": "00"
       },
       {
-        "season": "6-7",
-        "team": "NOTTINGHAM FOREST",
-        "value": "70"
+        "season": "6-8",
+        "team": "RAYONG FC",
+        "value": "82",
+        "apps": "00",
+        "goals": "00",
+        "assists": "00",
+        "clean_sheets": "00",
+        "cards": {
+          "yellow": "00",
+          "red": "00"
+        }
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/M. CAICEDO_CARD.webp",
     "id": 448,
-    "type": "prime",
-    "clubLogo": "assets/images/players/club/NOTTINGHAM FOREST.webp"
+    "type": "prime"
   },
   {
     "name": "AURELIEN TCHOUAMENI",
@@ -24617,7 +24635,7 @@
     "name": "MOHAMED CAMARA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FSV MAINZ 05",
+    "club": "FREE AGENT",
     "position": "DM",
     "value": 50,
     "gamesPlayed": 0,
@@ -24625,26 +24643,13 @@
       {
         "season": "5-6",
         "team": "FSV MAINZ 05",
-        "value": "50",
-        "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "FSV MAINZ 05",
-        "value": "50",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "value": "50"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. CAMARA_CARD.webp",
     "id": 771,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
   },
   {
     "name": "DANILO",
