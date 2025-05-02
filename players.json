@@ -4071,6 +4071,12 @@
         "team": "AC MILAN",
         "value": "84",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "84",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. ROMAGNOLI_CARD.webp",
@@ -4840,6 +4846,12 @@
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
         "value": "102",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
         "apps": "00"
       },
       {
@@ -6386,9 +6398,9 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "ST",
-    "value": 68,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6396,17 +6408,10 @@
         "team": "SEPAHAN SC",
         "value": "76",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "68",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp",
-    "id": 301,
-    "type": "standard"
+    "id": 301
   },
   {
     "name": "ALBERT GUDMUNDSSON",
@@ -13773,6 +13778,12 @@
         "team": "AC MILAN",
         "value": "80",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "80",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MALCOM_CARD.webp",
@@ -19866,6 +19877,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
+        "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
         "value": "100",
         "apps": "00"
       },
