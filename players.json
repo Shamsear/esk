@@ -136,7 +136,7 @@
     "name": "SHAY GIVEN",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "AC MILAN",
+    "club": "RB LEIPZIG",
     "position": "GK",
     "value": 60,
     "gamesPlayed": 0,
@@ -144,22 +144,18 @@
       {
         "season": "4-5",
         "team": "AS ROMA",
-        "value": "150"
+        "value": "150",
+        "apps": "00"
       },
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "RB LEIPZIG",
-        "value": "60"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "60"
+        "value": "60",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/S. GIVEN_CARD.webp",
-    "id": 8,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "id": 8
   },
   {
     "name": "MANUEL NEUER",
@@ -5219,25 +5215,27 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-5",
+        "season": "4-6",
         "team": "AL HILAL SFC",
-        "value": "130"
+        "value": "130",
+        "apps": "00"
       },
       {
         "season": "5-6",
         "team": "ASTON VILLA FC",
-        "value": "102"
+        "value": "102",
+        "apps": "00"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "86"
+        "value": "86",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/PAULO DYBALA_CARD.webp",
     "id": 248,
-    "type": "standard",
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "type": "standard"
   },
   {
     "name": "KARIM BENZEMA",
@@ -6381,25 +6379,20 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "ST",
-    "value": 68,
+    "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "76"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "68"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp",
     "id": 301,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
   },
   {
     "name": "ALBERT GUDMUNDSSON",
@@ -13752,23 +13745,25 @@
       {
         "season": "4-4.5",
         "team": "SANTOS FC",
-        "value": "50"
+        "value": "50",
+        "apps": "00"
       },
       {
-        "season": "4.5-6",
+        "season": "4.5-6.5",
         "team": "AC MILAN",
-        "value": "60"
+        "value": "60",
+        "apps": "00"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "80"
+        "value": "80",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MALCOM_CARD.webp",
     "id": 650,
-    "type": "prime",
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "type": "prime"
   },
   {
     "name": "MIGUEL ALMIRON",
@@ -14470,25 +14465,20 @@
     "name": "PHILIPP LIENHART",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "CB",
-    "value": 70,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "FC BARCELONA",
-        "value": "58"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "70"
+        "value": "58",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. LIENHART_CARD.webp",
-    "id": 687,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "id": 687
   },
   {
     "name": "JOACHIM ANDERSEN",
@@ -15949,7 +15939,7 @@
     "name": "ANDRE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "DM",
     "value": 50,
     "gamesPlayed": 0,
@@ -15957,17 +15947,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
-        "value": "50"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "50"
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/ANDRE_CARD.webp",
-    "id": 763,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "id": 763
   },
   {
     "name": "TOMAS SOUCEK",
@@ -16308,7 +16293,7 @@
     "name": "MAURO ARAMBARRI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -16316,17 +16301,12 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
-        "value": "40"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "40"
+        "value": "40",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. ARAMBARRI_CARD.webp",
-    "id": 781,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "id": 781
   },
   {
     "name": "MARIO LEMINA",
@@ -16775,14 +16755,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
+        "season": "4-6",
         "team": "AC MILAN",
-        "value": "54"
+        "value": "54",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/T. REIJNDERS_CARD.webp",
-    "id": 804,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "id": 804
   },
   {
     "name": "PASCAL GROB",
@@ -18370,25 +18350,20 @@
     "name": "ABDOULAYE DOUCOURE",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "AS ROMA",
     "position": "AM",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-5",
+        "season": "5-7",
         "team": "AS ROMA",
-        "value": "50"
-      },
-      {
-        "season": "5-6.5",
-        "team": "AC MILAN",
-        "value": "50"
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/A. DOUCOURE_CARD.webp",
-    "id": 887,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "id": 887
   },
   {
     "name": "ANDRE FRANCO",
