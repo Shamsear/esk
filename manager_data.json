@@ -4878,9 +4878,25 @@
             "contract": "SEASON 6",
             "salary": 4.2,
             "type": "standard"
+          },
+          {
+            "name": "ALESSIO ROMAGNOLI",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 6",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "MALCOM",
+            "position": "RW",
+            "value": 80,
+            "contract": "SEASON 6",
+            "salary": 4,
+            "type": "prime"
           }
         ],
-        "totalPlayers": 15
+        "totalPlayers": 17
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5054,7 +5070,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1160
+      "clubTotalValue": 1324
     },
     {
       "name": "NABEEL",
