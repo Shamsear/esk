@@ -4817,7 +4817,7 @@
     "name": "PATRICK KLUIVERT",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4827,10 +4827,23 @@
         "team": "RED BULL BRAGANTINO",
         "value": "102",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
-    "id": 230
+    "id": 230,
+    "type": "standard"
   },
   {
     "name": "FERNANDO TORRES",
@@ -19803,7 +19816,7 @@
     "name": "EVAIR",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -19813,10 +19826,17 @@
         "team": "FREE AGENT",
         "value": "100",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/EVAIR_CARD.webp",
-    "id": 965
+    "id": 965,
+    "type": "standard"
   },
   {
     "name": "JAVIER SAVIOLA",
