@@ -15944,7 +15944,7 @@
     "name": "ANDRE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 50,
     "gamesPlayed": 0,
@@ -15952,12 +15952,17 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
-        "value": "50",
-        "apps": "00"
+        "value": "50"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "50"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/ANDRE_CARD.webp",
-    "id": 763
+    "id": 763,
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "TOMAS SOUCEK",
