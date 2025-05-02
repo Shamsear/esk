@@ -14487,9 +14487,9 @@
     "name": "DECLAN RICE",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "RAYONG FC",
+    "club": "SANTOS FC",
     "position": "DM",
-    "value": 106,
+    "value": 140,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14516,6 +14516,12 @@
           "yellow": "00",
           "red": "00"
         }
+      },
+      {
+        "season": "6-8",
+        "team": "SANTOS FC",
+        "value": "140",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. RICE_CARD.webp",
