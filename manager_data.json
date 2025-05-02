@@ -4837,15 +4837,7 @@
             "value": 100,
             "contract": "SEASON 6",
             "salary": 5,
-            "type": "standard"
-          },
-          {
-            "name": "PATRICK KLUIVERT",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 6",
-            "salary": 5,
-            "type": "standard"
+            "type": "legend"
           },
           {
             "name": "EVAIR",
@@ -4853,7 +4845,7 @@
             "value": 100,
             "contract": "SEASON 6",
             "salary": 5,
-            "type": "standard"
+            "type": "prime legend"
           },
           {
             "name": "ALAN VARELA",
@@ -4909,7 +4901,7 @@
             "value": 60,
             "contract": "SEASON 6",
             "salary": 3,
-            "type": "legend"
+            "type": "standard"
           },
           {
             "name": "ANDRE",
@@ -4928,7 +4920,7 @@
             "type": "standard"
           }
         ],
-        "totalPlayers": 21
+        "totalPlayers": 20
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5102,7 +5094,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1544
+      "clubTotalValue": 1444
     },
     {
       "name": "NABEEL",
