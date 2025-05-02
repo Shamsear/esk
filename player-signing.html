@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Player Signing Auction Results - Eskimos Road to Glory</title>
+    <meta name="description" content="View player signing auction results for Eskimos Road to Glory, featuring bidding details for each position and player.">
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="assets/images/logo11.webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/additional-fixes.css">
+    <link rel="stylesheet" href="css/pwa.css">
+    
+    <!-- Page specific styles -->
+    <style>
+        /* Specific styles for the auction table */
+        .auction-container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .position-tabs {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        .position-tab {
+            padding: 12px 25px;
+            margin: 0 5px;
+            background: linear-gradient(135deg, rgba(41, 51, 92, 0.9), rgba(31, 41, 82, 0.9));
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .position-tab.active {
+            background: linear-gradient(135deg, rgba(81, 91, 172, 0.9), rgba(71, 81, 162, 0.9));
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .auction-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        
+        /* Modified table columns for better sizing */
+        .auction-table th:first-child,
+        .auction-table td:first-child {
+            min-width: 120px;
+        }
+        
+        .auction-table th,
+        .auction-table td {
+            min-width: 80px;
+        }
+        
+        .auction-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #fff;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        .auction-table th {
+            background: linear-gradient(135deg, rgba(41, 51, 92, 0.9), rgba(31, 41, 82, 0.9));
+            padding: 12px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+        
+        .auction-table th:hover {
+            background: linear-gradient(135deg, rgba(51, 61, 112, 0.9), rgba(41, 51, 102, 0.9));
+        }
+        
+        .auction-table th.sort-asc::after {
+            content: " ↑";
+            font-size: 14px;
+            color: #4fc3f7;
+        }
+        
+        .auction-table th.sort-desc::after {
+            content: " ↓";
+            font-size: 14px;
+            color: #4fc3f7;
+        }
+        
+        .auction-table tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .auction-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .auction-table .player-name {
+            font-weight: 600;
+            color: #ffc107;
+        }
+        
+        .auction-table .team-name {
+            font-weight: 500;
+            color: #4fc3f7;
+        }
+        
+        .auction-table .bid-amount {
+            font-weight: 600;
+            color: #4caf50;
+        }
+        
+        .auction-table .rating {
+            font-weight: 600;
+            color: #ff9800;
+        }
+        
+        .position-content {
+            display: none;
+        }
+        
+        .position-content.active {
+            display: block;
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 14px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .auction-table th, .auction-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .position-tab {
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+            
+            .auction-container {
+                padding: 10px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .auction-container {
+                padding: 10px 5px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .auction-table th, .auction-table td {
+                padding: 6px 4px;
+                font-size: 11px;
+            }
+            
+            .position-tabs {
+                margin-bottom: 10px;
+            }
+            
+            .position-tab {
+                padding: 8px 12px;
+                font-size: 11px;
+                margin: 0 3px;
+            }
+        }
+        
+        main {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        
+        @media (min-width: 1200px) {
+            .auction-container {
+                max-width: 1200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="mini-logo">
+                <img src="assets/images/logo11.webp" alt="Mini Logo" width="40" height="40">
+                <span>ESKIMOS</span>
+            </div>
+            <div class="controls">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="tournament-guide.html">Tournament Guide</a>
+                <a href="career-mode.html">Career Mode</a>
+                <a href="manager-ranking.html">Manager Ranking</a>
+                <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                <a href="career-tournament.html">Career Tournament</a>
+            </div>
+        </div>
+        
+        <main>
+            <header id="player-signing-header">
+                <a href="career-mode.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
+                <h1>Player Signing Auction Results</h1>
+                <p class="subtitle">View the latest player auction results by position</p>
+            </header>
+
+            <div class="auction-container">
+                <div class="search-container">
+                    <input type="text" id="playerSearch" class="search-input" placeholder="Search for player, team, or position...">
+                </div>
+                
+                <div class="position-tabs">
+                    <button class="position-tab active" data-position="all">All</button>
+                    <button class="position-tab" data-position="GK">GK</button>
+                    <button class="position-tab" data-position="CB">CB</button>
+                    <button class="position-tab" data-position="LB">LB</button>
+                    <button class="position-tab" data-position="RB">RB</button>
+                    <button class="position-tab" data-position="DM">DM</button>
+                    <button class="position-tab" data-position="CM">CM</button>
+                    <button class="position-tab" data-position="AM">AM</button>
+                    <button class="position-tab" data-position="LW">LW</button>
+                    <button class="position-tab" data-position="RW">RW</button>
+                    <button class="position-tab" data-position="ST">ST</button>
+                </div>
+                
+                <!-- GK Section -->
+                <div id="GK" class="position-content active">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="GK">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="GK-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- CB Section -->
+                <div id="CB" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="CB">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CB-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- LB Section -->
+                <div id="LB" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="LB">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="LB-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RB Section -->
+                <div id="RB" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="RB">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="RB-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CM Section -->
+                <div id="CM" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="CM">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CM-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- DM Section -->
+                <div id="DM" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="DM">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="DM-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AM Section -->
+                <div id="AM" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="AM">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="AM-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ST Section -->
+                <div id="ST" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="ST">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ST-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+                <!-- RW Section -->
+                <div id="RW" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="RW">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="RW-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- LW Section -->
+                <div id="LW" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="LW">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="LW-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- All Players Section -->
+                <div id="all" class="position-content">
+                    <div class="auction-table-container">
+                        <table class="auction-table" data-position="all">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Position</th>
+                                    <th>Base Value</th>
+                                    <th>Value</th>
+                                    <th>Team</th>
+                                    <th>Bid Amount</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-table">
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="tournament-guide.html">Tournament Guide</a>
+                    <a href="career-mode.html">Career Mode</a>
+                    <a href="manager-ranking.html">Manager Ranking</a>
+                    <a href="trophy-cabinet.html">Trophy Cabinet</a>
+                    <a href="career-tournament.html">Career Tournament</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 Eskimos Road to Glory. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script src="js/remove-conflicting-styles.js"></script>
+    
+    <script src="js/background-fix.js"></script>
+    <script src="js/fix-scroll.js"></script>
+    <script src="js/background-mobile-scroll.js"></script>
+    <script src="js/player-auction.js"></script>
+    <script src="js/image-protection.js"></script>
+    
+    <!-- Table Sorting Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize table sorting
+            initTableSorting();
+            
+            function initTableSorting() {
+                // Get all table headers across all position tables
+                const tables = document.querySelectorAll('.auction-table');
+                
+                tables.forEach(table => {
+                    const headers = table.querySelectorAll('th');
+                    
+                    headers.forEach((header, index) => {
+                        // Add click event listener to each header
+                        header.addEventListener('click', function() {
+                            sortTable(table, index);
+                        });
+                    });
+                });
+            }
+            
+            function sortTable(table, columnIndex) {
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                const headers = table.querySelectorAll('th');
+                
+                // Determine sort direction
+                const currentHeader = headers[columnIndex];
+                const isAscending = !currentHeader.classList.contains('sort-asc');
+                
+                // Remove sort classes from all headers
+                headers.forEach(header => {
+                    header.classList.remove('sort-asc', 'sort-desc');
+                });
+                
+                // Add appropriate sort class to the clicked header
+                currentHeader.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+                
+                // Sort the rows
+                rows.sort((rowA, rowB) => {
+                    // Get cell values to compare
+                    const cellA = rowA.cells[columnIndex].textContent.trim();
+                    const cellB = rowB.cells[columnIndex].textContent.trim();
+                    
+                    // Check if values are numbers (for numeric columns like Base Value, Value, Bid Amount)
+                    const numA = parseFloat(cellA.replace(/[^\d.-]/g, ''));
+                    const numB = parseFloat(cellB.replace(/[^\d.-]/g, ''));
+                    
+                    if (!isNaN(numA) && !isNaN(numB)) {
+                        // Numeric comparison
+                        return isAscending ? numA - numB : numB - numA;
+                    } else {
+                        // String comparison
+                        return isAscending 
+                            ? cellA.localeCompare(cellB) 
+                            : cellB.localeCompare(cellA);
+                    }
+                });
+                
+                // Remove all existing rows
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                
+                // Add sorted rows back to table
+                rows.forEach(row => {
+                    tbody.appendChild(row);
+                });
+                
+                // Add zebra striping after sorting
+                applyZebraStriping(tbody);
+            }
+            
+            function applyZebraStriping(tbody) {
+                // Reset background for all rows
+                const rows = tbody.querySelectorAll('tr');
+                
+                rows.forEach((row, index) => {
+                    row.classList.remove('odd', 'even');
+                    if (index % 2 === 0) {
+                        row.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    } else {
+                        row.style.backgroundColor = 'transparent';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- PWA scripts -->
+    <script src="js/pwa-init.js" defer></script>
+    <script src="js/offline-manager.js" defer></script>
+
+</body>
+</html> 
