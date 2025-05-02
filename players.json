@@ -8029,7 +8029,7 @@
     "name": "KARIM BENZEMA",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "MANCHESTER UNITED",
+    "club": "SSC NAPOLI",
     "position": "ST",
     "value": 82,
     "gamesPlayed": 0,
@@ -8037,32 +8037,23 @@
       {
         "season": "4-4.5",
         "team": "AL-NASSR FC",
-        "value": "84",
-        "apps": "00"
+        "value": "84"
       },
       {
         "season": "5-6",
         "team": "RB LEIPZIG",
-        "value": "82",
-        "apps": "00"
+        "value": "82"
       },
       {
         "season": "6-8",
-        "team": "MANCHESTER UNITED",
-        "value": "82",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "team": "SSC NAPOLI",
+        "value": "82"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/K. BENZEMA_CARD.webp",
     "id": 249,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/SSC NAPOLI.webp"
   },
   {
     "name": "ERLING HAALAND",
