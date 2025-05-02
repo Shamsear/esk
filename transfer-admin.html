@@ -3021,102 +3021,140 @@
                 showStatusMessage('Fixing data inconsistencies...', true);
                 
                 let fixedCount = 0;
-                let typeFixCount = 0;
                 
-                // Fix players with wrong club
-                results.playersWithWrongClub.forEach(player => {
-                    const playerIndex = playersData.findIndex(p => p.name === player.name);
-                    if (playerIndex !== -1) {
-                        playersData[playerIndex].club = player.managerClub;
-                        
-                        // Also update the player value to match the squad value
-                        if (typeof player.value !== 'undefined') {
-                            console.log(`Updating ${player.name} value from ${playersData[playerIndex].value} to ${player.value} (from manager data)`);
-                            playersData[playerIndex].value = player.value;
-                        }
-                        
-                        // Also update player type if available
-                        if (player.type) {
-                            console.log(`Updating ${player.name} type to ${player.type} (from manager data)`);
-                            playersData[playerIndex].type = player.type;
-                            typeFixCount++;
-                        }
-                        
-                        fixedCount++;
+                // Get current season range
+                const seasonStart = document.getElementById('season-start').value;
+                const seasonEnd = document.getElementById('season-end').value;
+                
+                // Process each player's stats
+                for (let playerIndex = 0; playerIndex < playersData.length; playerIndex++) {
+                    const player = playersData[playerIndex];
+                    let statsNeedUpdate = false;
+                    
+                    // Initialize stats array if doesn't exist
+                    if (!player.stats) {
+                        player.stats = [];
+                        statsNeedUpdate = true;
                     }
-                });
-                
-                // Fix players missing stats for current club
-                const seasonStart = document.getElementById('season-start').value || "6";
-                const seasonEnd = document.getElementById('season-end').value || "8";
-                const seasonRange = `${seasonStart}-${seasonEnd}`;
-                
-                results.playersWithMissingStats.forEach(player => {
-                    const playerIndex = playersData.findIndex(p => p.name === player.name);
-                    if (playerIndex !== -1) {
-                        if (!playersData[playerIndex].stats) {
-                            playersData[playerIndex].stats = [];
-                        }
+
+                    // Sort stats chronologically
+                    player.stats.sort((a, b) => {
+                        const aStart = parseFloat(a.season.split('-')[0]);
+                        const bStart = parseFloat(b.season.split('-')[0]);
+                        return aStart - bStart;
+                    });
+
+                    // Find the manager data for this player
+                    const managerWithPlayer = managersData.find(manager => 
+                        manager.squad?.players?.some(p => p.name === player.name)
+                    );
+
+                    if (managerWithPlayer) {
+                        const squadPlayer = managerWithPlayer.squad.players.find(p => p.name === player.name);
                         
-                        // Update the player value to match the squad value from manager data
-                        if (typeof player.value !== 'undefined') {
-                            console.log(`Updating ${player.name} value from ${playersData[playerIndex].value} to ${player.value} (from manager data)`);
-                            playersData[playerIndex].value = player.value;
+                        // Case 1: Handle FREE AGENT to team transition
+                        if (player.club === "FREE AGENT" || !player.club) {
+                            const lastStat = player.stats[player.stats.length - 1];
+                            if (lastStat && lastStat.team === "FREE AGENT") {
+                                // Update the FREE AGENT period to end at new transfer
+                                const [statStart, statEnd] = lastStat.season.split('-').map(Number);
+                                if (statEnd > parseFloat(seasonStart)) {
+                                    lastStat.season = `${statStart}-${seasonStart}`;
+                                    statsNeedUpdate = true;
+                                }
+                            }
                         }
-                        
-                        // Update player type if available
-                        if (player.type) {
-                            console.log(`Updating ${player.name} type to ${player.type} (from manager data)`);
-                            playersData[playerIndex].type = player.type;
-                            typeFixCount++;
-                        }
-                        
-                        // Add missing stats with the correct value from manager data
+
+                        // Case 2: Handle overlapping periods
+                        player.stats = player.stats.map(stat => {
+                            if (!stat.season || !stat.team) return stat;
+
+                            const [statStart, statEnd] = stat.season.split('-').map(Number);
+                            const newStart = parseFloat(seasonStart);
+                            const newEnd = parseFloat(seasonEnd);
+
+                            // If this stat period overlaps with new transfer period
+                            if (statEnd > newStart) {
+                                statsNeedUpdate = true;
+                                return {
+                                    ...stat,
+                                    season: `${statStart}-${newStart}`
+                                };
+                            }
+                            return stat;
+                        });
+
+                        // Case 3: Add new stat entry for current team
                         const newStat = {
-                            season: seasonRange,
-                            team: player.club,
-                            value: typeof player.value !== 'undefined' ? player.value.toString() : 
-                                  (playersData[playerIndex].value?.toString() || "1000"),
-                            apps: "00"
+                            season: `${seasonStart}-${seasonEnd}`,
+                            team: managerWithPlayer.club,
+                            value: squadPlayer.value.toString(),
+                            apps: "00",
+                            goals: "00",
+                            assists: "00",
+                            clean_sheets: "00",
+                            cards: { yellow: "00", red: "00" }
                         };
-                        
-                        playersData[playerIndex].stats.push(newStat);
-                        fixedCount++;
+
+                        // Only add if we don't have this exact period already
+                        const hasExactPeriod = player.stats.some(stat => 
+                            stat.season === `${seasonStart}-${seasonEnd}` && 
+                            stat.team === managerWithPlayer.club
+                        );
+
+                        if (!hasExactPeriod) {
+                            player.stats.push(newStat);
+                            statsNeedUpdate = true;
+                        }
+
+                        // Update current club and value
+                        if (player.club !== managerWithPlayer.club) {
+                            player.club = managerWithPlayer.club;
+                            statsNeedUpdate = true;
+                        }
+                        if (player.value !== squadPlayer.value) {
+                            player.value = squadPlayer.value;
+                            statsNeedUpdate = true;
+                        }
+
+                        // Update player type if needed
+                        if (squadPlayer.type && player.type !== squadPlayer.type) {
+                            player.type = squadPlayer.type;
+                            statsNeedUpdate = true;
+                        }
+
+                        // Clean up and validate
+                        if (statsNeedUpdate) {
+                            // Remove any zero-length periods
+                            player.stats = player.stats.filter(stat => {
+                                const [start, end] = stat.season.split('-').map(Number);
+                                return start < end;
+                            });
+
+                            // Sort stats again after modifications
+                            player.stats.sort((a, b) => {
+                                const aStart = parseFloat(a.season.split('-')[0]);
+                                const bStart = parseFloat(b.season.split('-')[0]);
+                                return aStart - bStart;
+                            });
+
+                            // Validate the updated stats
+                            const validationErrors = validatePlayerStats(player.stats);
+                            if (validationErrors.length > 0) {
+                                console.warn(`Validation warnings for ${player.name}:`, validationErrors);
+                            }
+
+                            fixedCount++;
+                        }
                     }
-                });
-                
-                // Fix players with missing or incorrect types
-                results.playersWithMissingTypes.forEach(player => {
-                    const playerIndex = playersData.findIndex(p => p.name === player.name);
-                    if (playerIndex !== -1 && player.managerType) {
-                        const oldType = playersData[playerIndex].type || 'None';
-                        
-                        // Update player type from manager data
-                        console.log(`Updating ${player.name} type from ${oldType} to ${player.managerType} (from manager data)`);
-                        playersData[playerIndex].type = player.managerType;
-                        
-                        typeFixCount++;
-                        fixedCount++;
-                    }
-                });
-                
-                console.log(`Fixed ${fixedCount} issues, including ${typeFixCount} player type updates`);
-                
-                // Log a sample of the updated players to verify types are set
-                const sampleSize = Math.min(5, playersData.length);
-                console.log(`Sample of ${sampleSize} players from playersData after fixes:`);
-                for (let i = 0; i < sampleSize; i++) {
-                    const player = playersData[i];
-                    console.log(`- ${player.name}: type = ${player.type || 'undefined'}, club = ${player.club || 'None'}`);
                 }
-                
-                // 3. Save changes
+
+                // Save changes
                 let saved = false;
                 
                 // Try GitHub first
                 if (githubConfig && githubConfig.isConfigured()) {
                     try {
-                        // Only save players.json as we're fixing inconsistencies
                         await saveFileToGitHub(playersData, 'players.json', 'Fix player data inconsistencies');
                         saved = true;
                     } catch (error) {
@@ -3138,19 +3176,15 @@
                         
                         if (saveResponse.ok) {
                             saved = true;
-                        } else {
-                            throw new Error('Failed to save to server');
                         }
                     }
                 }
-                
+
                 // Show results
-                if (saved) {
-                    showStatusMessage(`Fixed ${fixedCount} data inconsistencies (including ${typeFixCount} player types) and saved changes successfully.`, true);
-                } else {
-                    showStatusMessage(`Fixed ${fixedCount} data inconsistencies (including ${typeFixCount} player types) but couldn't save changes permanently.`, false);
-                }
-                
+                const message = `Fixed ${fixedCount} player records. ${saved ? 'Changes saved successfully.' : 'Changes only in memory.'}`;
+                showStatusMessage(message, saved);
+                console.log('Fix completed:', message);
+
             } catch (error) {
                 console.error('Error fixing data inconsistencies:', error);
                 showStatusMessage(`Error fixing data: ${error.message}`, false);
@@ -3403,209 +3437,6 @@
             document.querySelector('.container').prepend(messageDiv);
             setTimeout(() => messageDiv.remove(), 3000);
         }
-
-        // Test function for transfer scenarios
-        function testTransferScenarios() {
-            console.log('Testing transfer scenarios...');
-
-            // Store original getElementById function
-            const originalGetElementById = document.getElementById;
-
-            const testCases = [
-                {
-                    name: "Free Agent Basic",
-                    initial: {
-                        name: "Test Player 1",
-                        club: "FREE AGENT",
-                        stats: [{ season: "6-8", team: "FREE AGENT", value: "50" }]
-                    },
-                    transfer: {
-                        team: "Manchester United",
-                        season: "6-8",
-                        value: 100
-                    },
-                    expected: [{ season: "6-8", team: "Manchester United", value: "100" }]
-                },
-                {
-                    name: "Griezmann Case",
-                    initial: {
-                        name: "Griezmann",
-                        club: "Barcelona",
-                        stats: [
-                            { season: "4-6", team: "Manchester City", value: "100" },
-                            { season: "6-7", team: "Barcelona", value: "120" }
-                        ]
-                    },
-                    transfer: {
-                        team: "Manchester City",
-                        season: "6-8",
-                        value: 150
-                    },
-                    expected: [
-                        { season: "4-6", team: "Manchester City", value: "100" },
-                        { season: "6-8", team: "Manchester City", value: "150" }
-                    ]
-                },
-                {
-                    name: "Puyol Case",
-                    initial: {
-                        name: "Puyol",
-                        club: "Barcelona",
-                        stats: [{ season: "5-7", team: "Barcelona", value: "100" }]
-                    },
-                    transfer: {
-                        team: "Manchester United",
-                        season: "6-8",
-                        value: 120
-                    },
-                    expected: [
-                        { season: "5-6", team: "Barcelona", value: "100" },
-                        { season: "6-8", team: "Manchester United", value: "120" }
-                    ]
-                },
-                {
-                    name: "Mid-Season Transfer",
-                    initial: {
-                        name: "Test Player 2",
-                        club: "Arsenal",
-                        stats: [{ season: "6-7", team: "Arsenal", value: "80" }]
-                    },
-                    transfer: {
-                        team: "Chelsea",
-                        season: "6.5-8",
-                        value: 90
-                    },
-                    expected: [
-                        { season: "6-6.5", team: "Arsenal", value: "80" },
-                        { season: "6.5-8", team: "Chelsea", value: "90" }
-                    ]
-                },
-                {
-                    name: "Multiple Previous Teams",
-                    initial: {
-                        name: "Test Player 3",
-                        club: "Real Madrid",
-                        stats: [
-                            { season: "4-5", team: "Ajax", value: "40" },
-                            { season: "5-7", team: "Real Madrid", value: "80" }
-                        ]
-                    },
-                    transfer: {
-                        team: "Barcelona",
-                        season: "6-8",
-                        value: 100
-                    },
-                    expected: [
-                        { season: "4-5", team: "Ajax", value: "40" },
-                        { season: "5-6", team: "Real Madrid", value: "80" },
-                        { season: "6-8", team: "Barcelona", value: "100" }
-                    ]
-                }
-            ];
-
-            // Run each test case
-            testCases.forEach(testCase => {
-                console.log(`\nTesting: ${testCase.name}`);
-                
-                // Create a copy of the test player
-                const testPlayer = JSON.parse(JSON.stringify(testCase.initial));
-                
-                // Set up the transfer
-                const { team, season, value } = testCase.transfer;
-                const [seasonStart, seasonEnd] = season.split('-');
-                
-                // Create mock elements for season inputs
-                const mockElements = {
-                    'season-start': { value: seasonStart },
-                    'season-end': { value: seasonEnd }
-                };
-                
-                // Override getElementById temporarily
-                document.getElementById = (id) => mockElements[id] || originalGetElementById(id);
-                
-                try {
-                    // Perform the transfer
-                    const result = handlePlayerTransfer({
-                        ...testPlayer,
-                        value: value
-                    }, team);
-                    
-                    // Compare results
-                    const statsMatch = compareStats(result.stats, testCase.expected);
-                    console.log(`Test ${statsMatch ? 'PASSED ✓' : 'FAILED ✗'}`);
-                    if (!statsMatch) {
-                        console.log('Expected:', JSON.stringify(testCase.expected, null, 2));
-                        console.log('Got:', JSON.stringify(result.stats, null, 2));
-                        console.log('Differences:');
-                        findDifferences(testCase.expected, result.stats);
-                    }
-                } catch (error) {
-                    console.error(`Test ${testCase.name} failed with error:`, error);
-                }
-            });
-
-            // Restore original getElementById
-            document.getElementById = originalGetElementById;
-            
-            console.log('\nTest suite completed.');
-        }
-
-        // Helper function to find differences between expected and actual stats
-        function findDifferences(expected, actual) {
-            if (!actual || !expected) {
-                console.log('One of the arrays is null/undefined');
-                return;
-            }
-
-            const maxLength = Math.max(expected.length, actual.length);
-            
-            for (let i = 0; i < maxLength; i++) {
-                const expectedStat = expected[i];
-                const actualStat = actual[i];
-                
-                if (!expectedStat || !actualStat) {
-                    console.log(`Index ${i}: ${!expectedStat ? 'Missing in expected' : 'Missing in actual'}`);
-                    continue;
-                }
-                
-                if (expectedStat.season !== actualStat.season) {
-                    console.log(`Index ${i}: Season mismatch - Expected: ${expectedStat.season}, Got: ${actualStat.season}`);
-                }
-                if (expectedStat.team !== actualStat.team) {
-                    console.log(`Index ${i}: Team mismatch - Expected: ${expectedStat.team}, Got: ${actualStat.team}`);
-                }
-                if (expectedStat.value !== actualStat.value) {
-                    console.log(`Index ${i}: Value mismatch - Expected: ${expectedStat.value}, Got: ${actualStat.value}`);
-                }
-            }
-        }
-
-        // Helper function to compare stats arrays
-        function compareStats(actual, expected) {
-            if (!actual || !expected || actual.length !== expected.length) return false;
-            
-            for (let i = 0; i < actual.length; i++) {
-                const actualStat = actual[i];
-                const expectedStat = expected[i];
-                
-                if (actualStat.season !== expectedStat.season ||
-                    actualStat.team !== expectedStat.team ||
-                    actualStat.value !== expectedStat.value) {
-                    return false;
-                }
-            }
-            
-            return true;
-        }
-
-        // Add test button to debug controls
-        document.getElementById('debug-controls').innerHTML += `
-            <button id="test-transfers" style="margin-left: 10px; background-color: #4ecca3;">
-                Test Transfer Scenarios
-            </button>
-        `;
-
-        document.getElementById('test-transfers').addEventListener('click', testTransferScenarios);
     </script>
     
     <!-- Performance optimization JS -->
@@ -3684,195 +3515,5 @@
         <a href="token-setup.html"><i class="fas fa-key"></i> GitHub Token Setup</a>
         <a href="transfer-debug.html"><i class="fas fa-bug"></i> Debug Saving</a>
     </div>
-
-    <!-- Add test panel HTML after debug controls -->
-    <div id="test-panel" style="display: none; margin-top: 20px; padding: 20px; background: #1e1e1e; border-radius: 8px; border-left: 4px solid #4ecca3;">
-        <h3 style="margin-top: 0; color: #fff;">Transfer Test Panel</h3>
-        <div id="test-results" style="margin-top: 15px;">
-            <div class="test-controls" style="margin-bottom: 15px;">
-                <button id="run-all-tests" class="test-btn" style="background: #4ecca3; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-right: 10px;">
-                    Run All Tests
-                </button>
-                <button id="run-single-test" class="test-btn" style="background: #3f51b5; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
-                    Run Selected Test
-                </button>
-            </div>
-            <select id="test-selector" style="width: 100%; padding: 8px; margin-bottom: 15px; background: #252525; color: white; border: 1px solid #444; border-radius: 4px;">
-                <option value="">Select a test case...</option>
-            </select>
-            <div id="test-output" style="background: #252525; padding: 15px; border-radius: 4px; font-family: monospace; color: #e0e0e0; max-height: 300px; overflow-y: auto;">
-                Test results will appear here...
-            </div>
-        </div>
-    </div>
-
-    <!-- Modify the test function to work with the UI -->
-    <script>
-        function testTransferScenarios(selectedTestName = null) {
-            const outputDiv = document.getElementById('test-output');
-            outputDiv.innerHTML = ''; // Clear previous results
-
-            function log(message, type = 'info') {
-                const colors = {
-                    info: '#e0e0e0',
-                    success: '#4ecca3',
-                    error: '#ff5252',
-                    warning: '#ffd740'
-                };
-                
-                outputDiv.innerHTML += `<div style="color: ${colors[type]}; margin-bottom: 5px;">${message}</div>`;
-                outputDiv.scrollTop = outputDiv.scrollHeight;
-            }
-
-            log('Starting transfer tests...', 'info');
-
-            // Store original getElementById function
-            const originalGetElementById = document.getElementById;
-
-            const testCases = [
-                {
-                    name: "Free Agent Basic",
-                    description: "Tests converting a free agent to a team player",
-                    initial: {
-                        name: "Test Player 1",
-                        club: "FREE AGENT",
-                        stats: [{ season: "6-8", team: "FREE AGENT", value: "50" }]
-                    },
-                    transfer: {
-                        team: "Manchester United",
-                        season: "6-8",
-                        value: 100
-                    },
-                    expected: [{ season: "6-8", team: "Manchester United", value: "100" }]
-                },
-                {
-                    name: "Griezmann Case",
-                    description: "Tests player returning to previous team (Man City 4-6 → Barcelona 6-7 → Man City 6-8)",
-                    initial: {
-                        name: "Griezmann",
-                        club: "Barcelona",
-                        stats: [
-                            { season: "4-6", team: "Manchester City", value: "100" },
-                            { season: "6-7", team: "Barcelona", value: "120" }
-                        ]
-                    },
-                    transfer: {
-                        team: "Manchester City",
-                        season: "6-8",
-                        value: 150
-                    },
-                    expected: [
-                        { season: "4-6", team: "Manchester City", value: "100" },
-                        { season: "6-8", team: "Manchester City", value: "150" }
-                    ]
-                },
-                {
-                    name: "Puyol Case",
-                    description: "Tests overlapping seasons (Barcelona 5-7 → United 6-8)",
-                    initial: {
-                        name: "Puyol",
-                        club: "Barcelona",
-                        stats: [{ season: "5-7", team: "Barcelona", value: "100" }]
-                    },
-                    transfer: {
-                        team: "Manchester United",
-                        season: "6-8",
-                        value: 120
-                    },
-                    expected: [
-                        { season: "5-6", team: "Barcelona", value: "100" },
-                        { season: "6-8", team: "Manchester United", value: "120" }
-                    ]
-                }
-            ];
-
-            // Populate test selector
-            const selector = document.getElementById('test-selector');
-            selector.innerHTML = '<option value="">Select a test case...</option>';
-            testCases.forEach(test => {
-                selector.innerHTML += `<option value="${test.name}">${test.name}</option>`;
-            });
-
-            // Run tests
-            testCases.forEach(testCase => {
-                // Skip if a specific test was selected and this isn't it
-                if (selectedTestName && testCase.name !== selectedTestName) return;
-
-                log(`\nTesting: ${testCase.name}`, 'info');
-                log(`Description: ${testCase.description}`, 'info');
-                
-                // Create a copy of the test player
-                const testPlayer = JSON.parse(JSON.stringify(testCase.initial));
-                
-                // Set up the transfer
-                const { team, season, value } = testCase.transfer;
-                const [seasonStart, seasonEnd] = season.split('-');
-                
-                // Create mock elements
-                const mockElements = {
-                    'season-start': { value: seasonStart },
-                    'season-end': { value: seasonEnd }
-                };
-                
-                // Override getElementById
-                document.getElementById = (id) => mockElements[id] || originalGetElementById(id);
-                
-                try {
-                    // Show initial state
-                    log('\nInitial state:', 'info');
-                    log(JSON.stringify(testPlayer.stats, null, 2), 'info');
-                    
-                    // Perform transfer
-                    log('\nPerforming transfer...', 'info');
-                    const result = handlePlayerTransfer({
-                        ...testPlayer,
-                        value: value
-                    }, team);
-                    
-                    // Compare results
-                    const statsMatch = compareStats(result.stats, testCase.expected);
-                    
-                    if (statsMatch) {
-                        log(`\n✓ Test PASSED`, 'success');
-                    } else {
-                        log(`\n✗ Test FAILED`, 'error');
-                        log('\nExpected:', 'warning');
-                        log(JSON.stringify(testCase.expected, null, 2), 'warning');
-                        log('\nGot:', 'error');
-                        log(JSON.stringify(result.stats, null, 2), 'error');
-                        log('\nDifferences:', 'warning');
-                        findDifferences(testCase.expected, result.stats);
-                    }
-                } catch (error) {
-                    log(`\n✗ Test failed with error: ${error.message}`, 'error');
-                    console.error(error);
-                }
-            });
-
-            // Restore original getElementById
-            document.getElementById = originalGetElementById;
-            log('\nTest suite completed.', 'info');
-        }
-
-        // Add event listeners for test controls
-        document.getElementById('test-transfers').addEventListener('click', () => {
-            const testPanel = document.getElementById('test-panel');
-            testPanel.style.display = testPanel.style.display === 'none' ? 'block' : 'none';
-        });
-
-        document.getElementById('run-all-tests').addEventListener('click', () => {
-            testTransferScenarios();
-        });
-
-        document.getElementById('run-single-test').addEventListener('click', () => {
-            const selectedTest = document.getElementById('test-selector').value;
-            if (selectedTest) {
-                testTransferScenarios(selectedTest);
-            } else {
-                const outputDiv = document.getElementById('test-output');
-                outputDiv.innerHTML = '<div style="color: #ff5252;">Please select a test case first.</div>';
-            }
-        });
-    </script>
 </body>
 </html> 
