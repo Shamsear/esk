@@ -8320,14 +8320,6 @@
             "type": "standard"
           },
           {
-            "name": "BIXENTE LIZARAZU",
-            "position": "CB",
-            "value": 78,
-            "contract": "SEASON 8",
-            "salary": 3.9,
-            "type": "legend"
-          },
-          {
             "name": "KYLE WALKER",
             "position": "CB",
             "value": 72,
@@ -8341,7 +8333,7 @@
             "value": 78,
             "contract": "SEASON 8",
             "salary": 3.9,
-            "type": "standard"
+            "type": "legend"
           },
           {
             "name": "KYLE WALKER",
@@ -13082,7 +13074,7 @@
             "type": "standard"
           },
           {
-            "name": "RODRIGO BENTACUR",
+            "name": "RODRIGO BENTANCUR",
             "position": "CM",
             "value": 50,
             "contract": "SEASON 8",

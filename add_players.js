@@ -19,7 +19,8 @@ const playersToAdd = [
   { name: "CURTIS JONES", team: "SSC NAPOLI", value: 50, season: "SEASON 8" },
   { name: "GUTI", team: "TOTTENHAM HOTSPUR", value: 130, season: "SEASON 8" },
   { name: "TONI KROOS", team: "TOTTENHAM HOTSPUR", value: 50, season: "SEASON 8" },
-  { name: "LUKA MODRIC", team: "TOTTENHAM HOTSPUR", value: 68, season: "SEASON 8" }
+  { name: "LUKA MODRIC", team: "TOTTENHAM HOTSPUR", value: 68, season: "SEASON 8" },
+  { name: "BIXENTE LIZARAZU", team: "RAYONG FC", value: 78, season: "SEASON 8", type: "legend" }
 ];
 
 // Function to add players to the respective team
@@ -40,7 +41,7 @@ function addPlayerToTeam(player) {
       "value": player.value,
       "contract": player.season,
       "salary": parseFloat(salary),
-      "type": "standard"  // All players in this list are standard type
+      "type": player.type || "standard"  // Use provided type or default to "standard"
     };
     
     // Ensure squad and players array exist
@@ -82,7 +83,7 @@ function addPlayerToTeam(player) {
           "value": player.value,
           "contract": player.season,
           "salary": parseFloat(salary),
-          "type": "standard"  // All players in this list are standard type
+          "type": player.type || "standard"  // Use provided type or default to "standard"
         }]
       },
       "performance": {
