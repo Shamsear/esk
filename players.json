@@ -15960,7 +15960,7 @@
     "name": "ANDRE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 50,
     "gamesPlayed": 0,
@@ -15970,10 +15970,17 @@
         "team": "FREE AGENT",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/ANDRE_CARD.webp",
-    "id": 763
+    "id": 763,
+    "type": "prime"
   },
   {
     "name": "TOMAS SOUCEK",
@@ -16314,7 +16321,7 @@
     "name": "MAURO ARAMBARRI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -16324,10 +16331,17 @@
         "team": "FREE AGENT",
         "value": "40",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "40",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. ARAMBARRI_CARD.webp",
-    "id": 781
+    "id": 781,
+    "type": "standard"
   },
   {
     "name": "MARIO LEMINA",
