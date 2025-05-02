@@ -2475,7 +2475,7 @@
                 salaryValue.style.borderRadius = '4px';
                 salaryValue.style.color = '#bada55';
                 salaryValue.style.fontWeight = 'bold';
-                salaryValue.textContent = Math.round(player.value * 0.05).toLocaleString();
+                salaryValue.textContent = (player.value * 0.05).toFixed(1);
                 
                 salaryGroup.appendChild(salaryLabel);
                 salaryGroup.appendChild(salaryValue);
@@ -2500,8 +2500,8 @@
             const salaryElement = document.getElementById(`salary-${playerId}`);
             
             if (salaryElement) {
-                const salary = Math.round(value * 0.05);
-                salaryElement.textContent = salary.toLocaleString();
+                const salary = (value * 0.05).toFixed(1);
+                salaryElement.textContent = salary;
             }
         }
         
@@ -2595,7 +2595,7 @@
                         position: player.position,
                         value: transferValue,
                         contract: `SEASON ${seasonStart}`,
-                        salary: salary,
+                        salary: parseFloat((transferValue * 0.05).toFixed(1)),
                         type: playerType  // Add the player type
                     };
                     
