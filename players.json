@@ -136,7 +136,7 @@
     "name": "SHAY GIVEN",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "RB LEIPZIG",
+    "club": "AC MILAN",
     "position": "GK",
     "value": 60,
     "gamesPlayed": 0,
@@ -152,10 +152,17 @@
         "team": "RB LEIPZIG",
         "value": "60",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "60",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/S. GIVEN_CARD.webp",
-    "id": 8
+    "id": 8,
+    "type": "legend"
   },
   {
     "name": "MANUEL NEUER",
@@ -14472,9 +14479,9 @@
     "name": "PHILIPP LIENHART",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
-    "value": 50,
+    "value": 70,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14482,10 +14489,17 @@
         "team": "FC BARCELONA",
         "value": "58",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "70",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. LIENHART_CARD.webp",
-    "id": 687
+    "id": 687,
+    "type": "standard"
   },
   {
     "name": "JOACHIM ANDERSEN",
