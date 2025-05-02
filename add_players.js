@@ -5,26 +5,21 @@ let managerData = JSON.parse(fs.readFileSync('./manager_data.json', 'utf8'));
 
 // Players data from the image
 const playersToAdd = [
-  { name: "DANI OLMO", team: "AFC AJAX", value: 92, season: "SEASON 8" },
-  { name: "EMILE SMITH ROWE", team: "AFC AJAX", value: 62, season: "SEASON 8" },
-  { name: "GIOVANI LO CELSO", team: "ATLETICO DE MADRID", value: 40, season: "SEASON 8" },
-  { name: "COLE PALMER", team: "CRYSTAL PALACE", value: 90, season: "SEASON 8" },
-  { name: "ISCO", team: "CRYSTAL PALACE", value: 50, season: "SEASON 8" },
-  { name: "FRANCK RIBERY", team: "FC BAYERN MUNICH", value: 104, season: "SEASON 8" },
-  { name: "JUDE BELLINGHAM", team: "FENERBAHCE SK", value: 160, season: "SEASON 8" },
-  { name: "THIAGO ALMADA", team: "FENERBAHCE SK", value: 50, season: "SEASON 8" },
-  { name: "DEISIRE DOUE", team: "FENERBAHCE SK", value: 82, season: "SEASON 8" },
-  { name: "LORENZO PELLEGRINI", team: "FSV MAINZ 05", value: 64, season: "SEASON 8" },
-  { name: "JAMES MADDISON", team: "FSV MAINZ 05", value: 66, season: "SEASON 8" },
-  { name: "KAKA", team: "INTER MILAN", value: 170, season: "SEASON 8" },
-  { name: "BRAHIM DIAZ", team: "LEICESTER CITY", value: 72, season: "SEASON 8" },
-  { name: "MORGAN ROGERS", team: "LEICESTER CITY", value: 58, season: "SEASON 8" },
-  { name: "TAKUMI MINAMINO", team: "LEICESTER CITY", value: 48, season: "SEASON 8" },
-  { name: "DEJAN KULUSEVSKI", team: "LOSC LILLE", value: 110, season: "SEASON 8" },
-  { name: "JAMAL MUSIALA", team: "MANCHESTER CITY", value: 170, season: "SEASON 8" },
-  { name: "ARDA GULER", team: "MANCHESTER CITY", value: 90, season: "SEASON 8" },
-  { name: "CHANATHIP SONGKRASIN", team: "MANCHESTER UNITED", value: 40, season: "SEASON 8" },
-  { name: "AMINE ADLI", team: "MOHUN BAGAN SG", value: 54, season: "SEASON 8" }
+  { name: "FRANK LAMPARD", team: "RAYONG FC", value: 108, season: "SEASON 8" },
+  { name: "NICOLO BARELLA", team: "REAL MADRID", value: 86, season: "SEASON 8" },
+  { name: "FRANK ZAMBO ANGUISSA", team: "REAL MADRID", value: 54, season: "SEASON 8" },
+  { name: "LEON GORETZKA", team: "REAL MADRID", value: 50, season: "SEASON 8" },
+  { name: "RODRIGO BENTACUR", team: "REAL MADRID", value: 50, season: "SEASON 8" },
+  { name: "GRANIT XHAKA", team: "SL BENFICA", value: 80, season: "SEASON 8" },
+  { name: "ANDRE ALMEIDA", team: "SL BENFICA", value: 50, season: "SEASON 8" },
+  { name: "FRENKIE DE JONG", team: "SS LAZIO", value: 82, season: "SEASON 8" },
+  { name: "VITINHA", team: "SS LAZIO", value: 82, season: "SEASON 8" },
+  { name: "KONRAD LAIMER", team: "SSC NAPOLI", value: 52, season: "SEASON 8" },
+  { name: "MATEO KOVACIC", team: "SSC NAPOLI", value: 50, season: "SEASON 8" },
+  { name: "CURTIS JONES", team: "SSC NAPOLI", value: 50, season: "SEASON 8" },
+  { name: "GUTI", team: "TOTTENHAM HOTSPUR", value: 130, season: "SEASON 8" },
+  { name: "TONI KROOS", team: "TOTTENHAM HOTSPUR", value: 50, season: "SEASON 8" },
+  { name: "LUKA MODRIC", team: "TOTTENHAM HOTSPUR", value: 68, season: "SEASON 8" }
 ];
 
 // Function to add players to the respective team
@@ -41,7 +36,7 @@ function addPlayerToTeam(player) {
     // Create the new player object
     const newPlayer = {
       "name": player.name,
-      "position": "AM",
+      "position": "CM",
       "value": player.value,
       "contract": player.season,
       "salary": parseFloat(salary),
@@ -83,7 +78,7 @@ function addPlayerToTeam(player) {
         "total_players": 1,
         "players": [{
           "name": player.name,
-          "position": "AM",
+          "position": "CM",
           "value": player.value,
           "contract": player.season,
           "salary": parseFloat(salary),
