@@ -22913,40 +22913,31 @@
     "name": "ERIC DIER",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "MUMBAI CITY",
+    "club": "MANCHESTER UNITED",
     "position": "CB",
-    "value": 52,
+    "value": 58,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "FC PORTO",
-        "value": "80",
-        "apps": "00"
+        "value": "80"
       },
       {
         "season": "5-6",
         "team": "INTER MIAMI",
-        "value": "90",
-        "apps": "00"
+        "value": "90"
       },
       {
         "season": "6-8",
-        "team": "MUMBAI CITY",
-        "value": "52",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "team": "MANCHESTER UNITED",
+        "value": "58"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/E. DIER_CARD.webp",
     "id": 708,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/Manchester United FC.webp"
   },
   {
     "name": "TREVOH CHALOBAH",
