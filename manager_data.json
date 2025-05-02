@@ -4880,47 +4880,15 @@
             "type": "standard"
           },
           {
-            "name": "PHILIPP LIENHART",
-            "position": "CB",
-            "value": 50,
-            "contract": "SEASON 6",
-            "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "SHAY GIVEN",
-            "position": "GK",
-            "value": 60,
-            "contract": "SEASON 6",
-            "salary": 3,
-            "type": "standard"
-          },
-          {
-            "name": "ANDRE",
-            "position": "DM",
-            "value": 50,
-            "contract": "SEASON 6",
-            "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "MAURO ARAMBARRI",
-            "position": "DM",
-            "value": 40,
-            "contract": "SEASON 6",
-            "salary": 2,
-            "type": "standard"
-          },
-          {
             "name": "ELYE WAHI",
             "position": "ST",
-            "value": 40,
+            "value": 68,
             "contract": "SEASON 6",
-            "salary": 2,
+            "salary": 3.4,
             "type": "standard"
           }
         ],
-        "totalPlayers": 20
+        "totalPlayers": 16
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5094,7 +5062,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1400
+      "clubTotalValue": 1228
     },
     {
       "name": "NABEEL",
