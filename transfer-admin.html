@@ -2918,7 +2918,7 @@
         // Check for inconsistencies between manager data and players data
         function checkDataConsistency() {
             try {
-                console.log('Checking data consistency between manager data and players data...');
+                console.log('Checking data consistency for season 8 players between manager data and players data...');
                 
                 if (!managersData || !playersData) {
                     throw new Error('Data not loaded yet');
@@ -2931,24 +2931,31 @@
                     playersWithMissingTypes: []
                 };
                 
-                // Get all players in manager data
+                // Season 8 check - we specifically want to analyze players in season 8
+                const seasonCheck = 8;
+                
+                // Get all players in manager data for season 8
                 const managerSquadPlayers = [];
                 managersData.forEach(manager => {
                     if (manager.squad && manager.squad.players) {
-                        manager.squad.players.forEach(squadPlayer => {
-                            managerSquadPlayers.push({
-                                name: squadPlayer.name,
-                                club: manager.club,
-                                value: squadPlayer.value,
-                                position: squadPlayer.position,
-                                manager: manager.name,
-                                type: squadPlayer.type || 'standard'
+                        const isSeasonEightManager = determineIfSeasonEightManager(manager);
+                        
+                        if (isSeasonEightManager) {
+                            manager.squad.players.forEach(squadPlayer => {
+                                managerSquadPlayers.push({
+                                    name: squadPlayer.name,
+                                    club: manager.club,
+                                    value: squadPlayer.value,
+                                    position: squadPlayer.position,
+                                    manager: manager.name,
+                                    type: squadPlayer.type || 'standard'
+                                });
                             });
-                        });
+                        }
                     }
                 });
                 
-                console.log(`Found ${managerSquadPlayers.length} players in manager squad data`);
+                console.log(`Found ${managerSquadPlayers.length} players in season 8 manager squad data`);
                 
                 // Check each player in manager data
                 managerSquadPlayers.forEach(squadPlayer => {
@@ -2970,9 +2977,16 @@
                         });
                     }
                     
+                    // Check if player has season 8 stats
+                    let hasSeasonEightStats = false;
                     if (playerData.stats && Array.isArray(playerData.stats)) {
-                        const hasStatsForCurrentClub = playerData.stats.some(stat => stat.team === squadPlayer.club);
-                        if (!hasStatsForCurrentClub) {
+                        hasSeasonEightStats = playerData.stats.some(stat => {
+                            if (!stat.season) return false;
+                            const [statStart, statEnd] = stat.season.split('-').map(Number);
+                            return statStart <= seasonCheck && statEnd >= seasonCheck && stat.team === squadPlayer.club;
+                        });
+                        
+                        if (!hasSeasonEightStats) {
                             results.playersWithMissingStats.push({
                                 name: squadPlayer.name,
                                 club: squadPlayer.club,
@@ -3039,7 +3053,7 @@
                 
                 // Create download CSV button
                 const downloadBtn = document.createElement('button');
-                downloadBtn.textContent = 'Download Full Report (CSV)';
+                downloadBtn.textContent = 'Download Season 8 Report (CSV)';
                 downloadBtn.style.backgroundColor = '#4ecca3';
                 downloadBtn.style.color = 'white';
                 downloadBtn.style.border = 'none';
@@ -3067,7 +3081,7 @@
                 
                 // Create fix button
                 const fixBtn = document.createElement('button');
-                fixBtn.textContent = 'Fix All Issues';
+                fixBtn.textContent = 'Fix Season 8 Issues';
                 fixBtn.style.backgroundColor = '#3f51b5';
                 fixBtn.style.color = 'white';
                 fixBtn.style.border = 'none';
@@ -3086,7 +3100,7 @@
                 buttonsContainer.appendChild(closeBtn);
                 
                 // Create summary text
-                let summaryText = '<h3>Data Consistency Check Summary:</h3>';
+                let summaryText = '<h3>Season 8 Data Consistency Check Summary:</h3>';
                 summaryText += `<p>Total issues found: ${
                     results.playersInManagerButNotInPlayers.length +
                     results.playersWithWrongClub.length +
@@ -3094,12 +3108,12 @@
                     results.playersWithMissingTypes.length
                 }</p>`;
                 summaryText += `<ul>`;
-                summaryText += `<li>Players missing from players.json: ${results.playersInManagerButNotInPlayers.length}</li>`;
-                summaryText += `<li>Players with wrong club data: ${results.playersWithWrongClub.length}</li>`;
-                summaryText += `<li>Players missing stats: ${results.playersWithMissingStats.length}</li>`;
-                summaryText += `<li>Players with type issues: ${results.playersWithMissingTypes.length}</li>`;
+                summaryText += `<li>Season 8 players missing from players.json: ${results.playersInManagerButNotInPlayers.length}</li>`;
+                summaryText += `<li>Season 8 players with wrong club data: ${results.playersWithWrongClub.length}</li>`;
+                summaryText += `<li>Season 8 players missing stats: ${results.playersWithMissingStats.length}</li>`;
+                summaryText += `<li>Season 8 players with type issues: ${results.playersWithMissingTypes.length}</li>`;
                 summaryText += `</ul>`;
-                summaryText += `<p>Click "Download Full Report" to get a detailed CSV file with all issues.</p>`;
+                summaryText += `<p>Click "Download Season 8 Report" to get a detailed CSV file with all issues.</p>`;
                 
                 // Create content container
                 const contentDiv = document.createElement('div');
@@ -3115,6 +3129,44 @@
                 console.error('Error checking data consistency:', error);
                 showStatusMessage(`Error checking data: ${error.message}`, false);
             }
+        }
+
+        // Helper function to determine if a manager has season 8 players
+        function determineIfSeasonEightManager(manager) {
+            // Look for contract information that indicates season 8
+            if (manager.squad && manager.squad.players) {
+                for (const player of manager.squad.players) {
+                    if (player.contract) {
+                        // Check explicit season mention
+                        if (typeof player.contract === 'string' && 
+                            (player.contract.includes('SEASON 8') || 
+                             player.contract.includes('S8') || 
+                             player.contract.includes('8-') || 
+                             player.contract.includes('-8'))) {
+                            return true;
+                        }
+                        
+                        // Check if the contract is from a season range that includes 8
+                        if (typeof player.contract === 'string' && player.contract.includes('-')) {
+                            const [startSeason, endSeason] = player.contract.replace(/[^0-9.-]/g, '').split('-').map(Number);
+                            if (!isNaN(startSeason) && !isNaN(endSeason) && 
+                                startSeason <= 8 && endSeason >= 8) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // If manager has explicit season marker
+            if (manager.season === 8 || 
+                (manager.season && manager.season.toString().includes('8'))) {
+                return true;
+            }
+            
+            // If no specific season 8 indicators, assume all managers are part of current season
+            // This is a fallback that can be adjusted based on your specific needs
+            return true;
         }
 
         // Function to generate and download CSV
