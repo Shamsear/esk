@@ -6097,12 +6097,12 @@
       "overall_rating": 42.9,
       "r2g_coin_balance": 1445,
       "r2g_token_balance": 135,
-      "club_total_value": 1322,
+      "club_total_value": 1378,
       "manager_rating": -19.8,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 20,
+        "total_players": 21,
         "players": [
           {
             "name": "GIANLUCA SCAMACCA",
@@ -6262,6 +6262,14 @@
             "value": 60,
             "contract": "SEASON 8",
             "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "TALISCA",
+            "position": "RW",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.6,
             "type": "standard"
           }
         ]
@@ -12242,13 +12250,13 @@
       "overall_rating": 25.4,
       "r2g_coin_balance": 2005,
       "r2g_token_balance": 155,
-      "club_total_value": 1426,
+      "club_total_value": 1374,
       "star_rating": 3,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 22,
+        "total_players": 21,
         "players": [
           {
             "name": "BRAIS MENDEZ",
@@ -12320,14 +12328,6 @@
             "value": 46,
             "contract": "SEASON 8",
             "salary": 2.3,
-            "type": "standard"
-          },
-          {
-            "name": "TALISCA",
-            "position": "RW",
-            "value": 52,
-            "contract": "SEASON 8",
-            "salary": 2.6,
             "type": "standard"
           },
           {
