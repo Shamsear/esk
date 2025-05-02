@@ -4880,12 +4880,12 @@
             "type": "standard"
           },
           {
-            "name": "PATRICK KLUIVERT",
+            "name": "ELYE WAHI",
             "position": "ST",
-            "value": 100,
+            "value": 68,
             "contract": "SEASON 6",
-            "salary": 5,
-            "type": "legend"
+            "salary": 3.4,
+            "type": "standard"
           }
         ],
         "totalPlayers": 16
@@ -5062,7 +5062,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1260
+      "clubTotalValue": 1228
     },
     {
       "name": "NABEEL",
