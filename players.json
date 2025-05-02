@@ -14495,38 +14495,23 @@
       {
         "season": "4-5",
         "team": "BORUSSIA DORTMUND",
-        "value": "124",
-        "apps": "00"
+        "value": "124"
       },
       {
         "season": "5-6",
         "team": "BAYER LEVERKUSEN",
-        "value": "100",
-        "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "106",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "value": "100"
       },
       {
         "season": "6-8",
         "team": "SANTOS FC",
-        "value": "140",
-        "apps": "00"
+        "value": "140"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. RICE_CARD.webp",
     "id": 445,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/SANTOS FC.webp"
   },
   {
     "name": "RODRI",
