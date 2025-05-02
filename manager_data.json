@@ -8183,13 +8183,13 @@
       "overall_rating": 446.3,
       "r2g_coin_balance": 2292,
       "r2g_token_balance": 595,
-      "club_total_value": 2594,
+      "club_total_value": 2924,
       "star_rating": 6,
       "manager_rating": 166,
       "trophies": 2,
       "awards": 1,
       "squad": {
-        "total_players": 29,
+        "total_players": 27,
         "players": [
           {
             "name": "MATHEUS CUNHA",
@@ -8197,14 +8197,6 @@
             "value": 78,
             "contract": "SEASON 7.5",
             "salary": 3.9,
-            "type": "standard"
-          },
-          {
-            "name": "DECLAN RICE",
-            "position": "DM",
-            "value": 106,
-            "contract": "SEASON 7.5",
-            "salary": 5.3,
             "type": "standard"
           },
           {
@@ -8952,12 +8944,12 @@
       "overall_rating": 289,
       "r2g_coin_balance": 1869,
       "r2g_token_balance": 425,
-      "club_total_value": 2442,
+      "club_total_value": 3002,
       "manager_rating": 105.7,
       "trophies": 2,
       "awards": 1,
       "squad": {
-        "total_players": 31,
+        "total_players": 33,
         "players": [
           {
             "name": "VIKTOR GYOKERES",
@@ -9206,8 +9198,25 @@
             "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
+          },
+          {
+            "name": "DECLAN RICE",
+            "position": "DM",
+            "value": 140,
+            "contract": "SEASON 6",
+            "salary": 7,
+            "type": "standard"
+          },
+          {
+            "name": "DECLAN RICE",
+            "position": "DM",
+            "value": 140,
+            "contract": "SEASON 7.5",
+            "salary": 5.3,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 32
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -9384,7 +9393,8 @@
         }
       ],
       "current_season": 6,
-      "star_rating": 6
+      "star_rating": 6,
+      "clubTotalValue": 2862
     },
     {
       "name": "SAFVAN",
