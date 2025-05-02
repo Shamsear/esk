@@ -18370,7 +18370,7 @@
     "name": "ABDOULAYE DOUCOURE",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AS ROMA",
+    "club": "AC MILAN",
     "position": "AM",
     "value": 50,
     "gamesPlayed": 0,
@@ -18378,12 +18378,12 @@
       {
         "season": "5-7",
         "team": "AS ROMA",
-        "value": "50",
-        "apps": "00"
+        "value": "50"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/A. DOUCOURE_CARD.webp",
-    "id": 887
+    "id": 887,
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "ANDRE FRANCO",
