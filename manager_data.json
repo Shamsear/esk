@@ -4822,9 +4822,17 @@
             "contract": "SEASON 6",
             "salary": 5.4,
             "type": "legend"
+          },
+          {
+            "name": "YASSINE BOUNOU",
+            "position": "GK",
+            "value": 104,
+            "contract": "SEASON 6",
+            "salary": 5.2,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 8
+        "totalPlayers": 9
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4998,7 +5006,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 486
+      "clubTotalValue": 590
     },
     {
       "name": "NABEEL",
