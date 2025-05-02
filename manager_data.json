@@ -975,12 +975,12 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 2592,
+      "club_total_value": 2282,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 24,
+        "total_players": 20,
         "players": [
           {
             "name": "ERLING HAALAND",
@@ -1020,14 +1020,6 @@
             "value": 82,
             "contract": "SEASON 7",
             "salary": 4.1,
-            "type": "standard"
-          },
-          {
-            "name": "BERNARDO SILVA",
-            "position": "AM",
-            "value": 90,
-            "contract": "SEASON 7",
-            "salary": 4.5,
             "type": "standard"
           },
           {
@@ -5600,12 +5592,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 759,
       "r2g_token_balance": 80,
-      "club_total_value": 1406,
+      "club_total_value": 1496,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 14,
+        "total_players": 15,
         "players": [
           {
             "name": "THOMAS MULLER",
@@ -5717,6 +5709,14 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "BERNARDO SILVA",
+            "position": "AM",
+            "value": 90,
+            "contract": "SEASON 7",
+            "salary": 4.5,
             "type": "standard"
           }
         ]
