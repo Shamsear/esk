@@ -5202,9 +5202,9 @@
     "name": "PAULO DYBALA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
-    "value": 50,
+    "value": 86,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -5218,10 +5218,17 @@
         "team": "ASTON VILLA FC",
         "value": "102",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "86",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/PAULO DYBALA_CARD.webp",
-    "id": 248
+    "id": 248,
+    "type": "standard"
   },
   {
     "name": "KARIM BENZEMA",
@@ -10116,9 +10123,9 @@
     "name": "ALAN VARELA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
-    "value": 50,
+    "value": 100,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10126,10 +10133,17 @@
         "team": "SANTOS FC",
         "value": "62",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. VARELA_CARD.webp",
-    "id": 482
+    "id": 482,
+    "type": "standard"
   },
   {
     "name": "TYLER ADAMS",
