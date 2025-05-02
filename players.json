@@ -16775,14 +16775,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-6",
+        "season": "4.5-6.5",
         "team": "AC MILAN",
-        "value": "54",
-        "apps": "00"
+        "value": "54"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/T. REIJNDERS_CARD.webp",
-    "id": 804
+    "id": 804,
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "PASCAL GROB",
