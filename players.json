@@ -16303,7 +16303,7 @@
     "name": "MAURO ARAMBARRI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -16311,12 +16311,17 @@
       {
         "season": "4-6",
         "team": "FREE AGENT",
-        "value": "40",
-        "apps": "00"
+        "value": "40"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "40"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. ARAMBARRI_CARD.webp",
-    "id": 781
+    "id": 781,
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "MARIO LEMINA",
