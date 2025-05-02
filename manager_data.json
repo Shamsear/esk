@@ -580,12 +580,12 @@
       "overall_rating": 287.1,
       "r2g_coin_balance": 3161,
       "r2g_token_balance": 430,
-      "club_total_value": 2510,
+      "club_total_value": 1620,
       "manager_rating": 109.9,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 28,
+        "total_players": 27,
         "players": [
           {
             "name": "ROBERT ANDRICH",
@@ -802,14 +802,6 @@
             "contract": "SEASON 8",
             "salary": 3.3,
             "type": "standard"
-          },
-          {
-            "name": "OLIVER KAHN",
-            "position": "GK",
-            "value": 170,
-            "contract": "SEASON 8",
-            "salary": 8.5,
-            "type": "legendary"
           }
         ]
       },
@@ -6105,7 +6097,7 @@
       "overall_rating": 42.9,
       "r2g_coin_balance": 1445,
       "r2g_token_balance": 135,
-      "club_total_value": 1378,
+      "club_total_value": 1138,
       "manager_rating": -19.8,
       "trophies": 0,
       "awards": 0,
@@ -6233,6 +6225,14 @@
             "type": "standard"
           },
           {
+            "name": "JACK GREALISH",
+            "position": "LW",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
             "name": "WESLEY SNEIJDER",
             "position": "AM",
             "value": 110,
@@ -6270,14 +6270,6 @@
             "value": 60,
             "contract": "SEASON 8",
             "salary": 3,
-            "type": "standard"
-          },
-          {
-            "name": "TALISCA",
-            "position": "RW",
-            "value": 56,
-            "contract": "SEASON 8",
-            "salary": 2.6,
             "type": "standard"
           }
         ]
@@ -6463,12 +6455,12 @@
       "overall_rating": 174.2,
       "r2g_coin_balance": 533,
       "r2g_token_balance": 625,
-      "club_total_value": 1554,
+      "club_total_value": 1496,
       "manager_rating": 0,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 14,
+        "total_players": 13,
         "players": [
           {
             "name": "SON HEUNG-MIN",
@@ -6572,14 +6564,6 @@
             "value": 72,
             "contract": "SEASON 8",
             "salary": 3.6,
-            "type": "standard"
-          },
-          {
-            "name": "ERIC DIER",
-            "position": "CB",
-            "value": 58,
-            "contract": "SEASON 8",
-            "salary": 2.6,
             "type": "standard"
           }
         ]
@@ -6715,12 +6699,12 @@
       "overall_rating": 157.1,
       "r2g_coin_balance": 1273,
       "r2g_token_balance": 105,
-      "club_total_value": 1384,
+      "club_total_value": 1466,
       "manager_rating": 34.5,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 26,
+        "total_players": 11,
         "players": [
           {
             "name": "RODRI",
@@ -6801,6 +6785,14 @@
             "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
+          },
+          {
+            "name": "MOISES CAICEDO",
+            "position": "DM",
+            "value": 82,
+            "contract": "SEASON 7",
+            "salary": 4.1,
+            "type": "prime"
           }
         ]
       },
@@ -8047,13 +8039,13 @@
       "overall_rating": 446.3,
       "r2g_coin_balance": 2292,
       "r2g_token_balance": 595,
-      "club_total_value": 2486,
+      "club_total_value": 2918,
       "star_rating": 6,
       "manager_rating": 166,
       "trophies": 2,
       "awards": 1,
       "squad": {
-        "total_players": 28,
+        "total_players": 27,
         "players": [
           {
             "name": "MATHEUS CUNHA",
@@ -8118,14 +8110,6 @@
             "contract": "SEASON 7",
             "salary": 5.5,
             "type": "standard"
-          },
-          {
-            "name": "MOISES CAICEDO",
-            "position": "DM",
-            "value": 82,
-            "contract": "SEASON 7",
-            "salary": 4.1,
-            "type": "prime"
           },
           {
             "name": "MARTIN ODEGAARD",
@@ -10664,12 +10648,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 830,
       "r2g_token_balance": 50,
-      "club_total_value": 1280,
+      "club_total_value": 1212,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 24,
+        "total_players": 23,
         "players": [
           {
             "name": "GIOVANNI SIMEONE",
@@ -10853,14 +10837,6 @@
             "value": 82,
             "contract": "SEASON 8",
             "salary": 4.1,
-            "type": "standard"
-          },
-          {
-            "name": "ANATOLIY TRUBIN",
-            "position": "GK",
-            "value": 68,
-            "contract": "SEASON 8",
-            "salary": 3.4,
             "type": "standard"
           }
         ]
@@ -11359,12 +11335,12 @@
       "overall_rating": 106.2,
       "r2g_coin_balance": 584,
       "r2g_token_balance": 170,
-      "club_total_value": 980,
+      "club_total_value": 1100,
       "manager_rating": 0,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 14,
+        "total_players": 16,
         "players": [
           {
             "name": "GABRIEL BATISTUTA",
@@ -11391,6 +11367,14 @@
             "type": "standard"
           },
           {
+            "name": "ANATOLIY TRUBIN",
+            "position": "GK",
+            "value": 68,
+            "contract": "SEASON 8",
+            "salary": 3.4,
+            "type": "standard"
+          },
+          {
             "name": "DANIEL VAN BUYTEN",
             "position": "CB",
             "value": 100,
@@ -11404,6 +11388,14 @@
             "value": 54,
             "contract": "SEASON 8",
             "salary": 2.7,
+            "type": "standard"
+          },
+          {
+            "name": "ERIC DIER",
+            "position": "CB",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
             "type": "standard"
           },
           {
@@ -12258,7 +12250,7 @@
       "overall_rating": 25.4,
       "r2g_coin_balance": 2005,
       "r2g_token_balance": 155,
-      "club_total_value": 1374,
+      "club_total_value": 1184,
       "star_rating": 3,
       "manager_rating": 15,
       "trophies": 0,
@@ -12336,6 +12328,14 @@
             "value": 46,
             "contract": "SEASON 8",
             "salary": 2.3,
+            "type": "standard"
+          },
+          {
+            "name": "TALISCA",
+            "position": "RW",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
             "type": "standard"
           },
           {
@@ -12424,14 +12424,6 @@
             "value": 62,
             "contract": "SEASON 8",
             "salary": 3.1,
-            "type": "standard"
-          },
-          {
-            "name": "JACK GREALISH",
-            "position": "LW",
-            "value": 56,
-            "contract": "SEASON 8",
-            "salary": 2.8,
             "type": "standard"
           }
         ]
