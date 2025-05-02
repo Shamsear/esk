@@ -420,18 +420,25 @@
       {
         "season": "4-4.5",
         "team": "SANTOS FC",
-        "value": "112 "
+        "value": "112 ",
+        "apps": "05"
+      },
+      {
+        "season": "4.5-6.5",
+        "team": "FREE AGENT",
+        "value": "80",
+        "apps": "00"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "104"
+        "value": "104",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/Y. BOUNOU_CARD.webp",
     "id": 20,
-    "type": "standard",
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "type": "standard"
   },
   {
     "name": "GIANLUIGI DONNARUMMA",
@@ -4832,25 +4839,18 @@
       {
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
-        "value": "102",
-        "apps": "00"
+        "value": "102"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "100",
-        "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "100",
-        "apps": "00"
+        "value": "100"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
     "id": 230,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "FERNANDO TORRES",
@@ -5215,27 +5215,25 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-6",
+        "season": "4-5",
         "team": "AL HILAL SFC",
-        "value": "130",
-        "apps": "00"
+        "value": "130"
       },
       {
         "season": "5-6",
         "team": "ASTON VILLA FC",
-        "value": "102",
-        "apps": "00"
+        "value": "102"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "86",
-        "apps": "00"
+        "value": "86"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/PAULO DYBALA_CARD.webp",
     "id": 248,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "KARIM BENZEMA",
