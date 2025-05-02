@@ -3133,11 +3133,17 @@
 
         // Helper function to determine if a manager has season 8 players
         function determineIfSeasonEightManager(manager) {
-            // Look for contract information that indicates season 8
+            // Look for explicit season 8 markers first
+            if (manager.season === 8 || 
+                (manager.season && manager.season.toString().includes('8'))) {
+                return true;
+            }
+            
+            // Check player contracts for season 8 indicators
             if (manager.squad && manager.squad.players) {
                 for (const player of manager.squad.players) {
                     if (player.contract) {
-                        // Check explicit season mention
+                        // Check for explicit season 8 mentions
                         if (typeof player.contract === 'string' && 
                             (player.contract.includes('SEASON 8') || 
                              player.contract.includes('S8') || 
@@ -3146,27 +3152,24 @@
                             return true;
                         }
                         
-                        // Check if the contract is from a season range that includes 8
+                        // Check if contract timespan includes season 8
                         if (typeof player.contract === 'string' && player.contract.includes('-')) {
-                            const [startSeason, endSeason] = player.contract.replace(/[^0-9.-]/g, '').split('-').map(Number);
-                            if (!isNaN(startSeason) && !isNaN(endSeason) && 
-                                startSeason <= 8 && endSeason >= 8) {
-                                return true;
+                            const rangeMatch = player.contract.match(/(\d+\.?\d*)\s*-\s*(\d+\.?\d*)/);
+                            if (rangeMatch) {
+                                const startSeason = parseFloat(rangeMatch[1]);
+                                const endSeason = parseFloat(rangeMatch[2]);
+                                if (!isNaN(startSeason) && !isNaN(endSeason) && 
+                                    startSeason <= 8 && endSeason >= 8) {
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
             }
             
-            // If manager has explicit season marker
-            if (manager.season === 8 || 
-                (manager.season && manager.season.toString().includes('8'))) {
-                return true;
-            }
-            
-            // If no specific season 8 indicators, assume all managers are part of current season
-            // This is a fallback that can be adjusted based on your specific needs
-            return true;
+            // Not a season 8 manager
+            return false;
         }
 
         // Function to generate and download CSV
@@ -3228,175 +3231,241 @@
             return `"${String(field).replace(/"/g, '""')}"`;
         }
 
-        // Fix data inconsistencies
+        // Fix data inconsistencies for season 8 players
         async function fixDataInconsistencies(results) {
             try {
-                console.log('Fixing data inconsistencies for players with season 8...');
-                showStatusMessage('Fixing data inconsistencies for season 8 players...', true);
+                console.log('Fixing data inconsistencies for players with season 8 in manager data...');
+                showStatusMessage('Fixing data inconsistencies for season 8 players in managers data...', true);
                 
                 let fixedCount = 0;
+                const seasonCheck = 8; // We're specifically focusing on season 8
                 
-                // Get current season range (we'll use this to check for season 8)
+                // Get current season range for updated entries
                 const seasonStart = document.getElementById('season-start').value;
                 const seasonEnd = document.getElementById('season-end').value;
-                const seasonCheck = 8; // We're specifically looking for season 8
                 
-                // Process each player's stats
-                for (let playerIndex = 0; playerIndex < playersData.length; playerIndex++) {
-                    const player = playersData[playerIndex];
-                    let statsNeedUpdate = false;
-                    
-                    // Find the manager data for this player
-                    const managerWithPlayer = managersData.find(manager => 
-                        manager.squad?.players?.some(p => p.name === player.name)
-                    );
-                    
-                    // Check if this player is relevant to season 8
-                    let isSeasonEightPlayer = false;
-                    
-                    // 1. Check if player has any season 8 stats
-                    if (player.stats) {
-                        isSeasonEightPlayer = player.stats.some(stat => {
-                            const [statStart, statEnd] = stat.season.split('-').map(Number);
-                            return statStart <= seasonCheck && statEnd >= seasonCheck;
+                // First, identify all managers with season 8 players
+                const season8Managers = managersData.filter(manager => determineIfSeasonEightManager(manager));
+                console.log(`Found ${season8Managers.length} managers with season 8 players`);
+                
+                // Collect all players in season 8 squads
+                const season8Players = [];
+                season8Managers.forEach(manager => {
+                    if (manager.squad && manager.squad.players) {
+                        manager.squad.players.forEach(squadPlayer => {
+                            season8Players.push({
+                                name: squadPlayer.name,
+                                club: manager.club,
+                                position: squadPlayer.position,
+                                value: squadPlayer.value,
+                                type: squadPlayer.type || 'standard',
+                                contract: squadPlayer.contract
+                            });
                         });
                     }
-                    
-                    // 2. Or if player is in a manager's squad and we're fixing for season 8
-                    if (managerWithPlayer && parseFloat(seasonStart) <= seasonCheck && parseFloat(seasonEnd) >= seasonCheck) {
-                        isSeasonEightPlayer = true;
-                    }
-                    
-                    // Skip players not related to season 8
-                    if (!isSeasonEightPlayer) {
+                });
+                
+                console.log(`Found ${season8Players.length} players in season 8 squads to check/fix`);
+                
+                // Process each player in season 8 squads
+                for (const squadPlayer of season8Players) {
+                    // Find player in playersData
+                    const playerIndex = playersData.findIndex(p => p.name === squadPlayer.name);
+                    if (playerIndex === -1) {
+                        console.warn(`Player ${squadPlayer.name} not found in players data`);
                         continue;
                     }
                     
-                    // Initialize stats array if doesn't exist
-                    if (!player.stats) {
-                        player.stats = [];
-                        statsNeedUpdate = true;
+                    const player = playersData[playerIndex];
+                    let playerUpdated = false;
+                    
+                    // 1. Update club if different
+                    if (player.club !== squadPlayer.club) {
+                        console.log(`Updating club for ${player.name}: ${player.club || 'None'} -> ${squadPlayer.club}`);
+                        player.club = squadPlayer.club;
+                        playerUpdated = true;
                     }
-
-                    // Sort stats chronologically
-                    player.stats.sort((a, b) => {
-                        const aStart = parseFloat(a.season.split('-')[0]);
-                        const bStart = parseFloat(b.season.split('-')[0]);
-                        return aStart - bStart;
-                    });
-
-                    if (managerWithPlayer) {
-                        const squadPlayer = managerWithPlayer.squad.players.find(p => p.name === player.name);
-                        
-                        // Case 1: Handle FREE AGENT to team transition
-                        if (player.club === "FREE AGENT" || !player.club) {
-                            const lastStat = player.stats[player.stats.length - 1];
-                            if (lastStat && lastStat.team === "FREE AGENT") {
-                                // Update the FREE AGENT period to end at new transfer
-                                const [statStart, statEnd] = lastStat.season.split('-').map(Number);
-                                if (statEnd > parseFloat(seasonStart) && statStart <= seasonCheck && statEnd >= seasonCheck) {
-                                    lastStat.season = `${statStart}-${seasonStart}`;
-                                    statsNeedUpdate = true;
-                                }
-                            }
-                        }
-
-                        // Case 2: Handle overlapping periods
-                        player.stats = player.stats.map(stat => {
-                            if (!stat.season || !stat.team) return stat;
-
-                            const [statStart, statEnd] = stat.season.split('-').map(Number);
-                            const newStart = parseFloat(seasonStart);
-                            const newEnd = parseFloat(seasonEnd);
-
-                            // Only fix stats related to season 8
-                            if (statStart <= seasonCheck && statEnd >= seasonCheck) {
-                                // If this stat period overlaps with new transfer period
-                                if (statEnd > newStart) {
-                                    statsNeedUpdate = true;
-                                    return {
-                                        ...stat,
-                                        season: `${statStart}-${newStart}`
-                                    };
-                                }
-                            }
-                            return stat;
+                    
+                    // 2. Update player type if different
+                    if (player.type !== squadPlayer.type) {
+                        console.log(`Updating type for ${player.name}: ${player.type || 'None'} -> ${squadPlayer.type}`);
+                        player.type = squadPlayer.type;
+                        playerUpdated = true;
+                    }
+                    
+                    // 3. Update value if different
+                    if (player.value !== squadPlayer.value) {
+                        console.log(`Updating value for ${player.name}: ${player.value} -> ${squadPlayer.value}`);
+                        player.value = squadPlayer.value;
+                        playerUpdated = true;
+                    }
+                    
+                    // 4. Handle player stats
+                    if (!player.stats) {
+                        // No stats, create new stats array with season 8 entry
+                        player.stats = [{
+                            season: `${seasonStart}-${seasonEnd}`,
+                            team: squadPlayer.club,
+                            value: squadPlayer.value.toString(),
+                            apps: "00",
+                            goals: "00",
+                            assists: "00",
+                            clean_sheets: "00",
+                            cards: { yellow: "00", red: "00" }
+                        }];
+                        playerUpdated = true;
+                    } else {
+                        // Sort existing stats by start season
+                        player.stats.sort((a, b) => {
+                            if (!a.season || !b.season) return 0;
+                            const aStart = parseFloat(a.season.split('-')[0]);
+                            const bStart = parseFloat(b.season.split('-')[0]);
+                            return aStart - bStart;
                         });
-
-                        // Case 3: Add new stat entry for current team if it involves season 8
-                        if (parseFloat(seasonStart) <= seasonCheck && parseFloat(seasonEnd) >= seasonCheck) {
-                            const newStat = {
-                                season: `${seasonStart}-${seasonEnd}`,
-                                team: managerWithPlayer.club,
-                                value: squadPlayer.value.toString(),
-                                apps: "00",
-                                goals: "00",
-                                assists: "00",
-                                clean_sheets: "00",
-                                cards: { yellow: "00", red: "00" }
-                            };
-
-                            // Only add if we don't have this exact period already
-                            const hasExactPeriod = player.stats.some(stat => 
-                                stat.season === `${seasonStart}-${seasonEnd}` && 
-                                stat.team === managerWithPlayer.club
-                            );
-
-                            if (!hasExactPeriod) {
-                                player.stats.push(newStat);
-                                statsNeedUpdate = true;
+                        
+                        // Remove any invalid stats entries
+                        player.stats = player.stats.filter(stat => {
+                            if (!stat.season || !stat.team) return false;
+                            
+                            // Try to parse the season range
+                            try {
+                                const [start, end] = stat.season.split('-').map(Number);
+                                return !isNaN(start) && !isNaN(end) && start < end;
+                            } catch (e) {
+                                return false;
                             }
-
-                            // Update current club and value
-                            if (player.club !== managerWithPlayer.club) {
-                                player.club = managerWithPlayer.club;
-                                statsNeedUpdate = true;
-                            }
-                            if (player.value !== squadPlayer.value) {
-                                player.value = squadPlayer.value;
-                                statsNeedUpdate = true;
-                            }
-
-                            // Update player type if needed
-                            if (squadPlayer.type && player.type !== squadPlayer.type) {
-                                player.type = squadPlayer.type;
-                                statsNeedUpdate = true;
+                        });
+                        
+                        // Check for existing stats that cover season 8
+                        const season8StatExists = player.stats.some(stat => {
+                            if (!stat.season) return false;
+                            const [statStart, statEnd] = stat.season.split('-').map(Number);
+                            return statStart <= seasonCheck && statEnd >= seasonCheck && stat.team === squadPlayer.club;
+                        });
+                        
+                        // Get the last stat entry
+                        const lastStat = player.stats.length > 0 ? player.stats[player.stats.length - 1] : null;
+                        
+                        // CASE 1: FREE AGENT as latest stat - change to current team
+                        if (lastStat && lastStat.team === "FREE AGENT") {
+                            const [statStart, statEnd] = lastStat.season.split('-').map(Number);
+                            
+                            if (statEnd >= seasonCheck) {
+                                // FREE AGENT period overlaps with season 8, adjust it to end at the start of this season
+                                lastStat.season = `${statStart}-${seasonStart}`;
+                                
+                                // Add new entry for current team
+                                player.stats.push({
+                                    season: `${seasonStart}-${seasonEnd}`,
+                                    team: squadPlayer.club,
+                                    value: squadPlayer.value.toString(),
+                                    apps: "00",
+                                    goals: "00",
+                                    assists: "00",
+                                    clean_sheets: "00",
+                                    cards: { yellow: "00", red: "00" }
+                                });
+                                
+                                playerUpdated = true;
                             }
                         }
-
-                        // Clean up and validate
-                        if (statsNeedUpdate) {
-                            // Remove any zero-length periods
-                            player.stats = player.stats.filter(stat => {
-                                const [start, end] = stat.season.split('-').map(Number);
-                                return start < end;
+                        // CASE 2: Player changed teams mid-season
+                        else if (!season8StatExists) {
+                            // Find any overlapping stats that need adjustment
+                            let needsNewStat = true;
+                            
+                            player.stats = player.stats.map(stat => {
+                                if (!stat.season) return stat;
+                                
+                                const [statStart, statEnd] = stat.season.split('-').map(Number);
+                                
+                                // If this stat period overlaps with season 8
+                                if (statStart <= seasonCheck && statEnd >= seasonCheck) {
+                                    // If the player changed teams, split the season
+                                    if (stat.team !== squadPlayer.club) {
+                                        // Shorten the existing stat period to end before season 8
+                                        const updatedStat = {
+                                            ...stat,
+                                            season: `${statStart}-${Math.min(statEnd, seasonCheck)}`
+                                        };
+                                        playerUpdated = true;
+                                        return updatedStat;
+                                    } else {
+                                        // Already on this team for season 8, no new stat needed
+                                        needsNewStat = false;
+                                    }
+                                }
+                                
+                                return stat;
                             });
-
-                            // Sort stats again after modifications
+                            
+                            // If we need to add a new stat for season 8 with this team
+                            if (needsNewStat) {
+                                player.stats.push({
+                                    season: `${seasonStart}-${seasonEnd}`,
+                                    team: squadPlayer.club,
+                                    value: squadPlayer.value.toString(),
+                                    apps: "00",
+                                    goals: "00",
+                                    assists: "00",
+                                    clean_sheets: "00",
+                                    cards: { yellow: "00", red: "00" }
+                                });
+                                playerUpdated = true;
+                            }
+                        }
+                        
+                        // Clean up and validate stats after changes
+                        if (playerUpdated) {
+                            // Sort stats again
                             player.stats.sort((a, b) => {
+                                if (!a.season || !b.season) return 0;
                                 const aStart = parseFloat(a.season.split('-')[0]);
                                 const bStart = parseFloat(b.season.split('-')[0]);
                                 return aStart - bStart;
                             });
-
-                            // Validate the updated stats
-                            const validationErrors = validatePlayerStats(player.stats);
-                            if (validationErrors.length > 0) {
-                                console.warn(`Validation warnings for ${player.name}:`, validationErrors);
+                            
+                            // Remove any overlapping periods for the same team
+                            for (let i = 0; i < player.stats.length - 1; i++) {
+                                const current = player.stats[i];
+                                const next = player.stats[i + 1];
+                                
+                                if (current.team === next.team) {
+                                    try {
+                                        const [currStart, currEnd] = current.season.split('-').map(Number);
+                                        const [nextStart, nextEnd] = next.season.split('-').map(Number);
+                                        
+                                        // If periods are adjacent, merge them
+                                        if (Math.abs(currEnd - nextStart) < 0.01) {
+                                            current.season = `${currStart}-${nextEnd}`;
+                                            player.stats.splice(i + 1, 1);
+                                            i--; // Recheck this position
+                                        }
+                                        // If periods overlap, fix them
+                                        else if (currEnd > nextStart) {
+                                            current.season = `${currStart}-${nextStart}`;
+                                        }
+                                    } catch (e) {
+                                        console.warn(`Error processing stats for ${player.name}:`, e);
+                                    }
+                                }
                             }
-
-                            fixedCount++;
                         }
                     }
+                    
+                    if (playerUpdated) {
+                        playersData[playerIndex] = player;
+                        fixedCount++;
+                    }
                 }
-
+                
                 // Save changes
                 let saved = false;
                 
                 // Try GitHub first
                 if (githubConfig && githubConfig.isConfigured()) {
                     try {
-                        await saveFileToGitHub(playersData, 'players.json', 'Fix season 8 player data inconsistencies');
+                        await saveFileToGitHub(playersData, 'players.json', 'Fix season 8 player data for managers squad');
                         saved = true;
                     } catch (error) {
                         console.error('Failed to save to GitHub:', error);
@@ -3422,7 +3491,7 @@
                 }
 
                 // Show results
-                const message = `Fixed ${fixedCount} player records for season 8. ${saved ? 'Changes saved successfully.' : 'Changes only in memory.'}`;
+                const message = `Fixed ${fixedCount} players in season 8 squads. ${saved ? 'Changes saved successfully.' : 'Changes only in memory.'}`;
                 showStatusMessage(message, saved);
                 console.log('Fix completed:', message);
 
