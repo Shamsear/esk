@@ -6455,12 +6455,12 @@
       "overall_rating": 174.2,
       "r2g_coin_balance": 533,
       "r2g_token_balance": 625,
-      "club_total_value": 1496,
+      "club_total_value": 1554,
       "manager_rating": 0,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 13,
+        "total_players": 14,
         "players": [
           {
             "name": "SON HEUNG-MIN",
@@ -6564,6 +6564,14 @@
             "value": 72,
             "contract": "SEASON 8",
             "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "ERIC DIER",
+            "position": "CB",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.6,
             "type": "standard"
           }
         ]
@@ -11335,12 +11343,12 @@
       "overall_rating": 106.2,
       "r2g_coin_balance": 584,
       "r2g_token_balance": 170,
-      "club_total_value": 1100,
+      "club_total_value": 1048,
       "manager_rating": 0,
       "trophies": 0,
       "awards": 1,
       "squad": {
-        "total_players": 16,
+        "total_players": 15,
         "players": [
           {
             "name": "GABRIEL BATISTUTA",
@@ -11388,14 +11396,6 @@
             "value": 54,
             "contract": "SEASON 8",
             "salary": 2.7,
-            "type": "standard"
-          },
-          {
-            "name": "ERIC DIER",
-            "position": "CB",
-            "value": 52,
-            "contract": "SEASON 8",
-            "salary": 2.6,
             "type": "standard"
           },
           {
