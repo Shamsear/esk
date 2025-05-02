@@ -26074,20 +26074,34 @@
     "name": "RODRIGO BENTANCUR",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "REAL MADRID",
     "position": "CM",
     "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "REAL MADRID",
+        "value": "50",
+        "apps": "00",
+        "goals": "00",
+        "assists": "00",
+        "clean_sheets": "00",
+        "cards": {
+          "yellow": "00",
+          "red": "00"
+        }
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. BENTANCUR_CARD.webp",
-    "id": 822
+    "id": 822,
+    "type": "standard"
   },
   {
     "name": "RUBEN LOFTUS-CHEEK",
