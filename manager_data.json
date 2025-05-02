@@ -580,12 +580,12 @@
       "overall_rating": 287.1,
       "r2g_coin_balance": 3161,
       "r2g_token_balance": 430,
-      "club_total_value": 1620,
+      "club_total_value": 2510,
       "manager_rating": 109.9,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 27,
+        "total_players": 28,
         "players": [
           {
             "name": "ROBERT ANDRICH",
@@ -802,6 +802,14 @@
             "contract": "SEASON 8",
             "salary": 3.3,
             "type": "standard"
+          },
+          {
+            "name": "OLIVER KAHN",
+            "position": "GK",
+            "value": 170,
+            "contract": "SEASON 8",
+            "salary": 8.5,
+            "type": "legendary"
           }
         ]
       },
