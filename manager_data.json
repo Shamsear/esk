@@ -4880,15 +4880,39 @@
             "type": "standard"
           },
           {
-            "name": "ELYE WAHI",
+            "name": "PATRICK KLUIVERT",
             "position": "ST",
-            "value": 68,
+            "value": 100,
             "contract": "SEASON 6",
-            "salary": 3.4,
+            "salary": 5,
             "type": "standard"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ALESSIO ROMAGNOLI",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 6",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "MALCOM",
+            "position": "RW",
+            "value": 80,
+            "contract": "SEASON 6",
+            "salary": 4,
+            "type": "prime"
           }
         ],
-        "totalPlayers": 16
+        "totalPlayers": 19
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5062,7 +5086,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1228
+      "clubTotalValue": 1524
     },
     {
       "name": "NABEEL",
