@@ -220,7 +220,6 @@
             display: none;
         }
 
-        /* Top Bar Styling */
         .top-bar {
             background: var(--surface);
             padding: 20px;
@@ -253,7 +252,6 @@
             gap: 20px;
         }
 
-        /* Back Link */
         .back-link {
             margin: 20px;
         }
@@ -277,13 +275,56 @@
             transform: translateX(-5px);
         }
 
-        /* Animations */
+        .player-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .add-player-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .add-player-btn:hover {
+            background: var(--secondary);
+        }
+
+        .remove-player-btn {
+            background: var(--error);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-player-btn:hover {
+            opacity: 0.8;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .admin-container {
                 padding: 15px;
@@ -355,12 +396,8 @@
                             <input type="text" id="name" required readonly>
                         </div>
                         <div class="stat-input">
-                            <label for="age">Age</label>
-                            <input type="number" id="age" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="club">Club</label>
-                            <input type="text" id="club" required>
+                            <label for="rank">Rank</label>
+                            <input type="text" id="rank" required>
                         </div>
                         <div class="stat-input">
                             <label for="overall">Overall Rating</label>
@@ -379,109 +416,45 @@
                     <div class="stat-group">
                         <h3><i class="fas fa-coins"></i>Financial</h3>
                         <div class="stat-input">
-                            <label for="club_value">Club Total Value (M)</label>
+                            <label for="club_value">Club Total Value</label>
                             <input type="number" id="club_value" required>
                         </div>
                         <div class="stat-input">
-                            <label for="r2g_coins">R2G Coins</label>
+                            <label for="r2g_coins">R2G Coin Balance</label>
                             <input type="number" id="r2g_coins" required>
                         </div>
                         <div class="stat-input">
-                            <label for="r2g_tokens">R2G Tokens</label>
+                            <label for="r2g_tokens">R2G Token Balance</label>
                             <input type="number" id="r2g_tokens" required>
-                        </div>
-                    </div>
-
-                    <div class="stat-group">
-                        <h3><i class="fas fa-chart-line"></i>Overall Performance</h3>
-                        <div class="stat-input">
-                            <label for="matches">Total Matches</label>
-                            <input type="number" id="matches" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="wins">Total Wins</label>
-                            <input type="number" id="wins" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="draws">Total Draws</label>
-                            <input type="number" id="draws" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="losses">Total Losses</label>
-                            <input type="number" id="losses" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="goals_scored">Total Goals Scored</label>
-                            <input type="number" id="goals_scored" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="goals_conceded">Total Goals Conceded</label>
-                            <input type="number" id="goals_conceded" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="goal_difference">Goal Difference</label>
-                            <input type="number" id="goal_difference" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="clean_sheets">Clean Sheets</label>
-                            <input type="number" id="clean_sheets" required>
                         </div>
                     </div>
 
                     <div class="stat-group">
                         <h3><i class="fas fa-trophy"></i>Achievements</h3>
                         <div class="stat-input">
-                            <label for="trophies">Trophies & Awards</label>
+                            <label for="trophies">Trophies</label>
                             <input type="number" id="trophies" required>
                         </div>
                         <div class="stat-input">
-                            <label for="manager_rank">Current Manager Rank</label>
-                            <input type="text" id="manager_rank" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="rank_point">Rank Points</label>
-                            <input type="number" id="rank_point" step="0.1" required>
+                            <label for="awards">Awards</label>
+                            <input type="number" id="awards" required>
                         </div>
                     </div>
 
                     <div class="stat-group">
-                        <h3><i class="fas fa-money-bill-wave"></i>Latest Season Finance</h3>
+                        <h3><i class="fas fa-users"></i>Players</h3>
                         <div class="stat-input">
-                            <label for="team_income">Team Income</label>
-                            <input type="number" id="team_income" required>
+                            <label for="total_players">Total Players</label>
+                            <input type="number" id="total_players" required>
                         </div>
-                        <div class="stat-input">
-                            <label for="team_expense">Team Expense</label>
-                            <input type="number" id="team_expense" required>
+                        
+                        <h4 style="margin: 20px 0 10px; color: var(--text-secondary);">Player Details</h4>
+                        <div class="player-list" id="player-list">
+                            <!-- Player items will be added here dynamically -->
                         </div>
-                        <div class="stat-input">
-                            <label for="team_profit">Team Profit</label>
-                            <input type="number" id="team_profit" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="session_rewards">Session Rewards</label>
-                            <input type="number" id="session_rewards" required>
-                        </div>
-                    </div>
-
-                    <div class="stat-group">
-                        <h3><i class="fas fa-medal"></i>Latest Season Competitions</h3>
-                        <div class="stat-input">
-                            <label for="division">Division & Placement</label>
-                            <input type="text" id="division" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="super_cup">Super Cup Stage</label>
-                            <input type="text" id="super_cup" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="ucel">UCEL Stage</label>
-                            <input type="text" id="ucel" required>
-                        </div>
-                        <div class="stat-input">
-                            <label for="authentic">Authentic Stage</label>
-                            <input type="text" id="authentic" required>
-                        </div>
+                        <button type="button" class="add-player-btn" id="add-player-btn">
+                            <i class="fas fa-plus"></i> Add Player
+                        </button>
                     </div>
 
                     <button type="submit" class="save-button">Save Changes</button>
@@ -546,51 +519,79 @@
         function populateForm(manager) {
             // Basic Info
             document.getElementById('name').value = manager.name;
-            document.getElementById('age').value = manager.age;
-            document.getElementById('club').value = manager.club;
-            document.getElementById('overall').value = manager.overall;
-            document.getElementById('manager_rating').value = manager.manager_rating;
-            document.getElementById('star_rating').value = manager.star_rating;
+            document.getElementById('rank').value = manager.rank || '';
+            document.getElementById('overall').value = manager.overall || '';
+            document.getElementById('manager_rating').value = manager.manager_rating || '';
+            document.getElementById('star_rating').value = manager.star_rating || '';
             
             // Financial
-            document.getElementById('club_value').value = manager.club_total_value;
-            document.getElementById('r2g_coins').value = manager.r2g_coin_balance;
-            document.getElementById('r2g_tokens').value = manager.r2g_token_balance;
-            
-            // Performance
-            document.getElementById('matches').value = manager.performance.matches;
-            document.getElementById('wins').value = manager.performance.wins;
-            document.getElementById('draws').value = manager.performance.draws;
-            document.getElementById('losses').value = manager.performance.losses;
-            document.getElementById('goals_scored').value = manager.performance.goals_scored;
-            document.getElementById('goals_conceded').value = manager.performance.goals_conceded;
-            document.getElementById('goal_difference').value = manager.performance.goal_difference;
-            document.getElementById('clean_sheets').value = manager.performance.clean_sheets;
+            document.getElementById('club_value').value = manager.club_total_value || '';
+            document.getElementById('r2g_coins').value = manager.r2g_coin_balance || '';
+            document.getElementById('r2g_tokens').value = manager.r2g_token_balance || '';
             
             // Achievements
-            document.getElementById('trophies').value = manager.trophies_awards;
+            document.getElementById('trophies').value = manager.trophies || '';
+            document.getElementById('awards').value = manager.awards || '';
             
-            // Get latest season data
-            if (manager.seasons && manager.seasons.length > 0) {
-                const latestSeason = manager.seasons[0];
-                document.getElementById('manager_rank').value = latestSeason.manager_rank;
-                document.getElementById('rank_point').value = latestSeason.rank_point;
-                
-                // Latest Season Finance
-                document.getElementById('team_income').value = latestSeason.team_income;
-                document.getElementById('team_expense').value = latestSeason.team_expense;
-                document.getElementById('team_profit').value = latestSeason.team_profit;
-                document.getElementById('session_rewards').value = latestSeason.session_rewards;
-                
-                // Latest Season Competitions
-                if (latestSeason.competitions) {
-                    document.getElementById('division').value = `${latestSeason.competitions.division.name} - ${latestSeason.competitions.division.placement}`;
-                    document.getElementById('super_cup').value = latestSeason.competitions.super_cup.stage;
-                    document.getElementById('ucel').value = latestSeason.competitions.ucel.stage;
-                    document.getElementById('authentic').value = latestSeason.competitions.authentic.stage;
-                }
+            // Players
+            document.getElementById('total_players').value = manager.total_players || '';
+            
+            // Clear player list
+            const playerList = document.getElementById('player-list');
+            playerList.innerHTML = '';
+            
+            // Add players if they exist
+            if (manager.players && Array.isArray(manager.players)) {
+                manager.players.forEach((player, index) => {
+                    addPlayerToList(player, index);
+                });
             }
         }
+
+        // Add a player to the list
+        function addPlayerToList(player = {}, index) {
+            const playerList = document.getElementById('player-list');
+            const playerItem = document.createElement('div');
+            playerItem.className = 'player-item';
+            playerItem.dataset.index = index;
+            
+            playerItem.innerHTML = `
+                <div>
+                    <input type="text" placeholder="Player Name" value="${player.name || ''}" 
+                        name="player_name_${index}" style="width: 120px; margin-right: 10px;">
+                    <input type="number" placeholder="Value" value="${player.value || ''}" 
+                        name="player_value_${index}" style="width: 80px; margin-right: 10px;">
+                    <input type="text" placeholder="Contract" value="${player.contract || ''}" 
+                        name="player_contract_${index}" style="width: 80px; margin-right: 10px;">
+                    <input type="text" placeholder="Type" value="${player.type || ''}" 
+                        name="player_type_${index}" style="width: 80px;">
+                </div>
+                <button type="button" class="remove-player-btn" data-index="${index}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            playerList.appendChild(playerItem);
+            
+            // Add event listener to remove button
+            playerItem.querySelector('.remove-player-btn').addEventListener('click', function() {
+                playerItem.remove();
+                updateTotalPlayers();
+            });
+        }
+
+        // Update total players count
+        function updateTotalPlayers() {
+            const playerCount = document.getElementById('player-list').children.length;
+            document.getElementById('total_players').value = playerCount;
+        }
+
+        // Add new player button
+        document.getElementById('add-player-btn').addEventListener('click', function() {
+            const playerCount = document.getElementById('player-list').children.length;
+            addPlayerToList({}, playerCount);
+            updateTotalPlayers();
+        });
 
         // Handle form submission
         document.getElementById('stats-form').addEventListener('submit', async (event) => {
@@ -599,31 +600,37 @@
             const errorMessage = document.getElementById('save-error');
             
             try {
+                // Collect player data
+                const playerItems = document.querySelectorAll('.player-item');
+                const players = Array.from(playerItems).map(item => {
+                    const index = item.dataset.index;
+                    return {
+                        name: item.querySelector(`[name="player_name_${index}"]`).value,
+                        value: item.querySelector(`[name="player_value_${index}"]`).value,
+                        contract: item.querySelector(`[name="player_contract_${index}"]`).value,
+                        type: item.querySelector(`[name="player_type_${index}"]`).value
+                    };
+                });
+                
                 const formData = {
                     name: document.getElementById('name').value,
-                    age: parseInt(document.getElementById('age').value),
-                    club: document.getElementById('club').value,
+                    rank: document.getElementById('rank').value,
                     overall: parseFloat(document.getElementById('overall').value),
                     manager_rating: parseFloat(document.getElementById('manager_rating').value),
                     star_rating: parseInt(document.getElementById('star_rating').value),
                     club_total_value: parseInt(document.getElementById('club_value').value),
                     r2g_coin_balance: parseInt(document.getElementById('r2g_coins').value),
                     r2g_token_balance: parseInt(document.getElementById('r2g_tokens').value),
-                    trophies_awards: parseInt(document.getElementById('trophies').value),
-                    performance: {
-                        matches: parseInt(document.getElementById('matches').value),
-                        wins: parseInt(document.getElementById('wins').value),
-                        draws: parseInt(document.getElementById('draws').value),
-                        losses: parseInt(document.getElementById('losses').value),
-                        goals_scored: parseInt(document.getElementById('goals_scored').value),
-                        goals_conceded: parseInt(document.getElementById('goals_conceded').value),
-                        goal_difference: parseInt(document.getElementById('goal_difference').value),
-                        clean_sheets: parseInt(document.getElementById('clean_sheets').value)
-                    }
-                    // Note: Season data would need to be handled separately as it's more complex
+                    trophies: parseInt(document.getElementById('trophies').value),
+                    awards: parseInt(document.getElementById('awards').value),
+                    total_players: parseInt(document.getElementById('total_players').value),
+                    players: players
                 };
 
                 // Here you would typically send this data to your server
+                // For now, we'll just show a success message
+                console.log('Saving data:', formData);
+                
                 successMessage.style.display = 'block';
                 errorMessage.style.display = 'none';
                 setTimeout(() => {
