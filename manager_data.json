@@ -4868,13 +4868,13 @@
       "overall_rating": 39.6,
       "r2g_coin_balance": 1703,
       "r2g_token_balance": 75,
-      "club_total_value": 1180,
+      "club_total_value": 1394,
       "star_rating": 2,
       "manager_rating": -7.7,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 23,
+        "total_players": 21,
         "players": [
           {
             "name": "BETO",
@@ -4946,14 +4946,6 @@
             "value": 56,
             "contract": "SEASON 8",
             "salary": 2.8,
-            "type": "standard"
-          },
-          {
-            "name": "ANDRE ONANA",
-            "position": "GK",
-            "value": 54,
-            "contract": "SEASON 8",
-            "salary": 2.7,
             "type": "standard"
           },
           {
@@ -6836,13 +6828,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1552,
+      "club_total_value": 1250,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 22,
+        "total_players": 29,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -7010,14 +7002,6 @@
             "value": 108,
             "contract": "SEASON 8",
             "salary": 5.4,
-            "type": "standard"
-          },
-          {
-            "name": "ELYE WAHI",
-            "position": "ST",
-            "value": 68,
-            "contract": "SEASON 8",
-            "salary": 3,
             "type": "standard"
           }
         ]
@@ -7591,12 +7575,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 828,
       "r2g_token_balance": 80,
-      "club_total_value": 1610,
+      "club_total_value": 1488,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 20,
+        "total_players": 25,
         "players": [
           {
             "name": "ROBERTO BAGGIO",
@@ -7628,6 +7612,14 @@
             "value": 98,
             "contract": "SEASON 8",
             "salary": 4.9,
+            "type": "standard"
+          },
+          {
+            "name": "ELYE WAHI",
+            "position": "ST",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
             "type": "standard"
           },
           {
@@ -10354,12 +10346,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 830,
       "r2g_token_balance": 50,
-      "club_total_value": 1082,
+      "club_total_value": 1236,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 25,
+        "total_players": 24,
         "players": [
           {
             "name": "GIOVANNI SIMEONE",
@@ -10543,6 +10535,14 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRE ONANA",
+            "position": "GK",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
             "type": "standard"
           }
         ]
