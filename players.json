@@ -30122,32 +30122,18 @@
       {
         "season": "4.5-5.5",
         "team": "RED BULL BRAGANTINO",
-        "value": "70",
-        "apps": "00"
+        "value": "70"
       },
       {
-        "season": "5.5-6",
+        "season": "5.5-7.5",
         "team": "BORUSSIA DORTMUND",
-        "value": "230",
-        "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "BORUSSIA DORTMUND",
-        "value": "230",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "value": "230"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. SUAREZ_CARD.webp",
     "id": 985,
-    "type": "prime"
+    "type": "prime",
+    "clubLogo": "assets/images/players/club/BORUSSIA DORTMUND.webp"
   },
   {
     "name": "LUUK DE JONG",
