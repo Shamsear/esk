@@ -3684,5 +3684,195 @@
         <a href="token-setup.html"><i class="fas fa-key"></i> GitHub Token Setup</a>
         <a href="transfer-debug.html"><i class="fas fa-bug"></i> Debug Saving</a>
     </div>
+
+    <!-- Add test panel HTML after debug controls -->
+    <div id="test-panel" style="display: none; margin-top: 20px; padding: 20px; background: #1e1e1e; border-radius: 8px; border-left: 4px solid #4ecca3;">
+        <h3 style="margin-top: 0; color: #fff;">Transfer Test Panel</h3>
+        <div id="test-results" style="margin-top: 15px;">
+            <div class="test-controls" style="margin-bottom: 15px;">
+                <button id="run-all-tests" class="test-btn" style="background: #4ecca3; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-right: 10px;">
+                    Run All Tests
+                </button>
+                <button id="run-single-test" class="test-btn" style="background: #3f51b5; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
+                    Run Selected Test
+                </button>
+            </div>
+            <select id="test-selector" style="width: 100%; padding: 8px; margin-bottom: 15px; background: #252525; color: white; border: 1px solid #444; border-radius: 4px;">
+                <option value="">Select a test case...</option>
+            </select>
+            <div id="test-output" style="background: #252525; padding: 15px; border-radius: 4px; font-family: monospace; color: #e0e0e0; max-height: 300px; overflow-y: auto;">
+                Test results will appear here...
+            </div>
+        </div>
+    </div>
+
+    <!-- Modify the test function to work with the UI -->
+    <script>
+        function testTransferScenarios(selectedTestName = null) {
+            const outputDiv = document.getElementById('test-output');
+            outputDiv.innerHTML = ''; // Clear previous results
+
+            function log(message, type = 'info') {
+                const colors = {
+                    info: '#e0e0e0',
+                    success: '#4ecca3',
+                    error: '#ff5252',
+                    warning: '#ffd740'
+                };
+                
+                outputDiv.innerHTML += `<div style="color: ${colors[type]}; margin-bottom: 5px;">${message}</div>`;
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+            }
+
+            log('Starting transfer tests...', 'info');
+
+            // Store original getElementById function
+            const originalGetElementById = document.getElementById;
+
+            const testCases = [
+                {
+                    name: "Free Agent Basic",
+                    description: "Tests converting a free agent to a team player",
+                    initial: {
+                        name: "Test Player 1",
+                        club: "FREE AGENT",
+                        stats: [{ season: "6-8", team: "FREE AGENT", value: "50" }]
+                    },
+                    transfer: {
+                        team: "Manchester United",
+                        season: "6-8",
+                        value: 100
+                    },
+                    expected: [{ season: "6-8", team: "Manchester United", value: "100" }]
+                },
+                {
+                    name: "Griezmann Case",
+                    description: "Tests player returning to previous team (Man City 4-6 → Barcelona 6-7 → Man City 6-8)",
+                    initial: {
+                        name: "Griezmann",
+                        club: "Barcelona",
+                        stats: [
+                            { season: "4-6", team: "Manchester City", value: "100" },
+                            { season: "6-7", team: "Barcelona", value: "120" }
+                        ]
+                    },
+                    transfer: {
+                        team: "Manchester City",
+                        season: "6-8",
+                        value: 150
+                    },
+                    expected: [
+                        { season: "4-6", team: "Manchester City", value: "100" },
+                        { season: "6-8", team: "Manchester City", value: "150" }
+                    ]
+                },
+                {
+                    name: "Puyol Case",
+                    description: "Tests overlapping seasons (Barcelona 5-7 → United 6-8)",
+                    initial: {
+                        name: "Puyol",
+                        club: "Barcelona",
+                        stats: [{ season: "5-7", team: "Barcelona", value: "100" }]
+                    },
+                    transfer: {
+                        team: "Manchester United",
+                        season: "6-8",
+                        value: 120
+                    },
+                    expected: [
+                        { season: "5-6", team: "Barcelona", value: "100" },
+                        { season: "6-8", team: "Manchester United", value: "120" }
+                    ]
+                }
+            ];
+
+            // Populate test selector
+            const selector = document.getElementById('test-selector');
+            selector.innerHTML = '<option value="">Select a test case...</option>';
+            testCases.forEach(test => {
+                selector.innerHTML += `<option value="${test.name}">${test.name}</option>`;
+            });
+
+            // Run tests
+            testCases.forEach(testCase => {
+                // Skip if a specific test was selected and this isn't it
+                if (selectedTestName && testCase.name !== selectedTestName) return;
+
+                log(`\nTesting: ${testCase.name}`, 'info');
+                log(`Description: ${testCase.description}`, 'info');
+                
+                // Create a copy of the test player
+                const testPlayer = JSON.parse(JSON.stringify(testCase.initial));
+                
+                // Set up the transfer
+                const { team, season, value } = testCase.transfer;
+                const [seasonStart, seasonEnd] = season.split('-');
+                
+                // Create mock elements
+                const mockElements = {
+                    'season-start': { value: seasonStart },
+                    'season-end': { value: seasonEnd }
+                };
+                
+                // Override getElementById
+                document.getElementById = (id) => mockElements[id] || originalGetElementById(id);
+                
+                try {
+                    // Show initial state
+                    log('\nInitial state:', 'info');
+                    log(JSON.stringify(testPlayer.stats, null, 2), 'info');
+                    
+                    // Perform transfer
+                    log('\nPerforming transfer...', 'info');
+                    const result = handlePlayerTransfer({
+                        ...testPlayer,
+                        value: value
+                    }, team);
+                    
+                    // Compare results
+                    const statsMatch = compareStats(result.stats, testCase.expected);
+                    
+                    if (statsMatch) {
+                        log(`\n✓ Test PASSED`, 'success');
+                    } else {
+                        log(`\n✗ Test FAILED`, 'error');
+                        log('\nExpected:', 'warning');
+                        log(JSON.stringify(testCase.expected, null, 2), 'warning');
+                        log('\nGot:', 'error');
+                        log(JSON.stringify(result.stats, null, 2), 'error');
+                        log('\nDifferences:', 'warning');
+                        findDifferences(testCase.expected, result.stats);
+                    }
+                } catch (error) {
+                    log(`\n✗ Test failed with error: ${error.message}`, 'error');
+                    console.error(error);
+                }
+            });
+
+            // Restore original getElementById
+            document.getElementById = originalGetElementById;
+            log('\nTest suite completed.', 'info');
+        }
+
+        // Add event listeners for test controls
+        document.getElementById('test-transfers').addEventListener('click', () => {
+            const testPanel = document.getElementById('test-panel');
+            testPanel.style.display = testPanel.style.display === 'none' ? 'block' : 'none';
+        });
+
+        document.getElementById('run-all-tests').addEventListener('click', () => {
+            testTransferScenarios();
+        });
+
+        document.getElementById('run-single-test').addEventListener('click', () => {
+            const selectedTest = document.getElementById('test-selector').value;
+            if (selectedTest) {
+                testTransferScenarios(selectedTest);
+            } else {
+                const outputDiv = document.getElementById('test-output');
+                outputDiv.innerHTML = '<div style="color: #ff5252;">Please select a test case first.</div>';
+            }
+        });
+    </script>
 </body>
 </html> 
