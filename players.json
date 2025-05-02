@@ -4853,17 +4853,11 @@
         "team": "AC MILAN",
         "value": "100",
         "apps": "00"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "100",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
     "id": 230,
-    "type": "legend"
+    "type": "standard"
   },
   {
     "name": "FERNANDO TORRES",
@@ -6392,9 +6386,9 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
-    "value": 40,
+    "value": 68,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -6402,10 +6396,17 @@
         "team": "SEPAHAN SC",
         "value": "76",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "68",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp",
-    "id": 301
+    "id": 301,
+    "type": "standard"
   },
   {
     "name": "ALBERT GUDMUNDSSON",
