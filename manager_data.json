@@ -4554,7 +4554,7 @@
       "overall_rating": 396.4,
       "r2g_coin_balance": 2626,
       "r2g_token_balance": 465,
-      "club_total_value": 2504,
+      "club_total_value": 3138,
       "manager_rating": 171,
       "trophies": 3,
       "awards": 2,
@@ -4714,14 +4714,6 @@
             "type": "standard"
           },
           {
-            "name": "GARETH BALE",
-            "position": "LW",
-            "value": 152,
-            "contract": "SEASON 8",
-            "salary": 7.6,
-            "type": "legend"
-          },
-          {
             "name": "PAVEL NEDVED",
             "position": "LW",
             "value": 182,
@@ -4760,6 +4752,14 @@
             "contract": "SEASON 8",
             "salary": 10.2,
             "type": "standard"
+          },
+          {
+            "name": "PAOLO MALDINI",
+            "position": "CB",
+            "value": 174,
+            "contract": "SEASON 8",
+            "salary": 8.7,
+            "type": "legend"
           }
         ]
       },
@@ -6113,12 +6113,12 @@
       "overall_rating": 42.9,
       "r2g_coin_balance": 1445,
       "r2g_token_balance": 135,
-      "club_total_value": 1138,
+      "club_total_value": 1320,
       "manager_rating": -19.8,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 21,
+        "total_players": 20,
         "players": [
           {
             "name": "GIANLUCA SCAMACCA",
@@ -6126,14 +6126,6 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "HWANG HEE-CHAN",
-            "position": "ST",
-            "value": 58,
-            "contract": "SEASON 8",
-            "salary": 2.9,
             "type": "standard"
           },
           {
@@ -9833,14 +9825,14 @@
       "age": 3,
       "club": "REAL MADRID CF",
       "overall_rating": 297.6,
-      "r2g_coin_balance": 2369,
+      "r2g_coin_balance": 2009,
       "r2g_token_balance": 330,
-      "club_total_value": 2244,
+      "club_total_value": 2702,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 27,
+        "total_players": 32,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -9955,14 +9947,6 @@
             "type": "legend"
           },
           {
-            "name": "PAOLO MALDINI",
-            "position": "CB",
-            "value": 174,
-            "contract": "SEASON 8",
-            "salary": 8.7,
-            "type": "legend"
-          },
-          {
             "name": "PAU TORRES",
             "position": "CB",
             "value": 122,
@@ -10057,8 +10041,57 @@
             "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
+          },
+          {
+            "name": "NICOLO BARELLA",
+            "position": "CM",
+            "value": 86,
+            "contract": "SEASON 6",
+            "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "FRANK ANGUISSA",
+            "position": "CM",
+            "value": 54,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "RODRIGO BENTANCUR",
+            "position": "CM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "LEON GORETZKA",
+            "position": "CM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "GARETH BALE",
+            "position": "LW",
+            "value": 174,
+            "contract": "SEASON 8",
+            "salary": 7.6,
+            "type": "legend"
+          },
+          {
+            "name": "HWANG HEE-CHAN",
+            "position": "ST",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 31
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -10239,7 +10272,12 @@
         }
       ],
       "current_season": 6,
-      "star_rating": 6
+      "star_rating": 6,
+      "r2gCoinBalance": 2009,
+      "r2g_coins": 2009,
+      "r2gCoins": 2009,
+      "coins": 1769,
+      "clubTotalValue": 2644
     },
     {
       "name": "SHAHANAB",
