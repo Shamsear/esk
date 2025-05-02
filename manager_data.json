@@ -4751,13 +4751,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1528,
+      "club_total_value": 1578,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 21,
+        "total_players": 22,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4925,6 +4925,14 @@
             "value": 40,
             "contract": "SEASON 8",
             "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "ABDOULAYE DOUCOURE",
+            "position": "AM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
             "type": "standard"
           }
         ],
