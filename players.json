@@ -2300,7 +2300,7 @@
     "name": "ANATOLIY TRUBIN",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "MUMBAI CITY",
+    "club": "SSC NAPOLI",
     "position": "GK",
     "value": 68,
     "gamesPlayed": 0,
@@ -2308,26 +2308,23 @@
       {
         "season": "4-5.5",
         "team": "RED BULL BRAGANTINO",
-        "value": "58",
-        "apps": "00"
+        "value": "58"
+      },
+      {
+        "season": "6-6",
+        "team": "MUMBAI CITY",
+        "value": "68"
       },
       {
         "season": "6-8",
-        "team": "MUMBAI CITY",
-        "value": "68",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "team": "SSC NAPOLI",
+        "value": "54"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. TRUBIN_CARD.webp",
     "id": 80,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/SSC NAPOLI.webp"
   },
   {
     "name": "GUGLIELMO VICARIO",
