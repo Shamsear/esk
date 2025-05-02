@@ -102,20 +102,25 @@
     "name": "OLIVER KAHN",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "NEWCASTLE UNITED",
     "position": "GK",
-    "value": 100,
+    "value": 170,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-6",
         "team": "FC BAYERN MUNICH",
-        "value": "204",
-        "apps": "00"
+        "value": "204"
+      },
+      {
+        "season": "6-8",
+        "team": "NEWCASTLE UNITED",
+        "value": "170"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/OLIVER KAHN_CARD.webp",
-    "id": 4
+    "id": 4,
+    "clubLogo": "assets/images/players/club/NEWCASTLE UNITED.webp"
   },
   {
     "name": "PETER SCHMEICHEL",
