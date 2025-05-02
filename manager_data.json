@@ -3447,7 +3447,7 @@
       "overall_rating": 98.9,
       "r2g_coin_balance": 918,
       "r2g_token_balance": 130,
-      "club_total_value": 1358,
+      "club_total_value": 1394,
       "manager_rating": 11.7,
       "trophies": 1,
       "awards": 0,
@@ -3588,6 +3588,14 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "DENIS ZAKARIA",
+            "position": "DM",
+            "value": 96,
+            "contract": "SEASON 8",
+            "salary": 4.8,
             "type": "standard"
           }
         ]
@@ -4868,7 +4876,7 @@
       "overall_rating": 39.6,
       "r2g_coin_balance": 1703,
       "r2g_token_balance": 75,
-      "club_total_value": 1394,
+      "club_total_value": 1352,
       "star_rating": 2,
       "manager_rating": -7.7,
       "trophies": 0,
@@ -4946,6 +4954,14 @@
             "value": 56,
             "contract": "SEASON 8",
             "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRE ONANA",
+            "position": "GK",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
             "type": "standard"
           },
           {
@@ -5034,14 +5050,6 @@
             "value": 42,
             "contract": "SEASON 8",
             "salary": 2.1,
-            "type": "standard"
-          },
-          {
-            "name": "DENIS ZAKARIA",
-            "position": "DM",
-            "value": 96,
-            "contract": "SEASON 8",
-            "salary": 4.8,
             "type": "standard"
           }
         ]
@@ -10346,12 +10354,12 @@
       "overall_rating": "-",
       "r2g_coin_balance": 830,
       "r2g_token_balance": 50,
-      "club_total_value": 1236,
+      "club_total_value": 1082,
       "manager_rating": 15,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 24,
+        "total_players": 25,
         "players": [
           {
             "name": "GIOVANNI SIMEONE",
@@ -10535,14 +10543,6 @@
             "value": 50,
             "contract": "SEASON 8",
             "salary": 2.5,
-            "type": "standard"
-          },
-          {
-            "name": "ANDRE ONANA",
-            "position": "GK",
-            "value": 54,
-            "contract": "SEASON 8",
-            "salary": 2.7,
             "type": "standard"
           }
         ]
