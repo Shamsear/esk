@@ -6379,20 +6379,25 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
-    "value": 40,
+    "value": 68,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "76"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "68"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp",
     "id": 301,
-    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "ALBERT GUDMUNDSSON",
