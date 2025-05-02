@@ -420,25 +420,18 @@
       {
         "season": "4-4.5",
         "team": "SANTOS FC",
-        "value": "112 ",
-        "apps": "05"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "80",
-        "apps": "00"
+        "value": "112 "
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "104",
-        "apps": "00"
+        "value": "104"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/Y. BOUNOU_CARD.webp",
     "id": 20,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "GIANLUIGI DONNARUMMA",
@@ -4839,18 +4832,25 @@
       {
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
-        "value": "102"
+        "value": "102",
+        "apps": "00"
       },
       {
         "season": "6-8",
         "team": "AC MILAN",
-        "value": "100"
+        "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
     "id": 230,
-    "type": "standard",
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "type": "standard"
   },
   {
     "name": "FERNANDO TORRES",
