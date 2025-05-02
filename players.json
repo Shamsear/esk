@@ -13520,7 +13520,7 @@
     "name": "PEDRO PORRO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "RAYONG FC",
+    "club": "INTER MILAN",
     "position": "RB",
     "value": 54,
     "gamesPlayed": 4,
@@ -13528,32 +13528,23 @@
       {
         "season": "4-4.5",
         "team": "RB LEIPZIG",
-        "value": "50 ",
-        "apps": "04"
+        "value": "50 "
       },
       {
         "season": "5-6",
-        "team": "RANDERS FC",
-        "value": "54",
-        "apps": "00"
+        "team": "RAYONG FC",
+        "value": "54"
       },
       {
-        "season": "6-8",
-        "team": "RAYONG FC",
-        "value": "54",
-        "apps": "00",
-        "goals": "00",
-        "assists": "00",
-        "clean_sheets": "00",
-        "cards": {
-          "yellow": "00",
-          "red": "00"
-        }
+        "season": "6-7",
+        "team": "INTER MILAN",
+        "value": "50"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. PORRO_CARD.webp",
     "id": 415,
-    "type": "standard"
+    "type": "standard",
+    "clubLogo": "assets/images/players/club/INTER MILAN.webp"
   },
   {
     "name": "NOUSSAIR MAZRAOUI",
