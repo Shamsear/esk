@@ -4055,9 +4055,9 @@
     "name": "ALESSIO ROMAGNOLI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
-    "value": 50,
+    "value": 84,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4065,10 +4065,17 @@
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "84",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "84",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. ROMAGNOLI_CARD.webp",
-    "id": 193
+    "id": 193,
+    "type": "standard"
   },
   {
     "name": "NICOLAS OTAMENDI",
@@ -13737,9 +13744,9 @@
     "name": "MALCOM",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "RW",
-    "value": 50,
+    "value": 80,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13753,10 +13760,17 @@
         "team": "AC MILAN",
         "value": "60",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "80",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MALCOM_CARD.webp",
-    "id": 650
+    "id": 650,
+    "type": "prime"
   },
   {
     "name": "MIGUEL ALMIRON",
