@@ -1,0 +1,54 @@
+    <!-- Main Content End -->
+
+    <!-- Footer Section -->
+    <!-- ... existing footer code ... -->
+
+    <script>
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadBetsData);
+        
+        // Mobile menu toggle and logo fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Logo image fallback handler
+            const logoPaths = [
+                'assets/images/logo11.webp',
+                './assets/images/logo11.webp',
+                '/assets/images/logo11.webp',
+                'https://eskimos-r2g.vercel.app/assets/images/logo11.webp',
+                'https://eskr2g.vercel.app/assets/images/logo11.webp'
+            ];
+            
+            function setImageWithFallbacks(imgElement, pathIndex = 0) {
+                if (pathIndex >= logoPaths.length) {
+                    // All paths failed, set base64 placeholder
+                    imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNlZWVlZWUiLz4KPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZmlsbD0iIzk5OTk5OSI+RXNraW1vczwvdGV4dD4KPC9zdmc+';
+                    return;
+                }
+                
+                const newImg = new Image();
+                newImg.onload = function() {
+                    imgElement.src = logoPaths[pathIndex];
+                };
+                newImg.onerror = function() {
+                    setImageWithFallbacks(imgElement, pathIndex + 1);
+                };
+                newImg.src = logoPaths[pathIndex];
+            }
+            
+            // Apply fallback to all logo images
+            document.querySelectorAll('img[src*="logo11.webp"]').forEach(img => {
+                setImageWithFallbacks(img);
+            });
+        });
+    </script>
+</body>
+</html> 

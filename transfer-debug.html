@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer System Debug</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2, h3 {
+            color: #3498db;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .status-success {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+        }
+        .status-error {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+        .status-warning {
+            background-color: rgba(241, 196, 15, 0.2);
+            border: 1px solid #f1c40f;
+            color: #f1c40f;
+        }
+        .status-info {
+            background-color: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #444;
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        textarea {
+            min-height: 100px;
+            font-family: monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+        th {
+            background-color: #333;
+        }
+        pre {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .nav-links {
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            color: #3498db;
+            text-decoration: none;
+            padding: 5px 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+        #response-display {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .loading {
+            display: none;
+            margin: 10px 0;
+            font-style: italic;
+            color: #bbb;
+        }
+        .loading::after {
+            content: "...";
+            animation: dots 1.5s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transfer System Debug</h1>
+        
+        <div class="nav-links">
+            <a href="transfer-admin.html"><i class="fas fa-exchange-alt"></i> Transfer Admin</a>
+            <a href="token-setup.html"><i class="fas fa-key"></i> GitHub Token Setup</a>
+        </div>
+        
+        <div class="section">
+            <h2>GitHub Config Status</h2>
+            <div id="github-status" class="status">Checking GitHub configuration...</div>
+            
+            <table id="github-config-table">
+                <tr>
+                    <th>Setting</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Configured</td>
+                    <td id="github-configured">Checking...</td>
+                </tr>
+                <tr>
+                    <td>Owner</td>
+                    <td id="github-owner">Checking...</td>
+                </tr>
+                <tr>
+                    <td>Repository</td>
+                    <td id="github-repo">Checking...</td>
+                </tr>
+                <tr>
+                    <td>Branch</td>
+                    <td id="github-branch">Checking...</td>
+                </tr>
+                <tr>
+                    <td>Token</td>
+                    <td id="github-token">Checking...</td>
+                </tr>
+            </table>
+            
+            <button id="check-github-btn">Recheck GitHub Config</button>
+            <button id="go-to-setup-btn">Go to Token Setup</button>
+        </div>
+        
+        <div class="section">
+            <h2>Test Data Saving</h2>
+            <p>Create a test file to verify GitHub saving functionality:</p>
+            
+            <div>
+                <label for="test-file-name">File Name:</label>
+                <input type="text" id="test-file-name" value="test-data.json">
+            </div>
+            
+            <div>
+                <label for="test-file-content">File Content:</label>
+                <textarea id="test-file-content">{
+  "test": true,
+  "timestamp": "2023-01-01T00:00:00Z",
+  "message": "Test data file"
+}</textarea>
+            </div>
+            
+            <button id="save-test-btn">Save Test File</button>
+            <div id="save-test-status" class="status" style="display: none;"></div>
+            <div id="save-test-loading" class="loading">Saving file to GitHub</div>
+        </div>
+        
+        <div class="section">
+            <h2>Fetch and Display Data Files</h2>
+            <button id="check-players-btn">Check players.json</button>
+            <button id="check-managers-btn">Check manager_data.json</button>
+            <div id="data-response-status" class="status" style="display: none;"></div>
+            <div id="data-response-loading" class="loading">Loading data file</div>
+            
+            <div id="response-display">
+                <pre id="response-content"></pre>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // GitHub configuration
+        let githubConfig = null;
+        
+        // Initialize GitHub configuration
+        function initGitHubConfig() {
+            if (typeof window.githubConfig !== 'undefined') {
+                githubConfig = window.githubConfig;
+                console.log('GitHub config loaded from global object');
+                return true;
+            }
+            
+            // Fallback implementation if github-config.js is not available
+            githubConfig = {
+                isConfigured: function() {
+                    return !!localStorage.getItem('githubToken');
+                },
+                getToken: function() {
+                    return localStorage.getItem('githubToken');
+                },
+                getOwner: function() {
+                    return localStorage.getItem('githubOwner') || '';
+                },
+                getRepo: function() {
+                    return localStorage.getItem('githubRepo') || '';
+                },
+                getBranch: function() {
+                    return localStorage.getItem('githubBranch') || 'main';
+                }
+            };
+            
+            return githubConfig.isConfigured();
+        }
+        
+        // Update GitHub configuration display
+        function updateGitHubConfigDisplay() {
+            const isConfigured = githubConfig.isConfigured();
+            const statusEl = document.getElementById('github-status');
+            
+            // Update status
+            if (isConfigured) {
+                statusEl.textContent = 'GitHub is properly configured.';
+                statusEl.className = 'status status-success';
+            } else {
+                statusEl.textContent = 'GitHub is NOT configured. Please set up your GitHub token.';
+                statusEl.className = 'status status-error';
+            }
+            
+            // Update table values
+            document.getElementById('github-configured').textContent = isConfigured ? 'Yes' : 'No';
+            document.getElementById('github-owner').textContent = githubConfig.getOwner() || 'Not set';
+            document.getElementById('github-repo').textContent = githubConfig.getRepo() || 'Not set';
+            document.getElementById('github-branch').textContent = githubConfig.getBranch();
+            
+            // Show token status without revealing actual token
+            const tokenEl = document.getElementById('github-token');
+            const token = githubConfig.getToken();
+            if (token) {
+                const maskedToken = token.substring(0, 4) + '...' + token.substring(token.length - 4);
+                tokenEl.textContent = `Present (${maskedToken})`;
+            } else {
+                tokenEl.textContent = 'Not set';
+            }
+        }
+        
+        // Save a file to GitHub
+        async function saveFileToGitHub(data, filePath) {
+            if (!githubConfig.isConfigured()) {
+                throw new Error('GitHub is not configured');
+            }
+            
+            // Get repository details
+            const repoDetails = {
+                owner: githubConfig.getOwner(),
+                repo: githubConfig.getRepo(),
+                path: filePath,
+                branch: githubConfig.getBranch()
+            };
+            
+            try {
+                // Get the current file to get its SHA (required for the GitHub API)
+                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                let currentSHA = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    // File doesn't exist yet
+                    fileExists = false;
+                } else if (!fileInfoResponse.ok) {
+                    const errorData = await fileInfoResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                } else {
+                    // File exists, get its SHA
+                    const fileInfo = await fileInfoResponse.json();
+                    currentSHA = fileInfo.sha;
+                }
+                
+                // Prepare the content
+                let content;
+                if (typeof data === 'string') {
+                    content = btoa(unescape(encodeURIComponent(data)));
+                } else {
+                    const jsonString = JSON.stringify(data, null, 2);
+                    content = btoa(unescape(encodeURIComponent(jsonString)));
+                }
+                
+                // Prepare the commit message
+                const commitMessage = `Update ${filePath} - Debug Test - ${new Date().toISOString()}`;
+                
+                // Prepare the request body
+                const requestBody = {
+                    message: commitMessage,
+                    content: content,
+                    branch: repoDetails.branch
+                };
+                
+                // Add SHA if the file exists
+                if (fileExists) {
+                    requestBody.sha = currentSHA;
+                }
+                
+                // Commit the updated file
+                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!commitResponse.ok) {
+                    const errorData = await commitResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                }
+                
+                const response = await commitResponse.json();
+                return response;
+                
+            } catch (error) {
+                console.error(`GitHub save error for ${filePath}:`, error);
+                throw error;
+            }
+        }
+        
+        // Fetch file from GitHub
+        async function fetchFileFromGitHub(filePath) {
+            if (!githubConfig.isConfigured()) {
+                throw new Error('GitHub is not configured');
+            }
+            
+            // Get repository details
+            const repoDetails = {
+                owner: githubConfig.getOwner(),
+                repo: githubConfig.getRepo(),
+                path: filePath,
+                branch: githubConfig.getBranch()
+            };
+            
+            try {
+                const fileResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                if (fileResponse.status === 404) {
+                    throw new Error(`File ${filePath} not found`);
+                }
+                
+                if (!fileResponse.ok) {
+                    const errorData = await fileResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                }
+                
+                const fileData = await fileResponse.json();
+                
+                // GitHub API returns content as base64 encoded
+                const content = atob(fileData.content.replace(/\n/g, ''));
+                return { content, sha: fileData.sha };
+                
+            } catch (error) {
+                console.error(`GitHub fetch error for ${filePath}:`, error);
+                throw error;
+            }
+        }
+        
+        // Document ready handler
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize GitHub config
+            initGitHubConfig();
+            updateGitHubConfigDisplay();
+            
+            // Set up event listeners
+            document.getElementById('check-github-btn').addEventListener('click', function() {
+                initGitHubConfig();
+                updateGitHubConfigDisplay();
+            });
+            
+            document.getElementById('go-to-setup-btn').addEventListener('click', function() {
+                window.location.href = 'token-setup.html';
+            });
+            
+            // Save test file button
+            document.getElementById('save-test-btn').addEventListener('click', async function() {
+                const saveBtn = this;
+                const fileNameInput = document.getElementById('test-file-name');
+                const fileContentInput = document.getElementById('test-file-content');
+                const statusEl = document.getElementById('save-test-status');
+                const loadingEl = document.getElementById('save-test-loading');
+                
+                const fileName = fileNameInput.value.trim();
+                let fileContent = fileContentInput.value.trim();
+                
+                // Validate input
+                if (!fileName) {
+                    statusEl.textContent = 'Please enter a file name';
+                    statusEl.className = 'status status-error';
+                    statusEl.style.display = 'block';
+                    return;
+                }
+                
+                if (!fileContent) {
+                    statusEl.textContent = 'Please enter file content';
+                    statusEl.className = 'status status-error';
+                    statusEl.style.display = 'block';
+                    return;
+                }
+                
+                // Try to parse as JSON if it looks like JSON
+                if (fileContent.startsWith('{') || fileContent.startsWith('[')) {
+                    try {
+                        fileContent = JSON.parse(fileContent);
+                        
+                        // Add timestamp if it's an object
+                        if (typeof fileContent === 'object' && fileContent !== null && !Array.isArray(fileContent)) {
+                            fileContent.timestamp = new Date().toISOString();
+                        }
+                    } catch (e) {
+                        // Keep as string if parsing fails
+                        console.log('Content not valid JSON, keeping as string');
+                    }
+                }
+                
+                // Disable button and show loading
+                saveBtn.disabled = true;
+                loadingEl.style.display = 'block';
+                statusEl.style.display = 'none';
+                
+                try {
+                    // Save file to GitHub
+                    const response = await saveFileToGitHub(fileContent, fileName);
+                    
+                    // Show success status
+                    statusEl.textContent = `File ${fileName} saved successfully! Commit: ${response.commit.sha.substring(0, 7)}`;
+                    statusEl.className = 'status status-success';
+                    statusEl.style.display = 'block';
+                    
+                    console.log('Save response:', response);
+                } catch (error) {
+                    // Show error status
+                    statusEl.textContent = `Error saving file: ${error.message}`;
+                    statusEl.className = 'status status-error';
+                    statusEl.style.display = 'block';
+                    
+                    console.error('Save error:', error);
+                } finally {
+                    // Re-enable button and hide loading
+                    saveBtn.disabled = false;
+                    loadingEl.style.display = 'none';
+                }
+            });
+            
+            // Check players.json button
+            document.getElementById('check-players-btn').addEventListener('click', async function() {
+                await fetchAndDisplayFile('players.json', this);
+            });
+            
+            // Check manager_data.json button
+            document.getElementById('check-managers-btn').addEventListener('click', async function() {
+                await fetchAndDisplayFile('manager_data.json', this);
+            });
+        });
+        
+        // Fetch and display file content
+        async function fetchAndDisplayFile(fileName, button) {
+            const statusEl = document.getElementById('data-response-status');
+            const loadingEl = document.getElementById('data-response-loading');
+            const contentEl = document.getElementById('response-content');
+            
+            // Disable button and show loading
+            button.disabled = true;
+            loadingEl.style.display = 'block';
+            statusEl.style.display = 'none';
+            contentEl.textContent = '';
+            
+            try {
+                // Try to fetch from local file first
+                try {
+                    const localResponse = await fetch(fileName);
+                    if (localResponse.ok) {
+                        const localData = await localResponse.json();
+                        const count = Array.isArray(localData) ? localData.length : 
+                                    (localData.managers ? localData.managers.length : 'unknown');
+                        
+                        statusEl.textContent = `Local ${fileName} fetched successfully! Count: ${count}`;
+                        statusEl.className = 'status status-success';
+                        
+                        // Display limited amount
+                        contentEl.textContent = `// Local file (${fileName}) - showing first 20 items\n`;
+                        if (Array.isArray(localData)) {
+                            contentEl.textContent += JSON.stringify(localData.slice(0, 20), null, 2);
+                        } else if (localData.managers && Array.isArray(localData.managers)) {
+                            contentEl.textContent += JSON.stringify({
+                                ...localData,
+                                managers: localData.managers.slice(0, 20)
+                            }, null, 2);
+                        } else {
+                            contentEl.textContent += JSON.stringify(localData, null, 2);
+                        }
+                    } else {
+                        throw new Error(`Local file not found`);
+                    }
+                } catch (localError) {
+                    console.log('Local file fetch failed, trying GitHub');
+                    
+                    // Fetch from GitHub if local fails
+                    const githubData = await fetchFileFromGitHub(fileName);
+                    let jsonData;
+                    
+                    try {
+                        jsonData = JSON.parse(githubData.content);
+                        const count = Array.isArray(jsonData) ? jsonData.length : 
+                                    (jsonData.managers ? jsonData.managers.length : 'unknown');
+                        
+                        statusEl.textContent = `GitHub ${fileName} fetched successfully! Count: ${count}`;
+                        statusEl.className = 'status status-success';
+                        
+                        // Display limited amount
+                        contentEl.textContent = `// GitHub file (${fileName}) - showing first 20 items\n`;
+                        if (Array.isArray(jsonData)) {
+                            contentEl.textContent += JSON.stringify(jsonData.slice(0, 20), null, 2);
+                        } else if (jsonData.managers && Array.isArray(jsonData.managers)) {
+                            contentEl.textContent += JSON.stringify({
+                                ...jsonData,
+                                managers: jsonData.managers.slice(0, 20)
+                            }, null, 2);
+                        } else {
+                            contentEl.textContent += JSON.stringify(jsonData, null, 2);
+                        }
+                    } catch (parseError) {
+                        statusEl.textContent = `Error parsing JSON: ${parseError.message}`;
+                        statusEl.className = 'status status-error';
+                        contentEl.textContent = githubData.content.substring(0, 10000) + 
+                                             (githubData.content.length > 10000 ? '...' : '');
+                    }
+                }
+                
+                statusEl.style.display = 'block';
+            } catch (error) {
+                // Show error status
+                statusEl.textContent = `Error fetching ${fileName}: ${error.message}`;
+                statusEl.className = 'status status-error';
+                statusEl.style.display = 'block';
+                
+                console.error('Fetch error:', error);
+            } finally {
+                // Re-enable button and hide loading
+                button.disabled = false;
+                loadingEl.style.display = 'none';
+            }
+        }
+    </script>
+    
+    <!-- Load GitHub configuration -->
+    <script src="github-config.js"></script>
+</body>
+</html> 
