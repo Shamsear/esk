@@ -107,7 +107,7 @@
             "name": "RAPHAEL VARANE",
             "position": "CB",
             "value": 86,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 3.3,
             "type": "prime"
           },
@@ -115,7 +115,7 @@
             "name": "BENJAMIN HENRICHS",
             "position": "RB",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -123,7 +123,7 @@
             "name": "ROBERT SANCHEZ",
             "position": "GK",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -131,7 +131,7 @@
             "name": "GEORGES MIKAUTADZE",
             "position": "ST",
             "value": 40,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -139,7 +139,7 @@
             "name": "CHARLES DE KETELAERE",
             "position": "ST",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -147,7 +147,7 @@
             "name": "JUSTIN KLUIVERT",
             "position": "AM",
             "value": 42,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.1,
             "type": "standard"
           },
@@ -155,7 +155,7 @@
             "name": "ORKUN KOKCU",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -163,7 +163,7 @@
             "name": "EDERSON",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -171,7 +171,7 @@
             "name": "CHRISTIAN ERIKSEN",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -179,7 +179,7 @@
             "name": "DANI CEBALLOS",
             "position": "CM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -187,7 +187,7 @@
             "name": "SHERALDO BECKER",
             "position": "ST",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           },
@@ -195,7 +195,7 @@
             "name": "JOAO PEDRO",
             "position": "ST",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -203,7 +203,7 @@
             "name": "EVAN FERGUSON",
             "position": "ST",
             "value": 52,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
           }
@@ -479,7 +479,7 @@
             "name": "ROBERT ANDRICH",
             "position": "DM",
             "value": 136,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5.7,
             "type": "prime"
           },
@@ -487,7 +487,7 @@
             "name": "PORTU",
             "position": "AM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -495,7 +495,7 @@
             "name": "IGOR JULIO",
             "position": "CB",
             "value": 52,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
           },
@@ -503,7 +503,7 @@
             "name": "MARCO CARNESECCHI",
             "position": "GK",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -511,7 +511,7 @@
             "name": "ANTONY",
             "position": "RW",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           },
@@ -519,7 +519,7 @@
             "name": "OMAR MARMOUSH",
             "position": "ST",
             "value": 48,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.4,
             "type": "standard"
           },
@@ -527,7 +527,7 @@
             "name": "KYOGO FURUHASHI",
             "position": "ST",
             "value": 70,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.5,
             "type": "standard"
           }
@@ -730,7 +730,7 @@
             "name": "ERLING HAALAND",
             "position": "ST",
             "value": 140,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 7,
             "type": "standard"
           },
@@ -738,7 +738,7 @@
             "name": "THEO HERNANDEZ",
             "position": "LB",
             "value": 80,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
           },
@@ -746,7 +746,7 @@
             "name": "RUBEN NEVES",
             "position": "DM",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -754,7 +754,7 @@
             "name": "RUBEN DIAS",
             "position": "CB",
             "value": 152,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 7.6,
             "type": "standard"
           },
@@ -762,7 +762,7 @@
             "name": "GAVI",
             "position": "CM",
             "value": 82,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.1,
             "type": "standard"
           },
@@ -770,7 +770,7 @@
             "name": "BERNARDO SILVA",
             "position": "AM",
             "value": 90,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.5,
             "type": "standard"
           },
@@ -778,7 +778,7 @@
             "name": "DARWIN NUNEZ",
             "position": "ST",
             "value": 104,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 5.2,
             "type": "standard"
           }
@@ -981,7 +981,7 @@
             "name": "CLAUDE MAKELELE",
             "position": "DM",
             "value": 100,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           },
@@ -989,7 +989,7 @@
             "name": "ANDREA PIRLO",
             "position": "DM",
             "value": 100,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "prime legend"
           },
@@ -997,7 +997,7 @@
             "name": "DOMENICO BERARDI",
             "position": "RW",
             "value": 60,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "standard"
           },
@@ -1005,7 +1005,7 @@
             "name": "BRYAN MBEUMO",
             "position": "RW",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1013,7 +1013,7 @@
             "name": "JULIAN BRANDT",
             "position": "RW",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -1021,7 +1021,7 @@
             "name": "JOSHUA KIMMICH",
             "position": "RB",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -1029,7 +1029,7 @@
             "name": "SADIO MANE",
             "position": "LW",
             "value": 68,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.4,
             "type": "standard"
           },
@@ -1037,7 +1037,7 @@
             "name": "DENILSON",
             "position": "LW",
             "value": 60,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "legend"
           },
@@ -1045,7 +1045,7 @@
             "name": "NUNO MENDES",
             "position": "LB",
             "value": 90,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.5,
             "type": "standard"
           },
@@ -1053,7 +1053,7 @@
             "name": "VITOR BAIA",
             "position": "GK",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           },
@@ -1061,7 +1061,7 @@
             "name": "EDERSON MORAES",
             "position": "GK",
             "value": 120,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "standard"
           },
@@ -1069,7 +1069,7 @@
             "name": "PASCAL GROB",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1077,7 +1077,7 @@
             "name": "PAUL SCHOLES",
             "position": "CM",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           },
@@ -1085,7 +1085,7 @@
             "name": "HAKAN CALHANOGLU",
             "position": "CM",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -1093,7 +1093,7 @@
             "name": "GIANLUCA MANCINI",
             "position": "CB",
             "value": 90,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.5,
             "type": "standard"
           },
@@ -1101,7 +1101,7 @@
             "name": "RAUL ALBIOL",
             "position": "CB",
             "value": 88,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.4,
             "type": "standard"
           },
@@ -1109,7 +1109,7 @@
             "name": "NICO ELVEDI",
             "position": "CB",
             "value": 74,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.7,
             "type": "standard"
           },
@@ -1117,7 +1117,7 @@
             "name": "A. BUONGIORNO",
             "position": "CB",
             "value": 110,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.5,
             "type": "standard"
           }
@@ -1268,7 +1268,7 @@
             "name": "GANSO",
             "position": "AM",
             "value": 40,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -1276,7 +1276,7 @@
             "name": "JAN VERTONGHEN",
             "position": "CB",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1284,7 +1284,7 @@
             "name": "PRESNEL KIMPEMBE",
             "position": "CB",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1292,7 +1292,7 @@
             "name": "PERVIS ESTUPINAN",
             "position": "LB",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1300,7 +1300,7 @@
             "name": "NOUSSAIR MAZRAOUI",
             "position": "RB",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1308,7 +1308,7 @@
             "name": "RAUL",
             "position": "ST",
             "value": 100,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "prime legend"
           },
@@ -1316,7 +1316,7 @@
             "name": "RAPHAEL VEIGA",
             "position": "AM",
             "value": 70,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.5,
             "type": "standard"
           },
@@ -1324,7 +1324,7 @@
             "name": "MARIO PASALIC",
             "position": "AM",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           },
@@ -1332,7 +1332,7 @@
             "name": "NATHAN COLLINS",
             "position": "CB",
             "value": 78,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.9,
             "type": "standard"
           },
@@ -1340,7 +1340,7 @@
             "name": "ANTHONY LOPES",
             "position": "GK",
             "value": 42,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.1,
             "type": "standard"
           },
@@ -1348,7 +1348,7 @@
             "name": "NUNO TEVARES",
             "position": "LB",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -1356,7 +1356,7 @@
             "name": "MALO GUSTO",
             "position": "RB",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1364,7 +1364,7 @@
             "name": "JOSEF MARTINEZ",
             "position": "ST",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -1372,7 +1372,7 @@
             "name": "LAZAR SAMARDZIC",
             "position": "AM",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1380,7 +1380,7 @@
             "name": "ETHAN PINNOCK",
             "position": "CB",
             "value": 40,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -1388,7 +1388,7 @@
             "name": "DAVIDE FRATTESI",
             "position": "CM",
             "value": 54,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.7,
             "type": "standard"
           },
@@ -1396,7 +1396,7 @@
             "name": "CONOR GALLAGHER",
             "position": "CM",
             "value": 60,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "standard"
           }
@@ -1767,7 +1767,7 @@
             "name": "NICOLO ZANIOLO",
             "position": "AM",
             "value": 56,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.8,
             "type": "standard"
           },
@@ -1775,7 +1775,7 @@
             "name": "JOE GOMEZ",
             "position": "CB",
             "value": 68,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.4,
             "type": "standard"
           },
@@ -1783,7 +1783,7 @@
             "name": "BREMER",
             "position": "CB",
             "value": 112,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.6,
             "type": "standard"
           },
@@ -1791,7 +1791,7 @@
             "name": "MARC GUEHI",
             "position": "CB",
             "value": 88,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.4,
             "type": "standard"
           },
@@ -1799,7 +1799,7 @@
             "name": "JEAN-CLAIR TODIBO",
             "position": "CB",
             "value": 56,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.8,
             "type": "standard"
           },
@@ -1807,7 +1807,7 @@
             "name": "OTAVIO",
             "position": "CB",
             "value": 76,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.8,
             "type": "standard"
           },
@@ -1815,7 +1815,7 @@
             "name": "JORDAN HENDERSON",
             "position": "CM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -1823,7 +1823,7 @@
             "name": "PEP GUARDIOLA",
             "position": "DM",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           },
@@ -1831,7 +1831,7 @@
             "name": "MIKE MAIGNAN",
             "position": "GK",
             "value": 120,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "standard"
           },
@@ -1839,7 +1839,7 @@
             "name": "JOSE SA",
             "position": "GK",
             "value": 64,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.2,
             "type": "standard"
           },
@@ -1847,7 +1847,7 @@
             "name": "DAN BURN",
             "position": "LB",
             "value": 72,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.6,
             "type": "standard"
           },
@@ -1855,7 +1855,7 @@
             "name": "DIOGO JOTA",
             "position": "LW",
             "value": 80,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
           },
@@ -1863,7 +1863,7 @@
             "name": "SAMUEL LINO",
             "position": "LW",
             "value": 60,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "standard"
           },
@@ -1871,7 +1871,7 @@
             "name": "ROBIN GOSENS",
             "position": "LW",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -1879,7 +1879,7 @@
             "name": "NAHUEL MOLINA",
             "position": "RB",
             "value": 62,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.1,
             "type": "standard"
           },
@@ -1887,7 +1887,7 @@
             "name": "MIGUEL ALMIRON",
             "position": "RW",
             "value": 92,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.6,
             "type": "standard"
           },
@@ -1895,7 +1895,7 @@
             "name": "FELIPE ANDERSON",
             "position": "RW",
             "value": 52,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
           },
@@ -1903,7 +1903,7 @@
             "name": "FILIPPO INZAGHI",
             "position": "ST",
             "value": 110,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.5,
             "type": "legend"
           },
@@ -1911,7 +1911,7 @@
             "name": "ALEXANDER SORLOTH",
             "position": "ST",
             "value": 82,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.1,
             "type": "standard"
           },
@@ -1919,7 +1919,7 @@
             "name": "IVAN TONEY",
             "position": "ST",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           }
@@ -2208,7 +2208,7 @@
             "name": "ALEXANDER ISAK",
             "position": "ST",
             "value": 110,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5.5,
             "type": "prime"
           },
@@ -2216,7 +2216,7 @@
             "name": "LUDOVIC GIULY",
             "position": "RW",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           },
@@ -2224,7 +2224,7 @@
             "name": "RYAN GIGGS",
             "position": "LW",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           }
@@ -2511,7 +2511,7 @@
             "name": "LAUTARO MARTINEZ",
             "position": "ST",
             "value": 90,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4.5,
             "type": "standard"
           },
@@ -2519,7 +2519,7 @@
             "name": "UNAI SIMON",
             "position": "GK",
             "value": 82,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4.1,
             "type": "standard"
           },
@@ -2527,7 +2527,7 @@
             "name": "KAORU MITOMA",
             "position": "AM",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -2535,7 +2535,7 @@
             "name": "OIHAN SANCET",
             "position": "AM",
             "value": 80,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
           },
@@ -2543,7 +2543,7 @@
             "name": "RAFAEL VAN DER VAART",
             "position": "AM",
             "value": 60,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "legend"
           }
@@ -2742,7 +2742,7 @@
             "name": "BERND LENO",
             "position": "GK",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -2750,7 +2750,7 @@
             "name": "IDRISSA GUEYE",
             "position": "DM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -2758,7 +2758,7 @@
             "name": "LUUK DE JONG",
             "position": "CB",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -2766,7 +2766,7 @@
             "name": "SEBASTIEN HALLER",
             "position": "ST",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           }
@@ -2963,7 +2963,7 @@
             "name": "ROBERTO FIRMINO",
             "position": "ST",
             "value": 46,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.3,
             "type": "standard"
           },
@@ -2971,7 +2971,7 @@
             "name": "AARON RAMSDALE",
             "position": "GK",
             "value": 76,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.8,
             "type": "standard"
           },
@@ -2979,7 +2979,7 @@
             "name": "KEILOR NAVAS",
             "position": "GK",
             "value": 46,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.3,
             "type": "standard"
           },
@@ -2987,7 +2987,7 @@
             "name": "ALEJANDRO GRIMALDO",
             "position": "LB",
             "value": 80,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
           },
@@ -2995,7 +2995,7 @@
             "name": "JESUS NAVAS",
             "position": "RB",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -3003,7 +3003,7 @@
             "name": "NAIF AGUERD",
             "position": "CB",
             "value": 70,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.5,
             "type": "standard"
           },
@@ -3011,7 +3011,7 @@
             "name": "CHRIS RICHARDS",
             "position": "CB",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3019,7 +3019,7 @@
             "name": "NATHAN WOOD",
             "position": "CB",
             "value": 62,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.1,
             "type": "standard"
           },
@@ -3027,7 +3027,7 @@
             "name": "KAI HAVERTZ",
             "position": "AM",
             "value": 86,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.3,
             "type": "standard"
           },
@@ -3035,7 +3035,7 @@
             "name": "G. DE ARRASCAETA",
             "position": "AM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3043,7 +3043,7 @@
             "name": "RUSLAN MALINOVSKYI",
             "position": "AM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -3051,7 +3051,7 @@
             "name": "MOHAMED CAMARA",
             "position": "DM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3059,7 +3059,7 @@
             "name": "LUCAS TORREIRA",
             "position": "DM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -3067,7 +3067,7 @@
             "name": "GEOFFREY KONDOGBIA",
             "position": "DM",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -3075,7 +3075,7 @@
             "name": "JOHN MCGINN",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3083,7 +3083,7 @@
             "name": "ELIJIF ELMAS",
             "position": "CM",
             "value": 56,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.8,
             "type": "standard"
           },
@@ -3091,7 +3091,7 @@
             "name": "WARREN ZAIRE-EMERY",
             "position": "CM",
             "value": 70,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.5,
             "type": "standard"
           },
@@ -3099,7 +3099,7 @@
             "name": "MASON MOUNT",
             "position": "AM",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           },
@@ -3107,7 +3107,7 @@
             "name": "D. CALVERT-LEWIN",
             "position": "ST",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           }
@@ -3258,7 +3258,7 @@
             "name": "TOMAS ROSICKY",
             "position": "ST",
             "value": 60,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "prime legend"
           },
@@ -3266,7 +3266,7 @@
             "name": "LUIS SUAREZ",
             "position": "ST",
             "value": 230,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 11.5,
             "type": "prime"
           },
@@ -3274,7 +3274,7 @@
             "name": "FERNANDO TORRES",
             "position": "ST",
             "value": 100,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "prime legend"
           },
@@ -3282,7 +3282,7 @@
             "name": "ANDRIY SHEVCHENKO",
             "position": "ST",
             "value": 200,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 10,
             "type": "prime legend"
           },
@@ -3290,7 +3290,7 @@
             "name": "PATRICK VIEIRA",
             "position": "DM",
             "value": 150,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 7.5,
             "type": "prime legend"
           },
@@ -3298,7 +3298,7 @@
             "name": "RONALDINHO GAUCHO",
             "position": "AM",
             "value": 112,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.6,
             "type": "prime legend"
           }
@@ -3501,7 +3501,7 @@
             "name": "BETO",
             "position": "ST",
             "value": 52,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
           },
@@ -3509,7 +3509,7 @@
             "name": "MATIAS SOULE",
             "position": "RW",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3517,7 +3517,7 @@
             "name": "RICCARDO ORSOLINI",
             "position": "RW",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3525,7 +3525,7 @@
             "name": "PARK JI-SUNG",
             "position": "LW",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           }
@@ -3722,7 +3722,7 @@
             "name": "ARTEM DOVBYK",
             "position": "ST",
             "value": 78,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.9,
             "type": "standard"
           },
@@ -3730,7 +3730,7 @@
             "name": "PABLO BARRIOS",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3738,7 +3738,7 @@
             "name": "MATTEO GUENDOUZI",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -3746,7 +3746,7 @@
             "name": "MARIO HERMOSO",
             "position": "CB",
             "value": 84,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.2,
             "type": "standard"
           }
@@ -4031,7 +4031,7 @@
             "name": "VICTOR OSIMHEN",
             "position": "ST",
             "value": 126,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.3,
             "type": "standard"
           },
@@ -4039,7 +4039,7 @@
             "name": "RAPHAEL GUERREIRO",
             "position": "LB",
             "value": 54,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.7,
             "type": "standard"
           },
@@ -4047,7 +4047,7 @@
             "name": "THIAGO SILVA",
             "position": "CB",
             "value": 84,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.2,
             "type": "standard"
           },
@@ -4055,7 +4055,7 @@
             "name": "ROBERT PIRES",
             "position": "LW",
             "value": 62,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.1,
             "type": "legend"
           },
@@ -4063,7 +4063,7 @@
             "name": "MORGAN GIBBS-WHITE",
             "position": "AM",
             "value": 68,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.4,
             "type": "standard"
           },
@@ -4071,7 +4071,7 @@
             "name": "EMMANUEL PETIT",
             "position": "DM",
             "value": 122,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.1,
             "type": "legend"
           },
@@ -4079,7 +4079,7 @@
             "name": "PEDRI",
             "position": "CM",
             "value": 110,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.5,
             "type": "standard"
           }
@@ -4413,7 +4413,7 @@
             "name": "SON HEUNG-MIN",
             "position": "ST",
             "value": 120,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "standard"
           }
@@ -4561,7 +4561,7 @@
             "name": "RODRI",
             "position": "DM",
             "value": 174,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 8.7,
             "type": "standard"
           }
@@ -4763,7 +4763,7 @@
             "name": "THIBAUT COURTOIS",
             "position": "GK",
             "value": 96,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4.8,
             "type": "prime"
           },
@@ -4771,7 +4771,7 @@
             "name": "MATTEO GABBIA",
             "position": "CB",
             "value": 44,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.2,
             "type": "prime"
           },
@@ -4779,7 +4779,7 @@
             "name": "STRAHINJA PAVLOVIC",
             "position": "CB",
             "value": 44,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "prime"
           },
@@ -4787,7 +4787,7 @@
             "name": "SAHAL ABDUL SAMAD",
             "position": "LW",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "prime"
           },
@@ -4795,7 +4795,7 @@
             "name": "CHEICK DOUCOURE",
             "position": "DM",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -4803,7 +4803,7 @@
             "name": "RUBEN LOFTUS-CHEEK",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "prime"
           },
@@ -4811,7 +4811,7 @@
             "name": "TIJJANI REIJNDERS",
             "position": "CM",
             "value": 54,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.7,
             "type": "prime"
           },
@@ -4819,7 +4819,7 @@
             "name": "BRYAN ROBSON",
             "position": "CM",
             "value": 108,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 5.4,
             "type": "legend"
           },
@@ -4827,7 +4827,7 @@
             "name": "YASSINE BOUNOU",
             "position": "GK",
             "value": 104,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 5.2,
             "type": "standard"
           },
@@ -4835,7 +4835,7 @@
             "name": "PATRICK KLUIVERT",
             "position": "ST",
             "value": 100,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           },
@@ -4843,7 +4843,7 @@
             "name": "EVAIR",
             "position": "ST",
             "value": 100,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "prime legend"
           },
@@ -4851,7 +4851,7 @@
             "name": "ALAN VARELA",
             "position": "DM",
             "value": 100,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -4859,7 +4859,7 @@
             "name": "PAULO DYBALA",
             "position": "ST",
             "value": 86,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 4.3,
             "type": "standard"
           },
@@ -4867,7 +4867,7 @@
             "name": "BENOÎT BADIASHILE",
             "position": "CB",
             "value": 84,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 4.2,
             "type": "standard"
           },
@@ -4875,7 +4875,7 @@
             "name": "ALESSIO ROMAGNOLI",
             "position": "CB",
             "value": 84,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 4.2,
             "type": "standard"
           },
@@ -4883,7 +4883,7 @@
             "name": "MALCOM",
             "position": "RW",
             "value": 80,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 4,
             "type": "prime"
           },
@@ -4891,7 +4891,7 @@
             "name": "PHILIPP LIENHART",
             "position": "CB",
             "value": 70,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3.5,
             "type": "standard"
           },
@@ -4899,7 +4899,7 @@
             "name": "SHAY GIVEN",
             "position": "GK",
             "value": 60,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "legend"
           },
@@ -4907,7 +4907,7 @@
             "name": "ANDRE",
             "position": "DM",
             "value": 50,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "prime"
           },
@@ -4915,7 +4915,7 @@
             "name": "MAURO ARAMBARRI",
             "position": "DM",
             "value": 40,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -4923,7 +4923,7 @@
             "name": "ELYE WAHI",
             "position": "ST",
             "value": 68,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3.4,
             "type": "standard"
           }
@@ -5122,7 +5122,7 @@
             "name": "JAVIER SAVIOLA",
             "position": "ST",
             "value": 130,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.5,
             "type": "legend"
           },
@@ -5130,7 +5130,7 @@
             "name": "A. COSTACURTA",
             "position": "LB",
             "value": 174,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 8.7,
             "type": "legend"
           },
@@ -5138,7 +5138,7 @@
             "name": "FILIP KOSTIC",
             "position": "LB",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -5146,7 +5146,7 @@
             "name": "ULI HOENAB",
             "position": "AM",
             "value": 102,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.1,
             "type": "legend"
           },
@@ -5154,7 +5154,7 @@
             "name": "CARLOS SOLER",
             "position": "CM",
             "value": 72,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 3.6,
             "type": "standard"
           }
@@ -5447,7 +5447,7 @@
             "name": "MATHEUS CUNHA",
             "position": "ST",
             "value": 78,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 3.9,
             "type": "standard"
           },
@@ -5455,7 +5455,7 @@
             "name": "DECLAN RICE",
             "position": "DM",
             "value": 106,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5.3,
             "type": "standard"
           },
@@ -5463,7 +5463,7 @@
             "name": "DIEGO FORLAN",
             "position": "ST",
             "value": 120,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "prime"
           },
@@ -5471,7 +5471,7 @@
             "name": "DAVID RAYA",
             "position": "GK",
             "value": 66,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3.3,
             "type": "standard"
           },
@@ -5479,7 +5479,7 @@
             "name": "PEDRO PORRO",
             "position": "RB",
             "value": 54,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.7,
             "type": "standard"
           },
@@ -5487,7 +5487,7 @@
             "name": "MILAN SKRINIAR",
             "position": "CB",
             "value": 154,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 7.7,
             "type": "standard"
           },
@@ -5495,7 +5495,7 @@
             "name": "JOACHIM ANDERSEN",
             "position": "CB",
             "value": 60,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "prime"
           },
@@ -5503,7 +5503,7 @@
             "name": "FEDERICO CHIESA",
             "position": "LW",
             "value": 110,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.5,
             "type": "standard"
           },
@@ -5511,7 +5511,7 @@
             "name": "MOISES CAICEDO",
             "position": "DM",
             "value": 82,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.1,
             "type": "prime"
           },
@@ -5519,7 +5519,7 @@
             "name": "MARTIN ODEGAARD",
             "position": "CM",
             "value": 124,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.2,
             "type": "prime"
           },
@@ -5527,7 +5527,7 @@
             "name": "TAKEHIRO TOMIYASU",
             "position": "RB",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           }
@@ -5814,7 +5814,7 @@
             "name": "VIKTOR GYOKERES",
             "position": "ST",
             "value": 112,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 5.6,
             "type": "standard"
           },
@@ -5822,7 +5822,7 @@
             "name": "CRISTHIAN MOSQUERA",
             "position": "CB",
             "value": 80,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4,
             "type": "standard"
           },
@@ -5830,7 +5830,7 @@
             "name": "RAHEEM STERLING",
             "position": "LW",
             "value": 58,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           },
@@ -5838,7 +5838,7 @@
             "name": "MICHAEL OLISE",
             "position": "RW",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -5846,7 +5846,7 @@
             "name": "FEDERICO VALVERDE",
             "position": "CM",
             "value": 116,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.8,
             "type": "standard"
           },
@@ -5854,7 +5854,7 @@
             "name": "NICOLAS DE LA CRUZ",
             "position": "CM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -5862,7 +5862,7 @@
             "name": "MAXIMILIAN BEIER",
             "position": "ST",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -5870,7 +5870,7 @@
             "name": "BENTO",
             "position": "GK",
             "value": 54,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.7,
             "type": "standard"
           },
@@ -5878,7 +5878,7 @@
             "name": "ARNAU MARTINEZ",
             "position": "RB",
             "value": 50,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           }
@@ -6167,7 +6167,7 @@
             "name": "JUAN MUSSO",
             "position": "GK",
             "value": 40,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -6175,7 +6175,7 @@
             "name": "MARTIN OJEDA",
             "position": "RW",
             "value": 40,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -6183,7 +6183,7 @@
             "name": "RODRIGO DE PAUL",
             "position": "CM",
             "value": 86,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4.3,
             "type": "prime"
           },
@@ -6191,7 +6191,7 @@
             "name": "LISANDRO MARTINEZ",
             "position": "CB",
             "value": 130,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.5,
             "type": "standard"
           }
@@ -6392,7 +6392,7 @@
             "name": "STEFAN DE VRIJ",
             "position": "CB",
             "value": 68,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 3.4,
             "type": "standard"
           },
@@ -6400,7 +6400,7 @@
             "name": "RAPHINHA",
             "position": "RW",
             "value": 86,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 4.3,
             "type": "prime"
           },
@@ -6408,7 +6408,7 @@
             "name": "ROMELU LUKAKU",
             "position": "ST",
             "value": 50,
-            "contract": "SEASON 7.5",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -6416,7 +6416,7 @@
             "name": "ALEX MERET",
             "position": "GK",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -6424,7 +6424,7 @@
             "name": "MARC CUCURELLA",
             "position": "LB",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -6432,7 +6432,7 @@
             "name": "LIONEL MESSI",
             "position": "RW",
             "value": 202,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 10.1,
             "type": "prime"
           },
@@ -6440,7 +6440,7 @@
             "name": "INAKI WILLIAMS",
             "position": "ST",
             "value": 84,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.2,
             "type": "prime"
           },
@@ -6448,7 +6448,7 @@
             "name": "JULIAN QUINONES",
             "position": "ST",
             "value": 40,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2,
             "type": "standard"
           },
@@ -6456,7 +6456,7 @@
             "name": "HRISTO STOICHKOV",
             "position": "ST",
             "value": 122,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.1,
             "type": "prime legend"
           },
@@ -6464,7 +6464,7 @@
             "name": "DANI PAREJO",
             "position": "CM",
             "value": 54,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 2.7,
             "type": "standard"
           },
@@ -6472,7 +6472,7 @@
             "name": "MICHAEL OWEN",
             "position": "ST",
             "value": 100,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "legend"
           }
@@ -6677,7 +6677,7 @@
             "name": "PAU CUBARSI",
             "position": "CB",
             "value": 128,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.4,
             "type": "standard"
           },
@@ -6685,7 +6685,7 @@
             "name": "ERIC GARCIA",
             "position": "CB",
             "value": 88,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.4,
             "type": "standard"
           },
@@ -6693,7 +6693,7 @@
             "name": "DUSAN VLAHOVIC",
             "position": "ST",
             "value": 96,
-            "contract": "SEASON 6.5",
+            "contract": "SEASON 8",
             "salary": 4.8,
             "type": "standard"
           }
@@ -6982,7 +6982,7 @@
             "name": "JEAN-PHILIPPE MATETA",
             "position": "ST",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -6990,7 +6990,7 @@
             "name": "NICK POPE",
             "position": "GK",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -6998,7 +6998,7 @@
             "name": "DAYOT UPAMECANO",
             "position": "CB",
             "value": 196,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 9.8,
             "type": "standard"
           },
@@ -7006,7 +7006,7 @@
             "name": "BENJAMIN PAVARD",
             "position": "CB",
             "value": 120,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "standard"
           },
@@ -7014,7 +7014,7 @@
             "name": "LEWIS DUNK",
             "position": "CB",
             "value": 94,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.7,
             "type": "standard"
           },
@@ -7022,7 +7022,7 @@
             "name": "JOSE MARIA GIMENEZ",
             "position": "CB",
             "value": 130,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.5,
             "type": "standard"
           },
@@ -7030,7 +7030,7 @@
             "name": "CHANCEL MBEMBA",
             "position": "CB",
             "value": 88,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 4.4,
             "type": "standard"
           },
@@ -7038,7 +7038,7 @@
             "name": "LEROY SANE",
             "position": "RW",
             "value": 120,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "standard"
           },
@@ -7046,7 +7046,7 @@
             "name": "OUSMANE DEMBELE",
             "position": "RW",
             "value": 122,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 6.1,
             "type": "standard"
           },
@@ -7054,7 +7054,7 @@
             "name": "FEDERICO DIMARCO",
             "position": "LW",
             "value": 100,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -7062,7 +7062,7 @@
             "name": "RODRIGO RIQUELME",
             "position": "LW",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -7070,7 +7070,7 @@
             "name": "HARVEY ELLIOT",
             "position": "AM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -7078,7 +7078,7 @@
             "name": "JERDY SCHOUTEN",
             "position": "DM",
             "value": 50,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -7086,7 +7086,7 @@
             "name": "STEVEN GERRARD",
             "position": "CM",
             "value": 104,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.2,
             "type": "legend"
           },
@@ -7094,7 +7094,7 @@
             "name": "RYAN GRAVENBERCH",
             "position": "CM",
             "value": 110,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 5.5,
             "type": "standard"
           }
@@ -7806,7 +7806,7 @@
             "name": "BRAIS MENDEZ",
             "position": "CM",
             "value": 58,
-            "contract": "SEASON 7",
+            "contract": "SEASON 8",
             "salary": 2.9,
             "type": "standard"
           },
@@ -7814,7 +7814,7 @@
             "name": "ROMARIO",
             "position": "ST",
             "value": 120,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 6,
             "type": "prime legend"
           },
@@ -7822,7 +7822,7 @@
             "name": "GERARD MORENO",
             "position": "ST",
             "value": 50,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -7830,7 +7830,7 @@
             "name": "LUCAS CHEVALIER",
             "position": "GK",
             "value": 52,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
           },
@@ -7838,7 +7838,7 @@
             "name": "DOMINIK LIVAKOVIC",
             "position": "GK",
             "value": 56,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.8,
             "type": "standard"
           },
@@ -7846,7 +7846,7 @@
             "name": "GIORGIO SCALVINI",
             "position": "CB",
             "value": 70,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3.5,
             "type": "prime"
           },
@@ -7854,7 +7854,7 @@
             "name": "MIKA MÀRMOL",
             "position": "CB",
             "value": 60,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3,
             "type": "standard"
           },
@@ -7862,7 +7862,7 @@
             "name": "ODILON KOSSOUNOU",
             "position": "CB",
             "value": 50,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -7870,7 +7870,7 @@
             "name": "NICOLAS TAGLIAFICO",
             "position": "LB",
             "value": 46,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.3,
             "type": "standard"
           },
@@ -7878,7 +7878,7 @@
             "name": "BRENNAN JOHNSON",
             "position": "RW",
             "value": 52,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.6,
             "type": "standard"
           },
@@ -7886,7 +7886,7 @@
             "name": "GABRIEL MARTINELLI",
             "position": "LW",
             "value": 100,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 5,
             "type": "standard"
           },
@@ -7894,7 +7894,7 @@
             "name": "DUSAN TADIC",
             "position": "LW",
             "value": 56,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.8,
             "type": "standard"
           },
@@ -7902,7 +7902,7 @@
             "name": "CALLUM HUDSON-ODOI",
             "position": "LW",
             "value": 50,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.5,
             "type": "standard"
           },
@@ -7910,7 +7910,7 @@
             "name": "KOKE",
             "position": "DM",
             "value": 62,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3.1,
             "type": "prime"
           },
@@ -7918,7 +7918,7 @@
             "name": "DANI OLMO",
             "position": "AM",
             "value": 92,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 4.6,
             "type": "standard"
           },
@@ -7926,7 +7926,7 @@
             "name": "EMILE SMITH ROWE",
             "position": "AM",
             "value": 62,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3.1,
             "type": "standard"
           },
@@ -7934,7 +7934,7 @@
             "name": "FABIAN RUIZ",
             "position": "CM",
             "value": 72,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 3.6,
             "type": "standard"
           },
@@ -7942,7 +7942,7 @@
             "name": "JACK GREALISH",
             "position": "LW",
             "value": 56,
-            "contract": "SEASON 6",
+            "contract": "SEASON 8",
             "salary": 2.8,
             "type": "standard"
           }
