@@ -847,68 +847,16 @@
                     const playerEditor = document.getElementById('player-editor');
                     playerEditor.insertBefore(configMessage, playerEditor.firstChild);
                 }
-
-                // Check save endpoints availability
-                checkSaveEndpoints();
+                
+                // No need to check server endpoints since we're focused on GitHub
             });
         });
 
-        // Function to check save endpoints availability
+        // Function to check save endpoints availability (deprecated - we're using GitHub now)
         async function checkSaveEndpoints() {
-            try {
-                const playerEndpointAvailable = await isServerAvailable();
-                const managerEndpointAvailable = await isManagerSaveEndpointAvailable();
-                
-                console.log('Server endpoints check results:');
-                console.log('- Player save endpoint:', playerEndpointAvailable ? 'Available' : 'Not available');
-                console.log('- Manager save endpoint:', managerEndpointAvailable ? 'Available' : 'Not available');
-                
-                if (!playerEndpointAvailable || !managerEndpointAvailable) {
-                    let warningMessage = 'Warning: ';
-                    if (!playerEndpointAvailable && !managerEndpointAvailable) {
-                        warningMessage += 'Server endpoints are not available. Changes will only be saved in memory.';
-                    } else if (!playerEndpointAvailable) {
-                        warningMessage += 'Player save endpoint is not available. Player changes will only be saved in memory.';
-                    } else {
-                        warningMessage += 'Manager save endpoint is not available. Player changes will be saved to the server, but manager data will not be updated.';
-                    }
-                    
-                    // Show warning message
-                    showStatusMessage(warningMessage, false, 8000);
-                    
-                    // Add a permanent warning about the endpoints
-                    const endpointWarning = document.createElement('div');
-                    endpointWarning.className = 'status-message status-error';
-                    endpointWarning.style.display = 'block';
-                    endpointWarning.style.marginBottom = '10px';
-                    endpointWarning.textContent = warningMessage;
-                    
-                    // Add a server start button if server is not available
-                    if (!playerEndpointAvailable) {
-                        const startServerButton = document.createElement('button');
-                        startServerButton.textContent = 'Start Server';
-                        startServerButton.style.marginTop = '5px';
-                        startServerButton.style.marginRight = '10px';
-                        startServerButton.addEventListener('click', () => {
-                            // Open the server setup guide (replace with actual guide URL if available)
-                            window.open('https://github.com/yourusername/server-setup-guide', '_blank');
-                        });
-                        
-                        endpointWarning.appendChild(startServerButton);
-                    }
-                    
-                    // Insert at the top of the player editor, after GitHub warning if it exists
-                    const playerEditor = document.getElementById('player-editor');
-                    const existingWarnings = playerEditor.querySelector('.status-message');
-                    if (existingWarnings) {
-                        playerEditor.insertBefore(endpointWarning, existingWarnings.nextSibling);
-                    } else {
-                        playerEditor.insertBefore(endpointWarning, playerEditor.firstChild);
-                    }
-                }
-            } catch (error) {
-                console.error('Error checking save endpoints:', error);
-            }
+            console.log('checkSaveEndpoints is deprecated - using direct GitHub connection instead');
+            // This function is kept for backward compatibility but does nothing
+            return;
         }
 
         // Fast logout function
@@ -963,62 +911,74 @@
                 // Load data with a timeout to allow UI to render first
                 let loadedData = false;
                 
-                // Try to load data from server with timeout
+                // Try to load data with preference for files updated by GitHub
                 const loadPromise = new Promise(async (resolve) => {
                     try {
-                        // First check if server is available - fast check
-                        const serverAvailable = await isServerAvailable();
-                        
-                        if (serverAvailable) {
-                            // Load players from server
-                            const playersResponse = await fetch('http://localhost:3000/players.json');
+                        // First try to load from files - these would be updated by GitHub
+                        console.log('Loading data from files (would be updated by GitHub)');
+                        try {
+                            const playersResponse = await fetch('players.json', {
+                                cache: 'no-store',  // Don't use cache
+                                headers: { 'Cache-Control': 'no-cache' }
+                            });
+                            
                             if (playersResponse.ok) {
                                 playersData = await playersResponse.json();
-                                console.log('Loaded players data from Node.js server');
                                 
-                                // Load manager data from server
-                                const managerResponse = await fetch('http://localhost:3000/manager_data.json');
-                                if (managerResponse.ok) {
-                                    managerData = await managerResponse.json();
-                                    console.log('Loaded manager data from Node.js server');
+                                // Add unique ID to each player if missing
+                                playersData = playersData.map((player, index) => ({
+                                    ...player,
+                                    id: player.id ? Number(player.id) : (index + 1)
+                                }));
+                                
+                                console.log('Players loaded from file:', playersData.length);
+                                
+                                // Also load manager data from file
+                                try {
+                                    const managerResponse = await fetch('manager_data.json', {
+                                        cache: 'no-store',
+                                        headers: { 'Cache-Control': 'no-cache' }
+                                    });
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Manager data loaded from file');
+                                    }
+                                } catch (managerError) {
+                                    console.error('Error loading manager data from file:', managerError);
                                 }
                                 
                                 resolve(true);
                                 return;
                             }
+                        } catch (fileError) {
+                            console.error('Error loading data from files:', fileError);
                         }
                         
-                        // Fallback: Load from files
-                        console.log('Server not available, loading from files');
-                        const fallbackResponse = await fetch('players.json');
-                        if (fallbackResponse.ok) {
-                            playersData = await fallbackResponse.json();
-                            
-                            // Add unique ID to each player if missing
-                            playersData = playersData.map((player, index) => ({
-                                ...player,
-                                id: player.id ? Number(player.id) : (index + 1)
-                            }));
-                            
-                            console.log('Players loaded from file:', playersData.length);
-                            
-                            // Also load manager data from file
-                            try {
-                                const managerResponse = await fetch('manager_data.json');
-                                if (managerResponse.ok) {
-                                    managerData = await managerResponse.json();
-                                    console.log('Manager data loaded from file');
+                        // Fallback: try local server if file loading failed
+                        console.log('File loading failed, trying local server as fallback');
+                        try {
+                            const serverAvailable = await isServerAvailable();
+                            if (serverAvailable) {
+                                const playersResponse = await fetch('http://localhost:3000/players.json');
+                                if (playersResponse.ok) {
+                                    playersData = await playersResponse.json();
+                                    console.log('Loaded players data from Node.js server (fallback)');
+                                    
+                                    const managerResponse = await fetch('http://localhost:3000/manager_data.json');
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Loaded manager data from Node.js server (fallback)');
+                                    }
+                                    
+                                    resolve(true);
+                                    return;
                                 }
-                            } catch (managerError) {
-                                console.error('Error loading manager data:', managerError);
                             }
-                            
-                            // Show server warning
-                            showStatusMessage('Warning: Data server is not running. Changes will not be saved.', false);
-                            resolve(true);
-                        } else {
-                            throw new Error('Failed to load players data');
+                        } catch (serverError) {
+                            console.error('Error loading from server (fallback):', serverError);
                         }
+                        
+                        throw new Error('Failed to load player data from any source');
                     } catch (error) {
                         console.error('Error loading data:', error);
                         resolve(false);
@@ -1096,24 +1056,11 @@
             }
         }
 
-        // Add a new function to specifically check if save-managers endpoint is available
+        // Add a new function to specifically check if save-managers endpoint is available (deprecated)
         async function isManagerSaveEndpointAvailable() {
-            try {
-                // Use AbortController to implement a timeout
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 500);  // 500ms timeout
-                
-                const response = await fetch('http://localhost:3000/save-managers', {
-                    method: 'HEAD',
-                    signal: controller.signal
-                });
-                
-                clearTimeout(timeoutId);
-                return response.ok;
-            } catch (error) {
-                console.log('Manager save endpoint check failed:', error.name);
-                return false;
-            }
+            console.log('isManagerSaveEndpointAvailable is deprecated - using direct GitHub connection instead');
+            // Always return false since we're using GitHub directly
+            return false;
         }
 
         // Extract unique clubs from player data
@@ -2828,100 +2775,124 @@
                 // Load data with a timeout to allow UI to render first
                 let loadedData = false;
                 
-                // Try to load data from server with timeout
+                // Try to load data with preference for files updated by GitHub
                 const loadPromise = new Promise(async (resolve) => {
                     try {
-                        // First check if server is available - fast check
-                        const serverAvailable = await isServerAvailable();
-                        
-                        if (serverAvailable) {
-                            // Load players from server
-                            const playersResponse = await fetch('http://localhost:3000/players.json');
+                        // First try to load from files - these would be updated by GitHub
+                        console.log('Loading data from files (would be updated by GitHub)');
+                        try {
+                            const playersResponse = await fetch('players.json', {
+                                cache: 'no-store',  // Don't use cache
+                                headers: { 'Cache-Control': 'no-cache' }
+                            });
+                            
                             if (playersResponse.ok) {
                                 playersData = await playersResponse.json();
-                                console.log('Loaded players data from Node.js server');
                                 
-                                // Load manager data from server
-                                const managerResponse = await fetch('http://localhost:3000/manager_data.json');
-                                if (managerResponse.ok) {
-                                    managerData = await managerResponse.json();
-                                    console.log('Loaded manager data from Node.js server');
-                                    
-                                    // Repair manager data if needed
-                                    const wasRepaired = repairManagerData();
-                                    if (wasRepaired) {
-                                        console.log('Manager data was repaired, saving changes...');
-                                        
-                                        // Try to save the repaired manager data
-                                        try {
-                                            const saveResponse = await fetch('http://localhost:3000/save-managers', {
-                                                method: 'POST',
-                                                headers: {
-                                                    'Content-Type': 'application/json'
-                                                },
-                                                body: JSON.stringify(managerData)
-                                            });
-                                            
-                                            if (saveResponse.ok) {
-                                                console.log('Repaired manager data saved successfully');
-                                            } else {
-                                                console.error('Failed to save repaired manager data:', await saveResponse.text());
-                                            }
-                                        } catch (saveError) {
-                                            console.error('Error saving repaired manager data:', saveError);
-                                        }
+                                // Add unique ID to each player if missing
+                                playersData = playersData.map((player, index) => ({
+                                    ...player,
+                                    id: player.id ? Number(player.id) : (index + 1)
+                                }));
+                                
+                                console.log('Players loaded from file:', playersData.length);
+                                
+                                // Also load manager data from file
+                                try {
+                                    const managerResponse = await fetch('manager_data.json', {
+                                        cache: 'no-store',
+                                        headers: { 'Cache-Control': 'no-cache' }
+                                    });
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Manager data loaded from file');
                                     }
+                                } catch (managerError) {
+                                    console.error('Error loading manager data from file:', managerError);
                                 }
                                 
                                 resolve(true);
                                 return;
                             }
+                        } catch (fileError) {
+                            console.error('Error loading data from files:', fileError);
                         }
                         
-                        // Fallback: Load from files
-                        console.log('Server not available, loading from files');
-                        const fallbackResponse = await fetch('players.json');
-                        if (fallbackResponse.ok) {
-                            playersData = await fallbackResponse.json();
-                            
-                            // Add unique ID to each player if missing
-                            playersData = playersData.map((player, index) => ({
-                                ...player,
-                                id: player.id ? Number(player.id) : (index + 1)
-                            }));
-                            
-                            console.log('Players loaded from file:', playersData.length);
-                            
-                            // Also load manager data from file
-                            try {
-                                const managerResponse = await fetch('manager_data.json');
-                                if (managerResponse.ok) {
-                                    managerData = await managerResponse.json();
-                                    console.log('Manager data loaded from file');
+                        // Fallback: try local server if file loading failed
+                        console.log('File loading failed, trying local server as fallback');
+                        try {
+                            const serverAvailable = await isServerAvailable();
+                            if (serverAvailable) {
+                                const playersResponse = await fetch('http://localhost:3000/players.json');
+                                if (playersResponse.ok) {
+                                    playersData = await playersResponse.json();
+                                    console.log('Loaded players data from Node.js server (fallback)');
                                     
-                                    // Repair manager data if needed
-                                    const wasRepaired = repairManagerData();
-                                    if (wasRepaired) {
-                                        console.log('Manager data was repaired (from file)');
+                                    const managerResponse = await fetch('http://localhost:3000/manager_data.json');
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Loaded manager data from Node.js server (fallback)');
                                     }
+                                    
+                                    resolve(true);
+                                    return;
                                 }
-                            } catch (managerError) {
-                                console.error('Error loading manager data:', managerError);
                             }
-                            
-                            // Show server warning
-                            showStatusMessage('Warning: Data server is not running. Changes will not be saved.', false);
-                            resolve(true);
-                        } else {
-                            throw new Error('Failed to load players data');
+                        } catch (serverError) {
+                            console.error('Error loading from server (fallback):', serverError);
                         }
+                        
+                        throw new Error('Failed to load player data from any source');
                     } catch (error) {
                         console.error('Error loading data:', error);
                         resolve(false);
                     }
                 });
                 
-                // Rest of the function remains unchanged...
+                // Set timeout for loading
+                const timeoutPromise = new Promise(resolve => {
+                    setTimeout(() => {
+                        if (!loadedData) {
+                            statusElement.textContent = 'Still loading... This may take a moment.';
+                        }
+                        resolve(false);
+                    }, 1500);
+                });
+                
+                // Wait for data or timeout
+                loadedData = await Promise.race([loadPromise, timeoutPromise]);
+                
+                // Wait for the actual data if timeout happened first
+                if (!loadedData) {
+                    loadedData = await loadPromise;
+                }
+                
+                if (!loadedData) {
+                    throw new Error('Failed to load players data');
+                }
+                
+                // Extract clubs and populate UI
+                extractClubs();
+                
+                // Reset pagination
+                currentPage = 1;
+                filteredPlayers = [...playersData];
+                totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+                
+                // Render players
+                populatePlayersList();
+                
+                // Show data summary
+                showStatusMessage(`Loaded ${playersData.length} players. Showing page 1 of ${totalPages}.`, true, 3000);
+                
+                // Hide loading status if it was success
+                if (statusElement.textContent === 'Loading player data...' || 
+                    statusElement.textContent === 'Still loading... This may take a moment.') {
+                    statusElement.style.display = 'none';
+                }
+                
+                // Return a resolved promise for chaining
+                return Promise.resolve();
             } catch (error) {
                 showStatusMessage(`Error: ${error.message}`, false);
                 console.error('Error initializing admin panel:', error);

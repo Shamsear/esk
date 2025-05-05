@@ -369,12 +369,6 @@
                         Back to Managers
                     </a>
                 </div>
-                <div class="back-link">
-                    <a href="token-setup.html">
-                        <i class="fas fa-cog"></i>
-                        Token Setup
-                    </a>
-                </div>
             </div>
         </div>
 
@@ -475,9 +469,44 @@
     </div>
 
     <script>
-        // Password validation (this should be replaced with proper server-side authentication)
+        // Main JavaScript for the admin stats panel
+        document.addEventListener('DOMContentLoaded', function() {
+            // Password validation (should be replaced with proper server-side authentication)
         const ADMIN_PASSWORD = 'r2gadmin123'; // This should be stored securely on the server
 
+            // Initialize GitHub config first
+            initGitHubConfig();
+            
+            // Check if GitHub integration is configured
+            if (!localStorage.getItem('githubToken')) {
+                const configWarning = document.createElement('div');
+                configWarning.className = 'error-message';
+                configWarning.style.backgroundColor = 'rgba(255, 193, 7, 0.1)';
+                configWarning.style.color = '#ffb700';
+                configWarning.style.border = '1px solid rgba(255, 193, 7, 0.3)';
+                configWarning.style.display = 'block';
+                configWarning.style.marginBottom = '20px';
+                configWarning.innerHTML = `
+                    <strong>Warning:</strong> GitHub integration not configured. 
+                    Changes will only be saved to the local server or in memory.
+                    <button id="configure-github" style="background: #ffb700; color: #333; border: none; border-radius: 4px; padding: 5px 10px; margin-top: 10px;">Configure GitHub</button>
+                `;
+                
+                // Add to DOM after login check completes
+                setTimeout(() => {
+                    const statsEditor = document.querySelector('.stats-editor');
+                    if (statsEditor) {
+                        statsEditor.prepend(configWarning);
+                    }
+                    
+                    // Add click handler for the configure button
+                    document.getElementById('configure-github')?.addEventListener('click', function() {
+                        window.location.href = 'token-setup.html';
+                    });
+                }, 100);
+            }
+            
+            // Handle login form
         function handleLogin(event) {
             event.preventDefault();
             const password = document.getElementById('admin-password').value;
@@ -486,6 +515,7 @@
             const statsEditor = document.getElementById('stats-editor');
 
             if (password === ADMIN_PASSWORD) {
+                    sessionStorage.setItem('statsAdminLoggedIn', 'true');
                 loginForm.style.display = 'none';
                 statsEditor.style.display = 'block';
                 loadManagerData();
@@ -493,8 +523,20 @@
                 loginError.textContent = 'Invalid password';
                 loginError.style.display = 'block';
             }
+                
             return false;
         }
+            
+            // Expose the login handler to the window
+            window.handleLogin = handleLogin;
+            
+            // Check if already logged in
+            if (sessionStorage.getItem('statsAdminLoggedIn') === 'true') {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('stats-editor').style.display = 'block';
+                loadManagerData();
+            }
+        });
 
         // Load manager data
         async function loadManagerData() {
@@ -503,33 +545,33 @@
                 let response;
                 let data;
                 
-                // First try local Node.js server
+                // First try local file since it would be updated by GitHub
                 try {
-                    response = await fetch('http://localhost:3000/manager_data.json');
+                    response = await fetch('manager_data.json', {
+                        cache: 'no-store',  // Don't use cache
+                        headers: { 'Cache-Control': 'no-cache' }
+                    });
+                    
                     if (response.ok) {
                         data = await response.json();
-                        console.log('Loaded manager data from local server');
+                        console.log('Loaded manager data from local file');
+                    } else {
+                        throw new Error(`Failed to fetch manager data: ${response.status}`);
                     }
-                } catch (serverError) {
-                    console.log('Local server not available:', serverError.message);
-                }
-                
-                // If server failed, try local file
-                if (!data) {
+                } catch (fileError) {
+                    console.error('Error loading local file:', fileError.message);
+                    
+                    // Fallback to local Node.js server if available
                     try {
-                        response = await fetch('manager_data.json', {
-                            cache: 'no-store',  // Don't use cache
-                            headers: { 'Cache-Control': 'no-cache' }
-                        });
-                        
+                        response = await fetch('http://localhost:3000/manager_data.json');
                         if (response.ok) {
                             data = await response.json();
-                            console.log('Loaded manager data from local file');
+                            console.log('Loaded manager data from local server (as fallback)');
                         } else {
-                            throw new Error(`Failed to fetch manager data: ${response.status}`);
+                            throw new Error('Failed to load manager data from server');
                         }
-                    } catch (fileError) {
-                        console.error('Error loading local file:', fileError.message);
+                    } catch (serverError) {
+                        console.log('Local server not available:', serverError.message);
                         throw new Error('Failed to load manager data from any source');
                     }
                 }
@@ -718,9 +760,11 @@
             updateTotalPlayers();
         });
 
-        // Add a function to save data to server
+        // Add a function to save to server (as a fallback only)
         async function saveToServer(data) {
             try {
+                console.log('Attempting to save to local server (fallback method)');
+                
                 // Try local server first
                 const response = await fetch('http://localhost:3000/save-managers', {
                     method: 'POST',
@@ -731,14 +775,16 @@
                 });
                 
                 if (response.ok) {
-                    console.log('Data saved to server successfully');
+                    console.log('Data saved to local server successfully');
                     return true;
                 } else {
                     console.error('Server error:', response.status, response.statusText);
+                    showError(`Server error: ${response.status} ${response.statusText}`, 5000);
                     return false;
                 }
             } catch (error) {
                 console.error('Error saving to server:', error);
+                showError(`Could not connect to local server: ${error.message}`, 5000);
                 return false;
             }
         }
@@ -746,30 +792,33 @@
         // Add a function to try to save to GitHub
         async function saveToGitHub(data) {
             try {
-                // Check if GitHub config is available
-                if (typeof window.githubConfig === 'undefined') {
-                    console.log('GitHub config not available');
-                    return false;
+                // Initialize GitHub config if not already done
+                if (!githubConfig) {
+                    initGitHubConfig();
                 }
                 
-                // Get GitHub config
-                const githubConfig = window.githubConfig;
-                if (!githubConfig.isConfigured || !githubConfig.isConfigured()) {
+                // Check if GitHub is configured
+                if (!githubConfig.isConfigured()) {
                     console.log('GitHub not configured');
                     return false;
                 }
+                
+                // Show saving message
+                showSuccess('Saving to GitHub...', 0);
                 
                 // Get repository details
                 const owner = githubConfig.getOwner();
                 const repo = githubConfig.getRepo();
                 const branch = githubConfig.getBranch();
-                const path = 'manager_data.json';
+                const path = githubConfig.managerFilePath || 'manager_data.json';
                 const token = githubConfig.getToken();
                 
                 if (!owner || !repo || !branch || !token) {
                     console.error('Missing GitHub configuration');
                     return false;
                 }
+                
+                console.log('Saving to GitHub:', { owner, repo, path, branch });
                 
                 // Get current file SHA
                 const fileInfoUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
@@ -779,42 +828,61 @@
                     }
                 });
                 
-                if (!fileInfoResponse.ok) {
+                let sha = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    // File doesn't exist yet
+                    fileExists = false;
+                    console.log('File does not exist on GitHub yet, will create it');
+                } else if (!fileInfoResponse.ok) {
                     console.error('Failed to get file info:', fileInfoResponse.status);
                     return false;
+                } else {
+                    // File exists, get its SHA
+                    const fileInfo = await fileInfoResponse.json();
+                    sha = fileInfo.sha;
+                    console.log('Found existing file with SHA:', sha);
                 }
                 
-                const fileInfo = await fileInfoResponse.json();
-                const sha = fileInfo.sha;
-                
-                // Prepare content
+                // Prepare content - wrap the managers array in an object with managers property
                 const content = btoa(unescape(encodeURIComponent(JSON.stringify({ managers: data }, null, 2))));
                 
                 // Create commit
                 const commitUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                const requestBody = {
+                    message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
+                    content: content,
+                    branch: branch
+                };
+                
+                // Add SHA if the file exists
+                if (fileExists) {
+                    requestBody.sha = sha;
+                }
+                
                 const commitResponse = await fetch(commitUrl, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `token ${token}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
-                        content: content,
-                        sha: sha,
-                        branch: branch
-                    })
+                    body: JSON.stringify(requestBody)
                 });
                 
                 if (commitResponse.ok) {
                     console.log('Changes saved to GitHub successfully');
+                    showSuccess('Changes saved to GitHub successfully! The site will update in a few minutes.', 5000);
                     return true;
                 } else {
-                    console.error('GitHub commit failed:', await commitResponse.text());
+                    const errorText = await commitResponse.text();
+                    console.error('GitHub commit failed:', errorText);
+                    showError('GitHub save failed: ' + errorText, 5000);
                     return false;
                 }
             } catch (error) {
                 console.error('Error saving to GitHub:', error);
+                showError('Error saving to GitHub: ' + error.message, 5000);
                 return false;
             }
         }
@@ -919,28 +987,44 @@
                 // Try to save the data
                 console.log('Saving updated manager data:', updatedManager);
                 
-                // Try server first
+                // Try GitHub first (direct method, no server needed)
                 let savedSuccessfully = false;
-                const serverSaved = await saveToServer(managersData);
                 
-                if (serverSaved) {
-                    savedSuccessfully = true;
-                } else {
-                    // Try GitHub if server failed
-                    const githubSaved = await saveToGitHub(managersData);
-                    if (githubSaved) {
-                        savedSuccessfully = true;
+                if (githubConfig && githubConfig.isConfigured()) {
+                    try {
+                        const githubSaved = await saveToGitHub(managersData);
+                        if (githubSaved) {
+                            savedSuccessfully = true;
+                            successMessage.textContent = 'Changes saved to GitHub successfully!';
+                            successMessage.style.display = 'block';
+                        }
+                    } catch (githubError) {
+                        console.error('GitHub save failed:', githubError);
+                        // Will try server as fallback
                     }
                 }
                 
-                // Update UI
+                // Try local server if GitHub failed or wasn't configured
+                if (!savedSuccessfully) {
+                    try {
+                        const serverSaved = await saveToServer(managersData);
+                        if (serverSaved) {
+                            savedSuccessfully = true;
+                            successMessage.textContent = 'Changes saved to local server.';
+                            successMessage.style.display = 'block';
+                        }
+                    } catch (serverError) {
+                        console.error('Server save failed:', serverError);
+                    }
+                }
+                
+                // Update UI based on save results
                 if (savedSuccessfully) {
-                    successMessage.textContent = 'Changes saved successfully!';
-                    successMessage.style.display = 'block';
+                    // Already displayed success message
                 } else {
-                    // If both failed, still acknowledge the changes were made in memory
-                    successMessage.textContent = 'Changes saved in memory only. Server/GitHub save failed.';
-                successMessage.style.display = 'block';
+                    // If both failed, acknowledge the changes were made in memory
+                    successMessage.textContent = 'Changes saved in memory only. GitHub and server saves failed.';
+                    successMessage.style.display = 'block';
                 }
                 
                 // Update the global data
@@ -1008,10 +1092,10 @@
             }
         }
 
-        // Check server availability on page load
+        // Check GitHub status on page load
         document.addEventListener('DOMContentLoaded', async function() {
-            const serverAvailable = await isServerAvailable();
-            if (!serverAvailable) {
+            // Focus on GitHub configuration instead of server availability
+            if (!localStorage.getItem('githubToken')) {
                 const warningMessage = document.createElement('div');
                 warningMessage.className = 'error-message';
                 warningMessage.style.backgroundColor = 'rgba(255, 193, 7, 0.1)';
@@ -1020,14 +1104,60 @@
                 warningMessage.style.display = 'block';
                 warningMessage.style.marginBottom = '20px';
                 warningMessage.innerHTML = `
-                    <strong>Warning:</strong> Local server is not running. 
-                    Changes will be saved to GitHub if configured, otherwise they'll be in memory only.
+                    <strong>Warning:</strong> GitHub integration is not configured. 
+                    Changes will only be saved in memory unless you configure GitHub connection.
+                    <button id="github-setup-btn" style="background: #ffb700; color: #333; border: none; border-radius: 4px; padding: 5px 10px; margin-top: 10px; cursor: pointer;">Configure GitHub</button>
                 `;
                 
                 // Add before login form or stats editor
-                document.querySelector('.stats-editor').prepend(warningMessage);
+                setTimeout(() => {
+                    const statsEditor = document.querySelector('.stats-editor');
+                    if (statsEditor) {
+                        statsEditor.prepend(warningMessage);
+                        
+                        // Add event listener to the button
+                        document.getElementById('github-setup-btn').addEventListener('click', function() {
+                            window.location.href = 'token-setup.html';
+                        });
+                    }
+                }, 100);
             }
         });
+
+        // GitHub configuration object
+        let githubConfig = null;
+        
+        // Initialize GitHub configuration
+        function initGitHubConfig() {
+            // If global config is available from github-config.js, use it
+            if (typeof window.githubConfig !== 'undefined') {
+                githubConfig = window.githubConfig;
+                console.log('GitHub config loaded from global object');
+                return true;
+            }
+            
+            // Fallback implementation if github-config.js is not available
+            githubConfig = {
+                isConfigured: function() {
+                    return !!localStorage.getItem('githubToken');
+                },
+                getToken: function() {
+                    return localStorage.getItem('githubToken');
+                },
+                getOwner: function() {
+                    return localStorage.getItem('githubOwner') || 'default-owner';
+                },
+                getRepo: function() {
+                    return localStorage.getItem('githubRepo') || 'default-repo';
+                },
+                getBranch: function() {
+                    return localStorage.getItem('githubBranch') || 'main';
+                },
+                managerFilePath: 'manager_data.json'
+            };
+            
+            return githubConfig.isConfigured();
+        }
     </script>
 </body>
 </html> 
