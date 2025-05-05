@@ -777,7 +777,19 @@
                 return true;
             }
             
-            // Fallback implementation if github-config.js is not available
+            // Load saved config from localStorage
+            const savedConfig = localStorage.getItem('githubConfig');
+            if (savedConfig) {
+                try {
+                    githubConfig = JSON.parse(savedConfig);
+                    console.log('GitHub config loaded from localStorage');
+                    return true;
+                } catch (error) {
+                    console.error('Error parsing saved GitHub config:', error);
+                }
+            }
+            
+            // Fallback implementation if no saved config exists
             githubConfig = {
                 isConfigured: function() {
                     return !!localStorage.getItem('githubToken');
@@ -797,6 +809,14 @@
                 filePath: 'players.json',
                 managerFilePath: 'manager_data.json'
             };
+            
+            // Save the config to localStorage
+            try {
+                localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
+                console.log('GitHub config saved to localStorage');
+            } catch (error) {
+                console.error('Error saving GitHub config:', error);
+            }
             
             return githubConfig.isConfigured();
         }
@@ -2343,6 +2363,25 @@
             }, duration);
         }
 
+        // Update GitHub configuration
+        function updateGitHubConfig(newConfig) {
+            if (!newConfig) return;
+            
+            // Update the current config
+            githubConfig = {
+                ...githubConfig,
+                ...newConfig
+            };
+            
+            // Save to localStorage
+            try {
+                localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
+                console.log('GitHub config updated and saved');
+            } catch (error) {
+                console.error('Error saving updated GitHub config:', error);
+            }
+        }
+
         // Save to GitHub
         async function saveToGitHub() {
             try {
@@ -2366,6 +2405,12 @@
                     path: localStorage.getItem('githubJsonPath') || githubConfig.filePath,
                     branch: githubConfig.getBranch()
                 };
+                
+                // Update config with any new values
+                updateGitHubConfig({
+                    filePath: repoDetails.path,
+                    branch: repoDetails.branch
+                });
                 
                 // Get the current players file to get its SHA (required for the GitHub API)
                 const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
@@ -2516,8 +2561,19 @@
             }
         }
 
+        // Handle GitHub configuration changes
+        function handleGitHubConfigChange(event) {
+            if (event.data && event.data.type === 'githubConfigUpdate') {
+                console.log('Received GitHub config update:', event.data.config);
+                updateGitHubConfig(event.data.config);
+            }
+        }
+
         // Initialize application
         document.addEventListener('DOMContentLoaded', async function() {
+            // Listen for GitHub config changes from token setup page
+            window.addEventListener('message', handleGitHubConfigChange);
+            
             // Initialize club data first to ensure it's available
             await window.ClubManager.initialize();
             

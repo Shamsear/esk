@@ -996,7 +996,7 @@
                         if (githubSaved) {
                             savedSuccessfully = true;
                             successMessage.textContent = 'Changes saved to GitHub successfully!';
-                            successMessage.style.display = 'block';
+                successMessage.style.display = 'block';
                         }
                     } catch (githubError) {
                         console.error('GitHub save failed:', githubError);
