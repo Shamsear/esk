@@ -769,7 +769,7 @@
         let githubConfig = null;
         
         // Initialize GitHub configuration
-        function initGitHubConfig() {
+        async function initGitHubConfig() {
             // If global config is available from github-config.js, use it
             if (typeof window.githubConfig !== 'undefined') {
                 githubConfig = window.githubConfig;
@@ -777,8 +777,8 @@
                 return true;
             }
             
-            // Create base config object with methods
-            const baseConfig = {
+            // Fallback implementation if github-config.js is not available
+            githubConfig = {
                 isConfigured: function() {
                     return !!localStorage.getItem('githubToken');
                 },
@@ -795,41 +795,113 @@
                     return localStorage.getItem('githubBranch') || 'main';
                 },
                 filePath: 'players.json',
-                managerFilePath: 'manager_data.json'
+                managerFilePath: 'manager_data.json',
+                configFilePath: 'admin-config.json',
+                
+                // Load configuration from GitHub
+                async loadConfig() {
+                    try {
+                        const response = await fetch(this.configFilePath);
+                        if (response.ok) {
+                            const config = await response.json();
+                            // Store token in localStorage for security
+                            if (config.token) localStorage.setItem('githubToken', config.token);
+                            // Store other settings in localStorage for quick access
+                            if (config.owner) localStorage.setItem('githubOwner', config.owner);
+                            if (config.repo) localStorage.setItem('githubRepo', config.repo);
+                            if (config.branch) localStorage.setItem('githubBranch', config.branch);
+                            if (config.filePath) localStorage.setItem('githubJsonPath', config.filePath);
+                            if (config.commitMessage) localStorage.setItem('githubCommitMessage', config.commitMessage);
+                            console.log('GitHub configuration loaded from repository');
+                            return true;
+                        }
+                    } catch (error) {
+                        console.error('Error loading GitHub configuration:', error);
+                    }
+                    return false;
+                },
+
+                // Save configuration to GitHub
+                async saveConfig(config) {
+                    try {
+                        // First get the current file SHA if it exists
+                        const fileInfoResponse = await fetch(`https://api.github.com/repos/${this.getOwner()}/${this.getRepo()}/contents/${this.configFilePath}?ref=${this.getBranch()}`, {
+                            headers: {
+                                'Authorization': `token ${this.getToken()}`
+                            }
+                        });
+
+                        let currentSHA = '';
+                        if (fileInfoResponse.ok) {
+                            const fileInfo = await fileInfoResponse.json();
+                            currentSHA = fileInfo.sha;
+                        }
+
+                        // Prepare the content
+                        const configToSave = {
+                            ...config,
+                            // Don't save token in the config file
+                            token: undefined
+                        };
+                        const jsonString = JSON.stringify(configToSave, null, 2);
+                        const content = btoa(unescape(encodeURIComponent(jsonString)));
+
+                        // Prepare the request body
+                        const requestBody = {
+                            message: 'Update admin configuration',
+                            content: content,
+                            branch: this.getBranch()
+                        };
+
+                        if (currentSHA) {
+                            requestBody.sha = currentSHA;
+                        }
+
+                        // Save the configuration file
+                        const saveResponse = await fetch(`https://api.github.com/repos/${this.getOwner()}/${this.getRepo()}/contents/${this.configFilePath}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `token ${this.getToken()}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(requestBody)
+                        });
+
+                        if (!saveResponse.ok) {
+                            throw new Error('Failed to save configuration to GitHub');
+                        }
+
+                        // Store token in localStorage for security
+                        if (config.token) localStorage.setItem('githubToken', config.token);
+                        // Store other settings in localStorage for quick access
+                        if (config.owner) localStorage.setItem('githubOwner', config.owner);
+                        if (config.repo) localStorage.setItem('githubRepo', config.repo);
+                        if (config.branch) localStorage.setItem('githubBranch', config.branch);
+                        if (config.filePath) localStorage.setItem('githubJsonPath', config.filePath);
+                        if (config.commitMessage) localStorage.setItem('githubCommitMessage', config.commitMessage);
+
+                        console.log('GitHub configuration saved to repository');
+                        return true;
+                    } catch (error) {
+                        console.error('Error saving GitHub configuration:', error);
+                        return false;
+                    }
+                },
+
+                // Clear configuration
+                clearConfig() {
+                    localStorage.removeItem('githubToken');
+                    localStorage.removeItem('githubOwner');
+                    localStorage.removeItem('githubRepo');
+                    localStorage.removeItem('githubBranch');
+                    localStorage.removeItem('githubJsonPath');
+                    localStorage.removeItem('githubCommitMessage');
+                    console.log('GitHub configuration cleared from localStorage');
+                }
             };
             
-            // Load saved config from localStorage
-            const savedConfig = localStorage.getItem('githubConfig');
-            if (savedConfig) {
-                try {
-                    const parsedConfig = JSON.parse(savedConfig);
-                    // Merge saved config with base config (preserving methods)
-                    githubConfig = {
-                        ...baseConfig,
-                        ...parsedConfig
-                    };
-                    console.log('GitHub config loaded from localStorage');
-                    return true;
-                } catch (error) {
-                    console.error('Error parsing saved GitHub config:', error);
-                }
-            }
-            
-            // Use base config if no saved config exists
-            githubConfig = baseConfig;
-            
-            // Save the config to localStorage (excluding methods)
-            try {
-                const configToSave = {
-                    filePath: githubConfig.filePath,
-                    managerFilePath: githubConfig.managerFilePath
-                };
-                localStorage.setItem('githubConfig', JSON.stringify(configToSave));
-                console.log('GitHub config saved to localStorage');
-            } catch (error) {
-                console.error('Error saving GitHub config:', error);
-            }
-            
+            // Try to load configuration from repository
+            await githubConfig.loadConfig();
             return githubConfig.isConfigured();
         }
         
@@ -1491,65 +1563,6 @@
             document.getElementById('player-name').focus();
         }
 
-        // Check GitHub API connectivity
-        async function checkGitHubConnectivity() {
-            if (!githubConfig || !githubConfig.isConfigured()) {
-                return { success: false, message: 'GitHub integration is not configured' };
-            }
-            
-            const token = githubConfig.getToken();
-            if (!token) {
-                return { success: false, message: 'GitHub token is missing' };
-            }
-            
-            try {
-                // Create an AbortController with timeout
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000);
-                
-                const response = await fetch('https://api.github.com/rate_limit', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `token ${token}`
-                    },
-                    signal: controller.signal
-                });
-                
-                // Clear the timeout
-                clearTimeout(timeoutId);
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('GitHub API connection successful. Rate limit:', data.resources.core);
-                    return { 
-                        success: true, 
-                        message: 'GitHub API connection successful',
-                        rateLimit: data.resources.core
-                    };
-                } else {
-                    const errorText = await response.text();
-                    console.error('GitHub API connectivity check failed:', 
-                        response.status, response.statusText, errorText);
-                    return { 
-                        success: false, 
-                        message: `GitHub API error: ${response.status} ${response.statusText}`
-                    };
-                }
-            } catch (error) {
-                console.error('GitHub API connectivity check error:', error);
-                if (error.name === 'AbortError') {
-                    return { 
-                        success: false, 
-                        message: 'GitHub API connection timed out. Please check your network connection.'
-                    };
-                }
-                return { 
-                    success: false, 
-                    message: `Network error: ${error.message}`
-                };
-            }
-        }
-
         // Save player changes
         async function savePlayerChanges() {
             // First give immediate UI feedback that save was clicked
@@ -1668,17 +1681,9 @@
                         if (!githubConfig) {
                             initGitHubConfig();
                         }
-                        
-                        // Check GitHub connectivity first
-                        const connectivityCheck = await checkGitHubConnectivity();
-                        if (!connectivityCheck.success) {
-                            console.warn('GitHub connectivity check failed:', connectivityCheck.message);
-                            showStatusMessage(`GitHub connectivity issue: ${connectivityCheck.message}. Changes saved in memory only.`, false);
-                        } else {
-                            await saveToGitHub();
-                            savedPermanently = true;
-                            managerDataSaved = true;
-                        }
+                        await saveToGitHub();
+                        savedPermanently = true;
+                        managerDataSaved = true;
                     } catch (githubError) {
                         console.error('GitHub save failed:', githubError);
                         // Continue to try server save if GitHub fails
@@ -2442,29 +2447,6 @@
             }, duration);
         }
 
-        // Update GitHub configuration
-        function updateGitHubConfig(newConfig) {
-            if (!newConfig) return;
-            
-            // Update the current config while preserving methods
-            githubConfig = {
-                ...githubConfig,
-                ...newConfig
-            };
-            
-            // Save to localStorage (excluding methods)
-            try {
-                const configToSave = {
-                    filePath: githubConfig.filePath,
-                    managerFilePath: githubConfig.managerFilePath
-                };
-                localStorage.setItem('githubConfig', JSON.stringify(configToSave));
-                console.log('GitHub config updated and saved');
-            } catch (error) {
-                console.error('Error saving updated GitHub config:', error);
-            }
-        }
-
         // Save to GitHub
         async function saveToGitHub() {
             try {
@@ -2478,11 +2460,6 @@
                     throw new Error('GitHub integration is not configured');
                 }
                 
-                const token = githubConfig.getToken();
-                if (!token) {
-                    throw new Error('GitHub token is missing');
-                }
-                
                 // Show saving message
                 showStatusMessage('Saving to GitHub...', true);
                 
@@ -2494,34 +2471,10 @@
                     branch: githubConfig.getBranch()
                 };
                 
-                console.log('Saving to GitHub repository:', `${repoDetails.owner}/${repoDetails.repo}`, 'path:', repoDetails.path);
-                
-                // Update config with any new values
-                updateGitHubConfig({
-                    filePath: repoDetails.path,
-                    branch: repoDetails.branch
-                });
-                
                 // Get the current players file to get its SHA (required for the GitHub API)
-                const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
-                console.log('Fetching file info from:', fileInfoUrl);
-                
-                try {
-                    // Test fetch to check network connection
-                    await fetch('https://api.github.com', {
-                        method: 'HEAD',
-                        headers: {
-                            'Authorization': `token ${token}`
-                        }
-                    });
-                } catch (networkError) {
-                    console.error('Network test failed:', networkError);
-                    throw new Error(`GitHub API network error: ${networkError.message}. Please check your internet connection and try again.`);
-                }
-                
-                const fileInfoResponse = await fetch(fileInfoUrl, {
+                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
                     headers: {
-                        'Authorization': `token ${token}`
+                        'Authorization': `token ${githubConfig.getToken()}`
                     }
                 });
                 
@@ -2531,17 +2484,13 @@
                 if (fileInfoResponse.status === 404) {
                     // File doesn't exist yet
                     fileExists = false;
-                    console.log('File does not exist yet, will create it');
                 } else if (!fileInfoResponse.ok) {
-                    const errorText = await fileInfoResponse.text();
-                    console.error('GitHub API error when fetching file info:', 
-                        fileInfoResponse.status, fileInfoResponse.statusText, errorText);
-                    throw new Error(`GitHub API error (${fileInfoResponse.status}): ${errorText}`);
+                    const errorData = await fileInfoResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
                 } else {
                     // File exists, get its SHA
                     const fileInfo = await fileInfoResponse.json();
                     currentSHA = fileInfo.sha;
-                    console.log('File exists, SHA:', currentSHA);
                 }
                 
                 // Prepare the content
@@ -2564,26 +2513,19 @@
                 }
                 
                 // Commit the updated file
-                const commitUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`;
-                console.log('Sending commit to:', commitUrl);
-                
-                const commitResponse = await fetch(commitUrl, {
+                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${token}`,
+                        'Authorization': `token ${githubConfig.getToken()}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(requestBody)
                 });
                 
                 if (!commitResponse.ok) {
-                    const errorText = await commitResponse.text();
-                    console.error('GitHub API error on commit:', 
-                        commitResponse.status, commitResponse.statusText, errorText);
-                    throw new Error(`GitHub API commit error (${commitResponse.status}): ${errorText}`);
+                    const errorData = await commitResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
                 }
-                
-                console.log('Player data successfully saved to GitHub');
                 
                 // If manager data exists, save it too
                 if (managerData) {
@@ -2678,19 +2620,8 @@
             }
         }
 
-        // Handle GitHub configuration changes
-        function handleGitHubConfigChange(event) {
-            if (event.data && event.data.type === 'githubConfigUpdate') {
-                console.log('Received GitHub config update:', event.data.config);
-                updateGitHubConfig(event.data.config);
-            }
-        }
-
         // Initialize application
         document.addEventListener('DOMContentLoaded', async function() {
-            // Listen for GitHub config changes from token setup page
-            window.addEventListener('message', handleGitHubConfigChange);
-            
             // Initialize club data first to ensure it's available
             await window.ClubManager.initialize();
             

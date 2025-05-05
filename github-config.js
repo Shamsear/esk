@@ -2,8 +2,8 @@
 // These values will be used for saving changes to the players.json file
 const githubConfig = {
     // Default repository details (can be overridden with localStorage values)
-    defaultOwner: 'YOUR_GITHUB_USERNAME',  // Replace with your GitHub username
-    defaultRepo: 'YOUR_REPO_NAME',         // Replace with your repository name 
+    defaultOwner: 'Shamsear',  // Replace with your GitHub username
+    defaultRepo: 'esk',         // Replace with your repository name 
     defaultBranch: 'main',                 // or 'master', depending on your repository
     filePath: 'players.json',              // Path to the players.json file in your repository
     
