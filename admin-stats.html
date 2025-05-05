@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     
+    <!-- Add GitHub configuration script -->
+    <script defer src="github-config.js"></script>
+    
     <style>
         :root {
             --primary: #3498db;
@@ -490,15 +493,73 @@
         // Load manager data
         async function loadManagerData() {
             try {
-                const response = await fetch('manager_data.json');
-                const data = await response.json();
-                const managers = Array.isArray(data) ? data : data.managers;
+                // Try multiple data sources
+                let response;
+                let data;
                 
+                // First try local Node.js server
+                try {
+                    response = await fetch('http://localhost:3000/manager_data.json');
+                    if (response.ok) {
+                        data = await response.json();
+                        console.log('Loaded manager data from local server');
+                    }
+                } catch (serverError) {
+                    console.log('Local server not available:', serverError.message);
+                }
+                
+                // If server failed, try local file
+                if (!data) {
+                    try {
+                        response = await fetch('manager_data.json', {
+                            cache: 'no-store',  // Don't use cache
+                            headers: { 'Cache-Control': 'no-cache' }
+                        });
+                        
+                        if (response.ok) {
+                            data = await response.json();
+                            console.log('Loaded manager data from local file');
+                        } else {
+                            throw new Error(`Failed to fetch manager data: ${response.status}`);
+                        }
+                    } catch (fileError) {
+                        console.error('Error loading local file:', fileError.message);
+                        throw new Error('Failed to load manager data from any source');
+                    }
+                }
+                
+                // Handle different data formats
+                let managers = [];
+                if (Array.isArray(data)) {
+                    managers = data;
+                    console.log('Manager data is in array format');
+                } else if (data && Array.isArray(data.managers)) {
+                    managers = data.managers;
+                    console.log('Manager data is in object.managers format');
+                } else {
+                    console.error('Unknown manager data format:', data);
+                    throw new Error('Invalid manager data format');
+                }
+                
+                if (!managers.length) {
+                    throw new Error('No managers found in the data');
+                }
+                
+                console.log(`Loaded ${managers.length} managers`);
+                
+                // Populate selector
                 const selector = document.getElementById('manager-selector');
+                selector.innerHTML = '<option value="">Select Manager</option>';
+                
                 managers.forEach(manager => {
+                    if (!manager.name) {
+                        console.warn('Manager missing name:', manager);
+                        return;
+                    }
+                    
                     const option = document.createElement('option');
                     option.value = manager.name;
-                    option.textContent = `${manager.name} (${manager.club})`;
+                    option.textContent = `${manager.name} (${manager.club || 'No Club'})`;
                     selector.appendChild(option);
                 });
 
@@ -509,43 +570,101 @@
                         populateForm(selectedManager);
                     }
                 });
+                
+                // Return managers data for use elsewhere
+                window.managersData = managers;
+                return managers;
             } catch (error) {
                 console.error('Error loading manager data:', error);
-                showError('Failed to load manager data. Please try again.');
+                showError('Failed to load manager data: ' + error.message);
+                return [];
             }
         }
 
         // Populate form with manager data
         function populateForm(manager) {
-            // Basic Info
-            document.getElementById('name').value = manager.name;
-            document.getElementById('rank').value = manager.rank || '';
-            document.getElementById('overall').value = manager.overall || '';
-            document.getElementById('manager_rating').value = manager.manager_rating || '';
-            document.getElementById('star_rating').value = manager.star_rating || '';
+            if (!manager) {
+                console.error('No manager data provided to populateForm');
+                showError('Invalid manager data');
+                return;
+            }
             
-            // Financial
-            document.getElementById('club_value').value = manager.club_total_value || '';
-            document.getElementById('r2g_coins').value = manager.r2g_coin_balance || '';
-            document.getElementById('r2g_tokens').value = manager.r2g_token_balance || '';
+            console.log('Populating form with manager data:', manager);
+            
+            // Helper function to safely get values
+            const getValue = (obj, key, fallback = '') => {
+                return obj[key] !== undefined ? obj[key] : fallback;
+            };
+            
+            // Basic Info
+            document.getElementById('name').value = getValue(manager, 'name');
+            document.getElementById('rank').value = getValue(manager, 'rank');
+            document.getElementById('overall').value = getValue(manager, 'overall');
+            document.getElementById('manager_rating').value = getValue(manager, 'manager_rating');
+            document.getElementById('star_rating').value = getValue(manager, 'star_rating', 3); // Default to 3 stars
+            
+            // Financial - check all possible field names
+            document.getElementById('club_value').value = 
+                getValue(manager, 'club_total_value', 
+                    getValue(manager, 'clubTotalValue',
+                        getValue(manager, 'club_value', 0)));
+            
+            document.getElementById('r2g_coins').value = 
+                getValue(manager, 'r2g_coin_balance',
+                    getValue(manager, 'r2gCoinBalance',
+                        getValue(manager, 'r2g_coins',
+                            getValue(manager, 'r2gCoins',
+                                getValue(manager, 'coins', 0)))));
+            
+            document.getElementById('r2g_tokens').value = 
+                getValue(manager, 'r2g_token_balance',
+                    getValue(manager, 'r2gTokenBalance',
+                        getValue(manager, 'r2g_tokens',
+                            getValue(manager, 'r2gTokens',
+                                getValue(manager, 'tokens', 0)))));
             
             // Achievements
-            document.getElementById('trophies').value = manager.trophies || '';
-            document.getElementById('awards').value = manager.awards || '';
+            document.getElementById('trophies').value = getValue(manager, 'trophies', 0);
+            document.getElementById('awards').value = getValue(manager, 'awards', 0);
             
-            // Players
-            document.getElementById('total_players').value = manager.total_players || '';
+            // Players - check different possible properties for player data
+            let playersList = [];
+            let totalPlayersCount = 0;
+            
+            // Try different properties that might contain player data
+            if (manager.squad && manager.squad.players && Array.isArray(manager.squad.players)) {
+                console.log('Found players in manager.squad.players');
+                playersList = manager.squad.players;
+                totalPlayersCount = playersList.length;
+            } else if (manager.players && Array.isArray(manager.players)) {
+                console.log('Found players in manager.players');
+                playersList = manager.players;
+                totalPlayersCount = playersList.length;
+            } else {
+                console.log('No players found in manager data');
+            }
+            
+            // Get total players count - check multiple possible property names
+            if (!totalPlayersCount) {
+                if (manager.squad && manager.squad.totalPlayers) {
+                    totalPlayersCount = manager.squad.totalPlayers;
+                } else if (manager.total_players) {
+                    totalPlayersCount = manager.total_players;
+                } else if (manager.totalPlayers) {
+                    totalPlayersCount = manager.totalPlayers;
+                }
+            }
+            
+            document.getElementById('total_players').value = totalPlayersCount || 0;
             
             // Clear player list
             const playerList = document.getElementById('player-list');
             playerList.innerHTML = '';
             
             // Add players if they exist
-            if (manager.players && Array.isArray(manager.players)) {
-                manager.players.forEach((player, index) => {
+            playersList.forEach((player, index) => {
                     addPlayerToList(player, index);
                 });
-            }
         }
 
         // Add a player to the list
@@ -593,65 +712,316 @@
             updateTotalPlayers();
         });
 
-        // Handle form submission
+        // Add a function to save data to server
+        async function saveToServer(data) {
+            try {
+                // Try local server first
+                const response = await fetch('http://localhost:3000/save-managers', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ managers: data })
+                });
+                
+                if (response.ok) {
+                    console.log('Data saved to server successfully');
+                    return true;
+                } else {
+                    console.error('Server error:', response.status, response.statusText);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error saving to server:', error);
+                return false;
+            }
+        }
+
+        // Add a function to try to save to GitHub
+        async function saveToGitHub(data) {
+            try {
+                // Check if GitHub config is available
+                if (typeof window.githubConfig === 'undefined') {
+                    console.log('GitHub config not available');
+                    return false;
+                }
+                
+                // Get GitHub config
+                const githubConfig = window.githubConfig;
+                if (!githubConfig.isConfigured || !githubConfig.isConfigured()) {
+                    console.log('GitHub not configured');
+                    return false;
+                }
+                
+                // Get repository details
+                const owner = githubConfig.getOwner();
+                const repo = githubConfig.getRepo();
+                const branch = githubConfig.getBranch();
+                const path = 'manager_data.json';
+                const token = githubConfig.getToken();
+                
+                if (!owner || !repo || !branch || !token) {
+                    console.error('Missing GitHub configuration');
+                    return false;
+                }
+                
+                // Get current file SHA
+                const fileInfoUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+                const fileInfoResponse = await fetch(fileInfoUrl, {
+                    headers: {
+                        'Authorization': `token ${token}`
+                    }
+                });
+                
+                if (!fileInfoResponse.ok) {
+                    console.error('Failed to get file info:', fileInfoResponse.status);
+                    return false;
+                }
+                
+                const fileInfo = await fileInfoResponse.json();
+                const sha = fileInfo.sha;
+                
+                // Prepare content
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify({ managers: data }, null, 2))));
+                
+                // Create commit
+                const commitUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                const commitResponse = await fetch(commitUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
+                        content: content,
+                        sha: sha,
+                        branch: branch
+                    })
+                });
+                
+                if (commitResponse.ok) {
+                    console.log('Changes saved to GitHub successfully');
+                    return true;
+                } else {
+                    console.error('GitHub commit failed:', await commitResponse.text());
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error saving to GitHub:', error);
+                return false;
+            }
+        }
+
+        // Handle form submission with actual saving
         document.getElementById('stats-form').addEventListener('submit', async (event) => {
             event.preventDefault();
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Saving...';
+            submitButton.disabled = true;
+            
             const successMessage = document.getElementById('save-success');
             const errorMessage = document.getElementById('save-error');
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
             
             try {
+                // Get selected manager name
+                const managerName = document.getElementById('name').value;
+                if (!managerName) {
+                    throw new Error('No manager selected');
+                }
+                
+                // Get the original managers data
+                const managersData = window.managersData;
+                if (!Array.isArray(managersData)) {
+                    throw new Error('Manager data not loaded properly');
+                }
+                
+                // Find the manager to update
+                const managerIndex = managersData.findIndex(m => m.name === managerName);
+                if (managerIndex === -1) {
+                    throw new Error(`Manager "${managerName}" not found in data`);
+                }
+                
+                // Get current manager data to preserve any fields we're not updating
+                const originalManager = managersData[managerIndex];
+                
                 // Collect player data
                 const playerItems = document.querySelectorAll('.player-item');
                 const players = Array.from(playerItems).map(item => {
                     const index = item.dataset.index;
                     return {
                         name: item.querySelector(`[name="player_name_${index}"]`).value,
-                        value: item.querySelector(`[name="player_value_${index}"]`).value,
+                        value: parseInt(item.querySelector(`[name="player_value_${index}"]`).value) || 0,
                         contract: item.querySelector(`[name="player_contract_${index}"]`).value,
-                        type: item.querySelector(`[name="player_type_${index}"]`).value
+                        type: item.querySelector(`[name="player_type_${index}"]`).value || 'standard'
                     };
                 });
                 
-                const formData = {
+                // Create updated manager object
+                const updatedManager = {
+                    ...originalManager, // Preserve existing fields
                     name: document.getElementById('name').value,
                     rank: document.getElementById('rank').value,
-                    overall: parseFloat(document.getElementById('overall').value),
-                    manager_rating: parseFloat(document.getElementById('manager_rating').value),
-                    star_rating: parseInt(document.getElementById('star_rating').value),
-                    club_total_value: parseInt(document.getElementById('club_value').value),
-                    r2g_coin_balance: parseInt(document.getElementById('r2g_coins').value),
-                    r2g_token_balance: parseInt(document.getElementById('r2g_tokens').value),
-                    trophies: parseInt(document.getElementById('trophies').value),
-                    awards: parseInt(document.getElementById('awards').value),
-                    total_players: parseInt(document.getElementById('total_players').value),
-                    players: players
+                    overall: parseFloat(document.getElementById('overall').value) || 0,
+                    manager_rating: parseFloat(document.getElementById('manager_rating').value) || 0,
+                    star_rating: parseInt(document.getElementById('star_rating').value) || 3,
+                    club_total_value: parseInt(document.getElementById('club_value').value) || 0,
+                    r2g_coin_balance: parseInt(document.getElementById('r2g_coins').value) || 0,
+                    r2g_token_balance: parseInt(document.getElementById('r2g_tokens').value) || 0,
+                    trophies: parseInt(document.getElementById('trophies').value) || 0,
+                    awards: parseInt(document.getElementById('awards').value) || 0,
+                    total_players: parseInt(document.getElementById('total_players').value) || 0
                 };
-
-                // Here you would typically send this data to your server
-                // For now, we'll just show a success message
-                console.log('Saving data:', formData);
                 
+                // Update coin fields with alternate naming for compatibility
+                updatedManager.r2gCoinBalance = updatedManager.r2g_coin_balance;
+                updatedManager.coins = updatedManager.r2g_coin_balance;
+                updatedManager.r2gCoins = updatedManager.r2g_coin_balance;
+
+                // Update token fields with alternate naming for compatibility
+                updatedManager.r2gTokenBalance = updatedManager.r2g_token_balance;
+                updatedManager.tokens = updatedManager.r2g_token_balance;
+                updatedManager.r2gTokens = updatedManager.r2g_token_balance;
+                
+                // Update club value fields with alternate naming for compatibility
+                updatedManager.clubTotalValue = updatedManager.club_total_value;
+                
+                // Handle squad structure update
+                if (originalManager.squad) {
+                    updatedManager.squad = {
+                        ...originalManager.squad,
+                        players: players,
+                        totalPlayers: players.length
+                    };
+                } else if (originalManager.players) {
+                    // If using players directly
+                    updatedManager.players = players;
+                } else {
+                    // If neither structure exists, create squad
+                    updatedManager.squad = {
+                        players: players,
+                        totalPlayers: players.length
+                    };
+                }
+                
+                // Update the manager in the data
+                managersData[managerIndex] = updatedManager;
+                
+                // Try to save the data
+                console.log('Saving updated manager data:', updatedManager);
+                
+                // Try server first
+                let savedSuccessfully = false;
+                const serverSaved = await saveToServer(managersData);
+                
+                if (serverSaved) {
+                    savedSuccessfully = true;
+                } else {
+                    // Try GitHub if server failed
+                    const githubSaved = await saveToGitHub(managersData);
+                    if (githubSaved) {
+                        savedSuccessfully = true;
+                    }
+                }
+                
+                // Update UI
+                if (savedSuccessfully) {
+                    successMessage.textContent = 'Changes saved successfully!';
+                    successMessage.style.display = 'block';
+                } else {
+                    // If both failed, still acknowledge the changes were made in memory
+                    successMessage.textContent = 'Changes saved in memory only. Server/GitHub save failed.';
                 successMessage.style.display = 'block';
-                errorMessage.style.display = 'none';
+                }
+                
+                // Update the global data
+                window.managersData = managersData;
+                
                 setTimeout(() => {
                     successMessage.style.display = 'none';
                 }, 3000);
-
             } catch (error) {
+                console.error('Error saving changes:', error);
                 errorMessage.textContent = 'Error saving changes: ' + error.message;
                 errorMessage.style.display = 'block';
-                successMessage.style.display = 'none';
+            } finally {
+                // Restore button state
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
             }
         });
 
-        function showError(message) {
+        function showError(message, duration = 5000) {
             const errorMessage = document.getElementById('save-error');
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
+            
+            // If a duration is provided, auto-hide the message after that time
+            if (duration > 0) {
             setTimeout(() => {
                 errorMessage.style.display = 'none';
-            }, 5000);
+                }, duration);
+            }
         }
+
+        function showSuccess(message, duration = 3000) {
+            const successMessage = document.getElementById('save-success');
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            
+            // If a duration is provided, auto-hide the message after that time
+            if (duration > 0) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, duration);
+            }
+        }
+
+        // Function to check if server is available
+        async function isServerAvailable() {
+            try {
+                const controller = new AbortController();
+                const signal = controller.signal;
+                
+                // Set a timeout to abort the request if it takes too long
+                const timeoutId = setTimeout(() => controller.abort(), 500);
+                
+                const response = await fetch('http://localhost:3000/manager_data.json', {
+                    method: 'HEAD',
+                    signal
+                });
+                
+                clearTimeout(timeoutId);
+                return response.ok;
+            } catch (error) {
+                console.log('Server check failed:', error.name);
+                return false;
+            }
+        }
+
+        // Check server availability on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            const serverAvailable = await isServerAvailable();
+            if (!serverAvailable) {
+                const warningMessage = document.createElement('div');
+                warningMessage.className = 'error-message';
+                warningMessage.style.backgroundColor = 'rgba(255, 193, 7, 0.1)';
+                warningMessage.style.color = '#ffb700';
+                warningMessage.style.border = '1px solid rgba(255, 193, 7, 0.3)';
+                warningMessage.style.display = 'block';
+                warningMessage.style.marginBottom = '20px';
+                warningMessage.innerHTML = `
+                    <strong>Warning:</strong> Local server is not running. 
+                    Changes will be saved to GitHub if configured, otherwise they'll be in memory only.
+                `;
+                
+                // Add before login form or stats editor
+                document.querySelector('.stats-editor').prepend(warningMessage);
+            }
+        });
     </script>
 </body>
 </html> 
