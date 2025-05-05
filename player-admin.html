@@ -1,0 +1,2943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://assets.mixkit.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>R2G Player Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="css/club-dropdown.css">
+    <!-- Load club manager script -->
+    <script src="js/club-loader.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e3e3e3;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #282828;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .username {
+            color: #bada55;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            height: calc(100vh - 70px);
+            box-sizing: border-box;
+        }
+        .player-list {
+            flex: 1;
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-y: auto;
+            max-width: 320px;
+            margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .player-list h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        .player-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .player-item:hover {
+            background-color: #333;
+        }
+        .player-item.selected {
+            background-color: #3f51b5;
+        }
+        .player-thumbnail {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .player-name {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .player-value {
+            color: #bada55;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .player-editor {
+            flex: 3;
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .btn-delete {
+            background-color: #f44336;
+        }
+        .btn-delete:hover {
+            background-color: #d32f2f;
+        }
+        .stats-container {
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 15px;
+        }
+        .stat-item {
+            background-color: #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .stat-item:hover {
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .add-stat-btn {
+            background-color: #3f51b5;
+            transition: background-color 0.2s;
+            padding: 10px 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .add-stat-btn:hover {
+            background-color: #303f9f;
+        }
+        .add-stat-btn i {
+            font-size: 16px;
+        }
+        .club-dropdown {
+            position: relative;
+        }
+        .club-search,
+        .team-search {
+            padding-right: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 8px) center;
+            background-size: 16px;
+        }
+        .club-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 0 0 4px 4px;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .club-option {
+            padding: 8px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .club-option:hover {
+            background-color: #444;
+        }
+        .club-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+        }
+        .status-message {
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .status-success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+        .status-error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid #f44336;
+        }
+        .add-player-btn {
+            margin: 0 0 15px auto;
+            display: block;
+        }
+        /* Tab system */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            gap: 5px;
+        }
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            border-radius: 4px 4px 0 0;
+        }
+        .tab:hover {
+            background-color: #333;
+        }
+        .tab.active {
+            border-bottom: 2px solid #4caf50;
+            font-weight: 600;
+            background-color: #333;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Team dropdown for stats */
+        .team-dropdown {
+            position: relative;
+        }
+        .team-search {
+            padding-right: 30px;
+        }
+        .team-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 0 0 4px 4px;
+            z-index: 100;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .team-option {
+            padding: 8px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .team-option:hover {
+            background-color: #444;
+        }
+        .team-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        
+        /* Stats reordering controls */
+        .stat-controls {
+            display: flex;
+            gap: 8px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .stat-move-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3f51b5;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .stat-move-btn:hover {
+            background-color: #303f9f;
+            transform: scale(1.05);
+        }
+        
+        .stat-move-btn.btn-delete {
+            background-color: #f44336;
+        }
+        
+        .stat-move-btn.btn-delete:hover {
+            background-color: #d32f2f;
+        }
+        
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .add-stat-btn {
+            background-color: #3f51b5;
+            transition: background-color 0.2s;
+            padding: 10px 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-stat-btn:hover {
+            background-color: #303f9f;
+        }
+        
+        .add-stat-btn i {
+            font-size: 16px;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            
+            .player-list {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+                max-height: 300px;
+            }
+            
+            .header {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                margin-bottom: 10px;
+                font-size: 22px;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-delete {
+                align-self: center;
+            }
+            
+            /* Make tabs more usable on mobile */
+            .tabs {
+                padding-bottom: 5px;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+                font-size: 15px;
+            }
+            
+            /* Adjust stat items for mobile */
+            .stat-item {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            
+            .stat-item > div {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .stat-controls {
+                position: relative;
+                transform: none;
+                justify-content: flex-end;
+                margin-top: 10px;
+                right: 0;
+            }
+            
+            /* Adjust form elements for touch */
+            button, input, select {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents iOS zoom on focus */
+                border-radius: 6px;
+            }
+            
+            label {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+        }
+        .setup-link {
+            margin-left: 10px;
+            color: #3498db;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background-color: rgba(52, 152, 219, 0.2);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .setup-link:hover {
+            background-color: rgba(52, 152, 219, 0.3);
+            color: #2980b9;
+        }
+        
+        .setup-link i {
+            margin-right: 5px;
+        }
+
+        .history-container {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background-color: #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover {
+            background-color: #3a3a3a;
+            transform: translateY(-2px);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-timestamp {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .history-type {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .history-type.transfer {
+            background-color: #2196f3;
+            color: white;
+        }
+
+        .history-type.edit {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .history-type.stats {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .history-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+        }
+
+        .history-changes {
+            display: flex;
+            gap: 20px;
+        }
+
+        .history-old, .history-new {
+            flex: 1;
+        }
+
+        .history-label {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .history-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .history-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .history-btn:hover {
+            background-color: #303f9f;
+        }
+
+        .history-btn.revert {
+            background-color: #f44336;
+        }
+
+        .history-btn.revert:hover {
+            background-color: #d32f2f;
+        }
+
+        #history-filter {
+            padding: 8px;
+            background-color: #333;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+    </style>
+
+    <!-- Performance optimized CSS -->
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/performance.css">
+    <link rel="stylesheet" href="css/additional-fixes.css"></noscript>
+
+</head>
+<body>
+    <div class="header">
+        <h1>R2G Player Admin Panel</h1>
+        <div class="user-info">
+            <span>Logged in as: <span class="username" id="logged-user">Admin</span></span>
+            <button class="logout-btn" id="logout-btn">Logout</button>
+            <a href="token-setup.html" class="setup-link" title="Configure GitHub Token">
+                <i class="fas fa-cog"></i> Token Setup
+            </a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="player-list">
+            <h2>Players</h2>
+            <input type="text" class="search-box" id="player-search" placeholder="Search players...">
+            <button class="add-player-btn" id="add-player-btn">+ New Player</button>
+            <div id="players-container">
+                <!-- Player list items will be added here dynamically -->
+            </div>
+        </div>
+        
+        <div class="player-editor" id="player-editor">
+            <div class="tabs">
+                <div class="tab active" data-tab="basic">Basic Info</div>
+                <div class="tab" data-tab="stats">Stats & History</div>
+                <div class="tab" data-tab="image">Image</div>
+                <div class="tab" data-tab="history">Change History</div>
+            </div>
+            
+            <div class="tab-content active" data-tab="basic">
+                <div class="form-group">
+                    <label for="player-name">Player Name</label>
+                    <input type="text" id="player-name" placeholder="Player name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-star">Star Rating</label>
+                    <select id="player-star">
+                        <option value="3-star-standard">3 Star Standard</option>
+                        <option value="4-star-standard">4 Star Standard</option>
+                        <option value="5-star-standard">5 Star Standard</option>
+                        <option value="4-star-legend">4 Star Legend</option>
+                        <option value="5-star-legend">5 Star Legend</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-level">Level</label>
+                    <select id="player-level">
+                        <option value="STANDARD">STANDARD</option>
+                        <option value="LEGENDARY">LEGENDARY</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-club">Club</label>
+                    <div class="team-dropdown">
+                        <input type="text" id="player-club" placeholder="Search club..." class="team-search">
+                        <div id="club-options" class="team-options"></div>
+                    </div>
+                    <div id="club-preview" class="club-preview"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-position">Position</label>
+                    <select id="player-position">
+                        <option value="GK">GK</option>
+                        <option value="CB">CB</option>
+                        <option value="LB">LB</option>
+                        <option value="RB">RB</option>
+                        <option value="DM">DM</option>
+                        <option value="CM">CM</option>
+                        <option value="AM">AM</option>
+                        <option value="LW">LW</option>
+                        <option value="RW">RW</option>
+                        <option value="ST">ST</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-value">Value (RC)</label>
+                    <input type="number" id="player-value" min="1" placeholder="Player value">
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab="stats">
+                <h3>Player Stats & History</h3>
+                <div class="stats-header">
+                    <div>
+                        <button id="add-stat-btn" class="add-stat-btn"><i class="fas fa-plus"></i> Add New Stat</button>
+                    </div>
+                </div>
+                <div id="stats-container" class="stats-container">
+                    <!-- Stat items will be added here dynamically -->
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab="image">
+                <h3>Player Image</h3>
+                <div class="form-group">
+                    <label for="player-image-path">Image Path</label>
+                    <input type="text" id="player-image-path" placeholder="../assets/images/players/...">
+                </div>
+                <div id="image-preview" style="margin-top: 20px; text-align: center;">
+                    <!-- Image preview will be shown here -->
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab="history">
+                <h3>Change History</h3>
+                <div class="history-controls">
+                    <button id="refresh-history" class="history-btn">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                    <select id="history-filter">
+                        <option value="all">All Changes</option>
+                        <option value="transfers">Transfers Only</option>
+                        <option value="edits">Edits Only</option>
+                        <option value="stats">Stats Changes</option>
+                    </select>
+                </div>
+                <div id="history-container" class="history-container">
+                    <!-- History items will be added here dynamically -->
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <div>
+                    <button id="save-btn">Save Changes</button>
+                    <button id="cancel-btn">Cancel</button>
+                </div>
+                <button id="delete-btn" class="btn-delete">Delete Player</button>
+            </div>
+            
+            <div id="status-message" class="status-message"></div>
+        </div>
+    </div>
+
+    <!-- Add script tag with placeholder - will be filled in next edit -->
+    <script defer src="github-config.js"></script>
+    <script>
+        // GitHub configuration object
+        let githubConfig = null;
+        
+        // Initialize GitHub configuration
+        function initGitHubConfig() {
+            // If global config is available from github-config.js, use it
+            if (typeof window.githubConfig !== 'undefined') {
+                githubConfig = window.githubConfig;
+                console.log('GitHub config loaded from global object');
+                return true;
+            }
+            
+            // Fallback implementation if github-config.js is not available
+            githubConfig = {
+                isConfigured: function() {
+                    return !!localStorage.getItem('githubToken');
+                },
+                getToken: function() {
+                    return localStorage.getItem('githubToken');
+                },
+                getOwner: function() {
+                    return localStorage.getItem('githubOwner') || 'default-owner';
+                },
+                getRepo: function() {
+                    return localStorage.getItem('githubRepo') || 'default-repo';
+                },
+                getBranch: function() {
+                    return localStorage.getItem('githubBranch') || 'main';
+                },
+                filePath: 'players.json',
+                managerFilePath: 'manager_data.json'
+            };
+            
+            return githubConfig.isConfigured();
+        }
+        
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show loading indicator
+            const statusElement = document.getElementById('status-message');
+            statusElement.textContent = 'Loading...';
+            statusElement.className = 'status-message status-success';
+            statusElement.style.display = 'block';
+            
+            // First just check if logged in - do this synchronously for speed
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (!isLoggedIn) {
+                // Redirect to login page
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Set logged in username immediately
+            document.getElementById('logged-user').textContent = sessionStorage.getItem('adminUsername') || 'Admin';
+            
+            // Initialize GitHub config first
+            initGitHubConfig();
+            
+            // Initialize the admin panel right away to show UI faster
+            initAdminPanel().then(() => {
+                // Check GitHub config after the UI is already showing
+                if (!localStorage.getItem('githubToken')) {
+                    const configMessage = document.createElement('div');
+                    configMessage.className = 'status-message status-error';
+                    configMessage.style.display = 'block';
+                    configMessage.textContent = 'GitHub integration not configured. Changes will only be saved in memory.';
+                    configMessage.style.marginBottom = '10px';
+                    
+                    // Add a setup button
+                    const setupButton = document.createElement('button');
+                    setupButton.textContent = 'Configure GitHub';
+                    setupButton.style.marginTop = '5px';
+                    setupButton.addEventListener('click', () => {
+                        window.location.href = 'token-setup.html';
+                    });
+                    
+                    configMessage.appendChild(setupButton);
+                    
+                    // Insert at the top of the player editor
+                    const playerEditor = document.getElementById('player-editor');
+                    playerEditor.insertBefore(configMessage, playerEditor.firstChild);
+                }
+                
+                // No need to check server endpoints since we're focused on GitHub
+            });
+        });
+
+        // Function to check save endpoints availability (deprecated - we're using GitHub now)
+        async function checkSaveEndpoints() {
+            console.log('checkSaveEndpoints is deprecated - using direct GitHub connection instead');
+            // This function is kept for backward compatibility but does nothing
+            return;
+        }
+
+        // Fast logout function
+        function performLogout() {
+            // Clear session data first for immediate response
+            sessionStorage.removeItem('adminLoggedIn');
+            sessionStorage.removeItem('adminUsername');
+            
+            // Redirect immediately to login page
+            window.location.href = 'admin-login.html';
+        }
+
+        // Global variables
+        let playersData = [];
+        let managerData = null; // Add manager data
+        let currentPlayer = null;
+        let clubsList = [];
+        let isNewPlayer = false;
+        let debounceTimer = null;
+        
+        // Pagination variables
+        let currentPage = 1;
+        const playersPerPage = 50;
+        let filteredPlayers = [];
+        let totalPages = 1;
+
+        // Debounce function to improve performance for input events
+        function debounce(func, delay = 300) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
+        // Initialize admin panel
+        async function initAdminPanel() {
+            try {
+                // Start with disabling editor while loading
+                toggleEditorState(false);
+                
+                // Show loading in status element
+                const statusElement = document.getElementById('status-message');
+                statusElement.textContent = 'Loading player data...';
+                statusElement.className = 'status-message status-success';
+                statusElement.style.display = 'block';
+                
+                // Set up event listeners early
+                setupEventListeners();
+                
+                // Load data with a timeout to allow UI to render first
+                let loadedData = false;
+                
+                // Try to load data with preference for files updated by GitHub
+                const loadPromise = new Promise(async (resolve) => {
+                    try {
+                        // First try to load from files - these would be updated by GitHub
+                        console.log('Loading data from files (would be updated by GitHub)');
+                        try {
+                            const playersResponse = await fetch('players.json', {
+                                cache: 'no-store',  // Don't use cache
+                                headers: { 'Cache-Control': 'no-cache' }
+                            });
+                            
+                            if (playersResponse.ok) {
+                                playersData = await playersResponse.json();
+                                
+                                // Add unique ID to each player if missing
+                                playersData = playersData.map((player, index) => ({
+                                    ...player,
+                                    id: player.id ? Number(player.id) : (index + 1)
+                                }));
+                                
+                                console.log('Players loaded from file:', playersData.length);
+                                
+                                // Also load manager data from file
+                                try {
+                                    const managerResponse = await fetch('manager_data.json', {
+                                        cache: 'no-store',
+                                        headers: { 'Cache-Control': 'no-cache' }
+                                    });
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Manager data loaded from file');
+                                    }
+                                } catch (managerError) {
+                                    console.error('Error loading manager data from file:', managerError);
+                                }
+                                
+                                resolve(true);
+                                return;
+                            }
+                        } catch (fileError) {
+                            console.error('Error loading data from files:', fileError);
+                        }
+                        
+                        // Fallback: try local server if file loading failed
+                        console.log('File loading failed, trying local server as fallback');
+                        try {
+                            const serverAvailable = await isServerAvailable();
+                            if (serverAvailable) {
+                                const playersResponse = await fetch('http://localhost:3000/players.json');
+                                if (playersResponse.ok) {
+                                    playersData = await playersResponse.json();
+                                    console.log('Loaded players data from Node.js server (fallback)');
+                                    
+                                    const managerResponse = await fetch('http://localhost:3000/manager_data.json');
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Loaded manager data from Node.js server (fallback)');
+                                    }
+                                    
+                                    resolve(true);
+                                    return;
+                                }
+                            }
+                        } catch (serverError) {
+                            console.error('Error loading from server (fallback):', serverError);
+                        }
+                        
+                        throw new Error('Failed to load player data from any source');
+                    } catch (error) {
+                        console.error('Error loading data:', error);
+                        resolve(false);
+                    }
+                });
+                
+                // Set timeout for loading
+                const timeoutPromise = new Promise(resolve => {
+                    setTimeout(() => {
+                        if (!loadedData) {
+                            statusElement.textContent = 'Still loading... This may take a moment.';
+                        }
+                        resolve(false);
+                    }, 1500);
+                });
+                
+                // Wait for data or timeout
+                loadedData = await Promise.race([loadPromise, timeoutPromise]);
+                
+                // Wait for the actual data if timeout happened first
+                if (!loadedData) {
+                    loadedData = await loadPromise;
+                }
+                
+                if (!loadedData) {
+                    throw new Error('Failed to load players data');
+                }
+                
+                // Extract clubs and populate UI
+                extractClubs();
+                
+                // Reset pagination
+                currentPage = 1;
+                filteredPlayers = [...playersData];
+                totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+                
+                // Render players
+                populatePlayersList();
+                
+                // Show data summary
+                showStatusMessage(`Loaded ${playersData.length} players. Showing page 1 of ${totalPages}.`, true, 3000);
+                
+                // Hide loading status if it was success
+                if (statusElement.textContent === 'Loading player data...' || 
+                    statusElement.textContent === 'Still loading... This may take a moment.') {
+                    statusElement.style.display = 'none';
+                }
+                
+                // Return a resolved promise for chaining
+                return Promise.resolve();
+            } catch (error) {
+                showStatusMessage(`Error: ${error.message}`, false);
+                console.error('Error initializing admin panel:', error);
+                return Promise.resolve(); // Still resolve to continue
+            }
+        }
+
+        // Helper function to determine if the server is available
+        async function isServerAvailable() {
+            try {
+                // Use AbortController to implement a timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 500);  // 500ms timeout
+                
+                const response = await fetch('http://localhost:3000/players.json', {
+                    method: 'HEAD',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                return response.ok;
+            } catch (error) {
+                console.log('Server check failed:', error.name);
+                return false;
+            }
+        }
+
+        // Add a new function to specifically check if save-managers endpoint is available (deprecated)
+        async function isManagerSaveEndpointAvailable() {
+            console.log('isManagerSaveEndpointAvailable is deprecated - using direct GitHub connection instead');
+            // Always return false since we're using GitHub directly
+            return false;
+        }
+
+        // Extract unique clubs from player data
+        function extractClubs() {
+            // This function is now deprecated - using ClubManager instead
+            console.log('Using ClubManager for club data');
+            return window.ClubManager.initialize();
+        }
+        
+        // Collect all unique team names from player stats
+        function collectTeamNames() {
+            // This function is now deprecated - using ClubManager instead
+            console.log('Using ClubManager for team data');
+        }
+
+        // Populate players list
+        function populatePlayersList(searchTerm = '') {
+            const container = document.getElementById('players-container');
+            container.innerHTML = '';
+            
+            // Filter players if there's a search term
+            const lowerSearchTerm = searchTerm.toLowerCase();
+            filteredPlayers = searchTerm 
+                ? playersData.filter(player => player.name.toLowerCase().includes(lowerSearchTerm))
+                : [...playersData];
+            
+            // Sort players by value (highest first)
+            filteredPlayers.sort((a, b) => {
+                // Sort by value (highest first)
+                if (b.value !== a.value) {
+                    return b.value - a.value;
+                }
+                // If values are equal, sort alphabetically by name
+                return a.name.localeCompare(b.name);
+            });
+            
+            // Calculate total pages
+            totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+            
+            // Make sure current page is valid
+            if (currentPage > totalPages) {
+                currentPage = totalPages || 1;
+            }
+            
+            // Get current page players
+            const startIndex = (currentPage - 1) * playersPerPage;
+            const endIndex = Math.min(startIndex + playersPerPage, filteredPlayers.length);
+            const currentPagePlayers = filteredPlayers.slice(startIndex, endIndex);
+            
+            // Use DocumentFragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            // Show pagination info
+            const paginationInfo = document.createElement('div');
+            paginationInfo.className = 'pagination-info';
+            paginationInfo.style.fontSize = '12px';
+            paginationInfo.style.color = '#aaa';
+            paginationInfo.style.margin = '5px 0 10px';
+            paginationInfo.style.textAlign = 'center';
+            paginationInfo.textContent = `Showing ${startIndex + 1}-${endIndex} of ${filteredPlayers.length} players`;
+            fragment.appendChild(paginationInfo);
+            
+            // Add players for current page
+            currentPagePlayers.forEach(player => {
+                const playerElement = document.createElement('div');
+                playerElement.className = 'player-item';
+                playerElement.dataset.id = player.id;
+                
+                const img = document.createElement('img');
+                img.className = 'player-thumbnail';
+                img.src = player.imagePath || player.img || 'https://via.placeholder.com/40';
+                img.alt = player.name;
+                img.loading = 'lazy'; // Lazy load images
+                img.onerror = function() {
+                    this.src = 'https://via.placeholder.com/40';
+                };
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'player-name';
+                nameSpan.textContent = player.name;
+                
+                const valueSpan = document.createElement('span');
+                valueSpan.className = 'player-value';
+                valueSpan.textContent = player.value;
+                
+                playerElement.appendChild(img);
+                playerElement.appendChild(nameSpan);
+                playerElement.appendChild(valueSpan);
+                
+                playerElement.addEventListener('click', () => {
+                    selectPlayer(player.id);
+                });
+                
+                fragment.appendChild(playerElement);
+            });
+            
+            // Create pagination controls if more than one page
+            if (totalPages > 1) {
+                const paginationControls = document.createElement('div');
+                paginationControls.className = 'pagination-controls';
+                paginationControls.style.display = 'flex';
+                paginationControls.style.justifyContent = 'center';
+                paginationControls.style.marginTop = '15px';
+                paginationControls.style.gap = '5px';
+                
+                const prevButton = document.createElement('button');
+                prevButton.innerHTML = '&laquo;';
+                prevButton.style.padding = '5px 10px';
+                prevButton.style.backgroundColor = '#333';
+                prevButton.style.border = '1px solid #444';
+                prevButton.style.borderRadius = '4px';
+                prevButton.style.color = '#fff';
+                prevButton.style.cursor = 'pointer';
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        populatePlayersList(searchTerm);
+                    }
+                });
+                
+                const pageInfo = document.createElement('span');
+                pageInfo.textContent = `${currentPage} / ${totalPages}`;
+                pageInfo.style.padding = '5px 10px';
+                pageInfo.style.backgroundColor = '#333';
+                pageInfo.style.border = '1px solid #444';
+                pageInfo.style.borderRadius = '4px';
+                
+                const nextButton = document.createElement('button');
+                nextButton.innerHTML = '&raquo;';
+                nextButton.style.padding = '5px 10px';
+                nextButton.style.backgroundColor = '#333';
+                nextButton.style.border = '1px solid #444';
+                nextButton.style.borderRadius = '4px';
+                nextButton.style.color = '#fff';
+                nextButton.style.cursor = 'pointer';
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        populatePlayersList(searchTerm);
+                    }
+                });
+                
+                paginationControls.appendChild(prevButton);
+                paginationControls.appendChild(pageInfo);
+                paginationControls.appendChild(nextButton);
+                
+                fragment.appendChild(paginationControls);
+            }
+            
+            // Append all elements at once
+            container.appendChild(fragment);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Logout button
+            document.getElementById('logout-btn').addEventListener('click', performLogout);
+            
+            // Tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    const tabName = tab.dataset.tab;
+                    document.querySelector(`.tab-content[data-tab="${tabName}"]`).classList.add('active');
+                });
+            });
+            
+            // Player search
+            const searchInput = document.getElementById('player-search');
+            searchInput.addEventListener('input', debounce(function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                currentPage = 1; // Reset to first page on search
+                populatePlayersList(searchTerm);
+            }, 250));
+            
+            // Club dropdown in basic info tab
+            const clubInput = document.getElementById('player-club');
+            const clubOptions = document.getElementById('club-options');
+            
+            clubInput.addEventListener('focus', async () => {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(clubOptions, clubInput, '');
+                clubOptions.style.display = 'block';
+            });
+            
+            clubInput.addEventListener('input', debounce(async function() {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(clubOptions, clubInput, this.value);
+                clubOptions.style.display = 'block';
+            }, 200));
+            
+            clubInput.addEventListener('blur', function() {
+                setTimeout(() => {
+                    clubOptions.style.display = 'none';
+                }, 150);
+            });
+            
+            // Global click handler for dropdowns (both club and team dropdowns)
+            document.addEventListener('click', (e) => {
+                // Handle club options dropdown
+                if (clubOptions && !clubInput.contains(e.target) && !clubOptions.contains(e.target)) {
+                    clubOptions.style.display = 'none';
+                }
+                
+                // Handle all team options dropdowns in stat items
+                const teamDropdowns = document.querySelectorAll('.team-dropdown');
+                teamDropdowns.forEach(dropdown => {
+                    const teamInput = dropdown.querySelector('.team-search');
+                    const teamOptions = dropdown.querySelector('.team-options');
+                    
+                    if (teamInput && teamOptions && !teamInput.contains(e.target) && !teamOptions.contains(e.target)) {
+                        teamOptions.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Add new player button
+            document.getElementById('add-player-btn').addEventListener('click', createNewPlayer);
+            
+            // Save button
+            document.getElementById('save-btn').addEventListener('click', savePlayerChanges);
+            
+            // Cancel button
+            document.getElementById('cancel-btn').addEventListener('click', () => {
+                if (currentPlayer) {
+                    loadPlayerData(currentPlayer.id);
+                } else {
+                    toggleEditorState(false);
+                }
+            });
+            
+            // Delete button
+            document.getElementById('delete-btn').addEventListener('click', deletePlayer);
+            
+            // Add stat buttons (both top and bottom)
+            document.getElementById('add-stat-btn').addEventListener('click', () => addStatItem());
+            
+            // Image path input change
+            const imagePathInput = document.getElementById('player-image-path');
+            imagePathInput.addEventListener('input', debounce(updateImagePreview, 300));
+        }
+
+        // Select player by ID
+        function selectPlayer(playerId) {
+            // Convert playerId to number to ensure consistent comparison
+            playerId = Number(playerId);
+            
+            // Find the player in the data
+            currentPlayer = playersData.find(p => Number(p.id) === playerId);
+            
+            if (!currentPlayer) {
+                console.error("Player not found with ID:", playerId);
+                showStatusMessage("Error: Player not found", false);
+                return;
+            }
+            
+            // Highlight selected player if it's on the current page
+            document.querySelectorAll('.player-item').forEach(item => {
+                item.classList.remove('selected');
+                if (Number(item.dataset.id) === playerId) {
+                    item.classList.add('selected');
+                    // Scroll the player into view
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+            
+            // If player is not on current page, try to find and navigate to their page
+            const playerIndex = filteredPlayers.findIndex(p => Number(p.id) === playerId);
+            if (playerIndex !== -1) {
+                const playerPage = Math.floor(playerIndex / playersPerPage) + 1;
+                if (playerPage !== currentPage) {
+                    currentPage = playerPage;
+                    populatePlayersList(document.getElementById('player-search').value);
+                    
+                    // Re-select the player after page change (small delay to let DOM update)
+                    setTimeout(() => {
+                        document.querySelectorAll('.player-item').forEach(item => {
+                            item.classList.remove('selected');
+                            if (Number(item.dataset.id) === playerId) {
+                                item.classList.add('selected');
+                                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                        });
+                    }, 50);
+                }
+            }
+            
+            // Load player data
+            loadPlayerData(playerId);
+            
+            // Enable editor
+            toggleEditorState(true);
+            isNewPlayer = false;
+        }
+
+        // Load player data into editor
+        function loadPlayerData(playerId) {
+            // Convert playerId to number to ensure consistent comparison
+            playerId = Number(playerId);
+            
+            currentPlayer = playersData.find(p => Number(p.id) === playerId);
+            if (!currentPlayer) {
+                console.error("loadPlayerData: Player not found with ID:", playerId);
+                return;
+            }
+            
+            // Basic info tab
+            document.getElementById('player-name').value = currentPlayer.name || '';
+            document.getElementById('player-star').value = currentPlayer.star || '3-star-standard';
+            document.getElementById('player-level').value = currentPlayer.level || 'STANDARD';
+            document.getElementById('player-club').value = currentPlayer.club || '';
+            document.getElementById('player-position').value = currentPlayer.position || 'ST';
+            document.getElementById('player-value').value = currentPlayer.value || '';
+            
+            // Image tab - also handle stats property correctly
+            document.getElementById('player-image-path').value = currentPlayer.imagePath || currentPlayer.img || '';
+            updateImagePreview();
+            
+            // Stats tab
+            populateStatsContainer();
+        }
+
+        // Toggle editor state (enabled/disabled)
+        function toggleEditorState(enabled) {
+            const editorInputs = document.querySelectorAll('#player-editor input, #player-editor select, #player-editor button:not(#add-player-btn)');
+            editorInputs.forEach(input => {
+                input.disabled = !enabled;
+            });
+            
+            document.getElementById('player-editor').style.opacity = enabled ? '1' : '0.7';
+            document.getElementById('delete-btn').style.display = isNewPlayer ? 'none' : 'block';
+        }
+
+        // Create new player
+        function createNewPlayer() {
+            isNewPlayer = true;
+            
+            // Generate a temporary ID (negative to avoid conflicts)
+            const tempId = -Date.now();
+            
+            // Create empty player object
+            currentPlayer = {
+                id: tempId,
+                name: '',
+                star: '3-star-standard',
+                level: 'STANDARD',
+                club: '',
+                clubLogo: '',
+                position: 'ST',
+                value: 1,
+                imagePath: '',  // Change from img to imagePath to match the rest of the code
+                stats: []
+            };
+            
+            // Deselect all players
+            document.querySelectorAll('.player-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Reset form
+            document.getElementById('player-name').value = '';
+            document.getElementById('player-star').value = '3-star-standard';
+            document.getElementById('player-level').value = 'STANDARD';
+            document.getElementById('player-club').value = '';
+            document.getElementById('player-position').value = 'ST';
+            document.getElementById('player-value').value = '1';
+            document.getElementById('player-image-path').value = '';
+            
+            // Clear stats
+            document.getElementById('stats-container').innerHTML = '';
+            
+            // Enable editor
+            toggleEditorState(true);
+            document.getElementById('delete-btn').style.display = 'none';
+            
+            // Switch to basic info tab
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('.tab[data-tab="basic"]').classList.add('active');
+            document.querySelector('.tab-content[data-tab="basic"]').classList.add('active');
+            
+            // Focus on name field
+            document.getElementById('player-name').focus();
+        }
+
+        // Save player changes
+        async function savePlayerChanges() {
+            // First give immediate UI feedback that save was clicked
+            const saveBtn = document.getElementById('save-btn');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+            
+            try {
+                // Validate required fields
+                const playerName = document.getElementById('player-name').value.trim();
+                const playerValue = parseInt(document.getElementById('player-value').value);
+                
+                if (!playerName) {
+                    throw new Error('Player name is required');
+                }
+                
+                if (isNaN(playerValue) || playerValue < 1) {
+                    throw new Error('Player value must be a positive number');
+                }
+                
+                // Update current player object with form values immediately
+                const updatedPlayer = {
+                    ...currentPlayer,
+                    name: playerName,
+                    star: document.getElementById('player-star').value,
+                    level: document.getElementById('player-level').value,
+                    club: document.getElementById('player-club').value,
+                    position: document.getElementById('player-position').value,
+                    value: playerValue,
+                    imagePath: document.getElementById('player-image-path').value
+                };
+                
+                // Get stats with the correct structure
+                const statsElements = document.querySelectorAll('.stat-item');
+                updatedPlayer.stats = Array.from(statsElements).map(statElement => {
+                    const season = statElement.querySelector('[data-stat-season]').value;
+                    const team = statElement.querySelector('[data-stat-team]').value;
+                    const value = statElement.querySelector('[data-stat-value]').value;
+                    
+                    return { 
+                        season,
+                        team,
+                        value
+                    };
+                });
+                
+                // Update club logo using ClubManager
+                const clubData = window.ClubManager.getClub(updatedPlayer.club);
+                if (clubData) {
+                    updatedPlayer.clubLogo = clubData.logo;
+                }
+                
+                // Update in memory immediately - don't wait for server
+                if (isNewPlayer) {
+                    // Find the highest existing ID and increment by 1
+                    const maxId = Math.max(...playersData.map(p => p.id), 0);
+                    updatedPlayer.id = maxId + 1;
+                    playersData.push(updatedPlayer);
+                    
+                    // Add to filtered players if applicable
+                    const searchTerm = document.getElementById('player-search').value.toLowerCase();
+                    if (!searchTerm || updatedPlayer.name.toLowerCase().includes(searchTerm)) {
+                        // Add to filtered players and re-sort
+                        filteredPlayers.push(updatedPlayer);
+                        
+                        // Navigate to the page with the new player
+                        currentPage = Math.ceil(filteredPlayers.length / playersPerPage);
+                    }
+                } else {
+                    // Update existing player
+                    const playerIndex = playersData.findIndex(p => Number(p.id) === Number(currentPlayer.id));
+                    if (playerIndex !== -1) {
+                        playersData[playerIndex] = updatedPlayer;
+                        
+                        // Update in filtered players if present
+                        const filteredIndex = filteredPlayers.findIndex(p => Number(p.id) === Number(currentPlayer.id));
+                        if (filteredIndex !== -1) {
+                            filteredPlayers[filteredIndex] = updatedPlayer;
+                        }
+                    } else {
+                        throw new Error('Player not found in the database');
+                    }
+                }
+                
+                // Update current player reference and reset state
+                currentPlayer = updatedPlayer;
+                isNewPlayer = false;
+                
+                // Update players list to show changes immediately
+                populatePlayersList(document.getElementById('player-search').value);
+                
+                // Reselect the current player in the list
+                selectPlayer(currentPlayer.id);
+                
+                // Sync changes to manager data
+                if (managerData) {
+                    syncPlayerToManagerData(updatedPlayer);
+                    console.log('Player data synced to manager data:', managerData);
+                } else {
+                    console.warn('Manager data not available. Cannot sync player data.');
+                }
+                
+                // Show immediate success message
+                showStatusMessage('Player saved in memory. Saving to storage...', true);
+                
+                // Now try saving to persistence (GitHub or server) in background
+                let savedPermanently = false;
+                let managerDataSaved = false;
+                
+                // First priority: GitHub if configured
+                const useGithub = localStorage.getItem('githubToken');
+                if (useGithub) {
+                    try {
+                        // Initialize GitHub config if needed
+                        if (!githubConfig) {
+                            initGitHubConfig();
+                        }
+                        await saveToGitHub();
+                        savedPermanently = true;
+                        managerDataSaved = true;
+                    } catch (githubError) {
+                        console.error('GitHub save failed:', githubError);
+                        // Continue to try server save if GitHub fails
+                    }
+                }
+                
+                // Second priority: Local server if GitHub failed or not configured
+                if (!savedPermanently) {
+                    const serverAvailable = await isServerAvailable();
+                    if (serverAvailable) {
+                        try {
+                            // Save updated players data to JSON file using the Node.js server
+                            const saveResponse = await fetch('http://localhost:3000/save-players', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(playersData)
+                            });
+                            
+                            if (!saveResponse.ok) {
+                                const errorData = await saveResponse.json();
+                                throw new Error(errorData.message || 'Failed to save changes');
+                            }
+                            
+                            savedPermanently = true;
+                            
+                            // Also save manager data if it exists
+                            if (managerData) {
+                                // Check if manager save endpoint is available
+                                const managerSaveAvailable = await isManagerSaveEndpointAvailable();
+                                
+                                if (managerSaveAvailable) {
+                                    try {
+                                        const saveManagerResponse = await fetch('http://localhost:3000/save-managers', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(managerData)
+                                        });
+                                        
+                                        if (saveManagerResponse.ok) {
+                                            managerDataSaved = true;
+                                            console.log('Manager data saved successfully');
+                                        } else {
+                                            console.error('Failed to save manager data:', await saveManagerResponse.text());
+                                        }
+                                    } catch (managerSaveError) {
+                                        console.error('Error saving manager data:', managerSaveError);
+                                    }
+                                } else {
+                                    console.warn('Manager save endpoint not available');
+                                }
+                            }
+                            
+                            showStatusMessage(managerDataSaved ? 
+                                'Changes saved to server!' : 
+                                'Player data saved, but manager data could not be saved.', 
+                                true);
+                        } catch (serverError) {
+                            console.error('Server save failed:', serverError);
+                        }
+                    }
+                }
+                
+                // If neither GitHub nor server saved, show warning
+                if (!savedPermanently) {
+                    showStatusMessage('Warning: Changes are only in memory. Configure GitHub integration to save permanently.', false);
+                }
+                
+            } catch (error) {
+                showStatusMessage(error.message, false);
+                console.error('Error saving player changes:', error);
+            } finally {
+                // Always restore button state
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }
+        }
+
+        // Sync player changes to manager data
+        function syncPlayerToManagerData(player) {
+            console.log('Syncing player to manager data:', player);
+            
+            if (!managerData) {
+                console.error('No manager data object is available');
+                return;
+            }
+            
+            // Debug the manager data structure
+            if (typeof managerData !== 'object') {
+                console.error('Manager data is not an object:', typeof managerData, managerData);
+                return;
+            }
+            
+            if (!managerData.managers) {
+                console.error('Manager data has no managers property:', managerData);
+                // Initialize managers array if it doesn't exist
+                managerData.managers = [];
+            }
+            
+            if (!Array.isArray(managerData.managers)) {
+                console.error('Manager data has managers property but it is not an array:', typeof managerData.managers, managerData.managers);
+                // Convert to array if possible
+                if (typeof managerData.managers === 'object' && managerData.managers !== null) {
+                    console.log('Attempting to convert managers object to array');
+                    const managersArray = Object.values(managerData.managers);
+                    managerData.managers = managersArray;
+                } else {
+                    // Reset to empty array if conversion is not possible
+                    managerData.managers = [];
+                }
+            }
+            
+            // Validate player object has required fields
+            if (!player || !player.name || !player.position || !player.value) {
+                console.error('Invalid player data for syncing', player);
+                return;
+            }
+            
+            const playerName = player.name;
+            const playerPosition = player.position;
+            const playerValue = Number(player.value);
+            const playerClub = player.club || '';
+            
+            // Skip sync if no club is assigned to player
+            if (!playerClub) {
+                console.log(`Player "${playerName}" has no club assigned, skipping manager sync.`);
+                return;
+            }
+            
+            console.log(`Syncing player "${playerName}" (${playerPosition}) to club "${playerClub}", value: ${playerValue}`);
+            console.log(`Total managers in data: ${managerData.managers.length}`);
+            
+            const playerContract = "SEASON 8";  
+            const playerType = (player.level || 'standard').toLowerCase();
+            
+            // Calculate a default salary based on player value (5% of value as a rough estimate)
+            const playerSalary = (playerValue * 0.05).toFixed(1);
+            
+            // Check if the player exists in any manager's squad
+            let foundInSquad = false;
+            let needsTransfer = false;
+            let oldManager = null;
+            let newManager = null;
+            
+            // First, find the player's current squad and the target squad
+            managerData.managers.forEach((manager, index) => {
+                console.log(`Checking manager ${index + 1}/${managerData.managers.length}: ${manager.name || 'unnamed'} (${manager.club || 'no club'})`);
+                
+                if (!manager.squad || !manager.squad.players || !Array.isArray(manager.squad.players)) {
+                    // Initialize squad structure if it doesn't exist
+                    console.log(`Initializing squad for manager: ${manager.name || 'unnamed'}`);
+                    manager.squad = {
+                        total_players: 0,
+                        players: []
+                    };
+                }
+                
+                // Check if player exists in this manager's squad (case-insensitive name comparison)
+                const playerIndex = manager.squad.players.findIndex(p => 
+                    p && p.name && p.position && 
+                    p.name.toUpperCase() === playerName.toUpperCase() && 
+                    p.position === playerPosition
+                );
+                
+                if (playerIndex !== -1) {
+                    foundInSquad = true;
+                    console.log(`Found player "${playerName}" in squad of ${manager.name} (${manager.club})`);
+                    
+                    // Check if the club has changed (player transfer needed)
+                    if (manager.club !== playerClub) {
+                        needsTransfer = true;
+                        oldManager = manager;
+                        console.log(`Player "${playerName}" found in ${manager.club} but needs transfer to ${playerClub}`);
+                    } else {
+                        // Same club, just update the player details
+                        console.log(`Updating player "${playerName}" in same club (${manager.club})`);
+                        manager.squad.players[playerIndex].value = playerValue;
+                        
+                        // Don't override existing contract and salary if they exist
+                        if (!manager.squad.players[playerIndex].contract) {
+                            manager.squad.players[playerIndex].contract = playerContract;
+                        }
+                        if (!manager.squad.players[playerIndex].salary) {
+                            manager.squad.players[playerIndex].salary = parseFloat(playerSalary);
+                        }
+                        if (!manager.squad.players[playerIndex].type) {
+                            manager.squad.players[playerIndex].type = playerType;
+                        }
+                        
+                        // Recalculate club total value
+                        recalculateManagerTotalValue(manager);
+                        console.log(`Updated player "${playerName}" in ${manager.club}'s squad`);
+                    }
+                }
+                
+                // Check if this is the target manager for a transfer
+                if (manager.club && playerClub && 
+                    manager.club.toUpperCase() === playerClub.toUpperCase()) {
+                    newManager = manager;
+                    console.log(`Found target manager for ${playerClub}: ${manager.name}`);
+                }
+            });
+            
+            // If we need to do a transfer but couldn't find the target manager, create one
+            if (playerClub && !newManager) {
+                console.log(`Creating new manager for club ${playerClub}`);
+                newManager = {
+                    name: `Manager of ${playerClub}`,
+                    club: playerClub,
+                    overall_rating: 0,
+                    r2g_coin_balance: 0,
+                    r2g_token_balance: 0,
+                    club_total_value: 0,
+                    manager_rating: 0,
+                    trophies: 0,
+                    awards: 0,
+                    squad: {
+                        total_players: 0,
+                        players: []
+                    },
+                    star_rating: 3
+                };
+                managerData.managers.push(newManager);
+                console.log(`Created new manager for ${playerClub}`);
+            }
+            
+            // Handle player transfers if needed
+            if (needsTransfer && oldManager && newManager) {
+                try {
+                    console.log(`Processing transfer for "${playerName}" from ${oldManager.club} to ${newManager.club}`);
+                    
+                    // 1. Remove the player from the old squad
+                    const oldPlayerIndex = oldManager.squad.players.findIndex(p => 
+                        p.name.toUpperCase() === playerName.toUpperCase() && 
+                        p.position === playerPosition
+                    );
+                    
+                    if (oldPlayerIndex !== -1) {
+                        // Get player data before removing (to preserve contract info if available)
+                        const playerData = oldManager.squad.players[oldPlayerIndex];
+                        console.log(`Removing player from ${oldManager.club}, current data:`, playerData);
+                        
+                        // Remove from old squad
+                        oldManager.squad.players.splice(oldPlayerIndex, 1);
+                        oldManager.squad.total_players = oldManager.squad.players.length;
+                        
+                        // 2. Add the player to the new squad with updated info
+                        const newPlayerData = {
+                            name: playerName,
+                            position: playerPosition,
+                            value: playerValue,
+                            contract: playerData.contract || playerContract,
+                            salary: playerData.salary || parseFloat(playerSalary),
+                            type: playerData.type || playerType
+                        };
+                        
+                        console.log(`Adding player to ${newManager.club} with data:`, newPlayerData);
+                        newManager.squad.players.push(newPlayerData);
+                        newManager.squad.total_players = newManager.squad.players.length;
+                        
+                        // 3. Recalculate both squads' total values
+                        recalculateManagerTotalValue(oldManager);
+                        recalculateManagerTotalValue(newManager);
+                        
+                        console.log(`Transferred player "${playerName}" from ${oldManager.club} to ${newManager.club}`);
+                        
+                        // Add to history
+                        addToHistory({
+                            type: 'transfer',
+                            oldTeam: oldManager.club,
+                            newTeam: newManager.club,
+                            description: `Transferred ${playerName} from ${oldManager.club} to ${newManager.club}`,
+                            revertible: true
+                        });
+                    }
+                } catch (transferError) {
+                    console.error(`Error transferring player "${playerName}":`, transferError);
+                }
+            } else if (!foundInSquad && playerClub && newManager) {
+                // Player not found in any squad but has a club assigned - add to the new club
+                try {
+                    const newPlayerData = {
+                        name: playerName,
+                        position: playerPosition,
+                        value: playerValue,
+                        contract: playerContract,
+                        salary: parseFloat(playerSalary),
+                        type: playerType
+                    };
+                    
+                    console.log(`Adding new player "${playerName}" to ${newManager.club}'s squad`, newPlayerData);
+                    
+                    // Make sure the squad and players array exist
+                    if (!newManager.squad) {
+                        newManager.squad = { total_players: 0, players: [] };
+                    }
+                    if (!newManager.squad.players) {
+                        newManager.squad.players = [];
+                    }
+                    
+                    newManager.squad.players.push(newPlayerData);
+                    newManager.squad.total_players = newManager.squad.players.length;
+                    recalculateManagerTotalValue(newManager);
+                    
+                    console.log(`Added new player "${playerName}" to ${newManager.club}'s squad`);
+                } catch (addError) {
+                    console.error(`Error adding player "${playerName}" to squad:`, addError);
+                }
+            } else if (!foundInSquad && playerClub) {
+                // Player has club but manager does not exist yet
+                console.log(`Player "${playerName}" has club "${playerClub}" but no matching manager found`);
+            } else if (!playerClub) {
+                console.log(`Player "${playerName}" has no club assigned`);
+            }
+            
+            // Final check to ensure the manager data is in a valid state
+            if (!Array.isArray(managerData.managers)) {
+                console.error('Manager data is invalid after sync:', managerData);
+            } else {
+                console.log(`Manager data after sync: ${managerData.managers.length} managers`);
+            }
+        }
+
+        // Recalculate manager's club total value
+        function recalculateManagerTotalValue(manager) {
+            if (!manager) {
+                console.error('Cannot recalculate value: No manager provided');
+                return;
+            }
+            
+            if (!manager.squad || !manager.squad.players || !Array.isArray(manager.squad.players)) {
+                console.log(`Setting up empty squad for ${manager.name || 'manager'}`);
+                manager.squad = {
+                    total_players: 0,
+                    players: []
+                };
+                manager.club_total_value = 0;
+                return;
+            }
+            
+            let totalValue = 0;
+            
+            try {
+                manager.squad.players.forEach(player => {
+                    if (player && player.value) {
+                        const playerValue = parseInt(player.value) || 0;
+                        totalValue += playerValue;
+                    }
+                });
+                
+                // Update the manager's club total value
+                manager.club_total_value = totalValue;
+                manager.squad.total_players = manager.squad.players.length;
+                
+                console.log(`Recalculated total value for ${manager.name || manager.club || 'manager'}: ${totalValue}`);
+            } catch (error) {
+                console.error('Error calculating manager total value:', error);
+                manager.club_total_value = 0;
+            }
+        }
+
+        // Delete player
+        async function deletePlayer() {
+            if (!currentPlayer || isNewPlayer) return;
+            
+            if (!confirm(`Are you sure you want to delete ${currentPlayer.name}?`)) {
+                return;
+            }
+            
+            try {
+                // Store player ID for later use
+                const playerId = Number(currentPlayer.id);
+                const playerName = currentPlayer.name;
+                const playerPosition = currentPlayer.position;
+                
+                // Remove player from main array
+                const playerIndex = playersData.findIndex(p => Number(p.id) === playerId);
+                if (playerIndex !== -1) {
+                    playersData.splice(playerIndex, 1);
+                    
+                    // Also remove from filtered players if present
+                    const filteredIndex = filteredPlayers.findIndex(p => Number(p.id) === playerId);
+                    if (filteredIndex !== -1) {
+                        filteredPlayers.splice(filteredIndex, 1);
+                    }
+                    
+                    // Remove from manager data if present
+                    if (managerData && managerData.managers) {
+                        managerData.managers.forEach(manager => {
+                            if (manager.squad && manager.squad.players) {
+                                const squadIndex = manager.squad.players.findIndex(p => 
+                                    p.name.toUpperCase() === playerName.toUpperCase() && 
+                                    p.position === playerPosition
+                                );
+                                
+                                if (squadIndex !== -1) {
+                                    manager.squad.players.splice(squadIndex, 1);
+                                    
+                                    // Update player count
+                                    manager.squad.total_players = manager.squad.players.length;
+                                    
+                                    // Recalculate club total value
+                                    recalculateManagerTotalValue(manager);
+                                    
+                                    console.log(`Removed player "${playerName}" from ${manager.name}'s squad`);
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Calculate new total pages
+                    totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+                    
+                    // Adjust current page if needed
+                    if (currentPage > totalPages) {
+                        currentPage = totalPages || 1;
+                    }
+                    
+                    // Check if GitHub integration is configured
+                    const useGithub = localStorage.getItem('githubToken');
+                    
+                    if (useGithub) {
+                        // Save to GitHub
+                        await saveToGitHub();
+                    } else {
+                        // Try server if available
+                        const serverAvailable = await isServerAvailable();
+                        
+                        if (serverAvailable) {
+                            // Save updated data to JSON file using the Node.js server
+                            const saveResponse = await fetch('http://localhost:3000/save-players', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(playersData)
+                            });
+                            
+                            if (!saveResponse.ok) {
+                                const errorData = await saveResponse.json();
+                                throw new Error(errorData.message || 'Failed to save changes');
+                            }
+                            
+                            // Also save manager data if it exists
+                            if (managerData) {
+                                const saveManagerResponse = await fetch('http://localhost:3000/save-managers', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(managerData)
+                                });
+                                
+                                if (!saveManagerResponse.ok) {
+                                    console.error('Failed to save manager data');
+                                }
+                            }
+                        } else {
+                            // Server not available, show warning
+                            showStatusMessage('Warning: Changes are only in memory. Configure GitHub integration to save permanently.', false);
+                        }
+                    }
+                    
+                    // Update players list with current search term
+                    populatePlayersList(document.getElementById('player-search').value);
+                    
+                    // Reset editor
+                    currentPlayer = null;
+                    toggleEditorState(false);
+                    
+                    showStatusMessage('Player deleted successfully!', true);
+                } else {
+                    throw new Error('Player not found in the database');
+                }
+            } catch (error) {
+                showStatusMessage(error.message, false);
+                console.error('Error deleting player:', error);
+            }
+        }
+
+        // Populate stats container
+        function populateStatsContainer() {
+            const container = document.getElementById('stats-container');
+            container.innerHTML = '';
+            
+            if (!currentPlayer || !currentPlayer.stats || !Array.isArray(currentPlayer.stats)) {
+                return;
+            }
+            
+            currentPlayer.stats.forEach(stat => {
+                addStatItem(
+                    stat.season || '', 
+                    stat.team || '', 
+                    stat.value || ''
+                );
+            });
+        }
+
+        // Add stat item with the correct fields matching the JSON structure
+        function addStatItem(season = '', team = '', statValue = '') {
+            const container = document.getElementById('stats-container');
+            const statElement = document.createElement('div');
+            statElement.className = 'stat-item';
+            
+            // Create season input
+            const seasonInput = document.createElement('input');
+            seasonInput.type = 'text';
+            seasonInput.value = season;
+            seasonInput.placeholder = 'Season (e.g. 6-8)';
+            seasonInput.dataset.statSeason = 'true';
+            seasonInput.style.flex = '1';
+            seasonInput.style.marginRight = '10px';
+            
+            // Create team input with dropdown
+            const teamDropdown = document.createElement('div');
+            teamDropdown.className = 'team-dropdown';
+            teamDropdown.style.flex = '1.5';
+            teamDropdown.style.marginRight = '10px';
+            
+            const teamInput = document.createElement('input');
+            teamInput.type = 'text';
+            teamInput.value = team;
+            teamInput.placeholder = 'Team';
+            teamInput.dataset.statTeam = 'true';
+            teamInput.className = 'team-search';
+            
+            const teamOptions = document.createElement('div');
+            teamOptions.className = 'team-options';
+            
+            teamDropdown.appendChild(teamInput);
+            teamDropdown.appendChild(teamOptions);
+            
+            // Setup team dropdown functionality
+            teamInput.addEventListener('focus', async () => {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(teamOptions, teamInput, '');
+                teamOptions.style.display = 'block';
+            });
+            
+            teamInput.addEventListener('input', async function() {
+                // Make sure club data is initialized
+                if (!window.ClubManager.initialized) {
+                    await window.ClubManager.initialize();
+                }
+                
+                populateTeamOptions(teamOptions, teamInput, this.value);
+                teamOptions.style.display = 'block';
+            });
+            
+            // Track mouse in dropdown
+            let mouseInTeamDropdown = false;
+            
+            teamOptions.addEventListener('mouseenter', () => {
+                mouseInTeamDropdown = true;
+            });
+            
+            teamOptions.addEventListener('mouseleave', () => {
+                mouseInTeamDropdown = false;
+            });
+            
+            teamInput.addEventListener('blur', () => {
+                // Give more time to select before hiding
+                setTimeout(() => {
+                    if (!mouseInTeamDropdown) {
+                        teamOptions.style.display = 'none';
+                    }
+                }, 500);
+            });
+            
+            // Create value input
+            const valueInput = document.createElement('input');
+            valueInput.type = 'text';
+            valueInput.value = statValue;
+            valueInput.placeholder = 'Value (e.g. 150 RC)';
+            valueInput.dataset.statValue = 'true';
+            valueInput.style.flex = '1';
+            valueInput.style.marginRight = '10px';
+            
+            // Create controls for reordering and deletion
+            const controlsContainer = document.createElement('div');
+            controlsContainer.className = 'stat-controls';
+            
+            // Create move up button
+            const moveUpBtn = document.createElement('button');
+            moveUpBtn.className = 'stat-move-btn';
+            moveUpBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            moveUpBtn.title = 'Move Up';
+            moveUpBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                moveStatUp(statElement);
+            });
+            
+            // Create move down button
+            const moveDownBtn = document.createElement('button');
+            moveDownBtn.className = 'stat-move-btn';
+            moveDownBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+            moveDownBtn.title = 'Move Down';
+            moveDownBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                moveStatDown(statElement);
+            });
+            
+            // Create delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'stat-move-btn btn-delete';
+            deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            deleteButton.title = 'Delete Stat';
+            deleteButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                container.removeChild(statElement);
+            });
+            
+            // Add buttons to controls container
+            controlsContainer.appendChild(moveUpBtn);
+            controlsContainer.appendChild(moveDownBtn);
+            controlsContainer.appendChild(deleteButton);
+            
+            // Add labels above inputs for clarity
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.width = '100%';
+            
+            // Create header row with labels
+            const headerRow = document.createElement('div');
+            headerRow.style.display = 'flex';
+            headerRow.style.marginBottom = '5px';
+            
+            const seasonLabel = document.createElement('div');
+            seasonLabel.textContent = 'Season';
+            seasonLabel.style.flex = '1';
+            seasonLabel.style.marginRight = '10px';
+            seasonLabel.style.fontSize = '12px';
+            
+            const teamLabel = document.createElement('div');
+            teamLabel.textContent = 'Team';
+            teamLabel.style.flex = '1.5';
+            teamLabel.style.marginRight = '10px';
+            teamLabel.style.fontSize = '12px';
+            
+            const valueLabel = document.createElement('div');
+            valueLabel.textContent = 'Value';
+            valueLabel.style.flex = '1';
+            valueLabel.style.marginRight = '10px';
+            valueLabel.style.fontSize = '12px';
+            
+            headerRow.appendChild(seasonLabel);
+            headerRow.appendChild(teamLabel);
+            headerRow.appendChild(valueLabel);
+            
+            // Create inputs row
+            const inputsRow = document.createElement('div');
+            inputsRow.style.display = 'flex';
+            
+            inputsRow.appendChild(seasonInput);
+            inputsRow.appendChild(teamDropdown);
+            inputsRow.appendChild(valueInput);
+            
+            wrapper.appendChild(headerRow);
+            wrapper.appendChild(inputsRow);
+            
+            statElement.appendChild(wrapper);
+            statElement.appendChild(controlsContainer);
+            container.appendChild(statElement);
+        }
+
+        // Move stat item up
+        function moveStatUp(statElement) {
+            const container = document.getElementById('stats-container');
+            const prevStat = statElement.previousElementSibling;
+            
+            if (prevStat) {
+                container.insertBefore(statElement, prevStat);
+            }
+        }
+        
+        // Move stat item down
+        function moveStatDown(statElement) {
+            const container = document.getElementById('stats-container');
+            const nextStat = statElement.nextElementSibling;
+            
+            if (nextStat) {
+                container.insertBefore(nextStat, statElement);
+            }
+        }
+        
+        // Populate team options for stat dropdowns
+        function populateTeamOptions(container, inputElement, searchTerm = '') {
+            // Use the ClubManager to populate team options
+            window.ClubManager.populateClubOptions(container, inputElement, searchTerm, club => {
+                // Update any related UI or data after selection
+                inputElement.value = club.name;
+                container.style.display = 'none';
+                
+                // If in basic info tab, update club logo preview if it exists
+                if (inputElement.id === 'player-club') {
+                    const clubLogoPreview = document.getElementById('club-logo-preview');
+                    if (clubLogoPreview && club.logo) {
+                        clubLogoPreview.src = club.logo;
+                        clubLogoPreview.style.display = 'block';
+                    }
+                    
+                    // Create preview if it doesn't exist
+                    const clubPreviewContainer = document.getElementById('club-preview');
+                    if (clubPreviewContainer && !clubLogoPreview) {
+                        const newClubLogoPreview = document.createElement('img');
+                        newClubLogoPreview.id = 'club-logo-preview';
+                        newClubLogoPreview.className = 'club-logo-preview';
+                        newClubLogoPreview.style.maxWidth = '50px';
+                        newClubLogoPreview.style.maxHeight = '50px';
+                        newClubLogoPreview.style.marginTop = '5px';
+                        newClubLogoPreview.src = club.logo;
+                        newClubLogoPreview.style.display = 'block';
+                        clubPreviewContainer.appendChild(newClubLogoPreview);
+                    }
+                }
+            });
+        }
+
+        // Update image preview
+        function updateImagePreview() {
+            const imagePath = document.getElementById('player-image-path').value;
+            const previewContainer = document.getElementById('image-preview');
+            
+            if (imagePath) {
+                const img = document.createElement('img');
+                img.src = imagePath;
+                img.alt = 'Player image preview';
+                img.style.maxWidth = '200px';
+                img.style.maxHeight = '200px';
+                img.style.border = '2px solid #444';
+                img.onerror = function() {
+                    previewContainer.innerHTML = '<p style="color: #f44336;">Invalid image path</p>';
+                };
+                
+                previewContainer.innerHTML = '';
+                previewContainer.appendChild(img);
+            } else {
+                previewContainer.innerHTML = '<p>No image path provided</p>';
+            }
+        }
+
+        // Show status message
+        function showStatusMessage(message, isSuccess, duration = 5000) {
+            const statusElement = document.getElementById('status-message');
+            statusElement.textContent = message;
+            statusElement.className = 'status-message';
+            statusElement.classList.add(isSuccess ? 'status-success' : 'status-error');
+            statusElement.style.display = 'block';
+            
+            // Hide after duration
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, duration);
+        }
+
+        // Save to GitHub
+        async function saveToGitHub() {
+            try {
+                // Initialize GitHub config if not already done
+                if (!githubConfig) {
+                    initGitHubConfig();
+                }
+                
+                // Check if GitHub integration is configured
+                if (!githubConfig.isConfigured()) {
+                    throw new Error('GitHub integration is not configured');
+                }
+                
+                // Show saving message
+                showStatusMessage('Saving to GitHub...', true);
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: localStorage.getItem('githubJsonPath') || githubConfig.filePath,
+                    branch: githubConfig.getBranch()
+                };
+                
+                // Get the current players file to get its SHA (required for the GitHub API)
+                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                let currentSHA = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    // File doesn't exist yet
+                    fileExists = false;
+                } else if (!fileInfoResponse.ok) {
+                    const errorData = await fileInfoResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                } else {
+                    // File exists, get its SHA
+                    const fileInfo = await fileInfoResponse.json();
+                    currentSHA = fileInfo.sha;
+                }
+                
+                // Prepare the content
+                const jsonString = JSON.stringify(playersData, null, 2);
+                const content = btoa(unescape(encodeURIComponent(jsonString)));
+                
+                // Prepare the commit message
+                const commitMessage = localStorage.getItem('githubCommitMessage') || 'Update player data';
+                
+                // Prepare the request body
+                const requestBody = {
+                    message: `${commitMessage} - ${new Date().toISOString()}`,
+                    content: content,
+                    branch: repoDetails.branch
+                };
+                
+                // Add SHA if the file exists
+                if (fileExists) {
+                    requestBody.sha = currentSHA;
+                }
+                
+                // Commit the updated file
+                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!commitResponse.ok) {
+                    const errorData = await commitResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                }
+                
+                // If manager data exists, save it too
+                if (managerData) {
+                    try {
+                        console.log('Attempting to save manager data to GitHub...');
+                        
+                        // Make sure managerData has a valid format before saving
+                        if (!managerData.managers || !Array.isArray(managerData.managers)) {
+                            console.error('Invalid manager data format:', managerData);
+                            throw new Error('Invalid manager data format');
+                        }
+                        
+                        // Get manager data file path - make sure to use a consistent path
+                        const managerPath = githubConfig.managerFilePath || 'manager_data.json';
+                        
+                        // Get the current manager file to get its SHA
+                        const managerInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}?ref=${repoDetails.branch}`, {
+                            headers: {
+                                'Authorization': `token ${githubConfig.getToken()}`
+                            }
+                        });
+                        
+                        let managerSHA = '';
+                        let managerExists = true;
+                        
+                        if (managerInfoResponse.status === 404) {
+                            // File doesn't exist yet
+                            managerExists = false;
+                            console.log('Manager file does not exist yet - will create it');
+                        } else if (!managerInfoResponse.ok) {
+                            const errorInfo = await managerInfoResponse.text();
+                            console.error('Error getting manager file info:', errorInfo);
+                            throw new Error(`Failed to get manager file info: ${errorInfo}`);
+                        } else {
+                            // File exists, get its SHA
+                            const fileInfo = await managerInfoResponse.json();
+                            managerSHA = fileInfo.sha;
+                            console.log('Found existing manager file with SHA:', managerSHA);
+                        }
+                        
+                        // Prepare the manager data content
+                        const managerJsonString = JSON.stringify(managerData, null, 2);
+                        console.log('Manager data size:', managerJsonString.length, 'bytes');
+                        
+                        const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
+                        
+                        // Prepare the manager request body
+                        const managerRequestBody = {
+                            message: `Update manager data - ${new Date().toISOString()}`,
+                            content: managerContent,
+                            branch: repoDetails.branch
+                        };
+                        
+                        // Add SHA if the file exists
+                        if (managerExists) {
+                            managerRequestBody.sha = managerSHA;
+                        }
+                        
+                        console.log('Sending manager data to GitHub...');
+                        
+                        // Commit the updated manager file
+                        const managerCommitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `token ${githubConfig.getToken()}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(managerRequestBody)
+                        });
+                        
+                        if (!managerCommitResponse.ok) {
+                            const errorText = await managerCommitResponse.text();
+                            console.error('Failed to save manager data to GitHub:', errorText);
+                            throw new Error(`Failed to save manager data: ${errorText}`);
+                        } else {
+                            console.log('Manager data saved to GitHub successfully');
+                        }
+                    } catch (managerError) {
+                        console.error('Error saving manager data to GitHub:', managerError);
+                        throw managerError; // Re-throw to be handled by the caller
+                    }
+                } else {
+                    console.log('No manager data to save');
+                }
+                
+                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                
+            } catch (error) {
+                showStatusMessage(`GitHub Error: ${error.message}`, false);
+                console.error('GitHub save error:', error);
+                throw error; // Re-throw to be handled by the caller
+            }
+        }
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Initialize club data first to ensure it's available
+            await window.ClubManager.initialize();
+            
+            // Load players data
+            loadPlayersData();
+            
+            // Add event listeners
+            setupEventListeners();
+        });
+
+        // Add to your existing JavaScript
+        let changeHistory = [];
+
+        function addToHistory(change) {
+            const timestamp = new Date().toISOString();
+            changeHistory.unshift({
+                timestamp,
+                ...change
+            });
+
+            // Save to localStorage
+            localStorage.setItem('playerChangeHistory', JSON.stringify(changeHistory));
+            
+            // Update history display if tab is active
+            if (document.querySelector('.tab[data-tab="history"]').classList.contains('active')) {
+                displayHistory();
+            }
+        }
+
+        function displayHistory() {
+            const container = document.getElementById('history-container');
+            const filter = document.getElementById('history-filter').value;
+            container.innerHTML = '';
+
+            const filteredHistory = changeHistory.filter(change => {
+                if (filter === 'all') return true;
+                return change.type === filter;
+            });
+
+            filteredHistory.forEach(change => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const header = document.createElement('div');
+                header.className = 'history-header';
+                
+                const timestamp = new Date(change.timestamp).toLocaleString();
+                header.innerHTML = `
+                    <div class="history-timestamp">${timestamp}</div>
+                    <div class="history-type ${change.type}">${change.type.toUpperCase()}</div>
+                `;
+
+                const details = document.createElement('div');
+                details.className = 'history-details';
+                
+                if (change.type === 'transfer') {
+                    details.innerHTML = `
+                        <div class="history-changes">
+                            <div class="history-old">
+                                <div class="history-label">From:</div>
+                                <div>${change.oldTeam || 'N/A'}</div>
+                            </div>
+                            <div class="history-new">
+                                <div class="history-label">To:</div>
+                                <div>${change.newTeam}</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    details.innerHTML = `
+                        <div class="history-changes">
+                            <div class="history-old">
+                                <div class="history-label">Previous:</div>
+                                <pre>${JSON.stringify(change.oldValue, null, 2)}</pre>
+                            </div>
+                            <div class="history-new">
+                                <div class="history-label">New:</div>
+                                <pre>${JSON.stringify(change.newValue, null, 2)}</pre>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Add revert button if change is revertible
+                if (change.revertible) {
+                    const revertBtn = document.createElement('button');
+                    revertBtn.className = 'history-btn revert';
+                    revertBtn.innerHTML = '<i class="fas fa-undo"></i> Revert';
+                    revertBtn.onclick = () => revertChange(change);
+                    details.appendChild(revertBtn);
+                }
+
+                historyItem.appendChild(header);
+                historyItem.appendChild(details);
+                container.appendChild(historyItem);
+            });
+        }
+
+        function revertChange(change) {
+            if (confirm('Are you sure you want to revert this change?')) {
+                // Handle revert based on change type
+                if (change.type === 'transfer') {
+                    // Revert transfer
+                    currentPlayer.club = change.oldTeam;
+                    document.getElementById('player-club').value = change.oldTeam;
+                } else {
+                    // Revert other changes
+                    Object.assign(currentPlayer, change.oldValue);
+                    loadPlayerData(currentPlayer.id);
+                }
+
+                // Add revert action to history
+                addToHistory({
+                    type: 'revert',
+                    oldValue: change.newValue,
+                    newValue: change.oldValue,
+                    description: `Reverted: ${change.description}`,
+                    revertible: false
+                });
+
+                // Save changes
+                savePlayerChanges();
+            }
+        }
+
+        // Load history from localStorage on init
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedHistory = localStorage.getItem('playerChangeHistory');
+            if (savedHistory) {
+                changeHistory = JSON.parse(savedHistory);
+            }
+
+            // Add history filter change handler
+            document.getElementById('history-filter').addEventListener('change', displayHistory);
+            
+            // Add refresh button handler
+            document.getElementById('refresh-history').addEventListener('click', displayHistory);
+        });
+
+        // Add after initAdminPanel function, before isServerAvailable
+        // Helper function to repair and standardize manager data format
+        function repairManagerData() {
+            if (!managerData) {
+                console.log('No manager data to repair');
+                return false;
+            }
+            
+            let wasRepaired = false;
+            
+            // Check if managerData is an object
+            if (typeof managerData !== 'object' || managerData === null) {
+                console.error('Manager data is not an object, initializing empty structure');
+                managerData = { managers: [] };
+                wasRepaired = true;
+                return wasRepaired;
+            }
+            
+            // Fix managers property if missing or not an array
+            if (!managerData.managers) {
+                console.log('Manager data missing managers property, adding empty array');
+                managerData.managers = [];
+                wasRepaired = true;
+            } else if (!Array.isArray(managerData.managers)) {
+                console.log('Manager data managers property is not an array, converting');
+                
+                // If it's an object with numeric keys, try to convert to array
+                if (typeof managerData.managers === 'object' && managerData.managers !== null) {
+                    try {
+                        const managersArray = Object.values(managerData.managers);
+                        managerData.managers = managersArray;
+                        wasRepaired = true;
+                        console.log('Converted managers object to array');
+                    } catch (error) {
+                        console.error('Failed to convert managers object to array:', error);
+                        managerData.managers = [];
+                        wasRepaired = true;
+                    }
+                } else {
+                    managerData.managers = [];
+                    wasRepaired = true;
+                }
+            }
+            
+            // Verify each manager object has required properties
+            managerData.managers.forEach((manager, index) => {
+                if (!manager.name) {
+                    console.log(`Manager at index ${index} missing name, adding placeholder`);
+                    manager.name = `Manager ${index + 1}`;
+                    wasRepaired = true;
+                }
+                
+                if (!manager.club) {
+                    console.log(`Manager at index ${index} (${manager.name}) missing club, adding placeholder`);
+                    manager.club = `Club ${index + 1}`;
+                    wasRepaired = true;
+                }
+                
+                // Ensure squad exists and has the right format
+                if (!manager.squad) {
+                    console.log(`Manager ${manager.name} missing squad, adding empty squad`);
+                    manager.squad = { total_players: 0, players: [] };
+                    wasRepaired = true;
+                } else {
+                    if (!manager.squad.players) {
+                        console.log(`Manager ${manager.name} squad missing players array, adding empty array`);
+                        manager.squad.players = [];
+                        wasRepaired = true;
+                    } else if (!Array.isArray(manager.squad.players)) {
+                        console.log(`Manager ${manager.name} squad players is not an array, converting`);
+                        
+                        try {
+                            if (typeof manager.squad.players === 'object' && manager.squad.players !== null) {
+                                manager.squad.players = Object.values(manager.squad.players);
+                            } else {
+                                manager.squad.players = [];
+                            }
+                            wasRepaired = true;
+                        } catch (error) {
+                            console.error(`Error converting players for manager ${manager.name}:`, error);
+                            manager.squad.players = [];
+                            wasRepaired = true;
+                        }
+                    }
+                    
+                    // Update total_players to match array length
+                    if (manager.squad.total_players !== manager.squad.players.length) {
+                        console.log(`Manager ${manager.name} total_players (${manager.squad.total_players}) doesn't match players array length (${manager.squad.players.length}), updating`);
+                        manager.squad.total_players = manager.squad.players.length;
+                        wasRepaired = true;
+                    }
+                    
+                    // Recalculate club value based on players
+                    recalculateManagerTotalValue(manager);
+                }
+            });
+            
+            return wasRepaired;
+        }
+
+        // Modify initAdminPanel to call repairManagerData after loading manager data
+        async function initAdminPanel() {
+            try {
+                // Start with disabling editor while loading
+                toggleEditorState(false);
+                
+                // Show loading in status element
+                const statusElement = document.getElementById('status-message');
+                statusElement.textContent = 'Loading player data...';
+                statusElement.className = 'status-message status-success';
+                statusElement.style.display = 'block';
+                
+                // Set up event listeners early
+                setupEventListeners();
+                
+                // Load data with a timeout to allow UI to render first
+                let loadedData = false;
+                
+                // Try to load data with preference for files updated by GitHub
+                const loadPromise = new Promise(async (resolve) => {
+                    try {
+                        // First try to load from files - these would be updated by GitHub
+                        console.log('Loading data from files (would be updated by GitHub)');
+                        try {
+                            const playersResponse = await fetch('players.json', {
+                                cache: 'no-store',  // Don't use cache
+                                headers: { 'Cache-Control': 'no-cache' }
+                            });
+                            
+                            if (playersResponse.ok) {
+                                playersData = await playersResponse.json();
+                                
+                                // Add unique ID to each player if missing
+                                playersData = playersData.map((player, index) => ({
+                                    ...player,
+                                    id: player.id ? Number(player.id) : (index + 1)
+                                }));
+                                
+                                console.log('Players loaded from file:', playersData.length);
+                                
+                                // Also load manager data from file
+                                try {
+                                    const managerResponse = await fetch('manager_data.json', {
+                                        cache: 'no-store',
+                                        headers: { 'Cache-Control': 'no-cache' }
+                                    });
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Manager data loaded from file');
+                                    }
+                                } catch (managerError) {
+                                    console.error('Error loading manager data from file:', managerError);
+                                }
+                                
+                                resolve(true);
+                                return;
+                            }
+                        } catch (fileError) {
+                            console.error('Error loading data from files:', fileError);
+                        }
+                        
+                        // Fallback: try local server if file loading failed
+                        console.log('File loading failed, trying local server as fallback');
+                        try {
+                            const serverAvailable = await isServerAvailable();
+                            if (serverAvailable) {
+                                const playersResponse = await fetch('http://localhost:3000/players.json');
+                                if (playersResponse.ok) {
+                                    playersData = await playersResponse.json();
+                                    console.log('Loaded players data from Node.js server (fallback)');
+                                    
+                                    const managerResponse = await fetch('http://localhost:3000/manager_data.json');
+                                    if (managerResponse.ok) {
+                                        managerData = await managerResponse.json();
+                                        console.log('Loaded manager data from Node.js server (fallback)');
+                                    }
+                                    
+                                    resolve(true);
+                                    return;
+                                }
+                            }
+                        } catch (serverError) {
+                            console.error('Error loading from server (fallback):', serverError);
+                        }
+                        
+                        throw new Error('Failed to load player data from any source');
+                    } catch (error) {
+                        console.error('Error loading data:', error);
+                        resolve(false);
+                    }
+                });
+                
+                // Set timeout for loading
+                const timeoutPromise = new Promise(resolve => {
+                    setTimeout(() => {
+                        if (!loadedData) {
+                            statusElement.textContent = 'Still loading... This may take a moment.';
+                        }
+                        resolve(false);
+                    }, 1500);
+                });
+                
+                // Wait for data or timeout
+                loadedData = await Promise.race([loadPromise, timeoutPromise]);
+                
+                // Wait for the actual data if timeout happened first
+                if (!loadedData) {
+                    loadedData = await loadPromise;
+                }
+                
+                if (!loadedData) {
+                    throw new Error('Failed to load players data');
+                }
+                
+                // Extract clubs and populate UI
+                extractClubs();
+                
+                // Reset pagination
+                currentPage = 1;
+                filteredPlayers = [...playersData];
+                totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+                
+                // Render players
+                populatePlayersList();
+                
+                // Show data summary
+                showStatusMessage(`Loaded ${playersData.length} players. Showing page 1 of ${totalPages}.`, true, 3000);
+                
+                // Hide loading status if it was success
+                if (statusElement.textContent === 'Loading player data...' || 
+                    statusElement.textContent === 'Still loading... This may take a moment.') {
+                    statusElement.style.display = 'none';
+                }
+                
+                // Return a resolved promise for chaining
+                return Promise.resolve();
+            } catch (error) {
+                showStatusMessage(`Error: ${error.message}`, false);
+                console.error('Error initializing admin panel:', error);
+                return Promise.resolve(); // Still resolve to continue
+            }
+        }
+    </script>
+
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the video after page content
+            setTimeout(function() {
+                const video = document.querySelector('.video-bg');
+                if (video && video.dataset.src) {
+                    const source = document.createElement('source');
+                    source.src = video.dataset.src;
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    video.load();
+                    video.play().catch(e => console.log('Autoplay prevented:', e));
+                }
+            }, 1000);
+            
+            // Set fade out for preloader
+            window.addEventListener('load', function() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    <script src="js/remove-conflicting-styles.js"></script>
+    
+    <script src="js/background-fix.js"></script>
+    <script src="js/background-mobile-scroll.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/fix-scroll.js"></script>
+</body>
+</html> 
+    

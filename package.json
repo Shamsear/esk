@@ -1,0 +1,29 @@
+{
+  "name": "r2g-player-admin",
+  "version": "1.0.0",
+  "description": "Admin interface for R2G player data management",
+  "main": "save-players.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "python -m http.server",
+    "server": "node save-players.js",
+    "pwa-setup": "node update-pwa.js"
+  },
+  "keywords": [
+    "admin",
+    "player",
+    "management",
+    "json",
+    "data"
+  ],
+  "author": "R2G Admin",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "xlsx": "^0.18.5"
+  }
+}
