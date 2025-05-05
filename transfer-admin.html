@@ -24,6 +24,22 @@
     <link rel="stylesheet" href="css/club-dropdown.css">
     <!-- Load club manager scripts in the correct order -->
     <script src="js/club-loader.js"></script>
+    <script>
+        // Fallback if club-loader.js fails to load
+        if (typeof window.ClubManager === 'undefined') {
+            console.warn('club-loader.js not loaded, creating fallback ClubManager');
+            window.ClubManager = {
+                initialize: function() { console.log('Fallback ClubManager initialize called'); },
+                getClub: function(clubName) { 
+                    return { 
+                        name: clubName, 
+                        logo: `assets/images/players/club/${clubName.replace(/\s+/g, '-').toLowerCase()}.webp` 
+                    }; 
+                },
+                initialized: false
+            };
+        }
+    </script>
     <script src="js/club-manager.js"></script>
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -1312,88 +1328,79 @@
             }
         }
 
-        .empty-history {
-            text-align: center;
-            color: #888;
-            padding: 20px;
-            font-style: italic;
+        /* Mobile loading indicator */
+        .mobile-loading {
+            overflow: hidden; /* Prevent scrolling while loading */
         }
-
-        /* Styles for save history */
-        .save-history-panel {
-            border-left: 4px solid #2196F3; /* Blue accent color */
-        }
-
-        .save-history-item {
-            padding: 15px;
-            background-color: #252525;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .save-history-item:hover {
-            background-color: #303030;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .save-success {
-            border-left-color: #4CAF50; /* Green for success */
-        }
-
-        .save-error {
-            border-left-color: #F44336; /* Red for failure */
-        }
-
-        .save-header {
+        
+        .mobile-loading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 5px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
         }
-
-        .save-status {
-            font-weight: bold;
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
-
-        .save-status.status-success {
-            color: #4CAF50;
+        
+        .loading-text {
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            padding: 0 20px;
         }
-
-        .save-status.status-error {
-            color: #F44336;
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
-        .save-timestamp {
-            color: #aaa;
-            font-size: 0.9em;
-        }
-
-        .save-details {
-            font-size: 0.95em;
-            line-height: 1.4;
-        }
-
-        .save-operations-list {
-            margin-top: 5px;
-            margin-bottom: 5px;
-            padding-left: 20px;
-        }
-
-        .save-error-details {
-            color: #FF9800;
-            margin-top: 8px;
-            font-size: 0.9em;
-            background: rgba(255, 152, 0, 0.1);
-            padding: 5px 8px;
+        
+        /* Improved status messages */
+        .status-message {
+            padding: 10px 15px;
             border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            position: relative;
+            animation: fadeInOut 0.3s ease-in-out;
         }
-
-        .save-operation-details {
-            margin-top: 8px;
+        
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 
@@ -1485,26 +1492,6 @@
             </div>
             <div id="history-container" class="history-container">
                 <!-- History items will be added here dynamically -->
-            </div>
-        </div>
-
-        <!-- Save Operations History Panel -->
-        <div class="history-panel save-history-panel">
-            <h2><i class="fas fa-save"></i> Save History</h2>
-            <div class="history-controls">
-                <button id="refresh-save-history" class="history-btn">
-                    <i class="fas fa-sync"></i> Refresh
-                </button>
-                <select id="save-history-filter">
-                    <option value="all">All Saves</option>
-                    <option value="success">Successful Saves</option>
-                    <option value="failed">Failed Saves</option>
-                    <option value="github">GitHub Saves</option>
-                    <option value="server">Server Saves</option>
-                </select>
-            </div>
-            <div id="save-history-container" class="history-container">
-                <!-- Save history items will be added here dynamically -->
             </div>
         </div>
 
@@ -1605,32 +1592,47 @@
         let githubConfig = null;
         
         function initGitHubConfig() {
-            if (typeof window.githubConfig !== 'undefined') {
-                githubConfig = window.githubConfig;
-                console.log('GitHub config loaded from global object');
-                return true;
-            }
-            
-            // Fallback implementation if github-config.js is not available
-            githubConfig = {
-                isConfigured: function() {
-                    return !!localStorage.getItem('githubToken');
-                },
-                getToken: function() {
-                    return localStorage.getItem('githubToken');
-                },
-                getOwner: function() {
-                    return localStorage.getItem('githubOwner') || 'default-owner';
-                },
-                getRepo: function() {
-                    return localStorage.getItem('githubRepo') || 'default-repo';
-                },
-                getBranch: function() {
-                    return localStorage.getItem('githubBranch') || 'main';
+            try {
+                if (typeof window.githubConfig !== 'undefined') {
+                    githubConfig = window.githubConfig;
+                    console.log('GitHub config loaded from global object');
+                    return true;
                 }
-            };
-            
-            return githubConfig.isConfigured();
+                    
+                // Fallback implementation if github-config.js is not available
+                githubConfig = {
+                    isConfigured: function() {
+                        return !!localStorage.getItem('githubToken');
+                    },
+                    getToken: function() {
+                        return localStorage.getItem('githubToken');
+                    },
+                    getOwner: function() {
+                        return localStorage.getItem('githubOwner') || 'default-owner';
+                    },
+                    getRepo: function() {
+                        return localStorage.getItem('githubRepo') || 'default-repo';
+                    },
+                    getBranch: function() {
+                        return localStorage.getItem('githubBranch') || 'main';
+                    }
+                };
+                    
+                return githubConfig.isConfigured();
+            } catch (error) {
+                console.error('Error initializing GitHub config:', error);
+                    
+                // Create minimal emergency fallback
+                githubConfig = {
+                    isConfigured: () => false,
+                    getToken: () => null,
+                    getOwner: () => 'default-owner',
+                    getRepo: () => 'default-repo', 
+                    getBranch: () => 'main'
+                };
+                    
+                return false;
+            }
         }
     
         // Authentication check
@@ -1641,9 +1643,37 @@
             statusElement.className = 'status-message status-success';
             statusElement.style.display = 'block';
             
+            // Set up mobile loading indicator
+            let mobileLoadingIndicator = null;
+            if (window.innerWidth <= 768) {
+                // Add loading class to body
+                document.body.classList.add('mobile-loading');
+                
+                // Create loading indicator
+                mobileLoadingIndicator = document.createElement('div');
+                mobileLoadingIndicator.className = 'mobile-loading-indicator';
+                mobileLoadingIndicator.innerHTML = '<div class="loading-spinner"></div><div class="loading-text">Loading players...</div>';
+                document.body.appendChild(mobileLoadingIndicator);
+            }
+            
+            // Function to remove mobile loading indicator
+            const removeMobileLoading = () => {
+                if (mobileLoadingIndicator) {
+                    document.body.classList.remove('mobile-loading');
+                    mobileLoadingIndicator.style.opacity = '0';
+                    setTimeout(() => {
+                        if (mobileLoadingIndicator && mobileLoadingIndicator.parentNode) {
+                            mobileLoadingIndicator.remove();
+                        }
+                    }, 300);
+                }
+            };
+            
             // Check if logged in
             const isLoggedIn = sessionStorage.getItem('transferAdminLoggedIn');
             if (!isLoggedIn) {
+                // Remove loading before redirect
+                removeMobileLoading();
                 // Redirect to login page
                 window.location.href = 'transfer-login.html';
                 return;
@@ -1676,7 +1706,22 @@
                     const container = document.querySelector('.container');
                     container.insertBefore(configMessage, container.firstChild);
                 }
+                
+                // Remove mobile loading indicator
+                removeMobileLoading();
+            }).catch(error => {
+                console.error('Error initializing transfer panel:', error);
+                
+                // Show error message
+                statusElement.textContent = `Failed to initialize: ${error.message}`;
+                statusElement.className = 'status-message status-error';
+                
+                // Remove mobile loading indicator
+                removeMobileLoading();
             });
+            
+            // Set a safety timeout to remove loading in case of other issues
+            setTimeout(removeMobileLoading, 10000);
         });
 
         // Logout function
@@ -1695,16 +1740,6 @@
         let selectedTeam = null;
         let selectedPlayers = [];
         let filteredPlayers = [];
-        
-        // Add save tracking globals
-        let saveHistory = [];
-        let lastSaveStatus = {
-            success: false,
-            timestamp: null,
-            source: null, // 'github', 'server', 'memory'
-            user: null,
-            details: null
-        };
         
         // Initialize transfer panel
         async function initTransferPanel() {
@@ -1730,34 +1765,75 @@
                         const serverAvailable = await isServerAvailable();
                         
                         if (serverAvailable) {
-                            // Load players from server
-                            const playersResponse = await fetch('http://localhost:3000/players.json');
-                            if (playersResponse.ok) {
-                                playersData = await playersResponse.json();
-                                
-                                // Load managers data
-                                const managersResponse = await fetch('http://localhost:3000/manager_data.json');
-                                if (managersResponse.ok) {
-                                    managersData = await managersResponse.json();
-                                    console.log('Loaded data from Node.js server');
-                                    resolve(true);
-                                    return;
+                            try {
+                                // Load players from server
+                                const playersResponse = await fetch('http://localhost:3000/players.json');
+                                if (playersResponse.ok) {
+                                    playersData = await playersResponse.json();
+                                    console.log(`Loaded ${playersData.length} players from server`);
+                                    
+                                    // Load managers data
+                                    const managersResponse = await fetch('http://localhost:3000/manager_data.json');
+                                    if (managersResponse.ok) {
+                                        const managersRawData = await managersResponse.json();
+                                        
+                                        // Handle different manager data formats
+                                        if (Array.isArray(managersRawData.managers)) {
+                                            managersData = managersRawData.managers;
+                                            console.log(`Loaded ${managersData.length} managers from server (managers array format)`);
+                                        } else if (Array.isArray(managersRawData)) {
+                                            managersData = managersRawData;
+                                            console.log(`Loaded ${managersData.length} managers from server (direct array format)`);
+                                        } else {
+                                            console.error('Server returned invalid manager data format');
+                                            throw new Error('Invalid manager data format from server');
+                                        }
+                                        
+                                        resolve(true);
+                                        return;
+                                    } else {
+                                        console.error('Failed to load manager data from server:', managersResponse.status, managersResponse.statusText);
+                                        throw new Error(`Failed to load manager data: ${managersResponse.status}`);
+                                    }
+                                } else {
+                                    console.error('Failed to load player data from server:', playersResponse.status, playersResponse.statusText);
+                                    throw new Error(`Failed to load player data: ${playersResponse.status}`);
                                 }
+                            } catch (serverError) {
+                                console.error('Error accessing server data:', serverError);
+                                // Continue to fallback loading
                             }
                         }
                         
                         // Fallback: Load from files
                         console.log('Server not available, loading from files');
-                        const playersResponse = await fetch('players.json');
-                        const managersResponse = await fetch('manager_data.json');
-                        
-                        if (playersResponse.ok && managersResponse.ok) {
+                        try {
+                            const playersResponse = await fetch('players.json', {
+                                cache: 'no-store',  // Don't use cache to get latest data
+                                headers: { 'Cache-Control': 'no-cache' }
+                            });
+                            
+                            if (!playersResponse.ok) {
+                                throw new Error(`Failed to load players.json: ${playersResponse.status}`);
+                            }
+                            
                             playersData = await playersResponse.json();
+                            console.log(`Loaded ${playersData.length} players from file`);
+                            
+                            const managersResponse = await fetch('manager_data.json', {
+                                cache: 'no-store',  // Don't use cache to get latest data
+                                headers: { 'Cache-Control': 'no-cache' }
+                            });
+                            
+                            if (!managersResponse.ok) {
+                                throw new Error(`Failed to load manager_data.json: ${managersResponse.status}`);
+                            }
+                            
                             const managersRawData = await managersResponse.json();
                             
                             // Make sure managersData is in the right format
                             if (Array.isArray(managersRawData.managers)) {
-                                // If the data is an object with a managers array property, use that
+                                // If the data is an object with a managers array property
                                 console.log('Manager data has managers array property');
                                 managersData = managersRawData.managers;
                             } else if (Array.isArray(managersRawData)) {
@@ -1766,16 +1842,20 @@
                             } else {
                                 console.error('Manager data has unexpected format:', typeof managersRawData);
                                 managersData = [];
+                                throw new Error('Invalid manager data format from file');
                             }
                             
                             console.log(`Data loaded from files: ${playersData.length} players, ${managersData.length} managers`);
-                            console.log('First few managers:', managersData.slice(0, 3));
+                            if (managersData.length > 0) {
+                                console.log('First manager:', managersData[0].name || managersData[0].club || 'unnamed');
+                            }
                             
                             // Show server warning
                             showStatusMessage('Warning: Data server is not running. Changes will not be saved.', false);
                             resolve(true);
-                        } else {
-                            throw new Error('Failed to load data');
+                        } catch (fileError) {
+                            console.error('Error loading data from files:', fileError);
+                            resolve(false);
                         }
                     } catch (error) {
                         console.error('Error loading data:', error);
@@ -2017,43 +2097,8 @@
             
             console.log('Found manager for team:', manager);
             
-            // Try to get logo from club-manager if available
-            let logoPath = 'assets/images/logo11.webp'; // default logo
-            
-            // Debug club manager
-            console.log('ClubManager available:', !!window.ClubManager);
-            console.log('ClubManager getClub available:', !!(window.ClubManager && window.ClubManager.getClub));
-            console.log('ClubManager initialized:', !!(window.ClubManager && window.ClubManager.initialized));
-            
-            if (window.ClubManager && window.ClubManager.getClub) {
-                // Initialize club manager if needed
-                if (window.ClubManager.initialize && !window.ClubManager.initialized) {
-                    console.log('Initializing ClubManager...');
-                    try {
-                        window.ClubManager.initialize();
-                    } catch (e) {
-                        console.error('Error initializing ClubManager:', e);
-                    }
-                }
-                
-                const club = window.ClubManager.getClub(teamName);
-                console.log('Club data for', teamName, ':', club);
-                
-                if (club && club.logo) {
-                    logoPath = club.logo;
-                    console.log('Found club logo:', logoPath);
-                } else {
-                    console.log('No logo found for club in ClubManager');
-                }
-            } else {
-                console.log('ClubManager not available or missing getClub method');
-            }
-            
-            // Make sure logo path is correct - remove any leading slash
-            if (logoPath.startsWith('/')) {
-                logoPath = logoPath.substring(1);
-                console.log('Fixed logo path by removing leading slash:', logoPath);
-            }
+            // Get logo path using a dedicated function
+            const logoPath = getTeamLogoPath(teamName);
             
             selectedTeam = {
                 name: teamName,
@@ -2091,6 +2136,72 @@
             
             // Show success message
             showStatusMessage(`Team "${teamName}" selected successfully`, true, 2000);
+        }
+
+        // Helper function to get team logo path with proper fallbacks
+        function getTeamLogoPath(teamName) {
+            if (!teamName) return 'assets/images/logo11.webp';
+            
+            let logoPath = 'assets/images/logo11.webp'; // default logo
+            
+            // Try to get logo from club-manager if available
+            try {
+                if (window.ClubManager) {
+                    // Initialize club manager if needed
+                    if (window.ClubManager.initialize && !window.ClubManager.initialized) {
+                        console.log('Initializing ClubManager...');
+                        try {
+                            window.ClubManager.initialize();
+                        } catch (e) {
+                            console.error('Error initializing ClubManager:', e);
+                        }
+                    }
+                    
+                    // Get club data using ClubManager
+                    if (window.ClubManager.getClub) {
+                        const club = window.ClubManager.getClub(teamName);
+                        console.log('Club data for', teamName, ':', club);
+                        
+                        if (club && club.logo) {
+                            logoPath = club.logo;
+                            console.log('Found club logo:', logoPath);
+                        } else {
+                            console.log('No logo found for club in ClubManager');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error using ClubManager:', error);
+            }
+            
+            // If ClubManager failed, try standard naming conventions
+            if (logoPath === 'assets/images/logo11.webp') {
+                // Try various common paths
+                const possiblePaths = [
+                    `assets/images/players/club/${teamName.replace(/\s+/g, '-').toLowerCase()}.webp`,
+                    `assets/images/players/club/${teamName}.webp`,
+                    `assets/images/club-logos/${teamName.replace(/\s+/g, '-').toLowerCase()}.webp`,
+                    `assets/images/club-logos/${teamName}.webp`
+                ];
+                
+                for (const path of possiblePaths) {
+                    // We can't check if image exists on server side, so we'll provide
+                    // a list of potential paths that the onerror handler can try
+                    if (path) {
+                        logoPath = path;
+                        // Find first non-empty path
+                        break;
+                    }
+                }
+            }
+            
+            // Make sure logo path is correct - remove any leading slash
+            if (logoPath.startsWith('/')) {
+                logoPath = logoPath.substring(1);
+                console.log('Fixed logo path by removing leading slash:', logoPath);
+            }
+            
+            return logoPath;
         }
 
         // Show current squad players
@@ -2775,32 +2886,86 @@
                         { name: player.name, club: player.club, value: player.value, type: player.type });
                 });
                 
-                // Prepare operation details for save history
-                const saveDetails = {
-                    operations: {
-                        playersAdded,
-                        transferValue: totalTransferSpend,
-                        playersUpdated: updatedPlayers.length,
-                        managersUpdated: 1 // We're updating one manager
-                    },
-                    message: `Transferred ${playersAdded} player(s) to ${selectedTeam.name}`
-                };
-
-                // Save changes - first try GitHub if configured, then server
+                // Save changes - first try GitHub if configured
                 let savedToPermanentStorage = false;
-
-                try {
-                    savedToPermanentStorage = await saveChanges(saveDetails);
-                } catch (error) {
-                    console.error('Failed to save changes:', error);
-                    // Even if saving fails, we'll still show success for the transfer itself
-                    // But we'll note that it's only in memory
-                    recordSaveOperation(true, 'memory', {
-                        message: 'Changes saved in memory only (GitHub and server saves failed)',
-                        operations: saveDetails.operations
-                    });
+                
+                // Check if GitHub integration is configured
+                if (githubConfig && githubConfig.isConfigured()) {
+                    try {
+                        // Save both files to GitHub
+                        await saveToGitHub();
+                        savedToPermanentStorage = true;
+                    } catch (githubError) {
+                        console.error('GitHub save failed:', githubError);
+                        // Continue to try server save if GitHub fails
+                    }
+                } else {
+                    console.log('GitHub integration not configured');
                 }
-
+                
+                // If GitHub failed or not configured, try server
+                if (!savedToPermanentStorage) {
+                    const serverAvailable = await isServerAvailable();
+                    if (serverAvailable) {
+                        try {
+                            console.log('Saving to local server...');
+                            
+                            // Format manager data correctly
+                            let managersDataToSave;
+                            if (Array.isArray(managersData)) {
+                                // If managersData is already an array, wrap it in the expected object format
+                                managersDataToSave = { managers: managersData };
+                            } else {
+                                // If it's something else, handle appropriately
+                                managersDataToSave = managersData;
+                                console.warn('Manager data is not in expected array format for saving');
+                            }
+                            
+                            // Log payload sizes to help diagnose potential issues
+                            const playersDataSize = JSON.stringify(playersData).length;
+                            const managersDataSize = JSON.stringify(managersDataToSave).length;
+                            console.log(`Data payload sizes - Players: ${(playersDataSize/1024/1024).toFixed(2)}MB, Managers: ${(managersDataSize/1024/1024).toFixed(2)}MB`);
+                            
+                            // Save players data
+                            const savePlayersResponse = await fetch('http://localhost:3000/save-players', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(playersData)
+                            });
+                            
+                            if (!savePlayersResponse.ok) {
+                                throw new Error(`Failed to save player data: ${savePlayersResponse.status} ${savePlayersResponse.statusText}`);
+                            }
+                            
+                            console.log('Players data saved successfully to server');
+                            
+                            // Save managers data
+                            const saveManagersResponse = await fetch('http://localhost:3000/save-managers', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(managersDataToSave)
+                            });
+                            
+                            if (!saveManagersResponse.ok) {
+                                throw new Error(`Failed to save manager data: ${saveManagersResponse.status} ${saveManagersResponse.statusText}`);
+                            }
+                            
+                            console.log('Managers data saved successfully to server');
+                            savedToPermanentStorage = true;
+                        } catch (error) {
+                            console.error('Server save failed:', error);
+                            // Show error to user but don't rethrow - we still want to continue
+                            showStatusMessage(`Server save error: ${error.message}`, false, 10000);
+                        }
+                    } else {
+                        console.log('Local server not available for saving data');
+                    }
+                }
+                
                 // Show success message with details
                 const successMsg = `Successfully transferred ${playersAdded} player${playersAdded !== 1 ? 's' : ''} to ${selectedTeam.name} for a total of ${totalTransferSpend.toLocaleString()} RC.`;
                 showStatusMessage(savedToPermanentStorage ? 
@@ -2844,53 +3009,22 @@
             try {
                 // Check if GitHub integration is configured
                 if (!githubConfig || !githubConfig.isConfigured()) {
-                    const errorMsg = 'GitHub integration is not configured';
-                    recordSaveOperation(false, 'github', { 
-                        message: errorMsg,
-                        error: errorMsg
-                    });
-                    throw new Error(errorMsg);
+                    throw new Error('GitHub integration is not configured');
                 }
                 
                 // Show saving message
                 showStatusMessage('Saving to GitHub...', true);
                 
-                // Prepare operation details for history
-                const operations = {
-                    playersUpdated: playersData.length,
-                    managersUpdated: managersData.length
-                };
+                // Save players.json
+                await saveFileToGitHub(playersData, 'players.json', 'Update players from transfer system');
                 
-                try {
-                    // Save players.json
-                    await saveFileToGitHub(playersData, 'players.json', 'Update players from transfer system');
-                    console.log('Players data saved successfully to GitHub');
-                    
-                    // Save manager_data.json - wrap managers array in the correct object format
-                    const managersDataFormatted = { managers: managersData };
-                    await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from transfer system');
-                    console.log('Managers data saved successfully to GitHub');
-                    
-                    // Record successful save
-                    recordSaveOperation(true, 'github', {
-                        message: 'Successfully saved all changes to GitHub repository',
-                        operations: operations
-                    });
-                    
-                    showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
-                    return true;
-                } catch (error) {
-                    // Record failed save
-                    recordSaveOperation(false, 'github', {
-                        message: 'Failed to save to GitHub',
-                        error: error.message,
-                        operations: operations
-                    });
-                    
-                    showStatusMessage(`GitHub Error: ${error.message}`, false);
-                    console.error('GitHub save error:', error);
-                    throw error; // Re-throw to be handled by the caller
-                }
+                // Save manager_data.json - wrap managers array in the correct object structure
+                const managersDataFormatted = { managers: managersData };
+                await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from transfer system');
+                
+                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                return true;
+                
             } catch (error) {
                 showStatusMessage(`GitHub Error: ${error.message}`, false);
                 console.error('GitHub save error:', error);
@@ -3888,696 +4022,10 @@
                 });
 
                 // Trigger the actual transfer reversion
+                // This would need to be implemented based on your transfer system
                 handleTransferReversion(transfer);
-                
-                // Update history display
-                displayTransferHistory();
             }
         }
-
-        // Load history from localStorage on init
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedHistory = localStorage.getItem('transferHistory');
-            if (savedHistory) {
-                transferHistory = JSON.parse(savedHistory);
-            }
-
-            // Add history filter change handler
-            document.getElementById('history-filter').addEventListener('change', displayTransferHistory);
-            
-            // Add refresh button handler
-            document.getElementById('refresh-history').addEventListener('click', displayTransferHistory);
-        });
-
-        // Modify your existing submitTransfers function to add to history
-        const originalSubmitTransfers = submitTransfers;
-        submitTransfers = async function() {
-            // Store the current state
-            const previousState = {
-                selectedPlayers: [...selectedPlayers],
-                selectedTeam: {...selectedTeam}
-            };
-
-            try {
-                // Call the original function
-                await originalSubmitTransfers();
-
-                // Add successful transfers to history
-                selectedPlayers.forEach(player => {
-                    addToTransferHistory({
-                        type: 'incoming',
-                        playerName: player.name,
-                        fromTeam: player.club || 'Free Agent',
-                        toTeam: selectedTeam.name,
-                        value: player.value,
-                        revertible: true
-                    });
-                });
-            } catch (error) {
-                console.error('Transfer failed:', error);
-            }
-        };
-
-        // Add this function after the existing checkDataConsistency function
-        async function fixSeasonEightConsistency() {
-            try {
-                console.log('Starting Season 8 data consistency check...');
-                const fixes = {
-                    freeAgentUpdates: 0,
-                    seasonSplits: 0,
-                    teamUpdates: 0,
-                    errors: []
-                };
-
-                // First, collect all Season 8 players from manager data
-                const season8Players = new Map(); // Map to store player info by name
-                managersData.managers.forEach(manager => {
-                    if (!manager.squad?.players) return;
-                    
-                    manager.squad.players.forEach(player => {
-                        if (player.contract === "SEASON 8") {
-                            season8Players.set(player.name, {
-                                name: player.name,
-                                currentTeam: manager.club,
-                                position: player.position,
-                                value: player.value,
-                                type: player.type || 'standard'
-                            });
-                        }
-                    });
-                });
-
-                console.log(`Found ${season8Players.size} players in Season 8`);
-
-                // Now check these players in players.json
-                for (const player of playersData) {
-                    const season8Info = season8Players.get(player.name);
-                    if (!season8Info) continue; // Skip if not a Season 8 player
-
-                    let needsUpdate = false;
-                    let statsUpdated = false;
-
-                    // Initialize stats array if it doesn't exist
-                    if (!player.stats) {
-                        player.stats = [];
-                        needsUpdate = true;
-                    }
-
-                    // Sort stats chronologically
-                    player.stats.sort((a, b) => {
-                        const aStart = parseFloat(a.season.split('-')[0]);
-                        const bStart = parseFloat(b.season.split('-')[0]);
-                        return aStart - bStart;
-                    });
-
-                    // Get the latest stat entry
-                    const latestStat = player.stats[player.stats.length - 1];
-
-                    // Case 1: Latest stat is FREE AGENT
-                    if (latestStat && latestStat.team === "FREE AGENT") {
-                        const [start, end] = latestStat.season.split('-').map(Number);
-                        if (end === 8) {
-                            // Update the FREE AGENT period to end at current season start
-                            latestStat.season = `${start}-6`;
-                            // Add new entry for current team
-                            player.stats.push({
-                                season: "6-8",
-                                team: season8Info.currentTeam,
-                                value: season8Info.value.toString(),
-                                apps: "00",
-                                goals: "00",
-                                assists: "00",
-                                clean_sheets: "00",
-                                cards: { yellow: "00", red: "00" }
-                            });
-                            fixes.freeAgentUpdates++;
-                            statsUpdated = true;
-                        }
-                    }
-
-                    // Case 2: Has previous team stats that need splitting
-                    player.stats = player.stats.map(stat => {
-                        if (!stat.season || !stat.team) return stat;
-                        const [start, end] = stat.season.split('-').map(Number);
-                        
-                        // If stat period overlaps with Season 8 and team is different
-                        if (end === 8 && stat.team !== season8Info.currentTeam) {
-                            fixes.seasonSplits++;
-                            statsUpdated = true;
-                            // Split the period
-                            return {
-                                ...stat,
-                                season: `${start}-6`
-                            };
-                        }
-                        return stat;
-                    });
-
-                    // Add new Season 8 entry if needed
-                    const hasSeason8Entry = player.stats.some(stat => {
-                        const [start, end] = stat.season.split('-').map(Number);
-                        return end === 8 && stat.team === season8Info.currentTeam;
-                    });
-
-                    if (!hasSeason8Entry) {
-                        player.stats.push({
-                            season: "6-8",
-                            team: season8Info.currentTeam,
-                            value: season8Info.value.toString(),
-                            apps: "00",
-                            goals: "00",
-                            assists: "00",
-                            clean_sheets: "00",
-                            cards: { yellow: "00", red: "00" }
-                        });
-                        fixes.teamUpdates++;
-                        statsUpdated = true;
-                    }
-
-                    // Update current club and value
-                    if (player.club !== season8Info.currentTeam || player.value !== season8Info.value) {
-                        player.club = season8Info.currentTeam;
-                        player.value = season8Info.value;
-                        needsUpdate = true;
-                    }
-
-                    // Update player type if needed
-                    if (season8Info.type && player.type !== season8Info.type) {
-                        player.type = season8Info.type;
-                        needsUpdate = true;
-                    }
-
-                    if (needsUpdate || statsUpdated) {
-                        // Clean up and validate stats
-                        player.stats = player.stats.filter(stat => {
-                            if (!stat.season || !stat.team) return false;
-                            const [start, end] = stat.season.split('-').map(Number);
-                            return start < end && start % 0.5 === 0 && end % 0.5 === 0;
-                        });
-
-                        // Sort stats chronologically
-                        player.stats.sort((a, b) => {
-                            const aStart = parseFloat(a.season.split('-')[0]);
-                            const bStart = parseFloat(b.season.split('-')[0]);
-                            return aStart - bStart;
-                        });
-                    }
-                }
-
-                // Save changes
-                let saved = false;
-                
-                // Try GitHub first
-                if (githubConfig && githubConfig.isConfigured()) {
-                    try {
-                        await saveToGitHub();
-                        saved = true;
-                    } catch (error) {
-                        console.error('Failed to save to GitHub:', error);
-                    }
-                }
-                
-                // Try server if GitHub failed
-                if (!saved) {
-                    const serverAvailable = await isServerAvailable();
-                    if (serverAvailable) {
-                        try {
-                            const saveResponse = await fetch('http://localhost:3000/save-players', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(playersData)
-                            });
-                            
-                            if (saveResponse.ok) {
-                                saved = true;
-                            }
-                        } catch (error) {
-                            console.error('Server save failed:', error);
-                        }
-                    }
-                }
-
-                // Show results
-                const message = `
-                    Fixed ${fixes.freeAgentUpdates} free agent transitions
-                    Split ${fixes.seasonSplits} season periods
-                    Updated ${fixes.teamUpdates} team assignments
-                    ${saved ? 'Changes saved successfully.' : 'Changes only in memory.'}
-                `;
-                showStatusMessage(message, saved);
-                console.log('Fix completed:', message);
-
-            } catch (error) {
-                console.error('Error fixing data consistency:', error);
-                showStatusMessage(`Error fixing data: ${error.message}`, false);
-            }
-        }
-
-        // Add button to UI for this function
-        document.getElementById('debug-controls').innerHTML += `
-            <button id="fix-season8-data" style="background-color: #4ecca3; margin-left: 10px;">
-                Fix Season 8 Data
-            </button>
-        `;
-
-        // Add event listener
-        document.getElementById('fix-season8-data').addEventListener('click', fixSeasonEightConsistency);
-
-        // Function to record a save operation
-        function recordSaveOperation(success, source, details = null) {
-            const timestamp = new Date();
-            const username = sessionStorage.getItem('transferAdminUsername') || 'Unknown User';
-            
-            // Update last save status
-            lastSaveStatus = {
-                success,
-                timestamp,
-                source,
-                user: username,
-                details
-            };
-            
-            // Add to history
-            const saveRecord = {
-                ...lastSaveStatus,
-                operations: details && details.operations ? details.operations : {},
-                id: Date.now() // Unique ID for this save
-            };
-            
-            saveHistory.unshift(saveRecord); // Add to the beginning
-            
-            // Keep history to a reasonable size (last 100 operations)
-            if (saveHistory.length > 100) {
-                saveHistory = saveHistory.slice(0, 100);
-            }
-            
-            // Save to localStorage for persistence
-            try {
-                localStorage.setItem('transferAdminSaveHistory', JSON.stringify(saveHistory));
-            } catch (e) {
-                console.warn('Could not save history to localStorage:', e);
-            }
-            
-            // Update UI if save history panel is visible
-            if (document.getElementById('save-history-container')) {
-                displaySaveHistory();
-            }
-            
-            return saveRecord;
-        }
-
-        // Function to display the save history
-        function displaySaveHistory(filter = 'all') {
-            const container = document.getElementById('save-history-container');
-            if (!container) return;
-            
-            // Clear the container
-            container.innerHTML = '';
-            
-            if (saveHistory.length === 0) {
-                container.innerHTML = '<p class="empty-history">No save operations recorded yet.</p>';
-                return;
-            }
-            
-            // Filter the history based on the filter value
-            const filteredHistory = saveHistory.filter(save => {
-                if (filter === 'all') return true;
-                if (filter === 'success') return save.success === true;
-                if (filter === 'failed') return save.success === false;
-                if (filter === 'github') return save.source === 'github';
-                if (filter === 'server') return save.source === 'server';
-                return true;
-            });
-            
-            if (filteredHistory.length === 0) {
-                container.innerHTML = `<p class="empty-history">No save operations match the filter "${filter}".</p>`;
-                return;
-            }
-            
-            // Create save history items
-            filteredHistory.forEach(save => {
-                const saveItem = document.createElement('div');
-                saveItem.className = `save-history-item ${save.success ? 'save-success' : 'save-error'}`;
-                
-                const timestamp = new Date(save.timestamp).toLocaleString();
-                const source = save.source === 'github' ? 'GitHub' : 
-                              (save.source === 'server' ? 'Local Server' : 
-                              (save.source === 'memory' ? 'Memory Only' : 'Unknown'));
-                
-                saveItem.innerHTML = `
-                    <div class="save-header">
-                        <span class="save-status ${save.success ? 'status-success' : 'status-error'}">
-                            ${save.success ? '<i class="fas fa-check-circle"></i> Success' : '<i class="fas fa-times-circle"></i> Failed'}
-                        </span>
-                        <span class="save-timestamp">${timestamp}</span>
-                    </div>
-                    <div class="save-details">
-                        <div><strong>User:</strong> ${save.user || 'Unknown'}</div>
-                        <div><strong>Source:</strong> ${source}</div>
-                        ${save.details ? `<div class="save-operation-details">${formatSaveDetails(save.details)}</div>` : ''}
-                    </div>
-                `;
-                
-                container.appendChild(saveItem);
-            });
-        }
-
-        // Helper function to format save details
-        function formatSaveDetails(details) {
-            if (!details) return '';
-            
-            let html = '';
-            
-            if (details.message) {
-                html += `<div><strong>Message:</strong> ${details.message}</div>`;
-            }
-            
-            if (details.operations) {
-                const ops = details.operations;
-                html += '<div><strong>Operations:</strong></div>';
-                html += '<ul class="save-operations-list">';
-                
-                if (ops.playersAdded) html += `<li>Players added: ${ops.playersAdded}</li>`;
-                if (ops.playersUpdated) html += `<li>Players updated: ${ops.playersUpdated}</li>`;
-                if (ops.managersUpdated) html += `<li>Teams updated: ${ops.managersUpdated}</li>`;
-                if (ops.transferValue) html += `<li>Transfer value: ${ops.transferValue.toLocaleString()} RC</li>`;
-                
-                html += '</ul>';
-            }
-            
-            if (details.error) {
-                html += `<div class="save-error-details"><strong>Error:</strong> ${details.error}</div>`;
-            }
-            
-            return html;
-        }
-
-        // Check if save endpoints are working properly
-        async function checkSaveEndpoints() {
-            try {
-                // First check if server is available
-                const serverAvailable = await isServerAvailable();
-                if (!serverAvailable) {
-                    console.log('Server is not available');
-                    return {
-                        available: false,
-                        reason: 'Server is not reachable',
-                        savePlayersEndpointWorks: false,
-                        saveManagersEndpointWorks: false
-                    };
-                }
-                
-                // Check players endpoint
-                let savePlayersEndpointWorks = false;
-                try {
-                    const pingPlayersResponse = await fetch('http://localhost:3000/save-players', {
-                        method: 'HEAD',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    
-                    // If endpoint exists, HEAD should return 200 or 405 (Method not allowed)
-                    savePlayersEndpointWorks = pingPlayersResponse.status === 200 || pingPlayersResponse.status === 405;
-                } catch (error) {
-                    console.log('Error testing players save endpoint:', error);
-                }
-                
-                // Check managers endpoint
-                let saveManagersEndpointWorks = false;
-                try {
-                    const pingManagersResponse = await fetch('http://localhost:3000/save-managers', {
-                        method: 'HEAD',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    
-                    // If endpoint exists, HEAD should return 200 or 405 (Method not allowed)
-                    saveManagersEndpointWorks = pingManagersResponse.status === 200 || pingManagersResponse.status === 405;
-                } catch (error) {
-                    console.log('Error testing managers save endpoint:', error);
-                }
-                
-                const available = savePlayersEndpointWorks && saveManagersEndpointWorks;
-                
-                return {
-                    available,
-                    reason: available ? 'All endpoints available' : 'One or more save endpoints missing',
-                    savePlayersEndpointWorks,
-                    saveManagersEndpointWorks
-                };
-            } catch (error) {
-                console.error('Error checking save endpoints:', error);
-                return {
-                    available: false,
-                    reason: 'Error checking endpoints: ' + error.message,
-                    savePlayersEndpointWorks: false,
-                    saveManagersEndpointWorks: false
-                };
-            }
-        }
-
-        // Check save endpoints on page load
-        document.addEventListener('DOMContentLoaded', async function() {
-            // ... other initialization code
-            
-            // Check save endpoints
-            try {
-                const endpointStatus = await checkSaveEndpoints();
-                if (!endpointStatus.available) {
-                    console.warn('Save endpoints check failed:', endpointStatus.reason);
-                    
-                    if (endpointStatus.savePlayersEndpointWorks !== endpointStatus.saveManagersEndpointWorks) {
-                        // If only one endpoint works, show specific warning
-                        const failedEndpoint = !endpointStatus.savePlayersEndpointWorks ? 'players' : 'managers';
-                        showStatusMessage(`Warning: ${failedEndpoint} save endpoint is not available. Changes may not persist correctly.`, false, 0);
-                    } else {
-                        // General warning if both don't work
-                        console.log('Both server save endpoints are unavailable. Changes will only be in memory unless GitHub is configured.');
-                    }
-                } else {
-                    console.log('Save endpoints are working properly');
-                }
-            } catch (error) {
-                console.error('Error during save endpoints check:', error);
-            }
-        });
-
-        // Save to server
-        async function saveToServer() {
-            try {
-                // Check if server is available
-                const serverAvailable = await isServerAvailable();
-                if (!serverAvailable) {
-                    const errorMsg = 'Server is not available';
-                    recordSaveOperation(false, 'server', { 
-                        message: errorMsg,
-                        error: errorMsg
-                    });
-                    throw new Error(errorMsg);
-                }
-                
-                console.log('Saving to local server...');
-                
-                // Format manager data correctly
-                let managersDataToSave;
-                if (Array.isArray(managersData)) {
-                    // If managersData is already an array, wrap it in the expected object format
-                    managersDataToSave = { managers: managersData };
-                } else {
-                    // If it's something else, handle appropriately
-                    managersDataToSave = managersData;
-                    console.warn('Manager data is not in expected array format for saving');
-                }
-                
-                // Log payload sizes to help diagnose potential issues
-                const playersDataSize = JSON.stringify(playersData).length;
-                const managersDataSize = JSON.stringify(managersDataToSave).length;
-                console.log(`Data payload sizes - Players: ${(playersDataSize/1024/1024).toFixed(2)}MB, Managers: ${(managersDataSize/1024/1024).toFixed(2)}MB`);
-                
-                // Prepare operation details for history
-                const operations = {
-                    playersUpdated: playersData.length,
-                    managersUpdated: managersData.length
-                };
-                
-                try {
-                    // Save players data
-                    const savePlayersResponse = await fetch('http://localhost:3000/save-players', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(playersData)
-                    });
-                    
-                    if (!savePlayersResponse.ok) {
-                        throw new Error(`Failed to save player data: ${savePlayersResponse.status} ${savePlayersResponse.statusText}`);
-                    }
-                    
-                    console.log('Players data saved successfully to server');
-                    
-                    // Save managers data
-                    const saveManagersResponse = await fetch('http://localhost:3000/save-managers', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(managersDataToSave)
-                    });
-                    
-                    if (!saveManagersResponse.ok) {
-                        throw new Error(`Failed to save manager data: ${saveManagersResponse.status} ${saveManagersResponse.statusText}`);
-                    }
-                    
-                    console.log('Managers data saved successfully to server');
-                    
-                    // Record successful save
-                    recordSaveOperation(true, 'server', {
-                        message: 'Successfully saved all changes to local server',
-                        operations: operations
-                    });
-                    
-                    return true;
-                } catch (error) {
-                    // Record failed save
-                    recordSaveOperation(false, 'server', {
-                        message: 'Failed to save to server',
-                        error: error.message,
-                        operations: operations
-                    });
-                    
-                    console.error('Server save failed:', error);
-                    throw error; // Re-throw to be handled by the caller
-                }
-            } catch (error) {
-                console.error('Server save error:', error);
-                throw error; // Re-throw to be handled by the caller
-            }
-        }
-
-        // Helper function to save changes
-        async function saveChanges(details = null) {
-            let saved = false;
-            
-            // Prepare default save details if none provided
-            const saveDetails = details || {
-                operations: {
-                    playersUpdated: playersData.length,
-                    managersUpdated: managersData.length,
-                    message: 'General data update'
-                }
-            };
-            
-            // Try GitHub first
-            if (githubConfig && githubConfig.isConfigured()) {
-                try {
-                    await saveToGitHub();
-                    saved = true;
-                    console.log('Successfully saved changes to GitHub');
-                    return true;
-                } catch (error) {
-                    console.error('Failed to save to GitHub:', error);
-                    // Continue to server save
-                }
-            } else {
-                // Record skipped GitHub save
-                recordSaveOperation(false, 'github', {
-                    message: 'GitHub integration not configured, skipping GitHub save',
-                    operations: saveDetails.operations
-                });
-            }
-            
-            // Try server if GitHub failed
-            if (!saved) {
-                try {
-                    await saveToServer();
-                    saved = true;
-                    console.log('Successfully saved changes to server');
-                    return true;
-                } catch (error) {
-                    console.error('Server save failed:', error);
-                    
-                    // If both GitHub and server fail, record memory-only save
-                    recordSaveOperation(true, 'memory', {
-                        message: 'Changes saved in memory only (GitHub and server saves failed)',
-                        operations: saveDetails.operations
-                    });
-                    
-                    // Re-throw for caller to handle
-                    throw error;
-                }
-            }
-            
-            return saved;
-        }
-
-        // Load save and transfer history from localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load transfer history
-            const savedHistory = localStorage.getItem('transferHistory');
-            if (savedHistory) {
-                try {
-                    transferHistory = JSON.parse(savedHistory);
-                    console.log(`Loaded ${transferHistory.length} transfer history items`);
-                } catch (error) {
-                    console.error('Error loading transfer history:', error);
-                }
-            }
-            
-            // Load save history
-            const savedSaveHistory = localStorage.getItem('transferAdminSaveHistory');
-            if (savedSaveHistory) {
-                try {
-                    saveHistory = JSON.parse(savedSaveHistory);
-                    console.log(`Loaded ${saveHistory.length} save history records`);
-                } catch (error) {
-                    console.error('Error loading save history:', error);
-                    saveHistory = [];
-                }
-            }
-            
-            // Set up event listeners for history panels
-            // Transfer history filter
-            const transferHistoryFilter = document.getElementById('history-filter');
-            if (transferHistoryFilter) {
-                transferHistoryFilter.addEventListener('change', displayTransferHistory);
-            }
-            
-            // Save history filter
-            const saveHistoryFilter = document.getElementById('save-history-filter');
-            if (saveHistoryFilter) {
-                saveHistoryFilter.addEventListener('change', function() {
-                    displaySaveHistory(this.value);
-                });
-            }
-            
-            // Refresh buttons
-            const refreshTransferBtn = document.getElementById('refresh-history');
-            if (refreshTransferBtn) {
-                refreshTransferBtn.addEventListener('click', displayTransferHistory);
-            }
-            
-            const refreshSaveBtn = document.getElementById('refresh-save-history');
-            if (refreshSaveBtn) {
-                refreshSaveBtn.addEventListener('click', function() {
-                    displaySaveHistory(saveHistoryFilter ? saveHistoryFilter.value : 'all');
-                });
-            }
-            
-            // Display initial histories
-            setTimeout(function() {
-                if (document.getElementById('history-container')) {
-                    displayTransferHistory();
-                }
-                if (document.getElementById('save-history-container')) {
-                    displaySaveHistory();
-                }
-            }, 1000);
-        });
 
         // Function to handle reverting a transfer
         function handleTransferReversion(transfer) {
@@ -4651,20 +4099,11 @@
                 // Update playersData with the reverted player
                 playersData[playerIndex] = player;
                 
-                // Prepare operation details for save history
-                const saveDetails = {
-                    operations: {
-                        playersUpdated: 1,
-                        managersUpdated: transfer.fromTeam !== "FREE AGENT" ? 2 : 1,
-                        message: `Reverted transfer of ${transfer.playerName} from ${transfer.toTeam} to ${transfer.fromTeam || 'FREE AGENT'}`
-                    }
-                };
-                
                 // Show success message
                 showStatusMessage(`Successfully reverted ${transfer.playerName}'s transfer to ${transfer.fromTeam || 'FREE AGENT'}`, true);
                 
                 // Try to save changes
-                saveChanges(saveDetails).catch(error => {
+                saveChanges().catch(error => {
                     console.error('Error saving changes after reversion:', error);
                     showStatusMessage('Changes are only in memory. Error saving permanently.', false);
                 });
@@ -4674,47 +4113,490 @@
             }
         }
 
-        // Add this call after the DOM content loaded event
+        // Helper function to save changes
+        async function saveChanges() {
+            let saved = false;
+            
+            // Try GitHub first
+            if (githubConfig && githubConfig.isConfigured()) {
+                try {
+                    await saveToGitHub();
+                    saved = true;
+                    console.log('Successfully saved changes to GitHub');
+                } catch (error) {
+                    console.error('Failed to save to GitHub:', error);
+                }
+            }
+            
+            // Try server if GitHub failed
+            if (!saved) {
+                const serverAvailable = await isServerAvailable();
+                if (serverAvailable) {
+                    try {
+                        console.log('Saving to local server...');
+                        
+                        // Format manager data correctly
+                        let managersDataToSave;
+                        if (Array.isArray(managersData)) {
+                            // If managersData is already an array, wrap it in the expected object format
+                            managersDataToSave = { managers: managersData };
+                        } else {
+                            // If it's something else, handle appropriately
+                            managersDataToSave = managersData;
+                            console.warn('Manager data is not in expected array format for saving');
+                        }
+                        
+                        // Log payload sizes to help diagnose potential issues
+                        const playersDataSize = JSON.stringify(playersData).length;
+                        const managersDataSize = JSON.stringify(managersDataToSave).length;
+                        console.log(`Data payload sizes - Players: ${(playersDataSize/1024/1024).toFixed(2)}MB, Managers: ${(managersDataSize/1024/1024).toFixed(2)}MB`);
+                        
+                        // Save players data first
+                        const savePlayersResponse = await fetch('http://localhost:3000/save-players', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(playersData)
+                        });
+                        
+                        if (!savePlayersResponse.ok) {
+                            throw new Error(`Failed to save player data: ${savePlayersResponse.status} ${savePlayersResponse.statusText}`);
+                        }
+                        
+                        console.log('Players data saved successfully to server');
+                        
+                        // Save managers data
+                        const saveManagersResponse = await fetch('http://localhost:3000/save-managers', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(managersDataToSave)
+                        });
+                        
+                        if (!saveManagersResponse.ok) {
+                            throw new Error(`Failed to save manager data: ${saveManagersResponse.status} ${saveManagersResponse.statusText}`);
+                        }
+                        
+                        console.log('Managers data saved successfully to server');
+                        saved = true;
+                    } catch (error) {
+                        console.error('Server save failed:', error);
+                        showStatusMessage(`Server save error: ${error.message}`, false, 10000);
+                        throw error; // Re-throw for caller to handle
+                    }
+                } else {
+                    console.log('Local server not available for saving data');
+                }
+            }
+            
+            return saved;
+        }
+
+        // Load history from localStorage on init
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedHistory = localStorage.getItem('transferHistory');
+            if (savedHistory) {
+                transferHistory = JSON.parse(savedHistory);
+            }
+
+            // Add history filter change handler
+            document.getElementById('history-filter').addEventListener('change', displayTransferHistory);
+            
+            // Add refresh button handler
+            document.getElementById('refresh-history').addEventListener('click', displayTransferHistory);
+        });
+
+        // Modify your existing submitTransfers function to add to history
+        const originalSubmitTransfers = submitTransfers;
+        submitTransfers = async function() {
+            // Store the current state
+            const previousState = {
+                selectedPlayers: [...selectedPlayers],
+                selectedTeam: {...selectedTeam}
+            };
+
+            try {
+                // Call the original function
+                await originalSubmitTransfers();
+
+                // Add successful transfers to history
+                selectedPlayers.forEach(player => {
+                    addToTransferHistory({
+                        type: 'incoming',
+                        playerName: player.name,
+                        fromTeam: player.club || 'Free Agent',
+                        toTeam: selectedTeam.name,
+                        value: player.value,
+                        revertible: true
+                    });
+                });
+            } catch (error) {
+                console.error('Transfer failed:', error);
+            }
+        };
+
+        // Add this function after the existing checkDataConsistency function
+        async function fixSeasonEightConsistency() {
+            try {
+                console.log('Starting Season 8 data consistency check...');
+                const statusElement = document.getElementById('status-message');
+                statusElement.textContent = 'Running Season 8 data consistency check...';
+                statusElement.className = 'status-message status-success';
+                statusElement.style.display = 'block';
+                
+                const fixes = {
+                    freeAgentUpdates: 0,
+                    seasonSplits: 0,
+                    teamUpdates: 0,
+                    errors: []
+                };
+
+                // First, collect all Season 8 players from manager data
+                const season8Players = new Map(); // Map to store player info by name
+                
+                // Check if managersData is available and properly structured
+                if (!Array.isArray(managersData) || managersData.length === 0) {
+                    throw new Error('Manager data is not properly loaded. Please reload the page and try again.');
+                }
+                
+                managersData.forEach(manager => {
+                    if (!manager.squad?.players) return;
+                    
+                    manager.squad.players.forEach(player => {
+                        if (player.contract === "SEASON 8") {
+                            season8Players.set(player.name, {
+                                name: player.name,
+                                currentTeam: manager.club,
+                                position: player.position,
+                                value: player.value,
+                                type: player.type || 'standard'
+                            });
+                        }
+                    });
+                });
+
+                console.log(`Found ${season8Players.size} players in Season 8`);
+                
+                // Check if we have Season 8 player data
+                if (season8Players.size === 0) {
+                    showStatusMessage('No Season 8 players found in manager data.', false);
+                    return;
+                }
+
+                // Check if playersData is available
+                if (!Array.isArray(playersData) || playersData.length === 0) {
+                    throw new Error('Player data is not properly loaded. Please reload the page and try again.');
+                }
+
+                // Now check these players in players.json
+                for (const player of playersData) {
+                    const season8Info = season8Players.get(player.name);
+                    if (!season8Info) continue; // Skip if not a Season 8 player
+
+                    let needsUpdate = false;
+                    let statsUpdated = false;
+
+                    // Initialize stats array if it doesn't exist
+                    if (!player.stats) {
+                        player.stats = [];
+                        needsUpdate = true;
+                    }
+
+                    // Sort stats chronologically
+                    player.stats.sort((a, b) => {
+                        const aStart = parseFloat(a.season?.split('-')?.[0] || 0);
+                        const bStart = parseFloat(b.season?.split('-')?.[0] || 0);
+                        return aStart - bStart;
+                    });
+
+                    // Get the latest stat entry
+                    const latestStat = player.stats[player.stats.length - 1];
+
+                    // Case 1: Latest stat is FREE AGENT
+                    if (latestStat && latestStat.team === "FREE AGENT") {
+                        try {
+                            const [start, end] = latestStat.season.split('-').map(Number);
+                            if (end === 8) {
+                                // Update the FREE AGENT period to end at current season start
+                                latestStat.season = `${start}-6`;
+                                // Add new entry for current team
+                                player.stats.push({
+                                    season: "6-8",
+                                    team: season8Info.currentTeam,
+                                    value: season8Info.value.toString(),
+                                    apps: "00",
+                                    goals: "00",
+                                    assists: "00",
+                                    clean_sheets: "00",
+                                    cards: { yellow: "00", red: "00" }
+                                });
+                                fixes.freeAgentUpdates++;
+                                statsUpdated = true;
+                            }
+                        } catch (error) {
+                            console.error(`Error processing FREE AGENT stats for ${player.name}:`, error);
+                            fixes.errors.push(`Error with ${player.name} FREE AGENT stats: ${error.message}`);
+                        }
+                    }
+
+                    // Case 2: Has previous team stats that need splitting
+                    player.stats = player.stats.map(stat => {
+                        if (!stat.season || !stat.team) return stat;
+                        try {
+                            const [start, end] = stat.season.split('-').map(Number);
+                            
+                            // If stat period overlaps with Season 8 and team is different
+                            if (end === 8 && stat.team !== season8Info.currentTeam) {
+                                fixes.seasonSplits++;
+                                statsUpdated = true;
+                                // Split the period
+                                return {
+                                    ...stat,
+                                    season: `${start}-6`
+                                };
+                            }
+                            return stat;
+                        } catch (error) {
+                            console.error(`Error processing stats period for ${player.name}:`, error);
+                            fixes.errors.push(`Error with ${player.name} stats period: ${error.message}`);
+                            return stat; // Return unchanged if error
+                        }
+                    });
+
+                    // Add new Season 8 entry if needed
+                    const hasSeason8Entry = player.stats.some(stat => {
+                        try {
+                            if (!stat.season || !stat.team) return false;
+                            const [start, end] = stat.season.split('-').map(Number);
+                            return end === 8 && stat.team === season8Info.currentTeam;
+                        } catch (error) {
+                            console.error(`Error checking Season 8 entry for ${player.name}:`, error);
+                            return false;
+                        }
+                    });
+
+                    if (!hasSeason8Entry) {
+                        player.stats.push({
+                            season: "6-8",
+                            team: season8Info.currentTeam,
+                            value: season8Info.value.toString(),
+                            apps: "00",
+                            goals: "00",
+                            assists: "00",
+                            clean_sheets: "00",
+                            cards: { yellow: "00", red: "00" }
+                        });
+                        fixes.teamUpdates++;
+                        statsUpdated = true;
+                    }
+
+                    // Update current club and value
+                    if (player.club !== season8Info.currentTeam || player.value !== season8Info.value) {
+                        player.club = season8Info.currentTeam;
+                        player.value = season8Info.value;
+                        needsUpdate = true;
+                    }
+
+                    // Update player type if needed
+                    if (season8Info.type && player.type !== season8Info.type) {
+                        player.type = season8Info.type;
+                        needsUpdate = true;
+                    }
+
+                    if (needsUpdate || statsUpdated) {
+                        // Clean up and validate stats
+                        player.stats = player.stats.filter(stat => {
+                            if (!stat.season || !stat.team) return false;
+                            try {
+                                const [start, end] = stat.season.split('-').map(Number);
+                                return start < end && start % 0.5 === 0 && end % 0.5 === 0;
+                            } catch (error) {
+                                console.error(`Error filtering invalid stat periods for ${player.name}:`, error);
+                                return false; // Remove invalid entries
+                            }
+                        });
+
+                        // Sort stats chronologically
+                        player.stats.sort((a, b) => {
+                            try {
+                                const aStart = parseFloat(a.season.split('-')[0]);
+                                const bStart = parseFloat(b.season.split('-')[0]);
+                                return aStart - bStart;
+                            } catch (error) {
+                                console.error(`Error sorting stats for ${player.name}:`, error);
+                                return 0; // Don't change order if error
+                            }
+                        });
+                    }
+                }
+
+                // Save changes
+                let saved = false;
+                
+                // Try GitHub first
+                if (githubConfig && githubConfig.isConfigured()) {
+                    try {
+                        await saveToGitHub();
+                        saved = true;
+                        console.log('Successfully saved changes to GitHub');
+                    } catch (error) {
+                        console.error('Failed to save to GitHub:', error);
+                    }
+                }
+                
+                // Try server if GitHub failed
+                if (!saved) {
+                    const serverAvailable = await isServerAvailable();
+                    if (serverAvailable) {
+                        try {
+                            console.log('Saving to local server...');
+                            
+                            // Save players data
+                            const saveResponse = await fetch('http://localhost:3000/save-players', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(playersData)
+                            });
+                            
+                            if (!saveResponse.ok) {
+                                throw new Error(`Failed to save data: ${saveResponse.status} ${saveResponse.statusText}`);
+                            }
+                            
+                            console.log('Player data saved successfully to server');
+                            saved = true;
+                        } catch (error) {
+                            console.error('Server save failed:', error);
+                            showStatusMessage(`Server save error: ${error.message}`, false, 10000);
+                        }
+                    } else {
+                        console.log('Local server not available for saving data');
+                    }
+                }
+
+                // Show results
+                let message = '';
+                if (fixes.errors.length > 0) {
+                    message = `Completed with ${fixes.errors.length} errors. `;
+                }
+                
+                message += `
+                    Fixed ${fixes.freeAgentUpdates} free agent transitions
+                    Split ${fixes.seasonSplits} season periods
+                    Updated ${fixes.teamUpdates} team assignments
+                    ${saved ? 'Changes saved successfully.' : 'Changes only in memory.'}
+                `;
+                
+                showStatusMessage(message, saved);
+                console.log('Fix completed:', message);
+                
+                if (fixes.errors.length > 0) {
+                    console.warn('Fix completed with errors:', fixes.errors);
+                }
+
+            } catch (error) {
+                console.error('Error fixing data consistency:', error);
+                showStatusMessage(`Error fixing data: ${error.message}`, false);
+            }
+        }
+
+        // Add button to UI for this function
+        document.getElementById('debug-controls').innerHTML += `
+            <button id="fix-season8-data" style="background-color: #4ecca3; margin-left: 10px;">
+                Fix Season 8 Data
+            </button>
+        `;
+
+        // Add event listener
+        document.getElementById('fix-season8-data').addEventListener('click', fixSeasonEightConsistency);
+
+        // Check if save endpoints are working properly
+        async function checkSaveEndpoints() {
+            try {
+                // First check if server is available
+                const serverAvailable = await isServerAvailable();
+                if (!serverAvailable) {
+                    console.log('Server is not available');
+                    return {
+                        available: false,
+                        reason: 'Server is not reachable',
+                        savePlayersEndpointWorks: false,
+                        saveManagersEndpointWorks: false
+                    };
+                }
+                
+                // Check players endpoint
+                let savePlayersEndpointWorks = false;
+                try {
+                    const pingPlayersResponse = await fetch('http://localhost:3000/save-players', {
+                        method: 'HEAD',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    // If endpoint exists, HEAD should return 200 or 405 (Method not allowed)
+                    savePlayersEndpointWorks = pingPlayersResponse.status === 200 || pingPlayersResponse.status === 405;
+                } catch (error) {
+                    console.log('Error testing players save endpoint:', error);
+                }
+                
+                // Check managers endpoint
+                let saveManagersEndpointWorks = false;
+                try {
+                    const pingManagersResponse = await fetch('http://localhost:3000/save-managers', {
+                        method: 'HEAD',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    // If endpoint exists, HEAD should return 200 or 405 (Method not allowed)
+                    saveManagersEndpointWorks = pingManagersResponse.status === 200 || pingManagersResponse.status === 405;
+                } catch (error) {
+                    console.log('Error testing managers save endpoint:', error);
+                }
+                
+                const available = savePlayersEndpointWorks && saveManagersEndpointWorks;
+                
+                return {
+                    available,
+                    reason: available ? 'All endpoints available' : 'One or more save endpoints missing',
+                    savePlayersEndpointWorks,
+                    saveManagersEndpointWorks
+                };
+            } catch (error) {
+                console.error('Error checking save endpoints:', error);
+                return {
+                    available: false,
+                    reason: 'Error checking endpoints: ' + error.message,
+                    savePlayersEndpointWorks: false,
+                    saveManagersEndpointWorks: false
+                };
+            }
+        }
+
+        // Check save endpoints on page load
         document.addEventListener('DOMContentLoaded', async function() {
-            console.log('Document loaded, checking save endpoints');
-            // This will execute after page is loaded
+            // Add this after other initialization
             try {
                 const endpointStatus = await checkSaveEndpoints();
-                if (endpointStatus && !endpointStatus.available) {
+                if (!endpointStatus.available) {
                     console.warn('Save endpoints check failed:', endpointStatus.reason);
                     
                     if (endpointStatus.savePlayersEndpointWorks !== endpointStatus.saveManagersEndpointWorks) {
                         // If only one endpoint works, show specific warning
                         const failedEndpoint = !endpointStatus.savePlayersEndpointWorks ? 'players' : 'managers';
                         showStatusMessage(`Warning: ${failedEndpoint} save endpoint is not available. Changes may not persist correctly.`, false, 0);
-                        
-                        // Record in save history
-                        recordSaveOperation(false, 'server', {
-                            message: `${failedEndpoint} save endpoint not available`,
-                            error: `${failedEndpoint} endpoint returned error during initialization check`
-                        });
                     } else {
                         // General warning if both don't work
                         console.log('Both server save endpoints are unavailable. Changes will only be in memory unless GitHub is configured.');
-                        
-                        // Record in save history if save history is initialized
-                        if (typeof recordSaveOperation === 'function') {
-                            recordSaveOperation(false, 'server', {
-                                message: 'Server save endpoints not available',
-                                error: 'Both endpoints returned errors during initialization check'
-                            });
-                        }
                     }
-                } else if (endpointStatus) {
+                } else {
                     console.log('Save endpoints are working properly');
-                    
-                    // Record successful endpoint check in save history
-                    if (typeof recordSaveOperation === 'function') {
-                        recordSaveOperation(true, 'server', {
-                            message: 'Server endpoints available and working',
-                            operations: { type: 'initialization' }
-                        });
-                    }
                 }
             } catch (error) {
                 console.error('Error during save endpoints check:', error);
