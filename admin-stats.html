@@ -792,13 +792,8 @@
         // Add a function to try to save to GitHub
         async function saveToGitHub(data) {
             try {
-                // Initialize GitHub config if not already done
-                if (!githubConfig) {
-                    initGitHubConfig();
-                }
-                
                 // Check if GitHub is configured
-                if (!githubConfig.isConfigured()) {
+                if (!githubConfig || !githubConfig.isConfigured()) {
                     console.log('GitHub not configured');
                     return false;
                 }
@@ -807,24 +802,31 @@
                 showSuccess('Saving to GitHub...', 0);
                 
                 // Get repository details
-                const owner = githubConfig.getOwner();
-                const repo = githubConfig.getRepo();
-                const branch = githubConfig.getBranch();
-                const path = githubConfig.managerFilePath || 'manager_data.json';
-                const token = githubConfig.getToken();
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: githubConfig.managerFilePath || 'manager_data.json',
+                    branch: githubConfig.getBranch(),
+                    token: githubConfig.getToken()
+                };
                 
-                if (!owner || !repo || !branch || !token) {
+                if (!repoDetails.owner || !repoDetails.repo || !repoDetails.branch || !repoDetails.token) {
                     console.error('Missing GitHub configuration');
                     return false;
                 }
                 
-                console.log('Saving to GitHub:', { owner, repo, path, branch });
+                console.log('Saving to GitHub:', { 
+                    owner: repoDetails.owner, 
+                    repo: repoDetails.repo, 
+                    path: repoDetails.path, 
+                    branch: repoDetails.branch 
+                });
                 
                 // Get current file SHA
-                const fileInfoUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+                const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
                 const fileInfoResponse = await fetch(fileInfoUrl, {
                     headers: {
-                        'Authorization': `token ${token}`
+                        'Authorization': `token ${repoDetails.token}`
                     }
                 });
                 
@@ -837,6 +839,7 @@
                     console.log('File does not exist on GitHub yet, will create it');
                 } else if (!fileInfoResponse.ok) {
                     console.error('Failed to get file info:', fileInfoResponse.status);
+                    showError(`GitHub error: ${fileInfoResponse.status} - ${fileInfoResponse.statusText}`, 5000);
                     return false;
                 } else {
                     // File exists, get its SHA
@@ -846,14 +849,16 @@
                 }
                 
                 // Prepare content - wrap the managers array in an object with managers property
-                const content = btoa(unescape(encodeURIComponent(JSON.stringify({ managers: data }, null, 2))));
+                const contentObj = Array.isArray(data) ? { managers: data } : data;
+                const jsonString = JSON.stringify(contentObj, null, 2);
+                const content = btoa(unescape(encodeURIComponent(jsonString)));
                 
                 // Create commit
-                const commitUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                const commitUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`;
                 const requestBody = {
-                    message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
+                    message: `Update manager data via admin interface - ${new Date().toISOString()}`,
                     content: content,
-                    branch: branch
+                    branch: repoDetails.branch
                 };
                 
                 // Add SHA if the file exists
@@ -864,7 +869,7 @@
                 const commitResponse = await fetch(commitUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${token}`,
+                        'Authorization': `token ${repoDetails.token}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(requestBody)
@@ -1133,30 +1138,44 @@
             if (typeof window.githubConfig !== 'undefined') {
                 githubConfig = window.githubConfig;
                 console.log('GitHub config loaded from global object');
-                return true;
+                return githubConfig.isConfigured();
             }
             
-            // Fallback implementation if github-config.js is not available
-            githubConfig = {
-                isConfigured: function() {
-                    return !!localStorage.getItem('githubToken');
-                },
-                getToken: function() {
-                    return localStorage.getItem('githubToken');
-                },
-                getOwner: function() {
-                    return localStorage.getItem('githubOwner') || 'default-owner';
-                },
-                getRepo: function() {
-                    return localStorage.getItem('githubRepo') || 'default-repo';
-                },
-                getBranch: function() {
-                    return localStorage.getItem('githubBranch') || 'main';
-                },
-                managerFilePath: 'manager_data.json'
-            };
+            // Fallback to using the configuration from the github-config.js file
+            try {
+                const script = document.createElement('script');
+                script.src = 'github-config.js';
+                script.onload = () => {
+                    githubConfig = window.githubConfig;
+                    console.log('GitHub config loaded from dynamically loaded github-config.js');
+                };
+                script.onerror = () => {
+                    console.error('Failed to load github-config.js');
+                    // Create minimal fallback
+                    githubConfig = {
+                        isConfigured: () => !!localStorage.getItem('githubToken'),
+                        getToken: () => localStorage.getItem('githubToken'),
+                        getOwner: () => localStorage.getItem('githubOwner') || 'default-owner',
+                        getRepo: () => localStorage.getItem('githubRepo') || 'default-repo',
+                        getBranch: () => localStorage.getItem('githubBranch') || 'main',
+                        managerFilePath: 'manager_data.json'
+                    };
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                console.error('Error initializing GitHub config:', error);
+                // Create minimal fallback on error
+                githubConfig = {
+                    isConfigured: () => !!localStorage.getItem('githubToken'),
+                    getToken: () => localStorage.getItem('githubToken'),
+                    getOwner: () => localStorage.getItem('githubOwner') || 'default-owner',
+                    getRepo: () => localStorage.getItem('githubRepo') || 'default-repo',
+                    getBranch: () => localStorage.getItem('githubBranch') || 'main',
+                    managerFilePath: 'manager_data.json'
+                };
+            }
             
-            return githubConfig.isConfigured();
+            return githubConfig?.isConfigured() || false;
         }
     </script>
 </body>

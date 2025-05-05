@@ -842,49 +842,15 @@
                 }
                 
                 // Fallback to localStorage if Vercel config is not available
-                console.log('Vercel config not available, falling back to localStorage');
-                githubConfig = {
-                    isConfigured: function() {
-                        return !!localStorage.getItem('githubToken');
-                    },
-                    getToken: function() {
-                        return localStorage.getItem('githubToken');
-                    },
-                    getOwner: function() {
-                        return localStorage.getItem('githubOwner') || 'default-owner';
-                    },
-                    getRepo: function() {
-                        return localStorage.getItem('githubRepo') || 'default-repo';
-                    },
-                    getBranch: function() {
-                        return localStorage.getItem('githubBranch') || 'main';
-                    },
-                    filePath: 'players.json',
-                    managerFilePath: 'manager_data.json',
-                    saveConfig: function(config) {
-                        if (config.token) localStorage.setItem('githubToken', config.token);
-                        if (config.owner) localStorage.setItem('githubOwner', config.owner);
-                        if (config.repo) localStorage.setItem('githubRepo', config.repo);
-                        if (config.branch) localStorage.setItem('githubBranch', config.branch);
-                        if (config.filePath) localStorage.setItem('githubJsonPath', config.filePath);
-                        if (config.commitMessage) localStorage.setItem('githubCommitMessage', config.commitMessage);
-                        console.log('GitHub configuration saved to localStorage');
-                    },
-                    clearConfig: function() {
-                        localStorage.removeItem('githubToken');
-                        localStorage.removeItem('githubOwner');
-                        localStorage.removeItem('githubRepo');
-                        localStorage.removeItem('githubBranch');
-                        localStorage.removeItem('githubJsonPath');
-                        localStorage.removeItem('githubCommitMessage');
-                        console.log('GitHub configuration cleared from localStorage');
-                    }
-                };
+                console.log('Vercel config not available, falling back to global githubConfig from github-config.js');
+                githubConfig = window.githubConfig;
                 
                 return githubConfig.isConfigured();
             } catch (error) {
                 console.error('Error initializing GitHub config:', error);
-                return false;
+                // Final fallback
+                githubConfig = window.githubConfig;
+                return githubConfig.isConfigured();
             }
         }
         
@@ -2433,11 +2399,6 @@
         // Save to GitHub
         async function saveToGitHub() {
             try {
-                // Initialize GitHub config if not already done
-                if (!githubConfig) {
-                    initGitHubConfig();
-                }
-                
                 // Check if GitHub integration is configured
                 if (!githubConfig.isConfigured()) {
                     throw new Error('GitHub integration is not configured');
@@ -2450,7 +2411,7 @@
                 const repoDetails = {
                     owner: githubConfig.getOwner(),
                     repo: githubConfig.getRepo(),
-                    path: localStorage.getItem('githubJsonPath') || githubConfig.filePath,
+                    path: githubConfig.filePath || 'players.json',
                     branch: githubConfig.getBranch()
                 };
                 
@@ -2513,94 +2474,107 @@
                 // If manager data exists, save it too
                 if (managerData) {
                     try {
-                        console.log('Attempting to save manager data to GitHub...');
-                        
-                        // Make sure managerData has a valid format before saving
-                        if (!managerData.managers || !Array.isArray(managerData.managers)) {
-                            console.error('Invalid manager data format:', managerData);
-                            throw new Error('Invalid manager data format');
-                        }
-                        
-                        // Get manager data file path - make sure to use a consistent path
-                        const managerPath = githubConfig.managerFilePath || 'manager_data.json';
-                        
-                        // Get the current manager file to get its SHA
-                        const managerInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}?ref=${repoDetails.branch}`, {
-                            headers: {
-                                'Authorization': `token ${githubConfig.getToken()}`
-                            }
-                        });
-                        
-                        let managerSHA = '';
-                        let managerExists = true;
-                        
-                        if (managerInfoResponse.status === 404) {
-                            // File doesn't exist yet
-                            managerExists = false;
-                            console.log('Manager file does not exist yet - will create it');
-                        } else if (!managerInfoResponse.ok) {
-                            const errorInfo = await managerInfoResponse.text();
-                            console.error('Error getting manager file info:', errorInfo);
-                            throw new Error(`Failed to get manager file info: ${errorInfo}`);
-                        } else {
-                            // File exists, get its SHA
-                            const fileInfo = await managerInfoResponse.json();
-                            managerSHA = fileInfo.sha;
-                            console.log('Found existing manager file with SHA:', managerSHA);
-                        }
-                        
-                        // Prepare the manager data content
-                        const managerJsonString = JSON.stringify(managerData, null, 2);
-                        console.log('Manager data size:', managerJsonString.length, 'bytes');
-                        
-                        const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
-                        
-                        // Prepare the manager request body
-                        const managerRequestBody = {
-                            message: `Update manager data - ${new Date().toISOString()}`,
-                            content: managerContent,
-                            branch: repoDetails.branch
-                        };
-                        
-                        // Add SHA if the file exists
-                        if (managerExists) {
-                            managerRequestBody.sha = managerSHA;
-                        }
-                        
-                        console.log('Sending manager data to GitHub...');
-                        
-                        // Commit the updated manager file
-                        const managerCommitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${githubConfig.getToken()}`,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(managerRequestBody)
-                        });
-                        
-                        if (!managerCommitResponse.ok) {
-                            const errorText = await managerCommitResponse.text();
-                            console.error('Failed to save manager data to GitHub:', errorText);
-                            throw new Error(`Failed to save manager data: ${errorText}`);
-                        } else {
-                            console.log('Manager data saved to GitHub successfully');
-                        }
+                        await saveManagerDataToGitHub(managerData);
                     } catch (managerError) {
                         console.error('Error saving manager data to GitHub:', managerError);
-                        throw managerError; // Re-throw to be handled by the caller
+                        showStatusMessage('Player data saved, but manager data could not be saved.', false);
+                        return true; // Return true since we at least saved player data
                     }
-                } else {
-                    console.log('No manager data to save');
                 }
                 
                 showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                return true;
                 
             } catch (error) {
                 showStatusMessage(`GitHub Error: ${error.message}`, false);
                 console.error('GitHub save error:', error);
                 throw error; // Re-throw to be handled by the caller
             }
+        }
+        
+        // Helper function to save manager data to GitHub
+        async function saveManagerDataToGitHub(managerData) {
+            if (!managerData) {
+                console.log('No manager data to save');
+                return false;
+            }
+            
+            console.log('Saving manager data to GitHub...');
+            
+            // Make sure managerData has a valid format before saving
+            if (!managerData.managers || !Array.isArray(managerData.managers)) {
+                console.error('Invalid manager data format:', managerData);
+                throw new Error('Invalid manager data format');
+            }
+            
+            // Get manager data file path - make sure to use a consistent path
+            const managerPath = githubConfig.managerFilePath || 'manager_data.json';
+            
+            // Get the current manager file to get its SHA
+            const fileInfoUrl = `https://api.github.com/repos/${githubConfig.getOwner()}/${githubConfig.getRepo()}/contents/${managerPath}?ref=${githubConfig.getBranch()}`;
+            const fileInfoResponse = await fetch(fileInfoUrl, {
+                headers: {
+                    'Authorization': `token ${githubConfig.getToken()}`
+                }
+            });
+            
+            let sha = '';
+            let fileExists = true;
+            
+            if (fileInfoResponse.status === 404) {
+                // File doesn't exist yet
+                fileExists = false;
+                console.log('Manager file does not exist on GitHub yet, will create it');
+            } else if (!fileInfoResponse.ok) {
+                const errorInfo = await fileInfoResponse.text();
+                console.error('Error getting manager file info:', errorInfo);
+                throw new Error(`Failed to get manager file info: ${errorInfo}`);
+            } else {
+                // File exists, get its SHA
+                const fileInfo = await fileInfoResponse.json();
+                sha = fileInfo.sha;
+                console.log('Found existing manager file with SHA:', sha);
+            }
+            
+            // Prepare the manager data content
+            const managerJsonString = JSON.stringify(managerData, null, 2);
+            console.log('Manager data size:', managerJsonString.length, 'bytes');
+            
+            const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
+            
+            // Prepare the manager request body
+            const requestBody = {
+                message: `Update manager data - ${new Date().toISOString()}`,
+                content: managerContent,
+                branch: githubConfig.getBranch()
+            };
+            
+            // Add SHA if the file exists
+            if (fileExists) {
+                requestBody.sha = sha;
+            }
+            
+            console.log('Sending manager data to GitHub...');
+            
+            // Commit the updated manager file
+            const commitUrl = `https://api.github.com/repos/${githubConfig.getOwner()}/${githubConfig.getRepo()}/contents/${managerPath}`;
+            const commitResponse = await fetch(commitUrl, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${githubConfig.getToken()}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            if (!commitResponse.ok) {
+                const errorText = await commitResponse.text();
+                console.error('Failed to save manager data to GitHub:', errorText);
+                throw new Error(`Failed to save manager data: ${errorText}`);
+            }
+            
+            console.log('Manager data saved to GitHub successfully');
+            return true;
         }
 
         // Initialize application

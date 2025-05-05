@@ -1596,43 +1596,48 @@
                 if (typeof window.githubConfig !== 'undefined') {
                     githubConfig = window.githubConfig;
                     console.log('GitHub config loaded from global object');
-                    return true;
+                    return githubConfig.isConfigured();
                 }
                     
-                // Fallback implementation if github-config.js is not available
-                githubConfig = {
-                    isConfigured: function() {
-                        return !!localStorage.getItem('githubToken');
-                    },
-                    getToken: function() {
-                        return localStorage.getItem('githubToken');
-                    },
-                    getOwner: function() {
-                        return localStorage.getItem('githubOwner') || 'default-owner';
-                    },
-                    getRepo: function() {
-                        return localStorage.getItem('githubRepo') || 'default-repo';
-                    },
-                    getBranch: function() {
-                        return localStorage.getItem('githubBranch') || 'main';
+                // If not available, try to load it
+                console.log('GitHubConfig not found in window, trying to load dynamically');
+                const script = document.createElement('script');
+                script.src = 'github-config.js';
+                script.onload = () => {
+                    if (window.githubConfig) {
+                        githubConfig = window.githubConfig;
+                        console.log('GitHub config loaded dynamically');
+                    } else {
+                        createFallbackConfig();
                     }
                 };
-                    
+                script.onerror = () => {
+                    console.error('Failed to load github-config.js');
+                    createFallbackConfig();
+                };
+                document.head.appendChild(script);
+                
+                // Create fallback while waiting for script to potentially load
+                createFallbackConfig();
                 return githubConfig.isConfigured();
             } catch (error) {
                 console.error('Error initializing GitHub config:', error);
-                    
-                // Create minimal emergency fallback
-                githubConfig = {
-                    isConfigured: () => false,
-                    getToken: () => null,
-                    getOwner: () => 'default-owner',
-                    getRepo: () => 'default-repo', 
-                    getBranch: () => 'main'
-                };
-                    
-                return false;
+                createFallbackConfig();
+                return githubConfig.isConfigured();
             }
+        }
+        
+        function createFallbackConfig() {
+            console.log('Creating fallback GitHub config');
+            githubConfig = {
+                isConfigured: () => !!localStorage.getItem('githubToken'),
+                getToken: () => localStorage.getItem('githubToken'),
+                getOwner: () => localStorage.getItem('githubOwner') || 'default-owner',
+                getRepo: () => localStorage.getItem('githubRepo') || 'default-repo', 
+                getBranch: () => localStorage.getItem('githubBranch') || 'main',
+                filePath: 'players.json',
+                managerFilePath: 'manager_data.json'
+            };
         }
     
         // Authentication check
@@ -3013,45 +3018,22 @@
                 }
                 
                 // Show saving message
-                showStatusMessage('Saving to GitHub...', true);
-                
-                // Save players.json
-                await saveFileToGitHub(playersData, 'players.json', 'Update players from transfer system');
-                
-                // Save manager_data.json - wrap managers array in the correct object structure
-                const managersDataFormatted = { managers: managersData };
-                await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from transfer system');
-                
-                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
-                return true;
-                
-            } catch (error) {
-                showStatusMessage(`GitHub Error: ${error.message}`, false);
-                console.error('GitHub save error:', error);
-                throw error; // Re-throw to be handled by the caller
-            }
-        }
-        
-        // Save a file to GitHub
-        async function saveFileToGitHub(data, filePath, commitMessage) {
-            try {
-                // Check if GitHub integration is configured
-                if (!githubConfig || !githubConfig.isConfigured()) {
-                    throw new Error('GitHub integration is not configured');
-                }
+                showStatusMessage('Saving to GitHub...', true, 0); // Don't auto-hide while saving
                 
                 // Get repository details
                 const repoDetails = {
                     owner: githubConfig.getOwner(),
                     repo: githubConfig.getRepo(),
-                    path: filePath,
-                    branch: githubConfig.getBranch()
+                    path: 'players.json',
+                    branch: githubConfig.getBranch(),
+                    token: githubConfig.getToken()
                 };
                 
                 // Get the current file to get its SHA (required for the GitHub API)
-                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
+                const fileInfoResponse = await fetch(fileInfoUrl, {
                     headers: {
-                        'Authorization': `token ${githubConfig.getToken()}`
+                        'Authorization': `token ${repoDetails.token}`
                     }
                 });
                 
@@ -3061,6 +3043,7 @@
                 if (fileInfoResponse.status === 404) {
                     // File doesn't exist yet
                     fileExists = false;
+                    console.log(`File players.json does not exist on GitHub yet, will create it`);
                 } else if (!fileInfoResponse.ok) {
                     const errorData = await fileInfoResponse.json();
                     throw new Error(`GitHub API error: ${errorData.message}`);
@@ -3068,14 +3051,15 @@
                     // File exists, get its SHA
                     const fileInfo = await fileInfoResponse.json();
                     currentSHA = fileInfo.sha;
+                    console.log(`Found existing file players.json with SHA: ${currentSHA}`);
                 }
                 
                 // Prepare the content
-                const jsonString = JSON.stringify(data, null, 2);
+                const jsonString = JSON.stringify(playersData, null, 2);
                 const content = btoa(unescape(encodeURIComponent(jsonString)));
                 
                 // Prepare the commit message
-                const fullCommitMessage = `${commitMessage} - ${new Date().toISOString()}`;
+                const fullCommitMessage = `Update players from transfer system - ${new Date().toISOString()}`;
                 
                 // Prepare the request body
                 const requestBody = {
@@ -3090,10 +3074,11 @@
                 }
                 
                 // Commit the updated file
-                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
+                const commitUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`;
+                const commitResponse = await fetch(commitUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Authorization': `token ${repoDetails.token}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(requestBody)
@@ -3104,10 +3089,13 @@
                     throw new Error(`GitHub API error: ${errorData.message}`);
                 }
                 
+                console.log(`Successfully saved players.json to GitHub`);
+                showStatusMessage(`players.json saved to GitHub successfully! The site will update in a few minutes.`, true);
                 return true;
                 
             } catch (error) {
-                console.error(`GitHub save error for ${filePath}:`, error);
+                console.error(`GitHub save error for players.json:`, error);
+                showStatusMessage(`Error saving to GitHub: ${error.message}`, false);
                 throw error; // Re-throw to be handled by the caller
             }
         }
@@ -4602,6 +4590,97 @@
                 console.error('Error during save endpoints check:', error);
             }
         });
+
+        // Save a file to GitHub
+        async function saveFileToGitHub(data, filePath, commitMessage) {
+            try {
+                // Check if GitHub integration is configured
+                if (!githubConfig || !githubConfig.isConfigured()) {
+                    throw new Error('GitHub integration is not configured');
+                }
+                
+                // Show saving message
+                showStatusMessage('Saving to GitHub...', true, 0); // Don't auto-hide while saving
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: filePath,
+                    branch: githubConfig.getBranch(),
+                    token: githubConfig.getToken()
+                };
+                
+                // Get the current file to get its SHA (required for the GitHub API)
+                const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
+                const fileInfoResponse = await fetch(fileInfoUrl, {
+                    headers: {
+                        'Authorization': `token ${repoDetails.token}`
+                    }
+                });
+                
+                let currentSHA = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    // File doesn't exist yet
+                    fileExists = false;
+                    console.log(`File ${filePath} does not exist on GitHub yet, will create it`);
+                } else if (!fileInfoResponse.ok) {
+                    const errorData = await fileInfoResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                } else {
+                    // File exists, get its SHA
+                    const fileInfo = await fileInfoResponse.json();
+                    currentSHA = fileInfo.sha;
+                    console.log(`Found existing file ${filePath} with SHA: ${currentSHA}`);
+                }
+                
+                // Prepare the content
+                const jsonString = JSON.stringify(data, null, 2);
+                const content = btoa(unescape(encodeURIComponent(jsonString)));
+                
+                // Prepare the commit message
+                const fullCommitMessage = `${commitMessage} - ${new Date().toISOString()}`;
+                
+                // Prepare the request body
+                const requestBody = {
+                    message: fullCommitMessage,
+                    content: content,
+                    branch: repoDetails.branch
+                };
+                
+                // Add SHA if the file exists
+                if (fileExists) {
+                    requestBody.sha = currentSHA;
+                }
+                
+                // Commit the updated file
+                const commitUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`;
+                const commitResponse = await fetch(commitUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${repoDetails.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!commitResponse.ok) {
+                    const errorData = await commitResponse.json();
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                }
+                
+                console.log(`Successfully saved ${filePath} to GitHub`);
+                showStatusMessage(`${filePath} saved to GitHub successfully!`, true);
+                return true;
+                
+            } catch (error) {
+                console.error(`GitHub save error for ${filePath}:`, error);
+                showStatusMessage(`Error saving to GitHub: ${error.message}`, false);
+                throw error; // Re-throw to be handled by the caller
+            }
+        }
     </script>
     
     <!-- Performance optimization JS -->
