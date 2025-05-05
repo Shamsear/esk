@@ -16390,7 +16390,7 @@
     "name": "BRYAN ROBSON",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CM",
     "value": 108,
     "gamesPlayed": 0,
@@ -16399,6 +16399,12 @@
         "season": "4-6",
         "team": "LIVERPOOL FC",
         "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "108",
         "apps": "00"
       }
     ],
