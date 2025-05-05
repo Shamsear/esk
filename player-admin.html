@@ -770,139 +770,122 @@
         
         // Initialize GitHub configuration
         async function initGitHubConfig() {
-            // If global config is available from github-config.js, use it
-            if (typeof window.githubConfig !== 'undefined') {
-                githubConfig = window.githubConfig;
-                console.log('GitHub config loaded from global object');
-                return true;
-            }
-            
-            // Fallback implementation if github-config.js is not available
-            githubConfig = {
-                isConfigured: function() {
-                    return !!localStorage.getItem('githubToken');
-                },
-                getToken: function() {
-                    return localStorage.getItem('githubToken');
-                },
-                getOwner: function() {
-                    return localStorage.getItem('githubOwner') || 'default-owner';
-                },
-                getRepo: function() {
-                    return localStorage.getItem('githubRepo') || 'default-repo';
-                },
-                getBranch: function() {
-                    return localStorage.getItem('githubBranch') || 'main';
-                },
-                filePath: 'players.json',
-                managerFilePath: 'manager_data.json',
-                configFilePath: 'admin-config.json',
-                
-                // Load configuration from GitHub
-                async loadConfig() {
-                    try {
-                        const response = await fetch(this.configFilePath);
-                        if (response.ok) {
-                            const config = await response.json();
-                            // Store token in localStorage for security
-                            if (config.token) localStorage.setItem('githubToken', config.token);
-                            // Store other settings in localStorage for quick access
-                            if (config.owner) localStorage.setItem('githubOwner', config.owner);
-                            if (config.repo) localStorage.setItem('githubRepo', config.repo);
-                            if (config.branch) localStorage.setItem('githubBranch', config.branch);
-                            if (config.filePath) localStorage.setItem('githubJsonPath', config.filePath);
-                            if (config.commitMessage) localStorage.setItem('githubCommitMessage', config.commitMessage);
-                            console.log('GitHub configuration loaded from repository');
-                            return true;
-                        }
-                    } catch (error) {
-                        console.error('Error loading GitHub configuration:', error);
-                    }
-                    return false;
-                },
-
-                // Save configuration to GitHub
-                async saveConfig(config) {
-                    try {
-                        // First get the current file SHA if it exists
-                        const fileInfoResponse = await fetch(`https://api.github.com/repos/${this.getOwner()}/${this.getRepo()}/contents/${this.configFilePath}?ref=${this.getBranch()}`, {
-                            headers: {
-                                'Authorization': `token ${this.getToken()}`
+            try {
+                // First try to get config from Vercel environment
+                const configResponse = await fetch('/api/github-config');
+                if (configResponse.ok) {
+                    const config = await configResponse.json();
+                    githubConfig = {
+                        isConfigured: function() {
+                            return !!config.token;
+                        },
+                        getToken: function() {
+                            return config.token;
+                        },
+                        getOwner: function() {
+                            return config.owner;
+                        },
+                        getRepo: function() {
+                            return config.repo;
+                        },
+                        getBranch: function() {
+                            return config.branch;
+                        },
+                        filePath: config.filePath || 'players.json',
+                        managerFilePath: config.managerFilePath || 'manager_data.json',
+                        // Save config to Vercel environment
+                        saveConfig: async function(newConfig) {
+                            try {
+                                const saveResponse = await fetch('/api/github-config', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(newConfig)
+                                });
+                                
+                                if (!saveResponse.ok) {
+                                    throw new Error('Failed to save GitHub configuration');
+                                }
+                                
+                                // Update local config
+                                Object.assign(config, newConfig);
+                                console.log('GitHub configuration saved to Vercel environment');
+                            } catch (error) {
+                                console.error('Error saving GitHub configuration:', error);
+                                throw error;
                             }
-                        });
-
-                        let currentSHA = '';
-                        if (fileInfoResponse.ok) {
-                            const fileInfo = await fileInfoResponse.json();
-                            currentSHA = fileInfo.sha;
+                        },
+                        // Clear config from Vercel environment
+                        clearConfig: async function() {
+                            try {
+                                const clearResponse = await fetch('/api/github-config', {
+                                    method: 'DELETE'
+                                });
+                                
+                                if (!clearResponse.ok) {
+                                    throw new Error('Failed to clear GitHub configuration');
+                                }
+                                
+                                // Clear local config
+                                Object.keys(config).forEach(key => {
+                                    config[key] = null;
+                                });
+                                console.log('GitHub configuration cleared from Vercel environment');
+                            } catch (error) {
+                                console.error('Error clearing GitHub configuration:', error);
+                                throw error;
+                            }
                         }
-
-                        // Prepare the content
-                        const configToSave = {
-                            ...config,
-                            // Don't save token in the config file
-                            token: undefined
-                        };
-                        const jsonString = JSON.stringify(configToSave, null, 2);
-                        const content = btoa(unescape(encodeURIComponent(jsonString)));
-
-                        // Prepare the request body
-                        const requestBody = {
-                            message: 'Update admin configuration',
-                            content: content,
-                            branch: this.getBranch()
-                        };
-
-                        if (currentSHA) {
-                            requestBody.sha = currentSHA;
-                        }
-
-                        // Save the configuration file
-                        const saveResponse = await fetch(`https://api.github.com/repos/${this.getOwner()}/${this.getRepo()}/contents/${this.configFilePath}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${this.getToken()}`,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(requestBody)
-                        });
-
-                        if (!saveResponse.ok) {
-                            throw new Error('Failed to save configuration to GitHub');
-                        }
-
-                        // Store token in localStorage for security
+                    };
+                    return githubConfig.isConfigured();
+                }
+                
+                // Fallback to localStorage if Vercel config is not available
+                console.log('Vercel config not available, falling back to localStorage');
+                githubConfig = {
+                    isConfigured: function() {
+                        return !!localStorage.getItem('githubToken');
+                    },
+                    getToken: function() {
+                        return localStorage.getItem('githubToken');
+                    },
+                    getOwner: function() {
+                        return localStorage.getItem('githubOwner') || 'default-owner';
+                    },
+                    getRepo: function() {
+                        return localStorage.getItem('githubRepo') || 'default-repo';
+                    },
+                    getBranch: function() {
+                        return localStorage.getItem('githubBranch') || 'main';
+                    },
+                    filePath: 'players.json',
+                    managerFilePath: 'manager_data.json',
+                    saveConfig: function(config) {
                         if (config.token) localStorage.setItem('githubToken', config.token);
-                        // Store other settings in localStorage for quick access
                         if (config.owner) localStorage.setItem('githubOwner', config.owner);
                         if (config.repo) localStorage.setItem('githubRepo', config.repo);
                         if (config.branch) localStorage.setItem('githubBranch', config.branch);
                         if (config.filePath) localStorage.setItem('githubJsonPath', config.filePath);
                         if (config.commitMessage) localStorage.setItem('githubCommitMessage', config.commitMessage);
-
-                        console.log('GitHub configuration saved to repository');
-                        return true;
-                    } catch (error) {
-                        console.error('Error saving GitHub configuration:', error);
-                        return false;
+                        console.log('GitHub configuration saved to localStorage');
+                    },
+                    clearConfig: function() {
+                        localStorage.removeItem('githubToken');
+                        localStorage.removeItem('githubOwner');
+                        localStorage.removeItem('githubRepo');
+                        localStorage.removeItem('githubBranch');
+                        localStorage.removeItem('githubJsonPath');
+                        localStorage.removeItem('githubCommitMessage');
+                        console.log('GitHub configuration cleared from localStorage');
                     }
-                },
-
-                // Clear configuration
-                clearConfig() {
-                    localStorage.removeItem('githubToken');
-                    localStorage.removeItem('githubOwner');
-                    localStorage.removeItem('githubRepo');
-                    localStorage.removeItem('githubBranch');
-                    localStorage.removeItem('githubJsonPath');
-                    localStorage.removeItem('githubCommitMessage');
-                    console.log('GitHub configuration cleared from localStorage');
-                }
-            };
-            
-            // Try to load configuration from repository
-            await githubConfig.loadConfig();
-            return githubConfig.isConfigured();
+                };
+                
+                return githubConfig.isConfigured();
+            } catch (error) {
+                console.error('Error initializing GitHub config:', error);
+                return false;
+            }
         }
         
         // Authentication check
