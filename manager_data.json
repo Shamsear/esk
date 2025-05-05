@@ -4822,9 +4822,113 @@
             "contract": "SEASON 6",
             "salary": 5.4,
             "type": "legend"
+          },
+          {
+            "name": "YASSINE BOUNOU",
+            "position": "GK",
+            "value": 104,
+            "contract": "SEASON 6",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "legend"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "prime legend"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PAULO DYBALA",
+            "position": "ST",
+            "value": 86,
+            "contract": "SEASON 6",
+            "salary": 4.3,
+            "type": "standard"
+          },
+          {
+            "name": "BENOÎT BADIASHILE",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 6",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "ALESSIO ROMAGNOLI",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 6",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "MALCOM",
+            "position": "RW",
+            "value": 80,
+            "contract": "SEASON 6",
+            "salary": 4,
+            "type": "prime"
+          },
+          {
+            "name": "PHILIPP LIENHART",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 6",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "SHAY GIVEN",
+            "position": "GK",
+            "value": 60,
+            "contract": "SEASON 6",
+            "salary": 3,
+            "type": "legend"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 6",
+            "salary": 2.5,
+            "type": "prime"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 6",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "ELYE WAHI",
+            "position": "ST",
+            "value": 68,
+            "contract": "SEASON 6",
+            "salary": 3.4,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 8
+        "totalPlayers": 21
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4998,7 +5102,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 486
+      "clubTotalValue": 1512
     },
     {
       "name": "NABEEL",
