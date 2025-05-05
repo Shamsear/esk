@@ -494,9 +494,9 @@
     "name": "DOMINIK LIVAKOVIC",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "GK",
-    "value": 50,
+    "value": 56,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -504,10 +504,17 @@
         "team": "AFC AJAX",
         "value": "52 ",
         "apps": "01"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "56",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. LIVAKOVIC_CARD.webp",
-    "id": 23
+    "id": 23,
+    "type": "standard"
   },
   {
     "name": "FERNANDO MUSLERA",
@@ -2595,9 +2602,9 @@
     "name": "GIORGIO SCALVINI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "CB",
-    "value": 50,
+    "value": 70,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -2611,10 +2618,17 @@
         "team": "MOHUN BAGAN AC",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "70",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/G. SCALVINI_CARD.webp",
-    "id": 126
+    "id": 126,
+    "type": "prime"
   },
   {
     "name": "AXEL WITSEL",
@@ -4169,9 +4183,9 @@
     "name": "MIKA MÀRMOL",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "CB",
-    "value": 50,
+    "value": 60,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4179,10 +4193,17 @@
         "team": "SANTOS FC",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "60",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. MARMOL_CARD.webp",
-    "id": 198
+    "id": 198,
+    "type": "standard"
   },
   {
     "name": "NATHAN COLLINS",
@@ -4509,9 +4530,9 @@
     "name": "ROMARIO",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "ST",
-    "value": 100,
+    "value": 120,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -4519,10 +4540,17 @@
         "team": "AFC AJAX",
         "value": "150 ",
         "apps": "14"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "120",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/ROMARIO_CARD.webp",
-    "id": 214
+    "id": 214,
+    "type": "prime legend"
   },
   {
     "name": "ALESSANDRO DEL PIERO",
@@ -6751,7 +6779,7 @@
     "name": "GERARD MORENO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "ST",
     "value": 50,
     "gamesPlayed": 0,
@@ -6767,10 +6795,17 @@
         "team": "RANGERS FC",
         "value": "64",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/G. MORENO_CARD.webp",
-    "id": 317
+    "id": 317,
+    "type": "standard"
   },
   {
     "name": "ALEXIS SANCHEZ",
@@ -8095,9 +8130,9 @@
     "name": "NICOLAS TAGLIAFICO",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "LB",
-    "value": 40,
+    "value": 46,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -8105,10 +8140,17 @@
         "team": "MOHUN BAGAN AC",
         "value": "46",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "46",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/N. TAGLIAFICO_CARD.webp",
-    "id": 383
+    "id": 383,
+    "type": "standard"
   },
   {
     "name": "LUCAS DIGNE",
@@ -9494,9 +9536,9 @@
     "name": "KOKE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "DM",
-    "value": 50,
+    "value": 62,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -9504,10 +9546,17 @@
         "team": "AFC AJAX",
         "value": "52 ",
         "apps": "14"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "62",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/KOKE_CARD.webp",
-    "id": 450
+    "id": 450,
+    "type": "prime"
   },
   {
     "name": "YVES BISSOUMA",
@@ -10806,9 +10855,9 @@
     "name": "FABIAN RUIZ",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "CM",
-    "value": 50,
+    "value": 72,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -10816,10 +10865,17 @@
         "team": "AFC AJAX",
         "value": "54 ",
         "apps": "05"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "72",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/FABIAN RUIZ_CARD.webp",
-    "id": 513
+    "id": 513,
+    "type": "standard"
   },
   {
     "name": "S. MILINKOVIC-SAVIC",
@@ -11373,9 +11429,9 @@
     "name": "DANI OLMO",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "AM",
-    "value": 80,
+    "value": 92,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -11389,10 +11445,17 @@
         "team": "AFC AJAX",
         "value": "90",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "92",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/D. OLMO_CARD.webp",
-    "id": 540
+    "id": 540,
+    "type": "standard"
   },
   {
     "name": "BERNARDO SILVA",
@@ -12134,7 +12197,7 @@
     "name": "CALLUM HUDSON-ODOI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "LW",
     "value": 50,
     "gamesPlayed": 0,
@@ -12144,10 +12207,17 @@
         "team": "AFC AJAX",
         "value": "50 ",
         "apps": "08"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. HUDSON-ODOI_CARD.webp",
-    "id": 575
+    "id": 575,
+    "type": "standard"
   },
   {
     "name": "MYKHAILO MUDRYK",
@@ -12367,9 +12437,9 @@
     "name": "EMILE SMITH ROWE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "AM",
-    "value": 50,
+    "value": 62,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12383,10 +12453,17 @@
         "team": "AFC AJAX",
         "value": "36",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "62",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/E. SMITH ROWE_CARD.webp",
-    "id": 586
+    "id": 586,
+    "type": "standard"
   },
   {
     "name": "BRADLEY BARCOLA",
@@ -12605,7 +12682,7 @@
     "name": "GABRIEL MARTINELLI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "RAYONG FC",
+    "club": "AFC AJAX",
     "position": "LW",
     "value": 100,
     "gamesPlayed": 0,
@@ -12621,10 +12698,17 @@
         "team": "RANDERS FC",
         "value": "88",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/G. MARTINELLI_CARD.webp",
-    "id": 596
+    "id": 596,
+    "type": "standard"
   },
   {
     "name": "CHRISTIAN PULISIC",
@@ -12869,9 +12953,9 @@
     "name": "JACK GREALISH",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "LW",
-    "value": 50,
+    "value": 56,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -12879,10 +12963,17 @@
         "team": "TOTTENHAM HOTSPUR FC",
         "value": "62",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "56",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/J. GREALISH_CARD.webp",
-    "id": 608
+    "id": 608,
+    "type": "standard"
   },
   {
     "name": "WILFRIED ZAHA",
@@ -13960,9 +14051,9 @@
     "name": "LUCAS CHEVALIER",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "GK",
-    "value": 50,
+    "value": 52,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -13970,10 +14061,17 @@
         "team": "ARSENAL FC",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "52",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/L. CHEVALIER_CARD.webp",
-    "id": 660
+    "id": 660,
+    "type": "standard"
   },
   {
     "name": "ŁUKASZ SKORUPSKI",
@@ -14600,7 +14698,7 @@
     "name": "ODILON KOSSOUNOU",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "CB",
     "value": 50,
     "gamesPlayed": 0,
@@ -14610,10 +14708,17 @@
         "team": "NEWCASTLE UNITED FC",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/O. KOSSOUNOU_CARD.webp",
-    "id": 693
+    "id": 693,
+    "type": "standard"
   },
   {
     "name": "SAM BEUKEMA",
@@ -18752,9 +18857,9 @@
     "name": "DUSAN TADIC",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "LW",
-    "value": 50,
+    "value": 56,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -18762,10 +18867,17 @@
         "team": "AFC AJAX",
         "value": "50",
         "apps": "09"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "56",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/D. TADIC_CARD.webp",
-    "id": 906
+    "id": 906,
+    "type": "standard"
   },
   {
     "name": "JAMINTON CAMPAZ",
@@ -19195,9 +19307,9 @@
     "name": "BRENNAN JOHNSON",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AFC AJAX",
     "position": "RW",
-    "value": 50,
+    "value": 52,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -19205,10 +19317,17 @@
         "team": "FC BAYERN MUNICH",
         "value": "52",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AFC AJAX",
+        "value": "52",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/B. JOHNSON_CARD.webp",
-    "id": 929
+    "id": 929,
+    "type": "standard"
   },
   {
     "name": "BRYAN MBEUMO",
