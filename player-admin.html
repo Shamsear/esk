@@ -769,89 +769,53 @@
         let githubConfig = null;
         
         // Initialize GitHub configuration
-        async function initGitHubConfig() {
+        function initGitHubConfig() {
             try {
-                // First try to get config from Vercel environment
-                const configResponse = await fetch('/api/github-config');
-                if (configResponse.ok) {
-                    const config = await configResponse.json();
-                    githubConfig = {
-                        isConfigured: function() {
-                            return !!config.token;
-                        },
-                        getToken: function() {
-                            return config.token;
-                        },
-                        getOwner: function() {
-                            return config.owner;
-                        },
-                        getRepo: function() {
-                            return config.repo;
-                        },
-                        getBranch: function() {
-                            return config.branch;
-                        },
-                        filePath: config.filePath || 'players.json',
-                        managerFilePath: config.managerFilePath || 'manager_data.json',
-                        // Save config to Vercel environment
-                        saveConfig: async function(newConfig) {
-                            try {
-                                const saveResponse = await fetch('/api/github-config', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify(newConfig)
-                                });
-                                
-                                if (!saveResponse.ok) {
-                                    throw new Error('Failed to save GitHub configuration');
-                                }
-                                
-                                // Update local config
-                                Object.assign(config, newConfig);
-                                console.log('GitHub configuration saved to Vercel environment');
-                            } catch (error) {
-                                console.error('Error saving GitHub configuration:', error);
-                                throw error;
-                            }
-                        },
-                        // Clear config from Vercel environment
-                        clearConfig: async function() {
-                            try {
-                                const clearResponse = await fetch('/api/github-config', {
-                                    method: 'DELETE'
-                                });
-                                
-                                if (!clearResponse.ok) {
-                                    throw new Error('Failed to clear GitHub configuration');
-                                }
-                                
-                                // Clear local config
-                                Object.keys(config).forEach(key => {
-                                    config[key] = null;
-                                });
-                                console.log('GitHub configuration cleared from Vercel environment');
-                            } catch (error) {
-                                console.error('Error clearing GitHub configuration:', error);
-                                throw error;
-                            }
-                        }
-                    };
+                if (typeof window.githubConfig !== 'undefined') {
+                    githubConfig = window.githubConfig;
+                    console.log('GitHub config loaded from global object');
                     return githubConfig.isConfigured();
                 }
+                    
+                // If not available, try to load it
+                console.log('GitHubConfig not found in window, trying to load dynamically');
+                const script = document.createElement('script');
+                script.src = 'github-config.js';
+                script.onload = () => {
+                    if (window.githubConfig) {
+                        githubConfig = window.githubConfig;
+                        console.log('GitHub config loaded dynamically');
+                    } else {
+                        createFallbackConfig();
+                    }
+                };
+                script.onerror = () => {
+                    console.error('Failed to load github-config.js');
+                    createFallbackConfig();
+                };
+                document.head.appendChild(script);
                 
-                // Fallback to localStorage if Vercel config is not available
-                console.log('Vercel config not available, falling back to global githubConfig from github-config.js');
-                githubConfig = window.githubConfig;
-                
+                // Create fallback while waiting for script to potentially load
+                createFallbackConfig();
                 return githubConfig.isConfigured();
             } catch (error) {
                 console.error('Error initializing GitHub config:', error);
-                // Final fallback
-                githubConfig = window.githubConfig;
+                createFallbackConfig();
                 return githubConfig.isConfigured();
             }
+        }
+        
+        function createFallbackConfig() {
+            console.log('Creating fallback GitHub config');
+            githubConfig = {
+                isConfigured: () => !!localStorage.getItem('githubToken'),
+                getToken: () => localStorage.getItem('githubToken'),
+                getOwner: () => localStorage.getItem('githubOwner') || 'default-owner',
+                getRepo: () => localStorage.getItem('githubRepo') || 'default-repo', 
+                getBranch: () => localStorage.getItem('githubBranch') || 'main',
+                filePath: 'players.json',
+                managerFilePath: 'manager_data.json'
+            };
         }
         
         // Authentication check
@@ -1628,8 +1592,15 @@
                     try {
                         // Initialize GitHub config if needed
                         if (!githubConfig) {
+                            console.log('githubConfig is null, initializing...');
                             initGitHubConfig();
                         }
+                        
+                        if (!githubConfig) {
+                            console.error('Failed to initialize githubConfig');
+                            throw new Error('GitHub configuration could not be initialized');
+                        }
+                        
                         await saveToGitHub();
                         savedPermanently = true;
                         managerDataSaved = true;
@@ -2400,12 +2371,45 @@
         async function saveToGitHub() {
             try {
                 // Check if GitHub integration is configured
-                if (!githubConfig.isConfigured()) {
+                if (!githubConfig || !githubConfig.isConfigured()) {
                     throw new Error('GitHub integration is not configured');
                 }
                 
                 // Show saving message
                 showStatusMessage('Saving to GitHub...', true);
+                
+                // Check if we have the saveFileToGitHub method available
+                if (githubConfig.saveFileToGitHub) {
+                    console.log('Using standardized saveFileToGitHub method');
+                    
+                    // Use the standardized method to save players data
+                    const result = await githubConfig.saveFileToGitHub(
+                        playersData,
+                        githubConfig.filePath || 'players.json',
+                        localStorage.getItem('githubCommitMessage') || 'Update player data'
+                    );
+                    
+                    // If manager data exists, save it too
+                    if (managerData) {
+                        try {
+                            await githubConfig.saveFileToGitHub(
+                                managerData,
+                                githubConfig.managerFilePath || 'manager_data.json',
+                                'Update manager data'
+                            );
+                        } catch (managerError) {
+                            console.error('Error saving manager data to GitHub:', managerError);
+                            showStatusMessage('Player data saved, but manager data could not be saved.', false);
+                            return true; // Return true since we at least saved player data
+                        }
+                    }
+                    
+                    showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                    return true;
+                }
+                
+                // Legacy implementation (fallback)
+                console.log('Using legacy implementation for saveToGitHub');
                 
                 // Get repository details
                 const repoDetails = {
@@ -2418,7 +2422,7 @@
                 // Get the current players file to get its SHA (required for the GitHub API)
                 const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
                     headers: {
-                        'Authorization': `token ${githubConfig.getToken()}`
+                        'Authorization': `Bearer ${githubConfig.getToken()}`
                     }
                 });
                 
@@ -2460,7 +2464,7 @@
                 const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Authorization': `Bearer ${githubConfig.getToken()}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(requestBody)
@@ -2514,7 +2518,9 @@
             const fileInfoUrl = `https://api.github.com/repos/${githubConfig.getOwner()}/${githubConfig.getRepo()}/contents/${managerPath}?ref=${githubConfig.getBranch()}`;
             const fileInfoResponse = await fetch(fileInfoUrl, {
                 headers: {
-                    'Authorization': `token ${githubConfig.getToken()}`
+                    'Authorization': `Bearer ${githubConfig.getToken()}`,
+                    'Accept': 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': '2022-11-28'
                 }
             });
             
@@ -2561,8 +2567,10 @@
             const commitResponse = await fetch(commitUrl, {
                 method: 'PUT',
                 headers: {
-                    'Authorization': `token ${githubConfig.getToken()}`,
-                    'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${githubConfig.getToken()}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': '2022-11-28'
                 },
                 body: JSON.stringify(requestBody)
             });

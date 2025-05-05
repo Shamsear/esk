@@ -3033,7 +3033,9 @@
                 const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
                 const fileInfoResponse = await fetch(fileInfoUrl, {
                     headers: {
-                        'Authorization': `token ${repoDetails.token}`
+                        'Authorization': `Bearer ${repoDetails.token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     }
                 });
                 
@@ -3078,8 +3080,10 @@
                 const commitResponse = await fetch(commitUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${repoDetails.token}`,
-                        'Content-Type': 'application/json'
+                        'Authorization': `Bearer ${repoDetails.token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     },
                     body: JSON.stringify(requestBody)
                 });
@@ -4615,7 +4619,9 @@
                 const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
                 const fileInfoResponse = await fetch(fileInfoUrl, {
                     headers: {
-                        'Authorization': `token ${repoDetails.token}`
+                        'Authorization': `Bearer ${repoDetails.token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     }
                 });
                 
@@ -4660,8 +4666,10 @@
                 const commitResponse = await fetch(commitUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${repoDetails.token}`,
-                        'Content-Type': 'application/json'
+                        'Authorization': `Bearer ${repoDetails.token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     },
                     body: JSON.stringify(requestBody)
                 });

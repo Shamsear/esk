@@ -801,6 +801,27 @@
                 // Show saving message
                 showSuccess('Saving to GitHub...', 0);
                 
+                // Check if we have the saveFileToGitHub method available
+                if (githubConfig.saveFileToGitHub) {
+                    console.log('Using standardized saveFileToGitHub method');
+                    try {
+                        const result = await githubConfig.saveFileToGitHub(
+                            data,
+                            githubConfig.managerFilePath || 'manager_data.json',
+                            'Update manager data via admin interface'
+                        );
+                        console.log('Changes saved to GitHub successfully');
+                        showSuccess('Changes saved to GitHub successfully! The site will update in a few minutes.', 5000);
+                        return true;
+                    } catch (error) {
+                        console.error('Error using saveFileToGitHub:', error);
+                        throw error; // Rethrow to be handled by the caller
+                    }
+                }
+                
+                // Legacy implementation
+                console.log('Using legacy implementation for saveToGitHub');
+                
                 // Get repository details
                 const repoDetails = {
                     owner: githubConfig.getOwner(),
@@ -826,7 +847,9 @@
                 const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
                 const fileInfoResponse = await fetch(fileInfoUrl, {
                     headers: {
-                        'Authorization': `token ${repoDetails.token}`
+                        'Authorization': `Bearer ${repoDetails.token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     }
                 });
                 
@@ -869,8 +892,10 @@
                 const commitResponse = await fetch(commitUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${repoDetails.token}`,
-                        'Content-Type': 'application/json'
+                        'Authorization': `Bearer ${repoDetails.token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
                     },
                     body: JSON.stringify(requestBody)
                 });
