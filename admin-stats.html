@@ -526,6 +526,7 @@
                     defaultBranch: 'main',
                     filePath: 'players.json',
                     managerFilePath: 'manager_data.json',
+                    vercelDeployHook: 'https://api.vercel.com/v1/integrations/deploy/prj_zay0W2jm2U9RmCM9ujPjcYg8M9vq/OrjEvgJEbE',
                     
                     // Get GitHub token
                     getToken: function() {
@@ -904,17 +905,28 @@
                 
                 console.log('Attempting to trigger Vercel deployment...');
                 
-                // Check if we have a Vercel deploy hook URL stored
-                const deployHookUrl = localStorage.getItem('vercelDeployHook');
+                // Check if we have a Vercel deploy hook URL stored in localStorage or in githubConfig
+                let deployHookUrl = localStorage.getItem('vercelDeployHook');
+                
+                // Use the default hook from githubConfig if none is found in localStorage
+                if (!deployHookUrl && githubConfig && githubConfig.vercelDeployHook) {
+                    console.log('Using default Vercel deploy hook from config');
+                    deployHookUrl = githubConfig.vercelDeployHook;
+                    
+                    // Optionally save this to localStorage for future use
+                    localStorage.setItem('vercelDeployHook', deployHookUrl);
+                }
                 
                 if (deployHookUrl) {
-                    console.log('Using stored Vercel deploy hook URL');
+                    console.log('Using Vercel deploy hook:', deployHookUrl);
                     
                     // Trigger deployment webhook
                     const response = await fetch(deployHookUrl, { method: 'POST' });
                     
                     if (response.ok) {
                         console.log('Vercel deployment triggered successfully');
+                        const responseData = await response.json();
+                        console.log('Deployment job created:', responseData);
                         showSuccess('Vercel deployment triggered. Site will update in a few minutes.', 5000);
                         
                         // Store successful deployment trigger
@@ -1066,13 +1078,17 @@
                 
                 if (commitResponse.ok) {
                     console.log('Changes saved to GitHub successfully');
-                    showSuccess('Changes saved to GitHub successfully! The site will update in a few minutes.', 5000);
+                    showSuccess('Manager and player data saved to GitHub successfully! The site will update in a few minutes.', 5000);
                         
-                        // Store the last successful push timestamp
-                        localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
+                    // Store the last successful push timestamp
+                    localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
                         
-                        // Trigger Vercel deployment
-                        triggerVercelDeployment();
+                    // Trigger Vercel deployment
+                    try {
+                        await triggerVercelDeployment();
+                    } catch (deployError) {
+                        console.error('Error triggering deployment, but GitHub save was successful:', deployError);
+                    }
                         
                     return true;
                 } else {
@@ -1173,7 +1189,14 @@
                 const hookInput = document.createElement('input');
                 hookInput.type = 'text';
                 hookInput.placeholder = 'https://api.vercel.com/v1/integrations/deploy/...';
-                hookInput.value = localStorage.getItem('vercelDeployHook') || '';
+                
+                // Use hook from localStorage, or default from githubConfig if available
+                let hookValue = localStorage.getItem('vercelDeployHook');
+                if (!hookValue && githubConfig && githubConfig.vercelDeployHook) {
+                    hookValue = githubConfig.vercelDeployHook;
+                }
+                
+                hookInput.value = hookValue || '';
                 hookInput.style.width = '100%';
                 hookInput.style.padding = '10px';
                 hookInput.style.backgroundColor = '#333';

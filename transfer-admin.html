@@ -3022,6 +3022,9 @@
                 const managersDataFormatted = { managers: managersData };
                 await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from transfer system');
                 
+                // Trigger Vercel deployment after successful save
+                await triggerVercelDeployment();
+                
                 showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
                 return true;
                 
@@ -3029,6 +3032,79 @@
                 showStatusMessage(`GitHub Error: ${error.message}`, false);
                 console.error('GitHub save error:', error);
                 throw error; // Re-throw to be handled by the caller
+            }
+        }
+        
+        // Function to trigger Vercel deployment and clear cache
+        async function triggerVercelDeployment() {
+            try {
+                // Store deployment trigger time
+                const triggerTime = new Date().toISOString();
+                localStorage.setItem('lastVercelDeployTrigger', triggerTime);
+                
+                console.log('Attempting to trigger Vercel deployment...');
+                
+                // Set the default deploy hook
+                const defaultDeployHook = 'https://api.vercel.com/v1/integrations/deploy/prj_zay0W2jm2U9RmCM9ujPjcYg8M9vq/OrjEvgJEbE';
+                
+                // Check if we have a Vercel deploy hook URL stored, otherwise use default
+                let deployHookUrl = localStorage.getItem('vercelDeployHook');
+                
+                // If no hook is found in localStorage, use the default and store it
+                if (!deployHookUrl) {
+                    console.log('Using default Vercel deploy hook');
+                    deployHookUrl = defaultDeployHook;
+                    
+                    // Save it to localStorage for future use
+                    localStorage.setItem('vercelDeployHook', deployHookUrl);
+                }
+                
+                if (deployHookUrl) {
+                    console.log('Using Vercel deploy hook:', deployHookUrl);
+                    
+                    // Trigger deployment webhook
+                    const response = await fetch(deployHookUrl, { method: 'POST' });
+                    
+                    if (response.ok) {
+                        console.log('Vercel deployment triggered successfully');
+                        const responseData = await response.json();
+                        console.log('Deployment job created:', responseData);
+                        showStatusMessage('Vercel deployment triggered. Site will update in a few minutes.', true, 5000);
+                        
+                        // Store successful deployment trigger
+                        localStorage.setItem('vercelDeploymentStatus', 'triggered');
+                        localStorage.setItem('vercelDeploymentTime', triggerTime);
+                    } else {
+                        console.error('Failed to trigger Vercel deployment', await response.text());
+                    }
+                } else {
+                    console.log('No Vercel deploy hook URL configured. Skipping deployment trigger.');
+                }
+                
+                // Add cache busters to URLs for immediate local use
+                addCacheBustersToUrls();
+            } catch (error) {
+                console.error('Error triggering Vercel deployment:', error);
+                // Don't throw, as this is optional functionality
+            }
+        }
+        
+        // Add cache busters to URLs for immediate local use
+        function addCacheBustersToUrls() {
+            try {
+                console.log('Adding cache busters to loaded files...');
+                
+                // Generate a cache buster value based on current time
+                const cacheBuster = Date.now();
+                
+                // Update localStorage to remember when we last busted cache
+                localStorage.setItem('lastCacheBust', cacheBuster.toString());
+                
+                // For already loaded JSON files, we can reload them with cache busters
+                // But we need to tell the user they might need to hard refresh
+                console.log('Cache busters added. Users might need to press Ctrl+F5 to see latest changes.');
+            } catch (error) {
+                console.error('Error adding cache busters:', error);
             }
         }
         
@@ -3068,6 +3144,19 @@
                     // File exists, get its SHA
                     const fileInfo = await fileInfoResponse.json();
                     currentSHA = fileInfo.sha;
+                }
+                
+                // For JSON data, add a cache-busting timestamp if appropriate
+                if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+                    // Add a hidden timestamp field for cache busting
+                    data._lastUpdated = new Date().toISOString();
+                } else if (Array.isArray(data)) {
+                    // For players.json, add timestamps to each player
+                    if (filePath === 'players.json') {
+                        data.forEach(player => {
+                            player._lastUpdated = new Date().toISOString();
+                        });
+                    }
                 }
                 
                 // Prepare the content

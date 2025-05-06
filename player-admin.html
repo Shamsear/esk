@@ -3855,17 +3855,31 @@
                 
                 console.log('Attempting to trigger Vercel deployment...');
                 
-                // Check if we have a Vercel deploy hook URL stored
-                const deployHookUrl = localStorage.getItem('vercelDeployHook');
+                // Set the default deploy hook
+                const defaultDeployHook = 'https://api.vercel.com/v1/integrations/deploy/prj_zay0W2jm2U9RmCM9ujPjcYg8M9vq/OrjEvgJEbE';
+                
+                // Check if we have a Vercel deploy hook URL stored, otherwise use default
+                let deployHookUrl = localStorage.getItem('vercelDeployHook');
+                
+                // If no hook is found in localStorage, use the default and store it
+                if (!deployHookUrl) {
+                    console.log('Using default Vercel deploy hook');
+                    deployHookUrl = defaultDeployHook;
+                    
+                    // Save it to localStorage for future use
+                    localStorage.setItem('vercelDeployHook', deployHookUrl);
+                }
                 
                 if (deployHookUrl) {
-                    console.log('Using stored Vercel deploy hook URL');
+                    console.log('Using Vercel deploy hook:', deployHookUrl);
                     
                     // Trigger deployment webhook
                     const response = await fetch(deployHookUrl, { method: 'POST' });
                     
                     if (response.ok) {
                         console.log('Vercel deployment triggered successfully');
+                        const responseData = await response.json();
+                        console.log('Deployment job created:', responseData);
                         showStatusMessage('Vercel deployment triggered. Site will update in a few minutes.', true, 5000);
                         
                         // Store successful deployment trigger
@@ -3876,23 +3890,6 @@
                     }
                 } else {
                     console.log('No Vercel deploy hook URL configured. Skipping deployment trigger.');
-                    
-                    // Show notification to add deploy hook
-                    const setupDeployHook = confirm('Would you like to set up a Vercel Deploy Hook to automatically clear cache when changes are pushed?\n\nThis helps ensure your changes are visible immediately.');
-                    
-                    if (setupDeployHook) {
-                        const hookUrl = prompt('Enter your Vercel Deploy Hook URL:\n\nYou can create one in your Vercel project settings under "Git" → "Deploy Hooks"');
-                        
-                        if (hookUrl && hookUrl.trim().startsWith('http')) {
-                            localStorage.setItem('vercelDeployHook', hookUrl.trim());
-                            showStatusMessage('Deploy hook saved. It will be used for future deployments.', true, 5000);
-                            
-                            // Try to use the newly added hook
-                            triggerVercelDeployment();
-                        } else {
-                            showStatusMessage('Invalid deploy hook URL. Changes were saved to GitHub but you may need to manually redeploy.', false, 8000);
-                        }
-                    }
                 }
                 
                 // Also add cache busters to loaded files for immediate local use
@@ -3984,6 +3981,9 @@
         // Show Vercel settings dialog
         function showVercelSettings() {
             try {
+                // Default deploy hook
+                const defaultDeployHook = 'https://api.vercel.com/v1/integrations/deploy/prj_zay0W2jm2U9RmCM9ujPjcYg8M9vq/OrjEvgJEbE';
+                
                 // Create modal
                 const modal = document.createElement('div');
                 modal.style.position = 'fixed';
@@ -4028,7 +4028,11 @@
                 const hookInput = document.createElement('input');
                 hookInput.type = 'text';
                 hookInput.placeholder = 'https://api.vercel.com/v1/integrations/deploy/...';
-                hookInput.value = localStorage.getItem('vercelDeployHook') || '';
+                
+                // Use the stored hook or default
+                const storedHook = localStorage.getItem('vercelDeployHook');
+                hookInput.value = storedHook || defaultDeployHook;
+                
                 hookInput.style.width = '100%';
                 hookInput.style.padding = '10px';
                 hookInput.style.backgroundColor = '#333';
