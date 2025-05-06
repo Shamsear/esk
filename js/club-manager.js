@@ -73,6 +73,23 @@ class ClubManager {
     }
 
     /**
+     * Format club name to match file naming conventions in club-logos directory
+     * @param {string} clubName - Original club name 
+     * @returns {string} - Formatted club name for file paths
+     */
+    formatClubNameForLogo(clubName) {
+        if (!clubName) return '';
+        
+        // Handle special case
+        if (clubName === 'FREE AGENT' || clubName === 'FREE AGENTP') {
+            return 'FREE-AGENT';
+        }
+        
+        // Replace spaces with hyphens and convert to uppercase for .webp files in club-logos
+        return clubName.replace(/\s+/g, '-').toUpperCase();
+    }
+
+    /**
      * Populates a dropdown with club options based on search term
      * @param {HTMLElement} container - The container to populate with options
      * @param {HTMLElement} inputElement - The input element that triggered the search
@@ -153,12 +170,22 @@ class ClubManager {
      * @returns {string} - The path to the club logo
      */
     getClubLogoPath(clubName) {
-        // Try multiple possible paths for the club logo
+        // First try to normalize club name if club-loader is available
+        let normalizedName = clubName;
+        if (typeof window.ClubManager !== 'undefined' && 
+            typeof window.ClubManager.normalizeClubName === 'function') {
+            normalizedName = window.ClubManager.normalizeClubName(clubName);
+        }
+        
+        // Format the club name for club-logos directory
+        const formattedName = this.formatClubNameForLogo(normalizedName);
+        
+        // Try multiple possible paths for the club logo, prioritizing club-logos directory
         const possiblePaths = [
-            `assets/images/players/club/${clubName.replace(/\s+/g, '-').toLowerCase()}.webp`,
-            `assets/images/players/club/${clubName}.webp`,
-            `assets/images/club-logos/${clubName.replace(/\s+/g, '-').toLowerCase()}.webp`,
-            `assets/images/club-logos/${clubName}.webp`
+            `assets/images/club-logos/${formattedName}.webp`,
+            `assets/images/players/club/${normalizedName}.webp`,
+            `assets/images/players/club/${normalizedName.replace(/\s+/g, '-')}.webp`,
+            `assets/images/players/club/${clubName}.webp`
         ];
         
         // Return the best path available (in this web context, we can't check file existence directly)

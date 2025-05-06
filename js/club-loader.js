@@ -69,6 +69,23 @@ function normalizeClubName(clubName) {
 }
 
 /**
+ * Format club name to match file naming conventions in club-logos directory
+ * @param {string} clubName - Original club name 
+ * @returns {string} - Formatted club name for file paths
+ */
+function formatClubNameForLogoPath(clubName) {
+    if (!clubName) return '';
+    
+    // Handle special case
+    if (clubName === 'FREE AGENT' || clubName === 'FREE AGENTP') {
+        return 'FREE-AGENT';
+    }
+    
+    // Replace spaces with hyphens and convert to uppercase for .webp files in club-logos
+    return clubName.replace(/\s+/g, '-').toUpperCase();
+}
+
+/**
  * Initialize club data
  * - Loads club data from players.json
  * - Preloads club logos
@@ -123,10 +140,11 @@ async function initializeClubData() {
             if (player.club && !clubsSet.has(player.club)) {
                 clubsSet.add(player.club);
                 const normalizedClubName = normalizeClubName(player.club);
+                const formattedLogoName = formatClubNameForLogoPath(normalizedClubName);
                 clubsList.push({
                     name: player.club,
                     normalizedName: normalizedClubName,
-                    logo: player.clubLogo || `assets/images/players/club/${normalizedClubName}.webp`
+                    logo: player.clubLogo || `assets/images/club-logos/${formattedLogoName}.webp`
                 });
             }
         });
@@ -138,10 +156,11 @@ async function initializeClubData() {
                     if (stat.team && !clubsSet.has(stat.team)) {
                         clubsSet.add(stat.team);
                         const normalizedClubName = normalizeClubName(stat.team);
+                        const formattedLogoName = formatClubNameForLogoPath(normalizedClubName);
                         clubsList.push({
                             name: stat.team,
                             normalizedName: normalizedClubName,
-                            logo: `assets/images/players/club/${normalizedClubName}.webp`
+                            logo: `assets/images/club-logos/${formattedLogoName}.webp`
                         });
                     }
                 });
@@ -158,31 +177,31 @@ async function initializeClubData() {
         for (const club of clubsList) {
             if (club.logo) {
                 try {
-                    // Check if -low quality version exists for performance optimization
-                    const lowQualityLogo = club.logo.replace('.webp', '-low.webp');
+                    // Load high quality image directly
                     const img = new Image();
+                    img.src = club.logo;
                     
-                    // Handle loading errors for low quality logo
-                    img.onerror = function() {
-                        console.log(`Could not load low quality logo for ${club.name}, trying original`);
-                        // If low quality fails, try original directly
+                    // Update cache if loaded successfully
+                    img.onload = () => {
                         clubCache.logos[club.name] = club.logo;
                     };
                     
-                    img.src = lowQualityLogo;
-                    
-                    // Set a timeout to use high quality after 500ms
-                    setTimeout(() => {
-                        const highQualityImg = new Image();
-                        highQualityImg.src = club.logo;
-                        // Only update if load is successful
-                        highQualityImg.onload = () => {
-                            clubCache.logos[club.name] = club.logo;
+                    // Handle errors 
+                    img.onerror = function() {
+                        console.log(`Could not load logo for ${club.name}`);
+                        
+                        // Try fallback to older directory
+                        const fallbackPath = `assets/images/players/club/${club.normalizedName}.webp`;
+                        const fallbackImg = new Image();
+                        fallbackImg.src = fallbackPath;
+                        
+                        fallbackImg.onload = () => {
+                            clubCache.logos[club.name] = fallbackPath;
                         };
-                    }, 500);
+                    };
                     
-                    // Store low quality initially
-                    clubCache.logos[club.name] = lowQualityLogo;
+                    // Cache the path initially
+                    clubCache.logos[club.name] = club.logo;
                 } catch (error) {
                     console.log(`Could not preload logo for ${club.name}`);
                 }
@@ -228,7 +247,7 @@ function getClubLogo(clubName) {
     
     // Special case for FREE AGENT
     if (clubName === 'FREE AGENT' || clubName === 'FREE AGENTP') {
-        const svgPath = 'assets/images/players/club/FREE AGENT.svg';
+        const svgPath = 'assets/images/club-logos/FREE-AGENT.WEBP';
         clubCache.logos[clubName] = svgPath;
         return svgPath;
     }
@@ -244,17 +263,18 @@ function getClubLogo(clubName) {
     // Try with normalized name if direct lookup fails
     const normalizedName = normalizeClubName(clubName);
     if (normalizedName !== clubName) {
-        // First try the high-quality version
-        const highQualityPath = `assets/images/players/club/${normalizedName}.webp`;
+        const formattedLogoName = formatClubNameForLogoPath(normalizedName);
+        // Use high-quality version from club-logos directory
+        const clubLogoPath = `assets/images/club-logos/${formattedLogoName}.webp`;
         
         // For cache purposes, store the high-quality path
-        // The actual image loading error handling is done in the UI components
-        clubCache.logos[clubName] = highQualityPath;
-        return highQualityPath;
+        clubCache.logos[clubName] = clubLogoPath;
+        return clubLogoPath;
     }
     
     // Default club logo path as last resort
-    const defaultLogo = `assets/images/players/club/${clubName}.webp`;
+    const formattedName = formatClubNameForLogoPath(clubName);
+    const defaultLogo = `assets/images/club-logos/${formattedName}.webp`;
     clubCache.logos[clubName] = defaultLogo; // Cache default path
     return defaultLogo;
 }
@@ -385,11 +405,11 @@ function populateClubOptions(container, inputElement, searchTerm = '', onSelect 
             const logo = document.createElement('img');
             logo.className = 'club-logo';
             
-            // Handle FREE AGENT specially since we know it has SVG and WEBP formats
+            // Handle FREE AGENT specially
             if (club.name === 'FREE AGENT' || club.name === 'FREE AGENTP') {
-                logo.src = 'assets/images/players/club/FREE AGENT.svg';
+                logo.src = 'assets/images/club-logos/FREE-AGENT.WEBP';
                 logo.onerror = function() {
-                    this.src = 'assets/images/players/club/freeagent.WEBP';
+                    this.src = 'assets/images/players/club/FREE AGENT.svg';
                     this.onerror = function() {
                         this.src = 'https://via.placeholder.com/20';
                     };
@@ -400,10 +420,11 @@ function populateClubOptions(container, inputElement, searchTerm = '', onSelect 
                     // Try with the normalized name directly
                     const normalizedName = normalizeClubName(club.name);
                     if (normalizedName !== club.name) {
-                        this.src = `assets/images/players/club/${normalizedName}.webp`;
+                        const formattedName = formatClubNameForLogoPath(normalizedName);
+                        this.src = `assets/images/club-logos/${formattedName}.webp`;
                         this.onerror = function() {
-                            // Try the low quality version as last resort
-                            this.src = `assets/images/players/club/${normalizedName}-low.webp`;
+                            // Try fallback to players/club directory
+                            this.src = `assets/images/players/club/${normalizedName}.webp`;
                             this.onerror = function() {
                                 this.src = 'https://via.placeholder.com/20';
                             };
@@ -469,5 +490,6 @@ window.ClubManager = {
     getClubLogo,
     createClubDropdown,
     populateClubOptions,
-    normalizeClubName // Expose the normalizeClubName function
+    normalizeClubName, // Expose the normalizeClubName function
+    formatClubNameForLogoPath // Expose the new formatting function
 }; 

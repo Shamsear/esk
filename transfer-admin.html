@@ -31,9 +31,11 @@
             window.ClubManager = {
                 initialize: function() { console.log('Fallback ClubManager initialize called'); },
                 getClub: function(clubName) { 
+                    // Format club name for logo path - replace spaces with hyphens and uppercase
+                    const formattedClubName = clubName.replace(/\s+/g, '-').toUpperCase();
                     return { 
                         name: clubName, 
-                        logo: `assets/images/players/club/${clubName.replace(/\s+/g, '-').toLowerCase()}.webp` 
+                        logo: `assets/images/club-logos/${formattedClubName}.webp` 
                     }; 
                 },
                 initialized: false
@@ -2711,10 +2713,10 @@
             if (logoPath === 'assets/images/logo11.webp') {
                 // Try various common paths
                 const possiblePaths = [
+                    `assets/images/club-logos/${teamName.replace(/\s+/g, '-').toUpperCase()}.webp`,
+                    `assets/images/club-logos/${teamName}.webp`,
                     `assets/images/players/club/${teamName.replace(/\s+/g, '-').toLowerCase()}.webp`,
-                    `assets/images/players/club/${teamName}.webp`,
-                    `assets/images/club-logos/${teamName.replace(/\s+/g, '-').toLowerCase()}.webp`,
-                    `assets/images/club-logos/${teamName}.webp`
+                    `assets/images/players/club/${teamName}.webp`
                 ];
                 
                 for (const path of possiblePaths) {
