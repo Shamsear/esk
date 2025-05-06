@@ -6163,26 +6163,30 @@
     "name": "ROMELU LUKAKU",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "REAL MADRID CF",
+    "club": "PARIS SAINT-GERMAIN FC",
     "position": "ST",
-    "value": 50,
+    "value": 52,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5.5",
         "team": "MOHUN BAGAN AC",
-        "value": "62",
-        "apps": "00"
+        "value": "62"
       },
       {
-        "season": "5.5-7.5",
-        "team": "AL HILAL SFC",
-        "value": "50",
-        "apps": "00"
+        "season": "5.5-6",
+        "team": "REAL MADRID CF",
+        "value": "50"
+      },
+      {
+        "season": "6-7.5",
+        "team": "PARIS SAINT-GERMAIN FC",
+        "value": "52"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. LUKAKU_CARD.webp",
-    "id": 292
+    "id": 292,
+    "clubLogo": "assets/images/players/club/PARIS SAINT-GERMAIN FC.webp"
   },
   {
     "name": "ADEMOLA LOOKMAN",
