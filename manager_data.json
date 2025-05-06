@@ -719,17 +719,17 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 768,
+      "club_total_value": 2592,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 7,
+        "total_players": 24,
         "players": [
           {
             "name": "ERLING HAALAND",
             "position": "ST",
-            "value": 210,
+            "value": 140,
             "contract": "SEASON 7.5",
             "salary": 7,
             "type": "standard"
@@ -3247,7 +3247,7 @@
       "overall_rating": 396.4,
       "r2g_coin_balance": 2626,
       "r2g_token_balance": 465,
-      "club_total_value": 2504,
+      "club_total_value": 860,
       "manager_rating": 171,
       "trophies": 3,
       "awards": 2,
@@ -3265,7 +3265,7 @@
           {
             "name": "LUIS SUAREZ",
             "position": "ST",
-            "value": 230,
+            "value": 238,
             "contract": "SEASON 7.5",
             "salary": 11.5,
             "type": "prime"
@@ -4751,13 +4751,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1288,
+      "club_total_value": 1250,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 7,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4814,6 +4814,78 @@
             "contract": "SEASON 6.5",
             "salary": 2.7,
             "type": "prime"
+          },
+          {
+            "name": "BRYAN ROBSON",
+            "position": "CM",
+            "value": 108,
+            "contract": "SEASON 6",
+            "salary": 5.4,
+            "type": "legend"
+          },
+          {
+            "name": "YASSINE BOUNOU",
+            "position": "GK",
+            "value": 104,
+            "contract": "SEASON 6",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PAULO DYBALA",
+            "position": "ST",
+            "value": 86,
+            "contract": "SEASON 6",
+            "salary": 4.3,
+            "type": "standard"
+          },
+          {
+            "name": "BENOÎT BADIASHILE",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 6",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "ELYE WAHI",
+            "position": "ST",
+            "value": 68,
+            "contract": "SEASON 6",
+            "salary": 3.4,
+            "type": "standard"
           }
         ],
         "totalPlayers": 16
@@ -6269,12 +6341,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2369,
       "r2g_token_balance": 330,
-      "club_total_value": 856,
+      "club_total_value": 1056,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 10,
+        "total_players": 12,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -6291,6 +6363,14 @@
             "contract": "SEASON 7.5",
             "salary": 4.3,
             "type": "prime"
+          },
+          {
+            "name": "ROMELU LUKAKU",
+            "position": "ST",
+            "value": 50,
+            "contract": "SEASON 7.5",
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "ALEX MERET",
@@ -6355,6 +6435,14 @@
             "contract": "SEASON 6.5",
             "salary": 5,
             "type": "legend"
+          },
+          {
+            "name": "GUGLIELMO VICARIO",
+            "position": "GK",
+            "value": 150,
+            "contract": "SEASON 8",
+            "salary": 7.5,
+            "type": "standard"
           }
         ]
       },
@@ -7864,32 +7952,7 @@
         }
       ],
       "current_season": 6
-    },
-    {
-      "name": "Manager of PARIS SAINT-GERMAIN FC",
-      "club": "PARIS SAINT-GERMAIN FC",
-      "overall_rating": 0,
-      "r2g_coin_balance": 0,
-      "r2g_token_balance": 0,
-      "club_total_value": 52,
-      "manager_rating": 0,
-      "trophies": 0,
-      "awards": 0,
-      "squad": {
-        "total_players": 1,
-        "players": [
-          {
-            "name": "ROMELU LUKAKU",
-            "position": "ST",
-            "value": 52,
-            "contract": "SEASON 7.5",
-            "salary": 2.5,
-            "type": "standard"
-          }
-        ]
-      },
-      "star_rating": 3
     }
   ],
-  "_lastUpdated": "2025-05-06T09:32:50.424Z"
+  "_lastUpdated": "2025-05-06T09:36:41.995Z"
 }
