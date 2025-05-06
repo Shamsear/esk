@@ -5236,7 +5236,7 @@
     "name": "ERLING HAALAND",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "MANCHESTER CITY",
+    "club": "FREE AGENT",
     "position": "ST",
     "value": 350,
     "gamesPlayed": 0,
@@ -5244,18 +5244,17 @@
       {
         "season": "4-5",
         "team": "ASTON VILLA FC",
-        "value": "350",
-        "apps": "00"
+        "value": "350"
       },
       {
-        "season": "5-7",
+        "season": "5-5",
         "team": "MANCHESTER CITY",
-        "value": "350",
-        "apps": "00"
+        "value": "350"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/E. HAALAND_CARD.webp",
-    "id": 250
+    "id": 250,
+    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
   },
   {
     "name": "KYLIAN MBAPPE",
@@ -20986,20 +20985,20 @@
     "name": "STRAHINJA PAVLOVIC",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-6",
+        "season": "5-7",
         "team": "AC MILAN",
-        "value": "40"
+        "value": "40",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. PAVLOVIC_CARD.webp",
-    "id": 1026,
-    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
+    "id": 1026
   },
   {
     "name": "BAFOFE DIAKITE",
