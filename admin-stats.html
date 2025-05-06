@@ -475,10 +475,96 @@
     </div>
 
     <script>
+        // Function to show error message
+        function showError(message, duration = 5000) {
+            const errorElement = document.getElementById('save-error');
+            if (!errorElement) {
+                console.error('Error element not found');
+                console.error(message);
+                return;
+            }
+            
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            if (duration > 0) {
+                setTimeout(() => {
+                    errorElement.style.display = 'none';
+                }, duration);
+            }
+        }
+        
+        // Function to show success message
+        function showSuccess(message, duration = 5000) {
+            const successElement = document.getElementById('save-success');
+            if (!successElement) {
+                console.log('Success element not found');
+                console.log(message);
+                return;
+            }
+            
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+            
+            if (duration > 0) {
+                setTimeout(() => {
+                    successElement.style.display = 'none';
+                }, duration);
+            }
+        }
+        
+        // GitHub configuration helper
+        function initGitHubConfig() {
+            // Only initialize if githubConfig doesn't exist yet
+            if (typeof githubConfig === 'undefined') {
+                console.log('Initializing GitHub config helper...');
+                
+                // Create the githubConfig object if it doesn't exist
+                window.githubConfig = {
+                    defaultOwner: 'eskimosrpg',
+                    defaultRepo: 'website',
+                    defaultBranch: 'main',
+                    filePath: 'players.json',
+                    managerFilePath: 'manager_data.json',
+                    
+                    // Get GitHub token
+                    getToken: function() {
+                        return localStorage.getItem('githubToken') || '';
+                    },
+                    
+                    // Get repository owner
+                    getOwner: function() {
+                        return localStorage.getItem('githubOwner') || this.defaultOwner;
+                    },
+                    
+                    // Get repository name
+                    getRepo: function() {
+                        return localStorage.getItem('githubRepo') || this.defaultRepo;
+                    },
+                    
+                    // Get branch name
+                    getBranch: function() {
+                        return localStorage.getItem('githubBranch') || this.defaultBranch;
+                    },
+                    
+                    // Check if GitHub integration is configured
+                    isConfigured: function() {
+                        return Boolean(this.getToken() && this.getOwner() && this.getRepo());
+                    }
+                };
+                
+                console.log('GitHub config helper initialized');
+            } else {
+                console.log('GitHub config helper already initialized');
+            }
+            
+            return window.githubConfig;
+        }
+        
         // Main JavaScript for the admin stats panel
         document.addEventListener('DOMContentLoaded', function() {
             // Password validation (should be replaced with proper server-side authentication)
-            const ADMIN_PASSWORD = 'r2gadmin123'; // This should be stored securely on the server
+        const ADMIN_PASSWORD = 'r2gadmin123'; // This should be stored securely on the server
 
             // Initialize GitHub config first
             initGitHubConfig();
@@ -526,25 +612,25 @@
             });
             
             // Handle login form
-            function handleLogin(event) {
-                event.preventDefault();
-                const password = document.getElementById('admin-password').value;
-                const loginError = document.getElementById('login-error');
-                const loginForm = document.getElementById('login-form');
-                const statsEditor = document.getElementById('stats-editor');
+        function handleLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            const loginError = document.getElementById('login-error');
+            const loginForm = document.getElementById('login-form');
+            const statsEditor = document.getElementById('stats-editor');
 
-                if (password === ADMIN_PASSWORD) {
-                        sessionStorage.setItem('statsAdminLoggedIn', 'true');
-                    loginForm.style.display = 'none';
-                    statsEditor.style.display = 'block';
-                    loadManagerData();
-                } else {
-                    loginError.textContent = 'Invalid password';
-                    loginError.style.display = 'block';
-                }
-                
-                return false;
+            if (password === ADMIN_PASSWORD) {
+                    sessionStorage.setItem('statsAdminLoggedIn', 'true');
+                loginForm.style.display = 'none';
+                statsEditor.style.display = 'block';
+                loadManagerData();
+            } else {
+                loginError.textContent = 'Invalid password';
+                loginError.style.display = 'block';
             }
+                
+            return false;
+        }
             
             // Expose the login handler to the window
             window.handleLogin = handleLogin;
@@ -665,8 +751,8 @@
             
             // Basic Info
             document.getElementById('name').value = getValue(manager, 'name');
-            document.getElementById('rank').value = getValue(manager, 'rank');
-            document.getElementById('overall').value = getValue(manager, 'overall');
+            document.getElementById('rank').value = getValue(manager, 'age');
+            document.getElementById('overall').value = getValue(manager, 'overall_rating');
             document.getElementById('manager_rating').value = getValue(manager, 'manager_rating');
             document.getElementById('star_rating').value = getValue(manager, 'star_rating', 3); // Default to 3 stars
             
@@ -924,62 +1010,62 @@
                     
                     // Add a timestamp for cache busting
                     managersData._lastUpdated = new Date().toISOString();
-                    
-                    // Get current file SHA
+                
+                // Get current file SHA
                     const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
-                    const fileInfoResponse = await fetch(fileInfoUrl, {
-                        headers: {
+                const fileInfoResponse = await fetch(fileInfoUrl, {
+                    headers: {
                             'Authorization': `token ${githubConfig.getToken()}`
-                        }
-                    });
-                    
-                    let sha = '';
-                    let fileExists = true;
-                    
-                    if (fileInfoResponse.status === 404) {
-                        // File doesn't exist yet
-                        fileExists = false;
-                        console.log('File does not exist on GitHub yet, will create it');
-                    } else if (!fileInfoResponse.ok) {
-                        console.error('Failed to get file info:', fileInfoResponse.status);
-                        return false;
-                    } else {
-                        // File exists, get its SHA
-                        const fileInfo = await fileInfoResponse.json();
-                        sha = fileInfo.sha;
-                        console.log('Found existing file with SHA:', sha);
                     }
-                    
+                });
+                
+                let sha = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    // File doesn't exist yet
+                    fileExists = false;
+                    console.log('File does not exist on GitHub yet, will create it');
+                } else if (!fileInfoResponse.ok) {
+                    console.error('Failed to get file info:', fileInfoResponse.status);
+                    return false;
+                } else {
+                    // File exists, get its SHA
+                    const fileInfo = await fileInfoResponse.json();
+                    sha = fileInfo.sha;
+                    console.log('Found existing file with SHA:', sha);
+                }
+                
                     // Prepare the content
                     const jsonString = JSON.stringify(managersData, null, 2);
                     const content = btoa(unescape(encodeURIComponent(jsonString)));
-                    
+                
                     // Prepare the commit
-                    const requestBody = {
-                        message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
-                        content: content,
+                const requestBody = {
+                    message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
+                    content: content,
                         branch: repoDetails.branch
-                    };
-                    
-                    // Add SHA if the file exists
-                    if (fileExists) {
-                        requestBody.sha = sha;
-                    }
-                    
+                };
+                
+                // Add SHA if the file exists
+                if (fileExists) {
+                    requestBody.sha = sha;
+                }
+                
                     // Commit the file
                     const commitUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`;
-                    const commitResponse = await fetch(commitUrl, {
-                        method: 'PUT',
-                        headers: {
+                const commitResponse = await fetch(commitUrl, {
+                    method: 'PUT',
+                    headers: {
                             'Authorization': `token ${githubConfig.getToken()}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(requestBody)
-                    });
-                    
-                    if (commitResponse.ok) {
-                        console.log('Changes saved to GitHub successfully');
-                        showSuccess('Changes saved to GitHub successfully! The site will update in a few minutes.', 5000);
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (commitResponse.ok) {
+                    console.log('Changes saved to GitHub successfully');
+                    showSuccess('Changes saved to GitHub successfully! The site will update in a few minutes.', 5000);
                         
                         // Store the last successful push timestamp
                         localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
@@ -987,13 +1073,13 @@
                         // Trigger Vercel deployment
                         triggerVercelDeployment();
                         
-                        return true;
-                    } else {
-                        const errorText = await commitResponse.text();
-                        console.error('GitHub commit failed:', errorText);
-                        showError('GitHub save failed: ' + errorText, 5000);
-                        return false;
-                    }
+                    return true;
+                } else {
+                    const errorText = await commitResponse.text();
+                    console.error('GitHub commit failed:', errorText);
+                    showError('GitHub save failed: ' + errorText, 5000);
+                    return false;
+                }
                 } catch (saveError) {
                     console.error('Error during file save:', saveError);
                     throw saveError;
@@ -1005,7 +1091,7 @@
                 return false;
             }
         }
-        
+
         // Add settings UI for Vercel deployment
         function addVercelSettingsUI() {
             try {
@@ -1239,9 +1325,6 @@
         
         // Initialize when document is ready
         document.addEventListener('DOMContentLoaded', async function() {
-            // Check if GitHub integration is configured
-            initGitHubConfig();
-            
             // Add Vercel settings UI
             addVercelSettingsUI();
             
@@ -1321,8 +1404,8 @@
                 const updatedManager = {
                     ...originalManager, // Preserve existing fields
                     name: document.getElementById('name').value,
-                    rank: document.getElementById('rank').value,
-                    overall: parseFloat(document.getElementById('overall').value) || 0,
+                    age: document.getElementById('rank').value,
+                    overall_rating: parseFloat(document.getElementById('overall').value) || 0,
                     manager_rating: parseFloat(document.getElementById('manager_rating').value) || 0,
                     star_rating: parseInt(document.getElementById('star_rating').value) || 3,
                     club_total_value: parseInt(document.getElementById('club_value').value) || 0,
