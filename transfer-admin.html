@@ -83,6 +83,70 @@
         .logout-btn:hover {
             background-color: #c62828;
         }
+        /* Batch save container styles */
+        .batch-save-container {
+            display: flex;
+            align-items: center;
+            margin: 0 20px 10px;
+            padding: 12px;
+            background-color: rgba(255, 193, 7, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 193, 7, 0.4);
+        }
+        
+        .batch-save-info {
+            flex: 1;
+            color: #ffb700;
+        }
+        
+        .batch-save-btn {
+            background-color: #ffb700;
+            color: #333;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: background-color 0.2s;
+        }
+        
+        .batch-save-btn:hover {
+            background-color: #ffa000;
+        }
+        
+        .pending-changes-counter {
+            display: inline-block;
+            background-color: #ff5722;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        /* Setup link styles */
+        .setup-link {
+            margin-left: 10px;
+            color: #3498db;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background-color: rgba(52, 152, 219, 0.2);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .setup-link:hover {
+            background-color: rgba(52, 152, 219, 0.3);
+            color: #2980b9;
+        }
+        
+        .setup-link i {
+            margin-right: 5px;
+        }
         .container {
             padding: 20px;
             display: flex;
@@ -1402,6 +1466,252 @@
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+
+        .add-player-btn:hover {
+            background-color: #3da88a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Styles for local updates container */
+        .local-updates-container {
+            margin-top: 20px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #1e1e1e;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .update-entry {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .update-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .update-timestamp {
+            color: #aaa;
+            font-size: 0.8em;
+        }
+        
+        .update-team {
+            font-weight: bold;
+            color: #4ecca3;
+        }
+        
+        .update-count {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            background-color: #3f51b5;
+            color: white;
+            margin-left: 8px;
+        }
+        
+        .update-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .update-btn {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .update-btn.undo {
+            background-color: #e53935;
+            color: white;
+        }
+        
+        .update-btn.details {
+            background-color: #3f51b5;
+            color: white;
+        }
+        
+        /* Player transfer detail modal */
+        .transfer-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .transfer-detail-content {
+            background-color: #242424;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 90%;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .transfer-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .transfer-detail-close {
+            background: transparent;
+            border: none;
+            color: #ccc;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .transfer-detail-close:hover {
+            color: #fff;
+        }
+        
+        .transfer-players-list {
+            margin-top: 10px;
+            max-height: 50vh;
+            overflow-y: auto;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+        
+        .transfer-player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .transfer-player-item:last-child {
+            border-bottom: none;
+        }
+        
+        .transfer-player-info {
+            flex: 1;
+        }
+        
+        .transfer-player-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #4ecca3;
+        }
+        
+        .transfer-player-details {
+            font-size: 0.9em;
+            color: #ddd;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            /* Batch save container mobile styles */
+            .batch-save-container {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 15px;
+                margin: 10px;
+                border-radius: 6px;
+            }
+            
+            .batch-save-info {
+                margin-bottom: 12px;
+                text-align: center;
+            }
+            
+            .batch-save-btn {
+                margin: 5px 0;
+                padding: 12px;
+                font-size: 14px;
+                width: 100%;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .batch-save-btn i {
+                margin-right: 8px;
+            }
+            
+            .local-updates-container {
+                margin: 10px;
+                max-height: 300px;
+            }
+            
+            .update-entry {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .update-entry > div:first-child {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            
+            .update-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .update-btn {
+                padding: 10px 15px;
+                font-size: 13px;
+                flex: 1;
+                margin: 0 5px;
+                text-align: center;
+            }
+            
+            /* Transfer detail modal mobile styles */
+            .transfer-detail-content {
+                width: 95%;
+                padding: 15px;
+                max-height: 80vh;
+            }
+            
+            .transfer-detail-header h3 {
+                font-size: 1.1em;
+            }
+            
+            .transfer-player-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .transfer-player-info {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .update-btn.undo {
+                width: 100%;
+                margin-top: 10px;
+                text-align: center;
+            }
+            
+            .transfer-players-list {
+                max-height: 40vh;
+            }
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -1473,6 +1783,38 @@
         <div class="user-info">
             <span>Logged in as: <span class="username" id="logged-user">Admin</span></span>
             <button class="logout-btn" id="logout-btn">Logout</button>
+            <a href="token-setup.html" class="setup-link" title="Configure GitHub Token">
+                <i class="fas fa-cog"></i> Token Setup
+            </a>
+            <a href="github-redeploy.html" class="setup-link" title="Redeploy GitHub Changes">
+                <i class="fas fa-sync-alt"></i> Redeploy Site
+            </a>
+        </div>
+    </div>
+    
+    <!-- Add batch save container for GitHub changes -->
+    <div class="batch-save-container" id="batch-save-container" style="display: none;">
+        <div class="batch-save-info">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="pending-changes-text">You have pending changes saved to localStorage.</span>
+            <span class="pending-changes-counter" id="pending-changes-count">0</span>
+        </div>
+        <button class="batch-save-btn" id="push-to-github-btn">
+            <i class="fab fa-github"></i> Push All to GitHub
+        </button>
+        <a href="github-redeploy.html" class="batch-save-btn" style="text-decoration:none; text-align:center; margin-left:5px;">
+            <i class="fas fa-sync-alt"></i> Redeploy Site
+        </a>
+    </div>
+    
+    <!-- Add local updates container for showing pending transfers -->
+    <div class="local-updates-container" id="local-updates-container" style="display: none;">
+        <div class="update-entry-header" style="padding: 10px; background-color: #333; font-weight: bold; border-bottom: 1px solid #444;">
+            <i class="fas fa-exchange-alt" style="margin-right: 8px; color: #4ecca3;"></i>
+            Recent Transfer Changes
+        </div>
+        <div id="update-entries">
+            <!-- Update entries will be added here dynamically -->
         </div>
     </div>
     
@@ -1489,7 +1831,7 @@
                     <option value="incoming">Incoming Transfers</option>
                     <option value="outgoing">Outgoing Transfers</option>
                 </select>
-            </div>
+        </div>
             <div id="history-container" class="history-container">
                 <!-- History items will be added here dynamically -->
             </div>
@@ -1590,6 +1932,7 @@
     <script>
         // GitHub configuration check
         let githubConfig = null;
+        let pendingTransfers = []; // Array to store pending transfers
         
         function initGitHubConfig() {
             try {
@@ -1722,7 +2065,167 @@
             
             // Set a safety timeout to remove loading in case of other issues
             setTimeout(removeMobileLoading, 10000);
+            
+            // Load pending transfers from localStorage
+            loadPendingTransfers();
+            
+            // Add event listener for the push to GitHub button
+            document.getElementById('push-to-github-btn').addEventListener('click', pushAllTransfersToGitHub);
         });
+
+        // Load pending transfers from localStorage
+        function loadPendingTransfers() {
+            const savedTransfers = localStorage.getItem('pendingTransfers');
+            if (savedTransfers) {
+                try {
+                    pendingTransfers = JSON.parse(savedTransfers);
+                    updatePendingTransfersUI();
+                } catch (error) {
+                    console.error('Error loading pending transfers:', error);
+                    pendingTransfers = [];
+                }
+            }
+        }
+
+        // Save pending transfers to localStorage
+        function savePendingTransfers() {
+            localStorage.setItem('pendingTransfers', JSON.stringify(pendingTransfers));
+            updatePendingTransfersUI();
+        }
+
+        // Update UI to show pending transfers
+        function updatePendingTransfersUI() {
+            const container = document.getElementById('batch-save-container');
+            const countElement = document.getElementById('pending-changes-count');
+            const updatesContainer = document.getElementById('local-updates-container');
+            const count = pendingTransfers.length;
+            
+            if (count > 0) {
+                container.style.display = 'flex';
+                updatesContainer.style.display = 'block';
+                countElement.textContent = count;
+                document.getElementById('pending-changes-text').textContent = 
+                    `You have ${count} pending transfer${count !== 1 ? 's' : ''} saved to localStorage.`;
+                
+                // Update the entries display
+                updateEntriesDisplay();
+            } else {
+                container.style.display = 'none';
+                updatesContainer.style.display = 'none';
+            }
+        }
+        
+        // Update the entries display
+        function updateEntriesDisplay() {
+            const entriesContainer = document.getElementById('update-entries');
+            entriesContainer.innerHTML = '';
+            
+            pendingTransfers.forEach((transfer, index) => {
+                const entry = document.createElement('div');
+                entry.className = 'update-entry';
+                
+                const timestamp = new Date(transfer.timestamp).toLocaleString();
+                const teamName = transfer.teamName;
+                const playerCount = transfer.players.length;
+                
+                entry.innerHTML = `
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                            <span class="update-team">${teamName}</span>
+                            <span class="update-count">${playerCount} player${playerCount !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div>
+                            <span class="update-timestamp">
+                                <i class="far fa-clock" style="margin-right: 4px;"></i>
+                                ${timestamp}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="update-controls">
+                        <button class="update-btn undo" data-index="${index}">
+                            <i class="fas fa-undo" style="margin-right: 4px;"></i>
+                            Undo All
+                        </button>
+                        <button class="update-btn details" data-index="${index}">
+                            <i class="fas fa-info-circle" style="margin-right: 4px;"></i>
+                            Details
+                        </button>
+                    </div>
+                `;
+                
+                entriesContainer.appendChild(entry);
+            });
+            
+            // Add event listeners to buttons
+            document.querySelectorAll('.update-btn.undo').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    undoAllTransfers(index);
+                });
+            });
+            
+            document.querySelectorAll('.update-btn.details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    showTransferDetails(index);
+                });
+            });
+        }
+
+        // Add transfer to pending changes
+        function addPendingTransfer(transferData) {
+            pendingTransfers.push({
+                ...transferData,
+                timestamp: new Date().toISOString()
+            });
+            
+            savePendingTransfers();
+        }
+
+        // Push all transfers to GitHub
+        async function pushAllTransfersToGitHub() {
+            const pushButton = document.getElementById('push-to-github-btn');
+            const originalText = pushButton.innerHTML;
+            
+            try {
+                // Show loading state
+                pushButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Pushing...';
+                pushButton.disabled = true;
+                
+                // Initialize GitHub config if needed
+                if (!githubConfig) {
+                    initGitHubConfig();
+                }
+                
+                if (!githubConfig.isConfigured()) {
+                    throw new Error('GitHub is not configured. Please set up your GitHub token first.');
+                }
+                
+                // Save to GitHub
+                await saveToGitHub();
+                
+                // Clear pending transfers
+                pendingTransfers = [];
+                localStorage.removeItem('pendingTransfers');
+                
+                // Update UI
+                updatePendingTransfersUI();
+                
+                // Show success message
+                showStatusMessage('All transfers successfully pushed to GitHub! The site will update in a few minutes.', true);
+                
+                // Store the last successful push timestamp
+                localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
+                
+            } catch (error) {
+                console.error('Error pushing transfers to GitHub:', error);
+                showStatusMessage(`Error pushing to GitHub: ${error.message}`, false);
+            } finally {
+                // Restore button
+                pushButton.innerHTML = originalText;
+                pushButton.disabled = false;
+            }
+        }
 
         // Logout function
         function performLogout() {
@@ -1935,6 +2438,36 @@
         function setupEventListeners() {
             // Logout button
             document.getElementById('logout-btn').addEventListener('click', performLogout);
+            
+            // GitHub push button
+            const pushGitHubBtn = document.getElementById('push-to-github-btn');
+            if (pushGitHubBtn) {
+                pushGitHubBtn.addEventListener('click', async function() {
+                    try {
+                        // Show loading state
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Pushing...';
+                        this.disabled = true;
+                        
+                        // Try to save to GitHub
+                        await saveToGitHub();
+                        
+                        // Hide the batch save container on success
+                        const batchSaveContainer = document.getElementById('batch-save-container');
+                        if (batchSaveContainer) {
+                            batchSaveContainer.style.display = 'none';
+                        }
+                        
+                    } catch (error) {
+                        console.error('Failed to push to GitHub:', error);
+                        showStatusMessage('Error pushing to GitHub: ' + error.message, false);
+                    } finally {
+                        // Restore button state
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }
+                });
+            }
             
             // Team selector
             const teamSelector = document.getElementById('team-selector');
@@ -2740,7 +3273,7 @@
             });
         }
 
-        // Submit transfers
+        // Submit transfers - modified to store changes in localStorage
         async function submitTransfers() {
             if (!selectedTeam) {
                 showStatusMessage('Please select a team first', false);
@@ -2793,6 +3326,14 @@
                 
                 console.log('Processing player transfers...');
                 
+                // Create a collection of transfer details for localStorage
+                const transferDetails = {
+                    teamName: selectedTeam.name,
+                    seasonRange: seasonRange,
+                    timestamp: new Date().toISOString(),
+                    players: []
+                };
+                
                 for (const player of selectedPlayers) {
                     // Get transfer details
                     const valueInput = document.getElementById(`value-${player.id}`);
@@ -2813,6 +3354,19 @@
                     
                     // Track total spend
                     totalTransferSpend += transferValue;
+                    
+                    // Add to transfer details for localStorage
+                    transferDetails.players.push({
+                        name: player.name,
+                        id: player.id,
+                        position: player.position,
+                        fromClub: player.club || 'FREE AGENT',
+                        toClub: selectedTeam.name,
+                        value: transferValue,
+                        contractYears: contractYears,
+                        type: playerType,
+                        salary: parseFloat((transferValue * 0.05).toFixed(1))
+                    });
                     
                     // Create a new player for the squad
                     const squadPlayer = {
@@ -2886,91 +3440,12 @@
                         { name: player.name, club: player.club, value: player.value, type: player.type });
                 });
                 
-                // Save changes - first try GitHub if configured
-                let savedToPermanentStorage = false;
-                
-                // Check if GitHub integration is configured
-                if (githubConfig && githubConfig.isConfigured()) {
-                    try {
-                        // Save both files to GitHub
-                        await saveToGitHub();
-                        savedToPermanentStorage = true;
-                    } catch (githubError) {
-                        console.error('GitHub save failed:', githubError);
-                        // Continue to try server save if GitHub fails
-                    }
-                } else {
-                    console.log('GitHub integration not configured');
-                }
-                
-                // If GitHub failed or not configured, try server
-                if (!savedToPermanentStorage) {
-                    const serverAvailable = await isServerAvailable();
-                    if (serverAvailable) {
-                        try {
-                            console.log('Saving to local server...');
-                            
-                            // Format manager data correctly
-                            let managersDataToSave;
-                            if (Array.isArray(managersData)) {
-                                // If managersData is already an array, wrap it in the expected object format
-                                managersDataToSave = { managers: managersData };
-                            } else {
-                                // If it's something else, handle appropriately
-                                managersDataToSave = managersData;
-                                console.warn('Manager data is not in expected array format for saving');
-                            }
-                            
-                            // Log payload sizes to help diagnose potential issues
-                            const playersDataSize = JSON.stringify(playersData).length;
-                            const managersDataSize = JSON.stringify(managersDataToSave).length;
-                            console.log(`Data payload sizes - Players: ${(playersDataSize/1024/1024).toFixed(2)}MB, Managers: ${(managersDataSize/1024/1024).toFixed(2)}MB`);
-                            
-                            // Save players data
-                            const savePlayersResponse = await fetch('http://localhost:3000/save-players', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(playersData)
-                            });
-                            
-                            if (!savePlayersResponse.ok) {
-                                throw new Error(`Failed to save player data: ${savePlayersResponse.status} ${savePlayersResponse.statusText}`);
-                            }
-                            
-                            console.log('Players data saved successfully to server');
-                            
-                            // Save managers data
-                            const saveManagersResponse = await fetch('http://localhost:3000/save-managers', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(managersDataToSave)
-                            });
-                            
-                            if (!saveManagersResponse.ok) {
-                                throw new Error(`Failed to save manager data: ${saveManagersResponse.status} ${saveManagersResponse.statusText}`);
-                            }
-                            
-                            console.log('Managers data saved successfully to server');
-                            savedToPermanentStorage = true;
-                        } catch (error) {
-                            console.error('Server save failed:', error);
-                            // Show error to user but don't rethrow - we still want to continue
-                            showStatusMessage(`Server save error: ${error.message}`, false, 10000);
-                        }
-                    } else {
-                        console.log('Local server not available for saving data');
-                    }
-                }
+                // Add the transfer to pending transfers
+                addPendingTransfer(transferDetails);
                 
                 // Show success message with details
                 const successMsg = `Successfully transferred ${playersAdded} player${playersAdded !== 1 ? 's' : ''} to ${selectedTeam.name} for a total of ${totalTransferSpend.toLocaleString()} RC.`;
-                showStatusMessage(savedToPermanentStorage ? 
-                    successMsg + ' Changes saved to storage.' :
-                    successMsg + ' Warning: Changes are only in memory.', savedToPermanentStorage);
+                showStatusMessage(successMsg + ' Changes saved in memory. Use "Push All to GitHub" to save permanently.', true);
                 
                 // Clear the selected players and refresh the lists
                 selectedPlayers = [];
@@ -3004,7 +3479,7 @@
             }
         }
 
-        // Save to GitHub
+        // Update saveToGitHub function to work with pending transfers
         async function saveToGitHub() {
             try {
                 // Check if GitHub integration is configured
@@ -3025,7 +3500,7 @@
                 // Trigger Vercel deployment after successful save
                 await triggerVercelDeployment();
                 
-                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes. If changes don\'t appear, use the <a href="github-redeploy.html">Redeploy Site</a> tool.', true);
                 return true;
                 
             } catch (error) {
@@ -3204,7 +3679,8 @@
         // Show status message
         function showStatusMessage(message, isSuccess, duration = 5000) {
             const statusElement = document.getElementById('status-message');
-            statusElement.textContent = message;
+            // Use innerHTML instead of textContent to support HTML content
+            statusElement.innerHTML = message;
             statusElement.className = 'status-message';
             statusElement.classList.add(isSuccess ? 'status-success' : 'status-error');
             statusElement.style.display = 'block';
@@ -4596,7 +5072,7 @@
         document.getElementById('debug-controls').innerHTML += `
             <button id="fix-season8-data" style="background-color: #4ecca3; margin-left: 10px;">
                 Fix Season 8 Data
-            </button>
+        </button>
         `;
 
         // Add event listener
@@ -4691,6 +5167,481 @@
                 console.error('Error during save endpoints check:', error);
             }
         });
+
+        // Undo all transfers for a specific index
+        function undoAllTransfers(index) {
+            if (index < 0 || index >= pendingTransfers.length) return;
+            
+            const transfer = pendingTransfers[index];
+            
+            if (confirm(`Are you sure you want to undo all transfers to ${transfer.teamName}? This will affect ${transfer.players.length} player(s).`)) {
+                try {
+                    // Process each player in the transfer
+                    transfer.players.forEach(player => {
+                        // Find the player in the playersData array
+                        const playerIndex = playersData.findIndex(p => p.name === player.name);
+                        if (playerIndex !== -1) {
+                            // Restore club to original
+                            playersData[playerIndex].club = player.fromClub;
+                            
+                            // Remove the latest stats entry if it's for this transfer
+                            if (playersData[playerIndex].stats && playersData[playerIndex].stats.length > 0) {
+                                const lastStatIndex = playersData[playerIndex].stats.length - 1;
+                                const lastStat = playersData[playerIndex].stats[lastStatIndex];
+                                
+                                if (lastStat.team === transfer.teamName) {
+                                    playersData[playerIndex].stats.pop();
+                                }
+                            }
+                        }
+                        
+                        // Find the team manager and remove the player from their squad
+                        const managerIndex = managersData.findIndex(m => m.club === transfer.teamName);
+                        if (managerIndex !== -1) {
+                            const manager = managersData[managerIndex];
+                            
+                            if (manager.squad && manager.squad.players) {
+                                const squadPlayerIndex = manager.squad.players.findIndex(p => p.name === player.name);
+                                
+                                if (squadPlayerIndex !== -1) {
+                                    // Remove player from squad
+                                    manager.squad.players.splice(squadPlayerIndex, 1);
+                                    manager.squad.totalPlayers = manager.squad.players.length;
+                                    
+                                    // Recalculate total value
+                                    manager.clubTotalValue = manager.squad.players.reduce((total, p) => total + p.value, 0);
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Remove the transfer from pending transfers
+                    pendingTransfers.splice(index, 1);
+                    savePendingTransfers();
+                    
+                    // Re-render all UI components affected
+                    filterPlayers();
+                    if (selectedTeam && selectedTeam.name === transfer.teamName) {
+                        updateSquadInfo();
+                    }
+                    
+                    showStatusMessage(`Successfully undid all transfers to ${transfer.teamName}.`, true);
+                } catch (error) {
+                    console.error('Error undoing transfers:', error);
+                    showStatusMessage(`Error undoing transfers: ${error.message}`, false);
+                }
+            }
+        }
+
+        // Show transfer details in a modal
+        function showTransferDetails(index) {
+            if (index < 0 || index >= pendingTransfers.length) return;
+            
+            const transfer = pendingTransfers[index];
+            
+            // Create modal container
+            const modalContainer = document.createElement('div');
+            modalContainer.className = 'transfer-detail-modal';
+            
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.className = 'transfer-detail-content';
+            
+            // Create header
+            const header = document.createElement('div');
+            header.className = 'transfer-detail-header';
+            
+            const title = document.createElement('h3');
+            title.innerHTML = `<i class="fas fa-exchange-alt" style="margin-right: 8px;"></i>Transfers to ${transfer.teamName}`;
+            title.style.margin = '0';
+            title.style.display = 'flex';
+            title.style.alignItems = 'center';
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'transfer-detail-close';
+            closeButton.innerHTML = '<i class="fas fa-times"></i>';
+            closeButton.onclick = () => modalContainer.remove();
+            
+            header.appendChild(title);
+            header.appendChild(closeButton);
+            
+            // Add timestamp and season info
+            const infoSection = document.createElement('div');
+            infoSection.style.marginBottom = '15px';
+            infoSection.style.color = '#aaa';
+            infoSection.style.fontSize = '0.9em';
+            infoSection.style.backgroundColor = '#1e1e1e';
+            infoSection.style.padding = '10px';
+            infoSection.style.borderRadius = '4px';
+            
+            infoSection.innerHTML = `
+                <div><i class="far fa-clock" style="width: 16px; margin-right: 5px;"></i> ${new Date(transfer.timestamp).toLocaleString()}</div>
+                <div><i class="far fa-calendar-alt" style="width: 16px; margin-right: 5px;"></i> Season: ${transfer.seasonRange}</div>
+                <div><i class="fas fa-users" style="width: 16px; margin-right: 5px;"></i> Players: ${transfer.players.length}</div>
+            `;
+            
+            // Create players list header
+            const playersHeader = document.createElement('div');
+            playersHeader.style.margin = '15px 0 10px 0';
+            playersHeader.style.fontWeight = 'bold';
+            playersHeader.style.display = 'flex';
+            playersHeader.style.alignItems = 'center';
+            playersHeader.innerHTML = '<i class="fas fa-users" style="margin-right: 8px; color: #4ecca3;"></i> Player Transfers';
+            
+            // Create players list
+            const playersList = document.createElement('div');
+            playersList.className = 'transfer-players-list';
+            
+            // Add each player
+            transfer.players.forEach((player, playerIndex) => {
+                const playerItem = document.createElement('div');
+                playerItem.className = 'transfer-player-item';
+                playerItem.dataset.playerIndex = playerIndex;
+                
+                const playerInfo = document.createElement('div');
+                playerInfo.className = 'transfer-player-info';
+                
+                const playerName = document.createElement('div');
+                playerName.className = 'transfer-player-name';
+                playerName.textContent = player.name;
+                
+                const playerDetails = document.createElement('div');
+                playerDetails.className = 'transfer-player-details';
+                playerDetails.innerHTML = `
+                    <div><strong>Position:</strong> ${player.position}</div>
+                    <div><strong>From:</strong> ${player.fromClub}</div>
+                    <div><strong>Value:</strong> ${player.value} RC</div>
+                    <div><strong>Type:</strong> ${player.type}</div>
+                `;
+                
+                playerInfo.appendChild(playerName);
+                playerInfo.appendChild(playerDetails);
+                
+                // Create undo button for this player
+                const undoButton = document.createElement('button');
+                undoButton.className = 'update-btn undo';
+                undoButton.innerHTML = '<i class="fas fa-undo" style="margin-right: 4px;"></i> Undo';
+                undoButton.onclick = () => undoPlayerTransfer(index, playerIndex, modalContainer);
+                
+                playerItem.appendChild(playerInfo);
+                playerItem.appendChild(undoButton);
+                
+                playersList.appendChild(playerItem);
+            });
+            
+            // Assemble the modal
+            modalContent.appendChild(header);
+            modalContent.appendChild(infoSection);
+            modalContent.appendChild(playersHeader);
+            modalContent.appendChild(playersList);
+            
+            // Add close button at the bottom for mobile
+            const bottomCloseBtn = document.createElement('button');
+            bottomCloseBtn.style.width = '100%';
+            bottomCloseBtn.style.padding = '12px';
+            bottomCloseBtn.style.marginTop = '15px';
+            bottomCloseBtn.style.backgroundColor = '#3f51b5';
+            bottomCloseBtn.style.color = 'white';
+            bottomCloseBtn.style.border = 'none';
+            bottomCloseBtn.style.borderRadius = '4px';
+            bottomCloseBtn.style.fontSize = '16px';
+            bottomCloseBtn.style.fontWeight = 'bold';
+            bottomCloseBtn.style.cursor = 'pointer';
+            bottomCloseBtn.innerHTML = '<i class="fas fa-times"></i> Close';
+            bottomCloseBtn.onclick = () => modalContainer.remove();
+            
+            modalContent.appendChild(bottomCloseBtn);
+            modalContainer.appendChild(modalContent);
+            document.body.appendChild(modalContainer);
+            
+            // Add escape key handler
+            document.addEventListener('keydown', function escHandler(e) {
+                if (e.key === 'Escape') {
+                    modalContainer.remove();
+                    document.removeEventListener('keydown', escHandler);
+                }
+            });
+            
+            // Add click outside to close
+            modalContainer.addEventListener('click', function(e) {
+                if (e.target === modalContainer) {
+                    modalContainer.remove();
+                }
+            });
+        }
+
+        // Undo a single player transfer within a transfer batch
+        function undoPlayerTransfer(transferIndex, playerIndex, modalContainer) {
+            if (transferIndex < 0 || transferIndex >= pendingTransfers.length) return;
+            
+            const transfer = pendingTransfers[transferIndex];
+            
+            if (playerIndex < 0 || playerIndex >= transfer.players.length) return;
+            
+            const player = transfer.players[playerIndex];
+            
+            if (confirm(`Are you sure you want to undo the transfer of ${player.name} to ${transfer.teamName}?`)) {
+                try {
+                    // Find the player in the playersData array
+                    const dataPlayerIndex = playersData.findIndex(p => p.name === player.name);
+                    if (dataPlayerIndex !== -1) {
+                        // Restore club to original
+                        playersData[dataPlayerIndex].club = player.fromClub;
+                        
+                        // Remove the latest stats entry if it's for this transfer
+                        if (playersData[dataPlayerIndex].stats && playersData[dataPlayerIndex].stats.length > 0) {
+                            const lastStatIndex = playersData[dataPlayerIndex].stats.length - 1;
+                            const lastStat = playersData[dataPlayerIndex].stats[lastStatIndex];
+                            
+                            if (lastStat.team === transfer.teamName) {
+                                playersData[dataPlayerIndex].stats.pop();
+                            }
+                        }
+                    }
+                    
+                    // Find the team manager and remove the player from their squad
+                    const managerIndex = managersData.findIndex(m => m.club === transfer.teamName);
+                    if (managerIndex !== -1) {
+                        const manager = managersData[managerIndex];
+                        
+                        if (manager.squad && manager.squad.players) {
+                            const squadPlayerIndex = manager.squad.players.findIndex(p => p.name === player.name);
+                            
+                            if (squadPlayerIndex !== -1) {
+                                // Remove player from squad
+                                manager.squad.players.splice(squadPlayerIndex, 1);
+                                manager.squad.totalPlayers = manager.squad.players.length;
+                                
+                                // Recalculate total value
+                                manager.clubTotalValue = manager.squad.players.reduce((total, p) => total + p.value, 0);
+                            }
+                        }
+                    }
+                    
+                    // Remove the player from the transfer
+                    transfer.players.splice(playerIndex, 1);
+                    
+                    // If no more players in this transfer, remove the whole transfer
+                    if (transfer.players.length === 0) {
+                        pendingTransfers.splice(transferIndex, 1);
+                        
+                        // Close the modal since this transfer no longer exists
+                        if (modalContainer) {
+                            modalContainer.remove();
+                        }
+                    } else {
+                        // Just update the modal by refreshing it
+                        if (modalContainer) {
+                            modalContainer.remove();
+                            showTransferDetails(transferIndex);
+                        }
+                    }
+                    
+                    // Save pending transfers
+                    savePendingTransfers();
+                    
+                    // Re-render all UI components affected
+                    filterPlayers();
+                    if (selectedTeam && selectedTeam.name === transfer.teamName) {
+                        updateSquadInfo();
+                    }
+                    
+                    showStatusMessage(`Successfully undid the transfer of ${player.name} to ${transfer.teamName}.`, true);
+                } catch (error) {
+                    console.error('Error undoing player transfer:', error);
+                    showStatusMessage(`Error undoing player transfer: ${error.message}`, false);
+                }
+            }
+        }
+
+        // Show batch save confirmation dialog
+        function showBatchSaveConfirmation(savedTransfers) {
+            const modalContainer = document.createElement('div');
+            modalContainer.className = 'transfer-detail-modal';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'transfer-detail-content';
+            modalContent.style.maxWidth = '500px';
+            
+            // Create header
+            const header = document.createElement('div');
+            header.className = 'transfer-detail-header';
+            
+            const title = document.createElement('h3');
+            title.innerHTML = '<i class="fas fa-check-circle" style="color: #4ecca3; margin-right: 8px;"></i>Transfers Saved Successfully';
+            title.style.margin = '0';
+            title.style.display = 'flex';
+            title.style.alignItems = 'center';
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'transfer-detail-close';
+            closeButton.innerHTML = '<i class="fas fa-times"></i>';
+            closeButton.onclick = () => modalContainer.remove();
+            
+            header.appendChild(title);
+            header.appendChild(closeButton);
+            
+            // Create content
+            const content = document.createElement('div');
+            content.style.margin = '15px 0';
+            
+            const successMessage = document.createElement('p');
+            successMessage.innerHTML = `<i class="fas fa-info-circle" style="color: #3498db; margin-right: 8px;"></i>The following transfers have been successfully saved to the database:`;
+            successMessage.style.marginBottom = '15px';
+            
+            content.appendChild(successMessage);
+            
+            // Create summary list
+            const summaryList = document.createElement('div');
+            summaryList.style.backgroundColor = '#1e1e1e';
+            summaryList.style.borderRadius = '4px';
+            summaryList.style.padding = '10px';
+            summaryList.style.marginBottom = '15px';
+            
+            // Group by team
+            const teamGroups = {};
+            savedTransfers.forEach(transfer => {
+                if (!teamGroups[transfer.teamName]) {
+                    teamGroups[transfer.teamName] = [];
+                }
+                teamGroups[transfer.teamName].push(transfer);
+            });
+            
+            for (const [teamName, transfers] of Object.entries(teamGroups)) {
+                const teamItem = document.createElement('div');
+                teamItem.style.marginBottom = '10px';
+                teamItem.style.paddingBottom = '10px';
+                teamItem.style.borderBottom = '1px solid #444';
+                
+                const teamHeader = document.createElement('div');
+                teamHeader.style.fontWeight = 'bold';
+                teamHeader.style.color = '#4ecca3';
+                teamHeader.style.marginBottom = '5px';
+                teamHeader.innerHTML = `<i class="fas fa-users" style="margin-right: 5px;"></i>${teamName}`;
+                
+                teamItem.appendChild(teamHeader);
+                
+                const playerCount = transfers.reduce((total, t) => total + t.players.length, 0);
+                const playerInfo = document.createElement('div');
+                playerInfo.style.fontSize = '0.9em';
+                playerInfo.style.color = '#ddd';
+                playerInfo.innerHTML = `${playerCount} player${playerCount !== 1 ? 's' : ''} transferred`;
+                
+                teamItem.appendChild(playerInfo);
+                summaryList.appendChild(teamItem);
+            }
+            
+            if (Object.keys(teamGroups).length === 0) {
+                const noTransfers = document.createElement('div');
+                noTransfers.style.fontStyle = 'italic';
+                noTransfers.style.color = '#aaa';
+                noTransfers.textContent = 'No transfers were saved.';
+                summaryList.appendChild(noTransfers);
+            }
+            
+            content.appendChild(summaryList);
+            
+            // Create note about refresh
+            const noteDiv = document.createElement('div');
+            noteDiv.style.backgroundColor = '#2c3e50';
+            noteDiv.style.padding = '10px';
+            noteDiv.style.borderRadius = '4px';
+            noteDiv.style.marginBottom = '15px';
+            noteDiv.innerHTML = '<i class="fas fa-sync" style="margin-right: 8px;"></i>The page will reload shortly to reflect the saved changes.';
+            
+            content.appendChild(noteDiv);
+            
+            // Add close button
+            const closeBtn = document.createElement('button');
+            closeBtn.style.width = '100%';
+            closeBtn.style.padding = '12px';
+            closeBtn.style.backgroundColor = '#3f51b5';
+            closeBtn.style.color = 'white';
+            closeBtn.style.border = 'none';
+            closeBtn.style.borderRadius = '4px';
+            closeBtn.style.fontSize = '16px';
+            closeBtn.style.fontWeight = 'bold';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.innerHTML = '<i class="fas fa-check"></i> OK';
+            closeBtn.onclick = () => {
+                modalContainer.remove();
+                // Reload page after slight delay
+                setTimeout(() => location.reload(), 500);
+            };
+            
+            content.appendChild(closeBtn);
+            
+            // Assemble modal
+            modalContent.appendChild(header);
+            modalContent.appendChild(content);
+            modalContainer.appendChild(modalContent);
+            document.body.appendChild(modalContainer);
+            
+            // Set auto-reload timeout
+            setTimeout(() => {
+                if (document.body.contains(modalContainer)) {
+                    modalContainer.remove();
+                    location.reload();
+                }
+            }, 3000);
+        }
+
+        // Save pending transfers to database
+        function savePendingTransfers() {
+            if (pendingTransfers.length === 0) {
+                alert('No transfers to save');
+                return;
+            }
+            
+            // Disable save button
+            document.getElementById('save-all-btn').disabled = true;
+            document.getElementById('save-all-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            
+            // Prepare data for submission
+            const transfersData = pendingTransfers.map(transfer => {
+                return {
+                    teamId: transfer.teamId,
+                    teamName: transfer.teamName,
+                    seasonRange: transfer.seasonRange,
+                    players: transfer.players
+                };
+            });
+            
+            // Submit to server
+            fetch('save-transfers.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ transfers: transfersData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success confirmation with saved transfers
+                    showBatchSaveConfirmation(pendingTransfers);
+                    
+                    // Clear pending transfers
+                    pendingTransfers = [];
+                    updateTransferCount();
+                    
+                    // Hide local updates display
+                    document.querySelector('.local-updates-container').style.display = 'none';
+                } else {
+                    alert('Error: ' + data.message);
+                    // Re-enable save button
+                    document.getElementById('save-all-btn').disabled = false;
+                    document.getElementById('save-all-btn').innerHTML = '<i class="fas fa-save"></i> Save All';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to save transfers. Please try again.');
+                // Re-enable save button
+                document.getElementById('save-all-btn').disabled = false;
+                document.getElementById('save-all-btn').innerHTML = '<i class="fas fa-save"></i> Save All';
+            });
+        }
     </script>
     
     <!-- Performance optimization JS -->

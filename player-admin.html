@@ -749,19 +749,25 @@
             <a href="token-setup.html" class="setup-link" title="Configure GitHub Token">
                 <i class="fas fa-cog"></i> Token Setup
             </a>
+            <a href="github-redeploy.html" class="setup-link" title="Redeploy GitHub Changes">
+                <i class="fas fa-sync-alt"></i> Redeploy Site
+            </a>
         </div>
     </div>
     
     <!-- Add after the other buttons in the navigation area, before the container div -->
     <div class="batch-save-container" id="batch-save-container" style="display: none;">
         <div class="batch-save-info">
-            <i class="fas fa-exclamation-triangle"></i> 
+            <i class="fas fa-exclamation-triangle"></i>
             <span id="pending-changes-text">You have pending changes saved to localStorage.</span>
             <span class="pending-changes-counter" id="pending-changes-count">0</span>
         </div>
         <button class="batch-save-btn" id="push-to-github-btn">
             <i class="fab fa-github"></i> Push All to GitHub
         </button>
+        <a href="github-redeploy.html" class="batch-save-btn" style="text-decoration:none; text-align:center; margin-left:5px;">
+            <i class="fas fa-sync-alt"></i> Redeploy Site
+        </a>
     </div>
     
     <div class="local-updates-container" id="local-updates-container" style="display: none;">
@@ -2562,7 +2568,7 @@
                         localStorage.removeItem('pendingPlayerChanges');
                         // Update UI
                         updatePendingChangesUI();
-                        showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                        showStatusMessage('Changes saved to GitHub! The site will update in a few minutes. If changes don\'t appear, use the <a href="github-redeploy.html">Redeploy Site</a> tool.', true);
                     } else {
                         throw new Error('Failed to save all files to GitHub');
                     }
