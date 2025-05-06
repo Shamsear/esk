@@ -105,7 +105,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "210",
         "apps": "00"
       }
@@ -379,7 +379,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "112",
         "apps": "00"
@@ -421,12 +421,6 @@
         "team": "SANTOS FC",
         "value": "112 ",
         "apps": "05"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "80",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/Y. BOUNOU_CARD.webp",
@@ -507,7 +501,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50",
         "apps": "00"
       }
@@ -526,7 +520,7 @@
     "stats": [
       {
         "season": "4-4.5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "52 ",
         "apps": "08"
       },
@@ -538,7 +532,7 @@
       },
       {
         "season": "5-7",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50",
         "apps": "00"
       }
@@ -822,7 +816,7 @@
       },
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "66",
         "apps": "00"
       }
@@ -848,25 +842,6 @@
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/A. NUBEL_CARD.webp",
     "id": 40
-  },
-  {
-    "name": "DEAN HENDERSON",
-    "star": "4-star-standard",
-    "level": "STANDARD",
-    "club": "FREE AGENT",
-    "position": "CB",
-    "value": 50,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "6-7",
-        "team": "FREE AGENT",
-        "value": "40",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/D. HENDERSON_CARD.webp",
-    "id": 41
   },
   {
     "name": "SERGIO RAMOS",
@@ -1568,7 +1543,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "50",
         "apps": "00"
@@ -1625,14 +1600,14 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-4,5",
+        "season": "4-4.5",
         "team": "SPORTING CP",
         "value": "60",
         "apps": "00"
       },
       {
         "season": "4.5-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "142",
         "apps": "00"
       }
@@ -1689,7 +1664,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "84 ",
         "apps": "05"
       }
@@ -1711,12 +1686,6 @@
         "team": "MUMBAI CITY",
         "value": "40 ",
         "apps": "03"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "40",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. HERRERA_CARD.webp",
@@ -1840,7 +1809,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "114 ",
         "apps": "13"
       }
@@ -2130,7 +2099,7 @@
       },
       {
         "season": "4.5-5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "130",
         "apps": "00"
       },
@@ -2161,7 +2130,7 @@
       },
       {
         "season": "5-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "130",
         "apps": "00"
       }
@@ -2369,7 +2338,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "192",
         "apps": "00"
       }
@@ -2388,7 +2357,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "132",
         "apps": "00"
       },
@@ -2418,7 +2387,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "LOSC LILLE",
         "value": "172",
         "apps": "00"
@@ -2614,7 +2583,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "52 ",
         "apps": "02"
       }
@@ -2633,7 +2602,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "56 ",
         "apps": "13"
       }
@@ -3062,7 +3031,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "190",
         "apps": "00"
@@ -3194,7 +3163,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "NEWCASTLE UNITED",
         "value": "172",
         "apps": "00"
@@ -3244,7 +3213,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "168",
         "apps": "00"
@@ -3317,12 +3286,6 @@
         "team": "MANCHESTER UNITED",
         "value": "130",
         "apps": "00"
-      },
-      {
-        "season": "5-7",
-        "team": "FREE AGENT",
-        "value": "154",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/M. SKRINIAR_CARD.webp",
@@ -3375,7 +3338,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "90",
         "apps": "00"
@@ -3540,7 +3503,7 @@
     "stats": [
       {
         "season": "4-4.5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "50 ",
         "apps": "02"
       },
@@ -3565,7 +3528,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "60",
         "apps": "00"
       },
@@ -3639,7 +3602,7 @@
         "apps": "01"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "LOSC LILLE",
         "value": "70",
         "apps": "00"
@@ -3671,7 +3634,7 @@
       },
       {
         "season": "5.5-7.5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "68",
         "apps": "00"
       }
@@ -3720,8 +3683,8 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
-        "team": "RANDERS FC",
+        "season": "5-6",
+        "team": "RAYONG FC",
         "value": "110",
         "apps": "00"
       }
@@ -3745,7 +3708,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "NEWCASTLE UNITED",
         "value": "162",
         "apps": "00"
@@ -3884,7 +3847,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "132",
         "apps": "00"
@@ -3928,7 +3891,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "64",
         "apps": "00"
@@ -3947,7 +3910,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "98",
         "apps": "00"
@@ -3982,25 +3945,6 @@
     "id": 189
   },
   {
-    "name": "ALEXANDER NUBEL",
-    "star": "4-star-standard",
-    "level": "STANDARD",
-    "club": "FREE AGENT",
-    "position": "CB",
-    "value": 50,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "6-7",
-        "team": "FREE AGENT",
-        "value": "40",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/A. NUBEL_CARD.webp",
-    "id": 190
-  },
-  {
     "name": "DEAN HENDERSON",
     "star": "4-star-standard",
     "level": "STANDARD",
@@ -4029,7 +3973,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "SS LAZIO",
         "value": "60",
         "apps": "00"
@@ -4131,7 +4075,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "NEWCASTLE UNITED",
         "value": "90",
         "apps": "00"
@@ -4252,7 +4196,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "40 ",
         "apps": "02"
       }
@@ -4378,7 +4322,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "44",
         "apps": "00"
       }
@@ -4452,7 +4396,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "118",
         "apps": "00"
@@ -4548,7 +4492,7 @@
     "stats": [
       {
         "season": "4.5-6.5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "100",
         "apps": "00"
       }
@@ -4611,7 +4555,7 @@
       },
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "120",
         "apps": "00"
       }
@@ -4649,7 +4593,7 @@
     "stats": [
       {
         "season": "5-7",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "122",
         "apps": "00"
       }
@@ -5002,7 +4946,7 @@
         "apps": "01"
       },
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "FREE AGENT",
         "value": "60",
         "apps": "00"
@@ -5101,12 +5045,6 @@
         "team": "FC BAYERN MUNICH",
         "value": "62 ",
         "apps": "02"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "60",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/M. SALAS_CARD.webp",
@@ -5191,8 +5129,8 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-6",
-        "team": "AL HILAL SFC",
+        "season": "4-5",
+        "team": "REAL MADRID CF",
         "value": "130",
         "apps": "00"
       },
@@ -5279,7 +5217,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "REAL MADRID CF",
         "value": "308",
         "apps": "00"
@@ -5292,7 +5230,7 @@
     "name": "LAUTARO MARTINEZ",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "INTER MILAN",
+    "club": "FREE AGENT",
     "position": "ST",
     "value": 136,
     "gamesPlayed": 0,
@@ -5304,7 +5242,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RANGERS FC",
         "value": "136",
         "apps": "00"
@@ -5348,7 +5286,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-6",
+        "season": "4-5",
         "team": "LIVERPOOL FC",
         "value": "144",
         "apps": "00"
@@ -5531,7 +5469,7 @@
     "stats": [
       {
         "season": "4-4.5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "100",
         "apps": "00"
       },
@@ -5542,7 +5480,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RANGERS FC",
         "value": "106",
         "apps": "00"
@@ -5725,7 +5663,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RED BULL BRAGANTINO",
         "value": "62",
         "apps": "00"
@@ -5792,12 +5730,6 @@
         "team": "MUMBAI CITY",
         "value": "50 ",
         "apps": "06"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "50",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/EVANILSON_CARD.webp",
@@ -6173,7 +6105,7 @@
       },
       {
         "season": "5.5-7.5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50",
         "apps": "00"
       }
@@ -6255,7 +6187,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "50",
         "apps": "00"
       }
@@ -6274,7 +6206,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "50",
         "apps": "00"
       }
@@ -6449,7 +6381,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "78",
         "apps": "00"
@@ -6625,7 +6557,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "60",
         "apps": "00"
@@ -6719,7 +6651,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RANGERS FC",
         "value": "64",
         "apps": "00"
@@ -6739,7 +6671,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "40 ",
         "apps": "13"
       }
@@ -6921,7 +6853,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BORUSSIA DORTMUND",
         "value": "46",
         "apps": "00"
@@ -6941,14 +6873,8 @@
     "stats": [
       {
         "season": "4-4.5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "44",
-        "apps": "00"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "40",
         "apps": "00"
       }
     ],
@@ -6996,7 +6922,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "MOHUN BAGAN SG",
         "value": "66",
         "apps": "00"
@@ -7268,7 +7194,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "82 ",
         "apps": "11"
       }
@@ -7349,7 +7275,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "102",
         "apps": "00"
@@ -7584,7 +7510,7 @@
       },
       {
         "season": "5-7",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50",
         "apps": "00"
       }
@@ -8001,7 +7927,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "58 ",
         "apps": "02"
       }
@@ -8077,7 +8003,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "46",
         "apps": "00"
       }
@@ -8194,12 +8120,6 @@
         "team": "SANTOS FC",
         "value": "122 ",
         "apps": "06"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "100",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/CAFU_CARD.webp",
@@ -8259,7 +8179,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RANGERS FC",
         "value": "100",
         "apps": "00"
@@ -8461,7 +8381,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "NEWCASTLE UNITED",
         "value": "132",
         "apps": "00"
@@ -8486,7 +8406,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "56",
         "apps": "00"
@@ -8511,7 +8431,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "52",
         "apps": "00"
@@ -8714,7 +8634,7 @@
       },
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "54",
         "apps": "00"
       }
@@ -8940,7 +8860,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "82",
         "apps": "00"
@@ -8984,8 +8904,8 @@
         "apps": "05"
       },
       {
-        "season": "4.5-6.5",
-        "team": "RANDERS FC",
+        "season": "4.5-6",
+        "team": "RAYONG FC",
         "value": "50",
         "apps": "00"
       }
@@ -9023,7 +8943,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "42",
         "apps": "00"
       }
@@ -9042,7 +8962,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "52 ",
         "apps": "11"
       }
@@ -9244,7 +9164,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "110",
         "apps": "00"
       }
@@ -9313,7 +9233,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "90",
         "apps": "00"
       },
@@ -9343,7 +9263,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "100",
         "apps": "00"
@@ -9356,7 +9276,7 @@
     "name": "RODRI",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "NOTTINGHAM FOREST",
+    "club": "FREE AGENT",
     "position": "DM",
     "value": 174,
     "gamesPlayed": 0,
@@ -9368,7 +9288,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RB LEIPZIG",
         "value": "174",
         "apps": "00"
@@ -9393,7 +9313,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "80",
         "apps": "00"
@@ -9419,7 +9339,7 @@
       },
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "82",
         "apps": "00"
       }
@@ -9476,7 +9396,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50 ",
         "apps": "13"
       }
@@ -9557,7 +9477,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "54",
         "apps": "00"
@@ -9607,7 +9527,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "82",
         "apps": "00"
@@ -9931,7 +9851,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "66",
         "apps": "00"
       },
@@ -10049,7 +9969,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
@@ -10300,25 +10220,6 @@
     "id": 491
   },
   {
-    "name": "ULI HOENAB",
-    "star": "5-star-legend",
-    "level": "LEGENDARY",
-    "club": "FREE AGENT",
-    "position": "AM",
-    "value": 100,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "4-6",
-        "team": "FREE AGENT",
-        "value": "100",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/U. HOENAB_CARD.webp",
-    "id": 492
-  },
-  {
     "name": "MARTIN CACERES",
     "star": "5-star-legend",
     "level": "LEGENDARY",
@@ -10366,7 +10267,7 @@
     "name": "ANDRES INIESTA",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "SEPAHAN SC",
+    "club": "FREE AGENT",
     "position": "CM",
     "value": 138,
     "gamesPlayed": 0,
@@ -10375,12 +10276,6 @@
         "season": "4-5",
         "team": "FC BARCELONA",
         "value": "122",
-        "apps": "00"
-      },
-      {
-        "season": "5-7",
-        "team": "FREE AGENT",
-        "value": "132",
         "apps": "00"
       }
     ],
@@ -10398,7 +10293,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "100",
         "apps": "00"
       }
@@ -10681,7 +10576,7 @@
       },
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "124",
         "apps": "00"
       }
@@ -10782,7 +10677,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "58 ",
         "apps": "10"
       }
@@ -10800,7 +10695,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "76",
         "apps": "00"
@@ -10863,7 +10758,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RANGERS FC",
         "value": "110",
         "apps": "00"
@@ -11079,7 +10974,7 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "122 ",
         "apps": "13"
       },
@@ -11128,7 +11023,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "100",
         "apps": "00"
@@ -11211,7 +11106,7 @@
     "stats": [
       {
         "season": "4-4.5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "86",
         "apps": "00"
       },
@@ -11289,12 +11184,6 @@
         "team": "RB LEIPZIG",
         "value": "60 ",
         "apps": "09"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "60",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/H. NAKATA_CARD.webp",
@@ -11385,7 +11274,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "106",
         "apps": "00"
@@ -11411,7 +11300,7 @@
       },
       {
         "season": "5-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "100",
         "apps": "00"
       }
@@ -11756,7 +11645,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "50",
         "apps": "00"
@@ -11876,7 +11765,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "MOHUN BAGAN SG",
         "value": "40",
         "apps": "00"
@@ -11964,7 +11853,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "44",
         "apps": "00"
@@ -12065,7 +11954,7 @@
     "gamesPlayed": 11,
     "stats": [
       {
-        "season": "4-6",
+        "season": "4-4.5",
         "team": "AC MILAN",
         "value": "50 ",
         "apps": "11"
@@ -12254,7 +12143,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "LOSC LILLE",
         "value": "130",
         "apps": "00"
@@ -12540,12 +12429,6 @@
         "team": "NEWCASTLE UNITED",
         "value": "80 ",
         "apps": "02"
-      },
-      {
-        "season": "4.5-6.5",
-        "team": "FREE AGENT",
-        "value": "60",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/C. FUHRICH_CARD.webp",
@@ -12568,7 +12451,7 @@
       },
       {
         "season": "5-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "88",
         "apps": "00"
       }
@@ -12606,13 +12489,13 @@
     "stats": [
       {
         "season": "4-5",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "100",
         "apps": "00"
       },
       {
         "season": "5-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "84",
         "apps": "00"
       }
@@ -12631,7 +12514,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "156",
         "apps": "00"
       }
@@ -12757,7 +12640,7 @@
       },
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "110",
         "apps": "00"
       }
@@ -12807,7 +12690,7 @@
       },
       {
         "season": "5-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "88",
         "apps": "00"
       }
@@ -12883,7 +12766,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "56",
         "apps": "00"
       }
@@ -13078,7 +12961,7 @@
       },
       {
         "season": "5-7",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "202",
         "apps": "00"
       }
@@ -13241,7 +13124,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "100",
         "apps": "00"
@@ -13305,7 +13188,7 @@
       },
       {
         "season": "5-7",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "84",
         "apps": "00"
       }
@@ -13425,7 +13308,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "92",
         "apps": "00"
       }
@@ -13531,7 +13414,7 @@
     "name": "RAPHINHA",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "REAL MADRID CF",
+    "club": "FREE AGENT",
     "position": "LW",
     "value": 86,
     "gamesPlayed": 0,
@@ -13543,7 +13426,7 @@
         "apps": "00"
       },
       {
-        "season": "5.5-7.5",
+        "season": "5.5-6",
         "team": "AS ROMA",
         "value": "86",
         "apps": "00"
@@ -13713,7 +13596,7 @@
         "apps": "00"
       },
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "AC MILAN",
         "value": "60",
         "apps": "00"
@@ -14429,7 +14312,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "58",
         "apps": "00"
@@ -14449,7 +14332,7 @@
     "stats": [
       {
         "season": "5-7",
-        "team": "RANDERS FC",
+        "team": "RAYONG FC",
         "value": "60",
         "apps": "00"
       }
@@ -14581,7 +14464,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "78",
         "apps": "00"
@@ -14619,7 +14502,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "100",
         "apps": "00"
@@ -14627,25 +14510,6 @@
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/MURILO_CARD.webp",
     "id": 697
-  },
-  {
-    "name": "JORREL HATO",
-    "star": "4-star-standard",
-    "level": "STANDARD",
-    "club": "FREE AGENT",
-    "position": "CB",
-    "value": 50,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "4-6",
-        "team": "FREE AGENT",
-        "value": "50",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/J. HATO_CARD.webp",
-    "id": 698
   },
   {
     "name": "ILLIA ZABARNYI",
@@ -14676,7 +14540,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "SS LAZIO",
         "value": "76",
         "apps": "00"
@@ -14840,7 +14704,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "90",
         "apps": "00"
@@ -14878,7 +14742,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "ASTON VILLA",
         "value": "42",
         "apps": "00"
@@ -14898,7 +14762,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "40 ",
         "apps": "11"
       }
@@ -15074,7 +14938,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RANGERS FC",
         "value": "152",
         "apps": "00"
@@ -15761,25 +15625,6 @@
     "id": 755
   },
   {
-    "name": "GEOVANY QUENDA",
-    "star": "4-star-standard",
-    "level": "STANDARD",
-    "club": "FREE AGENT",
-    "position": "RW",
-    "value": 50,
-    "gamesPlayed": 0,
-    "stats": [
-      {
-        "season": "4-6",
-        "team": "FREE AGENT",
-        "value": "50",
-        "apps": "00"
-      }
-    ],
-    "imagePath": "../assets/images/players/4 STAR CARDS/G. QUENDA_CARD.webp",
-    "id": 756
-  },
-  {
     "name": "EDMILSON",
     "star": "5-star-legend",
     "level": "LEGENDARY",
@@ -15790,7 +15635,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "100",
         "apps": "13"
       }
@@ -15846,7 +15691,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "MOHUN BAGAN SG",
         "value": "58",
         "apps": "00"
@@ -15966,7 +15811,7 @@
         "apps": "00"
       },
       {
-        "season": "5-6.5",
+        "season": "5-6",
         "team": "AC MILAN",
         "value": "56",
         "apps": "00"
@@ -16004,7 +15849,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "58",
         "apps": "00"
@@ -16137,8 +15982,8 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
-        "team": "RANDERS FC",
+        "season": "5-6",
+        "team": "RAYONG FC",
         "value": "52",
         "apps": "00"
       }
@@ -16530,7 +16375,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "AC MILAN",
         "value": "80",
         "apps": "00"
@@ -16568,7 +16413,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "80",
         "apps": "00"
@@ -16612,7 +16457,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "54",
         "apps": "00"
@@ -16631,7 +16476,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "66",
         "apps": "00"
@@ -16650,7 +16495,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "SL BENFICA",
         "value": "50",
         "apps": "00"
@@ -16745,7 +16590,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "50",
         "apps": "00"
@@ -16803,7 +16648,7 @@
     "stats": [
       {
         "season": "4.5-6.5",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50",
         "apps": "00"
       }
@@ -16821,7 +16666,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
+        "season": "4.5-6",
         "team": "INTER MILAN",
         "value": "60",
         "apps": "00"
@@ -16859,7 +16704,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "50",
         "apps": "00"
@@ -17011,7 +16856,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "50",
         "apps": "00"
@@ -17049,7 +16894,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "50",
         "apps": "00"
@@ -17125,7 +16970,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "50",
         "apps": "00"
@@ -17511,8 +17356,8 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
-        "team": "RANDERS FC",
+        "season": "4.5-6",
+        "team": "RAYONG FC",
         "value": "50",
         "apps": "00"
       }
@@ -17631,7 +17476,7 @@
         "apps": "00"
       },
       {
-        "season": "5.5-7.5",
+        "season": "5.5-6",
         "team": "AS ROMA",
         "value": "40",
         "apps": "00"
@@ -17821,8 +17666,8 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4.5-6.5",
-        "team": "RANDERS FC",
+        "season": "4.5-6",
+        "team": "RAYONG FC",
         "value": "80",
         "apps": "00"
       }
@@ -18004,7 +17849,7 @@
         "apps": "00"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "50",
         "apps": "00"
@@ -18270,7 +18115,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "MOHUN BAGAN SG",
         "value": "48",
         "apps": "00"
@@ -18346,7 +18191,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "BAYER LEVERKUSEN",
         "value": "40",
         "apps": "00"
@@ -18365,7 +18210,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "AS ROMA",
         "value": "40",
         "apps": "00"
@@ -18485,7 +18330,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "RED BULL BRAGANTINO",
         "value": "60",
         "apps": "00"
@@ -18637,7 +18482,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "54",
         "apps": "00"
@@ -18966,7 +18811,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "80",
         "apps": "00"
@@ -19023,7 +18868,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "96",
         "apps": "00"
@@ -19688,7 +19533,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "52",
         "apps": "00"
@@ -19745,7 +19590,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "INTER MIAMI",
         "value": "100",
         "apps": "00"
@@ -19975,7 +19820,7 @@
     "stats": [
       {
         "season": "4-6",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "50",
         "apps": "02"
       }
@@ -20132,7 +19977,7 @@
         "apps": "04"
       },
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "64",
         "apps": "00"
@@ -20878,7 +20723,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "AC MILAN",
         "value": "40",
         "apps": "00"
@@ -20897,7 +20742,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "AC MILAN",
         "value": "40",
         "apps": "00"
@@ -20917,7 +20762,7 @@
     "stats": [
       {
         "season": "5-7",
-        "team": "AL HILAL SFC",
+        "team": "REAL MADRID CF",
         "value": "40",
         "apps": "00"
       }
@@ -21074,7 +20919,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "FC BARCELONA",
         "value": "58",
         "apps": "00"
@@ -21112,7 +20957,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "AC MILAN",
         "value": "40",
         "apps": "00"
@@ -21131,7 +20976,7 @@
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "AC MILAN",
         "value": "40",
         "apps": "00"
