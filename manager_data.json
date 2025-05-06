@@ -4816,12 +4816,12 @@
             "type": "prime"
           },
           {
-            "name": "ELYE WAHI",
-            "position": "ST",
-            "value": 68,
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
             "contract": "SEASON 8",
-            "salary": 3.4,
-            "type": "standard"
+            "salary": 2.5,
+            "type": "prime"
           }
         ],
         "totalPlayers": 8
@@ -4998,7 +4998,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 446
+      "clubTotalValue": 428
     },
     {
       "name": "NABEEL",
@@ -7882,5 +7882,5 @@
       "current_season": 6
     }
   ],
-  "_lastUpdated": "2025-05-06T17:48:30.125Z"
+  "_lastUpdated": "2025-05-06T18:33:45.860Z"
 }
