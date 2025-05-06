@@ -2026,18 +2026,17 @@ function openModal(card) {
     const tableBody = document.getElementById('modalPlayerDetails');
     tableBody.innerHTML = '';
 
-    // Sort stats by season in descending order
+    // Sort stats by value in descending order (higher to lower)
     stats.sort((a, b) => {
-        const seasonA = parseInt(a.season.split('-')[0]);
-        const seasonB = parseInt(b.season.split('-')[0]);
-        return seasonB - seasonA;
+        return b.value - a.value; // Sort by value in descending order
     });
 
     // Populate the playerStatsTable with the player's individual stats
     stats.forEach((stat, index) => {
         const row = document.createElement('tr');
         
-        // Calculate value trend
+        // Calculate value trend - now comparing to next value in sorted array
+        // For the last item or if there's only one stat, valueTrend will be 0
         const valueTrend = index < stats.length - 1 
             ? stat.value - stats[index + 1].value 
             : 0;
