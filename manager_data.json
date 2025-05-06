@@ -4751,13 +4751,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 546,
+      "club_total_value": 1288,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 8,
+        "total_players": 17,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4773,6 +4773,14 @@
             "value": 44,
             "contract": "SEASON 7",
             "salary": 2.2,
+            "type": "prime"
+          },
+          {
+            "name": "STRAHINJA PAVLOVIC",
+            "position": "CB",
+            "value": 44,
+            "contract": "SEASON 7",
+            "salary": 2,
             "type": "prime"
           },
           {
@@ -4806,25 +4814,9 @@
             "contract": "SEASON 6.5",
             "salary": 2.7,
             "type": "prime"
-          },
-          {
-            "name": "BRYAN ROBSON",
-            "position": "CM",
-            "value": 108,
-            "contract": "SEASON 8",
-            "salary": 5.4,
-            "type": "legend"
-          },
-          {
-            "name": "YASSINE BOUNOU",
-            "position": "GK",
-            "value": 104,
-            "contract": "SEASON 8",
-            "salary": 5.2,
-            "type": "standard"
           }
         ],
-        "totalPlayers": 9
+        "totalPlayers": 16
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4998,7 +4990,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 590
+      "clubTotalValue": 1228
     },
     {
       "name": "NABEEL",
@@ -7880,31 +7872,6 @@
         }
       ],
       "current_season": 6
-    },
-    {
-      "name": "Manager of FREE AGENT",
-      "club": "FREE AGENT",
-      "overall_rating": 0,
-      "r2g_coin_balance": 0,
-      "r2g_token_balance": 0,
-      "club_total_value": 40,
-      "manager_rating": 0,
-      "trophies": 0,
-      "awards": 0,
-      "squad": {
-        "total_players": 1,
-        "players": [
-          {
-            "name": "STRAHINJA PAVLOVIC",
-            "position": "CB",
-            "value": 40,
-            "contract": "SEASON 7",
-            "salary": 2,
-            "type": "prime"
-          }
-        ]
-      },
-      "star_rating": 3
     }
   ]
 }
