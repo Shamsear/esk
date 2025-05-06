@@ -719,17 +719,17 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 2592,
+      "club_total_value": 768,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 24,
+        "total_players": 7,
         "players": [
           {
             "name": "ERLING HAALAND",
             "position": "ST",
-            "value": 140,
+            "value": 210,
             "contract": "SEASON 7.5",
             "salary": 7,
             "type": "standard"
@@ -7873,5 +7873,6 @@
       ],
       "current_season": 6
     }
-  ]
+  ],
+  "_lastUpdated": "2025-05-06T10:30:38.063Z"
 }
