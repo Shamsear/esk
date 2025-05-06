@@ -31,7 +31,7 @@ class ClubManager {
             this.clubs = Array.from(clubsSet).map(clubName => {
                 return {
                     name: clubName,
-                    logo: `assets/images/players/club/${clubName.replace(/\s+/g, '-').toLowerCase()}.webp`
+                    logo: `assets/images/club-logos/${clubName.replace(/\s+/g, '-').toLowerCase()}.webp`
                 };
             });
 
