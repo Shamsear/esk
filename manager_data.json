@@ -4746,181 +4746,63 @@
     },
     {
       "name": "MUBASHIR",
-      "age": 22,
+      "age": "22",
       "club": "AC MILAN",
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 334,
+      "club_total_value": 1288,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 6,
+        "total_players": 17,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
-            "position": "GK",
             "value": 96,
             "contract": "SEASON 7.5",
-            "salary": 4.8,
             "type": "prime"
           },
           {
             "name": "MATTEO GABBIA",
-            "position": "CB",
             "value": 44,
             "contract": "SEASON 7",
-            "salary": 2.2,
+            "type": "prime"
+          },
+          {
+            "name": "STRAHINJA PAVLOVIC",
+            "value": 44,
+            "contract": "SEASON 7",
             "type": "prime"
           },
           {
             "name": "SAHAL ABDUL SAMAD",
-            "position": "LW",
             "value": 40,
             "contract": "SEASON 7",
-            "salary": 2,
             "type": "prime"
           },
           {
             "name": "CHEICK DOUCOURE",
-            "position": "DM",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5,
             "type": "standard"
           },
           {
             "name": "RUBEN LOFTUS-CHEEK",
-            "position": "CM",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5,
             "type": "prime"
           },
           {
             "name": "TIJJANI REIJNDERS",
-            "position": "CM",
             "value": 54,
             "contract": "SEASON 6.5",
-            "salary": 2.7,
-            "type": "prime"
-          },
-          {
-            "name": "BRYAN ROBSON",
-            "position": "CM",
-            "value": 108,
-            "contract": "SEASON 8",
-            "salary": 5.4,
-            "type": "legend"
-          },
-          {
-            "name": "YASSINE BOUNOU",
-            "position": "GK",
-            "value": 104,
-            "contract": "SEASON 8",
-            "salary": 5.2,
-            "type": "standard"
-          },
-          {
-            "name": "PATRICK KLUIVERT",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 8",
-            "salary": 5,
-            "type": "standard"
-          },
-          {
-            "name": "EVAIR",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 8",
-            "salary": 5,
-            "type": "prime legend"
-          },
-          {
-            "name": "ALAN VARELA",
-            "position": "DM",
-            "value": 100,
-            "contract": "SEASON 8",
-            "salary": 5,
-            "type": "standard"
-          },
-          {
-            "name": "PAULO DYBALA",
-            "position": "ST",
-            "value": 86,
-            "contract": "SEASON 8",
-            "salary": 4.3,
-            "type": "standard"
-          },
-          {
-            "name": "BENOÎT BADIASHILE",
-            "position": "CB",
-            "value": 84,
-            "contract": "SEASON 8",
-            "salary": 4.2,
-            "type": "standard"
-          },
-          {
-            "name": "ALESSIO ROMAGNOLI",
-            "position": "CB",
-            "value": 84,
-            "contract": "SEASON 8",
-            "salary": 4.2,
-            "type": "standard"
-          },
-          {
-            "name": "MALCOM",
-            "position": "RW",
-            "value": 80,
-            "contract": "SEASON 8",
-            "salary": 4,
-            "type": "prime"
-          },
-          {
-            "name": "PHILIPP LIENHART",
-            "position": "CB",
-            "value": 70,
-            "contract": "SEASON 8",
-            "salary": 3.5,
-            "type": "standard"
-          },
-          {
-            "name": "SHAY GIVEN",
-            "position": "GK",
-            "value": 60,
-            "contract": "SEASON 8",
-            "salary": 3,
-            "type": "legend"
-          },
-          {
-            "name": "ANDRE",
-            "position": "DM",
-            "value": 50,
-            "contract": "SEASON 8",
-            "salary": 2.5,
-            "type": "prime"
-          },
-          {
-            "name": "MAURO ARAMBARRI",
-            "position": "DM",
-            "value": 40,
-            "contract": "SEASON 8",
-            "salary": 2,
-            "type": "standard"
-          },
-          {
-            "name": "ELYE WAHI",
-            "position": "ST",
-            "value": 68,
-            "contract": "SEASON 8",
-            "salary": 3.4,
             "type": "standard"
           }
         ],
-        "totalPlayers": 20
+        "totalPlayers": 7
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -5094,7 +4976,14 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1468
+      "clubTotalValue": 1288,
+      "total_players": 7,
+      "r2gCoinBalance": 1249,
+      "coins": 1249,
+      "r2gCoins": 1249,
+      "r2gTokenBalance": 115,
+      "tokens": 115,
+      "r2gTokens": 115
     },
     {
       "name": "NABEEL",
@@ -7976,31 +7865,7 @@
         }
       ],
       "current_season": 6
-    },
-    {
-      "name": "Manager of FREE AGENT",
-      "club": "FREE AGENT",
-      "overall_rating": 0,
-      "r2g_coin_balance": 0,
-      "r2g_token_balance": 0,
-      "club_total_value": 40,
-      "manager_rating": 0,
-      "trophies": 0,
-      "awards": 0,
-      "squad": {
-        "total_players": 1,
-        "players": [
-          {
-            "name": "STRAHINJA PAVLOVIC",
-            "position": "CB",
-            "value": 40,
-            "contract": "SEASON 7",
-            "salary": 2,
-            "type": "prime"
-          }
-        ]
-      },
-      "star_rating": 3
     }
-  ]
+  ],
+  "_lastUpdated": "2025-05-06T08:25:49.697Z"
 }
