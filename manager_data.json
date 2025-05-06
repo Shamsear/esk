@@ -719,17 +719,17 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 768,
+      "club_total_value": 2592,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 7,
+        "total_players": 24,
         "players": [
           {
             "name": "ERLING HAALAND",
             "position": "ST",
-            "value": 210,
+            "value": 140,
             "contract": "SEASON 7.5",
             "salary": 7,
             "type": "standard"
@@ -6269,12 +6269,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2369,
       "r2g_token_balance": 330,
-      "club_total_value": 856,
+      "club_total_value": 2244,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 10,
+        "total_players": 11,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -6291,6 +6291,14 @@
             "contract": "SEASON 7.5",
             "salary": 4.3,
             "type": "prime"
+          },
+          {
+            "name": "ROMELU LUKAKU",
+            "position": "ST",
+            "value": 50,
+            "contract": "SEASON 7.5",
+            "salary": 2.5,
+            "type": "standard"
           },
           {
             "name": "ALEX MERET",
@@ -7864,32 +7872,6 @@
         }
       ],
       "current_season": 6
-    },
-    {
-      "name": "Manager of PARIS SAINT-GERMAIN FC",
-      "club": "PARIS SAINT-GERMAIN FC",
-      "overall_rating": 0,
-      "r2g_coin_balance": 0,
-      "r2g_token_balance": 0,
-      "club_total_value": 52,
-      "manager_rating": 0,
-      "trophies": 0,
-      "awards": 0,
-      "squad": {
-        "total_players": 1,
-        "players": [
-          {
-            "name": "ROMELU LUKAKU",
-            "position": "ST",
-            "value": 52,
-            "contract": "SEASON 7.5",
-            "salary": 2.5,
-            "type": "standard"
-          }
-        ]
-      },
-      "star_rating": 3
     }
-  ],
-  "_lastUpdated": "2025-05-06T09:32:50.424Z"
+  ]
 }

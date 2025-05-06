@@ -1619,30 +1619,26 @@
     "name": "GUGLIELMO VICARIO",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "REAL MADRID CF",
+    "club": "FREE AGENT",
     "position": "GK",
-    "value": 150,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "4-4.5",
+        "season": "4-4,5",
         "team": "SPORTING CP",
-        "value": "60"
+        "value": "60",
+        "apps": "00"
       },
       {
         "season": "4.5-6",
         "team": "AL HILAL SFC",
-        "value": "142"
-      },
-      {
-        "season": "6-8",
-        "team": "REAL MADRID CF",
-        "value": "150"
+        "value": "142",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/G. VICARIO_CARD.webp",
-    "id": 81,
-    "clubLogo": "assets/images/players/club/REAL MADRID CF.webp"
+    "id": 81
   },
   {
     "name": "JORDAN PICKFORD",
@@ -5242,23 +5238,24 @@
     "level": "STANDARD",
     "club": "MANCHESTER CITY",
     "position": "ST",
-    "value": 210,
+    "value": 350,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "ASTON VILLA FC",
-        "value": "350"
+        "value": "350",
+        "apps": "00"
       },
       {
         "season": "5-7",
         "team": "MANCHESTER CITY",
-        "value": "350"
+        "value": "350",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/E. HAALAND_CARD.webp",
-    "id": 250,
-    "clubLogo": "assets/images/players/club/Manchester City FC.webp"
+    "id": 250
   },
   {
     "name": "KYLIAN MBAPPE",
@@ -6163,30 +6160,26 @@
     "name": "ROMELU LUKAKU",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "PARIS SAINT-GERMAIN FC",
+    "club": "REAL MADRID CF",
     "position": "ST",
-    "value": 52,
+    "value": 50,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5.5",
         "team": "MOHUN BAGAN AC",
-        "value": "62"
+        "value": "62",
+        "apps": "00"
       },
       {
-        "season": "5.5-6",
-        "team": "REAL MADRID CF",
-        "value": "50"
-      },
-      {
-        "season": "6-7.5",
-        "team": "PARIS SAINT-GERMAIN FC",
-        "value": "52"
+        "season": "5.5-7.5",
+        "team": "AL HILAL SFC",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/R. LUKAKU_CARD.webp",
-    "id": 292,
-    "clubLogo": "assets/images/players/club/PARIS SAINT-GERMAIN FC.webp"
+    "id": 292
   },
   {
     "name": "ADEMOLA LOOKMAN",
