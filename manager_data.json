@@ -4814,17 +4814,9 @@
             "contract": "SEASON 6.5",
             "salary": 2.7,
             "type": "prime"
-          },
-          {
-            "name": "ANDRE",
-            "position": "DM",
-            "value": 50,
-            "contract": "SEASON 8",
-            "salary": 2.5,
-            "type": "prime"
           }
         ],
-        "totalPlayers": 8
+        "totalPlayers": 16
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4998,7 +4990,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 428
+      "clubTotalValue": 1228
     },
     {
       "name": "NABEEL",
@@ -7881,10 +7873,5 @@
       ],
       "current_season": 6
     }
-<<<<<<< Updated upstream
-  ],
-  "_lastUpdated": "2025-05-06T18:33:45.860Z"
-=======
   ]
->>>>>>> Stashed changes
 }
