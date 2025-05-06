@@ -4746,7 +4746,7 @@
     },
     {
       "name": "MUBASHIR",
-      "age": 22,
+      "age": "22",
       "club": "AC MILAN",
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
@@ -4761,62 +4761,42 @@
         "players": [
           {
             "name": "THIBAUT COURTOIS",
-            "position": "GK",
             "value": 96,
             "contract": "SEASON 7.5",
-            "salary": 4.8,
             "type": "prime"
           },
           {
             "name": "MATTEO GABBIA",
-            "position": "CB",
             "value": 44,
             "contract": "SEASON 7",
-            "salary": 2.2,
-            "type": "prime"
-          },
-          {
-            "name": "STRAHINJA PAVLOVIC",
-            "position": "CB",
-            "value": 44,
-            "contract": "SEASON 7",
-            "salary": 2,
             "type": "prime"
           },
           {
             "name": "SAHAL ABDUL SAMAD",
-            "position": "LW",
             "value": 40,
             "contract": "SEASON 7",
-            "salary": 2,
             "type": "prime"
           },
           {
             "name": "CHEICK DOUCOURE",
-            "position": "DM",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5,
             "type": "standard"
           },
           {
             "name": "RUBEN LOFTUS-CHEEK",
-            "position": "CM",
             "value": 50,
             "contract": "SEASON 6.5",
-            "salary": 2.5,
             "type": "prime"
           },
           {
             "name": "TIJJANI REIJNDERS",
-            "position": "CM",
             "value": 54,
             "contract": "SEASON 6.5",
-            "salary": 2.7,
             "type": "prime"
           }
         ],
-        "totalPlayers": 16
+        "totalPlayers": 6
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4990,7 +4970,15 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1228
+      "clubTotalValue": 1288,
+      "overall": 82.1,
+      "total_players": 6,
+      "r2gCoinBalance": 1249,
+      "coins": 1249,
+      "r2gCoins": 1249,
+      "r2gTokenBalance": 115,
+      "tokens": 115,
+      "r2gTokens": 115
     },
     {
       "name": "NABEEL",
@@ -7873,5 +7861,6 @@
       ],
       "current_season": 6
     }
-  ]
+  ],
+  "_lastUpdated": "2025-05-06T08:31:19.819Z"
 }
