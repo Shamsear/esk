@@ -218,22 +218,14 @@
         
         <div class="section" data-tab="test">
             <div class="info-panel">
-                <p>Test your GitHub configuration to make sure it can access your repository and all necessary files.</p>
+                <p>Test your GitHub configuration to make sure it can access your repository and the players.json file.</p>
             </div>
             
             <div id="connection-status" class="status-message"></div>
             
             <div class="button-container">
                 <button id="test-connection-btn">Test Connection</button>
-            </div>
-            
-            <div id="admin-buttons" style="margin-top: 20px; display: none;">
-                <h3>Access Admin Panels:</h3>
-                <div class="button-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <button id="goto-player-admin-btn" class="secondary-button">Player Admin</button>
-                    <button id="goto-admin-stats-btn" class="secondary-button">Stats Admin</button>
-                    <button id="goto-transfer-admin-btn" class="secondary-button">Transfer Admin</button>
-                </div>
+                <button id="goto-admin-btn" class="secondary-button">Go to Admin Panel</button>
             </div>
         </div>
         
@@ -267,52 +259,12 @@
     <script defer src="github-config.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if github-config.js is loaded
-            if (typeof window.githubConfig === 'undefined') {
-                console.warn('github-config.js not loaded correctly, creating fallback implementation');
-                window.githubConfig = {
-                    isConfigured: function() {
-                        return !!localStorage.getItem('githubToken');
-                    },
-                    getToken: function() {
-                        return localStorage.getItem('githubToken');
-                    },
-                    getOwner: function() {
-                        return localStorage.getItem('githubOwner') || 'default-owner';
-                    },
-                    getRepo: function() {
-                        return localStorage.getItem('githubRepo') || 'default-repo';
-                    },
-                    getBranch: function() {
-                        return localStorage.getItem('githubBranch') || 'main';
-                    },
-                    filePath: 'players.json',
-                    managerFilePath: 'manager_data.json',
-                    saveConfig: function(config) {
-                        if (config.token) localStorage.setItem('githubToken', config.token);
-                        if (config.owner) localStorage.setItem('githubOwner', config.owner);
-                        if (config.repo) localStorage.setItem('githubRepo', config.repo);
-                        if (config.branch) localStorage.setItem('githubBranch', config.branch);
-                        if (config.filePath) localStorage.setItem('githubJsonPath', config.filePath);
-                        if (config.commitMessage) localStorage.setItem('githubCommitMessage', config.commitMessage);
-                    },
-                    clearConfig: function() {
-                        localStorage.removeItem('githubToken');
-                        localStorage.removeItem('githubOwner');
-                        localStorage.removeItem('githubRepo');
-                        localStorage.removeItem('githubBranch');
-                        localStorage.removeItem('githubJsonPath');
-                        localStorage.removeItem('githubCommitMessage');
-                    }
-                };
-            }
-
             // Load saved values
             document.getElementById('github-token').value = localStorage.getItem('githubToken') || '';
-            document.getElementById('github-username').value = localStorage.getItem('githubOwner') || window.githubConfig.getOwner();
-            document.getElementById('github-repo').value = localStorage.getItem('githubRepo') || window.githubConfig.getRepo();
-            document.getElementById('github-branch').value = localStorage.getItem('githubBranch') || window.githubConfig.getBranch();
-            document.getElementById('json-path').value = localStorage.getItem('githubJsonPath') || window.githubConfig.filePath;
+            document.getElementById('github-username').value = localStorage.getItem('githubOwner') || githubConfig.defaultOwner;
+            document.getElementById('github-repo').value = localStorage.getItem('githubRepo') || githubConfig.defaultRepo;
+            document.getElementById('github-branch').value = localStorage.getItem('githubBranch') || githubConfig.defaultBranch;
+            document.getElementById('json-path').value = localStorage.getItem('githubJsonPath') || githubConfig.filePath;
             document.getElementById('commit-message').value = localStorage.getItem('githubCommitMessage') || 'Update player data';
             
             // Tab functionality
@@ -342,21 +294,11 @@
                     return;
                 }
                 
-                // Save using githubConfig if available
-                if (window.githubConfig && typeof window.githubConfig.saveConfig === 'function') {
-                    window.githubConfig.saveConfig({
-                        token: token,
-                        owner: username,
-                        repo: repo,
-                        branch: branch
-                    });
-                } else {
-                    // Fallback to direct localStorage
-                    localStorage.setItem('githubToken', token);
-                    localStorage.setItem('githubOwner', username);
-                    localStorage.setItem('githubRepo', repo);
-                    localStorage.setItem('githubBranch', branch);
-                }
+                // Save to localStorage
+                localStorage.setItem('githubToken', token);
+                localStorage.setItem('githubOwner', username);
+                localStorage.setItem('githubRepo', repo);
+                localStorage.setItem('githubBranch', branch);
                 
                 showMessage('Configuration saved successfully!', true);
                 
@@ -374,17 +316,9 @@
                     return;
                 }
                 
-                // Save using githubConfig if available
-                if (window.githubConfig && typeof window.githubConfig.saveConfig === 'function') {
-                    window.githubConfig.saveConfig({
-                        filePath: jsonPath,
-                        commitMessage: commitMessage
-                    });
-                } else {
-                    // Fallback to direct localStorage
-                    localStorage.setItem('githubJsonPath', jsonPath);
-                    localStorage.setItem('githubCommitMessage', commitMessage);
-                }
+                // Save to localStorage
+                localStorage.setItem('githubJsonPath', jsonPath);
+                localStorage.setItem('githubCommitMessage', commitMessage);
                 
                 showMessage('Advanced settings saved successfully!', true);
             });
@@ -392,25 +326,19 @@
             // Clear all settings
             document.getElementById('clear-config-btn').addEventListener('click', function() {
                 if (confirm('Are you sure you want to clear all GitHub configuration settings?')) {
-                    // Clear using githubConfig if available
-                    if (window.githubConfig && typeof window.githubConfig.clearConfig === 'function') {
-                        window.githubConfig.clearConfig();
-                    } else {
-                        // Fallback to direct localStorage removal
-                        localStorage.removeItem('githubToken');
-                        localStorage.removeItem('githubOwner');
-                        localStorage.removeItem('githubRepo');
-                        localStorage.removeItem('githubBranch');
-                        localStorage.removeItem('githubJsonPath');
-                        localStorage.removeItem('githubCommitMessage');
-                    }
+                    localStorage.removeItem('githubToken');
+                    localStorage.removeItem('githubOwner');
+                    localStorage.removeItem('githubRepo');
+                    localStorage.removeItem('githubBranch');
+                    localStorage.removeItem('githubJsonPath');
+                    localStorage.removeItem('githubCommitMessage');
                     
                     // Reset form fields
                     document.getElementById('github-token').value = '';
-                    document.getElementById('github-username').value = window.githubConfig.getOwner();
-                    document.getElementById('github-repo').value = window.githubConfig.getRepo();
-                    document.getElementById('github-branch').value = window.githubConfig.getBranch();
-                    document.getElementById('json-path').value = window.githubConfig.filePath;
+                    document.getElementById('github-username').value = githubConfig.defaultOwner;
+                    document.getElementById('github-repo').value = githubConfig.defaultRepo;
+                    document.getElementById('github-branch').value = githubConfig.defaultBranch;
+                    document.getElementById('json-path').value = githubConfig.filePath;
                     document.getElementById('commit-message').value = 'Update player data';
                     
                     showMessage('All configuration settings have been cleared', true);
@@ -425,85 +353,49 @@
                 connectionStatus.className = 'status-message';
                 
                 try {
-                    if (!window.githubConfig.isConfigured()) {
+                    if (!githubConfig.isConfigured()) {
                         throw new Error('GitHub configuration is not complete. Please fill in all required fields in the Setup tab.');
                     }
                     
-                    const owner = window.githubConfig.getOwner();
-                    const repo = window.githubConfig.getRepo();
-                    const branch = window.githubConfig.getBranch();
-                    const filePath = localStorage.getItem('githubJsonPath') || window.githubConfig.filePath;
+                    // Make a request to the GitHub API to check if the token is valid
+                    const response = await fetch(`https://api.github.com/repos/${githubConfig.getOwner()}/${githubConfig.getRepo()}/contents/${localStorage.getItem('githubJsonPath') || githubConfig.filePath}?ref=${githubConfig.getBranch()}`, {
+                        headers: {
+                            'Authorization': `token ${githubConfig.getToken()}`
+                        }
+                    });
                     
-                    console.log('Testing connection with:', { owner, repo, branch, filePath });
-                    
-                    // Check if repository exists
-                    let repoResponse;
-                    try {
-                        repoResponse = await window.githubConfig.makeApiRequest(`/repos/${owner}/${repo}`);
-                        console.log('Repository response status:', repoResponse.status);
-                    } catch (err) {
-                        console.error('Error checking repository:', err);
-                        throw new Error(`Failed to connect to GitHub API: ${err.message}`);
+                    if (response.status === 401) {
+                        throw new Error('Authentication failed. Please check your GitHub token.');
                     }
                     
-                    if (repoResponse.status === 401) {
-                        throw new Error('Authentication failed. Please check your GitHub token. Make sure you\'re using a valid token with appropriate permissions.');
+                    if (response.status === 404) {
+                        throw new Error('Repository or file not found. Please check your repository details and file path.');
                     }
                     
-                    if (repoResponse.status === 404) {
-                        throw new Error(`Repository "${owner}/${repo}" not found. Please check your username and repository name.`);
-                    }
-                    
-                    if (!repoResponse.ok) {
-                        const errorData = await repoResponse.json();
+                    if (!response.ok) {
+                        const errorData = await response.json();
                         throw new Error(`GitHub API error: ${errorData.message}`);
                     }
                     
-                    // Now check if the file exists in the repository
-                    try {
-                        const fileResponse = await window.githubConfig.makeApiRequest(`/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`);
-                        console.log('File response status:', fileResponse.status);
-                        
-                        if (fileResponse.status === 404) {
-                            // File doesn't exist, but that's okay - we'll create it later
-                            console.log(`File "${filePath}" not found in repository, but this is not an error.`);
-                        } else if (!fileResponse.ok) {
-                            const errorData = await fileResponse.json();
-                            console.warn(`Warning for file check: ${errorData.message}`);
-                        }
-                    } catch (err) {
-                        console.warn('Non-critical error checking file:', err);
-                        // Continue despite file check error - we'll create the file if needed
-                    }
-                    
                     // If we got here, the connection is successful
-                    connectionStatus.textContent = 'Connection successful! You can now use the admin panels.';
-                    connectionStatus.className = 'status-message status-success';
+                    connectionStatus.textContent = 'Connection successful! You can now use the admin panel.';
+                    connectionStatus.classList.add('status-success');
                     
-                    // Show the Go to Admin Panel buttons
-                    document.getElementById('admin-buttons').style.display = 'block';
+                    // Show the "Go to Admin Panel" button
+                    document.getElementById('goto-admin-btn').style.display = 'block';
                     
                 } catch (error) {
-                    console.error('Connection test error:', error);
                     connectionStatus.textContent = error.message;
-                    connectionStatus.className = 'status-message status-error';
+                    connectionStatus.classList.add('status-error');
                     
-                    // Hide the Go to Admin Panel buttons
-                    document.getElementById('admin-buttons').style.display = 'none';
+                    // Hide the "Go to Admin Panel" button
+                    document.getElementById('goto-admin-btn').style.display = 'none';
                 }
             });
             
-            // Admin panel navigation buttons
-            document.getElementById('goto-player-admin-btn').addEventListener('click', function() {
+            // Go to admin panel
+            document.getElementById('goto-admin-btn').addEventListener('click', function() {
                 window.location.href = 'player-admin.html';
-            });
-            
-            document.getElementById('goto-admin-stats-btn').addEventListener('click', function() {
-                window.location.href = 'admin-stats.html';
-            });
-            
-            document.getElementById('goto-transfer-admin-btn').addEventListener('click', function() {
-                window.location.href = 'transfer-admin.html';
             });
             
             // Show message

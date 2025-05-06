@@ -615,6 +615,123 @@
             border: 1px solid #444;
             border-radius: 4px;
         }
+        
+        /* Add styles for pending changes indicator and batch save button */
+        .batch-save-container {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: rgba(255, 193, 7, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 193, 7, 0.4);
+        }
+        
+        .batch-save-info {
+            flex: 1;
+            color: #ffb700;
+        }
+        
+        .batch-save-btn {
+            background-color: #ffb700;
+            color: #333;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .batch-save-btn:hover {
+            background-color: #ffa000;
+        }
+        
+        .pending-changes-counter {
+            display: inline-block;
+            background-color: #ff5722;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        .local-updates-container {
+            margin-top: 20px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .update-entry {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .update-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .update-timestamp {
+            color: #aaa;
+            font-size: 0.8em;
+        }
+        
+        .update-player {
+            font-weight: bold;
+            color: #bada55;
+        }
+        
+        .update-type {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .update-type.add {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .update-type.edit {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .update-type.delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .update-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .update-btn {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .update-btn.undo {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .update-btn.details {
+            background-color: #7f8c8d;
+            color: white;
+        }
     </style>
 
     <!-- Performance optimized CSS -->
@@ -632,6 +749,27 @@
             <a href="token-setup.html" class="setup-link" title="Configure GitHub Token">
                 <i class="fas fa-cog"></i> Token Setup
             </a>
+        </div>
+    </div>
+    
+    <!-- Add after the other buttons in the navigation area, before the container div -->
+    <div class="batch-save-container" id="batch-save-container" style="display: none;">
+        <div class="batch-save-info">
+            <i class="fas fa-exclamation-triangle"></i> 
+            <span id="pending-changes-text">You have pending changes saved to localStorage.</span>
+            <span class="pending-changes-counter" id="pending-changes-count">0</span>
+        </div>
+        <button class="batch-save-btn" id="push-to-github-btn">
+            <i class="fab fa-github"></i> Push All to GitHub
+        </button>
+    </div>
+    
+    <div class="local-updates-container" id="local-updates-container" style="display: none;">
+        <div class="update-entry-header" style="padding: 10px; background-color: #333; font-weight: bold; border-bottom: 1px solid #444;">
+            Recent Local Changes
+        </div>
+        <div id="update-entries">
+            <!-- Update entries will be added here dynamically -->
         </div>
     </div>
     
@@ -769,53 +907,53 @@
         let githubConfig = null;
         
         // Initialize GitHub configuration
-        function initGitHubConfig() {
+        async function initGitHubConfig() {
             try {
+                // First try to get config from global object
                 if (typeof window.githubConfig !== 'undefined') {
                     githubConfig = window.githubConfig;
                     console.log('GitHub config loaded from global object');
-                    return githubConfig.isConfigured();
+                    return true;
                 }
                     
-                // If not available, try to load it
-                console.log('GitHubConfig not found in window, trying to load dynamically');
-                const script = document.createElement('script');
-                script.src = 'github-config.js';
-                script.onload = () => {
-                    if (window.githubConfig) {
-                        githubConfig = window.githubConfig;
-                        console.log('GitHub config loaded dynamically');
-                    } else {
-                        createFallbackConfig();
-                    }
+                // Fallback implementation if github-config.js is not available
+                githubConfig = {
+                    isConfigured: function() {
+                        return !!localStorage.getItem('githubToken');
+                    },
+                    getToken: function() {
+                        return localStorage.getItem('githubToken');
+                    },
+                    getOwner: function() {
+                        return localStorage.getItem('githubOwner') || 'default-owner';
+                    },
+                    getRepo: function() {
+                        return localStorage.getItem('githubRepo') || 'default-repo';
+                    },
+                    getBranch: function() {
+                        return localStorage.getItem('githubBranch') || 'main';
+                    },
+                    filePath: 'players.json',
+                    managerFilePath: 'manager_data.json'
                 };
-                script.onerror = () => {
-                    console.error('Failed to load github-config.js');
-                    createFallbackConfig();
-                };
-                document.head.appendChild(script);
-                
-                // Create fallback while waiting for script to potentially load
-                createFallbackConfig();
+                    
                 return githubConfig.isConfigured();
             } catch (error) {
                 console.error('Error initializing GitHub config:', error);
-                createFallbackConfig();
-                return githubConfig.isConfigured();
+                    
+                // Create minimal emergency fallback
+                githubConfig = {
+                    isConfigured: () => false,
+                    getToken: () => null,
+                    getOwner: () => 'default-owner',
+                    getRepo: () => 'default-repo', 
+                    getBranch: () => 'main',
+                    filePath: 'players.json',
+                    managerFilePath: 'manager_data.json'
+                };
+                    
+                return false;
             }
-        }
-        
-        function createFallbackConfig() {
-            console.log('Creating fallback GitHub config');
-            githubConfig = {
-                isConfigured: () => !!localStorage.getItem('githubToken'),
-                getToken: () => localStorage.getItem('githubToken'),
-                getOwner: () => localStorage.getItem('githubOwner') || 'default-owner',
-                getRepo: () => localStorage.getItem('githubRepo') || 'default-repo', 
-                getBranch: () => localStorage.getItem('githubBranch') || 'main',
-                filePath: 'players.json',
-                managerFilePath: 'manager_data.json'
-            };
         }
         
         // Authentication check
@@ -1592,15 +1730,8 @@
                     try {
                         // Initialize GitHub config if needed
                         if (!githubConfig) {
-                            console.log('githubConfig is null, initializing...');
                             initGitHubConfig();
                         }
-                        
-                        if (!githubConfig) {
-                            console.error('Failed to initialize githubConfig');
-                            throw new Error('GitHub configuration could not be initialized');
-                        }
-                        
                         await saveToGitHub();
                         savedPermanently = true;
                         managerDataSaved = true;
@@ -2370,59 +2501,31 @@
         // Save to GitHub
         async function saveToGitHub() {
             try {
+                // Initialize GitHub config if not already done
+                if (!githubConfig) {
+                    initGitHubConfig();
+                }
+                
                 // Check if GitHub integration is configured
-                if (!githubConfig || !githubConfig.isConfigured()) {
+                if (!githubConfig.isConfigured()) {
                     throw new Error('GitHub integration is not configured');
                 }
                 
                 // Show saving message
                 showStatusMessage('Saving to GitHub...', true);
                 
-                // Check if we have the saveFileToGitHub method available
-                if (githubConfig.saveFileToGitHub) {
-                    console.log('Using standardized saveFileToGitHub method');
-                    
-                    // Use the standardized method to save players data
-                    const result = await githubConfig.saveFileToGitHub(
-                        playersData,
-                        githubConfig.filePath || 'players.json',
-                        localStorage.getItem('githubCommitMessage') || 'Update player data'
-                    );
-                    
-                    // If manager data exists, save it too
-                    if (managerData) {
-                        try {
-                            await githubConfig.saveFileToGitHub(
-                                managerData,
-                                githubConfig.managerFilePath || 'manager_data.json',
-                                'Update manager data'
-                            );
-                        } catch (managerError) {
-                            console.error('Error saving manager data to GitHub:', managerError);
-                            showStatusMessage('Player data saved, but manager data could not be saved.', false);
-                            return true; // Return true since we at least saved player data
-                        }
-                    }
-                    
-                    showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
-                    return true;
-                }
-                
-                // Legacy implementation (fallback)
-                console.log('Using legacy implementation for saveToGitHub');
-                
                 // Get repository details
                 const repoDetails = {
                     owner: githubConfig.getOwner(),
                     repo: githubConfig.getRepo(),
-                    path: githubConfig.filePath || 'players.json',
+                    path: localStorage.getItem('githubJsonPath') || githubConfig.filePath,
                     branch: githubConfig.getBranch()
                 };
                 
                 // Get the current players file to get its SHA (required for the GitHub API)
                 const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
                     headers: {
-                        'Authorization': `Bearer ${githubConfig.getToken()}`
+                        'Authorization': `token ${githubConfig.getToken()}`
                     }
                 });
                 
@@ -2464,7 +2567,7 @@
                 const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `Bearer ${githubConfig.getToken()}`,
+                        'Authorization': `token ${githubConfig.getToken()}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(requestBody)
@@ -2478,111 +2581,94 @@
                 // If manager data exists, save it too
                 if (managerData) {
                     try {
-                        await saveManagerDataToGitHub(managerData);
+                        console.log('Attempting to save manager data to GitHub...');
+                        
+                        // Make sure managerData has a valid format before saving
+                        if (!managerData.managers || !Array.isArray(managerData.managers)) {
+                            console.error('Invalid manager data format:', managerData);
+                            throw new Error('Invalid manager data format');
+                        }
+                        
+                        // Get manager data file path - make sure to use a consistent path
+                        const managerPath = githubConfig.managerFilePath || 'manager_data.json';
+                        
+                        // Get the current manager file to get its SHA
+                        const managerInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}?ref=${repoDetails.branch}`, {
+                            headers: {
+                                'Authorization': `token ${githubConfig.getToken()}`
+                            }
+                        });
+                        
+                        let managerSHA = '';
+                        let managerExists = true;
+                        
+                        if (managerInfoResponse.status === 404) {
+                            // File doesn't exist yet
+                            managerExists = false;
+                            console.log('Manager file does not exist yet - will create it');
+                        } else if (!managerInfoResponse.ok) {
+                            const errorInfo = await managerInfoResponse.text();
+                            console.error('Error getting manager file info:', errorInfo);
+                            throw new Error(`Failed to get manager file info: ${errorInfo}`);
+                        } else {
+                            // File exists, get its SHA
+                            const fileInfo = await managerInfoResponse.json();
+                            managerSHA = fileInfo.sha;
+                            console.log('Found existing manager file with SHA:', managerSHA);
+                        }
+                        
+                        // Prepare the manager data content
+                        const managerJsonString = JSON.stringify(managerData, null, 2);
+                        console.log('Manager data size:', managerJsonString.length, 'bytes');
+                        
+                        const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
+                        
+                        // Prepare the manager request body
+                        const managerRequestBody = {
+                            message: `Update manager data - ${new Date().toISOString()}`,
+                            content: managerContent,
+                            branch: repoDetails.branch
+                        };
+                        
+                        // Add SHA if the file exists
+                        if (managerExists) {
+                            managerRequestBody.sha = managerSHA;
+                        }
+                        
+                        console.log('Sending manager data to GitHub...');
+                        
+                        // Commit the updated manager file
+                        const managerCommitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `token ${githubConfig.getToken()}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(managerRequestBody)
+                        });
+                        
+                        if (!managerCommitResponse.ok) {
+                            const errorText = await managerCommitResponse.text();
+                            console.error('Failed to save manager data to GitHub:', errorText);
+                            throw new Error(`Failed to save manager data: ${errorText}`);
+                        } else {
+                            console.log('Manager data saved to GitHub successfully');
+                        }
                     } catch (managerError) {
                         console.error('Error saving manager data to GitHub:', managerError);
-                        showStatusMessage('Player data saved, but manager data could not be saved.', false);
-                        return true; // Return true since we at least saved player data
+                        throw managerError; // Re-throw to be handled by the caller
                     }
+                } else {
+                    console.log('No manager data to save');
                 }
                 
                 showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
-                return true;
                 
             } catch (error) {
                 showStatusMessage(`GitHub Error: ${error.message}`, false);
                 console.error('GitHub save error:', error);
                 throw error; // Re-throw to be handled by the caller
             }
-        }
-        
-        // Helper function to save manager data to GitHub
-        async function saveManagerDataToGitHub(managerData) {
-            if (!managerData) {
-                console.log('No manager data to save');
-                return false;
-            }
-            
-            console.log('Saving manager data to GitHub...');
-            
-            // Make sure managerData has a valid format before saving
-            if (!managerData.managers || !Array.isArray(managerData.managers)) {
-                console.error('Invalid manager data format:', managerData);
-                throw new Error('Invalid manager data format');
-            }
-            
-            // Get manager data file path - make sure to use a consistent path
-            const managerPath = githubConfig.managerFilePath || 'manager_data.json';
-            
-            // Get the current manager file to get its SHA
-            const fileInfoUrl = `https://api.github.com/repos/${githubConfig.getOwner()}/${githubConfig.getRepo()}/contents/${managerPath}?ref=${githubConfig.getBranch()}`;
-            const fileInfoResponse = await fetch(fileInfoUrl, {
-                headers: {
-                    'Authorization': `Bearer ${githubConfig.getToken()}`,
-                    'Accept': 'application/vnd.github+json',
-                    'X-GitHub-Api-Version': '2022-11-28'
-                }
-            });
-            
-            let sha = '';
-            let fileExists = true;
-            
-            if (fileInfoResponse.status === 404) {
-                // File doesn't exist yet
-                fileExists = false;
-                console.log('Manager file does not exist on GitHub yet, will create it');
-            } else if (!fileInfoResponse.ok) {
-                const errorInfo = await fileInfoResponse.text();
-                console.error('Error getting manager file info:', errorInfo);
-                throw new Error(`Failed to get manager file info: ${errorInfo}`);
-            } else {
-                // File exists, get its SHA
-                const fileInfo = await fileInfoResponse.json();
-                sha = fileInfo.sha;
-                console.log('Found existing manager file with SHA:', sha);
-            }
-            
-            // Prepare the manager data content
-            const managerJsonString = JSON.stringify(managerData, null, 2);
-            console.log('Manager data size:', managerJsonString.length, 'bytes');
-            
-            const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
-            
-            // Prepare the manager request body
-            const requestBody = {
-                message: `Update manager data - ${new Date().toISOString()}`,
-                content: managerContent,
-                branch: githubConfig.getBranch()
-            };
-            
-            // Add SHA if the file exists
-            if (fileExists) {
-                requestBody.sha = sha;
-            }
-            
-            console.log('Sending manager data to GitHub...');
-            
-            // Commit the updated manager file
-            const commitUrl = `https://api.github.com/repos/${githubConfig.getOwner()}/${githubConfig.getRepo()}/contents/${managerPath}`;
-            const commitResponse = await fetch(commitUrl, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${githubConfig.getToken()}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/vnd.github+json',
-                    'X-GitHub-Api-Version': '2022-11-28'
-                },
-                body: JSON.stringify(requestBody)
-            });
-            
-            if (!commitResponse.ok) {
-                const errorText = await commitResponse.text();
-                console.error('Failed to save manager data to GitHub:', errorText);
-                throw new Error(`Failed to save manager data: ${errorText}`);
-            }
-            
-            console.log('Manager data saved to GitHub successfully');
-            return true;
         }
 
         // Initialize application
@@ -2966,6 +3052,695 @@
                 showStatusMessage(`Error: ${error.message}`, false);
                 console.error('Error initializing admin panel:', error);
                 return Promise.resolve(); // Still resolve to continue
+            }
+        }
+
+        // Add LocalStorage change tracking system
+        let pendingChanges = [];
+        
+        // Load pending changes from localStorage on init
+        function loadPendingChanges() {
+            const savedChanges = localStorage.getItem('pendingPlayerChanges');
+            if (savedChanges) {
+                try {
+                    // If changes were recently pushed successfully, clear them
+                    if (verifyGitHubPush()) {
+                        localStorage.removeItem('pendingPlayerChanges');
+                        pendingChanges = [];
+                    } else {
+                        pendingChanges = JSON.parse(savedChanges);
+                    }
+                    updatePendingChangesUI();
+                } catch (error) {
+                    console.error('Error loading pending changes:', error);
+                    pendingChanges = [];
+                }
+            }
+        }
+        
+        // Save pending changes to localStorage
+        function savePendingChanges() {
+            localStorage.setItem('pendingPlayerChanges', JSON.stringify(pendingChanges));
+            updatePendingChangesUI();
+        }
+        
+        // Update the UI to reflect pending changes
+        function updatePendingChangesUI() {
+            const container = document.getElementById('batch-save-container');
+            const updatesContainer = document.getElementById('local-updates-container');
+            const countElement = document.getElementById('pending-changes-count');
+            const count = pendingChanges.length;
+            
+            if (count > 0) {
+                container.style.display = 'flex';
+                updatesContainer.style.display = 'block';
+                countElement.textContent = count;
+                document.getElementById('pending-changes-text').textContent = 
+                    `You have ${count} pending change${count !== 1 ? 's' : ''} saved to localStorage.`;
+                
+                // Update the entries display
+                updateEntriesDisplay();
+            } else {
+                container.style.display = 'none';
+                updatesContainer.style.display = 'none';
+            }
+        }
+        
+        // Update the entries display
+        function updateEntriesDisplay() {
+            const entriesContainer = document.getElementById('update-entries');
+            entriesContainer.innerHTML = '';
+            
+            pendingChanges.forEach((change, index) => {
+                const entry = document.createElement('div');
+                entry.className = 'update-entry';
+                
+                const timestamp = new Date(change.timestamp).toLocaleString();
+                const playerName = change.playerData ? change.playerData.name : 'Unknown player';
+                
+                entry.innerHTML = `
+                    <div>
+                        <span class="update-timestamp">${timestamp}</span>
+                        <span class="update-player">${playerName}</span>
+                        <span class="update-type ${change.type}">${change.type.toUpperCase()}</span>
+                    </div>
+                    <div class="update-controls">
+                        <button class="update-btn undo" data-index="${index}">Undo</button>
+                        <button class="update-btn details" data-index="${index}">Details</button>
+                    </div>
+                `;
+                
+                entriesContainer.appendChild(entry);
+            });
+            
+            // Add event listeners to undo and details buttons
+            document.querySelectorAll('.update-btn.undo').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    undoChange(index);
+                });
+            });
+            
+            document.querySelectorAll('.update-btn.details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    showChangeDetails(index);
+                });
+            });
+        }
+        
+        // Add a change to the pending changes list
+        function addPendingChange(type, playerData, previousData = null) {
+            pendingChanges.push({
+                type, // 'add', 'edit', or 'delete'
+                playerData,
+                previousData,
+                timestamp: new Date().toISOString()
+            });
+            
+            savePendingChanges();
+        }
+        
+        // Undo a specific change
+        function undoChange(index) {
+            if (index < 0 || index >= pendingChanges.length) return;
+            
+            const change = pendingChanges[index];
+            
+            // Only confirm for changes that permanently affect data
+            if (confirm(`Are you sure you want to undo this ${change.type} operation for ${change.playerData.name}?`)) {
+                try {
+                    switch (change.type) {
+                        case 'add':
+                            // Remove the added player
+                            const addedPlayerIndex = playersData.findIndex(p => p.id === change.playerData.id);
+                            if (addedPlayerIndex !== -1) {
+                                playersData.splice(addedPlayerIndex, 1);
+                            }
+                            break;
+                            
+                        case 'edit':
+                            // Restore previous data
+                            if (change.previousData) {
+                                const editedPlayerIndex = playersData.findIndex(p => p.id === change.playerData.id);
+                                if (editedPlayerIndex !== -1) {
+                                    playersData[editedPlayerIndex] = change.previousData;
+                                }
+                            }
+                            break;
+                            
+                        case 'delete':
+                            // Restore deleted player
+                            if (change.previousData) {
+                                playersData.push(change.previousData);
+                            }
+                            break;
+                    }
+                    
+                    // Remove this change from pending changes
+                    pendingChanges.splice(index, 1);
+                    savePendingChanges();
+                    
+                    // Update UI
+                    populatePlayersList(document.getElementById('player-search').value);
+                    
+                    // Show success message
+                    showStatusMessage(`Undo successful for ${change.type} operation.`, true);
+                } catch (error) {
+                    console.error('Error undoing change:', error);
+                    showStatusMessage(`Error undoing change: ${error.message}`, false);
+                }
+            }
+        }
+        
+        // Show details for a specific change
+        function showChangeDetails(index) {
+            if (index < 0 || index >= pendingChanges.length) return;
+            
+            const change = pendingChanges[index];
+            
+            // Create a modal or dialog to display the details
+            const detailsContainer = document.createElement('div');
+            detailsContainer.style.position = 'fixed';
+            detailsContainer.style.top = '50%';
+            detailsContainer.style.left = '50%';
+            detailsContainer.style.transform = 'translate(-50%, -50%)';
+            detailsContainer.style.backgroundColor = '#282828';
+            detailsContainer.style.borderRadius = '8px';
+            detailsContainer.style.padding = '20px';
+            detailsContainer.style.maxWidth = '90%';
+            detailsContainer.style.maxHeight = '90%';
+            detailsContainer.style.overflow = 'auto';
+            detailsContainer.style.zIndex = '1000';
+            detailsContainer.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+            
+            const header = document.createElement('h3');
+            header.textContent = `Change Details: ${change.type.toUpperCase()} - ${change.playerData.name}`;
+            header.style.borderBottom = '1px solid #444';
+            header.style.paddingBottom = '10px';
+            header.style.marginBottom = '15px';
+            
+            const timestamp = document.createElement('p');
+            timestamp.textContent = `Timestamp: ${new Date(change.timestamp).toLocaleString()}`;
+            timestamp.style.color = '#aaa';
+            timestamp.style.fontSize = '0.9em';
+            
+            const dataContainer = document.createElement('div');
+            dataContainer.style.display = 'grid';
+            dataContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            dataContainer.style.gap = '20px';
+            dataContainer.style.marginTop = '15px';
+            
+            // Helper function to create a field row
+            function createFieldRow(label, currentValue, previousValue) {
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.marginBottom = '8px';
+                row.style.padding = '8px';
+                row.style.backgroundColor = currentValue !== previousValue ? 'rgba(255, 193, 7, 0.1)' : 'transparent';
+                row.style.borderRadius = '4px';
+                
+                const labelElement = document.createElement('div');
+                labelElement.style.flex = '1';
+                labelElement.style.fontWeight = 'bold';
+                labelElement.style.color = '#aaa';
+                labelElement.textContent = label;
+                
+                const valueElement = document.createElement('div');
+                valueElement.style.flex = '2';
+                valueElement.style.color = currentValue !== previousValue ? '#ffb700' : 'white';
+                valueElement.textContent = currentValue || 'Not set';
+                
+                row.appendChild(labelElement);
+                row.appendChild(valueElement);
+                return row;
+            }
+            
+            // Create sections for current and previous data
+            const currentSection = document.createElement('div');
+            currentSection.innerHTML = '<h4 style="margin-bottom: 15px; color: #4caf50;">Current Data</h4>';
+            
+            const previousSection = document.createElement('div');
+            previousSection.innerHTML = '<h4 style="margin-bottom: 15px; color: #ff9800;">Previous Data</h4>';
+            
+            // Define fields to display and their labels
+            const fields = [
+                { key: 'name', label: 'Player Name' },
+                { key: 'position', label: 'Position' },
+                { key: 'club', label: 'Club' },
+                { key: 'value', label: 'Value' },
+                { key: 'star', label: 'Star Rating' },
+                { key: 'level', label: 'Level' }
+            ];
+            
+            // Add fields to both sections
+            fields.forEach(field => {
+                const currentValue = change.playerData[field.key];
+                const previousValue = change.previousData ? change.previousData[field.key] : null;
+                
+                currentSection.appendChild(createFieldRow(field.label, currentValue, previousValue));
+                if (change.previousData) {
+                    previousSection.appendChild(createFieldRow(field.label, previousValue, previousValue));
+                }
+            });
+            
+            // Add stats section if available
+            if (change.playerData.stats && change.playerData.stats.length > 0) {
+                const statsHeader = document.createElement('h4');
+                statsHeader.textContent = 'Player Stats';
+                statsHeader.style.marginTop = '20px';
+                statsHeader.style.marginBottom = '10px';
+                statsHeader.style.gridColumn = '1 / -1';
+                
+                const statsTable = document.createElement('table');
+                statsTable.style.width = '100%';
+                statsTable.style.borderCollapse = 'collapse';
+                statsTable.style.marginTop = '10px';
+                statsTable.style.gridColumn = '1 / -1';
+                
+                // Create table header
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #444;">Season</th>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #444;">Team</th>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #444;">Value</th>
+                    </tr>
+                `;
+                statsTable.appendChild(thead);
+                
+                // Create table body
+                const tbody = document.createElement('tbody');
+                change.playerData.stats.forEach(stat => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="padding: 8px; border-bottom: 1px solid #333;">${stat.season || ''}</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #333;">${stat.team || ''}</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #333;">${stat.value || ''}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                statsTable.appendChild(tbody);
+                
+                dataContainer.appendChild(statsHeader);
+                dataContainer.appendChild(statsTable);
+            }
+            
+            // Add sections to data container
+            if (change.previousData) {
+                dataContainer.appendChild(previousSection);
+            }
+            dataContainer.appendChild(currentSection);
+            
+            // Add change type indicator
+            const changeTypeIndicator = document.createElement('div');
+            changeTypeIndicator.style.marginTop = '20px';
+            changeTypeIndicator.style.padding = '10px';
+            changeTypeIndicator.style.borderRadius = '4px';
+            changeTypeIndicator.style.textAlign = 'center';
+            changeTypeIndicator.style.fontWeight = 'bold';
+            
+            switch (change.type) {
+                case 'add':
+                    changeTypeIndicator.style.backgroundColor = 'rgba(46, 204, 113, 0.2)';
+                    changeTypeIndicator.style.color = '#2ecc71';
+                    changeTypeIndicator.textContent = 'New Player Added';
+                    break;
+                case 'edit':
+                    changeTypeIndicator.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
+                    changeTypeIndicator.style.color = '#3498db';
+                    changeTypeIndicator.textContent = 'Player Details Updated';
+                    break;
+                case 'delete':
+                    changeTypeIndicator.style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
+                    changeTypeIndicator.style.color = '#e74c3c';
+                    changeTypeIndicator.textContent = 'Player Deleted';
+                    break;
+            }
+            
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.style.marginTop = '20px';
+            closeButton.style.padding = '8px 15px';
+            closeButton.style.backgroundColor = '#4caf50';
+            closeButton.style.color = 'white';
+            closeButton.style.border = 'none';
+            closeButton.style.borderRadius = '4px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.onclick = function() {
+                document.body.removeChild(detailsContainer);
+                document.body.removeChild(overlay);
+            };
+            
+            // Add overlay
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            overlay.style.zIndex = '999';
+            overlay.onclick = function() {
+                document.body.removeChild(detailsContainer);
+                document.body.removeChild(overlay);
+            };
+            
+            // Assemble and add to document
+            detailsContainer.appendChild(header);
+            detailsContainer.appendChild(timestamp);
+            detailsContainer.appendChild(changeTypeIndicator);
+            detailsContainer.appendChild(dataContainer);
+            detailsContainer.appendChild(closeButton);
+            
+            document.body.appendChild(overlay);
+            document.body.appendChild(detailsContainer);
+        }
+        
+        // Push all pending changes to GitHub
+        async function pushAllChangesToGitHub() {
+            if (pendingChanges.length === 0) {
+                showStatusMessage('No pending changes to push', false);
+                return;
+            }
+            
+            // Show loading
+            const pushButton = document.getElementById('push-to-github-btn');
+            const originalText = pushButton.innerHTML;
+            pushButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Pushing...';
+            pushButton.disabled = true;
+            
+            try {
+                // Initialize GitHub config if needed
+                if (!githubConfig) {
+                    initGitHubConfig();
+                }
+                
+                if (!githubConfig.isConfigured()) {
+                    throw new Error('GitHub is not configured. Please set up your GitHub token first.');
+                }
+                
+                // Save to GitHub directly
+                const success = await saveToGitHub();
+                
+                if (success) {
+                    // Clear pending changes from localStorage
+                    localStorage.removeItem('pendingPlayerChanges');
+                    
+                    // Clear the pending changes array
+                    pendingChanges = [];
+                    
+                    // Update UI to hide pending changes elements
+                    const batchSaveContainer = document.getElementById('batch-save-container');
+                    const localUpdatesContainer = document.getElementById('local-updates-container');
+                    if (batchSaveContainer) batchSaveContainer.style.display = 'none';
+                    if (localUpdatesContainer) localUpdatesContainer.style.display = 'none';
+                    
+                    // Show success message
+                    showStatusMessage('All changes successfully pushed to GitHub! The site will update in a few minutes.', true);
+                    
+                    // Store the last successful push timestamp
+                    localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
+                } else {
+                    throw new Error('Failed to push changes to GitHub');
+                }
+            } catch (error) {
+                console.error('Error pushing changes to GitHub:', error);
+                showStatusMessage(`Error pushing to GitHub: ${error.message}`, false);
+            } finally {
+                // Restore button
+                pushButton.innerHTML = originalText;
+                pushButton.disabled = false;
+            }
+        }
+
+        // Add a function to check if changes were actually pushed
+        function verifyGitHubPush() {
+            const lastPushTimestamp = localStorage.getItem('lastGitHubPushTimestamp');
+            if (lastPushTimestamp) {
+                const lastPush = new Date(lastPushTimestamp);
+                const now = new Date();
+                const timeDiff = now - lastPush;
+                
+                // If last push was less than 5 minutes ago, consider changes as pushed
+                if (timeDiff < 300000) { // 5 minutes in milliseconds
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Modify loadPendingChanges to check for recent pushes
+        function loadPendingChanges() {
+            const savedChanges = localStorage.getItem('pendingPlayerChanges');
+            if (savedChanges) {
+                try {
+                    // If changes were recently pushed successfully, clear them
+                    if (verifyGitHubPush()) {
+                        localStorage.removeItem('pendingPlayerChanges');
+                        pendingChanges = [];
+                    } else {
+                        pendingChanges = JSON.parse(savedChanges);
+                    }
+                    updatePendingChangesUI();
+                } catch (error) {
+                    console.error('Error loading pending changes:', error);
+                    pendingChanges = [];
+                }
+            }
+        }
+
+        // Add a function to check GitHub status periodically
+        function startGitHubStatusCheck() {
+            // Check every minute
+            setInterval(() => {
+                if (pendingChanges.length > 0 && verifyGitHubPush()) {
+                    // Clear pending changes if they were pushed
+                    localStorage.removeItem('pendingPlayerChanges');
+                    pendingChanges = [];
+                    updatePendingChangesUI();
+                }
+            }, 60000); // Check every minute
+        }
+
+        // Update the document ready handler to start the status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing code ...
+            
+            // Load pending changes
+            loadPendingChanges();
+            
+            // Start GitHub status check
+            startGitHubStatusCheck();
+            
+            // Add push to GitHub button event listener
+            document.getElementById('push-to-github-btn').addEventListener('click', pushAllChangesToGitHub);
+            
+            // ... existing code ...
+        });
+        
+        // Modify savePlayerChanges function to store changes in localStorage first
+        async function savePlayerChanges() {
+            // First give immediate UI feedback that save was clicked
+            const saveBtn = document.getElementById('save-btn');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+            
+            try {
+                // Validate required fields
+                const playerName = document.getElementById('player-name').value.trim();
+                const playerValue = parseInt(document.getElementById('player-value').value);
+                
+                if (!playerName) {
+                    throw new Error('Player name is required');
+                }
+                
+                if (isNaN(playerValue) || playerValue < 1) {
+                    throw new Error('Player value must be a positive number');
+                }
+                
+                // Store previous data for undo if editing existing player
+                const previousData = !isNewPlayer ? {...currentPlayer} : null;
+                
+                // Update current player object with form values immediately
+                const updatedPlayer = {
+                    ...currentPlayer,
+                    name: playerName,
+                    star: document.getElementById('player-star').value,
+                    level: document.getElementById('player-level').value,
+                    club: document.getElementById('player-club').value,
+                    position: document.getElementById('player-position').value,
+                    value: playerValue,
+                    imagePath: document.getElementById('player-image-path').value
+                };
+                
+                // Get stats with the correct structure
+                const statsElements = document.querySelectorAll('.stat-item');
+                updatedPlayer.stats = Array.from(statsElements).map(statElement => {
+                    const season = statElement.querySelector('[data-stat-season]').value;
+                    const team = statElement.querySelector('[data-stat-team]').value;
+                    const value = statElement.querySelector('[data-stat-value]').value;
+                    
+                    return { 
+                        season,
+                        team,
+                        value
+                    };
+                });
+                
+                // Update club logo using ClubManager
+                const clubData = window.ClubManager.getClub(updatedPlayer.club);
+                if (clubData) {
+                    updatedPlayer.clubLogo = clubData.logo;
+                }
+                
+                // Determine the change type
+                const changeType = isNewPlayer ? 'add' : 'edit';
+                
+                // Update in memory immediately - don't wait for server
+                if (isNewPlayer) {
+                    // Find the highest existing ID and increment by 1
+                    const maxId = Math.max(...playersData.map(p => p.id), 0);
+                    updatedPlayer.id = maxId + 1;
+                    playersData.push(updatedPlayer);
+                    
+                    // Add to filtered players if applicable
+                    const searchTerm = document.getElementById('player-search').value.toLowerCase();
+                    if (!searchTerm || updatedPlayer.name.toLowerCase().includes(searchTerm)) {
+                        // Add to filtered players and re-sort
+                        filteredPlayers.push(updatedPlayer);
+                        
+                        // Navigate to the page with the new player
+                        currentPage = Math.ceil(filteredPlayers.length / playersPerPage);
+                    }
+                } else {
+                    // Update existing player
+                    const playerIndex = playersData.findIndex(p => Number(p.id) === Number(currentPlayer.id));
+                    if (playerIndex !== -1) {
+                        playersData[playerIndex] = updatedPlayer;
+                        
+                        // Update in filtered players if present
+                        const filteredIndex = filteredPlayers.findIndex(p => Number(p.id) === Number(currentPlayer.id));
+                        if (filteredIndex !== -1) {
+                            filteredPlayers[filteredIndex] = updatedPlayer;
+                        }
+                    } else {
+                        throw new Error('Player not found in the database');
+                    }
+                }
+                
+                // Add this change to pending changes
+                addPendingChange(changeType, updatedPlayer, previousData);
+                
+                // Update current player reference and reset state
+                currentPlayer = updatedPlayer;
+                isNewPlayer = false;
+                
+                // Update players list to show changes immediately
+                populatePlayersList(document.getElementById('player-search').value);
+                
+                // Reselect the current player in the list
+                selectPlayer(currentPlayer.id);
+                
+                // Sync changes to manager data
+                if (managerData) {
+                    syncPlayerToManagerData(updatedPlayer);
+                    console.log('Player data synced to manager data:', managerData);
+                } else {
+                    console.warn('Manager data not available. Cannot sync player data.');
+                }
+                
+                // Show immediate success message
+                showStatusMessage('Player saved to local storage. Use "Push All to GitHub" to save permanently.', true);
+                
+            } catch (error) {
+                showStatusMessage(error.message, false);
+                console.error('Error saving player changes:', error);
+            } finally {
+                // Always restore button state
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }
+        }
+        
+        // Update delete player function to add to pending changes
+        async function deletePlayer() {
+            if (!currentPlayer || isNewPlayer) return;
+            
+            if (!confirm(`Are you sure you want to delete ${currentPlayer.name}?`)) {
+                return;
+            }
+            
+            try {
+                // Store player ID for later use
+                const playerId = Number(currentPlayer.id);
+                const playerName = currentPlayer.name;
+                const playerPosition = currentPlayer.position;
+                
+                // Store a copy of the player data for potential undo
+                const deletedPlayerData = {...currentPlayer};
+                
+                // Remove player from main array
+                const playerIndex = playersData.findIndex(p => Number(p.id) === playerId);
+                if (playerIndex !== -1) {
+                    playersData.splice(playerIndex, 1);
+                    
+                    // Also remove from filtered players if present
+                    const filteredIndex = filteredPlayers.findIndex(p => Number(p.id) === playerId);
+                    if (filteredIndex !== -1) {
+                        filteredPlayers.splice(filteredIndex, 1);
+                    }
+                    
+                    // Add this change to pending changes
+                    addPendingChange('delete', deletedPlayerData, deletedPlayerData);
+                    
+                    // Remove from manager data if present
+                    if (managerData && managerData.managers) {
+                        managerData.managers.forEach(manager => {
+                            if (manager.squad && manager.squad.players) {
+                                const squadIndex = manager.squad.players.findIndex(p => 
+                                    p.name.toUpperCase() === playerName.toUpperCase() && 
+                                    p.position === playerPosition
+                                );
+                                
+                                if (squadIndex !== -1) {
+                                    manager.squad.players.splice(squadIndex, 1);
+                                    
+                                    // Update player count
+                                    manager.squad.total_players = manager.squad.players.length;
+                                    
+                                    // Recalculate club total value
+                                    recalculateManagerTotalValue(manager);
+                                    
+                                    console.log(`Removed player "${playerName}" from ${manager.name}'s squad`);
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Calculate new total pages
+                    totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+                    
+                    // Adjust current page if needed
+                    if (currentPage > totalPages) {
+                        currentPage = totalPages || 1;
+                    }
+                    
+                    // Update players list with current search term
+                    populatePlayersList(document.getElementById('player-search').value);
+                    
+                    // Reset editor
+                    currentPlayer = null;
+                    toggleEditorState(false);
+                    
+                    showStatusMessage('Player deleted and saved to local storage. Use "Push All to GitHub" to save permanently.', true);
+                } else {
+                    throw new Error('Player not found in the database');
+                }
+            } catch (error) {
+                showStatusMessage(error.message, false);
+                console.error('Error deleting player:', error);
             }
         }
     </script>
