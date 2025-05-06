@@ -2501,13 +2501,17 @@
         // Save to GitHub
         async function saveToGitHub() {
             try {
-                // Initialize GitHub config if not already done
+                console.log('Starting GitHub save process...');
+                
+                // Initialize GitHub config if needed
                 if (!githubConfig) {
+                    console.log('Initializing GitHub config...');
                     initGitHubConfig();
                 }
                 
                 // Check if GitHub integration is configured
                 if (!githubConfig.isConfigured()) {
+                    console.error('GitHub integration is not configured');
                     throw new Error('GitHub integration is not configured');
                 }
                 
@@ -2522,7 +2526,76 @@
                     branch: githubConfig.getBranch()
                 };
                 
-                // Get the current players file to get its SHA (required for the GitHub API)
+                console.log('Using repository details:', repoDetails);
+                
+                let savedPlayers = false;
+                let savedManagers = false;
+                
+                try {
+                    // Save players.json
+                    console.log('Saving players.json...');
+                    const playersResponse = await saveFileToGitHub(playersData, 'players.json', 'Update players from admin panel');
+                    savedPlayers = playersResponse.ok;
+                    console.log('Players save result:', savedPlayers);
+                    
+                    // Save manager_data.json if we have manager data
+                    if (managerData) {
+                        console.log('Saving manager_data.json...');
+                        const managersDataFormatted = { managers: managerData.managers || [] };
+                        const managersResponse = await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from admin panel');
+                        savedManagers = managersResponse.ok;
+                        console.log('Managers save result:', savedManagers);
+                    } else {
+                        console.log('No manager data to save');
+                        savedManagers = true; // Consider it successful if there's no manager data
+                    }
+                    
+                    // Only consider it successful if both saves worked (or if manager save wasn't needed)
+                    const success = savedPlayers && savedManagers;
+                    
+                    if (success) {
+                        console.log('All files saved successfully to GitHub');
+                        // Store the success timestamp
+                        localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
+                        // Clear pending changes
+                        pendingChanges = [];
+                        localStorage.removeItem('pendingPlayerChanges');
+                        // Update UI
+                        updatePendingChangesUI();
+                        showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                    } else {
+                        throw new Error('Failed to save all files to GitHub');
+                    }
+                    
+                    return success;
+                    
+                } catch (error) {
+                    console.error('Error during file saves:', error);
+                    throw error;
+                }
+                
+            } catch (error) {
+                console.error('GitHub save error:', error);
+                showStatusMessage(`GitHub Error: ${error.message}`, false);
+                return false;
+            }
+        }
+
+        // Save a file to GitHub
+        async function saveFileToGitHub(data, filePath, commitMessage) {
+            try {
+                console.log(`Starting save for ${filePath}...`);
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: filePath,
+                    branch: githubConfig.getBranch()
+                };
+                
+                // Get the current file to get its SHA
+                console.log('Fetching current file info...');
                 const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
                     headers: {
                         'Authorization': `token ${githubConfig.getToken()}`
@@ -2533,37 +2606,34 @@
                 let fileExists = true;
                 
                 if (fileInfoResponse.status === 404) {
-                    // File doesn't exist yet
+                    console.log('File does not exist yet, will create it');
                     fileExists = false;
                 } else if (!fileInfoResponse.ok) {
                     const errorData = await fileInfoResponse.json();
+                    console.error('Error getting file info:', errorData);
                     throw new Error(`GitHub API error: ${errorData.message}`);
                 } else {
-                    // File exists, get its SHA
                     const fileInfo = await fileInfoResponse.json();
                     currentSHA = fileInfo.sha;
+                    console.log('Found existing file with SHA:', currentSHA);
                 }
                 
                 // Prepare the content
-                const jsonString = JSON.stringify(playersData, null, 2);
+                const jsonString = JSON.stringify(data, null, 2);
                 const content = btoa(unescape(encodeURIComponent(jsonString)));
                 
-                // Prepare the commit message
-                const commitMessage = localStorage.getItem('githubCommitMessage') || 'Update player data';
-                
-                // Prepare the request body
+                // Prepare the commit
                 const requestBody = {
                     message: `${commitMessage} - ${new Date().toISOString()}`,
                     content: content,
                     branch: repoDetails.branch
                 };
                 
-                // Add SHA if the file exists
                 if (fileExists) {
                     requestBody.sha = currentSHA;
                 }
                 
-                // Commit the updated file
+                console.log(`Committing ${filePath}...`);
                 const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
                     method: 'PUT',
                     headers: {
@@ -2575,99 +2645,16 @@
                 
                 if (!commitResponse.ok) {
                     const errorData = await commitResponse.json();
-                    throw new Error(`GitHub API error: ${errorData.message}`);
+                    console.error(`Failed to commit ${filePath}:`, errorData);
+                    throw new Error(`Failed to commit ${filePath}: ${errorData.message}`);
                 }
                 
-                // If manager data exists, save it too
-                if (managerData) {
-                    try {
-                        console.log('Attempting to save manager data to GitHub...');
-                        
-                        // Make sure managerData has a valid format before saving
-                        if (!managerData.managers || !Array.isArray(managerData.managers)) {
-                            console.error('Invalid manager data format:', managerData);
-                            throw new Error('Invalid manager data format');
-                        }
-                        
-                        // Get manager data file path - make sure to use a consistent path
-                        const managerPath = githubConfig.managerFilePath || 'manager_data.json';
-                        
-                        // Get the current manager file to get its SHA
-                        const managerInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}?ref=${repoDetails.branch}`, {
-                            headers: {
-                                'Authorization': `token ${githubConfig.getToken()}`
-                            }
-                        });
-                        
-                        let managerSHA = '';
-                        let managerExists = true;
-                        
-                        if (managerInfoResponse.status === 404) {
-                            // File doesn't exist yet
-                            managerExists = false;
-                            console.log('Manager file does not exist yet - will create it');
-                        } else if (!managerInfoResponse.ok) {
-                            const errorInfo = await managerInfoResponse.text();
-                            console.error('Error getting manager file info:', errorInfo);
-                            throw new Error(`Failed to get manager file info: ${errorInfo}`);
-                        } else {
-                            // File exists, get its SHA
-                            const fileInfo = await managerInfoResponse.json();
-                            managerSHA = fileInfo.sha;
-                            console.log('Found existing manager file with SHA:', managerSHA);
-                        }
-                        
-                        // Prepare the manager data content
-                        const managerJsonString = JSON.stringify(managerData, null, 2);
-                        console.log('Manager data size:', managerJsonString.length, 'bytes');
-                        
-                        const managerContent = btoa(unescape(encodeURIComponent(managerJsonString)));
-                        
-                        // Prepare the manager request body
-                        const managerRequestBody = {
-                            message: `Update manager data - ${new Date().toISOString()}`,
-                            content: managerContent,
-                            branch: repoDetails.branch
-                        };
-                        
-                        // Add SHA if the file exists
-                        if (managerExists) {
-                            managerRequestBody.sha = managerSHA;
-                        }
-                        
-                        console.log('Sending manager data to GitHub...');
-                        
-                        // Commit the updated manager file
-                        const managerCommitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerPath}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${githubConfig.getToken()}`,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(managerRequestBody)
-                        });
-                        
-                        if (!managerCommitResponse.ok) {
-                            const errorText = await managerCommitResponse.text();
-                            console.error('Failed to save manager data to GitHub:', errorText);
-                            throw new Error(`Failed to save manager data: ${errorText}`);
-                        } else {
-                            console.log('Manager data saved to GitHub successfully');
-                        }
-                    } catch (managerError) {
-                        console.error('Error saving manager data to GitHub:', managerError);
-                        throw managerError; // Re-throw to be handled by the caller
-                    }
-                } else {
-                    console.log('No manager data to save');
-                }
-                
-                showStatusMessage('Changes saved to GitHub! The site will update in a few minutes.', true);
+                console.log(`Successfully saved ${filePath}`);
+                return commitResponse;
                 
             } catch (error) {
-                showStatusMessage(`GitHub Error: ${error.message}`, false);
-                console.error('GitHub save error:', error);
-                throw error; // Re-throw to be handled by the caller
+                console.error(`Error saving ${filePath}:`, error);
+                throw error;
             }
         }
 
@@ -3420,9 +3407,12 @@
         // Push all pending changes to GitHub
         async function pushAllChangesToGitHub() {
             if (pendingChanges.length === 0) {
+                console.log('No pending changes to push');
                 showStatusMessage('No pending changes to push', false);
                 return;
             }
+            
+            console.log(`Attempting to push ${pendingChanges.length} changes to GitHub...`);
             
             // Show loading
             const pushButton = document.getElementById('push-to-github-btn');
@@ -3433,6 +3423,7 @@
             try {
                 // Initialize GitHub config if needed
                 if (!githubConfig) {
+                    console.log('Initializing GitHub config...');
                     initGitHubConfig();
                 }
                 
@@ -3441,7 +3432,9 @@
                 }
                 
                 // Save to GitHub directly
+                console.log('Calling saveToGitHub...');
                 const success = await saveToGitHub();
+                console.log('saveToGitHub result:', success);
                 
                 if (success) {
                     // Clear pending changes from localStorage
@@ -3453,14 +3446,22 @@
                     // Update UI to hide pending changes elements
                     const batchSaveContainer = document.getElementById('batch-save-container');
                     const localUpdatesContainer = document.getElementById('local-updates-container');
-                    if (batchSaveContainer) batchSaveContainer.style.display = 'none';
-                    if (localUpdatesContainer) localUpdatesContainer.style.display = 'none';
+                    if (batchSaveContainer) {
+                        console.log('Hiding batch save container');
+                        batchSaveContainer.style.display = 'none';
+                    }
+                    if (localUpdatesContainer) {
+                        console.log('Hiding local updates container');
+                        localUpdatesContainer.style.display = 'none';
+                    }
                     
                     // Show success message
                     showStatusMessage('All changes successfully pushed to GitHub! The site will update in a few minutes.', true);
                     
                     // Store the last successful push timestamp
-                    localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
+                    const timestamp = new Date().toISOString();
+                    console.log('Storing successful push timestamp:', timestamp);
+                    localStorage.setItem('lastGitHubPushTimestamp', timestamp);
                 } else {
                     throw new Error('Failed to push changes to GitHub');
                 }
