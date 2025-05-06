@@ -719,21 +719,13 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 2592,
+      "club_total_value": 558,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 24,
+        "total_players": 6,
         "players": [
-          {
-            "name": "ERLING HAALAND",
-            "position": "ST",
-            "value": 140,
-            "contract": "SEASON 7.5",
-            "salary": 7,
-            "type": "standard"
-          },
           {
             "name": "THEO HERNANDEZ",
             "position": "LB",
@@ -7872,6 +7864,31 @@
         }
       ],
       "current_season": 6
+    },
+    {
+      "name": "Manager of FREE AGENT",
+      "club": "FREE AGENT",
+      "overall_rating": 0,
+      "r2g_coin_balance": 0,
+      "r2g_token_balance": 0,
+      "club_total_value": 350,
+      "manager_rating": 0,
+      "trophies": 0,
+      "awards": 0,
+      "squad": {
+        "total_players": 1,
+        "players": [
+          {
+            "name": "ERLING HAALAND",
+            "position": "ST",
+            "value": 350,
+            "contract": "SEASON 7.5",
+            "salary": 7,
+            "type": "standard"
+          }
+        ]
+      },
+      "star_rating": 3
     }
   ]
 }
