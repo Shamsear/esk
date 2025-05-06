@@ -719,17 +719,17 @@
       "overall_rating": 137.3,
       "r2g_coin_balance": 1537,
       "r2g_token_balance": 275,
-      "club_total_value": 768,
+      "club_total_value": 2592,
       "manager_rating": 90.7,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 7,
+        "total_players": 24,
         "players": [
           {
             "name": "ERLING HAALAND",
             "position": "ST",
-            "value": 210,
+            "value": 140,
             "contract": "SEASON 7.5",
             "salary": 7,
             "type": "standard"
@@ -4814,9 +4814,17 @@
             "contract": "SEASON 6.5",
             "salary": 2.7,
             "type": "prime"
+          },
+          {
+            "name": "BRYAN ROBSON",
+            "position": "CM",
+            "value": 108,
+            "contract": "SEASON 8",
+            "salary": 5.4,
+            "type": "legend"
           }
         ],
-        "totalPlayers": 16
+        "totalPlayers": 8
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4990,7 +4998,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1228
+      "clubTotalValue": 486
     },
     {
       "name": "NABEEL",
@@ -7874,5 +7882,5 @@
       "current_season": 6
     }
   ],
-  "_lastUpdated": "2025-05-06T10:30:38.063Z"
+  "_lastUpdated": "2025-05-06T10:43:43.923Z"
 }
