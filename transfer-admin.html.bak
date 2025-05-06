@@ -1466,250 +1466,72 @@
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Local changes container styles */
-        .local-updates-container {
+
+        /* Pending Changes Panel Styles */
+        .pending-changes-panel {
             background-color: #1e1e1e;
             border-radius: 8px;
-            margin: 20px 0;
-            overflow: hidden;
+            padding: 20px;
+            margin-bottom: 24px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            max-height: 400px;
-            overflow-y: auto;
+            border-left: 4px solid #ff9800; /* Orange left border to indicate pending status */
         }
-        
-        .update-entry {
-            padding: 12px 15px;
-            border-bottom: 1px solid #333;
+
+        .pending-changes-controls {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-        
-        .update-entry:last-child {
-            border-bottom: none;
-        }
-        
-        .update-entry:hover {
+
+        .pending-changes-section {
             background-color: #252525;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
         }
-        
-        .update-info {
-            flex: 1;
-        }
-        
-        .update-timestamp {
-            color: #999;
-            font-size: 0.8em;
-            margin-bottom: 4px;
-        }
-        
-        .update-description {
-            color: #fff;
-        }
-        
-        .update-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .update-action-btn {
-            background-color: #3f51b5;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .update-action-btn.undo {
-            background-color: #e53935;
-        }
-        
-        .update-action-btn:hover {
-            opacity: 0.9;
-        }
-        
-        /* Team grouping styles */
-        .team-group {
-            border-bottom: 1px solid #333;
-            overflow: hidden;
-        }
-        
-        .team-header {
-            padding: 12px 15px;
-            background-color: #252525;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.2s;
-        }
-        
-        .team-header:hover {
+
+        .pending-changes-section:hover {
             background-color: #303030;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-        
-        .team-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .team-logo {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-        
-        .team-name {
-            font-weight: bold;
+
+        .pending-changes-section h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
             color: #fff;
         }
-        
-        .team-count {
-            color: #4ecca3;
-            font-size: 0.9em;
-            margin-left: 8px;
-        }
-        
-        .team-toggle {
+
+        .pending-changes-section p {
+            margin-top: 0;
+            margin-bottom: 15px;
             color: #aaa;
-            transition: transform 0.2s;
         }
-        
-        .team-players {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: #1a1a1a;
+
+        .player-change-card {
+            transition: all 0.2s ease;
         }
-        
-        .team-group.expanded .team-players {
-            max-height: 500px;
+
+        .player-change-card:hover {
+            background-color: #2a2a2a;
+            transform: translateX(3px);
         }
-        
-        .team-group.expanded .team-toggle {
-            transform: rotate(180deg);
-        }
-        
-        .player-row {
-            padding: 10px 15px 10px 55px;
-            border-bottom: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .player-row:last-child {
-            border-bottom: none;
-        }
-        
-        .player-row:hover {
-            background-color: #222;
-        }
-        
-        .player-info {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-        
-        .player-name {
-            font-weight: 500;
-            color: #fff;
-        }
-        
-        .player-details {
-            color: #aaa;
-            font-size: 0.85em;
-        }
-        
-        .player-value {
-            color: #4ecca3;
-        }
-        
-        .player-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        /* View toggle styles */
-        .view-toggle {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .view-toggle-btn {
-            background-color: #252525;
-            color: #aaa;
-            border: none;
-            border-radius: 4px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .view-toggle-btn:hover {
-            background-color: #333;
-            color: #fff;
-        }
-        
-        .view-toggle-btn.active {
-            background-color: #4ecca3;
-            color: #fff;
-        }
-        
-        /* Mobile optimizations for team view */
+
         @media (max-width: 768px) {
-            .team-header {
-                padding: 10px;
+            .pending-changes-panel {
+                margin: 10px;
+                padding: 15px;
             }
-            
-            .team-logo {
-                width: 24px;
-                height: 24px;
+
+            .pending-changes-controls {
+                gap: 5px;
             }
-            
-            .team-name {
+
+            .pending-changes-controls button {
                 font-size: 0.9em;
-            }
-            
-            .player-row {
-                padding: 8px 10px 8px 40px;
-            }
-            
-            .player-name {
-                font-size: 0.9em;
-            }
-            
-            .player-details {
-                font-size: 0.8em;
-            }
-            
-            .update-action-btn {
-                padding: 4px 8px;
-                font-size: 0.8em;
-            }
-            
-            .team-count {
-                font-size: 0.8em;
-            }
-            
-            .view-toggle-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 0.9em;
+                padding: 6px 10px;
             }
         }
     </style>
@@ -1807,27 +1629,37 @@
         </a>
     </div>
     
-    
     <div class="container">
-    <!-- Add local changes container -->
-        <div class="local-updates-container" id="local-updates-container" style="display: none;">
-            <div class="update-entry-header" style="padding: 10px; background-color: #333; font-weight: bold; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center;">
-                <span>Recent Local Changes</span>
+        
+        <!-- Add this new section in place of the history panel -->
+        <div class="pending-changes-panel" id="pending-changes-panel" style="display:none;">
+            <h2>Pending GitHub Changes</h2>
+            <div class="pending-changes-controls">
+                <button id="refresh-changes" class="history-btn">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+                <button id="push-all-changes" class="history-btn">
+                    <i class="fab fa-github"></i> Push All to GitHub
+                </button>
+                <button id="discard-changes" class="history-btn revert">
+                    <i class="fas fa-trash"></i> Discard All
+                </button>
             </div>
-            <div id="update-entries">
-                <!-- Update entries will be added here dynamically -->
-            </div>
-            <div id="team-grouped-changes">
-                <!-- Team-grouped changes will be added here -->
+            <div id="pending-changes-container" class="history-container">
+                <!-- Changes sections will be added here dynamically -->
+                <div class="no-changes-message" style="text-align:center; padding:20px; color:#888;">
+                    No pending changes to display
+                </div>
             </div>
         </div>
+
         <!-- Existing content -->
         <div class="mobile-quick-nav" id="mobile-quick-nav" style="display: none;">
             <button class="quick-nav-btn" data-target="team-selection">Team</button>
             <button class="quick-nav-btn" data-target="available-players">Available</button>
             <button class="quick-nav-btn" data-target="selected-players">Selected</button>
             <button class="quick-nav-btn" data-target="transfer-settings">Settings</button>
-            <button class="quick-nav-btn" data-target="history-panel">History</button>
+            <button class="quick-nav-btn" data-target="pending-changes-panel">Pending</button>
         </div>
         
         <div class="team-selection">
@@ -2086,9 +1918,6 @@
                 const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
                 updateBatchSaveUI(pendingChanges.length);
                 
-                // Display any existing local changes
-                displayLocalChanges();
-                
                 // Load data first before setting up the UI
                 let loadedData = false;
                 
@@ -2235,6 +2064,9 @@
                 
                 // Hide loading status
                 statusElement.style.display = 'none';
+                
+                // Display pending changes if any
+                displayPendingChanges();
                 
                 return Promise.resolve();
                 
@@ -2404,6 +2236,46 @@
                     }
                 });
             }
+
+            // Add event listeners for pending changes panel buttons
+            const refreshChangesBtn = document.getElementById('refresh-changes');
+            if (refreshChangesBtn) {
+                refreshChangesBtn.addEventListener('click', displayPendingChanges);
+            }
+            
+            const pushAllChangesBtn = document.getElementById('push-all-changes');
+            if (pushAllChangesBtn) {
+                pushAllChangesBtn.addEventListener('click', async function() {
+                    try {
+                        // Show loading state
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Pushing...';
+                        this.disabled = true;
+                        
+                        // Try to save to GitHub
+                        await saveToGitHub();
+                        
+                    } catch (error) {
+                        console.error('Failed to push to GitHub:', error);
+                        showStatusMessage('Error pushing to GitHub: ' + error.message, false);
+                    } finally {
+                        // Restore button state
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }
+                });
+            }
+            
+            const discardChangesBtn = document.getElementById('discard-changes');
+            if (discardChangesBtn) {
+                discardChangesBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to discard all pending changes? This cannot be undone.')) {
+                        localStorage.removeItem('pendingTransferChanges');
+                        displayPendingChanges();
+                        updateBatchSaveUI(0);
+                    }
+                });
+            }
         }
 
         // Populate the team selector dropdown
@@ -2530,20 +2402,7 @@
                         console.log('Club data for', teamName, ':', club);
                         
                         if (club && club.logo) {
-                            // Handle case where logo is an array
-                            if (Array.isArray(club.logo)) {
-                                // Try to find the first valid path
-                                for (const path of club.logo) {
-                                    if (path && typeof path === 'string') {
-                                        logoPath = path;
-                                        console.log('Using logo path from array:', logoPath);
-                                        break;
-                                    }
-                                }
-                            } else if (typeof club.logo === 'string') {
-                                logoPath = club.logo;
-                            }
-                            
+                            logoPath = club.logo;
                             console.log('Found club logo:', logoPath);
                         } else {
                             console.log('No logo found for club in ClubManager');
@@ -2575,8 +2434,8 @@
                 }
             }
             
-            // Make sure logoPath is a string and handle the leading slash if present
-            if (typeof logoPath === 'string' && logoPath.startsWith('/')) {
+            // Make sure logo path is correct - remove any leading slash
+            if (logoPath.startsWith('/')) {
                 logoPath = logoPath.substring(1);
                 console.log('Fixed logo path by removing leading slash:', logoPath);
             }
@@ -2638,22 +2497,7 @@
                     
                     const playerDetails = document.createElement('div');
                     playerDetails.className = 'squad-player-details';
-                    
-                    // Format details: Position, Type, Value
-                    const position = player.position || 'Unknown';
-                    const type = player.type || 'Standard';
-                    const value = player.value ? player.value.toLocaleString() : 'Unknown';
-                    
-                    // Add timestamp if available
-                    let timestampHtml = '';
-                    if (player._lastUpdated) {
-                        const timestamp = new Date(player._lastUpdated);
-                        const timeStr = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                        const dateStr = timestamp.toLocaleDateString();
-                        timestampHtml = ` &middot; <span class="player-timestamp" style="color: #888; font-size: 0.9em;">${dateStr} ${timeStr}</span>`;
-                    }
-                    
-                    playerDetails.innerHTML = `${position} &middot; ${type} &middot; <span class="player-value">${value} RC</span>${timestampHtml}`;
+                    playerDetails.textContent = `${player.position} | Value: ${player.value.toLocaleString()} RC | Contract: ${player.contract} years`;
                     
                     playerInfo.appendChild(playerName);
                     playerInfo.appendChild(playerDetails);
@@ -3236,9 +3080,6 @@
                         // Explicitly set the player type - this is the key fix
                         updatedPlayer.type = playerType;
                         
-                        // Add timestamp for tracking changes
-                        updatedPlayer._lastUpdated = new Date().toISOString();
-                        
                         console.log(`Updated player ${player.name} in players.json:`, {
                             club: updatedPlayer.club,
                             value: updatedPlayer.value,
@@ -3300,9 +3141,6 @@
                 
                 // Update batch save UI
                 updateBatchSaveUI(pendingChanges.length);
-                
-                // Display local changes
-                displayLocalChanges();
                 
                 // Save changes to server if available
                 let savedToServer = false;
@@ -3410,330 +3248,27 @@
             const batchSaveContainer = document.getElementById('batch-save-container');
             const pendingChangesCount = document.getElementById('pending-changes-count');
             const pendingChangesText = document.getElementById('pending-changes-text');
+            const pendingChangesPanel = document.getElementById('pending-changes-panel');
             
             if (batchSaveContainer && pendingChangesCount && pendingChangesText) {
                 if (changeCount > 0) {
                     batchSaveContainer.style.display = 'flex';
                     pendingChangesCount.textContent = changeCount;
                     pendingChangesText.textContent = `You have ${changeCount} pending transfer${changeCount !== 1 ? 's' : ''} saved to localStorage.`;
+                    
+                    // Also update the pending changes panel
+                    if (pendingChangesPanel) {
+                        pendingChangesPanel.style.display = 'block';
+                        displayPendingChanges();
+                    }
                 } else {
                     batchSaveContainer.style.display = 'none';
-                }
-            }
-            
-            // Update local changes display
-            displayLocalChanges();
-        }
-        
-        // Function to display local changes
-        function displayLocalChanges() {
-            const container = document.getElementById('update-entries');
-            const teamContainer = document.getElementById('team-grouped-changes');
-            const localUpdatesContainer = document.getElementById('local-updates-container');
-            
-            if (!container || !teamContainer || !localUpdatesContainer) return;
-            
-            // Get pending changes from localStorage
-            const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
-            
-            // Clear containers
-            container.innerHTML = '';
-            teamContainer.innerHTML = '';
-            
-            if (pendingChanges.length === 0) {
-                localUpdatesContainer.style.display = 'none';
-                return;
-            }
-            
-            // Show container
-            localUpdatesContainer.style.display = 'block';
-            
-            // Now build the team-grouped view
-            displayTeamGroupedChanges(pendingChanges, teamContainer);
-        }
-        
-        // Function to display team-grouped changes
-        function displayTeamGroupedChanges(pendingChanges, container) {
-            // If no changes, nothing to do
-            if (!pendingChanges || pendingChanges.length === 0) return;
-            
-            // Use the latest change data
-            const latestChange = pendingChanges[pendingChanges.length - 1];
-            const { playersData } = latestChange;
-            
-            if (!playersData || !Array.isArray(playersData)) {
-                // If no player data, show a message
-                const noDataMsg = document.createElement('div');
-                noDataMsg.style.padding = '15px';
-                noDataMsg.style.color = '#aaa';
-                noDataMsg.style.textAlign = 'center';
-                noDataMsg.textContent = 'No player transfer data available';
-                container.appendChild(noDataMsg);
-                return;
-            }
-            
-            // Find players that have been transferred (with _lastUpdated property)
-            const transferredPlayers = playersData.filter(player => 
-                player._lastUpdated && player.club // Must have a club assigned
-            );
-            
-            // Group players by team (destination club)
-            const teamGroups = {};
-            
-            transferredPlayers.forEach(player => {
-                const team = player.club;
-                if (!teamGroups[team]) {
-                    teamGroups[team] = [];
-                }
-                teamGroups[team].push(player);
-            });
-            
-            // If no teams found, show a message
-            if (Object.keys(teamGroups).length === 0) {
-                const noTeamsMsg = document.createElement('div');
-                noTeamsMsg.style.padding = '15px';
-                noTeamsMsg.style.color = '#aaa';
-                noTeamsMsg.style.textAlign = 'center';
-                noTeamsMsg.textContent = 'No teams with transferred players found';
-                container.appendChild(noTeamsMsg);
-                return;
-            }
-            
-            // Sort teams by most recent player update
-            const sortedTeams = Object.keys(teamGroups).sort((a, b) => {
-                // Get the most recent update timestamp for each team
-                const aLatestTime = getLatestTimestamp(teamGroups[a]);
-                const bLatestTime = getLatestTimestamp(teamGroups[b]);
-                
-                // Sort in descending order (most recent first)
-                return bLatestTime - aLatestTime;
-            });
-            
-            // Create a team group for each team
-            sortedTeams.forEach(teamName => {
-                const players = teamGroups[teamName];
-                
-                // Sort players by update time (most recent first)
-                players.sort((a, b) => {
-                    const aTime = a._lastUpdated ? new Date(a._lastUpdated).getTime() : 0;
-                    const bTime = b._lastUpdated ? new Date(b._lastUpdated).getTime() : 0;
-                    return bTime - aTime;
-                });
-                
-                // Create team group container
-                const teamGroup = document.createElement('div');
-                teamGroup.className = 'team-group';
-                teamGroup.dataset.team = teamName;
-                
-                // Create team header (clickable to expand/collapse)
-                const teamHeader = document.createElement('div');
-                teamHeader.className = 'team-header';
-                teamHeader.onclick = () => toggleTeamGroup(teamGroup);
-                
-                // Team info (logo and name)
-                const teamInfo = document.createElement('div');
-                teamInfo.className = 'team-info';
-                
-                // Team logo
-                const teamLogo = document.createElement('img');
-                teamLogo.className = 'team-logo';
-                teamLogo.src = getTeamLogoPath(teamName);
-                teamLogo.alt = teamName;
-                teamLogo.onerror = function() {
-                    this.src = 'assets/images/logo11.webp';
-                    this.onerror = null;
-                };
-                
-                // Team name with count
-                const teamNameEl = document.createElement('div');
-                teamNameEl.className = 'team-name';
-                teamNameEl.textContent = teamName;
-                
-                // Add player count badge
-                const teamCount = document.createElement('span');
-                teamCount.className = 'team-count';
-                teamCount.textContent = `${players.length} player${players.length !== 1 ? 's' : ''}`;
-                teamNameEl.appendChild(teamCount);
-                
-                teamInfo.appendChild(teamLogo);
-                teamInfo.appendChild(teamNameEl);
-                
-                // Add expand/collapse icon
-                const teamToggle = document.createElement('div');
-                teamToggle.className = 'team-toggle';
-                teamToggle.innerHTML = '<i class="fas fa-chevron-down"></i>';
-                
-                teamHeader.appendChild(teamInfo);
-                teamHeader.appendChild(teamToggle);
-                
-                // Players container (initially collapsed)
-                const playersContainer = document.createElement('div');
-                playersContainer.className = 'team-players';
-                
-                // Add each player
-                players.forEach(player => {
-                    const playerRow = document.createElement('div');
-                    playerRow.className = 'player-row';
-                    playerRow.dataset.playerId = player.id;
                     
-                    // Player info
-                    const playerInfo = document.createElement('div');
-                    playerInfo.className = 'player-info';
-                    
-                    // Player name
-                    const playerName = document.createElement('div');
-                    playerName.className = 'player-name';
-                    playerName.textContent = player.name || 'Unknown Player';
-                    
-                    // Player details
-                    const playerDetails = document.createElement('div');
-                    playerDetails.className = 'player-details';
-                    
-                    // Format details: Position, Type, Value
-                    const position = player.position || 'Unknown';
-                    const type = player.type || 'Standard';
-                    const value = player.value ? player.value.toLocaleString() : 'Unknown';
-                    
-                    // Add timestamp if available
-                    let timestampHtml = '';
-                    if (player._lastUpdated) {
-                        const timestamp = new Date(player._lastUpdated);
-                        const timeStr = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                        const dateStr = timestamp.toLocaleDateString();
-                        timestampHtml = ` &middot; <span class="player-timestamp" style="color: #888; font-size: 0.9em;">${dateStr} ${timeStr}</span>`;
-                    }
-                    
-                    playerDetails.innerHTML = `${position} &middot; ${type} &middot; <span class="player-value">${value} RC</span>${timestampHtml}`;
-                    
-                    playerInfo.appendChild(playerName);
-                    playerInfo.appendChild(playerDetails);
-                    
-                    // Player actions
-                    const playerActions = document.createElement('div');
-                    playerActions.className = 'player-actions';
-                    
-                    // Undo button for this specific player
-                    const undoBtn = document.createElement('button');
-                    undoBtn.className = 'update-action-btn undo';
-                    undoBtn.style.padding = '4px 8px';
-                    undoBtn.style.fontSize = '0.8em';
-                    undoBtn.innerHTML = '<i class="fas fa-undo"></i> Undo';
-                    undoBtn.onclick = (e) => {
-                        e.stopPropagation(); // Prevent toggling team group
-                        undoPlayerTransfer(player);
-                    };
-                    
-                    playerActions.appendChild(undoBtn);
-                    
-                    playerRow.appendChild(playerInfo);
-                    playerRow.appendChild(playerActions);
-                    
-                    playersContainer.appendChild(playerRow);
-                });
-                
-                teamGroup.appendChild(teamHeader);
-                teamGroup.appendChild(playersContainer);
-                
-                container.appendChild(teamGroup);
-            });
-            
-            // All teams are collapsed by default
-            // (removed the code that automatically expanded the first team)
-        }
-        
-        // Helper function to toggle team group expansion
-        function toggleTeamGroup(teamGroup) {
-            teamGroup.classList.toggle('expanded');
-        }
-        
-        // Function to undo a specific player transfer
-        async function undoPlayerTransfer(player) {
-            try {
-                if (!confirm(`Are you sure you want to undo the transfer of ${player.name}? This cannot be reversed.`)) {
-                    return;
-                }
-                
-                // Get pending changes
-                const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
-                
-                if (pendingChanges.length === 0) {
-                    showStatusMessage('No pending changes to undo', false);
-                    return;
-                }
-                
-                // Get the latest change
-                const latestChange = pendingChanges[pendingChanges.length - 1];
-                
-                // Find the player in the latest data
-                const playerIndex = latestChange.playersData.findIndex(p => p.name === player.name);
-                if (playerIndex === -1) {
-                    showStatusMessage(`Player ${player.name} not found in latest changes`, false);
-                    return;
-                }
-                
-                // Get previous club info from player's stats if available
-                let previousClub = 'FREE AGENT';
-                const playerData = latestChange.playersData[playerIndex];
-                
-                if (playerData.stats && Array.isArray(playerData.stats) && playerData.stats.length > 1) {
-                    // Get the second to last stat entry (before the current one)
-                    const previousStat = playerData.stats[playerData.stats.length - 2];
-                    if (previousStat && previousStat.team) {
-                        previousClub = previousStat.team;
+                    // Also hide the pending changes panel
+                    if (pendingChangesPanel) {
+                        pendingChangesPanel.style.display = 'none';
                     }
                 }
-                
-                // Create a modified change
-                const modifiedChange = JSON.parse(JSON.stringify(latestChange));
-                
-                // Revert the player's club in the modified data
-                modifiedChange.playersData[playerIndex].club = previousClub;
-                
-                // Add a timestamp for tracking
-                modifiedChange.playersData[playerIndex]._lastUpdated = new Date().toISOString();
-                
-                // Remove the latest stats entry if it exists
-                if (modifiedChange.playersData[playerIndex].stats && 
-                    Array.isArray(modifiedChange.playersData[playerIndex].stats) && 
-                    modifiedChange.playersData[playerIndex].stats.length > 0) {
-                    modifiedChange.playersData[playerIndex].stats.pop();
-                }
-                
-                // Find and update the manager data to remove player from squad
-                const currentClub = playerData.club;
-                if (currentClub) {
-                    const managerIndex = modifiedChange.managersData.findIndex(m => m.club === currentClub);
-                    if (managerIndex !== -1) {
-                        const manager = modifiedChange.managersData[managerIndex];
-                        
-                        // Remove player from squad
-                        if (manager.squad && Array.isArray(manager.squad.players)) {
-                            const squadIndex = manager.squad.players.findIndex(p => p.name === player.name);
-                            if (squadIndex !== -1) {
-                                manager.squad.players.splice(squadIndex, 1);
-                                manager.squad.totalPlayers = manager.squad.players.length;
-                            }
-                        }
-                    }
-                }
-                
-                // Update description to reflect what changed
-                modifiedChange.description = `Undid transfer of ${player.name} from ${previousClub} to ${currentClub}`;
-                modifiedChange.timestamp = new Date().toISOString();
-                
-                // Add the modified change to the pending changes
-                pendingChanges.push(modifiedChange);
-                localStorage.setItem('pendingTransferChanges', JSON.stringify(pendingChanges));
-                
-                // Update the UI
-                updateBatchSaveUI(pendingChanges.length);
-                
-                // Show success message
-                showStatusMessage(`Successfully undid transfer of ${player.name}`, true);
-                
-            } catch (error) {
-                console.error('Error undoing player transfer:', error);
-                showStatusMessage(`Error: ${error.message}`, false);
             }
         }
 
@@ -3783,12 +3318,6 @@
                 
                 // Update batch save UI
                 updateBatchSaveUI(0);
-                
-                // Hide local changes container
-                const localUpdatesContainer = document.getElementById('local-updates-container');
-                if (localUpdatesContainer) {
-                    localUpdatesContainer.style.display = 'none';
-                }
                 
                 showStatusMessage('All changes saved to GitHub! The site will update in a few minutes. If changes don\'t appear, use the <a href="github-redeploy.html">Redeploy Site</a> tool.', true);
                 return true;
@@ -4788,103 +4317,6 @@
             setTimeout(() => messageDiv.remove(), 3000);
         }
 
-        // Add to transfer history
-        let transferHistory = [];
-
-        function addToTransferHistory(transfer) {
-            const timestamp = new Date().toISOString();
-            transferHistory.unshift({
-                timestamp,
-                ...transfer
-            });
-
-            // Save to localStorage
-            localStorage.setItem('transferHistory', JSON.stringify(transferHistory));
-            
-            // Update history display
-            displayTransferHistory();
-        }
-
-        function displayTransferHistory() {
-            const container = document.getElementById('history-container');
-            const filter = document.getElementById('history-filter').value;
-            container.innerHTML = '';
-
-            const filteredHistory = transferHistory.filter(transfer => {
-                if (filter === 'all') return true;
-                return transfer.type === filter;
-            });
-
-            filteredHistory.forEach(transfer => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                
-                const header = document.createElement('div');
-                header.className = 'history-header';
-                
-                const timestamp = new Date(transfer.timestamp).toLocaleString();
-                header.innerHTML = `
-                    <div class="history-timestamp">${timestamp}</div>
-                    <div class="history-type ${transfer.type}">${transfer.type.toUpperCase()}</div>
-                `;
-
-                const details = document.createElement('div');
-                details.className = 'history-details';
-                
-                details.innerHTML = `
-                    <div class="history-changes">
-                        <div class="history-old">
-                            <div class="history-label">From:</div>
-                            <div>${transfer.fromTeam || 'N/A'}</div>
-                        </div>
-                        <div class="history-new">
-                            <div class="history-label">To:</div>
-                            <div>${transfer.toTeam}</div>
-                        </div>
-                    </div>
-                    <div class="history-player" style="margin-top: 10px;">
-                        <div class="history-label">Player:</div>
-                        <div>${transfer.playerName} (${transfer.value} RC)</div>
-                    </div>
-                `;
-
-                // Add revert button if transfer is revertible
-                if (transfer.revertible) {
-                    const revertBtn = document.createElement('button');
-                    revertBtn.className = 'history-btn revert';
-                    revertBtn.innerHTML = '<i class="fas fa-undo"></i> Revert';
-                    revertBtn.onclick = () => revertTransfer(transfer);
-                    details.appendChild(revertBtn);
-                }
-
-                historyItem.appendChild(header);
-                historyItem.appendChild(details);
-                container.appendChild(historyItem);
-            });
-        }
-
-        function revertTransfer(transfer) {
-            if (confirm(`Are you sure you want to revert the transfer of ${transfer.playerName}?`)) {
-                // Add revert transfer to history
-                addToTransferHistory({
-                    type: transfer.type === 'incoming' ? 'outgoing' : 'incoming',
-                    playerName: transfer.playerName,
-                    fromTeam: transfer.toTeam,
-                    toTeam: transfer.fromTeam,
-                    value: transfer.value,
-                    description: `Reverted: ${transfer.description}`,
-                    revertible: false
-                });
-
-                // Trigger the actual transfer reversion
-                // This would need to be implemented based on your transfer system
-                handleTransferReversion(transfer);
-                
-                // Display updated local changes
-                displayLocalChanges();
-            }
-        }
-
         // Function to handle reverting a transfer
         function handleTransferReversion(transfer) {
             try {
@@ -5461,293 +4893,627 @@
             }
         });
 
-        // Helper function to count transferred players in a change
-        function getTransferredPlayerCount(change) {
-            if (!change.playersData || !Array.isArray(change.playersData)) {
-                return 0;
+        // Add after the updateBatchSaveUI function
+
+        // Functions for pending changes display and management
+        function displayPendingChanges() {
+            const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
+            const container = document.getElementById('pending-changes-container');
+            const panel = document.getElementById('pending-changes-panel');
+            
+            if (!container || !panel) return;
+            
+            // Show or hide the panel based on whether there are changes
+            if (pendingChanges.length > 0) {
+                panel.style.display = 'block';
+            } else {
+                panel.style.display = 'none';
+                return;
             }
             
-            // For simplicity, count players with a timestamp close to the change time
-            const changeTime = new Date(change.timestamp).getTime();
-            const timeWindow = 10 * 60 * 1000; // 10 minutes
+            container.innerHTML = '';
             
-            let count = 0;
-            change.playersData.forEach(player => {
-                if (player._lastUpdated) {
-                    const playerUpdateTime = new Date(player._lastUpdated).getTime();
-                    if (Math.abs(playerUpdateTime - changeTime) < timeWindow) {
-                        count++;
+            // Group changes by team
+            const teamChanges = {};
+            
+            pendingChanges.forEach((change, index) => {
+                // Extract unique teams from this change
+                const teamsInChange = new Set();
+                
+                if (change.description && change.description.includes('Transferred')) {
+                    // Extract team name from description if available
+                    const teamMatch = change.description.match(/to ([^(]+)(?:\(|$)/);
+                    if (teamMatch && teamMatch[1]) {
+                        const teamName = teamMatch[1].trim();
+                        teamsInChange.add(teamName);
                     }
                 }
-            });
-            
-            return count;
-        }
-        
-        // Function to view change details
-        function viewChangeDetails(index) {
-            try {
-                // Get pending changes
-                const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
                 
-                if (index < 0 || index >= pendingChanges.length) {
-                    showStatusMessage('Invalid change index', false);
-                    return;
-                }
-                
-                const change = pendingChanges[index];
-                
-                // Create a modal to display change details
-                const modalOverlay = document.createElement('div');
-                modalOverlay.style.position = 'fixed';
-                modalOverlay.style.top = '0';
-                modalOverlay.style.left = '0';
-                modalOverlay.style.width = '100%';
-                modalOverlay.style.height = '100%';
-                modalOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                modalOverlay.style.zIndex = '9999';
-                modalOverlay.style.display = 'flex';
-                modalOverlay.style.justifyContent = 'center';
-                modalOverlay.style.alignItems = 'center';
-                
-                const modalContent = document.createElement('div');
-                modalContent.style.backgroundColor = '#1e1e1e';
-                modalContent.style.borderRadius = '8px';
-                modalContent.style.padding = '20px';
-                modalContent.style.width = '80%';
-                modalContent.style.maxWidth = '800px';
-                modalContent.style.maxHeight = '80vh';
-                modalContent.style.overflow = 'auto';
-                modalContent.style.position = 'relative';
-                modalContent.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-                
-                // Add close button
-                const closeBtn = document.createElement('button');
-                closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-                closeBtn.style.position = 'absolute';
-                closeBtn.style.top = '10px';
-                closeBtn.style.right = '10px';
-                closeBtn.style.backgroundColor = 'transparent';
-                closeBtn.style.border = 'none';
-                closeBtn.style.color = '#fff';
-                closeBtn.style.fontSize = '20px';
-                closeBtn.style.cursor = 'pointer';
-                closeBtn.onclick = () => document.body.removeChild(modalOverlay);
-                
-                // Add title
-                const title = document.createElement('h3');
-                title.textContent = 'Change Details';
-                title.style.marginTop = '0';
-                title.style.borderBottom = '1px solid #444';
-                title.style.paddingBottom = '10px';
-                
-                // Add timestamp
-                const timestamp = document.createElement('p');
-                timestamp.innerHTML = `<strong>Time:</strong> ${new Date(change.timestamp).toLocaleString()}`;
-                
-                // Add description
-                const description = document.createElement('p');
-                description.innerHTML = `<strong>Description:</strong> ${change.description || 'Transfer change'}`;
-                
-                // Add content
-                modalContent.appendChild(closeBtn);
-                modalContent.appendChild(title);
-                modalContent.appendChild(timestamp);
-                modalContent.appendChild(description);
-                
-                // Add table of affected players if available
-                if (change.playersData && Array.isArray(change.playersData)) {
-                    const playersHeader = document.createElement('h4');
-                    playersHeader.textContent = 'Affected Players';
-                    modalContent.appendChild(playersHeader);
+                // If no teams extracted from description, find modified players
+                if (teamsInChange.size === 0 && change.playersData) {
+                    // Compare with previous change to find modified players
+                    const prevChange = index > 0 ? pendingChanges[index - 1] : null;
                     
-                    const playersTable = document.createElement('table');
-                    playersTable.style.width = '100%';
-                    playersTable.style.borderCollapse = 'collapse';
-                    playersTable.style.marginBottom = '20px';
-                    
-                    // Add table header
-                    const thead = document.createElement('thead');
-                    const headerRow = document.createElement('tr');
-                    ['Name', 'Club', 'Value', 'Type', 'Last Updated'].forEach(text => {
-                        const th = document.createElement('th');
-                        th.textContent = text;
-                        th.style.padding = '8px';
-                        th.style.textAlign = 'left';
-                        th.style.borderBottom = '1px solid #444';
-                        headerRow.appendChild(th);
-                    });
-                    thead.appendChild(headerRow);
-                    playersTable.appendChild(thead);
-                    
-                    // Add table body
-                    const tbody = document.createElement('tbody');
-                    
-                    // For simplicity, show recently updated players
-                    const changeTime = new Date(change.timestamp).getTime();
-                    const timeWindow = 10 * 60 * 1000; // 10 minutes
-                    
-                    const affectedPlayers = change.playersData.filter(player => {
-                        if (player._lastUpdated) {
-                            const playerUpdateTime = new Date(player._lastUpdated).getTime();
-                            return Math.abs(playerUpdateTime - changeTime) < timeWindow;
-                        }
-                        return false;
-                    });
-                    
-                    if (affectedPlayers.length > 0) {
-                        affectedPlayers.forEach(player => {
-                            const row = document.createElement('tr');
-                            row.style.borderBottom = '1px solid #333';
-                            
-                            // Name
-                            const nameCell = document.createElement('td');
-                            nameCell.textContent = player.name || 'Unknown';
-                            nameCell.style.padding = '8px';
-                            
-                            // Club
-                            const clubCell = document.createElement('td');
-                            clubCell.textContent = player.club || 'None';
-                            clubCell.style.padding = '8px';
-                            
-                            // Value
-                            const valueCell = document.createElement('td');
-                            valueCell.textContent = player.value ? player.value.toLocaleString() : 'Unknown';
-                            valueCell.style.padding = '8px';
-                            
-                            // Type
-                            const typeCell = document.createElement('td');
-                            typeCell.textContent = player.type || 'Standard';
-                            typeCell.style.padding = '8px';
-                            
-                            // Last Updated
-                            const updateCell = document.createElement('td');
-                            updateCell.textContent = player._lastUpdated ? new Date(player._lastUpdated).toLocaleString() : 'Unknown';
-                            updateCell.style.padding = '8px';
-                            
-                            row.appendChild(nameCell);
-                            row.appendChild(clubCell);
-                            row.appendChild(valueCell);
-                            row.appendChild(typeCell);
-                            row.appendChild(updateCell);
-                            
-                            tbody.appendChild(row);
+                    if (prevChange && prevChange.playersData) {
+                        // Find players with changed club
+                        change.playersData.forEach((player, playerIdx) => {
+                            if (playerIdx < prevChange.playersData.length) {
+                                const prevPlayer = prevChange.playersData[playerIdx];
+                                if (player.club !== prevPlayer.club && player.club) {
+                                    teamsInChange.add(player.club);
+                                }
+                            }
                         });
                     } else {
-                        const emptyRow = document.createElement('tr');
-                        const emptyCell = document.createElement('td');
-                        emptyCell.textContent = 'No affected players found';
-                        emptyCell.colSpan = 5;
-                        emptyCell.style.padding = '8px';
-                        emptyCell.style.textAlign = 'center';
-                        emptyRow.appendChild(emptyCell);
-                        tbody.appendChild(emptyRow);
+                        // For the first change, look for modified club properties
+                        change.playersData.forEach(player => {
+                            if (player.club) {
+                                teamsInChange.add(player.club);
+                            }
+                        });
                     }
-                    
-                    playersTable.appendChild(tbody);
-                    modalContent.appendChild(playersTable);
                 }
                 
-                // Add action buttons
-                const actionDiv = document.createElement('div');
-                actionDiv.style.marginTop = '20px';
-                actionDiv.style.textAlign = 'right';
+                // Add change to each team's list
+                teamsInChange.forEach(team => {
+                    if (!teamChanges[team]) {
+                        teamChanges[team] = [];
+                    }
+                    teamChanges[team].push({...change, index});
+                });
+            });
+            
+            // If no team changes were identified, show all changes together
+            if (Object.keys(teamChanges).length === 0) {
+                const genericSection = document.createElement('div');
+                genericSection.className = 'pending-changes-section';
+                genericSection.innerHTML = `
+                    <h3>Ungrouped Changes</h3>
+                    <p>${pendingChanges.length} changes that couldn't be grouped by team</p>
+                `;
                 
-                // Add undo button
+                // Add a details button for all changes
+                const detailsBtn = document.createElement('button');
+                detailsBtn.className = 'history-btn';
+                detailsBtn.innerHTML = '<i class="fas fa-info-circle"></i> Details';
+                detailsBtn.addEventListener('click', () => showPendingChangeDetails(pendingChanges));
+                genericSection.appendChild(detailsBtn);
+                
+                // Add undo button for all changes
                 const undoBtn = document.createElement('button');
-                undoBtn.innerHTML = '<i class="fas fa-undo"></i> Undo This Change';
-                undoBtn.style.backgroundColor = '#e53935';
-                undoBtn.style.color = 'white';
-                undoBtn.style.border = 'none';
-                undoBtn.style.padding = '10px 15px';
-                undoBtn.style.borderRadius = '4px';
-                undoBtn.style.cursor = 'pointer';
-                undoBtn.onclick = () => {
-                    document.body.removeChild(modalOverlay);
-                    undoChange(index);
-                };
+                undoBtn.className = 'history-btn revert';
+                undoBtn.innerHTML = '<i class="fas fa-undo"></i> Discard All';
+                undoBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to discard all pending changes? This cannot be undone.')) {
+                        localStorage.removeItem('pendingTransferChanges');
+                        displayPendingChanges();
+                        updateBatchSaveUI(0);
+                    }
+                });
+                genericSection.appendChild(undoBtn);
                 
-                actionDiv.appendChild(undoBtn);
-                modalContent.appendChild(actionDiv);
-                
-                // Add to document
-                modalOverlay.appendChild(modalContent);
-                document.body.appendChild(modalOverlay);
-                
-            } catch (error) {
-                console.error('Error viewing change details:', error);
-                showStatusMessage(`Error: ${error.message}`, false);
+                container.appendChild(genericSection);
+            } else {
+                // Create a section for each team
+                Object.keys(teamChanges).sort().forEach(team => {
+                    const teamSection = document.createElement('div');
+                    teamSection.className = 'pending-changes-section';
+                    
+                    const changes = teamChanges[team];
+                    const teamPlayers = getPlayersForTeam(changes, team);
+                    const playerCount = teamPlayers.length;
+                    
+                    // Create header section with expand/collapse functionality
+                    const headerSection = document.createElement('div');
+                    headerSection.className = 'pending-team-header';
+                    headerSection.style.display = 'flex';
+                    headerSection.style.justifyContent = 'space-between';
+                    headerSection.style.alignItems = 'center';
+                    headerSection.style.cursor = 'pointer';
+                    
+                    // Left side with team info
+                    const teamInfo = document.createElement('div');
+                    teamInfo.innerHTML = `
+                        <h3 style="margin: 0;">${team}</h3>
+                        <p style="margin: 5px 0 0 0; color: #aaa;">${changes.length} transfer(s) with ${playerCount} player(s)</p>
+                    `;
+                    
+                    // Right side with expand/collapse icon
+                    const expandIcon = document.createElement('i');
+                    expandIcon.className = 'fas fa-chevron-down';
+                    expandIcon.style.transition = 'transform 0.3s';
+                    
+                    headerSection.appendChild(teamInfo);
+                    headerSection.appendChild(expandIcon);
+                    teamSection.appendChild(headerSection);
+                    
+                    // Create collapsible content section
+                    const contentSection = document.createElement('div');
+                    contentSection.className = 'pending-team-content';
+                    contentSection.style.marginTop = '15px';
+                    contentSection.style.display = 'none';
+                    contentSection.style.transition = 'all 0.3s ease';
+                    
+                    // Add player list
+                    if (playerCount > 0) {
+                        const playerList = document.createElement('div');
+                        playerList.style.marginBottom = '15px';
+                        
+                        const playerGrid = document.createElement('div');
+                        playerGrid.style.display = 'grid';
+                        playerGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+                        playerGrid.style.gap = '10px';
+                        playerGrid.style.marginBottom = '15px';
+                        
+                        teamPlayers.forEach(player => {
+                            const playerCard = document.createElement('div');
+                            playerCard.className = 'player-change-card';
+                            playerCard.style.backgroundColor = '#1e1e1e';
+                            playerCard.style.padding = '10px';
+                            playerCard.style.borderRadius = '4px';
+                            playerCard.style.display = 'flex';
+                            playerCard.style.justifyContent = 'space-between';
+                            playerCard.style.alignItems = 'center';
+                            
+                            // Show player details
+                            const playerInfo = document.createElement('div');
+                            playerInfo.innerHTML = `
+                                <div><strong>${player.name}</strong></div>
+                                <div style="font-size: 0.8em; color: #aaa;">
+                                    ${player.position || ''} | Value: ${player.value || 0}
+                                </div>
+                            `;
+                            
+                            const undoBtn = document.createElement('button');
+                            undoBtn.className = 'history-btn revert';
+                            undoBtn.innerHTML = '<i class="fas fa-undo"></i>';
+                            undoBtn.style.padding = '5px 10px';
+                            undoBtn.style.minWidth = 'auto';
+                            undoBtn.title = 'Remove this player from transfer';
+                            undoBtn.addEventListener('click', (e) => {
+                                e.stopPropagation(); // Prevent triggering the header click
+                                if (confirm(`Are you sure you want to remove ${player.name} from the transfer? This will undo this player's transfer only.`)) {
+                                    undoPlayerTransfer(player.name, team);
+                                    displayPendingChanges();
+                                }
+                            });
+                            
+                            playerCard.appendChild(playerInfo);
+                            playerCard.appendChild(undoBtn);
+                            playerGrid.appendChild(playerCard);
+                        });
+                        
+                        playerList.appendChild(playerGrid);
+                        contentSection.appendChild(playerList);
+                    } else {
+                        const noPlayers = document.createElement('p');
+                        noPlayers.textContent = 'No specific players found for this team.';
+                        noPlayers.style.color = '#aaa';
+                        noPlayers.style.fontStyle = 'italic';
+                        contentSection.appendChild(noPlayers);
+                    }
+                    
+                    // Add buttons container
+                    const buttonsContainer = document.createElement('div');
+                    buttonsContainer.className = 'pending-buttons-container';
+                    buttonsContainer.style.display = 'flex';
+                    buttonsContainer.style.gap = '10px';
+                    buttonsContainer.style.justifyContent = 'flex-end';
+                    
+                    // Add discard button for this team
+                    const discardBtn = document.createElement('button');
+                    discardBtn.className = 'history-btn revert';
+                    discardBtn.innerHTML = '<i class="fas fa-trash"></i> Discard All';
+                    discardBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent triggering the header click
+                        if (confirm(`Are you sure you want to discard all pending changes for ${team}? This cannot be undone.`)) {
+                            // Get all change indices for this team
+                            const indicesToRemove = changes.map(change => change.index);
+                            removeChangesAtIndices(indicesToRemove);
+                            displayPendingChanges();
+                        }
+                    });
+                    
+                    buttonsContainer.appendChild(discardBtn);
+                    contentSection.appendChild(buttonsContainer);
+                    
+                    teamSection.appendChild(contentSection);
+                    
+                    // Toggle expand/collapse on header click
+                    headerSection.addEventListener('click', () => {
+                        const isExpanded = contentSection.style.display !== 'none';
+                        contentSection.style.display = isExpanded ? 'none' : 'block';
+                        expandIcon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+                    });
+                    
+                    container.appendChild(teamSection);
+                });
             }
         }
         
-        // Function to undo a specific change
-        function undoChange(index) {
-            try {
-                if (!confirm('Are you sure you want to undo this change? This cannot be reversed.')) {
-                    return;
-                }
-                
-                // Get pending changes
-                const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
-                
-                if (index < 0 || index >= pendingChanges.length) {
-                    showStatusMessage('Invalid change index', false);
-                    return;
-                }
-                
-                // Remove the change
-                const removedChange = pendingChanges.splice(index, 1)[0];
-                
-                // If changes array is now empty, clear localStorage
-                if (pendingChanges.length === 0) {
-                    localStorage.removeItem('pendingTransferChanges');
-                } else {
-                    // Otherwise update localStorage
-                    localStorage.setItem('pendingTransferChanges', JSON.stringify(pendingChanges));
-                }
-                
-                // Update UI
-                updateBatchSaveUI(pendingChanges.length);
-                
-                // Show success message
-                showStatusMessage(`Change undone: ${removedChange.description || 'Transfer change'}`, true);
-                
-                // Reload the page to reset the state
-                if (confirm('Change has been undone. Would you like to reload the page to refresh the data?')) {
-                    window.location.reload();
-                }
-                
-            } catch (error) {
-                console.error('Error undoing change:', error);
-                showStatusMessage(`Error: ${error.message}`, false);
-            }
-        }
-
-        // Function to setup view toggle
-        function setupViewToggle(listContainer, teamContainer) {
-            // This function has been removed as we now only use the team-grouped view
-            // Team view is always displayed by default
-            teamContainer.style.display = 'block';
-        }
-
-        // Helper function to get the latest timestamp from an array of players
-        function getLatestTimestamp(players) {
-            if (!players || !Array.isArray(players) || players.length === 0) {
-                return 0;
-            }
+        // Helper function to get all players transferred to a specific team
+        function getPlayersForTeam(changes, teamName) {
+            const playersMap = new Map(); // Use map to track unique players by name
             
-            let latestTime = 0;
-            
-            players.forEach(player => {
-                if (player._lastUpdated) {
-                    const updateTime = new Date(player._lastUpdated).getTime();
-                    if (updateTime > latestTime) {
-                        latestTime = updateTime;
+            // Process all changes in chronological order
+            changes.sort((a, b) => a.index - b.index).forEach(change => {
+                if (!change.playersData) return;
+                
+                // Find players that belong to this team
+                change.playersData.forEach(player => {
+                    if (player.club === teamName) {
+                        // Store or update player information
+                        playersMap.set(player.name, player);
                     }
+                });
+            });
+            
+            // Convert map values to array and sort by name
+            return Array.from(playersMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+        }
+        
+        // Show details dialog for a specific team's changes
+        function showPendingTeamDetails(teamName, changes) {
+            const modifiedPlayers = new Set();
+            
+            // Find all players transferred to this team
+            changes.forEach(change => {
+                if (change.playersData) {
+                    change.playersData.forEach(player => {
+                        if (player.club === teamName) {
+                            modifiedPlayers.add(player.name);
+                        }
+                    });
                 }
             });
             
-            return latestTime;
+            // Create a modal dialog
+            const dialog = document.createElement('div');
+            dialog.className = 'changes-dialog';
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.backgroundColor = '#252525';
+            dialog.style.padding = '20px';
+            dialog.style.borderRadius = '8px';
+            dialog.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            dialog.style.zIndex = '1000';
+            dialog.style.minWidth = '80%';
+            dialog.style.maxWidth = '90%';
+            dialog.style.maxHeight = '80vh';
+            dialog.style.overflow = 'auto';
+            
+            // Add header
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.borderBottom = '1px solid #444';
+            header.style.paddingBottom = '10px';
+            
+            const title = document.createElement('h3');
+            title.textContent = `Pending Changes for ${teamName}`;
+            title.style.margin = '0';
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = '×';
+            closeBtn.style.backgroundColor = 'transparent';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#fff';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.addEventListener('click', () => dialog.remove());
+            
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            dialog.appendChild(header);
+            
+            // Add player list
+            const playersList = document.createElement('div');
+            playersList.style.marginBottom = '20px';
+            
+            if (modifiedPlayers.size === 0) {
+                playersList.innerHTML = '<p>No specific players found for this team.</p>';
+            } else {
+                playersList.innerHTML = '<h4>Modified Players:</h4>';
+                const playerGrid = document.createElement('div');
+                playerGrid.style.display = 'grid';
+                playerGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+                playerGrid.style.gap = '10px';
+                
+                Array.from(modifiedPlayers).sort().forEach(playerName => {
+                    const playerCard = document.createElement('div');
+                    playerCard.className = 'player-change-card';
+                    playerCard.style.backgroundColor = '#1e1e1e';
+                    playerCard.style.padding = '10px';
+                    playerCard.style.borderRadius = '4px';
+                    playerCard.style.display = 'flex';
+                    playerCard.style.justifyContent = 'space-between';
+                    playerCard.style.alignItems = 'center';
+                    
+                    playerCard.innerHTML = `<span>${playerName}</span>`;
+                    
+                    const undoBtn = document.createElement('button');
+                    undoBtn.className = 'history-btn revert';
+                    undoBtn.innerHTML = '<i class="fas fa-undo"></i>';
+                    undoBtn.style.padding = '5px 10px';
+                    undoBtn.title = 'Remove this player from transfer';
+                    undoBtn.addEventListener('click', () => {
+                        if (confirm(`Are you sure you want to remove ${playerName} from the transfer? This will undo this player's transfer only.`)) {
+                            undoPlayerTransfer(playerName, teamName);
+                            dialog.remove();
+                            displayPendingChanges();
+                        }
+                    });
+                    
+                    playerCard.appendChild(undoBtn);
+                    playerGrid.appendChild(playerCard);
+                });
+                
+                playersList.appendChild(playerGrid);
+            }
+            
+            dialog.appendChild(playersList);
+            
+            // Add footer with buttons
+            const footer = document.createElement('div');
+            footer.style.display = 'flex';
+            footer.style.justifyContent = 'flex-end';
+            footer.style.gap = '10px';
+            footer.style.marginTop = '20px';
+            footer.style.borderTop = '1px solid #444';
+            footer.style.paddingTop = '15px';
+            
+            const discardBtn = document.createElement('button');
+            discardBtn.className = 'history-btn revert';
+            discardBtn.innerHTML = '<i class="fas fa-trash"></i> Discard All Team Changes';
+            discardBtn.addEventListener('click', () => {
+                if (confirm(`Are you sure you want to discard all pending changes for ${teamName}?`)) {
+                    // Get all change indices for this team
+                    const indicesToRemove = changes.map(change => change.index);
+                    removeChangesAtIndices(indicesToRemove);
+                    dialog.remove();
+                    displayPendingChanges();
+                }
+            });
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'history-btn';
+            closeButton.innerHTML = 'Close';
+            closeButton.addEventListener('click', () => dialog.remove());
+            
+            footer.appendChild(discardBtn);
+            footer.appendChild(closeButton);
+            dialog.appendChild(footer);
+            
+            // Add the dialog to the document
+            document.body.appendChild(dialog);
+        }
+        
+        // Show details for all pending changes
+        function showPendingChangeDetails(changes) {
+            // Create modal dialog
+            const dialog = document.createElement('div');
+            dialog.className = 'changes-dialog';
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.backgroundColor = '#252525';
+            dialog.style.padding = '20px';
+            dialog.style.borderRadius = '8px';
+            dialog.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            dialog.style.zIndex = '1000';
+            dialog.style.minWidth = '80%';
+            dialog.style.maxWidth = '90%';
+            dialog.style.maxHeight = '80vh';
+            dialog.style.overflow = 'auto';
+            
+            // Add header
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.justifyContent = 'space-between';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '15px';
+            header.style.borderBottom = '1px solid #444';
+            header.style.paddingBottom = '10px';
+            
+            const title = document.createElement('h3');
+            title.textContent = 'All Pending Changes';
+            title.style.margin = '0';
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = '×';
+            closeBtn.style.backgroundColor = 'transparent';
+            closeBtn.style.border = 'none';
+            closeBtn.style.color = '#fff';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.addEventListener('click', () => dialog.remove());
+            
+            header.appendChild(title);
+            header.appendChild(closeBtn);
+            dialog.appendChild(header);
+            
+            // Add changes list
+            const changesList = document.createElement('div');
+            
+            changes.forEach((change, index) => {
+                const changeItem = document.createElement('div');
+                changeItem.style.backgroundColor = '#1e1e1e';
+                changeItem.style.padding = '15px';
+                changeItem.style.marginBottom = '10px';
+                changeItem.style.borderRadius = '4px';
+                
+                // Format timestamp
+                const timestamp = new Date(change.timestamp).toLocaleString();
+                
+                // Create header with timestamp and description
+                const changeHeader = document.createElement('div');
+                changeHeader.style.display = 'flex';
+                changeHeader.style.justifyContent = 'space-between';
+                changeHeader.style.marginBottom = '10px';
+                
+                changeHeader.innerHTML = `
+                    <div><strong>Change #${index + 1}</strong> - ${timestamp}</div>
+                    <div>${change.description || 'No description'}</div>
+                `;
+                
+                changeItem.appendChild(changeHeader);
+                
+                // Add discard button
+                const actionsDiv = document.createElement('div');
+                actionsDiv.style.display = 'flex';
+                actionsDiv.style.justifyContent = 'flex-end';
+                actionsDiv.style.marginTop = '10px';
+                
+                const discardBtn = document.createElement('button');
+                discardBtn.className = 'history-btn revert';
+                discardBtn.innerHTML = '<i class="fas fa-trash"></i> Discard';
+                discardBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to discard this change?')) {
+                        removeChangesAtIndices([index]);
+                        dialog.remove();
+                        displayPendingChanges();
+                    }
+                });
+                
+                actionsDiv.appendChild(discardBtn);
+                changeItem.appendChild(actionsDiv);
+                
+                changesList.appendChild(changeItem);
+            });
+            
+            dialog.appendChild(changesList);
+            
+            // Add footer with buttons
+            const footer = document.createElement('div');
+            footer.style.display = 'flex';
+            footer.style.justifyContent = 'flex-end';
+            footer.style.gap = '10px';
+            footer.style.marginTop = '20px';
+            footer.style.borderTop = '1px solid #444';
+            footer.style.paddingTop = '15px';
+            
+            const discardAllBtn = document.createElement('button');
+            discardAllBtn.className = 'history-btn revert';
+            discardAllBtn.innerHTML = '<i class="fas fa-trash"></i> Discard All Changes';
+            discardAllBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to discard ALL pending changes? This cannot be undone.')) {
+                    localStorage.removeItem('pendingTransferChanges');
+                    dialog.remove();
+                    displayPendingChanges();
+                    updateBatchSaveUI(0);
+                }
+            });
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'history-btn';
+            closeButton.innerHTML = 'Close';
+            closeButton.addEventListener('click', () => dialog.remove());
+            
+            footer.appendChild(discardAllBtn);
+            footer.appendChild(closeButton);
+            dialog.appendChild(footer);
+            
+            // Add the dialog to the document
+            document.body.appendChild(dialog);
+        }
+        
+        // Remove specific change indices from localStorage
+        function removeChangesAtIndices(indices) {
+            const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
+            
+            // Sort indices in descending order to remove from the end first
+            indices.sort((a, b) => b - a);
+            
+            // Remove each change by index
+            indices.forEach(index => {
+                if (index >= 0 && index < pendingChanges.length) {
+                    pendingChanges.splice(index, 1);
+                }
+            });
+            
+            // Save back to localStorage
+            localStorage.setItem('pendingTransferChanges', JSON.stringify(pendingChanges));
+            
+            // Update the UI
+            updateBatchSaveUI(pendingChanges.length);
+        }
+        
+        // Undo a specific player transfer
+        function undoPlayerTransfer(playerName, teamName) {
+            const pendingChanges = JSON.parse(localStorage.getItem('pendingTransferChanges') || '[]');
+            
+            if (pendingChanges.length === 0) return;
+            
+            // Get the latest change data
+            const latestChange = pendingChanges[pendingChanges.length - 1];
+            
+            if (!latestChange.playersData) return;
+            
+            // Find the player in the latest data
+            const playerIndex = latestChange.playersData.findIndex(p => p.name === playerName);
+            
+            if (playerIndex === -1) return;
+            
+            const player = latestChange.playersData[playerIndex];
+            
+            // Only undo if the player is in the specified team
+            if (player.club !== teamName) return;
+            
+            // Look for the player in earlier changes to find their previous state
+            let previousState = null;
+            for (let i = pendingChanges.length - 2; i >= 0; i--) {
+                const prevChange = pendingChanges[i];
+                if (prevChange.playersData && playerIndex < prevChange.playersData.length) {
+                    const prevPlayer = prevChange.playersData[playerIndex];
+                    if (prevPlayer.name === playerName) {
+                        previousState = {...prevPlayer};
+                        break;
+                    }
+                }
+            }
+            
+            // If no previous state found, revert to FREE AGENT
+            if (!previousState) {
+                previousState = {
+                    ...player,
+                    club: "FREE AGENT",
+                    value: player.value
+                };
+            }
+            
+            // Create a new change with the player transfer undone
+            const newChangeData = JSON.parse(JSON.stringify(latestChange));
+            newChangeData.timestamp = new Date().toISOString();
+            newChangeData.description = `Undid transfer of ${playerName} to ${teamName}`;
+            
+            // Update the player's state
+            newChangeData.playersData[playerIndex] = previousState;
+            
+            // If the player was in a manager's squad, remove them
+            if (newChangeData.managersData) {
+                newChangeData.managersData.forEach(manager => {
+                    if (manager.club === teamName && manager.squad && manager.squad.players) {
+                        manager.squad.players = manager.squad.players.filter(p => p.name !== playerName);
+                        if (manager.squad.totalPlayers) {
+                            manager.squad.totalPlayers = manager.squad.players.length;
+                        }
+                    }
+                });
+            }
+            
+            // Add the new change
+            pendingChanges.push(newChangeData);
+            
+            // Save back to localStorage
+            localStorage.setItem('pendingTransferChanges', JSON.stringify(pendingChanges));
+            
+            // Update the UI
+            updateBatchSaveUI(pendingChanges.length);
         }
     </script>
     
