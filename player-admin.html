@@ -3744,6 +3744,455 @@
                 console.error('Error deleting player:', error);
             }
         }
+
+        // Save a file to GitHub with cache-busting for Vercel
+        async function saveFileToGitHub(data, filePath, commitMessage) {
+            try {
+                console.log(`Starting save for ${filePath}...`);
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: filePath,
+                    branch: githubConfig.getBranch()
+                };
+                
+                // Get the current file to get its SHA
+                console.log('Fetching current file info...');
+                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                let currentSHA = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    console.log('File does not exist yet, will create it');
+                    fileExists = false;
+                } else if (!fileInfoResponse.ok) {
+                    const errorData = await fileInfoResponse.json();
+                    console.error('Error getting file info:', errorData);
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                } else {
+                    const fileInfo = await fileInfoResponse.json();
+                    currentSHA = fileInfo.sha;
+                    console.log('Found existing file with SHA:', currentSHA);
+                }
+                
+                // For JSON data, add a cache-busting timestamp if appropriate
+                if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+                    // Add a hidden timestamp field for cache busting
+                    data._lastUpdated = new Date().toISOString();
+                } else if (Array.isArray(data)) {
+                    // For array data, we'll wrap it in an object with a timestamp
+                    const wrappedData = {
+                        data: data,
+                        _lastUpdated: new Date().toISOString()
+                    };
+                    
+                    // If the file is players.json, we need to maintain the original format
+                    // Otherwise, wrap it for cache busting
+                    if (filePath !== 'players.json') {
+                        data = wrappedData;
+                    }
+                }
+                
+                // Prepare the content
+                const jsonString = JSON.stringify(data, null, 2);
+                const content = btoa(unescape(encodeURIComponent(jsonString)));
+                
+                // Prepare the commit
+                const requestBody = {
+                    message: `${commitMessage} - ${new Date().toISOString()}`,
+                    content: content,
+                    branch: repoDetails.branch
+                };
+                
+                if (fileExists) {
+                    requestBody.sha = currentSHA;
+                }
+                
+                console.log(`Committing ${filePath}...`);
+                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!commitResponse.ok) {
+                    const errorData = await commitResponse.json();
+                    console.error(`Failed to commit ${filePath}:`, errorData);
+                    throw new Error(`Failed to commit ${filePath}: ${errorData.message}`);
+                }
+                
+                console.log(`Successfully saved ${filePath}`);
+                
+                // If this is a successful save, trigger Vercel deployment if configured
+                if (commitResponse.ok) {
+                    triggerVercelDeployment();
+                }
+                
+                return commitResponse;
+                
+            } catch (error) {
+                console.error(`Error saving ${filePath}:`, error);
+                throw error;
+            }
+        }
+        
+        // Function to trigger Vercel deployment and clear cache
+        async function triggerVercelDeployment() {
+            try {
+                // Store deployment trigger time
+                const triggerTime = new Date().toISOString();
+                localStorage.setItem('lastVercelDeployTrigger', triggerTime);
+                
+                console.log('Attempting to trigger Vercel deployment...');
+                
+                // Check if we have a Vercel deploy hook URL stored
+                const deployHookUrl = localStorage.getItem('vercelDeployHook');
+                
+                if (deployHookUrl) {
+                    console.log('Using stored Vercel deploy hook URL');
+                    
+                    // Trigger deployment webhook
+                    const response = await fetch(deployHookUrl, { method: 'POST' });
+                    
+                    if (response.ok) {
+                        console.log('Vercel deployment triggered successfully');
+                        showStatusMessage('Vercel deployment triggered. Site will update in a few minutes.', true, 5000);
+                        
+                        // Store successful deployment trigger
+                        localStorage.setItem('vercelDeploymentStatus', 'triggered');
+                        localStorage.setItem('vercelDeploymentTime', triggerTime);
+                    } else {
+                        console.error('Failed to trigger Vercel deployment', await response.text());
+                    }
+                } else {
+                    console.log('No Vercel deploy hook URL configured. Skipping deployment trigger.');
+                    
+                    // Show notification to add deploy hook
+                    const setupDeployHook = confirm('Would you like to set up a Vercel Deploy Hook to automatically clear cache when changes are pushed?\n\nThis helps ensure your changes are visible immediately.');
+                    
+                    if (setupDeployHook) {
+                        const hookUrl = prompt('Enter your Vercel Deploy Hook URL:\n\nYou can create one in your Vercel project settings under "Git" → "Deploy Hooks"');
+                        
+                        if (hookUrl && hookUrl.trim().startsWith('http')) {
+                            localStorage.setItem('vercelDeployHook', hookUrl.trim());
+                            showStatusMessage('Deploy hook saved. It will be used for future deployments.', true, 5000);
+                            
+                            // Try to use the newly added hook
+                            triggerVercelDeployment();
+                        } else {
+                            showStatusMessage('Invalid deploy hook URL. Changes were saved to GitHub but you may need to manually redeploy.', false, 8000);
+                        }
+                    }
+                }
+                
+                // Also add cache busters to loaded files for immediate local use
+                addCacheBustersToUrls();
+                
+            } catch (error) {
+                console.error('Error triggering Vercel deployment:', error);
+                // Don't throw, as this is optional functionality
+            }
+        }
+        
+        // Add cache busters to URLs for immediate local use
+        function addCacheBustersToUrls() {
+            try {
+                console.log('Adding cache busters to loaded files...');
+                
+                // Generate a cache buster value based on current time
+                const cacheBuster = Date.now();
+                
+                // Update localStorage to remember when we last busted cache
+                localStorage.setItem('lastCacheBust', cacheBuster.toString());
+                
+                // For already loaded JSON files, we can reload them with cache busters
+                // But we need to tell the user they might need to hard refresh
+                showStatusMessage('Files updated. You may need to press Ctrl+F5 to see the latest changes.', true, 8000);
+            } catch (error) {
+                console.error('Error adding cache busters:', error);
+            }
+        }
+        
+        // Function to check if we can load from cache or need to refresh
+        function shouldReloadData() {
+            try {
+                const lastCacheBust = localStorage.getItem('lastCacheBust');
+                const lastDeployment = localStorage.getItem('vercelDeploymentTime');
+                
+                if (lastCacheBust && lastDeployment) {
+                    // If we've busted cache since the last deployment, we're probably good
+                    const cacheBustTime = parseInt(lastCacheBust);
+                    const deployTime = new Date(lastDeployment).getTime();
+                    
+                    // If cache bust is more recent than deployment, we're good
+                    if (cacheBustTime > deployTime) {
+                        return false;
+                    }
+                }
+                
+                // By default, encourage reload if we're unsure
+                return true;
+            } catch (error) {
+                console.error('Error checking reload status:', error);
+                return true;
+            }
+        }
+        
+        // Add settings UI for Vercel deployment
+        function addVercelSettingsUI() {
+            try {
+                // Check if settings UI already exists
+                if (document.getElementById('vercel-settings-button')) {
+                    return;
+                }
+                
+                // Create settings button
+                const settingsButton = document.createElement('button');
+                settingsButton.id = 'vercel-settings-button';
+                settingsButton.innerHTML = '<i class="fas fa-cog"></i> Vercel Settings';
+                settingsButton.style.marginLeft = '10px';
+                settingsButton.style.backgroundColor = '#0070f3';
+                settingsButton.style.color = 'white';
+                settingsButton.style.border = 'none';
+                settingsButton.style.borderRadius = '4px';
+                settingsButton.style.padding = '8px 12px';
+                settingsButton.style.cursor = 'pointer';
+                
+                // Add click handler
+                settingsButton.addEventListener('click', showVercelSettings);
+                
+                // Find a good place to add the button in the header
+                const userInfo = document.querySelector('.user-info');
+                if (userInfo) {
+                    userInfo.appendChild(settingsButton);
+                }
+            } catch (error) {
+                console.error('Error adding Vercel settings UI:', error);
+            }
+        }
+        
+        // Show Vercel settings dialog
+        function showVercelSettings() {
+            try {
+                // Create modal
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                modal.style.zIndex = '1000';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                
+                // Create modal content
+                const content = document.createElement('div');
+                content.style.backgroundColor = '#282828';
+                content.style.borderRadius = '8px';
+                content.style.padding = '20px';
+                content.style.maxWidth = '600px';
+                content.style.width = '90%';
+                content.style.maxHeight = '90%';
+                content.style.overflow = 'auto';
+                
+                // Title
+                const title = document.createElement('h2');
+                title.textContent = 'Vercel Deployment Settings';
+                title.style.marginTop = '0';
+                title.style.borderBottom = '1px solid #444';
+                title.style.paddingBottom = '10px';
+                
+                // Deploy hook section
+                const hookSection = document.createElement('div');
+                hookSection.style.marginTop = '20px';
+                
+                const hookLabel = document.createElement('h3');
+                hookLabel.textContent = 'Deploy Hook URL';
+                
+                const hookDescription = document.createElement('p');
+                hookDescription.textContent = 'A deploy hook allows this admin panel to trigger a new Vercel deployment when changes are saved. This helps ensure your changes are visible immediately.';
+                hookDescription.style.color = '#aaa';
+                
+                const hookInput = document.createElement('input');
+                hookInput.type = 'text';
+                hookInput.placeholder = 'https://api.vercel.com/v1/integrations/deploy/...';
+                hookInput.value = localStorage.getItem('vercelDeployHook') || '';
+                hookInput.style.width = '100%';
+                hookInput.style.padding = '10px';
+                hookInput.style.backgroundColor = '#333';
+                hookInput.style.border = '1px solid #444';
+                hookInput.style.borderRadius = '4px';
+                hookInput.style.color = 'white';
+                hookInput.style.marginBottom = '10px';
+                
+                const hookHelpLink = document.createElement('a');
+                hookHelpLink.href = 'https://vercel.com/docs/git/deploy-hooks';
+                hookHelpLink.textContent = 'How to create a deploy hook in Vercel';
+                hookHelpLink.target = '_blank';
+                hookHelpLink.style.color = '#3498db';
+                hookHelpLink.style.display = 'inline-block';
+                hookHelpLink.style.marginBottom = '20px';
+                
+                // Test hook button
+                const testButton = document.createElement('button');
+                testButton.textContent = 'Test Deploy Hook';
+                testButton.style.backgroundColor = '#0070f3';
+                testButton.style.color = 'white';
+                testButton.style.border = 'none';
+                testButton.style.borderRadius = '4px';
+                testButton.style.padding = '10px 15px';
+                testButton.style.cursor = 'pointer';
+                testButton.style.marginTop = '10px';
+                
+                testButton.addEventListener('click', async () => {
+                    const hookUrl = hookInput.value.trim();
+                    
+                    if (!hookUrl) {
+                        alert('Please enter a deploy hook URL first.');
+                        return;
+                    }
+                    
+                    testButton.textContent = 'Testing...';
+                    testButton.disabled = true;
+                    
+                    try {
+                        const response = await fetch(hookUrl, { method: 'POST' });
+                        
+                        if (response.ok) {
+                            alert('Deploy hook test successful! Vercel deployment has been triggered.');
+                            localStorage.setItem('vercelDeployHook', hookUrl);
+                        } else {
+                            const errorText = await response.text();
+                            alert(`Deploy hook test failed: ${response.status} ${response.statusText}\n\n${errorText}`);
+                        }
+                    } catch (error) {
+                        alert(`Error testing deploy hook: ${error.message}`);
+                    } finally {
+                        testButton.textContent = 'Test Deploy Hook';
+                        testButton.disabled = false;
+                    }
+                });
+                
+                // Clear cache section
+                const cacheSection = document.createElement('div');
+                cacheSection.style.marginTop = '30px';
+                cacheSection.style.borderTop = '1px solid #444';
+                cacheSection.style.paddingTop = '20px';
+                
+                const cacheLabel = document.createElement('h3');
+                cacheLabel.textContent = 'Clear Browser Cache';
+                
+                const cacheDescription = document.createElement('p');
+                cacheDescription.textContent = 'If you\'re still seeing old data after pushing to GitHub, you may need to clear your browser cache.';
+                cacheDescription.style.color = '#aaa';
+                
+                const clearCacheButton = document.createElement('button');
+                clearCacheButton.textContent = 'Clear Local Cache';
+                clearCacheButton.style.backgroundColor = '#e74c3c';
+                clearCacheButton.style.color = 'white';
+                clearCacheButton.style.border = 'none';
+                clearCacheButton.style.borderRadius = '4px';
+                clearCacheButton.style.padding = '10px 15px';
+                clearCacheButton.style.cursor = 'pointer';
+                
+                clearCacheButton.addEventListener('click', () => {
+                    if (confirm('This will reload the page and clear the local cache. Continue?')) {
+                        // Add cache-busting parameter to current URL
+                        const sep = window.location.href.indexOf('?') !== -1 ? '&' : '?';
+                        const bustCache = `${sep}cache=${Date.now()}`;
+                        window.location.href = window.location.href + bustCache;
+                    }
+                });
+                
+                // Save button
+                const saveButton = document.createElement('button');
+                saveButton.textContent = 'Save Settings';
+                saveButton.style.backgroundColor = '#2ecc71';
+                saveButton.style.color = 'white';
+                saveButton.style.border = 'none';
+                saveButton.style.borderRadius = '4px';
+                saveButton.style.padding = '10px 15px';
+                saveButton.style.cursor = 'pointer';
+                saveButton.style.marginTop = '20px';
+                saveButton.style.marginRight = '10px';
+                
+                saveButton.addEventListener('click', () => {
+                    localStorage.setItem('vercelDeployHook', hookInput.value.trim());
+                    alert('Settings saved!');
+                    document.body.removeChild(modal);
+                });
+                
+                // Close button
+                const closeButton = document.createElement('button');
+                closeButton.textContent = 'Close';
+                closeButton.style.backgroundColor = '#7f8c8d';
+                closeButton.style.color = 'white';
+                closeButton.style.border = 'none';
+                closeButton.style.borderRadius = '4px';
+                closeButton.style.padding = '10px 15px';
+                closeButton.style.cursor = 'pointer';
+                closeButton.style.marginTop = '20px';
+                
+                closeButton.addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                });
+                
+                // Assemble the UI
+                hookSection.appendChild(hookLabel);
+                hookSection.appendChild(hookDescription);
+                hookSection.appendChild(hookInput);
+                hookSection.appendChild(hookHelpLink);
+                hookSection.appendChild(document.createElement('br'));
+                hookSection.appendChild(testButton);
+                
+                cacheSection.appendChild(cacheLabel);
+                cacheSection.appendChild(cacheDescription);
+                cacheSection.appendChild(clearCacheButton);
+                
+                const buttonContainer = document.createElement('div');
+                buttonContainer.style.display = 'flex';
+                buttonContainer.style.justifyContent = 'flex-end';
+                buttonContainer.appendChild(saveButton);
+                buttonContainer.appendChild(closeButton);
+                
+                content.appendChild(title);
+                content.appendChild(hookSection);
+                content.appendChild(cacheSection);
+                content.appendChild(buttonContainer);
+                
+                modal.appendChild(content);
+                document.body.appendChild(modal);
+            } catch (error) {
+                console.error('Error showing Vercel settings:', error);
+            }
+        }
+        
+        // Update document ready handler to initialize Vercel settings
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing code ...
+            
+            // Initialize Vercel settings UI
+            addVercelSettingsUI();
+            
+            // Add cache busting if needed
+            if (shouldReloadData()) {
+                addCacheBustersToUrls();
+            }
+            
+            // ... existing code ...
+        });
     </script>
 
     <!-- Performance optimization JS -->
