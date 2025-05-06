@@ -5596,8 +5596,11 @@
             }
             
             // Disable save button
-            document.getElementById('save-all-btn').disabled = true;
-            document.getElementById('save-all-btn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            const saveButton = document.getElementById('save-all-btn');
+            if (saveButton) {
+                saveButton.disabled = true;
+                saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            }
             
             // Prepare data for submission
             const transfersData = pendingTransfers.map(transfer => {
@@ -5632,16 +5635,20 @@
                 } else {
                     alert('Error: ' + data.message);
                     // Re-enable save button
-                    document.getElementById('save-all-btn').disabled = false;
-                    document.getElementById('save-all-btn').innerHTML = '<i class="fas fa-save"></i> Save All';
+                    if (saveButton) {
+                        saveButton.disabled = false;
+                        saveButton.innerHTML = '<i class="fas fa-save"></i> Save All';
+                    }
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Failed to save transfers. Please try again.');
                 // Re-enable save button
-                document.getElementById('save-all-btn').disabled = false;
-                document.getElementById('save-all-btn').innerHTML = '<i class="fas fa-save"></i> Save All';
+                if (saveButton) {
+                    saveButton.disabled = false;
+                    saveButton.innerHTML = '<i class="fas fa-save"></i> Save All';
+                }
             });
         }
     </script>
