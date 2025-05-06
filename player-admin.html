@@ -2541,54 +2541,7 @@
                     // Save manager_data.json if we have manager data
                     if (managerData) {
                         console.log('Saving manager_data.json...');
-                        
-                        // Fix: Ensure managerData has proper format before saving
-                        let managersDataFormatted;
-                        
-                        // Check if managerData already has the managers array
-                        if (managerData.managers && Array.isArray(managerData.managers)) {
-                            console.log('Using existing managers array structure');
-                            managersDataFormatted = { 
-                                managers: [...managerData.managers],
-                                _lastUpdated: new Date().toISOString()
-                            };
-                        } 
-                        // If managerData is just an object with no managers array
-                        else if (typeof managerData === 'object' && managerData !== null) {
-                            console.log('Creating managers array structure from object');
-                            if (managerData.managers && !Array.isArray(managerData.managers)) {
-                                // Convert managers object to array if it exists but isn't an array
-                                managersDataFormatted = { 
-                                    managers: Object.values(managerData.managers),
-                                    _lastUpdated: new Date().toISOString()
-                                };
-                            } else {
-                                // Use entire object as a manager if no managers property
-                                managersDataFormatted = { 
-                                    managers: [managerData],
-                                    _lastUpdated: new Date().toISOString()
-                                };
-                            }
-                        }
-                        // If managerData is an array directly
-                        else if (Array.isArray(managerData)) {
-                            console.log('Creating managers array structure from array');
-                            managersDataFormatted = { 
-                                managers: managerData,
-                                _lastUpdated: new Date().toISOString()
-                            };
-                        }
-                        // Fallback to empty array if nothing works
-                        else {
-                            console.log('Creating empty managers array structure');
-                            managersDataFormatted = { 
-                                managers: [],
-                                _lastUpdated: new Date().toISOString()
-                            };
-                        }
-                        
-                        console.log('Formatted manager data structure:', managersDataFormatted);
-                        
+                        const managersDataFormatted = { managers: managerData.managers || [] };
                         const managersResponse = await saveFileToGitHub(managersDataFormatted, 'manager_data.json', 'Update managers from admin panel');
                         savedManagers = managersResponse.ok;
                         console.log('Managers save result:', savedManagers);
@@ -2665,42 +2618,8 @@
                     console.log('Found existing file with SHA:', currentSHA);
                 }
                 
-                // Special handling for manager_data.json
-                let finalData = data;
-                if (filePath === 'manager_data.json') {
-                    console.log('Manager data format check before save:', finalData);
-                    // Make sure manager data has the correct format
-                    if (!finalData.managers && Array.isArray(finalData)) {
-                        console.log('Converting array to manager data format');
-                        finalData = { managers: finalData };
-                    } else if (finalData.managers && !Array.isArray(finalData.managers)) {
-                        console.log('Converting managers object to array');
-                        finalData.managers = Array.isArray(finalData.managers) ? finalData.managers : 
-                                            Object.values(finalData.managers || {});
-                    }
-                    console.log('Manager data format after check:', finalData);
-                }
-                
-                // For JSON data, add a cache-busting timestamp if appropriate
-                if (typeof finalData === 'object' && finalData !== null && !Array.isArray(finalData)) {
-                    // Add a hidden timestamp field for cache busting
-                    finalData._lastUpdated = new Date().toISOString();
-                } else if (Array.isArray(finalData)) {
-                    // For array data, we'll wrap it in an object with a timestamp
-                    const wrappedData = {
-                        data: finalData,
-                        _lastUpdated: new Date().toISOString()
-                    };
-                    
-                    // If the file is players.json, we need to maintain the original format
-                    // Otherwise, wrap it for cache busting
-                    if (filePath !== 'players.json') {
-                        finalData = wrappedData;
-                    }
-                }
-                
                 // Prepare the content
-                const jsonString = JSON.stringify(finalData, null, 2);
+                const jsonString = JSON.stringify(data, null, 2);
                 const content = btoa(unescape(encodeURIComponent(jsonString)));
                 
                 // Prepare the commit
@@ -2731,12 +2650,6 @@
                 }
                 
                 console.log(`Successfully saved ${filePath}`);
-                
-                // If this is a successful save, trigger Vercel deployment if configured
-                if (commitResponse.ok) {
-                    triggerVercelDeployment();
-                }
-                
                 return commitResponse;
                 
             } catch (error) {
@@ -3832,6 +3745,107 @@
             }
         }
 
+        // Save a file to GitHub with cache-busting for Vercel
+        async function saveFileToGitHub(data, filePath, commitMessage) {
+            try {
+                console.log(`Starting save for ${filePath}...`);
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: filePath,
+                    branch: githubConfig.getBranch()
+                };
+                
+                // Get the current file to get its SHA
+                console.log('Fetching current file info...');
+                const fileInfoResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                let currentSHA = '';
+                let fileExists = true;
+                
+                if (fileInfoResponse.status === 404) {
+                    console.log('File does not exist yet, will create it');
+                    fileExists = false;
+                } else if (!fileInfoResponse.ok) {
+                    const errorData = await fileInfoResponse.json();
+                    console.error('Error getting file info:', errorData);
+                    throw new Error(`GitHub API error: ${errorData.message}`);
+                } else {
+                    const fileInfo = await fileInfoResponse.json();
+                    currentSHA = fileInfo.sha;
+                    console.log('Found existing file with SHA:', currentSHA);
+                }
+                
+                // For JSON data, add a cache-busting timestamp if appropriate
+                if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+                    // Add a hidden timestamp field for cache busting
+                    data._lastUpdated = new Date().toISOString();
+                } else if (Array.isArray(data)) {
+                    // For array data, we'll wrap it in an object with a timestamp
+                    const wrappedData = {
+                        data: data,
+                        _lastUpdated: new Date().toISOString()
+                    };
+                    
+                    // If the file is players.json, we need to maintain the original format
+                    // Otherwise, wrap it for cache busting
+                    if (filePath !== 'players.json') {
+                        data = wrappedData;
+                    }
+                }
+                
+                // Prepare the content
+                const jsonString = JSON.stringify(data, null, 2);
+                const content = btoa(unescape(encodeURIComponent(jsonString)));
+                
+                // Prepare the commit
+                const requestBody = {
+                    message: `${commitMessage} - ${new Date().toISOString()}`,
+                    content: content,
+                    branch: repoDetails.branch
+                };
+                
+                if (fileExists) {
+                    requestBody.sha = currentSHA;
+                }
+                
+                console.log(`Committing ${filePath}...`);
+                const commitResponse = await fetch(`https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!commitResponse.ok) {
+                    const errorData = await commitResponse.json();
+                    console.error(`Failed to commit ${filePath}:`, errorData);
+                    throw new Error(`Failed to commit ${filePath}: ${errorData.message}`);
+                }
+                
+                console.log(`Successfully saved ${filePath}`);
+                
+                // If this is a successful save, trigger Vercel deployment if configured
+                if (commitResponse.ok) {
+                    triggerVercelDeployment();
+                }
+                
+                return commitResponse;
+                
+            } catch (error) {
+                console.error(`Error saving ${filePath}:`, error);
+                throw error;
+            }
+        }
+        
         // Function to trigger Vercel deployment and clear cache
         async function triggerVercelDeployment() {
             try {
