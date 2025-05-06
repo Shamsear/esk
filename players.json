@@ -20831,20 +20831,20 @@
     "name": "STRAHINJA PAVLOVIC",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
     "stats": [
       {
-        "season": "5-7",
+        "season": "5-6",
         "team": "AC MILAN",
-        "value": "40",
-        "apps": "00"
+        "value": "40"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. PAVLOVIC_CARD.webp",
-    "id": 1026
+    "id": 1026,
+    "clubLogo": "assets/images/club-logos/FREE-AGENT.webp"
   },
   {
     "name": "BAFOFE DIAKITE",
