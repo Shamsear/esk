@@ -6349,7 +6349,7 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "ST",
     "value": 68,
     "gamesPlayed": 0,
@@ -6358,18 +6358,11 @@
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "76"
-      },
-      {
-        "season": "6-8",
-        "team": "AC MILAN",
-        "value": "68",
-        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp",
     "id": 301,
-    "clubLogo": "assets/images/players/club/AC Milan.webp",
-    "type": "standard"
+    "clubLogo": "assets/images/players/club/AC Milan.webp"
   },
   {
     "name": "ALBERT GUDMUNDSSON",
@@ -20993,7 +20986,7 @@
     "name": "STRAHINJA PAVLOVIC",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "AC MILAN",
+    "club": "FREE AGENT",
     "position": "CB",
     "value": 40,
     "gamesPlayed": 0,
@@ -21001,12 +20994,12 @@
       {
         "season": "5-7",
         "team": "AC MILAN",
-        "value": "40",
-        "apps": "00"
+        "value": "40"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/S. PAVLOVIC_CARD.webp",
-    "id": 1026
+    "id": 1026,
+    "clubLogo": "assets/images/players/club/FREE AGENT.webp"
   },
   {
     "name": "BAFOFE DIAKITE",
