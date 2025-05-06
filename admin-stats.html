@@ -751,9 +751,10 @@
             
             // Basic Info
             document.getElementById('name').value = getValue(manager, 'name');
-            document.getElementById('rank').value = getValue(manager, 'age');
-            document.getElementById('overall').value = getValue(manager, 'overall_rating');
-            document.getElementById('manager_rating').value = getValue(manager, 'manager_rating');
+            document.getElementById('rank').value = getValue(manager, 'rank', '');
+            document.getElementById('overall').value = getValue(manager, 'overall', 
+                getValue(manager, 'overall_rating', 0));
+            document.getElementById('manager_rating').value = getValue(manager, 'manager_rating', 0);
             document.getElementById('star_rating').value = getValue(manager, 'star_rating', 3); // Default to 3 stars
             
             // Financial - check all possible field names
@@ -1404,8 +1405,8 @@
                 const updatedManager = {
                     ...originalManager, // Preserve existing fields
                     name: document.getElementById('name').value,
-                    age: document.getElementById('rank').value,
-                    overall_rating: parseFloat(document.getElementById('overall').value) || 0,
+                    rank: document.getElementById('rank').value,
+                    overall: parseFloat(document.getElementById('overall').value) || 0,
                     manager_rating: parseFloat(document.getElementById('manager_rating').value) || 0,
                     star_rating: parseInt(document.getElementById('star_rating').value) || 3,
                     club_total_value: parseInt(document.getElementById('club_value').value) || 0,
@@ -1415,6 +1416,11 @@
                     awards: parseInt(document.getElementById('awards').value) || 0,
                     total_players: parseInt(document.getElementById('total_players').value) || 0
                 };
+                
+                // For backward compatibility, preserve the overall_rating field if it exists in original data
+                if ('overall_rating' in originalManager) {
+                    updatedManager.overall_rating = updatedManager.overall;
+                }
                 
                 // Update coin fields with alternate naming for compatibility
                 updatedManager.r2gCoinBalance = updatedManager.r2g_coin_balance;
@@ -1461,7 +1467,7 @@
                         const githubSaved = await saveToGitHub(managersData);
                         if (githubSaved) {
                             savedSuccessfully = true;
-                            showSuccess('Changes saved to GitHub successfully!', 5000);
+                            showSuccess('Manager and player data saved to GitHub successfully!', 5000);
                         }
                     } catch (githubError) {
                         console.error('GitHub save failed:', githubError);
@@ -1475,7 +1481,7 @@
                         const serverSaved = await saveToServer(managersData);
                         if (serverSaved) {
                             savedSuccessfully = true;
-                            showSuccess('Changes saved to local server.', 5000);
+                            showSuccess('Manager and player data saved to local server.', 5000);
                         }
                     } catch (serverError) {
                         console.error('Server save failed:', serverError);
@@ -1485,7 +1491,7 @@
                 // Update UI based on save results
                 if (!savedSuccessfully) {
                     // If both failed, acknowledge the changes were made in memory
-                    showSuccess('Changes saved in memory only. GitHub and server saves failed.', 5000);
+                    showSuccess('Manager and player changes saved in memory only. GitHub and server saves failed.', 5000);
                 }
                 
                 // Update the global data
