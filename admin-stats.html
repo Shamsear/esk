@@ -899,96 +899,68 @@
             }
         }
 
-        // Function to trigger Vercel deployment and clear cache
+        // Add triggerVercelDeployment function
         async function triggerVercelDeployment() {
             try {
-                // Store deployment trigger time
-                const triggerTime = new Date().toISOString();
-                localStorage.setItem('lastVercelDeployTrigger', triggerTime);
+                // Store the deployment trigger time
+                const deployTime = new Date().toISOString();
+                localStorage.setItem('lastVercelDeployTrigger', deployTime);
                 
-                console.log('Attempting to trigger Vercel deployment...');
+                // Get the deploy hook URL, or use default if not set
+                const defaultHookUrl = "https://api.vercel.com/v1/integrations/deploy/prj_zay0W2jm2U9RmCM9ujPjcYg8M9vq/OrjEvgJEbE";
+                let deployHookUrl = localStorage.getItem('vercelDeployHookUrl') || defaultHookUrl;
                 
-                // Check if we have a Vercel deploy hook URL stored in localStorage or in githubConfig
-                let deployHookUrl = localStorage.getItem('vercelDeployHook');
-                
-                // Use the default hook from githubConfig if none is found in localStorage
-                if (!deployHookUrl && githubConfig && githubConfig.vercelDeployHook) {
-                    console.log('Using default Vercel deploy hook from config');
-                    deployHookUrl = githubConfig.vercelDeployHook;
-                    
-                    // Optionally save this to localStorage for future use
-                    localStorage.setItem('vercelDeployHook', deployHookUrl);
+                // If not already saved, save it for future use
+                if (!localStorage.getItem('vercelDeployHookUrl')) {
+                    localStorage.setItem('vercelDeployHookUrl', deployHookUrl);
                 }
                 
-                if (deployHookUrl) {
-                    console.log('Using Vercel deploy hook:', deployHookUrl);
-                    
-                    // Trigger deployment webhook
-                    const response = await fetch(deployHookUrl, { method: 'POST' });
-                    
-                    if (response.ok) {
-                        console.log('Vercel deployment triggered successfully');
-                        const responseData = await response.json();
-                        console.log('Deployment job created:', responseData);
-                        showSuccess('Vercel deployment triggered. Site will update in a few minutes.', 5000);
-                        
-                        // Store successful deployment trigger
-                        localStorage.setItem('vercelDeploymentStatus', 'triggered');
-                        localStorage.setItem('vercelDeploymentTime', triggerTime);
-                    } else {
-                        console.error('Failed to trigger Vercel deployment', await response.text());
+                console.log('Triggering Vercel deployment with hook:', deployHookUrl);
+                
+                // Trigger the deployment
+                const response = await fetch(deployHookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Vercel deployment triggered successfully:', result);
+                    
+                    // Add cache busters to currently loaded files for immediate local use
+                    addCacheBustersToUrls();
+                    
+                    return true;
                 } else {
-                    console.log('No Vercel deploy hook URL configured. Skipping deployment trigger.');
-                    
-                    // Show notification to add deploy hook
-                    const setupDeployHook = confirm('Would you like to set up a Vercel Deploy Hook to automatically clear cache when changes are pushed?\n\nThis helps ensure your changes are visible immediately.');
-                    
-                    if (setupDeployHook) {
-                        const hookUrl = prompt('Enter your Vercel Deploy Hook URL:\n\nYou can create one in your Vercel project settings under "Git" → "Deploy Hooks"');
-                        
-                        if (hookUrl && hookUrl.trim().startsWith('http')) {
-                            localStorage.setItem('vercelDeployHook', hookUrl.trim());
-                            showSuccess('Deploy hook saved. It will be used for future deployments.', 5000);
-                            
-                            // Try to use the newly added hook
-                            triggerVercelDeployment();
-                        } else {
-                            showError('Invalid deploy hook URL. Changes were saved to GitHub but you may need to manually redeploy.', 8000);
-                        }
-                    }
+                    const errorText = await response.text();
+                    console.error('Failed to trigger Vercel deployment:', errorText);
+                    return false;
                 }
-                
-                // Also add cache busters to loaded files for immediate local use
-                addCacheBustersToUrls();
-                
             } catch (error) {
                 console.error('Error triggering Vercel deployment:', error);
-                // Don't throw, as this is optional functionality
+                return false;
             }
         }
         
-        // Add cache busters to URLs for immediate local use
+        // Helper function to add cache busters to URLs
         function addCacheBustersToUrls() {
             try {
-                console.log('Adding cache busters to loaded files...');
+                // Add a cache buster to the current page if reloaded
+                const cacheBuster = `_cb=${Date.now()}`;
                 
-                // Generate a cache buster value based on current time
-                const cacheBuster = Date.now();
+                // Store the cache buster in localStorage
+                localStorage.setItem('lastCacheBuster', cacheBuster);
                 
-                // Update localStorage to remember when we last busted cache
-                localStorage.setItem('lastCacheBust', cacheBuster.toString());
-                
-                // For already loaded JSON files, we can reload them with cache busters
-                // But we need to tell the user they might need to hard refresh
-                showSuccess('Files updated. You may need to press Ctrl+F5 to see the latest changes.', 8000);
+                console.log('Added cache busters for local use');
             } catch (error) {
                 console.error('Error adding cache busters:', error);
             }
         }
         
         // Update saveToGitHub function to match player-admin.html
-        async function saveToGitHub(data) {
+        async function saveToGitHub(managerData) {
             try {
                 console.log('Starting GitHub save process...');
                 
@@ -1011,21 +983,308 @@
                 const repoDetails = {
                     owner: githubConfig.getOwner(),
                     repo: githubConfig.getRepo(),
-                    path: githubConfig.managerFilePath || 'manager_data.json',
                     branch: githubConfig.getBranch()
                 };
                 
                 console.log('Using repository details:', repoDetails);
                 
                 try {
+                    // Get players data first
+                    const playersData = await fetchPlayersData();
+                    
+                    // Extract player data from managers and update players.json
+                    await updatePlayersFromManagerData(playersData, managerData);
+                    
                     // Save manager_data.json
                     console.log('Saving manager_data.json...');
                     
                     // Format data properly - ensure it has the managers property
-                    const managersData = { managers: data };
+                    const managersData = { managers: managerData };
                     
                     // Add a timestamp for cache busting
                     managersData._lastUpdated = new Date().toISOString();
+                    
+                    // Get current file SHA for manager_data.json
+                    const managerFilePath = githubConfig.managerFilePath || 'manager_data.json';
+                    const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerFilePath}?ref=${repoDetails.branch}`;
+                    const fileInfoResponse = await fetch(fileInfoUrl, {
+                        headers: {
+                            'Authorization': `token ${githubConfig.getToken()}`
+                        }
+                    });
+                    
+                    let managerSha = '';
+                    let managerFileExists = true;
+                    
+                    if (fileInfoResponse.status === 404) {
+                        // File doesn't exist yet
+                        managerFileExists = false;
+                        console.log('Manager data file does not exist on GitHub yet, will create it');
+                    } else if (!fileInfoResponse.ok) {
+                        console.error('Failed to get manager file info:', fileInfoResponse.status);
+                    return false;
+                    } else {
+                        // File exists, get its SHA
+                        const fileInfo = await fileInfoResponse.json();
+                        managerSha = fileInfo.sha;
+                        console.log('Found existing manager file with SHA:', managerSha);
+                    }
+                    
+                    // Prepare the manager data content
+                    const managersJsonString = JSON.stringify(managersData, null, 2);
+                    const managersContent = btoa(unescape(encodeURIComponent(managersJsonString)));
+                    
+                    // Prepare the manager commit
+                    const managerRequestBody = {
+                        message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
+                        content: managersContent,
+                        branch: repoDetails.branch
+                    };
+                    
+                    // Add SHA if the file exists
+                    if (managerFileExists) {
+                        managerRequestBody.sha = managerSha;
+                    }
+                    
+                    // Commit the manager file
+                    const managerCommitUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${managerFilePath}`;
+                    const managerCommitResponse = await fetch(managerCommitUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${githubConfig.getToken()}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(managerRequestBody)
+                    });
+                    
+                    if (!managerCommitResponse.ok) {
+                        const errorText = await managerCommitResponse.text();
+                        console.error('GitHub commit for manager data failed:', errorText);
+                        showError('GitHub save failed for manager data: ' + errorText, 5000);
+                        return false;
+                    }
+                    
+                    console.log('Manager data saved to GitHub successfully');
+                    
+                    console.log('Changes saved to GitHub successfully');
+                    showSuccess('Manager and player data saved to GitHub successfully! The site will update in a few minutes.', 5000);
+                    
+                    // Store the last successful push timestamp
+                    localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
+                    
+                    // Trigger Vercel deployment
+                    try {
+                        await triggerVercelDeployment();
+                    } catch (deployError) {
+                        console.error('Error triggering deployment, but GitHub save was successful:', deployError);
+                    }
+                    
+                    return true;
+                    
+                } catch (saveError) {
+                    console.error('Error during file save:', saveError);
+                    throw saveError;
+                }
+                
+            } catch (error) {
+                console.error('GitHub save error:', error);
+                showError(`GitHub Error: ${error.message}`, false);
+                return false;
+            }
+        }
+        
+        // Fetch players data from players.json
+        async function fetchPlayersData() {
+            try {
+                console.log('Fetching players data from players.json...');
+                
+                // Get repository details
+                const repoDetails = {
+                    owner: githubConfig.getOwner(),
+                    repo: githubConfig.getRepo(),
+                    path: 'players.json',
+                    branch: githubConfig.getBranch()
+                };
+                
+                // Try to fetch players.json from GitHub
+                const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
+                const fileInfoResponse = await fetch(fileInfoUrl, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.getToken()}`
+                    }
+                });
+                
+                if (!fileInfoResponse.ok) {
+                    console.error('Failed to get players.json:', fileInfoResponse.status);
+                    
+                    // If file doesn't exist on GitHub, try to fetch it locally
+                    try {
+                        const localResponse = await fetch('players.json', {
+                            cache: 'no-store',
+                            headers: { 'Cache-Control': 'no-cache' }
+                        });
+                        
+                        if (localResponse.ok) {
+                            return await localResponse.json();
+                        }
+                    } catch (localError) {
+                        console.error('Error fetching local players.json:', localError);
+                    }
+                    
+                    // Return empty array if we couldn't get the file
+                    return [];
+                }
+                
+                // Get file content from GitHub
+                const fileInfo = await fileInfoResponse.json();
+                const content = fileInfo.content;
+                const decodedContent = atob(content);
+                const playersData = JSON.parse(decodedContent);
+                
+                console.log(`Fetched ${playersData.length} players from players.json`);
+                return playersData;
+            } catch (error) {
+                console.error('Error fetching players data:', error);
+                return [];
+            }
+        }
+        
+        // Update players.json with changes from manager data
+        async function updatePlayersFromManagerData(playersData, managersData) {
+            try {
+                console.log('Updating players data from manager data...');
+                
+                // Create a map of existing players by name and position for faster lookups
+                const existingPlayersMap = new Map();
+                playersData.forEach(player => {
+                    const key = `${player.name.toLowerCase()}|${player.position}`;
+                    existingPlayersMap.set(key, player);
+                });
+                
+                // Track all players in manager data to detect deleted players
+                const activePlayerKeys = new Set();
+                
+                // Process all players in manager data
+                let playersUpdated = false;
+                
+                managersData.forEach(manager => {
+                    if (!manager.squad || !manager.squad.players || !Array.isArray(manager.squad.players)) {
+                        return;
+                    }
+                    
+                    manager.squad.players.forEach(squadPlayer => {
+                        if (!squadPlayer.name || !squadPlayer.position) {
+                            return; // Skip invalid players
+                        }
+                        
+                        const playerKey = `${squadPlayer.name.toLowerCase()}|${squadPlayer.position}`;
+                        activePlayerKeys.add(playerKey);
+                        
+                        // Check if player exists in players data
+                        if (existingPlayersMap.has(playerKey)) {
+                            // Update existing player
+                            const existingPlayer = existingPlayersMap.get(playerKey);
+                            
+                            // Update value and club if changed
+                            if (existingPlayer.value !== squadPlayer.value || existingPlayer.club !== manager.club) {
+                                existingPlayer.value = squadPlayer.value;
+                                existingPlayer.club = manager.club;
+                                
+                                // Add or update stats entry for this club
+                                if (!existingPlayer.stats) {
+                                    existingPlayer.stats = [];
+                                }
+                                
+                                // Look for existing stat entry for this club
+                                const statIndex = existingPlayer.stats.findIndex(stat => stat.team === manager.club);
+                                const currentSeason = "Season 9"; // You may want to get this from somewhere else
+                                
+                                if (statIndex === -1) {
+                                    // Add new stat for this club
+                                    existingPlayer.stats.push({
+                                        season: currentSeason,
+                                        team: manager.club,
+                                        value: squadPlayer.value.toString()
+                                    });
+                                } else {
+                                    // Update existing stat for this club
+                                    existingPlayer.stats[statIndex].value = squadPlayer.value.toString();
+                                }
+                                
+                                // Mark as updated
+                                playersUpdated = true;
+                                console.log(`Updated player ${squadPlayer.name} in players.json`);
+                            }
+                        } else {
+                            // Add new player to players data
+                            const newPlayer = {
+                                id: playersData.length + 1,
+                                name: squadPlayer.name,
+                                position: squadPlayer.position,
+                                value: squadPlayer.value,
+                                club: manager.club,
+                                star: "3-star-standard", // Default values
+                                level: "STANDARD",
+                                stats: [{
+                                    season: "Season 9", // You may want to get this from somewhere else
+                                    team: manager.club,
+                                    value: squadPlayer.value.toString()
+                                }]
+                            };
+                            
+                            playersData.push(newPlayer);
+                            existingPlayersMap.set(playerKey, newPlayer);
+                            
+                            playersUpdated = true;
+                            console.log(`Added new player ${squadPlayer.name} to players.json`);
+                        }
+                    });
+                });
+                
+                // Check for deleted players (players that exist in players.json but not in any manager's squad)
+                let i = playersData.length;
+                while (i--) {
+                    const player = playersData[i];
+                    const playerKey = `${player.name.toLowerCase()}|${player.position}`;
+                    
+                    if (!activePlayerKeys.has(playerKey)) {
+                        // Player was deleted from managers, set as free agent instead of removing
+                        player.club = "Free Agent";
+                        // Add a history entry about being released
+                        if (!player.stats) {
+                            player.stats = [];
+                        }
+                        
+                        // Add release info to stats
+                        const currentSeason = "Season 9"; // You may want to get this from somewhere else
+                        player.stats.push({
+                            season: currentSeason,
+                            team: "Free Agent",
+                            value: player.value.toString(),
+                            note: "Released"
+                        });
+                        
+                        playersUpdated = true;
+                        console.log(`Set player ${player.name} as Free Agent in players.json`);
+                    }
+                }
+                
+                // If changes were made, save players.json
+                if (playersUpdated) {
+                    console.log('Saving updated players.json to GitHub...');
+                    
+                    // Add cache busting timestamp
+                    playersData.forEach(player => {
+                        player._lastUpdated = new Date().toISOString();
+                    });
+                    
+                    // Get repository details
+                    const repoDetails = {
+                        owner: githubConfig.getOwner(),
+                        repo: githubConfig.getRepo(),
+                        path: 'players.json',
+                        branch: githubConfig.getBranch()
+                    };
                 
                 // Get current file SHA
                     const fileInfoUrl = `https://api.github.com/repos/${repoDetails.owner}/${repoDetails.repo}/contents/${repoDetails.path}?ref=${repoDetails.branch}`;
@@ -1041,24 +1300,24 @@
                 if (fileInfoResponse.status === 404) {
                     // File doesn't exist yet
                     fileExists = false;
-                    console.log('File does not exist on GitHub yet, will create it');
+                        console.log('players.json does not exist on GitHub yet, will create it');
                 } else if (!fileInfoResponse.ok) {
-                    console.error('Failed to get file info:', fileInfoResponse.status);
+                        console.error('Failed to get players.json info:', fileInfoResponse.status);
                     return false;
                 } else {
                     // File exists, get its SHA
                     const fileInfo = await fileInfoResponse.json();
                     sha = fileInfo.sha;
-                    console.log('Found existing file with SHA:', sha);
+                        console.log('Found existing players.json with SHA:', sha);
                 }
                 
                     // Prepare the content
-                    const jsonString = JSON.stringify(managersData, null, 2);
+                    const jsonString = JSON.stringify(playersData, null, 2);
                     const content = btoa(unescape(encodeURIComponent(jsonString)));
                 
                     // Prepare the commit
                 const requestBody = {
-                    message: `Update manager data via admin-stats - ${new Date().toISOString()}`,
+                        message: `Update players.json from admin-stats - ${new Date().toISOString()}`,
                     content: content,
                         branch: repoDetails.branch
                 };
@@ -1079,35 +1338,20 @@
                     body: JSON.stringify(requestBody)
                 });
                 
-                if (commitResponse.ok) {
-                    console.log('Changes saved to GitHub successfully');
-                    showSuccess('Manager and player data saved to GitHub successfully! The site will update in a few minutes.', 5000);
-                        
-                    // Store the last successful push timestamp
-                    localStorage.setItem('lastGitHubPushTimestamp', new Date().toISOString());
-                        
-                    // Trigger Vercel deployment
-                    try {
-                        await triggerVercelDeployment();
-                    } catch (deployError) {
-                        console.error('Error triggering deployment, but GitHub save was successful:', deployError);
+                    if (!commitResponse.ok) {
+                    const errorText = await commitResponse.text();
+                        console.error('GitHub commit for players.json failed:', errorText);
+                    return false;
                     }
-                        
+                    
+                    console.log('players.json saved to GitHub successfully');
                     return true;
                 } else {
-                    const errorText = await commitResponse.text();
-                    console.error('GitHub commit failed:', errorText);
-                    showError('GitHub save failed: ' + errorText, 5000);
-                    return false;
+                    console.log('No changes needed for players.json');
+                    return true;
                 }
-                } catch (saveError) {
-                    console.error('Error during file save:', saveError);
-                    throw saveError;
-                }
-                
             } catch (error) {
-                console.error('GitHub save error:', error);
-                showError(`GitHub Error: ${error.message}`, false);
+                console.error('Error updating players data:', error);
                 return false;
             }
         }
