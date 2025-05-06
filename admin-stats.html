@@ -405,8 +405,8 @@
                             <input type="text" id="name" required readonly>
                         </div>
                         <div class="stat-input">
-                            <label for="rank">Rank</label>
-                            <input type="text" id="rank" required>
+                            <label for="age">Rank</label>
+                            <input type="text" id="age" required>
                         </div>
                         <div class="stat-input">
                             <label for="overall">Overall Rating</label>
@@ -751,7 +751,7 @@
             
             // Basic Info
             document.getElementById('name').value = getValue(manager, 'name');
-            document.getElementById('rank').value = getValue(manager, 'rank', '');
+            document.getElementById('age').value = getValue(manager, 'age', '');
             document.getElementById('overall').value = getValue(manager, 'overall', 
                 getValue(manager, 'overall_rating', 0));
             document.getElementById('manager_rating').value = getValue(manager, 'manager_rating', 0);
@@ -1405,7 +1405,7 @@
                 const updatedManager = {
                     ...originalManager, // Preserve existing fields
                     name: document.getElementById('name').value,
-                    rank: document.getElementById('rank').value,
+                    age: document.getElementById('age').value,
                     overall: parseFloat(document.getElementById('overall').value) || 0,
                     manager_rating: parseFloat(document.getElementById('manager_rating').value) || 0,
                     star_rating: parseInt(document.getElementById('star_rating').value) || 3,
