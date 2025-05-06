@@ -5242,24 +5242,23 @@
     "level": "STANDARD",
     "club": "MANCHESTER CITY",
     "position": "ST",
-    "value": 350,
+    "value": 210,
     "gamesPlayed": 0,
     "stats": [
       {
         "season": "4-5",
         "team": "ASTON VILLA FC",
-        "value": "350",
-        "apps": "00"
+        "value": "350"
       },
       {
         "season": "5-7",
         "team": "MANCHESTER CITY",
-        "value": "350",
-        "apps": "00"
+        "value": "350"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR CARDS/E. HAALAND_CARD.webp",
-    "id": 250
+    "id": 250,
+    "clubLogo": "assets/images/players/club/Manchester City FC.webp"
   },
   {
     "name": "KYLIAN MBAPPE",
