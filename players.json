@@ -136,7 +136,7 @@
     "name": "SHAY GIVEN",
     "star": "4-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "GK",
     "value": 60,
     "gamesPlayed": 0,
@@ -150,11 +150,18 @@
         "season": "5-6",
         "team": "RB LEIPZIG",
         "value": "60"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "60",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR LEGEND CARDS/S. GIVEN_CARD.webp",
     "id": 8,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "clubLogo": "assets/images/players/club/AC Milan.webp",
+    "type": "legend"
   },
   {
     "name": "MANUEL NEUER",
@@ -411,7 +418,7 @@
     "name": "YASSINE BOUNOU",
     "star": "5-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "GK",
     "value": 104,
     "gamesPlayed": 5,
@@ -426,6 +433,12 @@
         "season": "4.5-6.5",
         "team": "FREE AGENT",
         "value": "80",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "104",
         "apps": "00"
       }
     ],
@@ -2778,7 +2791,7 @@
     "name": "BENOÎT BADIASHILE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
     "value": 84,
     "gamesPlayed": 0,
@@ -2787,6 +2800,12 @@
         "season": "4-6",
         "team": "ARSENAL FC",
         "value": "70",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "84",
         "apps": "00"
       }
     ],
@@ -4042,7 +4061,7 @@
     "name": "ALESSIO ROMAGNOLI",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
     "value": 84,
     "gamesPlayed": 0,
@@ -4050,6 +4069,12 @@
       {
         "season": "4-6",
         "team": "TOTTENHAM HOTSPUR FC",
+        "value": "84",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
         "value": "84",
         "apps": "00"
       }
@@ -4812,7 +4837,7 @@
     "name": "PATRICK KLUIVERT",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -4821,6 +4846,12 @@
         "season": "4-5",
         "team": "RED BULL BRAGANTINO",
         "value": "102"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/P. KLUIVERT_CARD.webp",
@@ -5185,7 +5216,7 @@
     "name": "PAULO DYBALA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 86,
     "gamesPlayed": 0,
@@ -5200,6 +5231,12 @@
         "season": "5-6",
         "team": "ASTON VILLA FC",
         "value": "102",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "86",
         "apps": "00"
       }
     ],
@@ -6349,7 +6386,7 @@
     "name": "ELYE WAHI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 68,
     "gamesPlayed": 0,
@@ -6358,11 +6395,18 @@
         "season": "4-6",
         "team": "SEPAHAN SC",
         "value": "76"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "68",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/ELYE WAHI_CARD.webp",
     "id": 301,
-    "clubLogo": "assets/images/players/club/AC Milan.webp"
+    "clubLogo": "assets/images/players/club/AC Milan.webp",
+    "type": "standard"
   },
   {
     "name": "ALBERT GUDMUNDSSON",
@@ -10100,7 +10144,7 @@
     "name": "ALAN VARELA",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 100,
     "gamesPlayed": 0,
@@ -10109,6 +10153,12 @@
         "season": "4-6",
         "team": "SANTOS FC",
         "value": "62",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
         "apps": "00"
       }
     ],
@@ -13701,7 +13751,7 @@
     "name": "MALCOM",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "RW",
     "value": 80,
     "gamesPlayed": 0,
@@ -13716,6 +13766,12 @@
         "season": "4.5-6.5",
         "team": "AC MILAN",
         "value": "60",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "80",
         "apps": "00"
       }
     ],
@@ -14423,9 +14479,9 @@
     "name": "PHILIPP LIENHART",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CB",
-    "value": 50,
+    "value": 70,
     "gamesPlayed": 0,
     "stats": [
       {
@@ -14433,10 +14489,17 @@
         "team": "FC BARCELONA",
         "value": "58",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "70",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/P. LIENHART_CARD.webp",
-    "id": 687
+    "id": 687,
+    "type": "standard"
   },
   {
     "name": "JOACHIM ANDERSEN",
@@ -15897,7 +15960,7 @@
     "name": "ANDRE",
     "star": "4-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 50,
     "gamesPlayed": 0,
@@ -15907,10 +15970,17 @@
         "team": "FREE AGENT",
         "value": "50",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "50",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/4 STAR CARDS/ANDRE_CARD.webp",
-    "id": 763
+    "id": 763,
+    "type": "prime"
   },
   {
     "name": "TOMAS SOUCEK",
@@ -16251,7 +16321,7 @@
     "name": "MAURO ARAMBARRI",
     "star": "3-star-standard",
     "level": "STANDARD",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "DM",
     "value": 40,
     "gamesPlayed": 0,
@@ -16261,10 +16331,17 @@
         "team": "FREE AGENT",
         "value": "40",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "40",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/3 STAR CARDS/M. ARAMBARRI_CARD.webp",
-    "id": 781
+    "id": 781,
+    "type": "standard"
   },
   {
     "name": "MARIO LEMINA",
@@ -16390,7 +16467,7 @@
     "name": "BRYAN ROBSON",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "CM",
     "value": 108,
     "gamesPlayed": 0,
@@ -16399,6 +16476,12 @@
         "season": "4-6",
         "team": "LIVERPOOL FC",
         "value": "100",
+        "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "108",
         "apps": "00"
       }
     ],
@@ -19796,7 +19879,7 @@
     "name": "EVAIR",
     "star": "5-star-legend",
     "level": "LEGENDARY",
-    "club": "FREE AGENT",
+    "club": "AC MILAN",
     "position": "ST",
     "value": 100,
     "gamesPlayed": 0,
@@ -19806,11 +19889,17 @@
         "team": "FREE AGENT",
         "value": "100",
         "apps": "00"
+      },
+      {
+        "season": "6-8",
+        "team": "AC MILAN",
+        "value": "100",
+        "apps": "00"
       }
     ],
     "imagePath": "../assets/images/players/5 STAR LEGEND CARDS/EVAIR_CARD.webp",
     "id": 965,
-    "type": "standard"
+    "type": "prime legend"
   },
   {
     "name": "JAVIER SAVIOLA",
