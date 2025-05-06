@@ -4751,13 +4751,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1288,
+      "club_total_value": 1250,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 7,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4814,6 +4814,78 @@
             "contract": "SEASON 6.5",
             "salary": 2.7,
             "type": "prime"
+          },
+          {
+            "name": "BRYAN ROBSON",
+            "position": "CM",
+            "value": 108,
+            "contract": "SEASON 6",
+            "salary": 5.4,
+            "type": "legend"
+          },
+          {
+            "name": "YASSINE BOUNOU",
+            "position": "GK",
+            "value": 104,
+            "contract": "SEASON 6",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 6",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PAULO DYBALA",
+            "position": "ST",
+            "value": 86,
+            "contract": "SEASON 6",
+            "salary": 4.3,
+            "type": "standard"
+          },
+          {
+            "name": "BENOÎT BADIASHILE",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 6",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "ELYE WAHI",
+            "position": "ST",
+            "value": 68,
+            "contract": "SEASON 6",
+            "salary": 3.4,
+            "type": "standard"
           }
         ],
         "totalPlayers": 16
@@ -6269,12 +6341,12 @@
       "overall_rating": 297.6,
       "r2g_coin_balance": 2369,
       "r2g_token_balance": 330,
-      "club_total_value": 2244,
+      "club_total_value": 1056,
       "manager_rating": 129,
       "trophies": 1,
       "awards": 3,
       "squad": {
-        "total_players": 11,
+        "total_players": 12,
         "players": [
           {
             "name": "STEFAN DE VRIJ",
@@ -6363,6 +6435,14 @@
             "contract": "SEASON 6.5",
             "salary": 5,
             "type": "legend"
+          },
+          {
+            "name": "GUGLIELMO VICARIO",
+            "position": "GK",
+            "value": 150,
+            "contract": "SEASON 8",
+            "salary": 7.5,
+            "type": "standard"
           }
         ]
       },
