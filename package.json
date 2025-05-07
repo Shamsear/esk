@@ -1,11 +1,14 @@
 {
-  "name": "auction-backend",
+  "name": "r2g-player-admin",
   "version": "1.0.0",
-  "description": "Backend API for Player Auction System",
-  "main": "index.js",
+  "description": "Admin interface for R2G player data management",
+  "main": "save-players.js",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel --prod"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "python -m http.server",
+    "server": "node save-players.js",
+    "pwa-setup": "node update-pwa.js"
   },
   "keywords": [
     "admin",
@@ -18,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
-    "@vercel/postgres": "^0.5.1",
+    "@vercel/postgres": "^0.10.0",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "path": "^0.12.7",
@@ -26,10 +29,6 @@
   },
   "devDependencies": {
     "@prisma/client": "^6.7.0",
-    "prisma": "^6.7.0",
-    "vercel": "^32.6.1"
-  },
-  "engines": {
-    "node": ">=18.x"
+    "prisma": "^6.7.0"
   }
 }
