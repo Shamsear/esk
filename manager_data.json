@@ -2769,8 +2769,145 @@
             "contract": "SEASON 6.5",
             "salary": 2.5,
             "type": "standard"
+          },
+          {
+            "name": "EDIN DZEKO",
+            "position": "ST",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "EDDIE NKETIAH",
+            "position": "ST",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "JHON DURAN",
+            "position": "ST",
+            "value": 78,
+            "contract": "SEASON 8",
+            "salary": 3.9,
+            "type": "prime"
+          },
+          {
+            "name": "ERIC CHOUPO MOTING",
+            "position": "ST",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "LUIS MURIEL",
+            "position": "ST",
+            "value": 44,
+            "contract": "SEASON 8",
+            "salary": 2.2,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRIY LUNIN",
+            "position": "GK",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "FRANCESCO ACERBI",
+            "position": "CB",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "ISSA DIOP",
+            "position": "CB",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "MAXENCE LACROIX",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "prime"
+          },
+          {
+            "name": "IGOR ZUBELDIA",
+            "position": "CB",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
+          },
+          {
+            "name": "WILFRIED SINGO",
+            "position": "CB",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "BEN MEE",
+            "position": "CB",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "JORDI ALBA",
+            "position": "LB",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "prime"
+          },
+          {
+            "name": "CAFU",
+            "position": "RB",
+            "value": 106,
+            "contract": "SEASON 8",
+            "salary": 5.3,
+            "type": "legend"
+          },
+          {
+            "name": "STEVEN BERGHUIS",
+            "position": "RW",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "WILFRIED ZAHA",
+            "position": "LW",
+            "value": 48,
+            "contract": "SEASON 8",
+            "salary": 2.4,
+            "type": "standard"
+          },
+          {
+            "name": "IBRAHIM SANGARE",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 21
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -2943,7 +3080,8 @@
           }
         }
       ],
-      "current_season": 6
+      "current_season": 6,
+      "clubTotalValue": 1280
     },
     {
       "name": "FASAL",
@@ -4751,13 +4889,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1288,
+      "club_total_value": 1467,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 20,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4773,14 +4911,6 @@
             "value": 44,
             "contract": "SEASON 7",
             "salary": 2.2,
-            "type": "prime"
-          },
-          {
-            "name": "STRAHINJA PAVLOVIC",
-            "position": "CB",
-            "value": 44,
-            "contract": "SEASON 7",
-            "salary": 2,
             "type": "prime"
           },
           {
@@ -4814,9 +4944,121 @@
             "contract": "SEASON 6.5",
             "salary": 2.7,
             "type": "prime"
+          },
+          {
+            "name": "BRYAN ROBSON",
+            "position": "CM",
+            "value": 108,
+            "contract": "SEASON 8",
+            "salary": 5.4,
+            "type": "legend"
+          },
+          {
+            "name": "YASSINE BOUNOU",
+            "position": "GK",
+            "value": 104,
+            "contract": "SEASON 8",
+            "salary": 5.2,
+            "type": "standard"
+          },
+          {
+            "name": "PATRICK KLUIVERT",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "legend"
+          },
+          {
+            "name": "EVAIR",
+            "position": "ST",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "prime legend"
+          },
+          {
+            "name": "ALAN VARELA",
+            "position": "DM",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "PAULO DYBALA",
+            "position": "ST",
+            "value": 86,
+            "contract": "SEASON 8",
+            "salary": 4.3,
+            "type": "standard"
+          },
+          {
+            "name": "BENOÎT BADIASHILE",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 8",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "ALESSIO ROMAGNOLI",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 8",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "MALCOM",
+            "position": "RW",
+            "value": 80,
+            "contract": "SEASON 8",
+            "salary": 4,
+            "type": "prime"
+          },
+          {
+            "name": "PHILIPP LIENHART",
+            "position": "CB",
+            "value": 69,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "SHAY GIVEN",
+            "position": "GK",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "legend"
+          },
+          {
+            "name": "ANDRE",
+            "position": "DM",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "prime"
+          },
+          {
+            "name": "MAURO ARAMBARRI",
+            "position": "DM",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "ELYE WAHI",
+            "position": "ST",
+            "value": 68,
+            "contract": "SEASON 8",
+            "salary": 3.4,
+            "type": "standard"
           }
         ],
-        "totalPlayers": 16
+        "totalPlayers": 21
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -4990,7 +5232,7 @@
         }
       ],
       "current_season": 6,
-      "clubTotalValue": 1228
+      "clubTotalValue": 1511
     },
     {
       "name": "NABEEL",
@@ -7697,8 +7939,145 @@
             "contract": "SEASON 7",
             "salary": 2.9,
             "type": "standard"
+          },
+          {
+            "name": "ROMARIO",
+            "position": "ST",
+            "value": 124,
+            "contract": "SEASON 8",
+            "salary": 6.2,
+            "type": "prime legend"
+          },
+          {
+            "name": "GERARD MORENO",
+            "position": "ST",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "LUCAS CHEVALIER",
+            "position": "GK",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "DOMINIK LIVAKOVIC",
+            "position": "GK",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "GIORGIO SCALVINI",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "prime"
+          },
+          {
+            "name": "MIKA MÀRMOL",
+            "position": "CB",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "ODILON KOSSOUNOU",
+            "position": "CB",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "NICOLAS TAGLIAFICO",
+            "position": "LB",
+            "value": 46,
+            "contract": "SEASON 8",
+            "salary": 2.3,
+            "type": "standard"
+          },
+          {
+            "name": "BRENNAN JOHNSON",
+            "position": "RW",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "GABRIEL MARTINELLI",
+            "position": "LW",
+            "value": 100,
+            "contract": "SEASON 8",
+            "salary": 5,
+            "type": "standard"
+          },
+          {
+            "name": "DUSAN TADIC",
+            "position": "LW",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "CALLUM HUDSON-ODOI",
+            "position": "LW",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "KOKE",
+            "position": "DM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "prime"
+          },
+          {
+            "name": "DANI OLMO",
+            "position": "AM",
+            "value": 92,
+            "contract": "SEASON 8",
+            "salary": 4.6,
+            "type": "standard"
+          },
+          {
+            "name": "EMILE SMITH ROWE",
+            "position": "AM",
+            "value": 62,
+            "contract": "SEASON 8",
+            "salary": 3.1,
+            "type": "standard"
+          },
+          {
+            "name": "FABIAN RUIZ",
+            "position": "CM",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "JACK GREALISH",
+            "position": "LW",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 18
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -7871,7 +8250,34 @@
           }
         }
       ],
-      "current_season": 6
+      "current_season": 6,
+      "clubTotalValue": 1168
+    },
+    {
+      "name": "Manager of FREE AGENT",
+      "club": "FREE AGENT",
+      "overall_rating": 0,
+      "r2g_coin_balance": 0,
+      "r2g_token_balance": 0,
+      "club_total_value": 40,
+      "manager_rating": 0,
+      "trophies": 0,
+      "awards": 0,
+      "squad": {
+        "total_players": 1,
+        "players": [
+          {
+            "name": "STRAHINJA PAVLOVIC",
+            "position": "CB",
+            "value": 40,
+            "contract": "SEASON 7",
+            "salary": 2,
+            "type": "prime"
+          }
+        ]
+      },
+      "star_rating": 3
     }
-  ]
+  ],
+  "_lastUpdated": "2025-05-07T07:05:56.522Z"
 }
