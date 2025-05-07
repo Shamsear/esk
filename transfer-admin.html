@@ -1795,7 +1795,7 @@
     <!-- Add batch save container for GitHub changes -->
     <div class="batch-save-container" id="batch-save-container" style="display: none;">
         <div class="batch-save-info">
-            <i class="fas fa-exclamation-triangle"></i>
+            <i class="fas fa-exclamation-triangle" style="color: #f39c12; font-size: 18px; margin-right: 8px;"></i>
             <span id="pending-changes-text">You have pending changes saved to localStorage.</span>
             <span class="pending-changes-counter" id="pending-changes-count">0</span>
         </div>
@@ -1812,7 +1812,10 @@
     <!-- Add local changes container -->
         <div class="local-updates-container" id="local-updates-container" style="display: none;">
             <div class="update-entry-header" style="padding: 10px; background-color: #333; font-weight: bold; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center;">
-                <span>Recent Local Changes</span>
+                <span>Pending Changes (Not Yet Pushed to GitHub)</span>
+                <button id="collapse-local-changes" style="background: none; border: none; color: #aaa; cursor: pointer; font-size: 14px;">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
             </div>
             <div id="update-entries">
                 <!-- Update entries will be added here dynamically -->
@@ -2048,6 +2051,24 @@
             
             // Set a safety timeout to remove loading in case of other issues
             setTimeout(removeMobileLoading, 10000);
+            
+            // Set up collapse button for local changes container
+            const collapseLocalChangesBtn = document.getElementById('collapse-local-changes');
+            if (collapseLocalChangesBtn) {
+                collapseLocalChangesBtn.addEventListener('click', function() {
+                    const localChangesEntries = document.getElementById('team-grouped-changes');
+                    if (localChangesEntries) {
+                        const isCollapsed = localChangesEntries.style.display === 'none';
+                        localChangesEntries.style.display = isCollapsed ? 'block' : 'none';
+                        
+                        // Toggle the icon
+                        const icon = this.querySelector('i');
+                        if (icon) {
+                            icon.className = isCollapsed ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+                        }
+                    }
+                });
+            }
         });
 
         // Logout function
@@ -3415,7 +3436,22 @@
                 if (changeCount > 0) {
                     batchSaveContainer.style.display = 'flex';
                     pendingChangesCount.textContent = changeCount;
-                    pendingChangesText.textContent = `You have ${changeCount} pending transfer${changeCount !== 1 ? 's' : ''} saved to localStorage.`;
+                    pendingChangesText.innerHTML = `<strong>Warning:</strong> You have ${changeCount} pending transfer${changeCount !== 1 ? 's' : ''} that exist only in your browser.`;
+                    
+                    // Make the container more visible with animation
+                    batchSaveContainer.style.animation = 'none';
+                    batchSaveContainer.offsetHeight; // Trigger reflow
+                    batchSaveContainer.style.animation = 'fadeIn 0.5s ease-in-out';
+                    batchSaveContainer.style.backgroundColor = 'rgba(255, 193, 7, 0.3)';
+                    batchSaveContainer.style.borderColor = 'rgba(255, 193, 7, 0.6)';
+                    
+                    // Change button style to make it more prominent
+                    const pushBtn = document.getElementById('push-to-github-btn');
+                    if (pushBtn) {
+                        pushBtn.style.backgroundColor = '#f39c12';
+                        pushBtn.style.padding = '10px 18px';
+                        pushBtn.style.fontWeight = 'bold';
+                    }
                 } else {
                     batchSaveContainer.style.display = 'none';
                 }
@@ -3448,7 +3484,13 @@
             // Show container
             localUpdatesContainer.style.display = 'block';
             
-            // Now build the team-grouped view
+            // Update header text to be more clear
+            const headerElement = document.querySelector('.update-entry-header span');
+            if (headerElement) {
+                headerElement.textContent = 'Pending Changes (Not Yet Pushed to GitHub)';
+            }
+            
+            // Now build the team-grouped view for unpushed changes only
             displayTeamGroupedChanges(pendingChanges, teamContainer);
         }
         
@@ -3471,6 +3513,17 @@
                 container.appendChild(noDataMsg);
                 return;
             }
+            
+            // Add a note at the top explaining these are unpushed changes
+            const infoNote = document.createElement('div');
+            infoNote.style.padding = '10px 15px';
+            infoNote.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+            infoNote.style.borderRadius = '6px';
+            infoNote.style.marginBottom = '15px';
+            infoNote.style.color = '#3498db';
+            infoNote.style.fontSize = '14px';
+            infoNote.innerHTML = '<i class="fas fa-info-circle"></i> These changes are stored locally and will be lost if you clear your browser data. Use the <strong>"Push All to GitHub"</strong> button to save permanently.';
+            container.appendChild(infoNote);
             
             // Find players that have been transferred (with _lastUpdated property)
             const transferredPlayers = playersData.filter(player => 
@@ -3637,8 +3690,13 @@
                 container.appendChild(teamGroup);
             });
             
-            // All teams are collapsed by default
-            // (removed the code that automatically expanded the first team)
+            // Expand the first team by default to show users there are players inside
+            if (sortedTeams.length > 0) {
+                const firstTeamGroup = container.querySelector('.team-group');
+                if (firstTeamGroup) {
+                    toggleTeamGroup(firstTeamGroup);
+                }
+            }
         }
         
         // Helper function to toggle team group expansion
