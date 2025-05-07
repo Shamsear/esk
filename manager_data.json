@@ -7410,33 +7410,7 @@
       "awards": 1,
       "squad": {
         "total_players": 0,
-        "players": [
-          {
-            "name": "DENNIS BERGKAMP",
-            "position": "ST",
-            "value": 100,
-            "contract": "SEASON 8",
-            "salary": 5,
-            "type": "legend"
-          },
-          {
-            "name": "GONCALO RAMOS",
-            "position": "ST",
-            "value": 112,
-            "contract": "SEASON 8",
-            "salary": 5.6,
-            "type": "standard"
-          },
-          {
-            "name": "MIKEL OYARZABAL",
-            "position": "ST",
-            "value": 80,
-            "contract": "SEASON 8",
-            "salary": 4,
-            "type": "standard"
-          }
-        ],
-        "totalPlayers": 3
+        "players": []
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -7612,8 +7586,7 @@
           }
         }
       ],
-      "current_season": 6,
-      "clubTotalValue": 292
+      "current_season": 6
     },
     {
       "name": "VIMAL",
@@ -7900,10 +7873,5 @@
       ],
       "current_season": 6
     }
-<<<<<<< Updated upstream
-  ],
-  "_lastUpdated": "2025-05-07T07:55:26.518Z"
-=======
   ]
->>>>>>> Stashed changes
 }
