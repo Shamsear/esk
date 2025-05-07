@@ -2769,8 +2769,145 @@
             "contract": "SEASON 6.5",
             "salary": 2.5,
             "type": "standard"
+          },
+          {
+            "name": "EDIN DZEKO",
+            "position": "ST",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "EDDIE NKETIAH",
+            "position": "ST",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "standard"
+          },
+          {
+            "name": "JHON DURAN",
+            "position": "ST",
+            "value": 78,
+            "contract": "SEASON 8",
+            "salary": 3.9,
+            "type": "prime"
+          },
+          {
+            "name": "ERIC CHOUPO MOTING",
+            "position": "ST",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "LUIS MURIEL",
+            "position": "ST",
+            "value": 44,
+            "contract": "SEASON 8",
+            "salary": 2.2,
+            "type": "standard"
+          },
+          {
+            "name": "ANDRIY LUNIN",
+            "position": "GK",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "FRANCESCO ACERBI",
+            "position": "CB",
+            "value": 90,
+            "contract": "SEASON 8",
+            "salary": 4.5,
+            "type": "standard"
+          },
+          {
+            "name": "ISSA DIOP",
+            "position": "CB",
+            "value": 76,
+            "contract": "SEASON 8",
+            "salary": 3.8,
+            "type": "standard"
+          },
+          {
+            "name": "MAXENCE LACROIX",
+            "position": "CB",
+            "value": 70,
+            "contract": "SEASON 8",
+            "salary": 3.5,
+            "type": "prime"
+          },
+          {
+            "name": "IGOR ZUBELDIA",
+            "position": "CB",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "standard"
+          },
+          {
+            "name": "WILFRIED SINGO",
+            "position": "CB",
+            "value": 60,
+            "contract": "SEASON 8",
+            "salary": 3,
+            "type": "standard"
+          },
+          {
+            "name": "BEN MEE",
+            "position": "CB",
+            "value": 58,
+            "contract": "SEASON 8",
+            "salary": 2.9,
+            "type": "standard"
+          },
+          {
+            "name": "JORDI ALBA",
+            "position": "LB",
+            "value": 66,
+            "contract": "SEASON 8",
+            "salary": 3.3,
+            "type": "prime"
+          },
+          {
+            "name": "CAFU",
+            "position": "RB",
+            "value": 106,
+            "contract": "SEASON 8",
+            "salary": 5.3,
+            "type": "legend"
+          },
+          {
+            "name": "STEVEN BERGHUIS",
+            "position": "RW",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "WILFRIED ZAHA",
+            "position": "LW",
+            "value": 48,
+            "contract": "SEASON 8",
+            "salary": 2.4,
+            "type": "standard"
+          },
+          {
+            "name": "IBRAHIM SANGARE",
+            "position": "DM",
+            "value": 54,
+            "contract": "SEASON 8",
+            "salary": 2.7,
+            "type": "standard"
           }
-        ]
+        ],
+        "totalPlayers": 21
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -2943,7 +3080,8 @@
           }
         }
       ],
-      "current_season": 6
+      "current_season": 6,
+      "clubTotalValue": 1280
     },
     {
       "name": "FASAL",
@@ -8124,5 +8262,5 @@
       "clubTotalValue": 1168
     }
   ],
-  "_lastUpdated": "2025-05-07T06:51:39.587Z"
+  "_lastUpdated": "2025-05-07T07:04:12.288Z"
 }
