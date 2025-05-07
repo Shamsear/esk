@@ -3666,8 +3666,129 @@
             "contract": "SEASON 7",
             "salary": 5,
             "type": "legend"
+          },
+          {
+            "name": "FOLARIN BALOGUN",
+            "position": "ST",
+            "value": 72,
+            "contract": "SEASON 8",
+            "salary": 3.6,
+            "type": "standard"
+          },
+          {
+            "name": "YOANE WISSA",
+            "position": "ST",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "prime"
+          },
+          {
+            "name": "ODSONNE EDOUARD",
+            "position": "ST",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "DAVID SORIA",
+            "position": "GK",
+            "value": 56,
+            "contract": "SEASON 8",
+            "salary": 2.8,
+            "type": "standard"
+          },
+          {
+            "name": "DORDE PETROVIC",
+            "position": "GK",
+            "value": 52,
+            "contract": "SEASON 8",
+            "salary": 2.6,
+            "type": "standard"
+          },
+          {
+            "name": "RONALD ARAUJO",
+            "position": "CB",
+            "value": 130,
+            "contract": "SEASON 8",
+            "salary": 6.5,
+            "type": "standard"
+          },
+          {
+            "name": "MATS HUMMELS",
+            "position": "CB",
+            "value": 84,
+            "contract": "SEASON 8",
+            "salary": 4.2,
+            "type": "standard"
+          },
+          {
+            "name": "K. MAVROPANOS",
+            "position": "CB",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "JHON LUCUMI",
+            "position": "CB",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "MARCELO",
+            "position": "LB",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "REINILDO",
+            "position": "LB",
+            "value": 40,
+            "contract": "SEASON 8",
+            "salary": 2,
+            "type": "standard"
+          },
+          {
+            "name": "EMERSON ROYAL",
+            "position": "RB",
+            "value": 50,
+            "contract": "SEASON 8",
+            "salary": 2.5,
+            "type": "standard"
+          },
+          {
+            "name": "MARCOS LLORENTE",
+            "position": "RW",
+            "value": 110,
+            "contract": "SEASON 8",
+            "salary": 5.5,
+            "type": "prime"
+          },
+          {
+            "name": "LUIS DIAZ",
+            "position": "LW",
+            "value": 80,
+            "contract": "SEASON 8",
+            "salary": 4,
+            "type": "standard"
+          },
+          {
+            "name": "KALVIN PHILLIPS",
+            "position": "DM",
+            "value": 42,
+            "contract": "SEASON 8",
+            "salary": 2.1,
+            "type": "prime"
           }
-        ]
+        ],
+        "totalPlayers": 19
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -3840,7 +3961,8 @@
           }
         }
       ],
-      "current_season": 6
+      "current_season": 6,
+      "clubTotalValue": 1198
     },
     {
       "name": "FAZI",
@@ -4889,13 +5011,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1467,
+      "club_total_value": 1288,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 20,
+        "total_players": 17,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -5058,7 +5180,7 @@
             "type": "standard"
           }
         ],
-        "totalPlayers": 21
+        "totalPlayers": 20
       },
       "performance": {
         "formula": "Sum of all season_stats (excluding sp_tour_stats)",
@@ -8252,32 +8374,7 @@
       ],
       "current_season": 6,
       "clubTotalValue": 1168
-    },
-    {
-      "name": "Manager of FREE AGENT",
-      "club": "FREE AGENT",
-      "overall_rating": 0,
-      "r2g_coin_balance": 0,
-      "r2g_token_balance": 0,
-      "club_total_value": 40,
-      "manager_rating": 0,
-      "trophies": 0,
-      "awards": 0,
-      "squad": {
-        "total_players": 1,
-        "players": [
-          {
-            "name": "STRAHINJA PAVLOVIC",
-            "position": "CB",
-            "value": 40,
-            "contract": "SEASON 7",
-            "salary": 2,
-            "type": "prime"
-          }
-        ]
-      },
-      "star_rating": 3
     }
   ],
-  "_lastUpdated": "2025-05-07T07:05:56.522Z"
+  "_lastUpdated": "2025-05-07T07:32:14.765Z"
 }
