@@ -4889,13 +4889,13 @@
       "overall_rating": 82.1,
       "r2g_coin_balance": 1249,
       "r2g_token_balance": 115,
-      "club_total_value": 1288,
+      "club_total_value": 1467,
       "star_rating": 3,
       "manager_rating": 8.6,
       "trophies": 0,
       "awards": 0,
       "squad": {
-        "total_players": 17,
+        "total_players": 20,
         "players": [
           {
             "name": "THIBAUT COURTOIS",
@@ -4911,14 +4911,6 @@
             "value": 44,
             "contract": "SEASON 7",
             "salary": 2.2,
-            "type": "prime"
-          },
-          {
-            "name": "STRAHINJA PAVLOVIC",
-            "position": "CB",
-            "value": 44,
-            "contract": "SEASON 7",
-            "salary": 2,
             "type": "prime"
           },
           {
@@ -8260,7 +8252,32 @@
       ],
       "current_season": 6,
       "clubTotalValue": 1168
+    },
+    {
+      "name": "Manager of FREE AGENT",
+      "club": "FREE AGENT",
+      "overall_rating": 0,
+      "r2g_coin_balance": 0,
+      "r2g_token_balance": 0,
+      "club_total_value": 40,
+      "manager_rating": 0,
+      "trophies": 0,
+      "awards": 0,
+      "squad": {
+        "total_players": 1,
+        "players": [
+          {
+            "name": "STRAHINJA PAVLOVIC",
+            "position": "CB",
+            "value": 40,
+            "contract": "SEASON 7",
+            "salary": 2,
+            "type": "prime"
+          }
+        ]
+      },
+      "star_rating": 3
     }
   ],
-  "_lastUpdated": "2025-05-07T07:04:12.288Z"
+  "_lastUpdated": "2025-05-07T07:05:56.522Z"
 }
