@@ -3553,16 +3553,46 @@
                 }
                 
                 try {
-                    // First get the squad entry to know the player_id
+                    // First get the squad entry to know the player_id and details
                     const { data: squadData, error: getError } = await supabase
                         .from('manager_squads')
-                        .select('player_id')
+                        .select('player_id, player_type')
                         .eq('id', squadId)
                         .single();
                         
                     if (getError) throw getError;
                     
                     const playerId = squadData?.player_id;
+                    const playerType = squadData?.player_type || 'standard';
+                    
+                    if (!playerId) {
+                        showToast('Unable to find player information', 'error');
+                        return;
+                    }
+                    
+                    // Get player details to access star rating
+                    const { data: playerData, error: playerError } = await supabase
+                        .from('players')
+                        .select('id, name, star_rating, club_history')
+                        .eq('id', playerId)
+                        .single();
+                        
+                    if (playerError) {
+                        console.error('Error getting player details:', playerError);
+                        showToast('Error retrieving player details', 'error');
+                        return;
+                    }
+                    
+                    // Ask for current season
+                    const currentSeason = prompt(
+                        `Enter the current season (e.g. 6, 6.5) to update ${playerData.name}'s history:`, 
+                        currentManager?.current_season || ''
+                    );
+                    
+                    if (currentSeason === null) {
+                        // User canceled the operation
+                        return;
+                    }
                     
                     // Delete the squad entry
                     const { error } = await supabase
@@ -3572,34 +3602,89 @@
                         
                     if (error) throw error;
                     
-                    // If we have a player_id, check if this was their only squad
-                    if (playerId) {
-                        // Check if player is in any other squads
-                        const { data: otherSquads, error: checkError } = await supabase
-                            .from('manager_squads')
-                            .select('id')
-                            .eq('player_id', playerId);
-                            
-                        if (checkError) {
-                            console.error('Error checking player squads:', checkError);
-                        } else if (!otherSquads || otherSquads.length === 0) {
-                            // This was the player's only squad, so set them as a free agent
-                            console.log(`Player ${playerId} was removed from their only squad, updating club_id to null`);
-                            
-                            const { error: updateError } = await supabase
-                                .from('players')
-                                .update({ club_id: null })
-                                .eq('id', playerId);
-                                
-                            if (updateError) {
-                                console.error('Error updating player club_id:', updateError);
-                            } else {
-                                console.log(`Set player ${playerId} as free agent`);
-                            }
-                        }
+                    // Check if player is in any other squads
+                    const { data: otherSquads, error: checkError } = await supabase
+                        .from('manager_squads')
+                        .select('id')
+                        .eq('player_id', playerId);
+                        
+                    if (checkError) {
+                        console.error('Error checking player squads:', checkError);
                     }
                     
-                    showToast('Player removed from squad successfully');
+                    // If this was the player's only squad, set them as a free agent
+                    // and update their value based on star_rating and player_type
+                    if (!otherSquads || otherSquads.length === 0) {
+                        console.log(`Player ${playerId} was removed from their only squad, updating club_id to null and adjusting value`);
+                        
+                        // Determine new value based on star rating and player type
+                        let newValue;
+                        const starRating = playerData.star_rating || 3;
+                        
+                        if (playerType === 'legend' || playerType === 'prime legend') {
+                            if (starRating >= 5) {
+                                newValue = 100;
+                            } else if (starRating >= 4) {
+                                newValue = 60;
+                            } else {
+                                newValue = 40; // Default for other star ratings
+                            }
+                        } else { // standard, prime, icon
+                            if (starRating >= 5) {
+                                newValue = 80;
+                            } else if (starRating >= 4) {
+                                newValue = 50;
+                            } else { // 3 star or less
+                                newValue = 40;
+                            }
+                        }
+                        
+                        // Update club history if available
+                        let updatedClubHistory = playerData.club_history;
+                        
+                        if (updatedClubHistory) {
+                            // Try to find the last entry and update the end season
+                            try {
+                                // Check if club_history is a string that needs parsing
+                                if (typeof updatedClubHistory === 'string') {
+                                    updatedClubHistory = JSON.parse(updatedClubHistory);
+                                }
+                                
+                                // Make sure it's an array
+                                if (Array.isArray(updatedClubHistory) && updatedClubHistory.length > 0) {
+                                    // Get the last entry
+                                    const lastEntry = updatedClubHistory[updatedClubHistory.length - 1];
+                                    
+                                    // Update the end season if this is the current club
+                                    if (lastEntry && !lastEntry.end_season) {
+                                        lastEntry.end_season = currentSeason;
+                                        console.log(`Updated club history: set end_season to ${currentSeason}`);
+                                    }
+                                }
+                            } catch (historyError) {
+                                console.error('Error updating club history:', historyError);
+                            }
+                        }
+                        
+                        // Update player in the database
+                        const { error: updateError } = await supabase
+                            .from('players')
+                            .update({ 
+                                club_id: null,
+                                value: newValue,
+                                club_history: updatedClubHistory
+                            })
+                            .eq('id', playerId);
+                            
+                        if (updateError) {
+                            console.error('Error updating player club_id and value:', updateError);
+                        } else {
+                            console.log(`Set player ${playerId} as free agent with adjusted value: ${newValue}`);
+                            showToast(`Player removed from squad and value adjusted to ${newValue}`);
+                        }
+                    } else {
+                        showToast('Player removed from this squad but remains in other squads');
+                    }
                     
                     // Refresh squad list
                     await loadManagerSquad(currentManager.id);
