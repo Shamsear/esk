@@ -838,8 +838,12 @@
         <div class="player-grid">
             <div class="sidebar">
                 <div class="search-container">
-                    <input type="text" class="search-box" id="search-player" placeholder="Search players...">
+                    <input type="text" class="search-box" id="search-player" placeholder="Search players by name...">
                     <i class="fas fa-search search-icon"></i>
+                </div>
+                <div style="margin-bottom: 15px; font-size: 13px; color: #aaa; display: flex; align-items: center;">
+                    <i class="fas fa-sort-amount-down" style="margin-right: 6px;"></i>
+                    Sorted by value (highest first)
                 </div>
                 <ul class="player-list" id="player-list">
                     <!-- Players will be populated here via JavaScript -->
@@ -1186,7 +1190,7 @@
                     const to = from + ITEMS_PER_PAGE - 1;
                     
                     const { data, error, count } = await query
-                        .order('name')
+                        .order('value', { ascending: false })
                         .range(from, to);
                         
                     if (error) throw error;
@@ -1226,10 +1230,13 @@
                     const imgSrc = player.image_path || `assets/images/players/${player.name.replace(/\s+/g, '_')}.webp`;
                     const imgFallback = 'assets/images/player_placeholder.webp';
                     
+                    // Format the player value with separators
+                    const formattedValue = player.value ? player.value.toLocaleString() : '0';
+                    
                     listItem.innerHTML = `
                         <img src="${imgSrc}" alt="${player.name}" class="player-thumbnail" onerror="this.src='${imgFallback}'">
                         <span class="player-name">${player.name}</span>
-                        <span class="player-value">${player.value}</span>
+                        <span class="player-value">${formattedValue}</span>
                     `;
                     
                     listItem.addEventListener('click', () => selectPlayer(player.id));

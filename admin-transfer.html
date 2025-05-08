@@ -1207,7 +1207,7 @@
         <div class="grid">
             <div class="sidebar">
                 <div class="search-container">
-                    <input type="text" class="search-box" id="search-manager" placeholder="Search managers...">
+                    <input type="text" class="search-box" id="search-manager" placeholder="Search by manager or club name...">
                     <i class="fas fa-search search-icon"></i>
                 </div>
                 <ul class="manager-list" id="manager-list">
@@ -1598,7 +1598,11 @@
                     let query = supabase.from('managers').select('id, name, club_id', { count: 'exact' });
                     
                     if (searchTerm) {
-                        query = query.ilike('name', `%${searchTerm}%`);
+                        // First get club IDs that match the search term
+                        const matchingClubIds = await getClubIdsByName(searchTerm);
+                        
+                        // Modify query to search by manager name or club name
+                        query = query.or(`name.ilike.%${searchTerm}%,club_id.in.(${matchingClubIds})`);
                     }
                     
                     // Calculate pagination
@@ -1663,6 +1667,29 @@
                 } catch (error) {
                     showToast('Error loading managers: ' + error.message, 'error');
                     managerList.innerHTML = '<li class="manager-item">Error loading managers</li>';
+                }
+            }
+            
+            // Helper function to get club IDs by name
+            async function getClubIdsByName(searchTerm) {
+                try {
+                    // Search for clubs with names matching the search term
+                    const { data, error } = await supabase
+                        .from('clubs')
+                        .select('id')
+                        .ilike('name', `%${searchTerm}%`);
+                        
+                    if (error) throw error;
+                    
+                    if (!data || data.length === 0) {
+                        return '0'; // Return 0 as a fallback ID that won't match anything
+                    }
+                    
+                    // Return comma-separated list of club IDs
+                    return data.map(club => club.id).join(',');
+                } catch (error) {
+                    console.error('Error searching clubs:', error);
+                    return '0'; // Return 0 as a fallback ID that won't match anything
                 }
             }
             
@@ -1829,7 +1856,7 @@
             // Search managers
             function searchManagers() {
                 const searchTerm = searchInput.value;
-                loadManagers(1, searchTerm);
+                loadManagers(1, searchTerm); // Reset to page 1 when searching
             }
             
             // Logout
