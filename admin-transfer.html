@@ -2338,7 +2338,100 @@
                             console.error(`Error updating player ${player.id}:`, playerError);
                         }
                         
-                        // For contract SEASON 8, add stats for seasons 6-8
+                        // Get club name for player_stats
+                        let clubName = '';
+                        if (clubId) {
+                            const { data: clubData, error: clubNameError } = await supabase
+                                .from('clubs')
+                                .select('name')
+                                .eq('id', clubId)
+                                .single();
+                                
+                            if (!clubNameError && clubData) {
+                                clubName = clubData.name;
+                            }
+                        }
+                        
+                        // Get player's existing stats to check for previous team seasons
+                        const { data: existingStats, error: statsError } = await supabase
+                            .from('player_stats')
+                            .select('id, season, team')
+                            .eq('player_id', player.id);
+                            
+                        if (statsError) {
+                            console.error(`Error getting existing stats for player ${player.id}:`, statsError);
+                        } else {
+                            // Check if player was on another team with a season range (e.g., "5-7")
+                            const seasonRangeStats = existingStats?.filter(stat => 
+                                stat.season && stat.season.includes('-') && stat.team !== clubName
+                            );
+                            
+                            // Update any previous team's season ranges
+                            for (const stat of (seasonRangeStats || [])) {
+                                const seasonParts = stat.season.split('-');
+                                if (seasonParts.length === 2) {
+                                    const startSeason = parseInt(seasonParts[0]);
+                                    const endSeason = parseInt(seasonParts[1]);
+                                    
+                                    // Contract is current season, determine where to split
+                                    const contractSeason = player.contract;
+                                    
+                                    // If the player's new contract season is after the start season of old team
+                                    // update the old team's season range to end at previous season
+                                    if (contractSeason > startSeason) {
+                                        const newEndSeason = contractSeason - 1;
+                                        const newSeasonRange = `${startSeason}-${newEndSeason}`;
+                                        
+                                        // Update the old team's season range
+                                        const { error: updateStatsError } = await supabase
+                                            .from('player_stats')
+                                            .update({ 
+                                                season: newSeasonRange
+                                            })
+                                            .eq('id', stat.id);
+                                            
+                                        if (updateStatsError) {
+                                            console.error(`Error updating previous team stats for player ${player.id}:`, updateStatsError);
+                                        } else {
+                                            console.log(`Updated player ${player.name} previous team season range to ${newSeasonRange}`);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // Create new season range for the new team starting from contract-2 (min 6)
+                            if (clubName) {
+                                const newContractSeason = player.contract;
+                                const startSeason = Math.max(6, newContractSeason - 2);
+                                const seasonRange = `${startSeason}-${newContractSeason}`;
+                                
+                                // Check if we already have this season range for this club
+                                const existingClubStat = existingStats?.find(stat => 
+                                    stat.team === clubName && stat.season === seasonRange
+                                );
+                                
+                                if (!existingClubStat) {
+                                    // Create new entry for new club with season range
+                                    const { error: insertStatsError } = await supabase
+                                        .from('player_stats')
+                                        .insert([{
+                                            player_id: player.id,
+                                            season: seasonRange,
+                                            team: clubName,
+                                            value: player.value.toString(),
+                                            apps: '0'
+                                        }]);
+                                        
+                                    if (insertStatsError) {
+                                        console.error(`Error creating stats for player ${player.id} with team ${clubName}:`, insertStatsError);
+                                    } else {
+                                        console.log(`Added player ${player.name} to ${clubName} with season range ${seasonRange}`);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // For player_season_stats table too (this was already in your code)
                         if (player.contract >= 6) {
                             // Check if player already has season stats
                             const startSeason = Math.max(6, player.contract - 2);

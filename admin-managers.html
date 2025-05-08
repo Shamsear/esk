@@ -3583,7 +3583,11 @@
                     // Clear confirmation with details
                     const confirmMessage = `Release ${playerName} from ${clubName || 'the squad'}?\n\n` +
                         `Player Type: ${playerType}\n` +
-                        `This will make the player a free agent with an appropriate value.`;
+                        `Current Season: ${currentManager?.current_season || '6'}\n\n` +
+                        `This will:\n` +
+                        `- Make the player a free agent\n` +
+                        `- Set value based on star rating\n` +
+                        `- Update season stats to end at season ${currentManager?.current_season || '6'}`;
                     
                     if (!confirm(confirmMessage)) {
                         return;
@@ -3676,8 +3680,17 @@
                                             if (stat.team === clubName && stat.season.includes('-')) {
                                                 // This is a season range entry for this club that needs updating
                                                 const seasonParts = stat.season.split('-');
+                                                
+                                                // If it's already in the format we want (e.g., "5-6"), no need to update
+                                                if (seasonParts[1] === currentSeason) {
+                                                    console.log(`Season range already correctly set to ${stat.season}`);
+                                                    seasonRangeFound = true;
+                                                    break;
+                                                }
+                                                
                                                 // Update the end of the range to the current season
-                                                const newSeasonRange = `${seasonParts[0]}-${currentSeason}`;
+                                                const startSeason = parseInt(seasonParts[0]);
+                                                const newSeasonRange = `${startSeason}-${currentSeason}`;
                                                 
                                                 const { error: updateStatsError } = await supabase
                                                     .from('player_stats')
@@ -3689,29 +3702,14 @@
                                                 if (updateStatsError) {
                                                     console.error('Error updating player stats season range:', updateStatsError);
                                                 } else {
-                                                    console.log(`Updated player stat season range to ${newSeasonRange} for team ${clubName}`);
+                                                    console.log(`Updated player ${playerName} season range from ${stat.season} to ${newSeasonRange} for team ${clubName}`);
                                                     seasonRangeFound = true;
                                                 }
                                                 break;
                                             }
                                         }
                                         
-                                        // Always create a new FREE AGENT entry with the new value
-                                        const { error: insertStatsError } = await supabase
-                                            .from('player_stats')
-                                            .insert([{
-                                                player_id: playerId,
-                                                season: currentSeason,
-                                                team: 'FREE AGENT',
-                                                value: newValue.toString(),
-                                                apps: '0'
-                                            }]);
-                                            
-                                        if (insertStatsError) {
-                                            console.error('Error inserting player stats:', insertStatsError);
-                                        } else {
-                                            console.log(`Created new FREE AGENT stats entry for season ${currentSeason} with value ${newValue}`);
-                                        }
+                                        // No need to create a FREE AGENT entry as per request
                                     }
                                 }
                             }
