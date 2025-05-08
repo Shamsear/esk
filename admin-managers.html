@@ -3553,45 +3553,46 @@
                 }
                 
                 try {
-                    // First get the squad entry to know the player_id and details
+                    // First get the squad entry to know the player_id and player details
                     const { data: squadData, error: getError } = await supabase
                         .from('manager_squads')
-                        .select('player_id, player_type')
+                        .select('player_id, player_name, player_type')
                         .eq('id', squadId)
                         .single();
                         
                     if (getError) throw getError;
                     
                     const playerId = squadData?.player_id;
+                    const playerName = squadData?.player_name;
                     const playerType = squadData?.player_type || 'standard';
                     
-                    if (!playerId) {
-                        showToast('Unable to find player information', 'error');
+                    // Get manager club info for stats tracking
+                    let clubName = '';
+                    if (currentManager && currentManager.club_id) {
+                        const { data: clubData, error: clubError } = await supabase
+                            .from('clubs')
+                            .select('name')
+                            .eq('id', currentManager.club_id)
+                            .single();
+                            
+                        if (!clubError && clubData) {
+                            clubName = clubData.name;
+                        }
+                    }
+                    
+                    // Clear confirmation with details
+                    const confirmMessage = `Release ${playerName} from ${clubName || 'the squad'}?\n\n` +
+                        `Player Type: ${playerType}\n` +
+                        `This will make the player a free agent with an appropriate value.`;
+                    
+                    if (!confirm(confirmMessage)) {
                         return;
                     }
                     
-                    // Get player details to access star rating
-                    const { data: playerData, error: playerError } = await supabase
-                        .from('players')
-                        .select('id, name, star_rating, club_history')
-                        .eq('id', playerId)
-                        .single();
-                        
-                    if (playerError) {
-                        console.error('Error getting player details:', playerError);
-                        showToast('Error retrieving player details', 'error');
-                        return;
-                    }
-                    
-                    // Ask for current season
-                    const currentSeason = prompt(
-                        `Enter the current season (e.g. 6, 6.5) to update ${playerData.name}'s history:`, 
-                        currentManager?.current_season || ''
-                    );
-                    
-                    if (currentSeason === null) {
-                        // User canceled the operation
-                        return;
+                    // Get the current season information for player_stats
+                    let currentSeason = prompt('What is the current season? (e.g., 6, 6.5, 7)', currentManager?.current_season || '6');
+                    if (!currentSeason) {
+                        currentSeason = currentManager?.current_season || '6';
                     }
                     
                     // Delete the squad entry
@@ -3602,89 +3603,122 @@
                         
                     if (error) throw error;
                     
-                    // Check if player is in any other squads
-                    const { data: otherSquads, error: checkError } = await supabase
-                        .from('manager_squads')
-                        .select('id')
-                        .eq('player_id', playerId);
-                        
-                    if (checkError) {
-                        console.error('Error checking player squads:', checkError);
-                    }
-                    
-                    // If this was the player's only squad, set them as a free agent
-                    // and update their value based on star_rating and player_type
-                    if (!otherSquads || otherSquads.length === 0) {
-                        console.log(`Player ${playerId} was removed from their only squad, updating club_id to null and adjusting value`);
-                        
-                        // Determine new value based on star rating and player type
-                        let newValue;
-                        const starRating = playerData.star_rating || 3;
-                        
-                        if (playerType === 'legend' || playerType === 'prime legend') {
-                            if (starRating >= 5) {
-                                newValue = 100;
-                            } else if (starRating >= 4) {
-                                newValue = 60;
+                    // If we have a player_id, check if this was their only squad
+                    if (playerId) {
+                        // Check if player is in any other squads
+                        const { data: otherSquads, error: checkError } = await supabase
+                            .from('manager_squads')
+                            .select('id')
+                            .eq('player_id', playerId);
+                            
+                        if (checkError) {
+                            console.error('Error checking player squads:', checkError);
+                        } else if (!otherSquads || otherSquads.length === 0) {
+                            // This was the player's only squad, so set them as a free agent
+                            console.log(`Player ${playerId} was removed from their only squad, updating club_id to null`);
+                            
+                            // Get player star rating to determine new value
+                            const { data: playerData, error: playerError } = await supabase
+                                .from('players')
+                                .select('star')
+                                .eq('id', playerId)
+                                .single();
+                                
+                            if (playerError) {
+                                console.error('Error getting player star rating:', playerError);
                             } else {
-                                newValue = 40; // Default for other star ratings
-                            }
-                        } else { // standard, prime, icon
-                            if (starRating >= 5) {
-                                newValue = 80;
-                            } else if (starRating >= 4) {
-                                newValue = 50;
-                            } else { // 3 star or less
-                                newValue = 40;
-                            }
-                        }
-                        
-                        // Update club history if available
-                        let updatedClubHistory = playerData.club_history;
-                        
-                        if (updatedClubHistory) {
-                            // Try to find the last entry and update the end season
-                            try {
-                                // Check if club_history is a string that needs parsing
-                                if (typeof updatedClubHistory === 'string') {
-                                    updatedClubHistory = JSON.parse(updatedClubHistory);
+                                // Determine new value based on star rating and player type
+                                let newValue = 40; // Default value for 3 star standard
+                                
+                                // Check for legend status from player_type
+                                const isLegend = playerType.toLowerCase().includes('legend');
+                                
+                                // Get star rating from player data or infer from player type
+                                let starRating = playerData?.star || '3-star-standard';
+                                
+                                // Set value based on the specified rules
+                                if (starRating.includes('5-star') || playerType.includes('5') || playerType.includes('5-star')) {
+                                    newValue = isLegend ? 100 : 80; // 5 star legend = 100, 5 star standard = 80
+                                } else if (starRating.includes('4-star') || playerType.includes('4') || playerType.includes('4-star')) {
+                                    newValue = isLegend ? 60 : 50;  // 4 star legend = 60, 4 star standard = 50
+                                } else if (starRating.includes('3-star') || playerType.includes('3') || playerType.includes('3-star')) {
+                                    newValue = 40;  // 3 star standard = 40
                                 }
                                 
-                                // Make sure it's an array
-                                if (Array.isArray(updatedClubHistory) && updatedClubHistory.length > 0) {
-                                    // Get the last entry
-                                    const lastEntry = updatedClubHistory[updatedClubHistory.length - 1];
+                                // Update the player's value and club
+                                const { error: updateError } = await supabase
+                                    .from('players')
+                                    .update({ 
+                                        club_id: null,
+                                        value: newValue
+                                    })
+                                    .eq('id', playerId);
                                     
-                                    // Update the end season if this is the current club
-                                    if (lastEntry && !lastEntry.end_season) {
-                                        lastEntry.end_season = currentSeason;
-                                        console.log(`Updated club history: set end_season to ${currentSeason}`);
+                                if (updateError) {
+                                    console.error('Error updating player value and club_id:', updateError);
+                                } else {
+                                    console.log(`Set player ${playerId} as free agent with value ${newValue}`);
+                                    
+                                    // Find any existing player_stats entries with the current season format (e.g., "5-7")
+                                    const { data: existingStats, error: statsError } = await supabase
+                                        .from('player_stats')
+                                        .select('id, season, team')
+                                        .eq('player_id', playerId);
+                                        
+                                    if (statsError) {
+                                        console.error('Error checking player stats:', statsError);
+                                    } else {
+                                        // Check if we have a season range entry to update
+                                        let seasonRangeFound = false;
+                                        
+                                        // First try to find an entry with this specific club to update
+                                        for (const stat of (existingStats || [])) {
+                                            if (stat.team === clubName && stat.season.includes('-')) {
+                                                // This is a season range entry for this club that needs updating
+                                                const seasonParts = stat.season.split('-');
+                                                // Update the end of the range to the current season
+                                                const newSeasonRange = `${seasonParts[0]}-${currentSeason}`;
+                                                
+                                                const { error: updateStatsError } = await supabase
+                                                    .from('player_stats')
+                                                    .update({ 
+                                                        season: newSeasonRange
+                                                    })
+                                                    .eq('id', stat.id);
+                                                    
+                                                if (updateStatsError) {
+                                                    console.error('Error updating player stats season range:', updateStatsError);
+                                                } else {
+                                                    console.log(`Updated player stat season range to ${newSeasonRange} for team ${clubName}`);
+                                                    seasonRangeFound = true;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        
+                                        // Always create a new FREE AGENT entry with the new value
+                                        const { error: insertStatsError } = await supabase
+                                            .from('player_stats')
+                                            .insert([{
+                                                player_id: playerId,
+                                                season: currentSeason,
+                                                team: 'FREE AGENT',
+                                                value: newValue.toString(),
+                                                apps: '0'
+                                            }]);
+                                            
+                                        if (insertStatsError) {
+                                            console.error('Error inserting player stats:', insertStatsError);
+                                        } else {
+                                            console.log(`Created new FREE AGENT stats entry for season ${currentSeason} with value ${newValue}`);
+                                        }
                                     }
                                 }
-                            } catch (historyError) {
-                                console.error('Error updating club history:', historyError);
                             }
                         }
-                        
-                        // Update player in the database
-                        const { error: updateError } = await supabase
-                            .from('players')
-                            .update({ 
-                                club_id: null,
-                                value: newValue,
-                                club_history: updatedClubHistory
-                            })
-                            .eq('id', playerId);
-                            
-                        if (updateError) {
-                            console.error('Error updating player club_id and value:', updateError);
-                        } else {
-                            console.log(`Set player ${playerId} as free agent with adjusted value: ${newValue}`);
-                            showToast(`Player removed from squad and value adjusted to ${newValue}`);
-                        }
-                    } else {
-                        showToast('Player removed from this squad but remains in other squads');
                     }
+                    
+                    showToast('Player removed from squad successfully');
                     
                     // Refresh squad list
                     await loadManagerSquad(currentManager.id);
