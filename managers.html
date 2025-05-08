@@ -30,6 +30,10 @@
     <link rel="preload" href="js/pwa-init.js" as="script">
     <link rel="preload" href="js/offline-manager.js" as="script">
     
+    <!-- Supabase JS library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="manager-client.js"></script>
+
     <style>
         /* Managers page specific styling */
         .managers-container {
@@ -983,6 +987,9 @@
     </style>
 </head>
 <body data-page="managers">
+    <!-- Hidden config div for Supabase credentials -->
+    <div id="app-config" data-supabase-url="https://aikjdwmacnpdsrqdkhkq.supabase.co" data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M" style="display: none;"></div>
+
     <div class="overlay">
         <!-- Top Bar -->
         <div class="top-bar">
@@ -997,8 +1004,7 @@
                     <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
                 </div>
                 <div class="admin-links">
-                    <a href="admin-stats.html" title="Admin Stats"><i class="fas fa-chart-bar"></i></a>
-                    <a href="transfer-admin.html" title="Transfer Admin"><i class="fas fa-exchange-alt"></i></a>
+                    <a href="admin-dashboard.html" title="Admin Dashboard"><i class="fas fa-tachometer-alt"></i></a>
                 </div>
                 <div class="hamburger" id="hamburger">
                     <span></span>
@@ -1316,71 +1322,30 @@
     <script src="js/pwa-init.js"></script>
     <script src="js/offline-manager.js"></script>
     
-    <script>
-        // Mobile menu toggle
-        document.getElementById('hamburger').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.add('active');
-        });
+    <script type="module">
+        // Import the manager client functions
+        import { getManagers } from './manager-client.js';
         
-        document.getElementById('close-menu').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.remove('active');
-        });
-        
-        // Load and display managers data
+        // Load and display managers data from Supabase
         async function loadManagersData() {
             try {
-                // Try multiple sources for manager data with fallbacks
-                let data = null;
-                let errors = [];
-                
-                // Array of potential data sources to try
-                const dataSources = [
-                    '/manager_data.json',  // Root path
-                    './manager_data.json', // Relative path
-                    'https://eskimos-r2g.vercel.app/manager_data.json', // Absolute path to Vercel deployment
-                    'manager_data.json'    // Simple path as last resort
-                ];
-                
-                // Try each data source until one works
-                for (const source of dataSources) {
-                    try {
-                        console.log(`Attempting to load managers data from: ${source}`);
-                        const response = await fetch(source);
-                        if (response.ok) {
-                            data = await response.json();
-                            console.log(`Successfully loaded data from: ${source}`);
-                            break; // Exit the loop if successful
-                        } else {
-                            errors.push(`Failed to load from ${source}: ${response.status} ${response.statusText}`);
-                        }
-                    } catch (error) {
-                        errors.push(`Error fetching from ${source}: ${error.message}`);
-                    }
-                }
-                
-                // If no data was loaded, throw an error
-                if (!data) {
-                    throw new Error(`Failed to load managers data from all sources. Errors: ${errors.join('; ')}`);
-                }
-                
-                // Get reference to managers container
+                // Show loading state
                 const managersContainer = document.getElementById('managers-container');
                 if (!managersContainer) {
                     throw new Error('Managers container element not found in the DOM');
                 }
                 
-                // Clear skeleton loaders
-                managersContainer.innerHTML = '';
+                // Keep the skeleton loaders while loading data
+                console.log('Fetching managers data from Supabase...');
                 
-                // Extract managers data (handle both array and object formats)
-                const managers = Array.isArray(data) ? data : 
-                                (data.managers && Array.isArray(data.managers)) ? data.managers : [];
+                // Fetch managers data from Supabase
+                const managers = await getManagers();
                 
                 if (managers.length === 0) {
-                    throw new Error('No manager data found in the loaded resource');
+                    throw new Error('No manager data found in the Supabase database');
                 }
                 
-                console.log(`Loaded ${managers.length} managers`);
+                console.log(`Loaded ${managers.length} managers from Supabase`);
                 
                 // Sort managers by rank - numeric values first (1,2,3...), then "-" or other values
                 managers.sort((a, b) => {

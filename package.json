@@ -1,14 +1,14 @@
 {
-  "name": "r2g-player-admin",
+  "name": "json-to-supabase-migration",
   "version": "1.0.0",
-  "description": "Admin interface for R2G player data management",
-  "main": "save-players.js",
+  "description": "Migration tool to convert JSON data to Supabase database",
+  "main": "supabase_data_migration.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "python -m http.server",
-    "server": "node save-players.js",
-    "pwa-setup": "node update-pwa.js"
+    "migrate": "node supabase_data_migration.js",
+    "test": "node test_connection.js",
+    "clear": "node clear_database.js",
+    "apply-triggers": "node apply_enhanced_triggers.js",
+    "verify-triggers": "node verify_triggers.js"
   },
   "keywords": [
     "admin",
@@ -20,15 +20,22 @@
   "author": "R2G Admin",
   "license": "MIT",
   "dependencies": {
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/postgres": "^0.10.0",
-    "fs": "^0.0.1-security",
-    "http": "^0.0.1-security",
-    "path": "^0.12.7",
-    "xlsx": "^0.18.5"
+    "@supabase/supabase-js": "^2.38.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@prisma/client": "^6.7.0",
     "prisma": "^6.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shamsear/esk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shamsear/esk/issues"
+  },
+  "homepage": "https://github.com/Shamsear/esk#readme",
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

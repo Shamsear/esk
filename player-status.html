@@ -1228,14 +1228,30 @@
         
     </style>
 
+    <!-- Remove all non-existent JS files -->
+    <!-- Performance optimization JS -->
+    <script>
+        // Immediately executed critical JS
+        // Performance optimizations are now handled in separate files
+        // This avoids duplicate event listeners that were causing issues
+    </script>
+    <!-- Defer main script to improve initial load -->
+    <script defer src="js/script.js"></script>
+    
+    <!-- Supabase JS library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="supabase-client.js"></script>
 </head>
 <body>
     <!-- Admin link -->
     <div class="admin-link">
-        <a href="admin-login.html" title="Admin Panel">
+        <a href="admin-dashboard.html" title="Admin Dashboard">
             <i class="fas fa-user-shield"></i>
         </a>
     </div>
+    
+    <!-- Hidden config div -->
+    <div id="app-config" data-supabase-url="" data-supabase-key="" style="display: none;"></div>
     
     <!-- Back to Career Mode button -->
     <div class="back-link">
@@ -1683,6 +1699,13 @@
     <script>
 
 window.onload = function() {
+    // Set Supabase values - replace with actual values from your Supabase project
+    const configElement = document.getElementById('app-config');
+    if (configElement) {
+        configElement.setAttribute('data-supabase-url', 'https://aikjdwmacnpdsrqdkhkq.supabase.co');
+        configElement.setAttribute('data-supabase-key', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M');
+    }
+
     const messages = [
         "Welcome to R2G Player Data",
         "Loading Data...",
@@ -1694,7 +1717,7 @@ window.onload = function() {
     window.selectedPositions = [];
     window.modalSelectedPositions = [];
 
-    // Fetch players data from JSON file
+    // Fetch players data from Supabase
     fetchPlayersData();
 
     // Cycle through messages every 1.5 seconds
@@ -1741,52 +1764,36 @@ window.onload = function() {
     
     resetFilters();
     resetModalFilters(); // Reset the filters when the page loads
-    
-    // Rest of your initialization code
 };
 
-// Function to fetch and load player data from the JSON file
+// Function to fetch and load player data from Supabase
 async function fetchPlayersData() {
     try {
         // Show loading indicator with progress updates
         const loadingElement = document.getElementById('loading');
         const subtextElement = document.getElementById('subtext');
         if (subtextElement) {
-            subtextElement.textContent = 'Fetching player data...';
+            subtextElement.textContent = 'Connecting to database...';
         }
         
-        // Fetch the data with a timeout to handle very large files
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        // Import the getPlayers function
+        const { getPlayers } = await import('./supabase-client.js');
         
-        const response = await fetch('players.json', {
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
+        // Add progress event listener
+        window.addEventListener('player-data-progress', function(e) {
+            if (subtextElement) {
+                subtextElement.textContent = e.detail.message;
+            }
+        }, { once: false });
         
-        if (!response.ok) {
-            throw new Error('Failed to load player data');
+        const players = await getPlayers();
+        
+        if (!players || players.length === 0) {
+            throw new Error('No player data received. Please check your Supabase connection and database tables.');
         }
         
         if (subtextElement) {
-            subtextElement.textContent = 'Processing player data...';
-        }
-        
-        // Use streaming approach for large JSON files
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let chunks = '';
-        
-        // Process the data in chunks
-        while(true) {
-            const {value, done} = await reader.read();
-            if (done) break;
-            chunks += decoder.decode(value, {stream: true});
-        }
-        
-        const players = JSON.parse(chunks);
-        if (subtextElement) {
-            subtextElement.textContent = 'Preparing display...';
+            subtextElement.textContent = `Processing ${players.length} players...`;
         }
         
         // Initialize pagination state
@@ -1804,7 +1811,7 @@ async function fetchPlayersData() {
             }
         };
         
-        // Basic pre-sorting (we'll sort filtered results as needed)
+        // Basic pre-sorting
         window.playerState.allPlayers.sort((a, b) => {
             // Sort by value in descending order
             if (a.value !== b.value) {
@@ -1909,14 +1916,16 @@ function createPlayerCard(player) {
     playerCard.className = 'player-card';
     
     // Set data attributes
+    if (player.id) {
+        playerCard.setAttribute('data-id', player.id);
+    }
     playerCard.setAttribute('data-name', player.name);
-    playerCard.setAttribute('data-star', player.star);
-    playerCard.setAttribute('data-level', player.level);
-    playerCard.setAttribute('data-club', player.club);
-    playerCard.setAttribute('data-position', player.position);
-    playerCard.setAttribute('data-value', player.value);
-    playerCard.setAttribute('data-games-played', player.gamesPlayed);
-    playerCard.setAttribute('data-stats', JSON.stringify(player.stats));
+    playerCard.setAttribute('data-star', player.star || '');
+    playerCard.setAttribute('data-level', player.level || '');
+    playerCard.setAttribute('data-club', player.club || 'FREE AGENT');
+    playerCard.setAttribute('data-position', player.position || '');
+    playerCard.setAttribute('data-value', player.value || '0');
+    playerCard.setAttribute('data-stats', JSON.stringify(player.stats || []));
     
     // Create the image element
     const img = document.createElement('img');
@@ -2003,62 +2012,81 @@ function closeFilterModal() {
 }
 
 // Open the player modal and hide the filter button
-function openModal(card) {
-    const name = card.getAttribute('data-name');
+async function openModal(card) {
+    const playerId = card.getAttribute('data-id');
+    const name = card.getAttribute('data-name') || 'Unknown Player';
     const photoSrc = card.querySelector('img').src;
-    const club = card.getAttribute('data-club');
-    const level = card.getAttribute('data-level');
-    const position = card.getAttribute('data-position');
-    const value = card.getAttribute('data-value');
+    const club = card.getAttribute('data-club') || 'FREE AGENT';
+    const level = card.getAttribute('data-level') || 'N/A';
+    const position = card.getAttribute('data-position') || 'N/A';
+    const value = card.getAttribute('data-value') || '0';
     
-    // Parse stats from the JSON-like data-stats attribute
-    const stats = JSON.parse(card.getAttribute('data-stats'));
-
     // Set modal content for basic info
     document.getElementById('modalPlayerName').textContent = name;
     document.getElementById('modalPlayerPhoto').src = photoSrc;
     document.getElementById('modalPlayerClub').textContent = club;
     document.getElementById('modalPlayerLevel').textContent = level;
     document.getElementById('modalPlayerPosition').textContent = position;
-    document.getElementById('modalPlayerValue').textContent = value;    
-
+    document.getElementById('modalPlayerValue').textContent = value;
+    
     // Clear the previous table rows
     const tableBody = document.getElementById('modalPlayerDetails');
     tableBody.innerHTML = '';
-
-    // Sort stats by value in descending order (higher to lower)
-    stats.sort((a, b) => {
-        return b.value - a.value; // Sort by value in descending order
-    });
-
-    // Populate the playerStatsTable with the player's individual stats
-    stats.forEach((stat, index) => {
-        const row = document.createElement('tr');
+    
+    try {
+        let stats;
         
-        // Calculate value trend - now comparing to next value in sorted array
-        // For the last item or if there's only one stat, valueTrend will be 0
-        const valueTrend = index < stats.length - 1 
-            ? stat.value - stats[index + 1].value 
-            : 0;
+        // If we have playerId, try to get from Supabase directly
+        if (playerId) {
+            const { getPlayerById } = await import('./supabase-client.js');
+            const playerData = await getPlayerById(playerId);
+            if (playerData && playerData.stats) {
+                stats = playerData.stats;
+            }
+        }
         
-        const trendIcon = valueTrend > 0 
-            ? '<span class="trend-up"><i class="fas fa-arrow-up"></i></span>' 
-            : valueTrend < 0 
-                ? '<span class="trend-down"><i class="fas fa-arrow-down"></i></span>' 
-                : '';
-
-        row.innerHTML = `
-            <td><span class="season-badge">${stat.season}</span></td>
-            <td>${stat.team}</td>
-            <td>
-                <div class="value-cell">
-                    ${stat.value} RC
-                    <span class="value-trend">${trendIcon}</span>
-                </div>
-            </td>
-        `;
-        tableBody.appendChild(row);
-    });
+        // Fallback: Parse stats from the JSON attribute if Supabase data not available
+        if (!stats) {
+            stats = JSON.parse(card.getAttribute('data-stats'));
+        }
+        
+        // Sort stats by value in descending order (higher to lower)
+        stats.sort((a, b) => {
+            return b.value - a.value; // Sort by value in descending order
+        });
+        
+        // Populate the playerStatsTable with the player's individual stats
+        stats.forEach((stat, index) => {
+            const row = document.createElement('tr');
+            
+            // Calculate value trend - comparing to next value in sorted array
+            // For the last item or if there's only one stat, valueTrend will be 0
+            const valueTrend = index < stats.length - 1 
+                ? stat.value - stats[index + 1].value 
+                : 0;
+            
+            const trendIcon = valueTrend > 0 
+                ? '<span class="trend-up"><i class="fas fa-arrow-up"></i></span>' 
+                : valueTrend < 0 
+                    ? '<span class="trend-down"><i class="fas fa-arrow-down"></i></span>' 
+                    : '';
+    
+            row.innerHTML = `
+                <td><span class="season-badge">${stat.season}</span></td>
+                <td>${stat.team}</td>
+                <td>
+                    <div class="value-cell">
+                        ${stat.value} RC
+                        <span class="value-trend">${trendIcon}</span>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error loading player stats:', error);
+        tableBody.innerHTML = '<tr><td colspan="3">Error loading player statistics</td></tr>';
+    }
 
     // Show the modal
     const modal = document.getElementById('playerModal');

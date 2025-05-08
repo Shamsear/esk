@@ -286,7 +286,7 @@
             // Check if already logged in
             const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
             if (isLoggedIn) {
-                window.location.href = 'player-admin.html';
+                window.location.href = 'admin-dashboard.html';
                 return;
             }
             
@@ -344,7 +344,7 @@
                     
                     // Redirect to admin panel (reduced delay)
                     setTimeout(() => {
-                        window.location.href = 'player-admin.html';
+                        window.location.href = 'admin-dashboard.html';
                     }, 400); // Reduced from 800ms to 400ms
                 } else {
                     showError('Invalid username or password');

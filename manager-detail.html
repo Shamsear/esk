@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pwa.css">
     
+    <!-- Supabase JS library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="manager-client.js"></script>
+    
     <!-- Preload important PWA assets -->
     <link rel="preload" href="js/pwa-init.js" as="script">
     <link rel="preload" href="js/offline-manager.js" as="script">
@@ -1646,6 +1650,9 @@
     </style>
 </head>
 <body data-page="manager-detail">
+    <!-- Hidden config div for Supabase credentials -->
+    <div id="app-config" data-supabase-url="https://aikjdwmacnpdsrqdkhkq.supabase.co" data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M" style="display: none;"></div>
+
     <div class="overlay">
         <!-- Top Bar -->
         <div class="top-bar">
@@ -1730,7 +1737,10 @@
     <script src="js/pwa-init.js"></script>
     <script src="js/offline-manager.js"></script>
     
-    <script>
+    <script type="module">
+        // Import manager client functions
+        import { getManagerByName } from './manager-client.js';
+        
         // Handle image loading errors
         document.addEventListener('DOMContentLoaded', function() {
             // Array of possible logo paths to try
@@ -1784,7 +1794,7 @@
             return urlParams.get(param);
         }
         
-        // Load and display manager data
+        // Load and display manager data from Supabase
         async function loadManagerData() {
             const managerName = getQueryParam('name');
             
@@ -1795,65 +1805,13 @@
             }
             
             try {
-                // Try multiple sources for manager data with fallbacks
-                let data = null;
-                let errors = [];
+                console.log(`Loading manager data for: ${managerName}`);
                 
-                // Array of potential data sources to try
-                const dataSources = [
-                    '/manager_data.json',  // Root path
-                    './manager_data.json', // Relative path
-                    'https://eskimos-r2g.vercel.app/manager_data.json', // Absolute path to Vercel deployment
-                    'manager_data.json'    // Simple path as last resort
-                ];
+                // Fetch manager data from Supabase
+                const manager = await getManagerByName(managerName);
                 
-                // Try each data source until one works
-                for (const source of dataSources) {
-                    try {
-                        console.log(`Attempting to load manager data from: ${source}`);
-                        const response = await fetch(source);
-                        if (response.ok) {
-                            data = await response.json();
-                            console.log(`Successfully loaded data from: ${source}`);
-                            break; // Exit the loop if successful
-                        } else {
-                            errors.push(`Failed to load from ${source}: ${response.status} ${response.statusText}`);
-                        }
-                    } catch (error) {
-                        errors.push(`Error fetching from ${source}: ${error.message}`);
-                    }
-                }
-                
-                // If no data was loaded, throw an error
-                if (!data) {
-                    throw new Error(`Failed to load manager data from all sources. Errors: ${errors.join('; ')}`);
-                }
-                
-                // Check if data is an array or has a managers property
-                let managers = [];
-                if (Array.isArray(data)) {
-                    console.log('Data is an array, using directly');
-                    managers = data;
-                } else if (data.managers && Array.isArray(data.managers)) {
-                    console.log('Data has managers property, using data.managers');
-                    managers = data.managers;
-                } else {
-                    console.error('Unexpected data structure:', data);
-                    throw new Error('Invalid data format: managers data not found');
-                }
-                
-                // Find the manager by name
-                console.log(`Looking for manager with name: ${managerName}`);
-                console.log(`Available managers: ${managers.length}`);
-                if (managers.length > 0) {
-                    console.log(`First manager name: ${managers[0].name}`);
-                }
-                
-                const manager = managers.find(m => m.name === managerName);
-                
-                // If manager not found, display error
                 if (!manager) {
-                    displayError(`Manager "${managerName}" not found`);
+                    displayError(`Manager "${managerName}" not found in database`);
                     return;
                 }
                 
@@ -2038,23 +1996,23 @@
             // Modify player card rendering for mobile
             function renderPlayerCard(player) {
                 // Truncate player name if too long on mobile
-                let displayName = player.name;
+                let displayName = player.player_name;
                 if (isMobile() && displayName.length > 16) {
                     displayName = displayName.substring(0, 15) + '…';
                 }
                 
                 // Generate player type badge if available
                 let typeHTML = '';
-                if (player.type) {
-                    const typeClass = player.type.replace(' ', '-');
-                    typeHTML = `<span class="player-type type-${typeClass}">${player.type}</span>`;
+                if (player.player_type) {
+                    const typeClass = player.player_type.replace(' ', '-');
+                    typeHTML = `<span class="player-type type-${typeClass}">${player.player_type}</span>`;
                 }
                 
                 return `
                     <div class="player-card">
                         <div class="player-position position-${player.position}">${player.position}</div>
                         <div class="player-info">
-                            <div class="player-name" title="${player.name}">${displayName}${typeHTML}</div>
+                            <div class="player-name" title="${player.player_name}">${displayName}${typeHTML}</div>
                             <div class="player-details">${player.contract} | ${player.salary}M/season</div>
                         </div>
                         <div class="player-value">${player.value}M</div>

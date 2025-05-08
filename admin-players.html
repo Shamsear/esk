@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>R2G Admin - Players</title>
+    
+    <!-- Inline critical CSS -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #181820;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #252530;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header h1 i {
+            color: #3498db;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .username-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .username {
+            color: #bada55;
+            font-weight: 600;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn i {
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-red {
+            background-color: #e74c3c;
+        }
+        
+        .btn-red:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-green {
+            background-color: #2ecc71;
+        }
+        
+        .btn-green:hover {
+            background-color: #27ae60;
+        }
+        
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .player-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .sidebar {
+            background-color: #1e1e24;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            position: sticky;
+            top: 85px;
+            height: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .content {
+            background-color: #1e1e24;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #333340;
+            background-color: #252530;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        .search-box:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .player-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .player-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            background-color: #252530;
+            border: 1px solid transparent;
+        }
+        
+        .player-item:hover {
+            background-color: #2a2a35;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .player-item.selected {
+            background-color: rgba(52, 152, 219, 0.15);
+            border: 1px solid rgba(52, 152, 219, 0.5);
+        }
+        
+        .player-thumbnail {
+            width: 45px;
+            height: 45px;
+            border-radius: 6px;
+            margin-right: 15px;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .player-name {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 500;
+        }
+        
+        .player-value {
+            color: #2ecc71;
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 8px;
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .form-full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #cccccc;
+            font-size: 15px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #333340;
+            background-color: #252530;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 35px;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: flex-end;
+        }
+        
+        .actions button {
+            padding: 12px 20px;
+            min-width: 120px;
+        }
+        
+        .stats-container {
+            margin-top: 30px;
+            border-top: 1px solid #333340;
+            padding-top: 20px;
+        }
+        
+        .stats-container h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            font-size: 18px;
+        }
+        
+        .stat-item {
+            background-color: #252530;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .stat-item:hover {
+            background-color: #2a2a35;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .stat-season {
+            font-weight: 600;
+            font-size: 16px;
+            color: #ffffff;
+        }
+        
+        .stat-team {
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+        
+        .stat-details {
+            font-size: 14px;
+            display: flex;
+            gap: 15px;
+            color: #dddddd;
+        }
+        
+        .stat-value-item {
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #2ecc71;
+        }
+        
+        .stat-apps-item {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #3498db;
+        }
+        
+        .stat-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .preview-image {
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: #1e1e24;
+            border-radius: 12px;
+            padding: 25px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-30px) scale(0.95);
+            transition: all 0.3s ease;
+            border: 1px solid #333340;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #333340;
+            padding-bottom: 15px;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+        
+        .close-modal:hover {
+            color: #fff;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 8px;
+        }
+        
+        .pagination button {
+            background-color: #252530;
+            border: none;
+            color: #fff;
+            padding: 10px 12px;
+            min-width: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            font-weight: 500;
+        }
+        
+        .pagination button:hover {
+            background-color: #2a2a35;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pagination button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #1e1e24;
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border-left: 4px solid #3498db;
+        }
+        
+        .toast.success {
+            background-color: #1e1e24;
+            border-left-color: #2ecc71;
+        }
+        
+        .toast.error {
+            background-color: #1e1e24;
+            border-left-color: #e74c3c;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #no-player-selected {
+            text-align: center;
+            padding: 50px 0;
+            color: #aaaaaa;
+        }
+        
+        #no-player-selected i {
+            font-size: 48px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        #no-player-selected h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #dddddd;
+        }
+        
+        #no-player-selected p {
+            font-size: 16px;
+            margin-top: 0;
+        }
+        
+        #form-title {
+            margin-top: 0;
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #form-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background-color: #3498db;
+            border-radius: 2px;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .mobile-logout {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .header-left {
+                gap: 10px;
+                flex: 1;
+            }
+            
+            .header h1 {
+                font-size: 16px;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .mobile-logout {
+                display: flex;
+                align-items: center;
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+            
+            .player-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .sidebar {
+                max-height: none;
+                position: static;
+                margin-bottom: 15px;
+            }
+            
+            .content {
+                max-height: none;
+            }
+            
+            .search-box {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .player-item {
+                padding: 10px 12px;
+                margin-bottom: 6px;
+            }
+            
+            .player-thumbnail {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+        
+        .delete-confirmation-content {
+            padding: 15px 0;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .actions {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .actions button {
+                flex: 1;
+                min-width: unset;
+                padding: 10px;
+            }
+            
+            .modal {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .form-grid {
+                gap: 15px;
+            }
+            
+            #form-title {
+                font-size: 20px;
+            }
+            
+            .stats-container h3 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .stat-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .stat-actions {
+                align-self: flex-end;
+            }
+        }
+        
+        /* Custom scrollbar for all scrollable containers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #252530;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a45;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a4a55;
+        }
+        
+        /* Transitions and animations */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Focus styles for accessibility */
+        button:focus, 
+        input:focus, 
+        select:focus, 
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+        }
+        
+        .btn:focus {
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-red:focus {
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-green:focus {
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.3);
+        }
+    </style>
+
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-left">
+            <h1><i class="fas fa-user-alt"></i> Players Management</h1>
+        </div>
+        <div class="user-info" id="user-menu">
+            <a href="admin-dashboard.html" class="btn">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <span class="username-container">Logged in as: <span class="username" id="username">Admin</span></span>
+            <button class="btn btn-red" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+        <button class="mobile-logout btn btn-red" id="mobile-logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </header>
+
+    <div class="container">
+        <div class="actions" style="margin-bottom: 20px;">
+            <button class="btn btn-green" id="new-player-btn">
+                <i class="fas fa-plus"></i> Add New Player
+            </button>
+        </div>
+
+        <div class="player-grid">
+            <div class="sidebar">
+                <div class="search-container">
+                    <input type="text" class="search-box" id="search-player" placeholder="Search players...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <ul class="player-list" id="player-list">
+                    <!-- Players will be populated here via JavaScript -->
+                    <li class="player-item">Loading players...</li>
+                </ul>
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be added here -->
+                </div>
+            </div>
+
+            <div class="content" id="player-form-container">
+                <div id="player-form" style="display: none;">
+                    <h2 id="form-title">Edit Player</h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="player-id">ID</label>
+                            <input type="number" id="player-id" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-name">Name</label>
+                            <input type="text" id="player-name" placeholder="Enter player name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-position">Position</label>
+                            <select id="player-position">
+                                <option value="GK">Goalkeeper (GK)</option>
+                                <option value="CB">Center Back (CB)</option>
+                                <option value="RB">Right Back (RB)</option>
+                                <option value="LB">Left Back (LB)</option>
+                                <option value="DM">Defensive Midfielder (DM)</option>
+                                <option value="CM">Central Midfielder (CM)</option>
+                                <option value="AM">Attacking Midfielder (AM)</option>
+                                <option value="LW">Left Winger (LW)</option>
+                                <option value="RW">Right Winger (RW)</option>
+                                <option value="ST">Striker (ST)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-level">Level</label>
+                            <select id="player-level">
+                                <option value="STANDARD">Standard</option>
+                                <option value="LEGENDARY">Legendary</option>
+                                <option value="ICON">Icon</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-star">Star Rating</label>
+                            <select id="player-star">
+                                <option value="3-star-standard">3 Star Standard</option>
+                                <option value="4-star-standard">4 Star Standard</option>
+                                <option value="5-star-standard">5 Star Standard</option>
+                                <option value="4-star-legend">4 Star Legend</option>
+                                <option value="5-star-legend">5 Star Legend</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-value">Value</label>
+                            <input type="number" id="player-value" placeholder="Enter player value">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-club">Club</label>
+                            <select id="player-club">
+                                <option value="">Free Agent</option>
+                                <!-- Clubs will be loaded via JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-games">Games Played</label>
+                            <input type="number" id="player-games" placeholder="Enter games played">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="player-image">Image Path</label>
+                            <input type="text" id="player-image" placeholder="URL or path to player image">
+                        </div>
+                        
+                        <div class="form-group">
+                            <img id="preview-image" class="preview-image" src="" alt="Player Preview" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <div class="stats-container">
+                        <h3>
+                            Player Stats 
+                            <button class="btn btn-green" id="add-stat-btn">
+                                <i class="fas fa-plus"></i> Add Stat
+                            </button>
+                        </h3>
+                        
+                        <div id="stats-list">
+                            <!-- Stats will be populated here via JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn" id="cancel-btn">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button class="btn btn-red" id="delete-btn">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-green" id="save-btn">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="no-player-selected">
+                    <i class="fas fa-user-alt"></i>
+                    <h3>No Player Selected</h3>
+                    <p>Select a player from the list or create a new one.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Stat Modal -->
+    <div class="modal-overlay" id="stat-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-chart-line"></i> Add Player Stat</h3>
+                <button class="close-modal" id="close-stat-modal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="stat-season">Season</label>
+                <input type="text" id="stat-season" placeholder="e.g. 2023/24">
+            </div>
+            
+            <div class="form-group">
+                <label for="stat-team">Team</label>
+                <input type="text" id="stat-team" placeholder="Team Name">
+            </div>
+            
+            <div class="form-group">
+                <label for="stat-value">Value</label>
+                <input type="text" id="stat-value" placeholder="Value">
+            </div>
+            
+            <div class="form-group">
+                <label for="stat-apps">Appearances</label>
+                <input type="text" id="stat-apps" placeholder="Appearances">
+            </div>
+            
+            <div class="actions">
+                <button class="btn" id="cancel-stat-btn">Cancel</button>
+                <button class="btn btn-green" id="save-stat-btn">Save Stat</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Delete Player</h3>
+                <button class="close-modal" id="close-delete-modal">&times;</button>
+            </div>
+            
+            <div class="delete-confirmation-content">
+                <p>Are you sure you want to delete this player? This action cannot be undone.</p>
+            </div>
+            
+            <div class="actions">
+                <button class="btn" id="cancel-delete-btn">Cancel</button>
+                <button class="btn btn-red" id="confirm-delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+    
+    <script type="module">
+        import { supabase } from './supabase-client.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Authentication check
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Set username from session storage
+            const username = sessionStorage.getItem('adminUsername');
+            if (username) {
+                document.getElementById('username').textContent = username;
+            }
+            
+            // DOM elements
+            const playerList = document.getElementById('player-list');
+            const playerForm = document.getElementById('player-form');
+            const noPlayerSelected = document.getElementById('no-player-selected');
+            const formTitle = document.getElementById('form-title');
+            const searchInput = document.getElementById('search-player');
+            const pagination = document.getElementById('pagination');
+            const userMenu = document.getElementById('user-menu');
+            
+            // Form elements
+            const playerIdInput = document.getElementById('player-id');
+            const playerNameInput = document.getElementById('player-name');
+            const playerPositionSelect = document.getElementById('player-position');
+            const playerLevelSelect = document.getElementById('player-level');
+            const playerStarSelect = document.getElementById('player-star');
+            const playerValueInput = document.getElementById('player-value');
+            const playerClubSelect = document.getElementById('player-club');
+            const playerGamesInput = document.getElementById('player-games');
+            const playerImageInput = document.getElementById('player-image');
+            const previewImage = document.getElementById('preview-image');
+            const statsList = document.getElementById('stats-list');
+            
+            // Button elements
+            const newPlayerBtn = document.getElementById('new-player-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const deleteBtn = document.getElementById('delete-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const addStatBtn = document.getElementById('add-stat-btn');
+            
+            // Modal elements
+            const statModal = document.getElementById('stat-modal');
+            const closeStatModal = document.getElementById('close-stat-modal');
+            const cancelStatBtn = document.getElementById('cancel-stat-btn');
+            const saveStatBtn = document.getElementById('save-stat-btn');
+            const statSeasonInput = document.getElementById('stat-season');
+            const statTeamInput = document.getElementById('stat-team');
+            const statValueInput = document.getElementById('stat-value');
+            const statAppsInput = document.getElementById('stat-apps');
+            
+            const deleteModal = document.getElementById('delete-modal');
+            const closeDeleteModal = document.getElementById('close-delete-modal');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            
+            // Toast element
+            const toast = document.getElementById('toast');
+            
+            // Variables to track state
+            let players = [];
+            let currentPlayer = null;
+            let playerStats = [];
+            let editingStatId = null;
+            let isCreatingNewPlayer = false;
+            let currentPage = 1;
+            let totalPages = 1;
+            const ITEMS_PER_PAGE = 20;
+            
+            // Initialize the admin page
+            init();
+            
+            async function init() {
+                await loadClubs();
+                await loadPlayers();
+                hidePreloader();
+                setupEventListeners();
+            }
+            
+            function hidePreloader() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 300);
+                    }, 200);
+                }
+            }
+            
+            function setupEventListeners() {
+                // Buttons
+                newPlayerBtn.addEventListener('click', createNewPlayer);
+                saveBtn.addEventListener('click', savePlayer);
+                cancelBtn.addEventListener('click', cancelEdit);
+                deleteBtn.addEventListener('click', confirmDeletePlayer);
+                logoutBtn.addEventListener('click', logout);
+                document.getElementById('mobile-logout-btn').addEventListener('click', logout);
+                addStatBtn.addEventListener('click', openAddStatModal);
+                
+                // Modal buttons
+                closeStatModal.addEventListener('click', closeAddStatModal);
+                cancelStatBtn.addEventListener('click', closeAddStatModal);
+                saveStatBtn.addEventListener('click', savePlayerStat);
+                
+                closeDeleteModal.addEventListener('click', closeDeleteConfirmation);
+                cancelDeleteBtn.addEventListener('click', closeDeleteConfirmation);
+                confirmDeleteBtn.addEventListener('click', deletePlayer);
+                
+                // Search input
+                searchInput.addEventListener('input', debounce(searchPlayers, 300));
+                
+                // Image preview
+                playerImageInput.addEventListener('input', updateImagePreview);
+            }
+            
+            // Load clubs from Supabase
+            async function loadClubs() {
+                try {
+                    const { data: clubs, error } = await supabase
+                        .from('clubs')
+                        .select('id, name')
+                        .order('name');
+                        
+                    if (error) throw error;
+                    
+                    // Clear existing options (except Free Agent)
+                    playerClubSelect.innerHTML = '<option value="">Free Agent</option>';
+                    
+                    // Add club options
+                    clubs.forEach(club => {
+                        const option = document.createElement('option');
+                        option.value = club.id;
+                        option.textContent = club.name;
+                        playerClubSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    showToast('Error loading clubs: ' + error.message, 'error');
+                }
+            }
+            
+            // Load players from Supabase with pagination
+            async function loadPlayers(page = 1, searchTerm = '') {
+                try {
+                    // Show loading state
+                    playerList.innerHTML = '<li class="player-item">Loading players...</li>';
+                    
+                    let query = supabase.from('players').select('id, name, position, value, image_path', { count: 'exact' });
+                    
+                    if (searchTerm) {
+                        query = query.ilike('name', `%${searchTerm}%`);
+                    }
+                    
+                    // Calculate pagination
+                    const from = (page - 1) * ITEMS_PER_PAGE;
+                    const to = from + ITEMS_PER_PAGE - 1;
+                    
+                    const { data, error, count } = await query
+                        .order('name')
+                        .range(from, to);
+                        
+                    if (error) throw error;
+                    
+                    players = data;
+                    
+                    // Update pagination info
+                    if (count !== null) {
+                        totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+                        currentPage = page;
+                        updatePagination();
+                    }
+                    
+                    renderPlayerList();
+                } catch (error) {
+                    showToast('Error loading players: ' + error.message, 'error');
+                    playerList.innerHTML = '<li class="player-item">Error loading players</li>';
+                }
+            }
+            
+            // Render player list
+            function renderPlayerList() {
+                if (players.length === 0) {
+                    playerList.innerHTML = '<li class="player-item">No players found</li>';
+                    return;
+                }
+                
+                playerList.innerHTML = '';
+                
+                players.forEach(player => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'player-item';
+                    if (currentPlayer && player.id === currentPlayer.id) {
+                        listItem.classList.add('selected');
+                    }
+                    
+                    const imgSrc = player.image_path || `assets/images/players/${player.name.replace(/\s+/g, '_')}.webp`;
+                    const imgFallback = 'assets/images/player_placeholder.webp';
+                    
+                    listItem.innerHTML = `
+                        <img src="${imgSrc}" alt="${player.name}" class="player-thumbnail" onerror="this.src='${imgFallback}'">
+                        <span class="player-name">${player.name}</span>
+                        <span class="player-value">${player.value}</span>
+                    `;
+                    
+                    listItem.addEventListener('click', () => selectPlayer(player.id));
+                    
+                    playerList.appendChild(listItem);
+                });
+            }
+            
+            // Update pagination controls
+            function updatePagination() {
+                pagination.innerHTML = '';
+                
+                // Previous button
+                const prevBtn = document.createElement('button');
+                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                prevBtn.disabled = currentPage === 1;
+                prevBtn.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        loadPlayers(currentPage - 1, searchInput.value);
+                    }
+                });
+                pagination.appendChild(prevBtn);
+                
+                // Page numbers
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + 4);
+                if (endPage - startPage < 4) {
+                    startPage = Math.max(1, endPage - 4);
+                }
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.textContent = i;
+                    if (i === currentPage) {
+                        pageBtn.classList.add('active');
+                    }
+                    pageBtn.addEventListener('click', () => loadPlayers(i, searchInput.value));
+                    pagination.appendChild(pageBtn);
+                }
+                
+                // Next button
+                const nextBtn = document.createElement('button');
+                nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                nextBtn.disabled = currentPage === totalPages;
+                nextBtn.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        loadPlayers(currentPage + 1, searchInput.value);
+                    }
+                });
+                pagination.appendChild(nextBtn);
+            }
+            
+            // Select a player to edit
+            async function selectPlayer(playerId) {
+                try {
+                    // Show loading in the form
+                    playerForm.style.display = 'block';
+                    noPlayerSelected.style.display = 'none';
+                    formTitle.textContent = 'Loading player...';
+                    
+                    const { data, error } = await supabase
+                        .from('players')
+                        .select(`
+                            id, 
+                            name,
+                            position,
+                            value,
+                            level,
+                            star,
+                            club_id,
+                            games_played,
+                            image_path
+                        `)
+                        .eq('id', playerId)
+                        .single();
+                        
+                    if (error) throw error;
+                    
+                    currentPlayer = data;
+                    isCreatingNewPlayer = false;
+                    
+                    // Load the player stats
+                    await loadPlayerStats(playerId);
+                    
+                    // Populate the form
+                    formTitle.textContent = 'Edit Player';
+                    formTitle.innerHTML = `<i class="fas fa-edit"></i> Edit Player: ${data.name}`;
+                    playerIdInput.value = data.id;
+                    playerNameInput.value = data.name;
+                    playerPositionSelect.value = data.position;
+                    playerLevelSelect.value = data.level;
+                    playerStarSelect.value = data.star;
+                    playerValueInput.value = data.value;
+                    playerClubSelect.value = data.club_id || '';
+                    playerGamesInput.value = data.games_played || 0;
+                    playerImageInput.value = data.image_path || '';
+                    
+                    // Update image preview
+                    updateImagePreview();
+                    
+                    // Show the form, hide the placeholder
+                    playerForm.style.display = 'block';
+                    noPlayerSelected.style.display = 'none';
+                    
+                    // Highlight the selected player in the list
+                    renderPlayerList();
+                } catch (error) {
+                    showToast('Error loading player details: ' + error.message, 'error');
+                }
+            }
+            
+            // Load player stats
+            async function loadPlayerStats(playerId) {
+                try {
+                    statsList.innerHTML = '<div class="stat-item">Loading stats...</div>';
+                    
+                    const { data, error } = await supabase
+                        .from('player_stats')
+                        .select('*')
+                        .eq('player_id', playerId)
+                        .order('season', { ascending: false });
+                        
+                    if (error) throw error;
+                    
+                    playerStats = data;
+                    renderPlayerStats();
+                } catch (error) {
+                    showToast('Error loading player stats: ' + error.message, 'error');
+                    statsList.innerHTML = '<p>Error loading stats</p>';
+                }
+            }
+            
+            // Render player stats
+            function renderPlayerStats() {
+                if (playerStats.length === 0) {
+                    statsList.innerHTML = '<p>No stats available for this player</p>';
+                    return;
+                }
+                
+                statsList.innerHTML = '';
+                
+                playerStats.forEach(stat => {
+                    const statDiv = document.createElement('div');
+                    statDiv.className = 'stat-item';
+                    
+                    statDiv.innerHTML = `
+                        <div class="stat-info">
+                            <div class="stat-season">${stat.season}</div>
+                            <div class="stat-team">${stat.team}</div>
+                            <div class="stat-details">
+                                <span class="stat-value-item">Value: ${stat.value}</span>
+                                ${stat.apps ? `<span class="stat-apps-item">Apps: ${stat.apps}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="stat-actions">
+                            <button class="btn edit-stat" data-id="${stat.id}" title="Edit Stat">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-red delete-stat" data-id="${stat.id}" title="Delete Stat">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Add event listeners to the buttons
+                    statDiv.querySelector('.edit-stat').addEventListener('click', () => editStat(stat));
+                    statDiv.querySelector('.delete-stat').addEventListener('click', () => deleteStat(stat.id));
+                    
+                    statsList.appendChild(statDiv);
+                });
+            }
+            
+            // Create a new player
+            function createNewPlayer() {
+                currentPlayer = null;
+                isCreatingNewPlayer = true;
+                
+                // Clear the form
+                formTitle.innerHTML = '<i class="fas fa-plus"></i> Create New Player';
+                playerIdInput.value = 'Auto-generated';
+                playerNameInput.value = '';
+                playerPositionSelect.value = 'ST';
+                playerLevelSelect.value = 'STANDARD';
+                playerStarSelect.value = '3-star-standard';
+                playerValueInput.value = '1000000';
+                playerClubSelect.value = '';
+                playerGamesInput.value = '0';
+                playerImageInput.value = '';
+                
+                // Clear stats
+                playerStats = [];
+                statsList.innerHTML = '<p>Save the player first to add stats</p>';
+                
+                // Hide image preview
+                previewImage.style.display = 'none';
+                
+                // Show the form, hide the placeholder
+                playerForm.style.display = 'block';
+                noPlayerSelected.style.display = 'none';
+                
+                // Scroll to the form on mobile
+                if (window.innerWidth < 768) {
+                    const contentElement = document.querySelector('.content');
+                    if (contentElement) {
+                        contentElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+            
+            // Save player (create or update)
+            async function savePlayer() {
+                try {
+                    // Validate form
+                    if (!playerNameInput.value) {
+                        showToast('Player name is required', 'error');
+                        return;
+                    }
+                    
+                    if (!playerValueInput.value || isNaN(playerValueInput.value)) {
+                        showToast('Player value must be a number', 'error');
+                        return;
+                    }
+                    
+                    // Show saving indicator
+                    saveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Saving...';
+                    saveBtn.disabled = true;
+                    
+                    // Prepare player data
+                    const playerData = {
+                        name: playerNameInput.value,
+                        position: playerPositionSelect.value,
+                        level: playerLevelSelect.value,
+                        star: playerStarSelect.value,
+                        value: parseInt(playerValueInput.value),
+                        club_id: playerClubSelect.value || null,
+                        games_played: parseInt(playerGamesInput.value) || 0,
+                        image_path: playerImageInput.value || null
+                    };
+                    
+                    let result;
+                    
+                    if (isCreatingNewPlayer) {
+                        // Create new player
+                        result = await supabase.from('players').insert([playerData]).select();
+                    } else {
+                        // Update existing player
+                        result = await supabase
+                            .from('players')
+                            .update(playerData)
+                            .eq('id', currentPlayer.id)
+                            .select();
+                    }
+                    
+                    if (result.error) throw result.error;
+                    
+                    const savedPlayer = result.data[0];
+                    
+                    showToast(`Player ${isCreatingNewPlayer ? 'created' : 'updated'} successfully`, 'success');
+                    
+                    // Reset button state
+                    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+                    saveBtn.disabled = false;
+                    
+                    // Refresh the player list
+                    await loadPlayers(currentPage, searchInput.value);
+                    
+                    // Select the saved player
+                    selectPlayer(savedPlayer.id);
+                } catch (error) {
+                    // Reset button state
+                    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+                    saveBtn.disabled = false;
+                    
+                    showToast(`Error saving player: ${error.message}`, 'error');
+                }
+            }
+            
+            // Cancel editing
+            function cancelEdit() {
+                if (currentPlayer) {
+                    // If editing existing player, revert to the current data
+                    selectPlayer(currentPlayer.id);
+                } else {
+                    // If creating new player, hide the form
+                    playerForm.style.display = 'none';
+                    noPlayerSelected.style.display = 'block';
+                }
+            }
+            
+            // Open confirm delete modal
+            function confirmDeletePlayer() {
+                if (!currentPlayer) return;
+                
+                // Show delete confirmation modal
+                deleteModal.classList.add('active');
+            }
+            
+            // Close delete confirmation modal
+            function closeDeleteConfirmation() {
+                deleteModal.classList.remove('active');
+            }
+            
+            // Delete player
+            async function deletePlayer() {
+                if (!currentPlayer) return;
+                
+                try {
+                    // Show deleting indicator
+                    confirmDeleteBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Deleting...';
+                    confirmDeleteBtn.disabled = true;
+                    
+                    // First delete player stats
+                    const { error: statsError } = await supabase
+                        .from('player_stats')
+                        .delete()
+                        .eq('player_id', currentPlayer.id);
+                        
+                    if (statsError) throw statsError;
+                    
+                    // Then delete the player
+                    const { error } = await supabase
+                        .from('players')
+                        .delete()
+                        .eq('id', currentPlayer.id);
+                        
+                    if (error) throw error;
+                    
+                    showToast('Player deleted successfully', 'success');
+                    
+                    // Close the modal
+                    closeDeleteConfirmation();
+                    
+                    // Reset delete button
+                    confirmDeleteBtn.innerHTML = 'Delete';
+                    confirmDeleteBtn.disabled = false;
+                    
+                    // Refresh the player list
+                    await loadPlayers(currentPage, searchInput.value);
+                    
+                    // Hide the form
+                    playerForm.style.display = 'none';
+                    noPlayerSelected.style.display = 'block';
+                    
+                    // Reset current player
+                    currentPlayer = null;
+                } catch (error) {
+                    // Reset delete button
+                    confirmDeleteBtn.innerHTML = 'Delete';
+                    confirmDeleteBtn.disabled = false;
+                    
+                    showToast(`Error deleting player: ${error.message}`, 'error');
+                    closeDeleteConfirmation();
+                }
+            }
+            
+            // Open add stat modal
+            function openAddStatModal() {
+                if (!currentPlayer) return;
+                
+                // Clear the form
+                editingStatId = null;
+                statSeasonInput.value = '';
+                statTeamInput.value = '';
+                statValueInput.value = '';
+                statAppsInput.value = '';
+                
+                // Show the modal
+                statModal.classList.add('active');
+            }
+            
+            // Edit an existing stat
+            function editStat(stat) {
+                if (!currentPlayer) return;
+                
+                // Set the form values
+                editingStatId = stat.id;
+                statSeasonInput.value = stat.season;
+                statTeamInput.value = stat.team;
+                statValueInput.value = stat.value;
+                statAppsInput.value = stat.apps || '';
+                
+                // Show the modal
+                statModal.classList.add('active');
+            }
+            
+            // Close add stat modal
+            function closeAddStatModal() {
+                statModal.classList.remove('active');
+            }
+            
+            // Save player stat
+            async function savePlayerStat() {
+                if (!currentPlayer) return;
+                
+                try {
+                    // Validate form
+                    if (!statSeasonInput.value || !statTeamInput.value || !statValueInput.value) {
+                        showToast('Season, team and value are required', 'error');
+                        return;
+                    }
+                    
+                    // Show saving indicator
+                    saveStatBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Saving...';
+                    saveStatBtn.disabled = true;
+                    
+                    // Prepare stat data
+                    const statData = {
+                        player_id: currentPlayer.id,
+                        season: statSeasonInput.value,
+                        team: statTeamInput.value,
+                        value: statValueInput.value,
+                        apps: statAppsInput.value || null
+                    };
+                    
+                    let result;
+                    
+                    if (editingStatId) {
+                        // Update existing stat
+                        result = await supabase
+                            .from('player_stats')
+                            .update(statData)
+                            .eq('id', editingStatId);
+                    } else {
+                        // Create new stat
+                        result = await supabase.from('player_stats').insert([statData]);
+                    }
+                    
+                    if (result.error) throw result.error;
+                    
+                    showToast(`Stat ${editingStatId ? 'updated' : 'added'} successfully`, 'success');
+                    
+                    // Reset button state
+                    saveStatBtn.innerHTML = 'Save Stat';
+                    saveStatBtn.disabled = false;
+                    
+                    // Close the modal
+                    closeAddStatModal();
+                    
+                    // Refresh the player stats
+                    await loadPlayerStats(currentPlayer.id);
+                } catch (error) {
+                    // Reset button state
+                    saveStatBtn.innerHTML = 'Save Stat';
+                    saveStatBtn.disabled = false;
+                    
+                    showToast(`Error saving stat: ${error.message}`, 'error');
+                }
+            }
+            
+            // Delete player stat
+            async function deleteStat(statId) {
+                if (!currentPlayer) return;
+                
+                try {
+                    const { error } = await supabase
+                        .from('player_stats')
+                        .delete()
+                        .eq('id', statId);
+                        
+                    if (error) throw error;
+                    
+                    showToast('Stat deleted successfully', 'success');
+                    
+                    // Refresh the player stats
+                    await loadPlayerStats(currentPlayer.id);
+                } catch (error) {
+                    showToast(`Error deleting stat: ${error.message}`, 'error');
+                }
+            }
+            
+            // Update image preview
+            function updateImagePreview() {
+                const imagePath = playerImageInput.value;
+                
+                if (imagePath) {
+                    previewImage.src = imagePath;
+                    previewImage.style.display = 'block';
+                    previewImage.onerror = function() {
+                        this.src = 'assets/images/player_placeholder.webp';
+                    };
+                } else {
+                    previewImage.style.display = 'none';
+                }
+            }
+            
+            // Search players
+            function searchPlayers() {
+                const searchTerm = searchInput.value;
+                loadPlayers(1, searchTerm);
+            }
+            
+            // Logout
+            function logout() {
+                sessionStorage.removeItem('adminLoggedIn');
+                sessionStorage.removeItem('adminUsername');
+                window.location.href = 'admin-login.html';
+            }
+            
+            // Show toast message
+            function showToast(message, type = 'success') {
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.className = 'toast';
+                }, 3000);
+            }
+            
+            // Debounce function for search input
+            function debounce(func, delay) {
+                let timeout;
+                return function() {
+                    const context = this;
+                    const args = arguments;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), delay);
+                };
+            }
+        });
+    </script>
+</body>
+</html> 

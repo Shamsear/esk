@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo11.webp">
+
+    <!-- DNS prefetch and preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>R2G Admin - Transfers</title>
+    
+    <!-- Inline critical CSS -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #181820;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #252530;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header h1 i {
+            color: #3498db;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .username-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .username {
+            color: #bada55;
+            font-weight: 600;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn i {
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-red {
+            background-color: #e74c3c;
+        }
+        
+        .btn-red:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-green {
+            background-color: #2ecc71;
+        }
+        
+        .btn-green:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-yellow {
+            background-color: #f39c12;
+        }
+        
+        .btn-yellow:hover {
+            background-color: #e67e22;
+        }
+        
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .mobile-logout {
+            display: none;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .sidebar {
+            background-color: #1e1e24;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            position: sticky;
+            top: 85px;
+            height: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .content {
+            background-color: #1e1e24;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #333340;
+            background-color: #252530;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .search-box:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .manager-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #1e1e24;
+        }
+        
+        .manager-item {
+            padding: 12px 15px;
+            margin-bottom: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+            background-color: #1e1e24;
+            border-left: 3px solid transparent;
+            gap: 15px;
+        }
+        
+        .manager-item:hover {
+            background-color: #252530;
+            border-left-color: #3498db;
+        }
+        
+        .manager-item.selected {
+            background-color: #1e2a38;
+            border-left-color: #2ecc71;
+        }
+        
+        .manager-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #252530;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            flex-shrink: 0;
+            overflow: hidden;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid #353540;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .selected .manager-icon {
+            background-color: #1e2a38;
+            border: 2px solid #2ecc71;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
+        }
+        
+        .manager-details {
+            flex-grow: 1;
+            min-width: 0;
+        }
+        
+        .manager-name {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 6px;
+            color: #fff;
+            font-size: 15px;
+        }
+        
+        .manager-club {
+            color: #bada55;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(30, 30, 40, 0.6);
+            padding: 3px 8px;
+            border-radius: 12px;
+            width: fit-content;
+        }
+        
+        .manager-club i {
+            font-size: 11px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #cccccc;
+            font-size: 15px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #333340;
+            background-color: #252530;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        input:read-only {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: not-allowed;
+        }
+        
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 35px;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: flex-end;
+        }
+        
+        .actions button {
+            padding: 12px 20px;
+            min-width: 120px;
+        }
+        
+        .transfer-players-section {
+            margin-top: 30px;
+            border-top: 1px solid #333340;
+            padding-top: 20px;
+        }
+        
+        .transfer-list {
+            border: 1px solid #333340;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #252530;
+        }
+        
+        .transfer-item {
+            background-color: #1e1e24;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 15px;
+            display: grid;
+            grid-template-columns: 1fr 150px 150px 150px 100px;
+            gap: 15px;
+            align-items: center;
+            position: relative;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .transfer-item:hover {
+            background-color: #252530;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .transfer-item-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: #1e1e24;
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-30px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #333340;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #333340;
+            padding-bottom: 15px;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s ease;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            width: 36px;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 22px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            max-width: 350px;
+        }
+        
+        @media (max-width: 768px) {
+            .toast {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                max-width: none;
+                padding: 14px 18px;
+            }
+        }
+        
+        .toast.success {
+            background-color: #2ecc71;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .toast.error {
+            background-color: #e74c3c;
+            border-left: 5px solid #c0392b;
+        }
+        
+        .toast.info {
+            background-color: #3498db;
+            border-left: 5px solid #2980b9;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .toast-message {
+            flex: 1;
+        }
+        
+        .player-search-results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #333340;
+            background-color: #252530;
+        }
+        
+        .player-result-item {
+            padding: 12px 15px;
+            margin-bottom: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #333340;
+        }
+        
+        .player-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .player-result-item:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .player-result-details {
+            display: flex;
+            flex-grow: 1;
+            justify-content: space-between;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .player-result-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        .player-result-info {
+            color: #aaa;
+            font-size: 13px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #333340;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        .tab-btn {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .tab-btn.active {
+            color: #fff;
+            border-bottom-color: #3498db;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            color: #ddd;
+            border-bottom-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .tab-content {
+            margin-top: 25px;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination button {
+            background-color: #252530;
+            border: 1px solid #333340;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pagination button.active {
+            background-color: #3498db;
+            border-color: #3498db;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        .pagination button:hover:not(:disabled) {
+            background-color: #2a2a35;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .pagination {
+                margin-top: 15px;
+                gap: 3px;
+            }
+            
+            .pagination button {
+                padding: 6px 10px;
+                font-size: 13px;
+                min-width: 32px;
+            }
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(52, 152, 219, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(52, 152, 219, 0.7);
+        }
+        
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Mobile menu styles */
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .header-left {
+                gap: 10px;
+                flex: 1;
+            }
+            
+            .header h1 {
+                font-size: 16px;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .mobile-logout {
+                display: flex;
+                align-items: center;
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                order: 1;
+                margin-right: 10px;
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu-toggle:hover {
+                transform: scale(1.1);
+            }
+            
+            .user-info {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #181820;
+                padding: 15px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                gap: 10px;
+                border-top: 1px solid #252530;
+                z-index: 150;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+            
+            .user-info.show {
+                display: flex;
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .user-info a, 
+            .user-info button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .username-container {
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 5px;
+                text-align: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .transfer-item,
+            .selected-player-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .modal {
+                width: 95%;
+                padding: 20px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .actions button {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                height: 100vh;
+                max-height: none;
+                width: 280px;
+                z-index: 200;
+                border-radius: 0;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+                padding: 70px 20px 20px;
+                overflow-y: auto;
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.mobile-open {
+                transform: translateX(300px);
+            }
+            
+            body.sidebar-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 190;
+                backdrop-filter: blur(3px);
+            }
+            
+            body.sidebar-open {
+                overflow: hidden;
+            }
+            
+            .grid {
+                display: block;
+            }
+            
+            .content {
+                max-height: none;
+                margin-top: 20px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .selected-player-item {
+                grid-template-columns: 1fr 120px 120px 120px 40px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .selected-player-item {
+                grid-template-columns: 1fr 100px 100px 100px 40px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .selected-player-item {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                padding: 12px;
+            }
+            
+            .selected-player-item > div:first-child {
+                grid-column: 1 / -1;
+            }
+            
+            .selected-player-item > button:last-child {
+                grid-column: 2;
+                grid-row: 3;
+                justify-self: end;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .tab-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+        
+        .player-result-info {
+            color: #aaa;
+            font-size: 13px;
+        }
+        
+        .transfer-multi-list {
+            margin-top: 20px;
+            border: 1px solid #333340;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #252530;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .selected-players-list {
+            margin-top: 15px;
+        }
+        
+        .selected-player-item {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: 1fr 150px 150px 150px 40px;
+            gap: 10px;
+            align-items: center;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .selected-player-item:hover {
+            background-color: #3a3a3a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .remove-player-btn {
+            background: none;
+            border: none;
+            color: #f44336;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+        }
+        
+        .remove-player-btn:hover {
+            background-color: rgba(244, 67, 54, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .transfer-summary {
+            background-color: #252530;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .transfer-summary-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+        
+        .transfer-summary-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        
+        .transfer-summary-total {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+        
+        /* Mobile styles for manager items and sidebar */
+        @media (max-width: 768px) {
+            .sidebar {
+                max-height: none;
+                position: static !important;
+                margin-bottom: 15px;
+                transform: none !important;
+                left: auto !important;
+                height: auto !important;
+                width: auto !important;
+                border-radius: 8px !important;
+                overflow: visible;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                z-index: 1;
+                display: block;
+                padding: 20px;
+                background-color: #1e1e24;
+            }
+            
+            .manager-item {
+                padding: 12px 15px;
+                margin-bottom: 8px;
+                border-radius: 6px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                transition: all 0.2s ease;
+                background-color: #252530;
+                border: 1px solid transparent;
+                border-left-width: 1px; /* Override desktop border-left */
+            }
+            
+            .manager-item:hover {
+                background-color: #2a2a35;
+                transform: translateY(-1px);
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+                border-left-color: transparent;
+            }
+            
+            .manager-item.selected {
+                background-color: rgba(52, 152, 219, 0.15);
+                border: 1px solid rgba(52, 152, 219, 0.5);
+            }
+            
+            .manager-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 6px;
+                margin-right: 10px;
+                border: none;
+            }
+            
+            .selected .manager-icon {
+                border: none;
+                box-shadow: none;
+            }
+            
+            body.sidebar-open {
+                overflow: visible;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                position: static !important;
+                top: auto;
+                left: auto;
+                height: auto;
+                max-height: none;
+                width: auto;
+                z-index: 1;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                padding: 20px;
+                overflow-y: visible;
+                transform: none !important;
+            }
+            
+            .sidebar.mobile-open {
+                transform: none !important;
+            }
+            
+            body.sidebar-open {
+                overflow: visible;
+            }
+            
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                max-height: none;
+                margin-top: 20px;
+            }
+            
+            body.sidebar-open::after {
+                display: none;
+            }
+        }
+        
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+    </style>
+
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" crossorigin>
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-left">
+            <h1><i class="fas fa-exchange-alt"></i> Transfer Management</h1>
+        </div>
+        <div class="user-info" id="user-menu">
+            <a href="admin-dashboard.html" class="btn">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <span class="username-container">Logged in as: <span class="username" id="username">Admin</span></span>
+            <button class="btn btn-red" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+        <button class="mobile-logout btn btn-red" id="mobile-logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <div class="sidebar">
+                <div class="search-container">
+                    <input type="text" class="search-box" id="search-manager" placeholder="Search managers...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <ul class="manager-list" id="manager-list">
+                    <!-- Managers will be populated here via JavaScript -->
+                    <li class="manager-item">Loading managers...</li>
+                </ul>
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be added here -->
+                </div>
+            </div>
+
+            <div class="content" id="transfer-content">
+                <div id="no-manager-selected" style="text-align: center; padding: 50px 0;">
+                    <i class="fas fa-exchange-alt" style="font-size: 48px; color: #555; margin-bottom: 20px;"></i>
+                    <h3>No Manager Selected</h3>
+                    <p>Select a manager from the list to start transferring players.</p>
+                </div>
+                
+                <div id="transfer-form" style="display: none;">
+                    <h2 id="form-title">Transfer Players to Manager</h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="manager-id">Manager ID</label>
+                            <input type="number" id="manager-id" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="manager-name">Manager Name</label>
+                            <input type="text" id="manager-name" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="manager-club">Club</label>
+                            <input type="text" id="manager-club" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="manager-season">Current Season</label>
+                            <input type="number" id="manager-season" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="multi-transfer">Multi-Player Transfer</button>
+                        <button class="tab-btn" data-tab="current-squad">Current Squad</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="multi-transfer-tab">
+                            <div class="tab-header">
+                                <h3>Add Multiple Players to Squad</h3>
+                                <button class="btn btn-green" id="add-player-btn">
+                                    <i class="fas fa-plus"></i> Add Player
+                                </button>
+                            </div>
+                            
+                            <div class="transfer-multi-list">
+                                <div id="selected-players-empty" style="text-align: center; padding: 20px 0;">
+                                    <p>No players selected for transfer. Click "Add Player" to select players.</p>
+                                </div>
+                                
+                                <div class="selected-players-list" id="selected-players-list" style="display: none;">
+                                    <!-- Selected players will be listed here -->
+                                </div>
+                                
+                                <div class="transfer-summary" id="transfer-summary" style="display: none;">
+                                    <div class="transfer-summary-header">Transfer Summary</div>
+                                    <div class="transfer-summary-detail">
+                                        <span>Total Players:</span>
+                                        <span id="summary-players">0</span>
+                                    </div>
+                                    <div class="transfer-summary-detail">
+                                        <span>Total Value:</span>
+                                        <span id="summary-value">0</span>
+                                    </div>
+                                    <div class="transfer-summary-total">
+                                        <div class="transfer-summary-detail">
+                                            <span>Total Salary:</span>
+                                            <span id="summary-salary">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="actions">
+                                    <button class="btn btn-yellow" id="cancel-transfer-btn">
+                                        <i class="fas fa-times"></i> Clear All
+                                    </button>
+                                    <button class="btn btn-green" id="complete-transfer-btn">
+                                        <i class="fas fa-check"></i> Complete Transfer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="current-squad-tab">
+                            <div class="tab-header">
+                                <h3>Current Squad Players</h3>
+                            </div>
+                            
+                            <div id="squad-list">
+                                <!-- Squad players will be listed here -->
+                                <div style="text-align: center; padding: 20px 0;">
+                                    <p>Loading squad players...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Player Modal -->
+    <div class="modal-overlay" id="player-search-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Search Players</h3>
+                <button class="close-modal" id="close-player-search-modal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="player-search-input">Search Player</label>
+                <input type="text" id="player-search-input" placeholder="Enter player name">
+            </div>
+            
+            <div class="player-search-results" id="player-search-results">
+                <!-- Search results will be shown here -->
+                <div style="text-align: center; padding: 20px 0;">
+                    <p>Type to search for players</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Player Details Modal -->
+    <div class="modal-overlay" id="player-details-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Player Transfer Details</h3>
+                <button class="close-modal" id="close-player-details-modal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="player-name">Player Name</label>
+                <input type="text" id="player-name" readonly>
+                <input type="hidden" id="player-id">
+            </div>
+            
+            <div class="form-group">
+                <label for="player-position">Position</label>
+                <select id="player-position">
+                    <option value="GK">Goalkeeper (GK)</option>
+                    <option value="CB">Center Back (CB)</option>
+                    <option value="RB">Right Back (RB)</option>
+                    <option value="LB">Left Back (LB)</option>
+                    <option value="DM">Defensive Midfielder (DM)</option>
+                    <option value="CM">Central Midfielder (CM)</option>
+                    <option value="AM">Attacking Midfielder (AM)</option>
+                    <option value="LW">Left Winger (LW)</option>
+                    <option value="RW">Right Winger (RW)</option>
+                    <option value="ST">Striker (ST)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="player-value">Value</label>
+                <input type="number" id="player-value" placeholder="Player Value">
+            </div>
+            
+            <div class="form-group">
+                <label for="player-contract">Contract Season</label>
+                <input type="number" id="player-contract" placeholder="Contract Season">
+                <small style="color: #aaa; display: block; margin-top: 5px;">The contract will be set as "SEASON X"</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="player-salary">Salary</label>
+                <input type="number" id="player-salary" step="0.1" placeholder="Salary">
+                <small style="color: #aaa; display: block; margin-top: 5px;">Defaults to 5% of player value</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="player-type">Player Type</label>
+                <select id="player-type">
+                    <option value="standard">Standard</option>
+                    <option value="prime">Prime</option>
+                    <option value="icon">Icon</option>
+                    <option value="legend">Legend</option>
+                    <option value="prime legend">Prime Legend</option>
+                </select>
+            </div>
+            
+            <div class="actions">
+                <button class="btn" id="cancel-player-details-btn">Cancel</button>
+                <button class="btn btn-green" id="add-to-transfer-btn">Add to Transfer</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Transfer Confirmation Modal -->
+    <div class="modal-overlay" id="transfer-confirm-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Confirm Transfer</h3>
+                <button class="close-modal" id="close-transfer-confirm-modal">&times;</button>
+            </div>
+            
+            <p>Are you sure you want to transfer <span id="transfer-count">0</span> players to this manager's squad?</p>
+            
+            <div class="actions">
+                <button class="btn" id="cancel-confirm-btn">Cancel</button>
+                <button class="btn btn-green" id="confirm-transfer-btn">Confirm Transfer</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+    
+    <script type="module">
+        import { supabase } from './supabase-client.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Authentication check
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Set username from session storage
+            const username = sessionStorage.getItem('adminUsername');
+            if (username) {
+                document.getElementById('username').textContent = username;
+            }
+            
+            // DOM Elements - Main
+            const managerList = document.getElementById('manager-list');
+            const transferForm = document.getElementById('transfer-form');
+            const noManagerSelected = document.getElementById('no-manager-selected');
+            const formTitle = document.getElementById('form-title');
+            const searchInput = document.getElementById('search-manager');
+            const pagination = document.getElementById('pagination');
+            
+            // Form elements - Manager info
+            const managerIdInput = document.getElementById('manager-id');
+            const managerNameInput = document.getElementById('manager-name');
+            const managerClubInput = document.getElementById('manager-club');
+            const managerSeasonInput = document.getElementById('manager-season');
+            
+            // Tab elements
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            // Transfer elements
+            const selectedPlayersList = document.getElementById('selected-players-list');
+            const selectedPlayersEmpty = document.getElementById('selected-players-empty');
+            const transferSummary = document.getElementById('transfer-summary');
+            const summaryPlayers = document.getElementById('summary-players');
+            const summaryValue = document.getElementById('summary-value');
+            const summarySalary = document.getElementById('summary-salary');
+            
+            // Button elements
+            const addPlayerBtn = document.getElementById('add-player-btn');
+            const cancelTransferBtn = document.getElementById('cancel-transfer-btn');
+            const completeTransferBtn = document.getElementById('complete-transfer-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            
+            // Squad list element
+            const squadList = document.getElementById('squad-list');
+            
+            // Player Search Modal elements
+            const playerSearchModal = document.getElementById('player-search-modal');
+            const closePlayerSearchModal = document.getElementById('close-player-search-modal');
+            const playerSearchInput = document.getElementById('player-search-input');
+            const playerSearchResults = document.getElementById('player-search-results');
+            
+            // Player Details Modal elements
+            const playerDetailsModal = document.getElementById('player-details-modal');
+            const closePlayerDetailsModal = document.getElementById('close-player-details-modal');
+            const cancelPlayerDetailsBtn = document.getElementById('cancel-player-details-btn');
+            const addToTransferBtn = document.getElementById('add-to-transfer-btn');
+            const playerNameInput = document.getElementById('player-name');
+            const playerIdInput = document.getElementById('player-id');
+            const playerPositionSelect = document.getElementById('player-position');
+            const playerValueInput = document.getElementById('player-value');
+            const playerContractInput = document.getElementById('player-contract');
+            const playerSalaryInput = document.getElementById('player-salary');
+            const playerTypeSelect = document.getElementById('player-type');
+            
+            // Transfer Confirmation Modal elements
+            const transferConfirmModal = document.getElementById('transfer-confirm-modal');
+            const closeTransferConfirmModal = document.getElementById('close-transfer-confirm-modal');
+            const cancelConfirmBtn = document.getElementById('cancel-confirm-btn');
+            const confirmTransferBtn = document.getElementById('confirm-transfer-btn');
+            const transferCount = document.getElementById('transfer-count');
+            
+            // Toast element
+            const toast = document.getElementById('toast');
+            
+            // Variables to track state
+            let managers = [];
+            let currentManager = null;
+            let managerSquad = [];
+            let availablePlayers = [];
+            let selectedPlayers = [];
+            let currentPage = 1;
+            let totalPages = 1;
+            const ITEMS_PER_PAGE = 20;
+            
+            // Initialize the admin page
+            init();
+            
+            async function init() {
+                await loadManagers();
+                hidePreloader();
+                setupEventListeners();
+            }
+            
+            function hidePreloader() {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    setTimeout(function() {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 300);
+                    }, 200);
+                }
+            }
+            
+            function setupEventListeners() {
+                // Tab functionality
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tab = button.dataset.tab;
+                        
+                        // Remove active class from all tabs
+                        tabButtons.forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        tabPanes.forEach(pane => {
+                            pane.classList.remove('active');
+                        });
+                        
+                        // Add active class to selected tab
+                        button.classList.add('active');
+                        
+                        if (tab === 'multi-transfer') {
+                            document.getElementById('multi-transfer-tab').classList.add('active');
+                        } else if (tab === 'current-squad') {
+                            document.getElementById('current-squad-tab').classList.add('active');
+                        }
+                    });
+                });
+                
+                // Button event listeners
+                addPlayerBtn.addEventListener('click', openPlayerSearchModal);
+                cancelTransferBtn.addEventListener('click', clearTransfer);
+                completeTransferBtn.addEventListener('click', openTransferConfirmation);
+                logoutBtn.addEventListener('click', logout);
+                document.getElementById('mobile-logout-btn').addEventListener('click', logout);
+                
+                // Player Search Modal events
+                closePlayerSearchModal.addEventListener('click', closePlayerSearch);
+                playerSearchInput.addEventListener('input', debounce(searchPlayers, 300));
+                
+                // Player Details Modal events
+                closePlayerDetailsModal.addEventListener('click', closePlayerDetails);
+                cancelPlayerDetailsBtn.addEventListener('click', closePlayerDetails);
+                addToTransferBtn.addEventListener('click', addPlayerToTransfer);
+                playerValueInput.addEventListener('input', calculateSalary);
+                
+                // Transfer Confirmation Modal events
+                closeTransferConfirmModal.addEventListener('click', closeTransferConfirmation);
+                cancelConfirmBtn.addEventListener('click', closeTransferConfirmation);
+                confirmTransferBtn.addEventListener('click', completeTransfer);
+                
+                // Search input for managers
+                searchInput.addEventListener('input', debounce(searchManagers, 300));
+            }
+            
+            // Load managers from Supabase with pagination
+            async function loadManagers(page = 1, searchTerm = '') {
+                try {
+                    let query = supabase.from('managers').select('id, name, club_id', { count: 'exact' });
+                    
+                    if (searchTerm) {
+                        query = query.ilike('name', `%${searchTerm}%`);
+                    }
+                    
+                    // Calculate pagination
+                    const from = (page - 1) * ITEMS_PER_PAGE;
+                    const to = from + ITEMS_PER_PAGE - 1;
+                    
+                    const { data, error, count } = await query
+                        .order('name')
+                        .range(from, to);
+                        
+                    if (error) throw error;
+                    
+                    managers = data;
+                    
+                    // Load club info for each manager
+                    if (managers.length > 0) {
+                        const managerClubIds = managers.filter(m => m.club_id).map(m => m.club_id);
+                        
+                        if (managerClubIds.length > 0) {
+                            const { data: managerClubs, error: clubsError } = await supabase
+                                .from('clubs')
+                                .select('id, name')
+                                .in('id', managerClubIds);
+                                
+                            if (clubsError) throw clubsError;
+                            
+                            // Add club names and logos to managers
+                            managers.forEach(manager => {
+                                if (manager.club_id) {
+                                    const club = managerClubs.find(c => c.id === manager.club_id);
+                                    manager.club_name = club ? club.name : 'Unknown Club';
+                                    
+                                    // Generate club logo URL from club name
+                                    if (club && club.name) {
+                                        // Format club name to match logo file naming convention
+                                        const logoName = club.name.toUpperCase()
+                                            .replace(/\s+/g, '-')  // Replace spaces with hyphens
+                                            .replace(/[^\w-]/g, '') // Remove special characters
+                                            + '.webp';
+                                        
+                                        manager.club_logo = `assets/images/club-logos/${logoName}`;
+                                    } else {
+                                        // Use free agent logo if no club
+                                        manager.club_logo = 'assets/images/club-logos/FREE-AGENT.WEBP';
+                                    }
+                                } else {
+                                    // Use free agent logo if no club_id
+                                    manager.club_logo = 'assets/images/club-logos/FREE-AGENT.WEBP';
+                                }
+                            });
+                        }
+                    }
+                    
+                    // Update pagination info
+                    if (count !== null) {
+                        totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+                        currentPage = page;
+                        updatePagination();
+                    }
+                    
+                    renderManagerList();
+                } catch (error) {
+                    showToast('Error loading managers: ' + error.message, 'error');
+                    managerList.innerHTML = '<li class="manager-item">Error loading managers</li>';
+                }
+            }
+            
+            // Render manager list
+            function renderManagerList() {
+                if (managers.length === 0) {
+                    managerList.innerHTML = '<li class="manager-item">No managers found</li>';
+                    return;
+                }
+                
+                managerList.innerHTML = '';
+                
+                managers.forEach(manager => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'manager-item';
+                    if (currentManager && manager.id === currentManager.id) {
+                        listItem.classList.add('selected');
+                    }
+                    
+                    // Generate club logo URL from club name
+                    let clubLogo = 'assets/images/club-logos/FREE-AGENT.WEBP';
+                    if (manager.club_name) {
+                        const logoName = manager.club_name.toUpperCase()
+                            .replace(/\s+/g, '-')  // Replace spaces with hyphens
+                            .replace(/[^\w-]/g, '') // Remove special characters
+                            + '.webp';
+                        
+                        clubLogo = `assets/images/club-logos/${logoName}`;
+                    }
+                    
+                    // Use manager initial for the icon as fallback
+                    const managerInitial = manager.name ? manager.name.charAt(0).toUpperCase() : 'M';
+                    
+                    listItem.innerHTML = `
+                        <div class="manager-icon" style="background-image: url('${clubLogo}');">${managerInitial}</div>
+                        <div class="manager-details">
+                            <div class="manager-name">${manager.name}</div>
+                            ${manager.club_name ? `<div class="manager-club"><i class="fas fa-shield-alt"></i> ${manager.club_name}</div>` : ''}
+                        </div>
+                    `;
+                    
+                    // Handle image loading errors - fall back to initials
+                    const iconDiv = listItem.querySelector('.manager-icon');
+                    const img = new Image();
+                    img.onload = () => {
+                        iconDiv.textContent = ''; // Clear the initials if image loads
+                    };
+                    img.onerror = () => {
+                        iconDiv.style.backgroundImage = ''; // Clear the background image
+                        iconDiv.style.backgroundColor = '#3498db'; // Set fallback color
+                        iconDiv.style.color = '#fff'; // Ensure initials are visible
+                        iconDiv.style.fontSize = '16px'; // Adjust font size for initials
+                    };
+                    img.src = clubLogo;
+                    
+                    listItem.addEventListener('click', () => selectManager(manager.id));
+                    
+                    managerList.appendChild(listItem);
+                });
+            }
+            
+            // Update pagination controls
+            function updatePagination() {
+                pagination.innerHTML = '';
+                
+                // Only show pagination if we have more than one page
+                if (totalPages <= 1) {
+                    return;
+                }
+                
+                // Previous button
+                const prevBtn = document.createElement('button');
+                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                prevBtn.disabled = currentPage === 1;
+                prevBtn.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        loadManagers(currentPage - 1, searchInput.value);
+                    }
+                });
+                pagination.appendChild(prevBtn);
+                
+                // Page numbers
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + 4);
+                if (endPage - startPage < 4) {
+                    startPage = Math.max(1, endPage - 4);
+                }
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.textContent = i;
+                    if (i === currentPage) {
+                        pageBtn.classList.add('active');
+                    }
+                    pageBtn.addEventListener('click', () => loadManagers(i, searchInput.value));
+                    pagination.appendChild(pageBtn);
+                }
+                
+                // Next button
+                const nextBtn = document.createElement('button');
+                nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                nextBtn.disabled = currentPage === totalPages;
+                nextBtn.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        loadManagers(currentPage + 1, searchInput.value);
+                    }
+                });
+                pagination.appendChild(nextBtn);
+            }
+            
+            // Select manager and load details
+            async function selectManager(managerId) {
+                try {
+                    // Clear selected players
+                    selectedPlayers = [];
+                    updateTransferList();
+                    
+                    // Get manager info
+                    const { data, error } = await supabase
+                        .from('managers')
+                        .select('*')
+                        .eq('id', managerId)
+                        .single();
+                        
+                    if (error) throw error;
+                    
+                    // Set current manager data
+                    currentManager = data;
+                    
+                    // Get club name for the manager
+                    if (currentManager.club_id) {
+                        const { data: clubData, error: clubError } = await supabase
+                            .from('clubs')
+                            .select('name')
+                            .eq('id', currentManager.club_id)
+                            .single();
+                            
+                        if (!clubError && clubData) {
+                            currentManager.club_name = clubData.name;
+                        }
+                    }
+                    
+                    // Update UI to show details
+                    noManagerSelected.style.display = 'none';
+                    transferForm.style.display = 'block';
+                    formTitle.textContent = 'Transfer Players to: ' + currentManager.name;
+                    
+                    // Populate the form fields
+                    managerIdInput.value = currentManager.id;
+                    managerNameInput.value = currentManager.name || '';
+                    managerClubInput.value = currentManager.club_name || 'No Club';
+                    managerSeasonInput.value = currentManager.current_season || '1';
+                    
+                    // Load squad for the Current Squad tab
+                    loadManagerSquad(managerId);
+                    
+                    // Refresh selected item in list
+                    renderManagerList();
+                } catch (error) {
+                    showToast('Error loading manager details: ' + error.message, 'error');
+                }
+            }
+            
+            // Search managers
+            function searchManagers() {
+                const searchTerm = searchInput.value;
+                loadManagers(1, searchTerm);
+            }
+            
+            // Logout
+            function logout() {
+                sessionStorage.removeItem('adminLoggedIn');
+                sessionStorage.removeItem('adminUsername');
+                window.location.href = 'admin-login.html';
+            }
+            
+            // Show toast message
+            function showToast(message, type = 'success') {
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.className = 'toast';
+                }, 3000);
+            }
+            
+            // Debounce function for search inputs
+            function debounce(func, delay) {
+                let timeout;
+                return function() {
+                    const context = this;
+                    const args = arguments;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), delay);
+                };
+            }
+            
+            // Load manager squad
+            async function loadManagerSquad(managerId) {
+                try {
+                    squadList.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>Loading squad players...</p></div>';
+                    
+                    // First get the squad data
+                    const { data, error } = await supabase
+                        .from('manager_squads')
+                        .select('*')
+                        .eq('manager_id', managerId)
+                        .order('id');
+                        
+                    if (error) throw error;
+                    
+                    if (data && data.length > 0) {
+                        // Then load the player details separately
+                        const playerIds = data.map(squad => squad.player_id).filter(id => id !== null);
+                        
+                        if (playerIds.length > 0) {
+                            // Get player details
+                            const { data: playerData, error: playerError } = await supabase
+                                .from('players')
+                                .select('id, name, position, value')
+                                .in('id', playerIds);
+                                
+                            if (playerError) throw playerError;
+                            
+                            // Combine the data
+                            managerSquad = data.map(squad => {
+                                const player = playerData.find(p => p.id === squad.player_id);
+                                return {
+                                    ...squad,
+                                    player_details: player
+                                };
+                            });
+                        } else {
+                            managerSquad = data;
+                        }
+                    } else {
+                        managerSquad = data || [];
+                    }
+                    
+                    renderSquadList();
+                } catch (error) {
+                    showToast('Error loading manager squad: ' + error.message, 'error');
+                    squadList.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>Error loading squad</p></div>';
+                }
+            }
+            
+            // Render squad list
+            function renderSquadList() {
+                if (!managerSquad || managerSquad.length === 0) {
+                    squadList.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>No players in squad</p></div>';
+                    return;
+                }
+                
+                squadList.innerHTML = '';
+                
+                // Create a container for the squad players
+                const squadContainer = document.createElement('div');
+                squadContainer.className = 'squad-container';
+                
+                managerSquad.forEach(player => {
+                    const playerItem = document.createElement('div');
+                    playerItem.className = 'selected-player-item';
+                    
+                    const playerName = player.player_details?.name || player.player_name || 'Unknown Player';
+                    const playerPosition = player.position || player.player_details?.position || 'N/A';
+                    const playerValue = player.value || player.player_details?.value || 0;
+                    
+                    playerItem.innerHTML = `
+                        <div>
+                            <div style="font-weight: 600;">${playerName}</div>
+                            <div style="color: #aaa; font-size: 14px;">Position: ${playerPosition}</div>
+                        </div>
+                        <div>Value: ${playerValue.toLocaleString()}</div>
+                        <div>Contract: ${player.contract || 'N/A'}</div>
+                        <div>Salary: ${player.salary || 'N/A'}</div>
+                        <div>Type: ${player.player_type || 'standard'}</div>
+                    `;
+                    
+                    squadContainer.appendChild(playerItem);
+                });
+                
+                squadList.appendChild(squadContainer);
+            }
+            
+            // Open player search modal
+            function openPlayerSearchModal() {
+                if (!currentManager) {
+                    showToast('Please select a manager first', 'error');
+                    return;
+                }
+                
+                // Reset search
+                playerSearchInput.value = '';
+                playerSearchResults.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>Type to search for players</p></div>';
+                
+                // Show modal
+                playerSearchModal.classList.add('active');
+                
+                // Focus on search input
+                setTimeout(() => {
+                    playerSearchInput.focus();
+                }, 100);
+            }
+            
+            // Close player search modal
+            function closePlayerSearch() {
+                playerSearchModal.classList.remove('active');
+            }
+            
+            // Search players
+            async function searchPlayers() {
+                const searchTerm = playerSearchInput.value.trim();
+                
+                if (searchTerm.length < 2) {
+                    playerSearchResults.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>Type at least 2 characters to search</p></div>';
+                    return;
+                }
+                
+                playerSearchResults.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>Searching...</p></div>';
+                
+                try {
+                    // Get players from Supabase
+                    const { data, error } = await supabase
+                        .from('players')
+                        .select('id, name, position, value, club_id')
+                        .ilike('name', `%${searchTerm}%`)
+                        .order('name')
+                        .limit(20);
+                        
+                    if (error) throw error;
+                    
+                    if (!data || data.length === 0) {
+                        playerSearchResults.innerHTML = '<div style="text-align: center; padding: 20px 0;"><p>No players found</p></div>';
+                        return;
+                    }
+                    
+                    // Get clubs for the players
+                    const clubIds = data.filter(p => p.club_id).map(p => p.club_id);
+                    let clubs = [];
+                    
+                    if (clubIds.length > 0) {
+                        const { data: clubData, error: clubError } = await supabase
+                            .from('clubs')
+                            .select('id, name')
+                            .in('id', clubIds);
+                            
+                        if (!clubError) {
+                            clubs = clubData;
+                        }
+                    }
+                    
+                    // Check which players are already in the current manager's squad to exclude them
+                    const squadPlayerIds = managerSquad.map(s => s.player_id);
+                    
+                    // Also check which players are already selected for transfer
+                    const selectedPlayerIds = selectedPlayers.map(p => p.id);
+                    
+                    // Render results
+                    playerSearchResults.innerHTML = '';
+                    
+                    data.forEach(player => {
+                        // Skip if player is already in squad or selected for transfer
+                        const isInSquad = squadPlayerIds.includes(player.id);
+                        const isSelected = selectedPlayerIds.includes(player.id);
+                        
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'player-result-item';
+                        
+                        if (isInSquad || isSelected) {
+                            resultItem.style.opacity = '0.5';
+                            resultItem.style.cursor = 'not-allowed';
+                        }
+                        
+                        // Get club name
+                        const club = player.club_id ? clubs.find(c => c.id === player.club_id) : null;
+                        const clubName = club ? club.name : 'Free Agent';
+                        
+                        resultItem.innerHTML = `
+                            <div class="player-result-details">
+                                <span class="player-result-name">${player.name}</span>
+                                <span class="player-result-info">
+                                    ${player.position} | Value: ${player.value?.toLocaleString() || 'N/A'} | ${clubName}
+                                </span>
+                            </div>
+                        `;
+                        
+                        if (!isInSquad && !isSelected) {
+                            resultItem.addEventListener('click', () => {
+                                openPlayerDetailsModal(player);
+                            });
+                        } else {
+                            // Add a note about why player can't be selected
+                            const reason = isInSquad ? 'Already in squad' : 'Already added to transfer';
+                            resultItem.title = reason;
+                            resultItem.querySelector('.player-result-info').innerHTML += ` | <span style="color: #f44336;">${reason}</span>`;
+                        }
+                        
+                        playerSearchResults.appendChild(resultItem);
+                    });
+                } catch (error) {
+                    console.error('Error searching players:', error);
+                    playerSearchResults.innerHTML = `<div style="text-align: center; padding: 20px 0;"><p>Error searching players: ${error.message}</p></div>`;
+                }
+            }
+            
+            // Open player details modal
+            function openPlayerDetailsModal(player) {
+                // Close search modal first
+                closePlayerSearch();
+                
+                // Populate player details
+                playerNameInput.value = player.name;
+                playerIdInput.value = player.id;
+                playerPositionSelect.value = player.position || '';
+                playerValueInput.value = player.value || '';
+                
+                // Set default contract season to current manager season
+                const managerSeason = currentManager.current_season || 1;
+                playerContractInput.value = managerSeason;
+                
+                // Calculate salary (5% of value)
+                calculateSalary();
+                
+                // Set default player type
+                playerTypeSelect.value = 'standard';
+                
+                // Show modal
+                playerDetailsModal.classList.add('active');
+            }
+            
+            // Close player details modal
+            function closePlayerDetails() {
+                playerDetailsModal.classList.remove('active');
+            }
+            
+            // Add player to transfer list
+            function addPlayerToTransfer() {
+                if (!playerIdInput.value) {
+                    showToast('Player ID is missing', 'error');
+                    return;
+                }
+                
+                // Basic validation
+                if (!playerPositionSelect.value) {
+                    showToast('Please select a position', 'error');
+                    return;
+                }
+                
+                if (!playerValueInput.value) {
+                    showToast('Please enter a player value', 'error');
+                    return;
+                }
+                
+                if (!playerContractInput.value) {
+                    showToast('Please enter a contract season', 'error');
+                    return;
+                }
+                
+                if (!playerSalaryInput.value) {
+                    showToast('Please enter a salary', 'error');
+                    return;
+                }
+                
+                // Get player details from form
+                const player = {
+                    id: parseInt(playerIdInput.value),
+                    name: playerNameInput.value,
+                    position: playerPositionSelect.value,
+                    value: parseInt(playerValueInput.value),
+                    contract: parseInt(playerContractInput.value),
+                    salary: parseFloat(playerSalaryInput.value),
+                    type: playerTypeSelect.value
+                };
+                
+                // Add to selected players
+                selectedPlayers.push(player);
+                
+                // Update UI
+                updateTransferList();
+                
+                // Close modal
+                closePlayerDetails();
+                
+                showToast(`Added ${player.name} to transfer list`, 'success');
+            }
+            
+            // Update transfer list UI
+            function updateTransferList() {
+                if (selectedPlayers.length === 0) {
+                    selectedPlayersEmpty.style.display = 'block';
+                    selectedPlayersList.style.display = 'none';
+                    transferSummary.style.display = 'none';
+                    return;
+                }
+                
+                // Show selected players list and summary
+                selectedPlayersEmpty.style.display = 'none';
+                selectedPlayersList.style.display = 'block';
+                transferSummary.style.display = 'block';
+                
+                // Clear the list first
+                selectedPlayersList.innerHTML = '';
+                
+                // Add each selected player
+                selectedPlayers.forEach((player, index) => {
+                    const playerItem = document.createElement('div');
+                    playerItem.className = 'selected-player-item';
+                    
+                    playerItem.innerHTML = `
+                        <div>
+                            <div style="font-weight: 600;">${player.name}</div>
+                            <div style="color: #aaa; font-size: 14px;">Position: ${player.position}</div>
+                        </div>
+                        <div>Value: ${player.value.toLocaleString()}</div>
+                        <div>Contract: SEASON ${player.contract}</div>
+                        <div>Salary: ${player.salary}</div>
+                        <button class="remove-player-btn" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    selectedPlayersList.appendChild(playerItem);
+                });
+                
+                // Add remove button event listeners
+                document.querySelectorAll('.remove-player-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        removePlayerFromTransfer(index);
+                    });
+                });
+                
+                // Update summary
+                updateTransferSummary();
+            }
+            
+            // Remove a player from transfer list
+            function removePlayerFromTransfer(index) {
+                if (index >= 0 && index < selectedPlayers.length) {
+                    const player = selectedPlayers[index];
+                    selectedPlayers.splice(index, 1);
+                    
+                    showToast(`Removed ${player.name} from transfer list`, 'success');
+                    
+                    // Update UI
+                    updateTransferList();
+                }
+            }
+            
+            // Clear all players from transfer list
+            function clearTransfer() {
+                if (selectedPlayers.length === 0) return;
+                
+                if (confirm('Are you sure you want to clear all players from the transfer list?')) {
+                    selectedPlayers = [];
+                    updateTransferList();
+                    showToast('Transfer list cleared', 'success');
+                }
+            }
+            
+            // Update transfer summary
+            function updateTransferSummary() {
+                const totalPlayers = selectedPlayers.length;
+                const totalValue = selectedPlayers.reduce((sum, player) => sum + player.value, 0);
+                const totalSalary = selectedPlayers.reduce((sum, player) => sum + player.salary, 0);
+                
+                summaryPlayers.textContent = totalPlayers;
+                summaryValue.textContent = totalValue.toLocaleString();
+                summarySalary.textContent = totalSalary.toLocaleString();
+            }
+            
+            // Calculate salary based on value (5%)
+            function calculateSalary() {
+                const value = parseInt(playerValueInput.value) || 0;
+                if (value > 0) {
+                    // Calculate salary as 5% of value
+                    const salary = value * 0.05;
+                    playerSalaryInput.value = salary.toFixed(1);
+                }
+            }
+            
+            // Open transfer confirmation modal
+            function openTransferConfirmation() {
+                if (selectedPlayers.length === 0) {
+                    showToast('No players selected for transfer', 'error');
+                    return;
+                }
+                
+                transferCount.textContent = selectedPlayers.length;
+                transferConfirmModal.classList.add('active');
+            }
+            
+            // Close transfer confirmation modal
+            function closeTransferConfirmation() {
+                transferConfirmModal.classList.remove('active');
+            }
+            
+            // Complete the transfer of all selected players
+            async function completeTransfer() {
+                if (!currentManager || selectedPlayers.length === 0) {
+                    showToast('No players selected or no manager selected', 'error');
+                    closeTransferConfirmation();
+                    return;
+                }
+                
+                try {
+                    showToast('Processing transfer...', 'success');
+                    closeTransferConfirmation();
+                    
+                    const managerId = currentManager.id;
+                    const clubId = currentManager.club_id;
+                    const currentSeason = parseInt(currentManager.current_season) || 1;
+                    
+                    // Prepare batch inserts for manager_squads table
+                    const squadInserts = selectedPlayers.map(player => ({
+                        manager_id: managerId,
+                        player_id: player.id,
+                        player_name: player.name,
+                        position: player.position,
+                        value: player.value,
+                        contract: `SEASON ${player.contract}`,
+                        salary: player.salary,
+                        player_type: player.type
+                    }));
+                    
+                    // Insert into manager_squads
+                    const { error: squadError } = await supabase
+                        .from('manager_squads')
+                        .insert(squadInserts);
+                        
+                    if (squadError) throw squadError;
+                    
+                    // Update players table with new club_id and positions
+                    for (const player of selectedPlayers) {
+                        const { error: playerError } = await supabase
+                            .from('players')
+                            .update({
+                                club_id: clubId,
+                                position: player.position,
+                                value: player.value
+                            })
+                            .eq('id', player.id);
+                            
+                        if (playerError) {
+                            console.error(`Error updating player ${player.id}:`, playerError);
+                        }
+                        
+                        // For contract SEASON 8, add stats for seasons 6-8
+                        if (player.contract >= 6) {
+                            // Check if player already has season stats
+                            const startSeason = Math.max(6, player.contract - 2);
+                            const endSeason = player.contract;
+                            
+                            for (let season = startSeason; season <= endSeason; season++) {
+                                // Check if stats exist for this season
+                                const { data: existingStats, error: checkError } = await supabase
+                                    .from('player_season_stats')
+                                    .select('id')
+                                    .eq('player_id', player.id)
+                                    .eq('season', season)
+                                    .maybeSingle();
+                                    
+                                if (checkError) {
+                                    console.error(`Error checking stats for player ${player.id} season ${season}:`, checkError);
+                                    continue;
+                                }
+                                
+                                if (!existingStats) {
+                                    // Create new stats entry
+                                    const { error: statsError } = await supabase
+                                        .from('player_season_stats')
+                                        .insert({
+                                            player_id: player.id,
+                                            player_name: player.name,
+                                            season: season,
+                                            games: 0,
+                                            goals: 0,
+                                            assists: 0,
+                                            clean_sheets: 0,
+                                            club_id: clubId
+                                        });
+                                        
+                                    if (statsError) {
+                                        console.error(`Error creating stats for player ${player.id} season ${season}:`, statsError);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    showToast(`Successfully transferred ${selectedPlayers.length} players to ${currentManager.name}'s squad`, 'success');
+                    
+                    // Clear selected players
+                    selectedPlayers = [];
+                    updateTransferList();
+                    
+                    // Refresh the squad list
+                    await loadManagerSquad(managerId);
+                } catch (error) {
+                    showToast('Error completing transfer: ' + error.message, 'error');
+                    console.error('Transfer error:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
