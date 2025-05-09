@@ -2361,49 +2361,57 @@
                         if (statsError) {
                             console.error(`Error getting existing stats for player ${player.id}:`, statsError);
                         } else {
-                            // Check if player was on another team with a season range (e.g., "5-7")
-                            const seasonRangeStats = existingStats?.filter(stat => 
-                                stat.season && stat.season.includes('-') && stat.team !== clubName
-                            );
-                            
-                            // Update any previous team's season ranges
-                            for (const stat of (seasonRangeStats || [])) {
-                                const seasonParts = stat.season.split('-');
-                                if (seasonParts.length === 2) {
-                                    const startSeason = parseInt(seasonParts[0]);
-                                    const endSeason = parseInt(seasonParts[1]);
-                                    
-                                    // Contract is current season, determine where to split
-                                    const contractSeason = player.contract;
-                                    
-                                    // If the player's new contract season is after the start season of old team
-                                    // update the old team's season range to end at previous season
-                                    if (contractSeason > startSeason) {
-                                        const newEndSeason = contractSeason - 1;
-                                        const newSeasonRange = `${startSeason}-${newEndSeason}`;
-                                        
-                                        // Update the old team's season range
-                                        const { error: updateStatsError } = await supabase
-                                            .from('player_stats')
-                                            .update({ 
-                                                season: newSeasonRange
-                                            })
-                                            .eq('id', stat.id);
-                                            
-                                        if (updateStatsError) {
-                                            console.error(`Error updating previous team stats for player ${player.id}:`, updateStatsError);
-                                        } else {
-                                            console.log(`Updated player ${player.name} previous team season range to ${newSeasonRange}`);
-                                        }
-                                    }
-                                }
-                            }
-                            
                             // Create new season range for the new team starting from contract-2 (min 6)
                             if (clubName) {
                                 const newContractSeason = player.contract;
                                 const startSeason = Math.max(6, newContractSeason - 2);
                                 const seasonRange = `${startSeason}-${newContractSeason}`;
+                                
+                                // Now check if any previous teams' stats need to be updated
+                                // We only need to update stats that overlap with our new team's range (startSeason-newContractSeason)
+                                const seasonRangeStats = existingStats?.filter(stat => 
+                                    stat.season && stat.season.includes('-') && stat.team !== clubName
+                                );
+                                
+                                // Update any previous team's season ranges
+                                for (const stat of (seasonRangeStats || [])) {
+                                    const seasonParts = stat.season.split('-');
+                                    if (seasonParts.length === 2) {
+                                        const prevStartSeason = parseInt(seasonParts[0]);
+                                        const prevEndSeason = parseInt(seasonParts[1]);
+                                        
+                                        // Only update if there's an overlap between the previous range and our new range
+                                        // This means the new start season must be <= previous end season
+                                        // AND the previous start season must be <= new contract season
+                                        if (startSeason <= prevEndSeason && prevStartSeason <= newContractSeason) {
+                                            // There's an overlap, we need to adjust the previous range to end before our new start
+                                            if (prevStartSeason < startSeason && startSeason <= prevEndSeason) {
+                                                // The previous range starts before our new range and ends within or after it
+                                                // Update it to end at our new range's start season (not start-1)
+                                                const newEndSeason = startSeason;
+                                                
+                                                // Only update if the new end season is actually different and valid
+                                                if (newEndSeason >= prevStartSeason && newEndSeason < prevEndSeason) {
+                                                    const newSeasonRange = `${prevStartSeason}-${newEndSeason}`;
+                                                    
+                                                    // Update the old team's season range
+                                                    const { error: updateStatsError } = await supabase
+                                                        .from('player_stats')
+                                                        .update({ 
+                                                            season: newSeasonRange
+                                                        })
+                                                        .eq('id', stat.id);
+                                                        
+                                                    if (updateStatsError) {
+                                                        console.error(`Error updating previous team stats for player ${player.id}:`, updateStatsError);
+                                                    } else {
+                                                        console.log(`Updated player ${player.name} previous team season range from ${stat.season} to ${newSeasonRange}`);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 
                                 // Check if we already have this season range for this club
                                 const existingClubStat = existingStats?.find(stat => 

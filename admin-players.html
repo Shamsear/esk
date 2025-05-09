@@ -1479,7 +1479,7 @@
                     let result;
                     
                     if (isCreatingNewPlayer) {
-                        // Create new player
+                        // Create new player - ID will be auto-assigned by the database
                         result = await supabase.from('players').insert([playerData]).select();
                     } else {
                         // Update existing player

@@ -69,6 +69,7 @@ async function getPlayers() {
                     value,
                     level,
                     image_path,
+                    star,
                     clubs (id, name)
                 `)
                 .range(from, to);
@@ -122,16 +123,23 @@ async function getPlayers() {
             const playerClub = player.clubs ? player.clubs.name : "FREE AGENT";
             const playerStats = statsByPlayerId[player.id] || [];
             
-            // Determine star rating based on level
-            let starRating = 'standard';
-            if (player.level >= 90) {
-                starRating = '5-star-standard';
-            } else if (player.level >= 85) {
-                starRating = '4-star-standard';
-            } else if (player.level >= 80) {
-                starRating = '3-star-standard';
+            // Determine star rating based on level and existing star data
+            let starRating;
+            
+            // If player already has a star rating in the database, use it
+            if (player.star && (player.star.includes('legend') || player.star.includes('standard'))) {
+                starRating = player.star;
             } else {
-                starRating = '3-star-standard'; // Default
+                // Otherwise, determine based on level
+                if (player.level >= 90) {
+                    starRating = '5-star-standard';
+                } else if (player.level >= 85) {
+                    starRating = '4-star-standard';
+                } else if (player.level >= 80) {
+                    starRating = '3-star-standard';
+                } else {
+                    starRating = '3-star-standard'; // Default
+                }
             }
             
             return {
@@ -169,6 +177,7 @@ async function getPlayerById(playerId) {
                 value,
                 level,
                 image_path,
+                star,
                 clubs (id, name)
             `)
             .eq('id', playerId)
@@ -190,16 +199,23 @@ async function getPlayerById(playerId) {
         
         const playerClub = data.clubs ? data.clubs.name : "FREE AGENT";
         
-        // Determine star rating based on level
-        let starRating = 'standard';
-        if (data.level >= 90) {
-            starRating = '5-star-standard';
-        } else if (data.level >= 85) {
-            starRating = '4-star-standard';
-        } else if (data.level >= 80) {
-            starRating = '3-star-standard';
+        // Determine star rating based on level and existing star data
+        let starRating;
+        
+        // If player already has a star rating in the database, use it
+        if (data.star && (data.star.includes('legend') || data.star.includes('standard'))) {
+            starRating = data.star;
         } else {
-            starRating = '3-star-standard'; // Default
+            // Otherwise, determine based on level
+            if (data.level >= 90) {
+                starRating = '5-star-standard';
+            } else if (data.level >= 85) {
+                starRating = '4-star-standard';
+            } else if (data.level >= 80) {
+                starRating = '3-star-standard';
+            } else {
+                starRating = '3-star-standard'; // Default
+            }
         }
         
         return {
