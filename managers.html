@@ -984,6 +984,61 @@
             .stagger-5 { transition-delay: 0.75s; }
             .stagger-6 { transition-delay: 0.9s; }
         }
+        
+        /* OneDrive link styling */
+        .onedrive-link {
+            margin-top: 25px;
+        }
+        
+        .onedrive-link a {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 120, 212, 0.4);
+        }
+        
+        .onedrive-link a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 120, 212, 0.6);
+        }
+        
+        .onedrive-link a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .onedrive-link {
+                margin-top: 20px;
+            }
+            
+            .onedrive-link a {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .onedrive-link {
+                margin-top: 15px;
+            }
+            
+            .onedrive-link a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .onedrive-link a i {
+                margin-right: 8px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body data-page="managers">
@@ -1037,6 +1092,11 @@
         <div class="section-header fade-in stagger-2">
             <h1>Managers</h1>
             <p>View all managers in the Eskimos Road to Glory community. Filter by club, rating, or search for specific managers.</p>
+            <div class="onedrive-link">
+                <a href="https://1drv.ms/x/s!Al82cgGcN1PEpn6612xvHz2ksboe?e=4fx0yz" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-table"></i> View Manager Data Spreadsheet
+                </a>
+            </div>
         </div>
         
         <!-- Filter Section -->
