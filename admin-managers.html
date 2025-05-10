@@ -3391,14 +3391,44 @@
             // Load available players
             async function loadAvailablePlayers() {
                 try {
-                    const { data, error } = await supabase
+                    // First count total players to confirm we're getting all of them
+                    const { count, error: countError } = await supabase
                         .from('players')
-                        .select('id, name, position, value')
-                        .order('name');
+                        .select('*', { count: 'exact', head: true });
                         
-                    if (error) throw error;
+                    if (countError) throw countError;
+                    console.log(`Total players in database: ${count}`);
                     
-                    availablePlayers = data;
+                    // Use pagination to ensure we get ALL players
+                    let allPlayers = [];
+                    let page = 0;
+                    const pageSize = 1000; // Maximum size per request
+                    let hasMore = true;
+                    
+                    while (hasMore) {
+                        const from = page * pageSize;
+                        const to = from + pageSize - 1;
+                        
+                        const { data, error, count } = await supabase
+                            .from('players')
+                            .select('id, name, position, value')
+                            .range(from, to)
+                            .order('name');
+                        
+                        if (error) throw error;
+                        
+                        if (data && data.length > 0) {
+                            allPlayers = [...allPlayers, ...data];
+                            page++;
+                            console.log(`Loaded ${data.length} players (page ${page})`);
+                        }
+                        
+                        // If we got fewer results than the page size, we've reached the end
+                        hasMore = data && data.length === pageSize;
+                    }
+                    
+                    availablePlayers = allPlayers;
+                    console.log(`Successfully loaded ${availablePlayers.length} players total`);
                     
                     // Update player select in squad modal
                     playerSelect.innerHTML = '<option value="">Select Player</option>';
@@ -3433,6 +3463,7 @@
                     });
                 } catch (error) {
                     showToast('Error loading players: ' + error.message, 'error');
+                    console.error('Error loading players:', error);
                 }
             }
             

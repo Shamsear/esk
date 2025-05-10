@@ -694,6 +694,37 @@
             color: #e0e0e0;
         }
         
+        .missing-players-content {
+            padding: 15px 0;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #e0e0e0;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .missing-players-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .missing-players-content th {
+            background-color: #252530;
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #333340;
+        }
+        
+        .missing-players-content td {
+            padding: 10px;
+            border-bottom: 1px solid #333340;
+        }
+        
+        .missing-players-content tr:hover {
+            background-color: #252530;
+        }
+        
         /* Responsive improvements */
         @media (max-width: 768px) {
             .header h1 {
@@ -857,6 +888,9 @@
         <div class="actions" style="margin-bottom: 20px;">
             <button class="btn btn-green" id="new-player-btn">
                 <i class="fas fa-plus"></i> Add New Player
+            </button>
+            <button class="btn" id="check-missing-players-btn">
+                <i class="fas fa-exclamation-triangle"></i> Check Missing Players
             </button>
         </div>
 
@@ -1047,6 +1081,25 @@
         </div>
     </div>
     
+    <!-- Add Missing Players Modal -->
+    <div class="modal-overlay" id="missing-players-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Missing Players</h3>
+                <button class="close-modal" id="close-missing-players-modal">&times;</button>
+            </div>
+            
+            <div id="missing-players-content" class="missing-players-content">
+                <p>Checking for players assigned in manager_squad but missing from players table...</p>
+                <div id="missing-players-list"></div>
+            </div>
+            
+            <div class="actions">
+                <button class="btn" id="close-missing-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
     
@@ -1075,6 +1128,11 @@
             const searchInput = document.getElementById('search-player');
             const pagination = document.getElementById('pagination');
             const userMenu = document.getElementById('user-menu');
+            const checkMissingPlayersBtn = document.getElementById('check-missing-players-btn');
+            const missingPlayersModal = document.getElementById('missing-players-modal');
+            const closeMissingPlayersModal = document.getElementById('close-missing-players-modal');
+            const closeMissingBtn = document.getElementById('close-missing-btn');
+            const missingPlayersList = document.getElementById('missing-players-list');
             
             // Form elements
             const playerIdInput = document.getElementById('player-id');
@@ -1156,6 +1214,7 @@
                 logoutBtn.addEventListener('click', logout);
                 document.getElementById('mobile-logout-btn').addEventListener('click', logout);
                 addStatBtn.addEventListener('click', openAddStatModal);
+                checkMissingPlayersBtn.addEventListener('click', checkMissingPlayers);
                 
                 // Modal buttons
                 closeStatModal.addEventListener('click', closeAddStatModal);
@@ -1165,6 +1224,9 @@
                 closeDeleteModal.addEventListener('click', closeDeleteConfirmation);
                 cancelDeleteBtn.addEventListener('click', closeDeleteConfirmation);
                 confirmDeleteBtn.addEventListener('click', deletePlayer);
+                
+                closeMissingPlayersModal.addEventListener('click', closeMissingPlayersModalFn);
+                closeMissingBtn.addEventListener('click', closeMissingPlayersModalFn);
                 
                 // Search input
                 searchInput.addEventListener('input', debounce(searchPlayers, 300));
@@ -1780,6 +1842,99 @@
                     clearTimeout(timeout);
                     timeout = setTimeout(() => func.apply(context, args), delay);
                 };
+            }
+            
+            // Check for players in manager_squad but not in players table
+            async function checkMissingPlayers() {
+                try {
+                    // Show the modal with loading state
+                    missingPlayersModal.classList.add('active');
+                    missingPlayersList.innerHTML = '<p>Loading... Please wait.</p>';
+                    
+                    // Get all player_ids from manager_squads
+                    const { data: managerSquadPlayers, error: managerError } = await supabase
+                        .from('manager_squads')
+                        .select('player_id')
+                        .not('player_id', 'is', null);
+                        
+                    if (managerError) throw managerError;
+                    
+                    if (!managerSquadPlayers || managerSquadPlayers.length === 0) {
+                        missingPlayersList.innerHTML = '<p>No players found in manager_squads.</p>';
+                        return;
+                    }
+                    
+                    // Extract just the player_ids into an array
+                    const managerPlayerIds = managerSquadPlayers.map(p => p.player_id);
+                    
+                    // Check which of these player_ids don't exist in the players table
+                    const { data: foundPlayers, error: playersError } = await supabase
+                        .from('players')
+                        .select('id')
+                        .in('id', managerPlayerIds);
+                        
+                    if (playersError) throw playersError;
+                    
+                    // Create a set of found player ids for faster lookup
+                    const foundPlayerIds = new Set(foundPlayers.map(p => p.id));
+                    
+                    // Find the missing player IDs
+                    const missingPlayerIds = managerPlayerIds.filter(id => !foundPlayerIds.has(id));
+                    
+                    // Display results
+                    if (missingPlayerIds.length === 0) {
+                        missingPlayersList.innerHTML = '<p style="color: #2ecc71;"><i class="fas fa-check-circle"></i> All players in manager_squads exist in the players table.</p>';
+                    } else {
+                        // Get more details about the missing players from manager_squads
+                        const { data: missingDetails, error: detailsError } = await supabase
+                            .from('manager_squads')
+                            .select('manager_id, player_id, position, player_name')
+                            .in('player_id', missingPlayerIds);
+                            
+                        if (detailsError) throw detailsError;
+                        
+                        // Format the results as a table
+                        let tableHtml = `
+                            <p style="color: #e74c3c;"><i class="fas fa-exclamation-circle"></i> Found ${missingPlayerIds.length} missing players:</p>
+                            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                                <thead>
+                                    <tr style="background-color: #252530; text-align: left;">
+                                        <th style="padding: 10px; border-bottom: 1px solid #333340;">Player ID</th>
+                                        <th style="padding: 10px; border-bottom: 1px solid #333340;">Player Name</th>
+                                        <th style="padding: 10px; border-bottom: 1px solid #333340;">Manager ID</th>
+                                        <th style="padding: 10px; border-bottom: 1px solid #333340;">Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        
+                        missingDetails.forEach(item => {
+                            tableHtml += `
+                                <tr style="border-bottom: 1px solid #333340;">
+                                    <td style="padding: 10px;">${item.player_id}</td>
+                                    <td style="padding: 10px;">${item.player_name || 'Unknown'}</td>
+                                    <td style="padding: 10px;">${item.manager_id}</td>
+                                    <td style="padding: 10px;">${item.position}</td>
+                                </tr>
+                            `;
+                        });
+                        
+                        tableHtml += `
+                                </tbody>
+                            </table>
+                            <p style="margin-top: 15px;">These players should be created in the players table or removed from manager_squads.</p>
+                        `;
+                        
+                        missingPlayersList.innerHTML = tableHtml;
+                    }
+                } catch (error) {
+                    missingPlayersList.innerHTML = `<p style="color: #e74c3c;"><i class="fas fa-times-circle"></i> Error checking for missing players: ${error.message}</p>`;
+                }
+            }
+            
+            // Close missing players modal
+            function closeMissingPlayersModalFn() {
+                missingPlayersModal.classList.remove('active');
             }
         });
     </script>
