@@ -795,6 +795,31 @@
         .btn-green:focus {
             box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.3);
         }
+        
+        /* Calculated field styling */
+        .calculated-field {
+            background-color: #1e3a8a !important;
+            border-color: #2a4a9a !important;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .calculated-field::after {
+            content: '🔒';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+        
+        /* Add label indicator */
+        label[for$="salary"]::after {
+            content: " (Auto: 5% of Value)";
+            font-size: 12px;
+            color: #3498db;
+            font-style: italic;
+        }
     </style>
 
     <!-- Defer non-critical CSS -->

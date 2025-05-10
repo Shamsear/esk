@@ -1654,6 +1654,58 @@
                 font-size: 14px;
             }
         }
+        
+        /* Calculated field styling */
+        .calculated-field {
+            background-color: #1e3a8a !important;
+            border-color: #2a4a9a !important;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .calculated-field::after {
+            content: '🔒';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+        
+        /* Add label indicator */
+        label[for="squad-salary"]::after {
+            content: " (Auto: 5% of Value)";
+            font-size: 12px;
+            color: #3498db;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .tabs {
+                padding: 4px;
+            }
+            
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .actions {
+                flex-wrap: wrap;
+            }
+            
+            .actions button {
+                flex: 1;
+                min-width: 0;
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+        }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -1934,7 +1986,7 @@
             
             <div class="form-group">
                 <label for="squad-salary">Salary</label>
-                <input type="number" id="squad-salary" step="0.1" placeholder="Salary">
+                <input type="number" id="squad-salary" step="0.1" placeholder="Salary" readonly class="calculated-field" title="Salary is automatically calculated as 5% of value">
             </div>
             
             <div class="form-group">
@@ -3459,6 +3511,10 @@
                 }
                 
                 try {
+                    // Disable the save button to prevent double submission
+                    saveSquadBtn.disabled = true;
+                    saveSquadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    
                     // Get selected player details
                     const selectedPlayerId = playerSelect.value;
                     const selectedPlayerInfo = availablePlayers.find(p => p.id == selectedPlayerId);
@@ -3543,6 +3599,10 @@
                     await loadAvailablePlayers();
                 } catch (error) {
                     showToast('Error saving squad player: ' + error.message, 'error');
+                } finally {
+                    // Re-enable the save button
+                    saveSquadBtn.disabled = false;
+                    saveSquadBtn.innerHTML = 'Save Player';
                 }
             }
             
@@ -4206,9 +4266,12 @@
             function calculateSalary() {
                 const value = parseInt(squadValueInput.value) || 0;
                 if (value > 0) {
-                    // Calculate salary as 5% of value
+                    // Calculate salary as 5% of value - now enforced by database trigger
                     const salary = value * 0.05;
                     squadSalaryInput.value = salary.toFixed(1);
+                    
+                    // Inform user that this value will be calculated automatically at the database level too
+                    squadSalaryInput.setAttribute('title', 'Salary is automatically set to 5% of value by database rule');
                 }
             }
             

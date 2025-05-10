@@ -1170,6 +1170,31 @@
             color: #666;
             pointer-events: none;
         }
+        
+        /* Calculated field styling */
+        .calculated-field {
+            background-color: #1e3a8a !important;
+            border-color: #2a4a9a !important;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .calculated-field::after {
+            content: '🔒';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+        
+        /* Add label indicator */
+        label[for="squad-salary"]::after {
+            content: " (Auto: 5% of Value)";
+            font-size: 12px;
+            color: #3498db;
+            font-style: italic;
+        }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -1228,6 +1253,11 @@
                 
                 <div id="transfer-form" style="display: none;">
                     <h2 id="form-title">Transfer Players to Manager</h2>
+                    
+                    <div class="alert-info" style="background-color: rgba(52, 152, 219, 0.1); border-left: 4px solid #3498db; padding: 10px 15px; margin-bottom: 20px; border-radius: 4px;">
+                        <i class="fas fa-info-circle" style="color: #3498db; margin-right: 8px;"></i>
+                        <span>Note: Player salaries are automatically calculated as 5% of their value by a database rule.</span>
+                    </div>
                     
                     <div class="form-grid">
                         <div class="form-group">
@@ -1386,8 +1416,8 @@
             
             <div class="form-group">
                 <label for="player-salary">Salary</label>
-                <input type="number" id="player-salary" step="0.1" placeholder="Salary">
-                <small style="color: #aaa; display: block; margin-top: 5px;">Defaults to 5% of player value</small>
+                <input type="number" id="player-salary" step="0.1" placeholder="Salary" readonly class="calculated-field" title="Salary is automatically calculated as 5% of value">
+                <small style="color: #aaa; display: block; margin-top: 5px;">Automatically set to 5% of player value by database rule</small>
             </div>
             
             <div class="form-group">
@@ -2150,8 +2180,8 @@
                 }
                 
                 if (!playerSalaryInput.value) {
-                    showToast('Please enter a salary', 'error');
-                    return;
+                    // If salary is empty, calculate it (it should be auto-filled, but just in case)
+                    calculateSalary();
                 }
                 
                 // Get player details from form
@@ -2266,9 +2296,12 @@
             function calculateSalary() {
                 const value = parseInt(playerValueInput.value) || 0;
                 if (value > 0) {
-                    // Calculate salary as 5% of value
+                    // Calculate salary as 5% of value - now enforced by database trigger
                     const salary = value * 0.05;
                     playerSalaryInput.value = salary.toFixed(1);
+                    
+                    // Inform user that this value will be calculated automatically at the database level too
+                    playerSalaryInput.setAttribute('title', 'Salary is automatically set to 5% of value by database rule');
                 }
             }
             
@@ -2312,11 +2345,12 @@
                         position: player.position,
                         value: player.value,
                         contract: `SEASON ${player.contract}`,
-                        salary: player.salary,
+                        salary: player.salary, // Salary will be recalculated by the database trigger to ensure 5% rule
                         player_type: player.type
                     }));
                     
                     // Insert into manager_squads
+                    // Note: The database has a trigger that will ensure salary = 5% of value
                     const { error: squadError } = await supabase
                         .from('manager_squads')
                         .insert(squadInserts);
