@@ -2050,9 +2050,12 @@ async function openModal(card) {
             stats = JSON.parse(card.getAttribute('data-stats'));
         }
         
-        // Sort stats by value in descending order (higher to lower)
+        // Sort stats by season in descending order (newest to oldest)
         stats.sort((a, b) => {
-            return b.value - a.value; // Sort by value in descending order
+            // Extract season numbers and compare them
+            const seasonA = parseInt(a.season.split('-')[0]) || 0;
+            const seasonB = parseInt(b.season.split('-')[0]) || 0;
+            return seasonB - seasonA; // Sort by season in descending order (newest first)
         });
         
         // Populate the playerStatsTable with the player's individual stats
