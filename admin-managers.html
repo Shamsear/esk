@@ -1751,6 +1751,9 @@
             <button class="btn" id="verify-comp-btn" title="Verify data synchronization between seasons and competitions">
                 <i class="fas fa-trophy"></i> Verify Competition Sync
             </button>
+            <button class="btn btn-orange" id="verify-duplicates-btn" title="Find and clean up duplicate player entries in squads">
+                <i class="fas fa-broom"></i> Clean Up Duplicates
+            </button>
         </div>
 
         <div class="manager-grid">
@@ -2320,6 +2323,9 @@
                 
                 // Add event listener for verify competition sync button
                 document.getElementById('verify-comp-btn').addEventListener('click', verifySeasonCompetitionsSync);
+                
+                // Add event listener for verify duplicates button
+                document.getElementById('verify-duplicates-btn').addEventListener('click', verifyDuplicateEntries);
                 
                 // Squad modal event listeners for automatic field population
                 playerSelect.addEventListener('change', populatePlayerDetails);
@@ -3080,15 +3086,63 @@
                     if (error) throw error;
                     
                     if (data && data.length > 0) {
-                        // Then load the player details separately
-                        const playerIds = data.map(squad => squad.player_id).filter(id => id !== null);
+                        // Check for and handle duplicate player_id entries
+                        const playerIds = data.map(squad => squad.player_id);
+                        const duplicatePlayerIds = playerIds.filter((id, index) => 
+                            id !== null && playerIds.indexOf(id) !== index);
                         
-                        if (playerIds.length > 0) {
+                        // If duplicates are found, log them and potentially clean them up
+                        if (duplicatePlayerIds.length > 0) {
+                            console.warn(`Found ${duplicatePlayerIds.length} duplicate player entries in squad`);
+                            
+                            // Auto-deduplicate if confirmed by user
+                            if (confirm(`Found ${duplicatePlayerIds.length} duplicate player entries in this manager's squad. Do you want to automatically remove duplicates?`)) {
+                                // For each duplicate, keep the most recent entry and delete the others
+                                for (const dupPlayerId of [...new Set(duplicatePlayerIds)]) {
+                                    // Find all entries for this player
+                                    const entries = data.filter(entry => entry.player_id === dupPlayerId);
+                                    entries.sort((a, b) => (new Date(b.updated_at || b.created_at || 0)) - 
+                                                           (new Date(a.updated_at || a.created_at || 0)));
+                                    
+                                    // Keep the most recent entry, delete the rest
+                                    const entriesToDelete = entries.slice(1);
+                                    for (const entry of entriesToDelete) {
+                                        try {
+                                            await supabase
+                                                .from('manager_squads')
+                                                .delete()
+                                                .eq('id', entry.id);
+                                                
+                                            console.log(`Deleted duplicate entry for player ID ${dupPlayerId}, squad entry ID ${entry.id}`);
+                                        } catch (deleteError) {
+                                            console.error(`Failed to delete duplicate entry ${entry.id}:`, deleteError);
+                                        }
+                                    }
+                                }
+                                
+                                // Refresh the data after cleaning
+                                const { data: refreshedData, error: refreshError } = await supabase
+                                    .from('manager_squads')
+                                    .select('*')
+                                    .eq('manager_id', managerId)
+                                    .order('id');
+                                    
+                                if (refreshError) throw refreshError;
+                                data.splice(0, data.length, ...refreshedData);
+                                
+                                showToast('Duplicate squad entries have been cleaned up', 'success');
+                            }
+                        }
+                        
+                        // Then load the player details separately
+                        const squadPlayerIds = data.map(squad => squad.player_id).filter(id => id !== null);
+                        
+                        if (squadPlayerIds.length > 0) {
                             // Get player details
                             const { data: playerData, error: playerError } = await supabase
                                 .from('players')
                                 .select('id, name, position, value')
-                                .in('id', playerIds);
+                                .in('id', squadPlayerIds);
                                 
                             if (playerError) throw playerError;
                             
@@ -3544,32 +3598,11 @@
                         player_type: squadTypeSelect.value
                     };
                     
-                    // Prepare player update data - make sure we keep both tables in sync
-                    const playerUpdateData = {
-                        position: squadPositionSelect.value || null,
-                        value: parseInt(squadValueInput.value) || null,
-                        // Get club_id from the current manager
-                        club_id: currentManager.club_id
-                    };
+                    // REMOVE THE DUAL UPDATE APPROACH - Let database triggers handle synchronization
+                    // Instead of updating both player and squad tables, just update the squad table
+                    // The database trigger sync_squad_to_player() will update the player table automatically
                     
-                    // Update both tables in sequence
-                    
-                    // 1. First, update the player in players table
-                    console.log('Updating player data first:', playerUpdateData);
-                    
-                    const { error: playerUpdateError } = await supabase
-                        .from('players')
-                        .update(playerUpdateData)
-                        .eq('id', selectedPlayerId);
-                        
-                    if (playerUpdateError) {
-                        console.error('Error updating player details:', playerUpdateError);
-                        showToast('Warning: Player update failed. Continuing with squad update...', 'error');
-                    } else {
-                        console.log('Player details updated successfully');
-                    }
-                    
-                    // 2. Then update or insert squad data
+                    // Update or insert squad data only
                     if (editingSquadId) {
                         // Update existing squad entry
                         const { error } = await supabase
@@ -3579,7 +3612,7 @@
                             
                         if (error) throw error;
                         
-                        showToast('Squad player and player details updated successfully in both tables');
+                        showToast('Squad player updated successfully');
                     } else {
                         // Create new squad entry
                         const { error } = await supabase
@@ -3588,7 +3621,7 @@
                             
                         if (error) throw error;
                         
-                        showToast('Player added to squad and player details updated successfully in both tables');
+                        showToast('Player added to squad successfully');
                     }
                     
                     // Close modal and refresh squad list
@@ -4434,6 +4467,122 @@
                 } catch (error) {
                     showToast('Error verifying season competitions: ' + error.message, 'error');
                     console.error('Season competitions verification error:', error);
+                }
+            }
+            
+            // Verify and clean up duplicate squad entries
+            async function verifyDuplicateEntries() {
+                try {
+                    showToast('Scanning for duplicate player entries in squads...', 'success');
+                    
+                    // Get all squad entries to check
+                    const { data: allSquads, error: squadsError } = await supabase
+                        .from('manager_squads')
+                        .select('id, manager_id, player_id, player_name, updated_at, created_at')
+                        .not('player_id', 'is', null)
+                        .order('manager_id');
+                        
+                    if (squadsError) throw squadsError;
+                    
+                    if (!allSquads || allSquads.length === 0) {
+                        showToast('No squad entries found to check', 'error');
+                        return;
+                    }
+                    
+                    console.log(`Checking ${allSquads.length} squad entries for duplicates...`);
+                    
+                    // Group by manager_id
+                    const managerGroups = {};
+                    allSquads.forEach(squad => {
+                        if (!managerGroups[squad.manager_id]) {
+                            managerGroups[squad.manager_id] = [];
+                        }
+                        managerGroups[squad.manager_id].push(squad);
+                    });
+                    
+                    // Check each manager's squad for duplicates
+                    let totalDuplicates = 0;
+                    let totalManagers = 0;
+                    let totalCleaned = 0;
+                    
+                    for (const managerId in managerGroups) {
+                        const managerSquad = managerGroups[managerId];
+                        
+                        // Find duplicates in this manager's squad
+                        const playerIds = managerSquad.map(squad => squad.player_id);
+                        const duplicatePlayerIds = playerIds.filter((id, index) => 
+                            playerIds.indexOf(id) !== index);
+                            
+                        if (duplicatePlayerIds.length > 0) {
+                            totalManagers++;
+                            const uniqueDuplicates = [...new Set(duplicatePlayerIds)];
+                            totalDuplicates += uniqueDuplicates.length;
+                            
+                            console.log(`Manager ID ${managerId} has ${uniqueDuplicates.length} players with duplicate entries`);
+                            
+                            // Get manager name for better messaging
+                            const { data: managerData } = await supabase
+                                .from('managers')
+                                .select('name')
+                                .eq('id', managerId)
+                                .single();
+                                
+                            const managerName = managerData?.name || `Manager ID ${managerId}`;
+                            
+                            // For each duplicate player, keep most recent and delete others
+                            for (const dupPlayerId of uniqueDuplicates) {
+                                // Find all entries for this player
+                                const entries = managerSquad.filter(entry => entry.player_id === dupPlayerId);
+                                
+                                // Get player name for better messaging
+                                const playerName = entries[0]?.player_name || `Player ID ${dupPlayerId}`;
+                                
+                                // Sort by updated_at or created_at (most recent first)
+                                entries.sort((a, b) => {
+                                    const dateA = new Date(a.updated_at || a.created_at || 0);
+                                    const dateB = new Date(b.updated_at || b.created_at || 0);
+                                    return dateB - dateA;
+                                });
+                                
+                                // Keep the most recent entry, delete the rest
+                                const entriesToDelete = entries.slice(1);
+                                console.log(`${managerName}: Player ${playerName} has ${entries.length} entries, keeping ID ${entries[0].id}, deleting ${entriesToDelete.length} older entries`);
+                                
+                                for (const entry of entriesToDelete) {
+                                    try {
+                                        const { error: deleteError } = await supabase
+                                            .from('manager_squads')
+                                            .delete()
+                                            .eq('id', entry.id);
+                                            
+                                        if (deleteError) {
+                                            console.error(`Failed to delete duplicate entry ${entry.id}:`, deleteError);
+                                        } else {
+                                            totalCleaned++;
+                                            console.log(`Deleted duplicate entry ID ${entry.id} for ${playerName} from ${managerName}'s squad`);
+                                        }
+                                    } catch (e) {
+                                        console.error(`Exception deleting entry ${entry.id}:`, e);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Show results
+                    if (totalDuplicates === 0) {
+                        showToast(`Great! No duplicate player entries found across ${Object.keys(managerGroups).length} managers`, 'success');
+                    } else {
+                        showToast(`Found ${totalDuplicates} duplicate players across ${totalManagers} managers, cleaned up ${totalCleaned} entries`, 'success');
+                        
+                        // Refresh current manager's squad if we're viewing a manager
+                        if (currentManager) {
+                            await loadManagerSquad(currentManager.id);
+                        }
+                    }
+                } catch (error) {
+                    showToast('Error checking for duplicates: ' + error.message, 'error');
+                    console.error('Error checking for duplicates:', error);
                 }
             }
         });
