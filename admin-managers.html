@@ -3167,11 +3167,30 @@
                         managerSquad = data || [];
                     }
                     
-                    // Sort squad by value in descending order
+                    // Define position order for sorting
+                    const positionOrder = {
+                        'GK': 1,
+                        'CB': 2,
+                        'LB': 3,
+                        'RB': 4,
+                        'DM': 5,
+                        'CM': 6,
+                        'AM': 7,
+                        'LW': 8,
+                        'RW': 9,
+                        'ST': 10
+                    };
+                    
+                    // Sort squad by position according to the defined order
                     managerSquad.sort((a, b) => {
-                        const valueA = a.value || 0;
-                        const valueB = b.value || 0;
-                        return valueB - valueA; // Descending order
+                        const posA = a.position || '';
+                        const posB = b.position || '';
+                        
+                        // Get position order values (default to 99 if position not in our order list)
+                        const orderA = positionOrder[posA] || 99;
+                        const orderB = positionOrder[posB] || 99;
+                        
+                        return orderA - orderB;
                     });
                     
                     renderSquadList();
