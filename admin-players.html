@@ -1599,8 +1599,6 @@
                         games_played: parseInt(playerGamesInput.value) || 0,
                         image_path: playerImageInput.value || null
                     };
-
-                    console.log("Saving player data:", playerData);
                     
                     let result;
                     
@@ -1609,7 +1607,6 @@
                         if (playerIdInput.value && playerIdInput.value !== 'Auto-generated') {
                             // Use the already generated ID
                             playerData.id = parseInt(playerIdInput.value);
-                            console.log("Using manually generated ID:", playerData.id);
                         } else {
                             // Generate a new ID
                             const { data: maxIdData, error: maxIdError } = await supabase
@@ -1635,118 +1632,13 @@
                             .from('players')
                             .insert([playerData])
                             .select();
-                            
-                        console.log("Insert player result:", result);
-                            
-                        // Force update to manager_squads if the player is assigned to any club
-                        if (result.data && result.data[0] && playerData.club_id) {
-                            console.log("Player assigned to club, checking for manager_squads entries to update");
-                            
-                            // Find the manager associated with this club
-                            const { data: managerData, error: managerError } = await supabase
-                                .from('managers')
-                                .select('id')
-                                .eq('club_id', playerData.club_id)
-                                .maybeSingle();
-                                
-                            if (!managerError && managerData && managerData.id) {
-                                console.log("Found manager for club:", managerData.id);
-                                
-                                // Check if this player is already in the manager's squad
-                                const { data: existingSquad, error: squadError } = await supabase
-                                    .from('manager_squads')
-                                    .select('id')
-                                    .eq('player_id', playerData.id)
-                                    .eq('manager_id', managerData.id)
-                                    .maybeSingle();
-                                    
-                                if (!squadError && !existingSquad) {
-                                    // Add player to manager's squad
-                                    console.log("Adding player to manager's squad");
-                                    
-                                    const squadData = {
-                                        manager_id: managerData.id,
-                                        player_id: playerData.id,
-                                        player_name: playerData.name,
-                                        position: playerData.position,
-                                        value: playerData.value,
-                                        player_type: "standard",
-                                        contract: `SEASON ${managerData.current_season || 1}`
-                                    };
-                                    
-                                    const { data: squadInsert, error: insertError } = await supabase
-                                        .from('manager_squads')
-                                        .insert([squadData]);
-                                        
-                                    if (insertError) {
-                                        console.error("Error adding player to squad:", insertError);
-                                    } else {
-                                        console.log("Player added to squad successfully");
-                                    }
-                                } else if (existingSquad) {
-                                    console.log("Player already in squad, updating values");
-                                    
-                                    // Update existing squad entry
-                                    const { error: updateError } = await supabase
-                                        .from('manager_squads')
-                                        .update({
-                                            player_name: playerData.name,
-                                            position: playerData.position,
-                                            value: playerData.value
-                                        })
-                                        .eq('id', existingSquad.id);
-                                        
-                                    if (updateError) {
-                                        console.error("Error updating squad entry:", updateError);
-                                    } else {
-                                        console.log("Squad entry updated successfully");
-                                    }
-                                }
-                            }
-                        }
                     } else {
                         // Update existing player
-                        console.log("Updating existing player ID:", currentPlayer.id);
-                        
                         result = await supabase
                             .from('players')
                             .update(playerData)
                             .eq('id', currentPlayer.id)
                             .select();
-                            
-                        console.log("Update player result:", result);
-                        
-                        // Manually trigger manager_squads update if needed
-                        if (result.data && result.data[0]) {
-                            console.log("Manually checking for manager_squads entries to update");
-                            
-                            const { data: squadEntries, error: findError } = await supabase
-                                .from('manager_squads')
-                                .select('id, manager_id')
-                                .eq('player_id', currentPlayer.id);
-                                
-                            if (!findError && squadEntries && squadEntries.length > 0) {
-                                console.log(`Found ${squadEntries.length} squad entries to update`);
-                                
-                                // Update each squad entry manually
-                                for (const entry of squadEntries) {
-                                    const { error: updateError } = await supabase
-                                        .from('manager_squads')
-                                        .update({
-                                            player_name: playerData.name,
-                                            position: playerData.position,
-                                            value: playerData.value
-                                        })
-                                        .eq('id', entry.id);
-                                        
-                                    if (updateError) {
-                                        console.error(`Error updating squad entry ${entry.id}:`, updateError);
-                                    } else {
-                                        console.log(`Squad entry ${entry.id} updated successfully`);
-                                    }
-                                }
-                            }
-                        }
                     }
                     
                     if (result.error) throw result.error;
