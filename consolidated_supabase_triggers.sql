@@ -14,44 +14,16 @@
 CREATE OR REPLACE FUNCTION sync_player_to_squad()
 RETURNS TRIGGER AS $$
 BEGIN
-  -- Prevent recursive trigger calls by checking for changes
-  IF TG_OP = 'UPDATE' AND 
-     OLD.value = NEW.value AND 
-     OLD.position = NEW.position AND
-     OLD.name = NEW.name AND
-     OLD.club_id IS NOT DISTINCT FROM NEW.club_id THEN
+  -- Prevent recursive trigger calls
+  IF TG_OP = 'UPDATE' AND OLD.value = NEW.value AND OLD.position = NEW.position THEN
     RETURN NEW;
   END IF;
 
-  -- Validate position - make sure it's a valid value
-  IF NEW.position NOT IN ('GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'LW', 'RW', 'ST') THEN
-    RAISE WARNING 'Invalid position % detected for player % (ID: %). Not updating position in manager_squads.',
-      NEW.position, NEW.name, NEW.id;
-    
-    -- Update manager_squads entries without changing position
-    UPDATE manager_squads
-    SET 
-      value = NEW.value,
-      player_name = NEW.name
-    WHERE player_id = NEW.id;
-  ELSE
-    -- Add logging for debugging
-    RAISE NOTICE 'Syncing player % (ID: %) to squad: position=%, value=%, name=%', 
-      NEW.name, NEW.id, NEW.position, NEW.value, NEW.name;
-
-    -- Update all manager_squads entries with valid position
-    UPDATE manager_squads
-    SET 
-      position = NEW.position,
-      value = NEW.value,
-      player_name = NEW.name
-    WHERE player_id = NEW.id;
-  END IF;
-  
-  -- Also update salary which is 5% of value, stored as a decimal number
-  -- Use NUMERIC to ensure decimal precision and ROUND to 1 decimal place
+  -- Update all manager_squads entries that reference this player
   UPDATE manager_squads
-  SET salary = ROUND((NEW.value * 0.05)::numeric, 1)
+  SET 
+    position = NEW.position,
+    value = NEW.value
   WHERE player_id = NEW.id;
   
   RETURN NEW;
@@ -59,80 +31,66 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Trigger to call the function when a player is updated
-DROP TRIGGER IF EXISTS player_update_trigger ON players;
 CREATE TRIGGER player_update_trigger
 AFTER UPDATE ON players
 FOR EACH ROW
+WHEN (NEW.value IS DISTINCT FROM OLD.value OR NEW.position IS DISTINCT FROM OLD.position)
 EXECUTE FUNCTION sync_player_to_squad();
 
--- Redundant now that we've improved the main sync_player_to_squad function
 -- Function to sync player name changes to manager_squads
-DROP FUNCTION IF EXISTS sync_player_name_to_squad() CASCADE;
-DROP TRIGGER IF EXISTS player_name_update_trigger ON players;
-
--- Add a more comprehensive trigger to catch all player changes
-CREATE OR REPLACE FUNCTION debug_player_changes()
+CREATE OR REPLACE FUNCTION sync_player_name_to_squad()
 RETURNS TRIGGER AS $$
 BEGIN
-  -- Log detailed information about the change
-  RAISE NOTICE 'Player change detected - ID: %, Name: % -> %, Value: % -> %, Position: % -> %, Club: % -> %',
-    NEW.id,
-    COALESCE(OLD.name, 'New Player'),
-    NEW.name,
-    COALESCE(OLD.value, 0),
-    NEW.value,
-    COALESCE(OLD.position, 'None'),
-    NEW.position,
-    COALESCE(OLD.club_id::text, 'NULL'),
-    COALESCE(NEW.club_id::text, 'NULL');
-  
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Add debug trigger to track all player changes
-DROP TRIGGER IF EXISTS debug_player_changes_trigger ON players;
-CREATE TRIGGER debug_player_changes_trigger
-AFTER INSERT OR UPDATE ON players
-FOR EACH ROW
-EXECUTE FUNCTION debug_player_changes();
-
--- =============================================
--- Additional improvements and fixes
--- =============================================
-
--- Function to fetch the next available player ID
-CREATE OR REPLACE FUNCTION get_next_player_id()
-RETURNS INTEGER AS $$
-DECLARE
-  next_id INTEGER;
-BEGIN
-  -- Get the maximum ID and add 1
-  SELECT COALESCE(MAX(id), 0) + 1 INTO next_id FROM players;
-  RETURN next_id;
-END;
-$$ LANGUAGE plpgsql;
-
--- Function to ensure player IDs are set on insert
-CREATE OR REPLACE FUNCTION ensure_player_id()
-RETURNS TRIGGER AS $$
-BEGIN
-  -- If ID is NULL or 0, generate a new one
-  IF NEW.id IS NULL OR NEW.id = 0 THEN
-    NEW.id := get_next_player_id();
-    RAISE NOTICE 'Auto-assigned player ID: %', NEW.id;
+  -- If player name changes, update it in manager_squads
+  IF NEW.name != OLD.name THEN
+    UPDATE manager_squads
+    SET player_name = NEW.name
+    WHERE player_id = NEW.id;
   END IF;
   
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger to set player ID on insert
-DROP TRIGGER IF EXISTS player_ensure_id_trigger ON players;
-CREATE TRIGGER player_ensure_id_trigger
-BEFORE INSERT ON players
+-- Trigger to call the function when a player's name is updated
+CREATE TRIGGER player_name_update_trigger
+AFTER UPDATE ON players
 FOR EACH ROW
-EXECUTE FUNCTION ensure_player_id();
+WHEN (NEW.name IS DISTINCT FROM OLD.name)
+EXECUTE FUNCTION sync_player_name_to_squad();
+
+-- Function to update player_stats to update player games_played
+CREATE OR REPLACE FUNCTION update_player_games_played()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Update the player's games_played count
+  IF TG_OP = 'DELETE' THEN
+    UPDATE players
+    SET games_played = (
+      SELECT COALESCE(SUM(NULLIF(apps, '')::INTEGER), 0)
+      FROM player_stats
+      WHERE player_id = OLD.player_id
+    )
+    WHERE id = OLD.player_id;
+  ELSE
+    UPDATE players
+    SET games_played = (
+      SELECT COALESCE(SUM(NULLIF(apps, '')::INTEGER), 0)
+      FROM player_stats
+      WHERE player_id = NEW.player_id
+    )
+    WHERE id = NEW.player_id;
+  END IF;
+  
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger to call the function when player_stats are changed
+CREATE TRIGGER player_stats_update_trigger
+AFTER INSERT OR UPDATE OR DELETE ON player_stats
+FOR EACH ROW
+EXECUTE FUNCTION update_player_games_played();
 
 -- =============================================
 -- 2. CLUB-RELATED TRIGGERS
@@ -183,26 +141,6 @@ EXECUTE FUNCTION handle_club_deletion();
 -- =============================================
 -- 3. MANAGER_SQUADS-RELATED TRIGGERS
 -- =============================================
-
--- Function to check for duplicates in manager_squads
-CREATE OR REPLACE FUNCTION check_squad_duplicates()
-RETURNS TRIGGER AS $$
-BEGIN
-  -- Check if this player already exists in this manager's squad
-  IF EXISTS (
-    SELECT 1 FROM manager_squads 
-    WHERE manager_id = NEW.manager_id 
-    AND player_id = NEW.player_id 
-    AND id != COALESCE(NEW.id, -1)
-  ) THEN
-    RAISE EXCEPTION 'Duplicate player entry detected: Player % already exists in manager % squad', 
-      NEW.player_id, NEW.manager_id;
-    RETURN NULL;
-  END IF;
-  
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
 
 -- Function to update players when manager_squads are updated
 CREATE OR REPLACE FUNCTION sync_squad_to_player()
@@ -273,141 +211,12 @@ AFTER INSERT ON manager_squads
 FOR EACH ROW
 EXECUTE FUNCTION sync_new_squad_to_player();
 
--- Function to handle player transfers between teams
-CREATE OR REPLACE FUNCTION handle_player_transfer()
-RETURNS TRIGGER AS $$
-DECLARE
-  new_club_id INTEGER;
-  old_club_id INTEGER;
-  player_name_var TEXT;
-  current_season INTEGER;
-BEGIN
-  -- Get the new club ID from the manager
-  SELECT club_id, current_season INTO new_club_id, current_season 
-  FROM managers 
-  WHERE id = NEW.manager_id;
-  
-  -- Get the player's old club ID and name
-  SELECT club_id, name INTO old_club_id, player_name_var
-  FROM players
-  WHERE id = NEW.player_id;
-  
-  -- If this is actually a transfer (different clubs)
-  IF old_club_id IS DISTINCT FROM new_club_id AND old_club_id IS NOT NULL AND new_club_id IS NOT NULL THEN
-    RAISE NOTICE 'Transfer detected for player % (ID: %) from club % to club %',
-      player_name_var, NEW.player_id, old_club_id, new_club_id;
-      
-    -- Get old club name
-    DECLARE
-      old_club_name TEXT;
-      new_club_name TEXT;
-    BEGIN
-      SELECT name INTO old_club_name 
-      FROM clubs 
-      WHERE id = old_club_id;
-      
-      SELECT name INTO new_club_name 
-      FROM clubs 
-      WHERE id = new_club_id;
-      
-      -- Create a record in player_stats for the transfer
-      -- This allows tracking which seasons a player spent at which club
-      INSERT INTO player_stats (
-        player_id,
-        season,
-        team,
-        value,
-        apps
-      ) VALUES (
-        NEW.player_id,
-        CASE 
-          WHEN current_season IS NOT NULL THEN current_season::TEXT
-          ELSE 'Transfer'
-        END,
-        old_club_name || ' → ' || new_club_name,
-        NEW.value,
-        0
-      );
-      
-      RAISE NOTICE 'Created transfer record for % from % to % in season %',
-        player_name_var, old_club_name, new_club_name, current_season;
-    END;
-  END IF;
-  
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
 -- Trigger for player transfers (used by admin-transfer.html)
 DROP TRIGGER IF EXISTS handle_player_transfer_trigger ON manager_squads;
 CREATE TRIGGER handle_player_transfer_trigger
 AFTER INSERT ON manager_squads
 FOR EACH ROW
 EXECUTE FUNCTION handle_player_transfer();
-
--- Function to adjust player season stats based on contract
-CREATE OR REPLACE FUNCTION adjust_player_season_stats_on_contract()
-RETURNS TRIGGER AS $$
-DECLARE
-  player_name_var TEXT;
-  current_club_name TEXT;
-  current_season INTEGER;
-  contract_seasons TEXT[];
-  start_season INTEGER;
-  end_season INTEGER;
-BEGIN
-  -- Get player name and club name
-  SELECT p.name, c.name, m.current_season
-  INTO player_name_var, current_club_name, current_season
-  FROM players p
-  JOIN managers m ON m.id = NEW.manager_id
-  LEFT JOIN clubs c ON c.id = m.club_id
-  WHERE p.id = NEW.player_id;
-  
-  -- If contract contains SEASON information, extract the range
-  IF NEW.contract LIKE 'SEASON %' THEN
-    -- For single season contracts like "SEASON 5"
-    IF NEW.contract NOT LIKE '%-%' THEN
-      -- Just use the current season number
-      start_season := current_season;
-      end_season := current_season;
-    ELSE
-      -- For range contracts like "SEASON 5-7"
-      contract_seasons := regexp_matches(NEW.contract, 'SEASON (\d+)-(\d+)');
-      start_season := contract_seasons[1]::INTEGER;
-      end_season := contract_seasons[2]::INTEGER;
-    END IF;
-    
-    -- Create a stats entry for this contract period if it doesn't exist
-    IF NOT EXISTS (
-      SELECT 1 FROM player_stats 
-      WHERE player_id = NEW.player_id 
-      AND team = current_club_name
-      AND season = start_season::TEXT || '-' || end_season::TEXT
-    ) THEN
-      -- Insert the season stats entry
-      INSERT INTO player_stats (
-        player_id,
-        season,
-        team,
-        value,
-        apps
-      ) VALUES (
-        NEW.player_id,
-        start_season::TEXT || '-' || end_season::TEXT,
-        current_club_name,
-        NEW.value,
-        0  -- Initial appearances is 0
-      );
-      
-      RAISE NOTICE 'Created contract stats for % at % for seasons % to %',
-        player_name_var, current_club_name, start_season, end_season;
-    END IF;
-  END IF;
-  
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
 
 -- Trigger to adjust season stats based on contract when adding to squad
 DROP TRIGGER IF EXISTS adjust_season_stats_on_squad_insert ON manager_squads;
@@ -422,6 +231,26 @@ CREATE TRIGGER prevent_duplicate_squad_entries
 BEFORE INSERT OR UPDATE ON manager_squads
 FOR EACH ROW
 EXECUTE FUNCTION check_squad_duplicates();
+
+-- Function to check for duplicates in manager_squads
+CREATE OR REPLACE FUNCTION check_squad_duplicates()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if this player already exists in this manager's squad
+  IF EXISTS (
+    SELECT 1 FROM manager_squads 
+    WHERE manager_id = NEW.manager_id 
+    AND player_id = NEW.player_id 
+    AND id != COALESCE(NEW.id, -1)
+  ) THEN
+    RAISE EXCEPTION 'Duplicate player entry detected: Player % already exists in manager % squad', 
+      NEW.player_id, NEW.manager_id;
+    RETURN NULL;
+  END IF;
+  
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 -- Function to update player's club when removed from squad
 CREATE OR REPLACE FUNCTION sync_squad_delete_to_player()
@@ -457,7 +286,6 @@ BEGIN
     -- Only update the salary if value is not null
     IF NEW.value IS NOT NULL THEN
         -- Set salary to 5% of value, rounded to 1 decimal place
-        -- Use NUMERIC type to ensure decimal precision
         NEW.salary := ROUND((NEW.value * 0.05)::numeric, 1);
     END IF;
     
