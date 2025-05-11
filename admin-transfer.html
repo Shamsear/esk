@@ -2075,7 +2075,7 @@
                             <div style="color: #aaa; font-size: 14px;">Position: ${playerPosition}</div>
                         </div>
                         <div>Value: ${playerValue.toLocaleString()}</div>
-                        <div>Contract: ${player.contract || 'N/A'}</div>
+                        <div>Contract: SEASON ${player.contract || 'N/A'}</div>
                         <div>Salary: ${player.salary || 'N/A'}</div>
                         <div>Type: ${player.player_type || 'standard'}</div>
                     `;
@@ -2374,6 +2374,7 @@
                         <div>Value: ${player.value.toLocaleString()}</div>
                         <div>Contract: SEASON ${player.contract}</div>
                         <div>Salary: ${player.salary}</div>
+                        <div>Type: ${player.type || 'standard'}</div>
                         <div class="player-actions">
                             <button class="edit-player-btn" data-index="${index}" title="Edit Player">
                                 <i class="fas fa-edit"></i>
