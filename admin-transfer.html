@@ -1234,6 +1234,48 @@
                 overflow-y: auto;
             }
         }
+
+        .player-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .edit-player-btn {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+        }
+
+        .edit-player-btn:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: scale(1.1);
+        }
+
+        .selected-player-item {
+            grid-template-columns: 1fr 150px 150px 150px auto !important;
+        }
+
+        @media (max-width: 768px) {
+            .selected-player-item {
+                grid-template-columns: 1fr !important;
+            }
+
+            .player-actions {
+                justify-content: flex-end;
+                margin-top: 10px;
+            }
+        }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -2193,7 +2235,7 @@
                     
                     // Set default contract season to current manager season
                     const managerSeason = currentManager.current_season || 1;
-                    playerContractInput.value = 8;
+                    playerContractInput.value = managerSeason+2;
                     
                     // Calculate salary (5% of value)
                     calculateSalary();
@@ -2279,16 +2321,27 @@
                     type: playerTypeSelect.value
                 };
                 
-                // Add to selected players
-                selectedPlayers.push(player);
+                const editIndex = playerDetailsModal.dataset.editIndex;
+                if (editIndex !== undefined && editIndex !== '') {
+                    // Update existing player
+                    selectedPlayers[editIndex] = player;
+                    showToast(`Updated ${player.name}'s details`, 'success');
+                } else {
+                    // Add new player
+                    selectedPlayers.push(player);
+                    showToast(`Added ${player.name} to transfer list`, 'success');
+                }
                 
                 // Update UI
                 updateTransferList();
                 
+                // Reset the edit index and button text
+                delete playerDetailsModal.dataset.editIndex;
+                const addButton = document.getElementById('add-to-transfer-btn');
+                addButton.innerHTML = '<i class="fas fa-plus"></i> Add to Transfer';
+                
                 // Close modal
                 closePlayerDetails();
-                
-                showToast(`Added ${player.name} to transfer list`, 'success');
             }
             
             // Update transfer list UI
@@ -2321,15 +2374,27 @@
                         <div>Value: ${player.value.toLocaleString()}</div>
                         <div>Contract: SEASON ${player.contract}</div>
                         <div>Salary: ${player.salary}</div>
-                        <button class="remove-player-btn" data-index="${index}">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        <div class="player-actions">
+                            <button class="edit-player-btn" data-index="${index}" title="Edit Player">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="remove-player-btn" data-index="${index}" title="Remove Player">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
                     `;
                     
                     selectedPlayersList.appendChild(playerItem);
                 });
                 
-                // Add remove button event listeners
+                // Add event listeners for edit and remove buttons
+                document.querySelectorAll('.edit-player-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        editSelectedPlayer(index);
+                    });
+                });
+                
                 document.querySelectorAll('.remove-player-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const index = parseInt(this.getAttribute('data-index'));
@@ -2611,6 +2676,47 @@
                 } catch (error) {
                     showToast('Error completing transfer: ' + error.message, 'error');
                     console.error('Transfer error:', error);
+                }
+            }
+
+            // Add function to edit selected player
+            async function editSelectedPlayer(index) {
+                const player = selectedPlayers[index];
+                
+                try {
+                    // Get player level from database
+                    const { data, error } = await supabase
+                        .from('players')
+                        .select('level')
+                        .eq('id', player.id)
+                        .single();
+
+                    if (error) throw error;
+
+                    // Populate modal with player's current data
+                    playerNameInput.value = player.name;
+                    playerIdInput.value = player.id;
+                    playerPositionSelect.value = player.position;
+                    playerValueInput.value = player.value;
+                    playerContractInput.value = player.contract;
+                    playerSalaryInput.value = player.salary;
+
+                    // Update player type options based on level
+                    updatePlayerTypeOptions(data.level);
+                    playerTypeSelect.value = player.type;
+
+                    // Store the index being edited
+                    playerDetailsModal.dataset.editIndex = index;
+
+                    // Update the add button text to show it's editing
+                    const addButton = document.getElementById('add-to-transfer-btn');
+                    addButton.innerHTML = '<i class="fas fa-save"></i> Update Player';
+                    
+                    // Show modal
+                    playerDetailsModal.classList.add('active');
+                } catch (error) {
+                    console.error('Error loading player details:', error);
+                    showToast('Error loading player details', 'error');
                 }
             }
         });
