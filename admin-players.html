@@ -851,6 +851,21 @@
             color: #3498db;
             font-style: italic;
         }
+        
+        /* Add these styles to the existing CSS */
+        #stat-club {
+            margin-bottom: 10px;
+        }
+        
+        #stat-team {
+            background-color: #252530;
+        }
+        
+        #stat-team:read-only {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-color: #3498db;
+            cursor: not-allowed;
+        }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -1041,7 +1056,15 @@
             </div>
             
             <div class="form-group">
-                <label for="stat-team">Team</label>
+                <label for="stat-club">Club</label>
+                <select id="stat-club">
+                    <option value="">Select Club</option>
+                    <!-- Clubs will be loaded via JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="stat-team">Team Name</label>
                 <input type="text" id="stat-team" placeholder="Team Name">
             </div>
             
@@ -1164,10 +1187,10 @@
             const statTeamInput = document.getElementById('stat-team');
             const statValueInput = document.getElementById('stat-value');
             const statAppsInput = document.getElementById('stat-apps');
+            const statClubSelect = document.getElementById('stat-club');
             
             const deleteModal = document.getElementById('delete-modal');
             const closeDeleteModal = document.getElementById('close-delete-modal');
-            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
             const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
             
             // Toast element
@@ -1222,7 +1245,6 @@
                 saveStatBtn.addEventListener('click', savePlayerStat);
                 
                 closeDeleteModal.addEventListener('click', closeDeleteConfirmation);
-                cancelDeleteBtn.addEventListener('click', closeDeleteConfirmation);
                 confirmDeleteBtn.addEventListener('click', deletePlayer);
                 
                 closeMissingPlayersModal.addEventListener('click', closeMissingPlayersModalFn);
@@ -1233,6 +1255,9 @@
                 
                 // Image preview
                 playerImageInput.addEventListener('input', updateImagePreview);
+                
+                // Club selection
+                statClubSelect.addEventListener('change', updateTeamNameFromClub);
             }
             
             // Load clubs from Supabase
@@ -1686,9 +1711,13 @@
                 // Clear the form
                 editingStatId = null;
                 statSeasonInput.value = '';
+                statClubSelect.value = '';  // Clear club selection
                 statTeamInput.value = '';
                 statValueInput.value = '';
                 statAppsInput.value = '';
+                
+                // Load clubs
+                loadStatClubs();
                 
                 // Show the modal
                 statModal.classList.add('active');
@@ -1704,6 +1733,17 @@
                 statTeamInput.value = stat.team;
                 statValueInput.value = stat.value;
                 statAppsInput.value = stat.apps || '';
+                
+                // Load clubs and set the selected club if it matches
+                loadStatClubs().then(() => {
+                    const clubOption = Array.from(statClubSelect.options)
+                        .find(option => option.value === stat.team);
+                    if (clubOption) {
+                        statClubSelect.value = stat.team;
+                    } else {
+                        statClubSelect.value = '';
+                    }
+                });
                 
                 // Show the modal
                 statModal.classList.add('active');
@@ -1935,6 +1975,39 @@
             // Close missing players modal
             function closeMissingPlayersModalFn() {
                 missingPlayersModal.classList.remove('active');
+            }
+            
+            // Load club options for stat selection
+            async function loadStatClubs() {
+                try {
+                    const { data: clubs, error } = await supabase
+                        .from('clubs')
+                        .select('id, name')
+                        .order('name');
+                        
+                    if (error) throw error;
+                    
+                    // Clear existing options
+                    statClubSelect.innerHTML = '<option value="">Select Club</option>';
+                    
+                    // Add club options
+                    clubs.forEach(club => {
+                        const option = document.createElement('option');
+                        option.value = club.name;  // Use club name as value
+                        option.textContent = club.name;
+                        statClubSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    showToast('Error loading clubs: ' + error.message, 'error');
+                }
+            }
+            
+            // Update team name based on selected club
+            function updateTeamNameFromClub() {
+                const selectedClub = statClubSelect.value;
+                if (selectedClub) {
+                    statTeamInput.value = selectedClub;
+                }
             }
         });
     </script>
