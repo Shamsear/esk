@@ -1600,50 +1600,108 @@
                         image_path: playerImageInput.value || null
                     };
                     
+                    console.log("Player data being saved:", playerData);
+                    
                     let result;
                     
                     if (isCreatingNewPlayer) {
-                        // Check if ID has been generated
+                        // For new players, check if we need to set an ID
                         if (playerIdInput.value && playerIdInput.value !== 'Auto-generated') {
-                            // Use the already generated ID
+                            // If ID is manually provided, use it
                             playerData.id = parseInt(playerIdInput.value);
-                        } else {
-                            // Generate a new ID
-                            const { data: maxIdData, error: maxIdError } = await supabase
-                                .from('players')
-                                .select('id')
-                                .order('id', { ascending: false })
-                                .limit(1);
-                                
-                            if (maxIdError) {
-                                throw new Error(`Failed to get max ID: ${maxIdError.message}`);
-                            }
-                            
-                            // Calculate next ID (max + 1 or start at 1 if no records)
-                            const nextId = maxIdData && maxIdData.length > 0 ? maxIdData[0].id + 1 : 1;
-                            console.log("Generated new player ID:", nextId);
-                            
-                            // Add the ID to player data
-                            playerData.id = nextId;
+                            console.log("Using manually set ID:", playerData.id);
                         }
+                        // If no ID provided, Supabase trigger will handle it
                         
-                        // Insert with the explicit ID
+                        // Log the final player data being sent
+                        console.log("Creating new player with data:", playerData);
+                        
+                        // Create new player
                         result = await supabase
                             .from('players')
                             .insert([playerData])
                             .select();
+                            
+                        // Log the result
+                        console.log("New player creation result:", result);
                     } else {
                         // Update existing player
+                        playerData.id = parseInt(playerIdInput.value);
+                        console.log("Updating player ID:", playerData.id);
+                        
+                        // Log the final player data being sent
+                        console.log("Updating player with data:", playerData);
+                        
                         result = await supabase
                             .from('players')
                             .update(playerData)
-                            .eq('id', currentPlayer.id)
+                            .eq('id', playerData.id)
                             .select();
+                            
+                        // Log the result
+                        console.log("Update player result:", result);
                     }
                     
                     if (result.error) throw result.error;
                     
                     const savedPlayer = result.data[0];
+                    
+                    // Check that we have a saved player with an ID
+                    if (!savedPlayer || !savedPlayer.id) {
+                        throw new Error("Failed to get player ID from saved result");
+                    }
+                    
+                    console.log("Player saved successfully:", savedPlayer);
+                    
+                    // Verify synchronization with manager_squads
+                    const verifySync = async () => {
+                        try {
+                            const { data: squadEntries, error: squadError } = await supabase
+                                .from('manager_squads')
+                                .select('id, player_name, position, value, salary')
+                                .eq('player_id', savedPlayer.id);
+                                
+                            if (squadError) {
+                                console.error("Error checking squad sync:", squadError);
+                                return;
+                            }
+                            
+                            if (squadEntries && squadEntries.length > 0) {
+                                console.log(`Found ${squadEntries.length} squad entries for this player:`, squadEntries);
+                                
+                                // Check for data mismatches
+                                const mismatches = squadEntries.filter(entry => 
+                                    entry.player_name !== savedPlayer.name ||
+                                    entry.position !== savedPlayer.position ||
+                                    entry.value !== savedPlayer.value ||
+                                    // Check if salary is approximately 5% of value (allow small rounding differences)
+                                    Math.abs(entry.salary - (savedPlayer.value * 0.05)) > 0.2
+                                );
+                                
+                                if (mismatches.length > 0) {
+                                    console.warn("Data sync mismatches found:", mismatches);
+                                    
+                                    // Log detailed info about mismatches
+                                    mismatches.forEach(mismatch => {
+                                        console.log(`Mismatch details for squad ID ${mismatch.id}:`);
+                                        console.log(`- Name: ${mismatch.player_name} vs ${savedPlayer.name}`);
+                                        console.log(`- Position: ${mismatch.position} vs ${savedPlayer.position}`);
+                                        console.log(`- Value: ${mismatch.value} vs ${savedPlayer.value}`);
+                                        console.log(`- Salary: ${mismatch.salary} vs expected ${(savedPlayer.value * 0.05).toFixed(1)}`);
+                                    });
+                                } else {
+                                    console.log("All squad entries are in sync with player data");
+                                }
+                            } else {
+                                console.log("No squad entries found for this player");
+                            }
+                        } catch (verifyError) {
+                            console.error("Error during sync verification:", verifyError);
+                        }
+                    };
+                    
+                    // Run verification but don't wait for it
+                    verifySync();
                     
                     showToast(`Player ${isCreatingNewPlayer ? 'created' : 'updated'} successfully`, 'success');
                     
