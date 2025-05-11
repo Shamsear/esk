@@ -1195,6 +1195,45 @@
             color: #3498db;
             font-style: italic;
         }
+
+        /* Add new styles for desktop scrollbar */
+        @media (min-width: 769px) {
+            .modal {
+                max-height: 80vh;
+                overflow-y: auto;
+                /* Custom scrollbar styles for desktop */
+                scrollbar-width: thin;
+                scrollbar-color: #3498db #252530;
+            }
+
+            .modal::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .modal::-webkit-scrollbar-track {
+                background: #252530;
+                border-radius: 4px;
+            }
+
+            .modal::-webkit-scrollbar-thumb {
+                background: #3498db;
+                border-radius: 4px;
+            }
+
+            .modal::-webkit-scrollbar-thumb:hover {
+                background: #2980b9;
+            }
+        }
+
+        /* Keep existing mobile styles */
+        @media (max-width: 768px) {
+            .modal {
+                width: 95%;
+                padding: 20px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
     </style>
 
     <!-- Defer non-critical CSS -->
@@ -2131,24 +2170,69 @@
                 // Close search modal first
                 closePlayerSearch();
                 
-                // Populate player details
-                playerNameInput.value = player.name;
-                playerIdInput.value = player.id;
-                playerPositionSelect.value = player.position || '';
-                playerValueInput.value = player.value || '';
-                
-                // Set default contract season to current manager season
-                const managerSeason = currentManager.current_season || 1;
-                playerContractInput.value = managerSeason;
-                
-                // Calculate salary (5% of value)
-                calculateSalary();
-                
-                // Set default player type
-                playerTypeSelect.value = 'standard';
-                
-                // Show modal
-                playerDetailsModal.classList.add('active');
+                // Get player level from Supabase before showing modal
+                getPlayerLevelAndUpdateModal(player);
+            }
+            
+            // Function to get player level and update modal
+            async function getPlayerLevelAndUpdateModal(player) {
+                try {
+                    const { data, error } = await supabase
+                        .from('players')
+                        .select('level')
+                        .eq('id', player.id)
+                        .single();
+
+                    if (error) throw error;
+
+                    // Populate player details
+                    playerNameInput.value = player.name;
+                    playerIdInput.value = player.id;
+                    playerPositionSelect.value = player.position || '';
+                    playerValueInput.value = player.value || '';
+                    
+                    // Set default contract season to current manager season
+                    const managerSeason = currentManager.current_season || 1;
+                    playerContractInput.value = 8;
+                    
+                    // Calculate salary (5% of value)
+                    calculateSalary();
+                    
+                    // Update player type options based on level
+                    updatePlayerTypeOptions(data.level);
+                    
+                    // Show modal
+                    playerDetailsModal.classList.add('active');
+                } catch (error) {
+                    console.error('Error getting player level:', error);
+                    showToast('Error loading player details', 'error');
+                }
+            }
+            
+            // Function to update player type options based on level
+            function updatePlayerTypeOptions(level) {
+                const typeSelect = playerTypeSelect;
+                typeSelect.innerHTML = ''; // Clear existing options
+
+                if (level === 'LEGENDARY') {
+                    // Only allow legend and prime legend for legendary players
+                    addOption(typeSelect, 'legend', 'Legend');
+                    addOption(typeSelect, 'prime legend', 'Prime Legend');
+                    typeSelect.value = 'legend'; // Set default value
+                } else {
+                    // Only allow standard and prime for standard players
+                    addOption(typeSelect, 'standard', 'Standard');
+                    addOption(typeSelect, 'prime', 'Prime');
+                    typeSelect.value = 'standard'; // Set default value
+                }
+            }
+            
+            // Helper function to add options to select element
+            function addOption(select, value, text) {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = text;
+                select.appendChild(option);
             }
             
             // Close player details modal
