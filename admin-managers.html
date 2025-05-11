@@ -3167,6 +3167,13 @@
                         managerSquad = data || [];
                     }
                     
+                    // Sort squad by value in descending order
+                    managerSquad.sort((a, b) => {
+                        const valueA = a.value || 0;
+                        const valueB = b.value || 0;
+                        return valueB - valueA; // Descending order
+                    });
+                    
                     renderSquadList();
                     
                     // Also load available players for the squad modal

@@ -935,7 +935,12 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="player-id">ID</label>
-                            <input type="number" id="player-id" readonly>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="player-id" readonly style="flex: 1;">
+                                <button type="button" id="generate-id-btn" class="btn btn-green" style="display: none;">
+                                    <i class="fas fa-key"></i> Generate ID
+                                </button>
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -1238,6 +1243,7 @@
                 document.getElementById('mobile-logout-btn').addEventListener('click', logout);
                 addStatBtn.addEventListener('click', openAddStatModal);
                 checkMissingPlayersBtn.addEventListener('click', checkMissingPlayers);
+                document.getElementById('generate-id-btn').addEventListener('click', generatePlayerId);
                 
                 // Modal buttons
                 closeStatModal.addEventListener('click', closeAddStatModal);
@@ -1430,6 +1436,9 @@
                     currentPlayer = data;
                     isCreatingNewPlayer = false;
                     
+                    // Hide the Generate ID button for existing players
+                    document.getElementById('generate-id-btn').style.display = 'none';
+                    
                     // Load the player stats
                     await loadPlayerStats(playerId);
                     
@@ -1538,6 +1547,9 @@
                 playerGamesInput.value = '0';
                 playerImageInput.value = '';
                 
+                // Show the Generate ID button for new players
+                document.getElementById('generate-id-btn').style.display = 'block';
+                
                 // Clear stats
                 playerStats = [];
                 statsList.innerHTML = '<p>Save the player first to add stats</p>';
@@ -1591,8 +1603,35 @@
                     let result;
                     
                     if (isCreatingNewPlayer) {
-                        // Create new player - ID will be auto-assigned by the database
-                        result = await supabase.from('players').insert([playerData]).select();
+                        // Check if ID has been generated
+                        if (playerIdInput.value && playerIdInput.value !== 'Auto-generated') {
+                            // Use the already generated ID
+                            playerData.id = parseInt(playerIdInput.value);
+                        } else {
+                            // Generate a new ID
+                            const { data: maxIdData, error: maxIdError } = await supabase
+                                .from('players')
+                                .select('id')
+                                .order('id', { ascending: false })
+                                .limit(1);
+                                
+                            if (maxIdError) {
+                                throw new Error(`Failed to get max ID: ${maxIdError.message}`);
+                            }
+                            
+                            // Calculate next ID (max + 1 or start at 1 if no records)
+                            const nextId = maxIdData && maxIdData.length > 0 ? maxIdData[0].id + 1 : 1;
+                            console.log("Generated new player ID:", nextId);
+                            
+                            // Add the ID to player data
+                            playerData.id = nextId;
+                        }
+                        
+                        // Insert with the explicit ID
+                        result = await supabase
+                            .from('players')
+                            .insert([playerData])
+                            .select();
                     } else {
                         // Update existing player
                         result = await supabase
@@ -1623,6 +1662,7 @@
                     saveBtn.disabled = false;
                     
                     showToast(`Error saving player: ${error.message}`, 'error');
+                    console.error("Error saving player:", error);
                 }
             }
             
@@ -2007,6 +2047,47 @@
                 const selectedClub = statClubSelect.value;
                 if (selectedClub) {
                     statTeamInput.value = selectedClub;
+                }
+            }
+            
+            // Generate a new player ID
+            async function generatePlayerId() {
+                try {
+                    // Show loading state
+                    const generateIdBtn = document.getElementById('generate-id-btn');
+                    generateIdBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+                    generateIdBtn.disabled = true;
+                    
+                    // Get the highest current ID
+                    const { data: maxIdData, error: maxIdError } = await supabase
+                        .from('players')
+                        .select('id')
+                        .order('id', { ascending: false })
+                        .limit(1);
+                        
+                    if (maxIdError) {
+                        throw new Error(`Failed to get max ID: ${maxIdError.message}`);
+                    }
+                    
+                    // Calculate next ID (max + 1 or start at 1 if no records)
+                    const nextId = maxIdData && maxIdData.length > 0 ? maxIdData[0].id + 1 : 1;
+                    
+                    // Set the ID in the input field
+                    playerIdInput.value = nextId;
+                    
+                    // Reset button state
+                    generateIdBtn.innerHTML = '<i class="fas fa-key"></i> Generate ID';
+                    generateIdBtn.disabled = false;
+                    
+                    showToast(`ID ${nextId} generated successfully`, 'success');
+                } catch (error) {
+                    // Reset button state
+                    const generateIdBtn = document.getElementById('generate-id-btn');
+                    generateIdBtn.innerHTML = '<i class="fas fa-key"></i> Generate ID';
+                    generateIdBtn.disabled = false;
+                    
+                    showToast(`Error generating ID: ${error.message}`, 'error');
+                    console.error("Error generating ID:", error);
                 }
             }
         });
