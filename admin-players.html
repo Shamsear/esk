@@ -1584,6 +1584,13 @@
                         return;
                     }
                     
+                    // Validate position (must be one of the valid values)
+                    const validPositions = ['GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'LW', 'RW', 'ST'];
+                    if (!validPositions.includes(playerPositionSelect.value)) {
+                        showToast('Invalid position selected', 'error');
+                        return;
+                    }
+                    
                     // Show saving indicator
                     saveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Saving...';
                     saveBtn.disabled = true;

@@ -23,17 +23,30 @@ BEGIN
     RETURN NEW;
   END IF;
 
-  -- Add logging for debugging
-  RAISE NOTICE 'Syncing player % (ID: %) to squad: position=%, value=%, name=%', 
-    NEW.name, NEW.id, NEW.position, NEW.value, NEW.name;
+  -- Validate position - make sure it's a valid value
+  IF NEW.position NOT IN ('GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'LW', 'RW', 'ST') THEN
+    RAISE WARNING 'Invalid position % detected for player % (ID: %). Not updating position in manager_squads.',
+      NEW.position, NEW.name, NEW.id;
+    
+    -- Update manager_squads entries without changing position
+    UPDATE manager_squads
+    SET 
+      value = NEW.value,
+      player_name = NEW.name
+    WHERE player_id = NEW.id;
+  ELSE
+    -- Add logging for debugging
+    RAISE NOTICE 'Syncing player % (ID: %) to squad: position=%, value=%, name=%', 
+      NEW.name, NEW.id, NEW.position, NEW.value, NEW.name;
 
-  -- Update all manager_squads entries that reference this player
-  UPDATE manager_squads
-  SET 
-    position = NEW.position,
-    value = NEW.value,
-    player_name = NEW.name
-  WHERE player_id = NEW.id;
+    -- Update all manager_squads entries with valid position
+    UPDATE manager_squads
+    SET 
+      position = NEW.position,
+      value = NEW.value,
+      player_name = NEW.name
+    WHERE player_id = NEW.id;
+  END IF;
   
   -- Also update salary which is 5% of value, stored as a decimal number
   -- Use NUMERIC to ensure decimal precision and ROUND to 1 decimal place
@@ -64,11 +77,11 @@ BEGIN
   -- Log detailed information about the change
   RAISE NOTICE 'Player change detected - ID: %, Name: % -> %, Value: % -> %, Position: % -> %, Club: % -> %',
     NEW.id,
-    COALESCE(OLD.name, 'NEW'),
+    COALESCE(OLD.name, 'New Player'),
     NEW.name,
     COALESCE(OLD.value, 0),
     NEW.value,
-    COALESCE(OLD.position, 'NEW'),
+    COALESCE(OLD.position, 'None'),
     NEW.position,
     COALESCE(OLD.club_id::text, 'NULL'),
     COALESCE(NEW.club_id::text, 'NULL');
