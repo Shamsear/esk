@@ -525,6 +525,133 @@
         .stat-item:nth-child(1) { transition-delay: 0.2s; }
         .stat-item:nth-child(2) { transition-delay: 0.3s; }
         .stat-item:nth-child(3) { transition-delay: 0.4s; }
+        
+        /* Coming Soon Section Styling */
+        .coming-soon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+        
+        .coming-soon-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coming-soon-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(var(--primary-rgb), 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .coming-soon-box:hover::before {
+            opacity: 1;
+        }
+        
+        .coming-soon-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: #5dade2;
+        }
+        
+        .coming-soon-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .coming-soon-box h3 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .coming-soon-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Mobile responsiveness for coming soon section */
+        @media screen and (max-width: 768px) {
+            .coming-soon-container {
+                padding: 40px 15px;
+                margin: 30px 0;
+            }
+            
+            .coming-soon-box {
+                padding: 40px 25px;
+                max-width: 100%;
+            }
+            
+            .coming-soon-icon {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+            
+            .coming-soon-box h3 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+                letter-spacing: 1px;
+            }
+            
+            .coming-soon-box p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .coming-soon-box {
+                padding: 30px 20px;
+            }
+            
+            .coming-soon-icon {
+                font-size: 2.5rem;
+            }
+            
+            .coming-soon-box h3 {
+                font-size: 1.8rem;
+            }
+            
+            .coming-soon-box p {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -564,7 +691,7 @@
         
         <main>
             <header id="career-header">
-                <a href="career-mode.html" class="back-link" style="display: none;"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
                 <h1>Trophy Cabinet</h1>
                 <p class="subtitle">All trophies and achievements in Eskimos Road to Glory</p>
             </header>
@@ -589,6 +716,76 @@
                 </div>
             </div>
             
+            <div class="centered-box">
+                <div class="season-box" data-season="season6">
+                    <div class="season-number">Season</div>
+                    <h1>SEASON 6</h1>
+                </div>
+            </div>
+            <div class="season-content" id="season6-content">
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">TROPHY</h2>
+                    </div>
+                    <p>Major trophies won during Season 6 of the Eskimos Road to Glory tournament.</p>
+                </div>
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/s6t1.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t2.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t3.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t4.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t5.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t6.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t7.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t8.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t9.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t10.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s6t11.webp" alt="Season 6 Trophy" width="300" height="200">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">AWARDS</h2>
+                    </div>
+                    <p>Prestigious individual awards won by players in Season 6.</p>
+                </div>
+                
+                <!-- Coming Soon Section for Season 6 Awards -->
+                <div class="coming-soon-container">
+                    <div class="coming-soon-box">
+                        <div class="coming-soon-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Coming Soon</h3>
+                        <p>Award photos will be added later. Stay tuned for updates!</p>
+                    </div>
+                </div>
+                
+            </div>
             <div class="centered-box">
                 <div class="season-box" data-season="season5">
                     <div class="season-number">Season</div>
