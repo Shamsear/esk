@@ -1340,42 +1340,48 @@
             }
         });
         
-        // Initialize page animations
+        // Initialize page animations with improved timing
         function initializeAnimations() {
-            // Trigger initial animations after a small delay
+            // Trigger initial page elements animations after a small delay
             setTimeout(() => {
                 const fadeElements = document.querySelectorAll('.fade-in');
-                fadeElements.forEach(element => {
-                    element.classList.add('active');
+                fadeElements.forEach((element, index) => {
+                    // Add staggered delay for smooth sequential animation
+                    setTimeout(() => {
+                        element.classList.add('active');
+                    }, index * 120); // 120ms between each element
                 });
-            }, 300);
+            }, 200); // Reduced initial delay
             
-            // Observe intersection for scrolling animations
-            const observer = new IntersectionObserver((entries) => {
+            // Separate observer for manager cards with optimized timing
+            const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        // If the target is a container that needs its children animated
+                        // Animate manager cards with better timing
                         if (entry.target.classList.contains('managers-container')) {
-                            animateChildrenSequentially(entry.target);
+                            animateManagerCards(entry.target);
                         }
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.1, rootMargin: '50px' });
             
-            // Observe all elements with animation classes
-            document.querySelectorAll('.fade-in, .manager-card').forEach(element => {
-                observer.observe(element);
-            });
+            // Only observe the managers container for card animations
+            const managersContainer = document.querySelector('.managers-container');
+            if (managersContainer) {
+                cardObserver.observe(managersContainer);
+            }
         }
         
-        // Animate children in sequence
-        function animateChildrenSequentially(container) {
-            const children = container.querySelectorAll('.manager-card:not(.active)');
-            children.forEach((child, index) => {
+        // Animate manager cards with improved timing and performance
+        function animateManagerCards(container) {
+            const cards = container.querySelectorAll('.manager-card:not(.active)');
+            const isMobile = window.innerWidth <= 768;
+            const baseDelay = isMobile ? 80 : 60; // Optimized delays for mobile and desktop
+            
+            cards.forEach((card, index) => {
                 setTimeout(() => {
-                    child.classList.add('active');
-                }, 100 * index); // 100ms delay between each card
+                    card.classList.add('active');
+                }, baseDelay * index);
             });
         }
     </script>
@@ -1509,10 +1515,8 @@
                     }
                 });
                 
-                // Animate cards with staggered delay
-                setTimeout(() => {
-                    card.classList.add('active');
-                }, window.innerWidth <= 768 ? 100 * index : 50 * index); // Longer delay on mobile
+                // Note: Animation will be handled by the intersection observer
+                // Don't add 'active' class immediately - let observer handle it
             });
         }
         

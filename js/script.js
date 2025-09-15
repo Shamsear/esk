@@ -83,15 +83,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         switch(currentPage) {
             case 'registered-clubs.html':
-            case 'manager-ranking.html':
-                const galleryElements = [
+                const clubElements = [
                     ...document.querySelectorAll('.black-box'),
                     ...document.querySelectorAll('.club-info'),
                     ...document.querySelectorAll('.moze-gallery li'),
                     ...document.querySelectorAll('.gallery-loader'),
                     ...document.querySelectorAll('.search-box')
                 ];
-                setupScrollAnimations(galleryElements, commonDelay);
+                setupScrollAnimations(clubElements, commonDelay);
+                break;
+                
+            case 'managers.html':
+                // For managers page, let the page handle its own animations
+                // Only handle non-manager-card elements
+                const managerPageElements = [
+                    ...document.querySelectorAll('.black-box'),
+                    ...document.querySelectorAll('.club-info'),
+                    ...document.querySelectorAll('.search-box')
+                ];
+                // Only setup animations if elements exist
+                if (managerPageElements.length > 0) {
+                    setupScrollAnimations(managerPageElements, commonDelay);
+                }
                 break;
                 
             case 'trophy-cabinet.html':
