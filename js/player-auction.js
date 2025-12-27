@@ -233,15 +233,13 @@ function processSheetData(data, sheetPosition) {
 // Convert base value to star rating
 function getPlayerValue(baseValue) {
     switch (baseValue) {
+        case 120:
+            return 'Legend';
         case 100:
-            return '5★ Legend';
-        case 80:
             return '5★ Standard';
-        case 60:
-            return '4★ Legend';
-        case 50:
+        case 80:
             return '4★ Standard';
-        case 40:
+        case 60:
             return '3★ Standard';
         default:
             return 'Unknown';
@@ -277,15 +275,13 @@ function createPlayerRow(player) {
 // Get rating-specific class
 function getRatingClass(baseValue) {
     switch (baseValue) {
-        case 100:
+        case 120:
             return 'five-star-legend';
-        case 80:
+        case 100:
             return 'five-star-standard';
-        case 60:
-            return 'four-star-legend';
-        case 50:
+        case 80:
             return 'four-star-standard';
-        case 40:
+        case 60:
             return 'three-star-standard';
         default:
             return 'unknown-rating';
@@ -910,7 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const positionTabs = document.querySelectorAll('.position-tab');
     positionTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            setTimeout(updateBidAmountColors, 100); // Small delay to ensure content is updated
+            setTimeout(updateBidAmountColors, 120); // Small delay to ensure content is updated
         });
     });
     
@@ -918,7 +914,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('playerSearch');
     if (searchInput) {
         searchInput.addEventListener('input', () => {
-            setTimeout(updateBidAmountColors, 100);
+            setTimeout(updateBidAmountColors, 120);
         });
     }
 }); 
