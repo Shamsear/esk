@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <!-- PWA support -->
@@ -13,11 +14,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trophy Cabinet - Eskimos Road to Glory</title>
-    <meta name="description" content="View the trophy cabinet of Eskimos Road to Glory tournament, featuring all trophies and achievements.">
+    <meta name="description"
+        content="View the trophy cabinet of Eskimos Road to Glory tournament, featuring all trophies and achievements.">
     <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
     <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
     <link rel="apple-touch-icon" href="assets/images/logo11.webp">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pwa.css">
@@ -38,25 +41,25 @@
             margin: 0;
             padding: 0;
         }
-        
+
         /* Trophy Cabinet Specific Styles */
         .trophy-gallery {
             padding: 20px 0;
             margin-bottom: 40px;
         }
-        
+
         /* Season heading styling */
         .season-heading {
             padding: 0px;
             margin-top: 0px;
         }
-        
+
         .season-heading h1.moze-center {
             text-align: center;
             margin-top: 10px;
             margin-bottom: 0;
         }
-        
+
         /* Season heading h2 styling */
         .season-heading h2 {
             text-decoration: underline;
@@ -67,7 +70,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         /* Centered box for season headings */
         .centered-box {
             display: flex;
@@ -95,7 +98,7 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
+
         /* Add down arrow indicator to season box */
         .season-box::after {
             content: '\f078';
@@ -109,12 +112,12 @@
             color: var(--accent-color);
             transition: transform 0.3s ease;
         }
-        
+
         /* Rotate arrow when active */
         .season-box.active::after {
             transform: translateY(-50%) rotate(180deg);
         }
-        
+
         /* Enhance hover effect */
         .season-box:hover {
             background-color: rgba(10, 10, 10, 0.9);
@@ -136,7 +139,7 @@
                 font-size: 2.5rem;
             }
         }
-        
+
         .moze-gallery {
             display: flex;
             flex-wrap: wrap;
@@ -146,7 +149,7 @@
             max-width: 1200px;
             padding: 0 15px;
         }
-        
+
         .moze-gallery li {
             position: relative;
             width: 250px;
@@ -162,7 +165,7 @@
             cursor: default;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .moze-gallery img {
             width: 85%;
             height: 85%;
@@ -170,7 +173,7 @@
             background-color: transparent;
             padding: 10px;
         }
-        
+
         .club-info {
             text-align: center;
             max-width: 850px;
@@ -181,20 +184,20 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .club-info h2 {
             color: var(--accent-color);
             margin-bottom: 20px;
             font-size: 2rem;
         }
-        
+
         .club-info p {
             font-size: 1.05rem;
             line-height: 1.6;
             max-width: 90%;
             margin: 0 auto 15px;
         }
-        
+
         .black-box {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 25px;
@@ -205,7 +208,7 @@
             text-align: center;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
-        
+
         .black-box h1 {
             color: white;
             font-size: 2.5rem;
@@ -213,7 +216,7 @@
             font-weight: 700;
             letter-spacing: 2px;
         }
-        
+
         .stats-preview {
             display: flex;
             justify-content: space-around;
@@ -256,7 +259,7 @@
                 gap: 15px;
                 padding: 0 5px;
             }
-            
+
             .moze-gallery li {
                 width: 100%;
                 max-width: 95%;
@@ -265,7 +268,7 @@
                 height: auto;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             }
-            
+
             .moze-gallery img {
                 object-fit: contain;
                 padding: 5px;
@@ -274,77 +277,77 @@
                 max-height: none;
                 background-color: rgba(0, 0, 0, 0.2);
             }
-            
+
             .club-info {
                 padding: 20px 15px;
                 margin-bottom: 25px;
             }
-            
+
             .black-box h1 {
                 font-size: 1.8rem;
             }
-            
+
             .trophy-gallery {
                 padding: 10px 0;
             }
-            
+
             .stats-preview {
                 flex-direction: column;
                 align-items: center;
                 gap: 20px;
             }
-            
+
             .stat-item {
                 width: 100%;
                 max-width: 200px;
             }
-            
+
             .season-box {
                 width: 85%;
                 max-width: 300px;
                 padding: 12px 15px;
             }
-            
+
             .season-box h1 {
                 font-size: 2.2rem;
             }
-            
+
             .season-number {
                 font-size: 0.8rem;
                 letter-spacing: 5px;
             }
-            
+
             .season-box::after {
                 right: 15px;
                 font-size: 1.3rem;
             }
-            
+
             .centered-box {
                 margin: 25px 0;
             }
         }
-        
+
         /* Scroll Animation Styles */
         .hidden {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
+
         .animate-in {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Trophy cabinet specific animations */
         .black-box.hidden {
             transform: translateY(-30px);
         }
-        
+
         .club-info.hidden {
             transform: scale(0.95);
         }
-        
+
         /* Season box animation */
         .season-box.hidden,
         .centered-box.hidden {
@@ -352,13 +355,13 @@
             transform: scale(0.8);
             transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .season-box.animate-in,
         .centered-box.animate-in {
             opacity: 1;
             transform: scale(1);
         }
-        
+
         /* Collapsible season sections - Improved UI */
         .season-box {
             cursor: pointer;
@@ -374,7 +377,7 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
             border: none;
         }
-        
+
         .season-box h1 {
             color: #3498db;
             margin: 0;
@@ -383,7 +386,7 @@
             transition: all 0.3s ease;
             letter-spacing: 2px;
         }
-        
+
         .season-number {
             color: #fff;
             letter-spacing: 8px;
@@ -392,16 +395,16 @@
             font-weight: 400;
             margin-bottom: 0;
         }
-        
+
         .season-box:hover {
             transform: scale(1.03);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
         }
-        
+
         .season-box:hover h1 {
             color: #5dade2;
         }
-        
+
         .season-box::after {
             content: "\f107";
             font-family: "Font Awesome 5 Free";
@@ -414,18 +417,18 @@
             color: #3498db;
             font-size: 1.5rem;
         }
-        
+
         .season-box.active::after {
             transform: translateY(-50%) rotate(180deg);
             color: #5dade2;
         }
-        
+
         .centered-box {
             height: auto;
             margin: 40px 0;
             padding: 0 15px;
         }
-        
+
         .season-content {
             display: none;
             margin-top: -20px;
@@ -437,7 +440,7 @@
             animation: none;
             will-change: opacity, transform, max-height;
         }
-        
+
         .season-content.active {
             display: block;
             opacity: 1;
@@ -445,87 +448,132 @@
             overflow: visible;
             animation: expandContent 0.6s ease-out forwards;
         }
-        
+
         @keyframes expandContent {
-            0% { 
+            0% {
                 opacity: 0;
                 transform: translateY(-20px);
                 max-height: 0;
             }
+
             50% {
                 opacity: 1;
                 transform: translateY(0);
                 max-height: 20000px;
             }
-            100% { 
+
+            100% {
                 opacity: 1;
                 transform: translateY(0);
                 max-height: 100000px;
             }
         }
-        
+
         /* Trophy gallery items animations */
         .moze-gallery li.hidden {
             opacity: 0;
             transform: scale(0.8) translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .moze-gallery li.animate-in {
             opacity: 1;
             transform: scale(1) translateY(0);
         }
-        
+
         /* Add hover effects to trophy items */
         .moze-gallery li {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .moze-gallery li:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
         }
-        
+
         .moze-gallery li:hover img {
             transform: scale(1.05);
             filter: brightness(1.1);
         }
-        
+
         .moze-gallery img {
             transition: transform 0.3s ease, filter 0.3s ease;
         }
-        
+
         /* Stats preview items animations */
         .stat-item.hidden {
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
-        
+
         .stat-item.animate-in {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Staggered delays for trophy gallery items */
-        .moze-gallery li:nth-child(1) { transition-delay: 0.05s; }
-        .moze-gallery li:nth-child(2) { transition-delay: 0.1s; }
-        .moze-gallery li:nth-child(3) { transition-delay: 0.15s; }
-        .moze-gallery li:nth-child(4) { transition-delay: 0.2s; }
-        .moze-gallery li:nth-child(5) { transition-delay: 0.25s; }
-        .moze-gallery li:nth-child(6) { transition-delay: 0.3s; }
-        .moze-gallery li:nth-child(7) { transition-delay: 0.35s; }
-        .moze-gallery li:nth-child(8) { transition-delay: 0.4s; }
-        .moze-gallery li:nth-child(9) { transition-delay: 0.45s; }
-        .moze-gallery li:nth-child(10) { transition-delay: 0.5s; }
-        .moze-gallery li:nth-child(11) { transition-delay: 0.55s; }
-        .moze-gallery li:nth-child(12) { transition-delay: 0.6s; }
-        
+        .moze-gallery li:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+
+        .moze-gallery li:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .moze-gallery li:nth-child(3) {
+            transition-delay: 0.15s;
+        }
+
+        .moze-gallery li:nth-child(4) {
+            transition-delay: 0.2s;
+        }
+
+        .moze-gallery li:nth-child(5) {
+            transition-delay: 0.25s;
+        }
+
+        .moze-gallery li:nth-child(6) {
+            transition-delay: 0.3s;
+        }
+
+        .moze-gallery li:nth-child(7) {
+            transition-delay: 0.35s;
+        }
+
+        .moze-gallery li:nth-child(8) {
+            transition-delay: 0.4s;
+        }
+
+        .moze-gallery li:nth-child(9) {
+            transition-delay: 0.45s;
+        }
+
+        .moze-gallery li:nth-child(10) {
+            transition-delay: 0.5s;
+        }
+
+        .moze-gallery li:nth-child(11) {
+            transition-delay: 0.55s;
+        }
+
+        .moze-gallery li:nth-child(12) {
+            transition-delay: 0.6s;
+        }
+
         /* Staggered delays for stats items */
-        .stat-item:nth-child(1) { transition-delay: 0.2s; }
-        .stat-item:nth-child(2) { transition-delay: 0.3s; }
-        .stat-item:nth-child(3) { transition-delay: 0.4s; }
-        
+        .stat-item:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+
+        .stat-item:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .stat-item:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+
         /* Coming Soon Section Styling */
         .coming-soon-container {
             display: flex;
@@ -534,7 +582,7 @@
             padding: 60px 20px;
             margin: 40px 0;
         }
-        
+
         .coming-soon-box {
             background: rgba(0, 0, 0, 0.7);
             border: 2px solid var(--accent-color);
@@ -548,7 +596,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .coming-soon-box::before {
             content: '';
             position: absolute;
@@ -560,17 +608,17 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .coming-soon-box:hover::before {
             opacity: 1;
         }
-        
+
         .coming-soon-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             border-color: #5dade2;
         }
-        
+
         .coming-soon-icon {
             font-size: 4rem;
             color: var(--accent-color);
@@ -579,7 +627,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .coming-soon-box h3 {
             color: var(--accent-color);
             font-size: 2.5rem;
@@ -590,7 +638,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .coming-soon-box p {
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.2rem;
@@ -600,60 +648,69 @@
             position: relative;
             z-index: 1;
         }
-        
+
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
-        
+
         /* Mobile responsiveness for coming soon section */
         @media screen and (max-width: 768px) {
             .coming-soon-container {
                 padding: 40px 15px;
                 margin: 30px 0;
             }
-            
+
             .coming-soon-box {
                 padding: 40px 25px;
                 max-width: 100%;
             }
-            
+
             .coming-soon-icon {
                 font-size: 3rem;
                 margin-bottom: 20px;
             }
-            
+
             .coming-soon-box h3 {
                 font-size: 2rem;
                 margin-bottom: 15px;
                 letter-spacing: 1px;
             }
-            
+
             .coming-soon-box p {
                 font-size: 1.1rem;
             }
         }
-        
+
         @media screen and (max-width: 480px) {
             .coming-soon-box {
                 padding: 30px 20px;
             }
-            
+
             .coming-soon-icon {
                 font-size: 2.5rem;
             }
-            
+
             .coming-soon-box h3 {
                 font-size: 1.8rem;
             }
-            
+
             .coming-soon-box p {
                 font-size: 1rem;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="overlay">
         <div class="top-bar">
@@ -675,7 +732,7 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="mobile-menu" id="mobileMenu">
             <button class="close-menu" id="closeMenu">
                 <i class="fas fa-times"></i>
@@ -688,18 +745,19 @@
                 <a href="trophy-cabinet.html">Trophy Cabinet</a>
             </div>
         </div>
-        
+
         <main>
             <header id="career-header">
                 <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
                 <h1>Trophy Cabinet</h1>
                 <p class="subtitle">All trophies and achievements in Eskimos Road to Glory</p>
             </header>
-            
+
             <div class="club-info">
                 <h2>Eskimos Road to Glory Achievements</h2>
-                <p>Below are all the trophies and achievements from all seasons of the Eskimos Road to Glory tournament.</p>
-                
+                <p>Below are all the trophies and achievements from all seasons of the Eskimos Road to Glory tournament.
+                </p>
+
                 <div class="stats-preview">
                     <div class="stat-item">
                         <div class="stat-value">15</div>
@@ -715,7 +773,95 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="centered-box">
+                <div class="season-box" data-season="season7">
+                    <div class="season-number">Season</div>
+                    <h1>SEASON 7</h1>
+                </div>
+            </div>
+            <div class="season-content" id="season7-content">
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">TROPHY</h2>
+                    </div>
+                    <p>Major trophies won during Season 7 of the Eskimos Road to Glory tournament.</p>
+                </div>
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/s7t1.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t12.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t2.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t3.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t4.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t5.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t6.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t7.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t8.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t9.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t10.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7t11.webp" alt="Season 7 Trophy" width="300" height="200">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">AWARDS</h2>
+                    </div>
+                    <p>Prestigious individual awards won by players in Season 7.</p>
+                </div>
+
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/s7a1.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7a2.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7a3.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7a4.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7a5.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7a6.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/s7a7.webp" alt="Season 7 Award" width="300" height="200">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="centered-box">
                 <div class="season-box" data-season="season6">
                     <div class="season-number">Season</div>
@@ -776,7 +922,7 @@
                     </div>
                     <p>Prestigious individual awards won by players in Season 6.</p>
                 </div>
-                
+
                 <div class="trophy-gallery">
                     <ul class="moze-gallery pictures">
                         <li>
@@ -802,7 +948,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
             </div>
             <div class="centered-box">
                 <div class="season-box" data-season="season5">
@@ -896,7 +1042,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="centered-box">
                 <div class="season-box" data-season="season4">
                     <div class="season-number">Season</div>
@@ -905,73 +1051,82 @@
             </div>
 
             <div class="season-content" id="season4-content">
-            <div class="club-info">
-                <div class="textbox season-heading">
-                    <h2 class="moze-center">TROPHY</h2>
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">TROPHY</h2>
+                    </div>
+                    <p>Major trophies won during Season 4 of the Eskimos Road to Glory tournament.</p>
                 </div>
-                <p>Major trophies won during Season 4 of the Eskimos Road to Glory tournament.</p>
-            </div>
 
-            <div class="trophy-gallery">
-                <ul class="moze-gallery pictures">
-                    <li>
-                        <img src="assets/images/trophy/t1.webp" alt="Premier League Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t2.webp" alt="FA Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t3.webp" alt="Carabao Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t4.webp" alt="Champions League Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t5.webp" alt="Europa League Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t6.webp" alt="UEFA Super Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t7.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/t8.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                </ul>
-            </div>
-
-            <div class="club-info">
-                <div class="textbox season-heading">
-                    <h2 class="moze-center">AWARDS</h2>
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/t1.webp" alt="Premier League Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t2.webp" alt="FA Cup Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t3.webp" alt="Carabao Cup Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t4.webp" alt="Champions League Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t5.webp" alt="Europa League Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t6.webp" alt="UEFA Super Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t7.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/t8.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                    </ul>
                 </div>
-                <p>Prestigious individual awards won by players in Season 4.</p>
-            </div>
 
-            <div class="trophy-gallery">
-                <ul class="moze-gallery pictures">
-                    <li>
-                        <img src="assets/images/trophy/ta1.webp" alt="Ballon d'Or Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ta2.webp" alt="Golden Boot Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ta3.webp" alt="Golden Glove Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ta4.webp" alt="Player of the Year Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ta5.webp" alt="Player of the Year Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ta6.webp" alt="Player of the Year Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ta7.webp" alt="Player of the Year Trophy" width="300" height="200">
-                    </li>
-                </ul>
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">AWARDS</h2>
+                    </div>
+                    <p>Prestigious individual awards won by players in Season 4.</p>
+                </div>
+
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/ta1.webp" alt="Ballon d'Or Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ta2.webp" alt="Golden Boot Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ta3.webp" alt="Golden Glove Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ta4.webp" alt="Player of the Year Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ta5.webp" alt="Player of the Year Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ta6.webp" alt="Player of the Year Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ta7.webp" alt="Player of the Year Trophy" width="300"
+                                height="200">
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -983,76 +1138,90 @@
             </div>
 
             <div class="season-content" id="season2-content">
-            <div class="club-info">
-                <div class="textbox season-heading">
-                    <h2 class="moze-center">TROPHY</h2>
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">TROPHY</h2>
+                    </div>
+                    <p>Major trophies won during Season 2 of the Eskimos Road to Glory tournament.</p>
                 </div>
-                <p>Major trophies won during Season 2 of the Eskimos Road to Glory tournament.</p>
-            </div>
 
-            <div class="trophy-gallery">
-                <ul class="moze-gallery pictures">
-                    <li>
-                        <img src="assets/images/trophy/elitet2.webp" alt="Premier League Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/div1t2.webp" alt="FA Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/div2t2.webp" alt="Champions League Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/uclt.webp" alt="UEFA Super Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/uelt.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ueclt.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/trio.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/special.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/divcup.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/tos.webp" alt="Community Shield Trophy" width="300" height="200">
-                    </li>
-                </ul>
-            </div>
-
-            <div class="club-info">
-                <div class="textbox season-heading">
-                    <h2 class="moze-center">AWARDS</h2>
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/elitet2.webp" alt="Premier League Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/div1t2.webp" alt="FA Cup Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/div2t2.webp" alt="Champions League Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/uclt.webp" alt="UEFA Super Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/uelt.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ueclt.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/trio.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/special.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/divcup.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/tos.webp" alt="Community Shield Trophy" width="300"
+                                height="200">
+                        </li>
+                    </ul>
                 </div>
-                <p>Prestigious individual awards won by players in Season 2.</p>
-            </div>
 
-            <div class="trophy-gallery">
-                <ul class="moze-gallery pictures">
-                    <li>
-                        <img src="assets/images/trophy/best.webp" alt="Ballon d'Or Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/ballen.webp" alt="Golden Boot Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/muller.webp" alt="Golden Glove Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/yashin.webp" alt="Golden Glove Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/golden.webp" alt="Golden Glove Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/maldini.webp" alt="Golden Glove Trophy" width="300" height="200">
-                    </li>
-                </ul>
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">AWARDS</h2>
+                    </div>
+                    <p>Prestigious individual awards won by players in Season 2.</p>
+                </div>
+
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/best.webp" alt="Ballon d'Or Trophy" width="300" height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/ballen.webp" alt="Golden Boot Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/muller.webp" alt="Golden Glove Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/yashin.webp" alt="Golden Glove Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/golden.webp" alt="Golden Glove Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/maldini.webp" alt="Golden Glove Trophy" width="300"
+                                height="200">
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -1064,74 +1233,88 @@
             </div>
 
             <div class="season-content" id="season1-content">
-            <div class="club-info">
-                <div class="textbox season-heading">
-                    <h2 class="moze-center">TROPHY</h2>
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">TROPHY</h2>
+                    </div>
+                    <p>Major trophies won during Season 1 of the Eskimos Road to Glory tournament.</p>
                 </div>
-                <p>Major trophies won during Season 1 of the Eskimos Road to Glory tournament.</p>
-            </div>
 
-            <div class="trophy-gallery">
-                <ul class="moze-gallery pictures">
-                    <li>
-                        <img src="assets/images/trophy/elitet.webp" alt="Carabao Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/div1t.webp" alt="Europa League Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/div2t.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/kingt.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/supert.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/divg.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/eurot.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/team.webp" alt="Club World Cup Trophy" width="300" height="200">
-                    </li>
-                </ul>
-            </div>
-
-            <div class="club-info">
-                <div class="textbox season-heading">
-                    <h2 class="moze-center">AWARDS</h2>
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/elitet.webp" alt="Carabao Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/div1t.webp" alt="Europa League Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/div2t.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/kingt.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/supert.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/divg.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/eurot.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/team.webp" alt="Club World Cup Trophy" width="300"
+                                height="200">
+                        </li>
+                    </ul>
                 </div>
-                <p>Prestigious individual awards won by players in Season 1.</p>
-            </div>
 
-            <div class="trophy-gallery">
-                <ul class="moze-gallery pictures">
-                    <li>
-                        <img src="assets/images/trophy/a1.webp" alt="Player of the Year Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/a2.webp" alt="Best Goalkeeper Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/gerd.webp" alt="Best Goalkeeper Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/a4.webp" alt="Best Goalkeeper Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/a5.webp" alt="Best Goalkeeper Trophy" width="300" height="200">
-                    </li>
-                    <li>
-                        <img src="assets/images/trophy/a6.webp" alt="Best Goalkeeper Trophy" width="300" height="200">
-                    </li>
-                </ul>
+                <div class="club-info">
+                    <div class="textbox season-heading">
+                        <h2 class="moze-center">AWARDS</h2>
+                    </div>
+                    <p>Prestigious individual awards won by players in Season 1.</p>
+                </div>
+
+                <div class="trophy-gallery">
+                    <ul class="moze-gallery pictures">
+                        <li>
+                            <img src="assets/images/trophy/a1.webp" alt="Player of the Year Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/a2.webp" alt="Best Goalkeeper Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/gerd.webp" alt="Best Goalkeeper Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/a4.webp" alt="Best Goalkeeper Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/a5.webp" alt="Best Goalkeeper Trophy" width="300"
+                                height="200">
+                        </li>
+                        <li>
+                            <img src="assets/images/trophy/a6.webp" alt="Best Goalkeeper Trophy" width="300"
+                                height="200">
+                        </li>
+                    </ul>
                 </div>
             </div>
         </main>
-        
+
         <footer>
             <div class="footer-content">
                 <div class="footer-nav">
@@ -1153,17 +1336,17 @@
     <script src="js/image-protection.js"></script>
     <script>
         // Document ready function to ensure DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Get all season boxes
             const seasonBoxes = document.querySelectorAll('.season-box');
-            
+
             // Create Intersection Observer for scroll animations
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
                 threshold: 0.1
             };
-            
+
             const scrollObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1172,7 +1355,7 @@
                     }
                 });
             }, observerOptions);
-            
+
             // Function to animate season content elements
             function animateSeasonContent(seasonContent) {
                 // Get all elements to animate
@@ -1182,13 +1365,13 @@
                     ...seasonContent.querySelectorAll('p'),
                     ...seasonContent.querySelectorAll('.moze-gallery li')
                 ];
-                
+
                 // Reset all elements
                 elementsToAnimate.forEach(element => {
                     element.classList.remove('animate-in');
                     element.classList.add('hidden');
                 });
-                
+
                 // Start observing each element
                 elementsToAnimate.forEach((element, index) => {
                     // Add staggered delay based on index
@@ -1196,29 +1379,29 @@
                     scrollObserver.observe(element);
                 });
             }
-            
+
             // Add click event listener to each season box
-            seasonBoxes.forEach(function(box) {
-                box.addEventListener('click', function() {
+            seasonBoxes.forEach(function (box) {
+                box.addEventListener('click', function () {
                     // Get the season ID from the data-season attribute
                     const seasonId = this.getAttribute('data-season');
                     const seasonContentId = seasonId + '-content';
                     const seasonContent = document.getElementById(seasonContentId);
-                    
+
                     // Toggle active class on the clicked season box
                     this.classList.toggle('active');
-                    
+
                     // Toggle active class on the season content
                     if (seasonContent) {
                         // If we're activating the content
                         if (!seasonContent.classList.contains('active')) {
                             // Show the content first
                             seasonContent.style.display = 'block';
-                            
+
                             // Short delay to ensure display is set
                             setTimeout(() => {
                                 seasonContent.classList.add('active');
-                                
+
                                 // After content is expanded, start animations
                                 setTimeout(() => {
                                     seasonContent.style.maxHeight = 'none';
@@ -1231,7 +1414,7 @@
                             // We're hiding the content
                             seasonContent.style.maxHeight = '';
                             seasonContent.style.overflow = 'hidden';
-                            
+
                             // Remove animation classes
                             const animatedElements = seasonContent.querySelectorAll('.animate-in');
                             animatedElements.forEach(element => {
@@ -1239,7 +1422,7 @@
                                 element.classList.add('hidden');
                                 element.style.transitionDelay = '0s';
                             });
-                            
+
                             // Remove active class and hide content
                             seasonContent.classList.remove('active');
                             setTimeout(() => {
@@ -1251,9 +1434,9 @@
                     }
                 });
             });
-            
+
             // Make sure all season content sections have proper IDs
-            document.querySelectorAll('.season-content').forEach(function(content) {
+            document.querySelectorAll('.season-content').forEach(function (content) {
                 if (!content.id) {
                     const nearestBox = content.previousElementSibling.querySelector('.season-box');
                     if (nearestBox) {
@@ -1263,17 +1446,17 @@
                         }
                     }
                 }
-                
+
                 // Initially hide all elements
                 const elementsToHide = content.querySelectorAll('.club-info, .textbox, p, .moze-gallery li');
                 elementsToHide.forEach(element => {
                     element.classList.add('hidden');
                 });
             });
-            
+
             // Fix any hidden content that should be visible (if coming back to page)
             setTimeout(() => {
-                document.querySelectorAll('.season-box.active').forEach(function(box) {
+                document.querySelectorAll('.season-box.active').forEach(function (box) {
                     const seasonId = box.getAttribute('data-season');
                     const seasonContent = document.getElementById(seasonId + '-content');
                     if (seasonContent) {
@@ -1288,7 +1471,7 @@
             }, 100);
         });
     </script>
-    
+
     <script src="js/background-mobile-scroll.js"></script>
 
     <!-- PWA scripts -->
@@ -1296,4 +1479,5 @@
     <script src="js/offline-manager.js" defer></script>
 
 </body>
-</html> 
+
+</html>

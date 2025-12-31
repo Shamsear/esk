@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <!-- PWA support -->
@@ -13,11 +14,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Clubs - Eskimos Road to Glory</title>
-    <meta name="description" content="View all registered clubs in the Eskimos Road to Glory tournament, featuring club statistics, achievements, and rosters.">
+    <meta name="description"
+        content="View all registered clubs in the Eskimos Road to Glory tournament, featuring club statistics, achievements, and rosters.">
     <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
     <link rel="shortcut icon" href="assets/images/logo11.webp" type="image/webp">
     <link rel="apple-touch-icon" href="assets/images/logo11.webp">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/additional-fixes.css">
@@ -27,14 +30,14 @@
         .club-gallery {
             padding: 20px 0;
         }
-        
+
         .search-box {
             width: 100%;
             max-width: 500px;
             margin: 0 auto 30px;
             position: relative;
         }
-        
+
         .search-box input {
             width: 100%;
             padding: 15px 20px;
@@ -46,13 +49,13 @@
             font-size: 1.1rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .search-box input:focus {
             border-color: white;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
             outline: none;
         }
-        
+
         .search-box i {
             position: absolute;
             left: 20px;
@@ -60,7 +63,7 @@
             color: var(--accent-color);
             font-size: 1.2rem;
         }
-        
+
         .moze-gallery {
             display: flex;
             flex-wrap: wrap;
@@ -70,7 +73,7 @@
             max-width: 1200px;
             padding: 0 15px;
         }
-        
+
         .moze-gallery li {
             position: relative;
             width: 250px;
@@ -86,11 +89,12 @@
             cursor: default;
             pointer-events: none;
         }
-        
+
         .moze-gallery li::after {
-            display: none; /* Remove fullscreen icon */
+            display: none;
+            /* Remove fullscreen icon */
         }
-        
+
         .moze-gallery img {
             width: 80%;
             height: 80%;
@@ -99,13 +103,13 @@
             padding: 10px;
             pointer-events: none;
         }
-        
+
         .moze-gallery-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
             padding: 20px 10px;
             color: white;
             text-decoration: none;
@@ -113,9 +117,10 @@
             cursor: default;
             pointer-events: none;
         }
-        
+
         .title {
-            display: none; /* Hide the title containing club name */
+            display: none;
+            /* Hide the title containing club name */
         }
 
         .club-number {
@@ -133,7 +138,7 @@
             font-weight: bold;
             font-size: 0.8rem;
         }
-        
+
         .club-info {
             text-align: center;
             max-width: 800px;
@@ -143,13 +148,13 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        
+
         .club-info h2 {
             color: var(--accent-color);
             margin-bottom: 20px;
             font-size: 2rem;
         }
-        
+
         .black-box {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
@@ -158,14 +163,14 @@
             border-left: 4px solid var(--accent-color);
             text-align: center;
         }
-        
+
         .black-box h1 {
             color: white;
             font-size: 2.5rem;
             margin: 0;
             font-weight: 700;
         }
-        
+
         .title span {
             display: block;
             font-weight: bold;
@@ -213,13 +218,13 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         @media screen and (max-width: 768px) {
             .moze-gallery {
                 gap: 5px;
                 padding: 0 5px;
             }
-            
+
             .moze-gallery li {
                 width: 100%;
                 max-width: 95%;
@@ -228,7 +233,7 @@
                 height: auto;
                 box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
             }
-            
+
             .moze-gallery img {
                 object-fit: contain;
                 padding: 3px;
@@ -237,26 +242,26 @@
                 max-height: none;
                 background-color: rgba(0, 0, 0, 0.1);
             }
-            
+
             .moze-gallery-overlay {
                 padding: 15px 5px;
             }
-            
+
             .manager-name {
                 font-size: 0.7rem;
                 padding: 3px;
                 bottom: 5px;
             }
-            
+
             .club-info {
                 padding: 15px;
                 margin-bottom: 15px;
             }
-            
+
             .black-box h1 {
                 font-size: 1.7rem;
             }
-            
+
             .club-gallery {
                 padding: 5px 0;
             }
@@ -264,12 +269,12 @@
             .search-box {
                 margin-bottom: 20px;
             }
-            
+
             .search-box input {
                 padding: 12px 15px 12px 40px;
                 font-size: 1rem;
             }
-            
+
             .search-box i {
                 top: 14px;
                 left: 15px;
@@ -290,7 +295,8 @@
             background: rgba(0, 0, 0, 0.6);
             padding: 5px;
             z-index: 5;
-            display: none; /* Hide manager names */
+            display: none;
+            /* Hide manager names */
         }
 
         /* Scroll Animation Styles */
@@ -370,17 +376,18 @@
             .hidden {
                 transform: translateY(20px);
             }
-            
+
             .moze-gallery li.hidden {
                 transform: scale(0.9) translateY(15px);
             }
-            
+
             .black-box.hidden {
                 transform: translateY(-20px);
             }
         }
     </style>
 </head>
+
 <body>
     <div class="overlay">
         <div class="top-bar">
@@ -402,7 +409,7 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="mobile-menu" id="mobileMenu">
             <button class="close-menu" id="closeMenu">
                 <i class="fas fa-times"></i>
@@ -415,7 +422,7 @@
                 <a href="trophy-cabinet.html">Trophy Cabinet</a>
             </div>
         </div>
-        
+
         <main>
             <header id="career-header">
                 <a href="career-mode.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Career Mode</a>
@@ -426,7 +433,7 @@
             <div class="black-box">
                 <h1>REGISTERED CLUBS</h1>
             </div>
-            
+
             <div class="club-info">
                 <h2>Season 2024-2025</h2>
                 <p>Below are all officially registered clubs for the current season of Eskimos Road to Glory.</p>
@@ -495,7 +502,8 @@
                     </li>
                     <li data-name="Brighton & Hove Albion">
                         <div class="club-number">16</div>
-                        <img src="assets/images/managers/p16.webp" alt="Brighton & Hove Albion" width="300" height="200">
+                        <img src="assets/images/managers/p16.webp" alt="Brighton & Hove Albion" width="300"
+                            height="200">
                         <a class="moze-gallery-overlay">
                             <div class="title"><span>Brighton & Hove Albion</span></div>
                         </a>
@@ -661,6 +669,69 @@
                             <div class="title"><span>Norwich City</span></div>
                         </a>
                     </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">53</div>
+                        <img src="assets/images/managers/p54.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">54</div>
+                        <img src="assets/images/managers/p55.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">55</div>
+                        <img src="assets/images/managers/p56.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">56</div>
+                        <img src="assets/images/managers/p57.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">57</div>
+                        <img src="assets/images/managers/p58.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">58</div>
+                        <img src="assets/images/managers/p59.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">59</div>
+                        <img src="assets/images/managers/p60.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Norwich City">
+                        <div class="club-number">60</div>
+                        <img src="assets/images/managers/p61.webp" alt="Norwich City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Norwich City</span></div>
+                        </a>
+                    </li>
+                    <li data-name="Manchester City">
+                        <div class="club-number">6</div>
+                        <img src="assets/images/managers/p6.webp" alt="Manchester City" width="300" height="200">
+                        <a class="moze-gallery-overlay">
+                            <div class="title"><span>Manchester City</span></div>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -668,7 +739,7 @@
                 <button id="viewStandings"><i class="fas fa-table"></i> View Full Standings</button>
             </div>
         </main>
-        
+
         <footer>
             <div class="footer-content">
                 <div class="footer-nav">
@@ -684,53 +755,53 @@
             </div>
         </footer>
     </div>
-    
+
     <div class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </div>
     <script src="js/remove-conflicting-styles.js"></script>
-    
+
     <script src="js/background-fix.js"></script>
     <script src="js/background-mobile-scroll.js"></script>
     <script src="js/script.js"></script>
     <script src="js/fix-scroll.js"></script>
     <script src="js/image-protection.js"></script>
-   <script>
+    <script>
         // Initialize page functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Disable all clicks on gallery items and remove all interactive attributes
             const galleryItems = document.querySelectorAll('.moze-gallery a');
-            galleryItems.forEach(function(item) {
+            galleryItems.forEach(function (item) {
                 item.removeAttribute('href data-fancybox data-caption title');
             });
-            
+
             // Force pointer-events to none and cursor to default on all gallery elements
             const galleryElements = document.querySelectorAll('.moze-gallery li, .moze-gallery img, .moze-gallery a');
-            galleryElements.forEach(function(elem) {
+            galleryElements.forEach(function (elem) {
                 elem.style.pointerEvents = 'none';
                 elem.style.cursor = 'default';
             });
-            
+
             // View Detailed Statistics button
             const viewStandingsBtn = document.getElementById('viewStandings');
             if (viewStandingsBtn) {
-                viewStandingsBtn.addEventListener('click', function() {
+                viewStandingsBtn.addEventListener('click', function () {
                     alert('Detailed statistics feature coming soon!');
                 });
             }
-            
+
             // Back to top button functionality
             const backToTopBtn = document.getElementById('backToTop');
             if (backToTopBtn) {
-                window.addEventListener('scroll', function() {
+                window.addEventListener('scroll', function () {
                     if (window.pageYOffset > 300) {
                         backToTopBtn.style.display = 'flex';
                     } else {
                         backToTopBtn.style.display = 'none';
                     }
                 });
-                
-                backToTopBtn.addEventListener('click', function() {
+
+                backToTopBtn.addEventListener('click', function () {
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
@@ -745,4 +816,5 @@
     <script src="js/offline-manager.js" defer></script>
 
 </body>
-</html> 
+
+</html>
