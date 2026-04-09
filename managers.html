@@ -50,7 +50,7 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.6s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -61,6 +61,7 @@
         }
         
         .manager-card:hover {
+            transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             border-color: var(--primary);
         }
@@ -492,7 +493,7 @@
             }
             
             .manager-card:hover {
-                /* Hover handled by .animate-in:hover */
+                transform: translateY(-5px);
             }
             
             .manager-header {
@@ -928,30 +929,16 @@
             }
         }
         
-        /* Manager card animations - Start hidden */
-        .manager-card.hidden {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-        }
-        
-        .manager-card.animate-in {
+        /* Simplified - no entrance animations, only hover effects */
+        .manager-card {
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: translateY(0);
         }
         
-        /* Hover state for animated cards */
-        .manager-card.animate-in:hover {
-            transform: scale(1) translateY(-10px);
-        }
-        
-        /* Mobile optimizations */
+        /* Mobile-specific hover effects */
         @media (max-width: 768px) {
-            .manager-card.hidden {
-                transform: scale(0.97) translateY(15px);
-            }
-            
-            .manager-card.animate-in:hover {
-                transform: scale(1) translateY(-5px);
+            .manager-card:hover {
+                transform: translateY(-5px);
             }
         }
         
@@ -1053,13 +1040,13 @@
             </div>
         </div>
         
-        <div class="back-link">
+        <div class="back-link fade-in stagger-1">
             <a href="index.html">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
         
-        <div class="section-header">
+        <div class="section-header fade-in stagger-2">
             <h1>Managers</h1>
             <p>View all managers in the Road to Glory community. Filter by club, rating, or search for specific managers.</p>
             <div class="onedrive-link">
@@ -1070,7 +1057,7 @@
         </div>
         
         <!-- Filter Section -->
-        <div class="filters-section" id="filters-section">
+        <div class="filters-section fade-in stagger-3" id="filters-section">
             <div class="search-container">
                 <input type="text" class="search-input" id="search-input" placeholder="Search managers...">
                 <i class="fas fa-search search-icon"></i>
@@ -1079,7 +1066,7 @@
         </div>
         
         <!-- Managers Container -->
-        <div class="managers-container" id="managers-container">
+        <div class="managers-container fade-in stagger-4" id="managers-container">
             <!-- Manager cards will be dynamically inserted here -->
             <!-- Skeleton loaders while data loads -->
             <div class="manager-card skeleton">
@@ -1284,6 +1271,9 @@
     <script>
         // Modified theme-toggle functionality with null check
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            initializeAnimations();
+            
             const themeToggle = document.querySelector('.theme-toggle');
             if (themeToggle) { // Add null check
                 const body = document.body;
@@ -1306,6 +1296,52 @@
                 });
             }
         });
+        
+        // Initialize page animations with improved timing
+        function initializeAnimations() {
+            // Trigger initial page elements animations after a small delay
+            setTimeout(() => {
+                const fadeElements = document.querySelectorAll('.fade-in');
+                fadeElements.forEach((element, index) => {
+                    // Add staggered delay for smooth sequential animation
+                    setTimeout(() => {
+                        element.classList.add('active');
+                    }, index * 100); // 100ms between each element
+                });
+            }, 100); // Faster initial delay
+            
+            // Separate observer for manager cards with optimized timing
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate manager cards with better timing
+                        if (entry.target.classList.contains('managers-container')) {
+                            animateManagerCards(entry.target);
+                            cardObserver.unobserve(entry.target);
+                        }
+                    }
+                });
+            }, { threshold: 0.05, rootMargin: '100px' });
+            
+            // Only observe the managers container for card animations
+            const managersContainer = document.querySelector('.managers-container');
+            if (managersContainer) {
+                cardObserver.observe(managersContainer);
+            }
+        }
+        
+        // Animate manager cards with improved timing and performance
+        function animateManagerCards(container) {
+            const cards = container.querySelectorAll('.manager-card:not(.active)');
+            const isMobile = window.innerWidth <= 768;
+            const baseDelay = isMobile ? 50 : 40; // Faster, smoother delays
+            
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('active');
+                }, baseDelay * index);
+            });
+        }
     </script>
     <script src="js/pwa-init.js"></script>
     <script src="js/offline-manager.js"></script>
@@ -1391,7 +1427,7 @@
             
             managers.forEach((manager, index) => {
                 const card = document.createElement('div');
-                card.className = 'manager-card hidden'; // Start with hidden class for animation
+                card.className = 'manager-card'; // Remove 'active' class to start invisible
                 card.innerHTML = `
                     <div class="manager-header" style="background-image: url('assets/images/club-backgrounds/${manager.club.replace(/\s+/g, '%20')}.jpg')">
                         <div class="manager-photo" style="background-image: url('assets/images/managers/${manager.name.toLowerCase().replace(/\s+/g, '-')}.webp'), url('assets/images/default-manager.webp')"></div>
@@ -1440,19 +1476,18 @@
                 // Note: Trigger animation immediately after cards are added
             });
             
-            // Trigger staggered animation after cards are rendered
+            // Trigger animation after cards are added
             setTimeout(() => {
-                const cards = container.querySelectorAll('.manager-card.hidden');
-                console.log(`Starting animation for ${cards.length} cards`);
+                const cards = container.querySelectorAll('.manager-card:not(.active)');
+                const isMobile = window.innerWidth <= 768;
+                const baseDelay = isMobile ? 50 : 40;
                 
                 cards.forEach((card, index) => {
                     setTimeout(() => {
-                        console.log(`Animating card ${index + 1}`);
-                        card.classList.remove('hidden');
-                        card.classList.add('animate-in');
-                    }, index * 80); // 80ms delay between each card for visible stagger
+                        card.classList.add('active');
+                    }, baseDelay * index);
                 });
-            }, 150);
+            }, 100);
         }
         
         function setupFilters(allManagers) {
