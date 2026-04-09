@@ -31,6 +31,51 @@
             padding: 20px 0;
         }
 
+        /* Search Container Styles */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-input:focus {
+            border-color: white;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            outline: none;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .search-container::before {
+            content: '\f002';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
         .search-box {
             width: 100%;
             max-width: 500px;
@@ -266,6 +311,22 @@
                 padding: 5px 0;
             }
 
+            /* Mobile search styles */
+            .search-container {
+                max-width: 95%;
+                margin-bottom: 20px;
+            }
+
+            .search-input {
+                padding: 12px 15px 12px 45px;
+                font-size: 1rem;
+            }
+
+            .search-container::before {
+                left: 15px;
+                font-size: 1rem;
+            }
+
             .search-box {
                 margin-bottom: 20px;
             }
@@ -437,6 +498,10 @@
             <div class="club-info">
                 <h2>Season 2025-2026</h2>
                 <p>Below are all officially registered clubs for the current season of Road to Glory.</p>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="clubSearch" class="search-input" placeholder="Search for club or manager...">
             </div>
 
             <div class="club-gallery">
@@ -730,6 +795,26 @@
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Search functionality
+            const searchInput = document.getElementById('clubSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase().trim();
+                    const clubItems = document.querySelectorAll('.moze-gallery li');
+                    
+                    clubItems.forEach(function(item) {
+                        const clubName = item.getAttribute('data-name').toLowerCase();
+                        const managerName = item.getAttribute('data-manager').toLowerCase();
+                        
+                        if (clubName.includes(searchTerm) || managerName.includes(searchTerm)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
                     });
                 });
             }
