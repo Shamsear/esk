@@ -50,7 +50,7 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.6s ease-out;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -61,7 +61,6 @@
         }
         
         .manager-card:hover {
-            transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             border-color: var(--primary);
         }
@@ -493,7 +492,7 @@
             }
             
             .manager-card:hover {
-                transform: translateY(-5px);
+                /* Hover handled by .animate-in:hover */
             }
             
             .manager-header {
@@ -930,28 +929,29 @@
         }
         
         /* Manager card animations - Start hidden */
-        .manager-card {
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        
         .manager-card.hidden {
-            opacity: 0 !important;
-            transform: scale(0.95) translateY(20px) !important;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
         }
         
         .manager-card.animate-in {
-            opacity: 1 !important;
-            transform: scale(1) translateY(0) !important;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        
+        /* Hover state for animated cards */
+        .manager-card.animate-in:hover {
+            transform: scale(1) translateY(-10px);
         }
         
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .manager-card.hidden {
-                transform: scale(0.97) translateY(15px) !important;
+                transform: scale(0.97) translateY(15px);
             }
             
-            .manager-card:hover {
-                transform: translateY(-5px) !important;
+            .manager-card.animate-in:hover {
+                transform: scale(1) translateY(-5px);
             }
         }
         
@@ -1443,14 +1443,16 @@
             // Trigger staggered animation after cards are rendered
             setTimeout(() => {
                 const cards = container.querySelectorAll('.manager-card.hidden');
+                console.log(`Starting animation for ${cards.length} cards`);
                 
                 cards.forEach((card, index) => {
                     setTimeout(() => {
+                        console.log(`Animating card ${index + 1}`);
                         card.classList.remove('hidden');
                         card.classList.add('animate-in');
-                    }, index * 50); // 50ms delay between each card
+                    }, index * 80); // 80ms delay between each card for visible stagger
                 });
-            }, 100);
+            }, 150);
         }
         
         function setupFilters(allManagers) {
