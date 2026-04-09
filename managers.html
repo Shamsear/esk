@@ -1519,6 +1519,11 @@
                 // Note: Animation will be handled by the intersection observer
                 // Don't add 'active' class immediately - let observer handle it
             });
+            
+            // Trigger animation after cards are added
+            setTimeout(() => {
+                animateManagerCards(container);
+            }, 100);
         }
         
         function setupFilters(allManagers) {
