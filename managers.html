@@ -1306,9 +1306,9 @@
                     // Add staggered delay for smooth sequential animation
                     setTimeout(() => {
                         element.classList.add('active');
-                    }, index * 100); // 100ms between each element
+                    }, index * 120); // 120ms between each element
                 });
-            }, 100); // Faster initial delay
+            }, 200); // Reduced initial delay
             
             // Separate observer for manager cards with optimized timing
             const cardObserver = new IntersectionObserver((entries) => {
@@ -1317,11 +1317,10 @@
                         // Animate manager cards with better timing
                         if (entry.target.classList.contains('managers-container')) {
                             animateManagerCards(entry.target);
-                            cardObserver.unobserve(entry.target);
                         }
                     }
                 });
-            }, { threshold: 0.05, rootMargin: '100px' });
+            }, { threshold: 0.1, rootMargin: '50px' });
             
             // Only observe the managers container for card animations
             const managersContainer = document.querySelector('.managers-container');
@@ -1334,7 +1333,7 @@
         function animateManagerCards(container) {
             const cards = container.querySelectorAll('.manager-card:not(.active)');
             const isMobile = window.innerWidth <= 768;
-            const baseDelay = isMobile ? 50 : 40; // Faster, smoother delays
+            const baseDelay = isMobile ? 80 : 60; // Optimized delays for mobile and desktop
             
             cards.forEach((card, index) => {
                 setTimeout(() => {
