@@ -929,39 +929,29 @@
             }
         }
         
-        /* Scroll Animation Styles - Same as registered-clubs.html */
-        .hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            will-change: opacity, transform;
+        /* Manager card animations - Start hidden */
+        .manager-card {
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
-        .animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Manager card specific animations */
         .manager-card.hidden {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0 !important;
+            transform: scale(0.95) translateY(20px) !important;
         }
         
         .manager-card.animate-in {
-            opacity: 1;
-            transform: scale(1) translateY(0);
+            opacity: 1 !important;
+            transform: scale(1) translateY(0) !important;
         }
         
         /* Mobile optimizations */
         @media (max-width: 768px) {
-            .hidden {
-                transform: translateY(20px);
+            .manager-card.hidden {
+                transform: scale(0.97) translateY(15px) !important;
             }
             
-            .manager-card.hidden {
-                transform: scale(0.95) translateY(15px);
+            .manager-card:hover {
+                transform: translateY(-5px) !important;
             }
         }
         
@@ -1450,19 +1440,15 @@
                 // Note: Trigger animation immediately after cards are added
             });
             
-            // Trigger animation after cards are added - same as registered-clubs.html
+            // Trigger staggered animation after cards are rendered
             setTimeout(() => {
                 const cards = container.querySelectorAll('.manager-card.hidden');
-                const staggerDelay = 0.03; // Same as registered-clubs.html
                 
                 cards.forEach((card, index) => {
-                    card.style.transitionDelay = `${index * staggerDelay}s`;
-                    
-                    // Trigger animation
                     setTimeout(() => {
                         card.classList.remove('hidden');
                         card.classList.add('animate-in');
-                    }, 50);
+                    }, index * 50); // 50ms delay between each card
                 });
             }, 100);
         }
