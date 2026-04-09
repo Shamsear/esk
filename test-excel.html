@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Excel Data</title>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        #output {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .error {
+            color: #e74c3c;
+        }
+        .success {
+            color: #2ecc71;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+        }
+        tr:nth-child(even) {
+            background: #2a2a2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Excel Data Test - OneDrive</h1>
+        <p>This page tests fetching and parsing the Excel file from OneDrive.</p>
+        
+        <button onclick="testFetch()">Test Fetch Excel Data</button>
+        <button onclick="testWithCORS()">Test with CORS Proxy</button>
+        
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const EXCEL_URL = 'https://1drv.ms/x/c/c453379c0172365f/IQBfNnIBnDdTIIDEfhMAAAAAAdaOyMa7RgiqPWubClekwxw?e=Pl6kkC';
+        
+        function log(message, type = 'info') {
+            const output = document.getElementById('output');
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            output.innerHTML += `<div class="${className}">${message}</div>`;
+        }
+        
+        function convertOneDriveUrl(shareUrl) {
+            // Handle 1drv.ms shortened URLs
+            if (shareUrl.includes('1drv.ms')) {
+                log('Detected 1drv.ms shortened URL - converting to download URL');
+                
+                try {
+                    const url = new URL(shareUrl);
+                    const pathParts = url.pathname.split('/');
+                    
+                    // Get components: /x/c/USERID/FILEID
+                    const fileType = pathParts[1]; // 'x' for excel
+                    const scope = pathParts[2]; // 'c' or 's'
+                    const userId = pathParts[3];
+                    const fileId = pathParts[4];
+                    
+                    // Convert to download URL
+                    const cid = userId;
+                    const resid = `${userId}!${fileId}`;
+                    const downloadUrl = `https://onedrive.live.com/download?cid=${cid}&resid=${resid}`;
+                    
+                    log(`Converted to: ${downloadUrl}`);
+                    return downloadUrl;
+                } catch (e) {
+                    log(`Error converting URL: ${e.message}`, 'error');
+                    return shareUrl;
+                }
+            }
+            
+            // Try multiple conversion methods for full URLs
+            const url = new URL(shareUrl);
+            const resid = url.searchParams.get('resid');
+            
+            if (resid) {
+                // Method 1: Direct download URL
+                const downloadUrl = `https://onedrive.live.com/download?resid=${resid}`;
+                log(`Converted URL: ${downloadUrl}`);
+                return downloadUrl;
+            }
+            
+            // Method 2: Try embed URL
+            const embedUrl = shareUrl.replace(':x:', '/embed').split('?')[0];
+            log(`Embed URL: ${embedUrl}`);
+            
+            return shareUrl;
+        }
+        
+        async function testFetch() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="success">Starting test...</div>';
+            
+            try {
+                log('Original URL: ' + EXCEL_URL);
+                
+                // Convert URL
+                const downloadUrl = convertOneDriveUrl(EXCEL_URL);
+                
+                log('Attempting to fetch with CORS proxies...');
+                
+                // Try multiple CORS proxies
+                const proxies = [
+                    { name: 'corsproxy.io', url: 'https://corsproxy.io/?' },
+                    { name: 'allorigins', url: 'https://api.allorigins.win/raw?url=' },
+                    { name: 'codetabs', url: 'https://api.codetabs.com/v1/proxy?quest=' }
+                ];
+                
+                let workbook = null;
+                
+                for (let i = 0; i < proxies.length; i++) {
+                    const proxy = proxies[i];
+                    const proxyUrl = `${proxy.url}${encodeURIComponent(downloadUrl)}`;
+                    
+                    try {
+                        log(`\nTrying ${proxy.name}...`);
+                        log('Proxy URL: ' + proxyUrl);
+                        
+                        const response = await fetch(proxyUrl, {
+                            method: 'GET',
+                            cache: 'no-cache'
+                        });
+                        
+                        log(`Response status: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        
+                        const arrayBuffer = await response.arrayBuffer();
+                        log(`Downloaded ${arrayBuffer.byteLength} bytes`, 'success');
+                        
+                        // Parse with SheetJS
+                        workbook = XLSX.read(arrayBuffer, { type: 'array' });
+                        log(`Workbook loaded successfully with ${proxy.name}!`, 'success');
+                        break; // Success, exit loop
+                        
+                    } catch (error) {
+                        log(`${proxy.name} failed: ${error.message}`, 'error');
+                        if (i === proxies.length - 1) {
+                            throw new Error('All CORS proxies failed');
+                        }
+                        // Try next proxy
+                        continue;
+                    }
+                }
+                
+                if (!workbook) {
+                    throw new Error('Failed to load workbook');
+                }
+                
+                log(`Available sheets: ${workbook.SheetNames.join(', ')}`);
+                
+                // Get first sheet
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                
+                // Convert to JSON
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { 
+                    header: 1,
+                    defval: '',
+                    blankrows: false
+                });
+                
+                log(`Found ${jsonData.length} rows`, 'success');
+                
+                // Display as table
+                if (jsonData.length > 0) {
+                    let tableHTML = '<table><thead><tr>';
+                    
+                    // Headers
+                    jsonData[0].forEach(header => {
+                        tableHTML += `<th>${header || 'Empty'}</th>`;
+                    });
+                    tableHTML += '</tr></thead><tbody>';
+                    
+                    // Data rows (show first 10)
+                    for (let i = 1; i < Math.min(11, jsonData.length); i++) {
+                        tableHTML += '<tr>';
+                        jsonData[i].forEach(cell => {
+                            tableHTML += `<td>${cell || ''}</td>`;
+                        });
+                        tableHTML += '</tr>';
+                    }
+                    
+                    tableHTML += '</tbody></table>';
+                    output.innerHTML += tableHTML;
+                }
+                
+                // Show raw data
+                log('\nFirst 3 rows (raw):');
+                log(JSON.stringify(jsonData.slice(0, 3), null, 2));
+                
+            } catch (error) {
+                log(`Error: ${error.message}`, 'error');
+                log(`Stack: ${error.stack}`, 'error');
+            }
+        }
+        
+        async function testWithCORS() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="success">Testing with CORS proxy...</div>';
+            
+            try {
+                // Try using AllOrigins CORS proxy
+                const downloadUrl = convertOneDriveUrl(EXCEL_URL);
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(downloadUrl)}`;
+                
+                log('Using CORS proxy: ' + proxyUrl);
+                
+                const response = await fetch(proxyUrl);
+                
+                log(`Response status: ${response.status}`, 'success');
+                
+                const arrayBuffer = await response.arrayBuffer();
+                log(`Downloaded ${arrayBuffer.byteLength} bytes`, 'success');
+                
+                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+                log(`Workbook loaded!`, 'success');
+                log(`Sheets: ${workbook.SheetNames.join(', ')}`);
+                
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                
+                log(`Found ${jsonData.length} rows`, 'success');
+                log(JSON.stringify(jsonData.slice(0, 3), null, 2));
+                
+            } catch (error) {
+                log(`Error: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

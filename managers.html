@@ -30,9 +30,8 @@
     <link rel="preload" href="js/pwa-init.js" as="script">
     <link rel="preload" href="js/offline-manager.js" as="script">
     
-    <!-- Supabase JS library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script type="module" src="manager-client.js"></script>
+    <!-- Google Sheets integration -->
+    <script type="module" src="js/google-sheets-fetcher.js"></script>
 
     <style>
         /* Managers page specific styling */
@@ -1000,7 +999,7 @@
 </head>
 <body data-page="managers">
     <!-- Hidden config div for Supabase credentials -->
-    <div id="app-config" data-supabase-url="https://aikjdwmacnpdsrqdkhkq.supabase.co" data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M" style="display: none;"></div>
+    <div id="app-config" data-supabase-url="https://hydmjqeamcxzbnbesdfh.supabase.co" data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5ZG1qcWVhbWN4emJuYmVzZGZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MzkxMTYsImV4cCI6MjA5MTMxNTExNn0.JqELh84rh3tn8Q1jrc67qHqldc1YrLO2k8d7yWCluU4" style="display: none;"></div>
 
     <div class="overlay">
         <!-- Top Bar -->
@@ -1346,10 +1345,14 @@
     <script src="js/offline-manager.js"></script>
     
     <script type="module">
-        // Import the manager client functions
-        import { getManagers } from './manager-client.js';
+        // Import Google Sheets fetcher
+        import { getManagersFromGoogleSheets } from './js/google-sheets-fetcher.js';
         
-        // Load and display managers data from Supabase
+        // Google Sheets ID
+        const SPREADSHEET_ID = '16ajQjt7qVREV6z0x6wFgjtFrJErhPiFTK38Lfy0RCmw';
+        const SHEET_NAME = 'summary';
+        
+        // Load and display managers data from Google Sheets
         async function loadManagersData() {
             try {
                 // Show loading state
@@ -1359,16 +1362,16 @@
                 }
                 
                 // Keep the skeleton loaders while loading data
-                console.log('Fetching managers data from Supabase...');
+                console.log('Fetching managers data from Google Sheets...');
                 
-                // Fetch managers data from Supabase
-                const managers = await getManagers();
+                // Fetch managers data from Google Sheets
+                const managers = await getManagersFromGoogleSheets(SPREADSHEET_ID, SHEET_NAME);
                 
                 if (managers.length === 0) {
-                    throw new Error('No manager data found in the Supabase database');
+                    throw new Error('No manager data found in Google Sheets');
                 }
                 
-                console.log(`Loaded ${managers.length} managers from Supabase`);
+                console.log(`Loaded ${managers.length} managers from Google Sheets`);
                 
                 // Sort managers by rank - numeric values first (1,2,3...), then "-" or other values
                 managers.sort((a, b) => {

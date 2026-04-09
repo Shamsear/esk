@@ -4,8 +4,8 @@ const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 
 // Initialize Supabase client - replace with your credentials
-const supabaseUrl = process.env.SUPABASE_URL || 'https://aikjdwmacnpdsrqdkhkq.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://hydmjqeamcxzbnbesdfh.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5ZG1qcWVhbWN4emJuYmVzZGZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MzkxMTYsImV4cCI6MjA5MTMxNTExNn0.JqELh84rh3tn8Q1jrc67qHqldc1YrLO2k8d7yWCluU4';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Path to manager_data.json file

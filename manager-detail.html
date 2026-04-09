@@ -26,9 +26,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pwa.css">
     
-    <!-- Supabase JS library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script type="module" src="manager-client.js"></script>
+    <!-- Google Sheets integration -->
+    <script type="module" src="js/google-sheets-fetcher.js"></script>
     
     <!-- Preload important PWA assets -->
     <link rel="preload" href="js/pwa-init.js" as="script">
@@ -1651,7 +1650,7 @@
 </head>
 <body data-page="manager-detail">
     <!-- Hidden config div for Supabase credentials -->
-    <div id="app-config" data-supabase-url="https://aikjdwmacnpdsrqdkhkq.supabase.co" data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M" style="display: none;"></div>
+    <div id="app-config" data-supabase-url="https://hydmjqeamcxzbnbesdfh.supabase.co" data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5ZG1qcWVhbWN4emJuYmVzZGZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MzkxMTYsImV4cCI6MjA5MTMxNTExNn0.JqELh84rh3tn8Q1jrc67qHqldc1YrLO2k8d7yWCluU4" style="display: none;"></div>
 
     <div class="overlay">
         <!-- Top Bar -->
@@ -1738,8 +1737,12 @@
     <script src="js/offline-manager.js"></script>
     
     <script type="module">
-        // Import manager client functions
-        import { getManagerByName } from './manager-client.js';
+        // Import Google Sheets fetcher
+        import { getManagerByNameFromGoogleSheets } from './js/google-sheets-fetcher.js';
+        
+        // Google Sheets ID
+        const SPREADSHEET_ID = '16ajQjt7qVREV6z0x6wFgjtFrJErhPiFTK38Lfy0RCmw';
+        const SHEET_NAME = 'summary';
         
         // Handle image loading errors
         document.addEventListener('DOMContentLoaded', function() {
@@ -1794,7 +1797,7 @@
             return urlParams.get(param);
         }
         
-        // Load and display manager data from Supabase
+        // Load and display manager data from Google Sheets
         async function loadManagerData() {
             const managerName = getQueryParam('name');
             
@@ -1807,11 +1810,11 @@
             try {
                 console.log(`Loading manager data for: ${managerName}`);
                 
-                // Fetch manager data from Supabase
-                const manager = await getManagerByName(managerName);
+                // Fetch manager data from Google Sheets
+                const manager = await getManagerByNameFromGoogleSheets(SPREADSHEET_ID, managerName, SHEET_NAME);
                 
                 if (!manager) {
-                    displayError(`Manager "${managerName}" not found in database`);
+                    displayError(`Manager "${managerName}" not found in Google Sheets`);
                     return;
                 }
                 
@@ -2065,18 +2068,16 @@
                 // Sort seasons by number (descending)
                 const sortedSeasons = [...manager.seasons].sort((a, b) => b.number - a.number);
                 
-                // Limit initially active seasons on mobile
-                const initialActiveIndex = isMobile() ? 0 : 0;
-                
                 sortedSeasons.forEach((season, index) => {
-                    const isActive = index === initialActiveIndex ? 'active' : '';
+                    // Don't auto-expand any season
+                    const isActive = '';
                     
                     seasonsHTML += `
                         <div class="season-item ${isActive}" data-season="${season.number}">
                             <div class="season-header">
                                 <div class="season-title">
                                     <span class="season-number">Season ${season.number}</span>
-                                    <span>${season.manager_rank ? 'Rank: ' + season.manager_rank : ''} ${season.rank_point ? '(' + season.rank_point + ' pts)' : ''}</span>
+                                    <span>Rank: ${season.manager_rank} (${season.rank_point} pts)</span>
                                 </div>
                                 <div class="season-toggle">
                                     <i class="fas fa-chevron-down"></i>
@@ -2102,7 +2103,43 @@
                                     </div>
                                 </div>
                                 
-                                <h3 style="margin-bottom: 15px; font-size: ${isMobile() ? '1rem' : '1.2rem'};">Season Statistics</h3>
+                                <h3 style="margin-bottom: 15px; font-size: ${isMobile() ? '1rem' : '1.2rem'};">SP Tour Statistics</h3>
+                                <div class="season-stats">
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.matches || 0}</span>
+                                        <span class="stat-label">Matches</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.wins || 0}</span>
+                                        <span class="stat-label">Wins</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.draws || 0}</span>
+                                        <span class="stat-label">Draws</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.losses || 0}</span>
+                                        <span class="stat-label">Losses</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.goals_scored || 0}</span>
+                                        <span class="stat-label">GS</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.goals_conceded || 0}</span>
+                                        <span class="stat-label">GC</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.goal_difference || 0}</span>
+                                        <span class="stat-label">GD</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-value">${season.sp_tour_stats.clean_sheets || 0}</span>
+                                        <span class="stat-label">CS</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 style="margin: 20px 0 15px; font-size: ${isMobile() ? '1rem' : '1.2rem'};">Season Statistics</h3>
                                 <div class="season-stats">
                                     <div class="stat-card">
                                         <span class="stat-value">${season.season_stats.matches || 0}</span>
@@ -2158,6 +2195,36 @@
                                 </div>
                             `;
                         }
+                    }
+                    
+                    seasonsHTML += `
+                                </div>
+                                
+                                <h3 style="margin: 20px 0 15px; font-size: ${isMobile() ? '1rem' : '1.2rem'};">Awards</h3>
+                                <div class="competitions">
+                    `;
+                    
+                    // Add award cards
+                    if (season.awards && season.awards.length > 0) {
+                        for (const award of season.awards) {
+                            // Truncate award text if too long on mobile
+                            let awardText = award;
+                            if (isMobile() && awardText.length > 20) {
+                                awardText = awardText.substring(0, 18) + '…';
+                            }
+                            
+                            seasonsHTML += `
+                                <div class="competition-card">
+                                    <div class="competition-name">🏆 ${award}</div>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        seasonsHTML += `
+                            <div class="competition-card">
+                                <div class="competition-name" style="opacity: 0.5;">No awards</div>
+                            </div>
+                        `;
                     }
                     
                     seasonsHTML += `

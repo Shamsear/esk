@@ -2,8 +2,8 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 // Get config from HTML if available, otherwise use defaults
-let SUPABASE_URL = 'https://aikjdwmacnpdsrqdkhkq.supabase.co';
-let SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpa2pkd21hY25wZHNycWRraGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY2MDY1NTQsImV4cCI6MjA2MjE4MjU1NH0.vcJZ5TxAdm4jC22CxaV4CxiElFt9OHYZhFzEIasyz-M';
+let SUPABASE_URL = 'https://hydmjqeamcxzbnbesdfh.supabase.co';
+let SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh5ZG1qcWVhbWN4emJuYmVzZGZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MzkxMTYsImV4cCI6MjA5MTMxNTExNn0.JqELh84rh3tn8Q1jrc67qHqldc1YrLO2k8d7yWCluU4';
 
 // Try to get config from the HTML
 const configElement = document.getElementById('app-config');

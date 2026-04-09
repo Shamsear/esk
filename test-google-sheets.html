@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Google Sheets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        #output {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .error {
+            color: #e74c3c;
+        }
+        .success {
+            color: #2ecc71;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+        }
+        tr:nth-child(even) {
+            background: #2a2a2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Google Sheets Connection Test</h1>
+        <p>Testing connection to: <code>16ajQjt7qVREV6z0x6wFgjtFrJErhPiFTK38Lfy0RCmw</code></p>
+        
+        <button onclick="testSummarySheet()">Test Summary Sheet</button>
+        <button onclick="testManagerSheet()">Test Manager Detail (First Manager)</button>
+        <button onclick="listAllSheets()">List All Sheets</button>
+        
+        <div id="output"></div>
+    </div>
+
+    <script type="module">
+        import { getManagersFromGoogleSheets, getManagerByNameFromGoogleSheets } from './js/google-sheets-fetcher.js';
+        
+        const SPREADSHEET_ID = '16ajQjt7qVREV6z0x6wFgjtFrJErhPiFTK38Lfy0RCmw';
+        
+        function log(message, type = 'info') {
+            const output = document.getElementById('output');
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            output.innerHTML += `<div class="${className}">${message}</div>`;
+        }
+        
+        window.testSummarySheet = async function() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="success">Testing Summary Sheet...</div>';
+            
+            try {
+                log('Fetching managers from summary sheet...');
+                const managers = await getManagersFromGoogleSheets(SPREADSHEET_ID, 'summary');
+                
+                log(`✓ Success! Found ${managers.length} managers`, 'success');
+                
+                // Display first 5 managers
+                log('\nFirst 5 managers:');
+                managers.slice(0, 5).forEach((m, i) => {
+                    log(`${i + 1}. ${m.name} - ${m.club} (Rating: ${m.overall_rating})`);
+                });
+                
+                // Create table
+                let tableHTML = '<table><thead><tr><th>Name</th><th>Club</th><th>Rating</th><th>Rank</th><th>Trophies</th></tr></thead><tbody>';
+                managers.slice(0, 10).forEach(m => {
+                    tableHTML += `<tr><td>${m.name}</td><td>${m.club}</td><td>${m.overall_rating}</td><td>${m.age}</td><td>${m.trophies}</td></tr>`;
+                });
+                tableHTML += '</tbody></table>';
+                output.innerHTML += tableHTML;
+                
+            } catch (error) {
+                log(`✗ Error: ${error.message}`, 'error');
+                log(`Stack: ${error.stack}`, 'error');
+            }
+        };
+        
+        window.testManagerSheet = async function() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="success">Testing Manager Detail...</div>';
+            
+            try {
+                log('Fetching managers list...');
+                const managers = await getManagersFromGoogleSheets(SPREADSHEET_ID, 'summary');
+                
+                if (managers.length === 0) {
+                    throw new Error('No managers found');
+                }
+                
+                const firstManager = managers[0];
+                log(`Testing with: ${firstManager.name} (${firstManager.club})`);
+                
+                log(`\nFetching detailed data for ${firstManager.name}...`);
+                const managerDetail = await getManagerByNameFromGoogleSheets(SPREADSHEET_ID, firstManager.name, 'summary');
+                
+                log(`✓ Success!`, 'success');
+                log(`\nManager: ${managerDetail.name}`);
+                log(`Club: ${managerDetail.club}`);
+                log(`Rating: ${managerDetail.overall_rating}`);
+                log(`Squad Players: ${managerDetail.squad.players.length}`);
+                
+                if (managerDetail.squad.players.length > 0) {
+                    log('\nFirst 5 players:');
+                    managerDetail.squad.players.slice(0, 5).forEach((p, i) => {
+                        log(`${i + 1}. ${p.player_name} (${p.position}) - ${p.value} RC - ${p.contract}`);
+                    });
+                    
+                    // Create squad table
+                    let tableHTML = '<table><thead><tr><th>Player</th><th>Pos</th><th>Value</th><th>Contract</th><th>Salary</th><th>Card Type</th></tr></thead><tbody>';
+                    managerDetail.squad.players.slice(0, 10).forEach(p => {
+                        tableHTML += `<tr><td>${p.player_name}</td><td>${p.position}</td><td>${p.value} RC</td><td>${p.contract}</td><td>${p.salary} RC</td><td>${p.card_type || '-'}</td></tr>`;
+                    });
+                    tableHTML += '</tbody></table>';
+                    output.innerHTML += tableHTML;
+                } else {
+                    log('⚠ No squad data found', 'error');
+                }
+                
+            } catch (error) {
+                log(`✗ Error: ${error.message}`, 'error');
+                log(`Stack: ${error.stack}`, 'error');
+            }
+        };
+        
+        window.listAllSheets = async function() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="success">Listing All Sheets...</div>';
+            
+            try {
+                log('Fetching spreadsheet metadata...');
+                
+                // Try to fetch a non-existent sheet to see what sheets are available
+                const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=__list_sheets__`;
+                
+                log('Note: Google Sheets API doesn\'t provide a direct way to list sheets via CSV export.');
+                log('Sheets should be named after club names from the summary sheet.');
+                
+                log('\nFetching managers to see club names...');
+                const managers = await getManagersFromGoogleSheets(SPREADSHEET_ID, 'summary');
+                
+                log(`\nExpected sheet names (based on clubs in summary):`);
+                const uniqueClubs = [...new Set(managers.map(m => m.club))];
+                uniqueClubs.forEach((club, i) => {
+                    log(`${i + 1}. "${club}"`);
+                });
+                
+                log(`\nTotal unique clubs: ${uniqueClubs.length}`);
+                
+            } catch (error) {
+                log(`✗ Error: ${error.message}`, 'error');
+            }
+        };
+    </script>
+</body>
+</html>
