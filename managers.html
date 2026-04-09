@@ -50,7 +50,7 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -58,9 +58,6 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             height: 100%;
             min-height: 250px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
         .manager-card:hover {
@@ -932,57 +929,40 @@
             }
         }
         
-        /* Animation styles for synchronized reveal */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        
-        .fade-in.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Staggered animations with different delays */
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-        .stagger-3 { transition-delay: 0.3s; }
-        .stagger-4 { transition-delay: 0.4s; }
-        .stagger-5 { transition-delay: 0.5s; }
-        .stagger-6 { transition-delay: 0.6s; }
-        
-        /* Manager card animations */
-        .manager-card {
+        /* Scroll Animation Styles - Same as registered-clubs.html */
+        .hidden {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: opacity, transform;
         }
         
-        .manager-card.active {
+        .animate-in {
             opacity: 1;
             transform: translateY(0);
         }
         
-        /* Mobile-specific animations */
+        /* Manager card specific animations */
+        .manager-card.hidden {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .manager-card.animate-in {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        
+        /* Mobile optimizations */
         @media (max-width: 768px) {
-            .fade-in {
-                transform: translateY(30px);
-                transition: opacity 0.6s ease, transform 0.6s ease;
+            .hidden {
+                transform: translateY(20px);
             }
             
-            .manager-card {
-                transform: translateY(40px);
-                transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            .manager-card.hidden {
+                transform: scale(0.95) translateY(15px);
             }
-            
-            /* Longer stagger delays on mobile for more noticeable effect */
-            .stagger-1 { transition-delay: 0.15s; }
-            .stagger-2 { transition-delay: 0.3s; }
-            .stagger-3 { transition-delay: 0.45s; }
-            .stagger-4 { transition-delay: 0.6s; }
-            .stagger-5 { transition-delay: 0.75s; }
-            .stagger-6 { transition-delay: 0.9s; }
         }
         
         /* OneDrive link styling */
@@ -1083,13 +1063,13 @@
             </div>
         </div>
         
-        <div class="back-link fade-in stagger-1">
+        <div class="back-link">
             <a href="index.html">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
         
-        <div class="section-header fade-in stagger-2">
+        <div class="section-header">
             <h1>Managers</h1>
             <p>View all managers in the Road to Glory community. Filter by club, rating, or search for specific managers.</p>
             <div class="onedrive-link">
@@ -1100,7 +1080,7 @@
         </div>
         
         <!-- Filter Section -->
-        <div class="filters-section fade-in stagger-3" id="filters-section">
+        <div class="filters-section" id="filters-section">
             <div class="search-container">
                 <input type="text" class="search-input" id="search-input" placeholder="Search managers...">
                 <i class="fas fa-search search-icon"></i>
@@ -1109,7 +1089,7 @@
         </div>
         
         <!-- Managers Container -->
-        <div class="managers-container fade-in stagger-4" id="managers-container">
+        <div class="managers-container" id="managers-container">
             <!-- Manager cards will be dynamically inserted here -->
             <!-- Skeleton loaders while data loads -->
             <div class="manager-card skeleton">
@@ -1314,9 +1294,6 @@
     <script>
         // Modified theme-toggle functionality with null check
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize animations
-            initializeAnimations();
-            
             const themeToggle = document.querySelector('.theme-toggle');
             if (themeToggle) { // Add null check
                 const body = document.body;
@@ -1339,52 +1316,6 @@
                 });
             }
         });
-        
-        // Initialize page animations with improved timing
-        function initializeAnimations() {
-            // Trigger initial page elements animations after a small delay
-            setTimeout(() => {
-                const fadeElements = document.querySelectorAll('.fade-in');
-                fadeElements.forEach((element, index) => {
-                    // Add staggered delay for smooth sequential animation
-                    setTimeout(() => {
-                        element.classList.add('active');
-                    }, index * 100); // 100ms between each element
-                });
-            }, 100); // Faster initial delay
-            
-            // Separate observer for manager cards with optimized timing
-            const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Animate manager cards with better timing
-                        if (entry.target.classList.contains('managers-container')) {
-                            animateManagerCards(entry.target);
-                            cardObserver.unobserve(entry.target);
-                        }
-                    }
-                });
-            }, { threshold: 0.05, rootMargin: '100px' });
-            
-            // Only observe the managers container for card animations
-            const managersContainer = document.querySelector('.managers-container');
-            if (managersContainer) {
-                cardObserver.observe(managersContainer);
-            }
-        }
-        
-        // Animate manager cards with improved timing and performance
-        function animateManagerCards(container) {
-            const cards = container.querySelectorAll('.manager-card:not(.active)');
-            const isMobile = window.innerWidth <= 768;
-            const baseDelay = isMobile ? 50 : 40; // Faster, smoother delays
-            
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('active');
-                }, baseDelay * index);
-            });
-        }
     </script>
     <script src="js/pwa-init.js"></script>
     <script src="js/offline-manager.js"></script>
@@ -1470,7 +1401,7 @@
             
             managers.forEach((manager, index) => {
                 const card = document.createElement('div');
-                card.className = 'manager-card'; // Remove 'active' class to start invisible
+                card.className = 'manager-card hidden'; // Start with hidden class for animation
                 card.innerHTML = `
                     <div class="manager-header" style="background-image: url('assets/images/club-backgrounds/${manager.club.replace(/\s+/g, '%20')}.jpg')">
                         <div class="manager-photo" style="background-image: url('assets/images/managers/${manager.name.toLowerCase().replace(/\s+/g, '-')}.webp'), url('assets/images/default-manager.webp')"></div>
@@ -1519,16 +1450,19 @@
                 // Note: Trigger animation immediately after cards are added
             });
             
-            // Trigger animation after cards are added
+            // Trigger animation after cards are added - same as registered-clubs.html
             setTimeout(() => {
-                const cards = container.querySelectorAll('.manager-card:not(.active)');
-                const isMobile = window.innerWidth <= 768;
-                const baseDelay = isMobile ? 50 : 40;
+                const cards = container.querySelectorAll('.manager-card.hidden');
+                const staggerDelay = 0.03; // Same as registered-clubs.html
                 
                 cards.forEach((card, index) => {
+                    card.style.transitionDelay = `${index * staggerDelay}s`;
+                    
+                    // Trigger animation
                     setTimeout(() => {
-                        card.classList.add('active');
-                    }, baseDelay * index);
+                        card.classList.remove('hidden');
+                        card.classList.add('animate-in');
+                    }, 50);
                 });
             }, 100);
         }
