@@ -1516,13 +1516,20 @@
                     }
                 });
                 
-                // Note: Animation will be handled by the intersection observer
-                // Don't add 'active' class immediately - let observer handle it
+                // Note: Trigger animation immediately after cards are added
             });
             
             // Trigger animation after cards are added
             setTimeout(() => {
-                animateManagerCards(container);
+                const cards = container.querySelectorAll('.manager-card:not(.active)');
+                const isMobile = window.innerWidth <= 768;
+                const baseDelay = isMobile ? 50 : 40;
+                
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('active');
+                    }, baseDelay * index);
+                });
             }, 100);
         }
         
