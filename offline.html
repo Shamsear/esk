@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Eskimos R2G">
+    <meta name="apple-mobile-web-app-title" content="R2G">
     <link rel="apple-touch-icon" href="./assets/images/logo11.webp">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>You're Offline - Eskimos Road to Glory</title>
+    <title>You're Offline - Road to Glory</title>
     
     <!-- Favicon -->
     <link rel="icon" href="assets/images/logo11.webp" type="image/webp">
@@ -147,7 +147,7 @@
 </head>
 <body>
     <div class="offline-container">
-        <img src="assets/images/logo11.webp" alt="Eskimos Logo" class="logo">
+        <img src="assets/images/logo11.webp" alt="R2G Logo" class="logo">
         
         <div class="status-indicator">
             <div class="status-dot"></div>
@@ -180,7 +180,7 @@
         
         // Dynamically populate cached pages if possible
         if ('caches' in window) {
-            caches.open('eskimos-r2g-v1').then(function(cache) {
+            caches.open('r2g-v1').then(function(cache) {
                 cache.keys().then(function(requests) {
                     const htmlPages = requests.filter(request => 
                         request.url.endsWith('.html') && 
