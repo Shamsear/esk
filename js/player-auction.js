@@ -233,13 +233,13 @@ function processSheetData(data, sheetPosition) {
 // Convert base value to star rating
 function getPlayerValue(baseValue) {
     switch (baseValue) {
-        case 120:
+        case 150:
             return 'Legend';
-        case 100:
+        case 120:
             return '5★ Standard';
-        case 80:
+        case 100:
             return '4★ Standard';
-        case 60:
+        case 80:
             return '3★ Standard';
         default:
             return 'Unknown';
@@ -275,13 +275,13 @@ function createPlayerRow(player) {
 // Get rating-specific class
 function getRatingClass(baseValue) {
     switch (baseValue) {
-        case 120:
+        case 150:
             return 'five-star-legend';
-        case 100:
+        case 120:
             return 'five-star-standard';
-        case 80:
+        case 100:
             return 'four-star-standard';
-        case 60:
+        case 80:
             return 'three-star-standard';
         default:
             return 'unknown-rating';
